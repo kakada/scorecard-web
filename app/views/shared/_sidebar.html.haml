@@ -90,3 +90,7 @@
   / Sidebar Toggler (Sidebar)
   .text-center.d-none.d-md-inline
     %button#sidebarToggle.rounded-circle.border-0
+
+  / Version
+  .version
+    = "#{t('sidebar.version')}: #{ENV.fetch('APP_VERSION') { 'development' }}"
