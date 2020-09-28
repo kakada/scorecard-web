@@ -1,4 +1,5 @@
 *.rbc
+.DS_Store
 capybara-*.html
 .rspec
 /db/*.sqlite3
@@ -27,6 +28,7 @@ config/master.key
 # dotenv
 # TODO Comment out this rule if environment variables can be committed
 .env
+app.env
 
 ## Environment normalization:
 /.bundle

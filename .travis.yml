@@ -1,0 +1,28 @@
+language: minimal
+sudo: required
+notifications:
+  # slack: ilabsea:NezU6tCRUyJeePOiUxkldWr5
+
+services:
+  - docker
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.25.4
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - cp app.env.example app.env
+
+install:
+  - docker-compose pull
+
+before_script:
+  - docker-compose build
+  - docker-compose run --rm web yarn install --check-files
+  - docker-compose run --rm web rails db:prepare
+
+script:
+  - docker-compose run --rm web rspec
