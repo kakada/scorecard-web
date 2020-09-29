@@ -40,6 +40,10 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "omniauth-google-oauth2"
 gem "sentry-raven", "~> 3.0.4"
 
+gem "pagy", "~> 3.5"
+
+gem "pumi", require: "pumi/rails"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]

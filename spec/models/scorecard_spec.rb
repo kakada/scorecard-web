@@ -6,7 +6,7 @@
 #
 #  id                    :bigint           not null, primary key
 #  uuid                  :string
-#  conducted_year        :datetime
+#  conducted_year        :integer
 #  conducted_date        :datetime
 #  province_code         :string(2)
 #  district_code         :string(4)

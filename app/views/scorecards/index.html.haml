@@ -1,0 +1,28 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3 Scorecards
+
+  - if @scorecards.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th #
+          %th ID
+          %th Conducted Year
+          %th Type
+          %th Location
+
+      %tbody
+        - @scorecards.each_with_index do |scorecard, index|
+          %tr
+            %td= @pagy.from + index
+            %td= scorecard.uuid
+            %td= scorecard.conducted_year
+            %td= scorecard.category.humanize
+            %td= scorecard.location
+
+
+  - if @pagy.pages > 1
+    .pagy-wrapper
+      != pagy_bootstrap_nav(@pagy)

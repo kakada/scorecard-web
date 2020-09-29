@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   root to: "dashboard#show"
 
   devise_for :users, path: "/", controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+
+  resources :scorecards
 end

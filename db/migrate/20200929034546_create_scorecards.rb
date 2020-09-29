@@ -4,7 +4,7 @@ class CreateScorecards < ActiveRecord::Migration[6.0]
   def change
     create_table :scorecards do |t|
       t.string   :uuid
-      t.datetime :conducted_year
+      t.integer  :conducted_year
       t.datetime :conducted_date
       t.string   :province_code, limit: 2
       t.string   :district_code, limit: 4

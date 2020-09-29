@@ -10,152 +10,107 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_200_929_041_851) do
+ActiveRecord::Schema.define(version: 2020_09_29_041851) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'issue_ratings', force: :cascade do |t|
-    t.integer 'vote_issue_id'
-    t.integer 'vote_person_id'
-    t.integer 'score'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "issue_ratings", force: :cascade do |t|
+    t.integer "vote_issue_id"
+    t.integer "vote_person_id"
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'predefined_issues', force: :cascade do |t|
-    t.string 'scorecard_uuid'
-    t.text 'content'
-    t.string 'audio'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "predefined_issues", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.text "content"
+    t.string "audio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'raised_issues', force: :cascade do |t|
-    t.string 'scorecard_uuid'
-    t.integer 'raised_person_id'
-    t.text 'content'
-    t.string 'audio'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "raised_issues", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.integer "raised_person_id"
+    t.text "content"
+    t.string "audio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'raised_people', force: :cascade do |t|
-    t.string 'scorecard_uuid'
-    t.string 'gender'
-    t.integer 'age'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "raised_people", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.string "gender"
+    t.integer "age"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'scorecards', force: :cascade do |t|
-    t.string 'uuid'
-    t.datetime 'conducted_year'
-    t.datetime 'conducted_date'
-    t.string 'province_code', limit: 2
-    t.string 'district_code', limit: 4
-    t.string 'commune_code', limit: 6
-    t.integer 'category'
-    t.string 'sector'
-    t.integer 'number_of_caf'
-    t.integer 'number_of_participant'
-    t.integer 'number_of_female'
-    t.text 'caf_members'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "scorecards", force: :cascade do |t|
+    t.string "uuid"
+    t.integer "conducted_year"
+    t.datetime "conducted_date"
+    t.string "province_code", limit: 2
+    t.string "district_code", limit: 4
+    t.string "commune_code", limit: 6
+    t.integer "category"
+    t.string "sector"
+    t.integer "number_of_caf"
+    t.integer "number_of_participant"
+    t.integer "number_of_female"
+    t.text "caf_members"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'survey_form_field_options', force: :cascade do |t|
-    t.integer 'field_id'
-    t.string 'name'
-    t.string 'value'
-    t.string 'color'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "swots", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.integer "voting_issue_id"
+    t.integer "display_order"
+    t.text "strength"
+    t.text "weakness"
+    t.text "improvement"
+    t.text "activity"
+    t.float "rating_median_score"
+    t.string "rating_result"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'survey_form_fields', force: :cascade do |t|
-    t.string 'code'
-    t.string 'name'
-    t.string 'type'
-    t.text 'description'
-    t.integer 'display_order'
-    t.integer 'section_id'
-    t.integer 'form_id'
-    t.integer 'mapping_field_id'
-    t.string 'mapping_field_type'
-    t.boolean 'default', default: false
-    t.boolean 'entry_able', default: true
-    t.boolean 'color_required', default: false
-    t.boolean 'tracingable', default: false
-    t.boolean 'required'
-    t.text 'validations'
-    t.string 'relevant'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table 'survey_form_forms', force: :cascade do |t|
-    t.string 'name'
-    t.integer 'display_order'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "vote_issues", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.string "content"
+    t.string "audio"
+    t.string "display_order"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'survey_form_sections', force: :cascade do |t|
-    t.string 'name'
-    t.integer 'form_id'
-    t.integer 'display_order'
-    t.boolean 'default', default: false
-    t.boolean 'display', default: true
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "vote_people", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.string "gender"
+    t.integer "age"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'swots', force: :cascade do |t|
-    t.string 'scorecard_uuid'
-    t.integer 'voting_issue_id'
-    t.integer 'display_order'
-    t.text 'strength'
-    t.text 'weakness'
-    t.text 'improvement'
-    t.text 'activity'
-    t.float 'rating_median_score'
-    t.string 'rating_result'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-  end
-
-  create_table 'users', force: :cascade do |t|
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.string 'confirmation_token'
-    t.datetime 'confirmed_at'
-    t.datetime 'confirmation_sent_at'
-    t.string 'unconfirmed_email'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['confirmation_token'], name: 'index_users_on_confirmation_token', unique: true
-    t.index ['email'], name: 'index_users_on_email', unique: true
-    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
-  end
-
-  create_table 'vote_issues', force: :cascade do |t|
-    t.string 'scorecard_uuid'
-    t.string 'content'
-    t.string 'audio'
-    t.string 'display_order'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-  end
-
-  create_table 'vote_people', force: :cascade do |t|
-    t.string 'scorecard_uuid'
-    t.string 'gender'
-    t.integer 'age'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-  end
 end

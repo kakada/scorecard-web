@@ -13,10 +13,16 @@
   / Wrapper scroll
   .sidebar-list-wrapper
     / Nav Item - Dashboard
-    %li.nav-item.active
-      %a.nav-link{:href => "index.html"}
+    %li.nav-item{ class: css_active_class('dashboard') }
+      %a.nav-link{:href => root_path}
         %i.fas.fa-fw.fa-tachometer-alt
         %span Dashboard
+
+
+    %li.nav-item{ class: css_active_class('scorecards') }
+      %a.nav-link{:href => scorecards_path}
+        %i.far.fa-fw.fa-clipboard
+        %span Scorecard
 
     / Divider
     %hr.sidebar-divider/
