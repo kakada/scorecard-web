@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -20,7 +22,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -51,7 +53,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -62,7 +64,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { :host => Settings.host }
+  config.action_mailer.default_url_options = { host: Settings.host }
 
   if Settings.smtp.present?
     smtp_settings = {}.tap do |settings|
@@ -72,7 +74,9 @@ Rails.application.configure do
       settings[:user_name]            = Settings.smtp["user_name"] if Settings.smtp["user_name"].present?
       settings[:password]             = Settings.smtp["password"] if Settings.smtp["password"].present?
       settings[:authentication]       = Settings.smtp["authentication"] if Settings.smtp["authentication"].present?
-      settings[:enable_starttls_auto] = Settings.smtp["enable_starttls_auto"] if Settings.smtp["enable_starttls_auto"].present?
+      if Settings.smtp["enable_starttls_auto"].present?
+        settings[:enable_starttls_auto] = Settings.smtp["enable_starttls_auto"]
+      end
     end
     if smtp_settings.present?
       config.action_mailer.delivery_method = :smtp

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -14,13 +16,13 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join("tmp", "caching-dev.txt").exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
+      "Cache-Control" => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -36,7 +38,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { :host => Settings.host }
+  config.action_mailer.default_url_options = { host: Settings.host }
 
   if Settings.smtp.present?
     smtp_settings = {}.tap do |settings|
@@ -46,7 +48,9 @@ Rails.application.configure do
       settings[:user_name]            = Settings.smtp["user_name"] if Settings.smtp["user_name"].present?
       settings[:password]             = Settings.smtp["password"] if Settings.smtp["password"].present?
       settings[:authentication]       = Settings.smtp["authentication"] if Settings.smtp["authentication"].present?
-      settings[:enable_starttls_auto] = Settings.smtp["enable_starttls_auto"] if Settings.smtp["enable_starttls_auto"].present?
+      if Settings.smtp["enable_starttls_auto"].present?
+        settings[:enable_starttls_auto] = Settings.smtp["enable_starttls_auto"]
+      end
     end
 
     if smtp_settings.present?

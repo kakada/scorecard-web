@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true
 
@@ -8,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   private
     def set_layout
-      devise_controller? ? 'layouts/minimal' : 'layouts/application'
+      devise_controller? ? "layouts/minimal" : "layouts/application"
     end
 
     def set_raven_context
