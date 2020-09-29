@@ -1,0 +1,2 @@
+module MediansHelper
+end

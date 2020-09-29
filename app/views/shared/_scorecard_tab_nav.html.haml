@@ -1,0 +1,9 @@
+%ul.nav.nav-tabs.nav-justified
+  %li.nav-item
+    = link_to t("scorecard.scorecard_info"), scorecard_path(@scorecard), class: ['nav-link', css_active_class('scorecards')]
+  %li.nav-item
+    = link_to t("scorecard.issue_list"), scorecard_issues_path(@scorecard), class: ['nav-link', css_active_class('issues')]
+  %li.nav-item
+    = link_to t("scorecard.median_table"), scorecard_medians_path(@scorecard), class: ['nav-link', css_active_class('medians')]
+  %li.nav-item
+    = link_to t("scorecard.swot_table"), scorecard_swots_path(@scorecard), class: ['nav-link', css_active_class('swots')]

@@ -17,11 +17,10 @@
         - @scorecards.each_with_index do |scorecard, index|
           %tr
             %td= @pagy.from + index
-            %td= scorecard.uuid
+            %td= link_to scorecard.uuid, scorecard, class: 'btn btn-link p-0'
             %td= scorecard.conducted_year
             %td= scorecard.category.humanize
             %td= scorecard.location
-
 
   - if @pagy.pages > 1
     .pagy-wrapper

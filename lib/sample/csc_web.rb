@@ -7,6 +7,7 @@ module Sample
   class CscWeb
     def self.load_samples
       ::Sample::User.load
+      ::Sample::PredefinedIssue.load
       ::Sample::Scorecard.load
     end
   end
