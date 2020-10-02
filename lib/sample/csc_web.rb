@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'user'
+require_relative 'predefined_issue'
 require_relative 'scorecard'
 
 module Sample

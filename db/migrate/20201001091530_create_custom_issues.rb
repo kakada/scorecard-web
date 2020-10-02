@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class CreatePredefinedIssues < ActiveRecord::Migration[6.0]
+class CreateCustomIssues < ActiveRecord::Migration[6.0]
   def change
-    create_table :predefined_issues do |t|
+    create_table :custom_issues do |t|
+      t.integer :raised_persion_id
       t.text    :content
       t.string  :audio
-      t.integer :issue_category_id
       t.string  :tag
 
       t.timestamps

@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_29_041851) do
+ActiveRecord::Schema.define(version: 2020_10_01_091530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "custom_issues", force: :cascade do |t|
+    t.integer "raised_persion_id"
+    t.text "content"
+    t.string "audio"
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "issue_categories", force: :cascade do |t|
+    t.string "sector"
+    t.integer "scorecard_category"
+    t.integer "year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "issue_ratings", force: :cascade do |t|
     t.integer "vote_issue_id"
@@ -24,9 +41,10 @@ ActiveRecord::Schema.define(version: 2020_09_29_041851) do
   end
 
   create_table "predefined_issues", force: :cascade do |t|
-    t.string "scorecard_uuid"
     t.text "content"
     t.string "audio"
+    t.integer "issue_category_id"
+    t.string "tag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

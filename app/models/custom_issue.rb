@@ -1,0 +1,2 @@
+class CustomIssue < ApplicationRecord
+end

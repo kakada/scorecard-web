@@ -35,6 +35,8 @@ class Scorecard < ApplicationRecord
     self_accessment: 2
   }
 
+  SECTORS = %w(primary_school health_center commune)
+
   def location
     ::Pumi::Commune.find_by_id(commune_code).try(:address_km)
   end

@@ -4,14 +4,14 @@
       %h3 Scorecards
 
   - if @scorecards.present?
-    %table.table.table-hover.medium-width
+    %table.table.table-hover.medium-width.pretty
       %thead
         %tr
           %th #
           %th ID
-          %th Conducted Year
-          %th Type
-          %th Location
+          %th= sortable "conducted_year", t('scorecard.conducted_year')
+          %th= sortable "category", t('scorecard.category')
+          %th= sortable "commune_code", t('scorecard.location')
 
       %tbody
         - @scorecards.each_with_index do |scorecard, index|
