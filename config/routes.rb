@@ -11,4 +11,12 @@ Rails.application.routes.draw do
     resources :medians
     resources :swots
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :languages do
+        get :download, on: :member
+      end
+    end
+  end
 end
