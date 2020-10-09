@@ -21,13 +21,6 @@
 #  updated_at            :datetime         not null
 #
 class Scorecard < ApplicationRecord
-  has_many :raised_people, foreign_key: :scorecard_uuid
-  has_many :raised_issues, foreign_key: :scorecard_uuid
-  has_many :predefined_issues, foreign_key: :scorecard_uuid
-  has_many :vote_issues, foreign_key: :scorecard_uuid
-  has_many :vote_people, foreign_key: :scorecard_uuid
-  has_many :swots, foreign_key: :scorecard_uuid
-
   serialize :caf_members, Array
 
   enum category: {
