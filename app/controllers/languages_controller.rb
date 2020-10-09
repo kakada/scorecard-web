@@ -35,7 +35,7 @@ class LanguagesController < ApplicationController
     @language = authorize Language.find(params[:id])
     @language.destroy
 
-    redirect_to programs_url
+    redirect_to categories_url
   end
 
   private

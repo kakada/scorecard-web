@@ -29,6 +29,12 @@
           %i.fas.fa-fw.fa-language
           %span Language
 
+    - if policy(Category).create?
+      %li.nav-item{ class: css_active_class('categories') }
+        %a.nav-link{:href => categories_path}
+          %i.fas.fa-fw.fa-sitemap
+          %span Scorecard Category
+
     %li.nav-item{ class: css_active_class('scorecards') }
       %a.nav-link{:href => scorecards_path}
         %i.far.fa-fw.fa-clipboard

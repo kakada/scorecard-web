@@ -44,6 +44,7 @@ gem "pumi", require: "pumi/rails"
 gem "carrierwave", "~> 2.0"
 gem "pundit", "~> 2.1.0"
 gem "simple_form", "~> 5.0.3"
+gem "awesome_nested_set", "~> 3.2.1"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

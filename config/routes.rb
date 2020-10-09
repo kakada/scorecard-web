@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :programs
   resources :languages
+  resources :categories
 
   namespace :api do
     namespace :v1 do
