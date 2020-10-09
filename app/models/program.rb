@@ -11,6 +11,6 @@ class Program < ApplicationRecord
 
   private
     def create_default_language
-      languages.create(code: 'km', name: 'Khmer')
+      languages.create(code: "km", name: "Khmer")
     end
 end

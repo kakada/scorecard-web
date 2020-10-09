@@ -2,7 +2,7 @@
 
 .form-group
   %label Parent Category
-  = f.select :parent_id, nested_set_options(Category, @category) {|i| "#{'-' * i.level} #{i.name}" }, {:include_blank => true}, {class: 'form-control'}
+  = f.select :parent_id, current_program.categories.roots.pluck(:name, :id), {:include_blank => true}, {class: 'form-control'}
 
 .actions
   = f.submit t('shared.save'), class: 'btn btn-primary'

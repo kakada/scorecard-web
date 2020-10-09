@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Category < ApplicationRecord
-  acts_as_nested_set :scope => [:program_id]
+  acts_as_nested_set scope: [:program_id]
 
   belongs_to :program
 

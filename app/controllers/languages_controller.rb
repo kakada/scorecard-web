@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LanguagesController < ApplicationController
   def index
     @pagy, @languages = pagy(Language.all)

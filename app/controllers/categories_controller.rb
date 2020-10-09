@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
   def index
     @pagy, @categories = pagy(current_program.categories.roots.includes(:children))
