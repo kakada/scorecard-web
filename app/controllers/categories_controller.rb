@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   def index
-    @pagy, @categories = pagy(Category.roots.includes(:children))
+    @pagy, @categories = pagy(current_program.categories.roots.includes(:children))
   end
 
   def new
@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = authorize Category.new(category_params)
+    @category = authorize current_program.categories.new(category_params)
 
     if @category.save
       redirect_to categories_url

@@ -10,6 +10,8 @@ class CreateCategories < ActiveRecord::Migration[6.0]
       t.integer :depth, :null => false, :default => 0
       t.integer :children_count, :null => false, :default => 0
 
+      t.integer :program_id
+
       t.timestamps
     end
   end

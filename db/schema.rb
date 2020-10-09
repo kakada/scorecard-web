@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_072444) do
     t.integer "rgt", null: false
     t.integer "depth", default: 0, null: false
     t.integer "children_count", default: 0, null: false
+    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lft"], name: "index_categories_on_lft"

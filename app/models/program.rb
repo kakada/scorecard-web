@@ -3,6 +3,7 @@
 class Program < ApplicationRecord
   has_many :users
   has_many :languages
+  has_many :categories
 
   validates :name, presence: true
 
