@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_103146) do
     t.string "code"
     t.string "name"
     t.string "json_file"
+    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
