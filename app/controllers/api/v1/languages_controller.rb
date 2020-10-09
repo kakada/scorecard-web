@@ -6,7 +6,7 @@ module Api
       def download
         @language = ::Language.find_by(code: params[:id])
 
-        send_file @language.json_file.path, disposition: 'attachment'
+        send_file @language.json_file.path, disposition: "attachment"
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Sample
   class Scorecard
     def self.load
@@ -16,11 +18,11 @@ module Sample
         caf_members = (1..number_of_caf).to_a.map { |i| "Caf #{i}" }
         conducted_date = Date.today
         conducted_year = conducted_date.year
-        sector = ['Primary School', 'Health Center', 'Commune'].sample
+        sector = ["Primary School", "Health Center", "Commune"].sample
         commune = ::Pumi::Commune.all.sample
         category = ::Scorecard.categories.keys.sample
 
-        new_record = ::Scorecard.create({
+        ::Scorecard.create({
           uuid: uuid,
           conducted_date: conducted_date,
           conducted_year: conducted_year,

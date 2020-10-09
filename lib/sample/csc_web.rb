@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'user'
-require_relative 'program'
-require_relative 'scorecard'
+require_relative "user"
+require_relative "program"
+require_relative "scorecard"
 
 module Sample
   class CscWeb
