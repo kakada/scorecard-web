@@ -23,6 +23,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
+  enum role: {
+    system_admin: 1,
+    program_admin: 2,
+    staff: 3,
+    guest: 4
+  }
+
+  belongs_to :program, optional: true
+
+  ROLES = roles.keys.map { |r| [r.titlecase, r] }
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data["email"]).first

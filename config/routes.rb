@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :swots
   end
 
+  resources :programs
+
   namespace :api do
     namespace :v1 do
       resources :languages do

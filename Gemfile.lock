@@ -194,6 +194,8 @@ GEM
     puma (4.3.5)
       nio4r (~> 2.0)
     pumi (0.5.0)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -291,6 +293,9 @@ GEM
     sexp_processor (4.15.1)
     shoulda-matchers (4.4.1)
       activesupport (>= 4.2.0)
+    simple_form (5.0.3)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -354,6 +359,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   pumi
+  pundit (~> 2.1.0)
   rails (~> 6.0.3, >= 6.0.3.2)
   rspec-rails (~> 4.0.1)
   rubocop-performance (~> 1.7.1)
@@ -362,6 +368,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-raven (~> 3.0.4)
   shoulda-matchers (~> 4.0)
+  simple_form (~> 5.0.3)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
