@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   def index
-    @pagy, @categories = pagy(Category.roots)
+    @pagy, @categories = pagy(Category.roots.includes(:children))
   end
 
   def new
