@@ -6,3 +6,26 @@ body {
   height: 100%;
   overflow: hidden;
 }
+
+#content {
+  width: 100%;
+  padding: 20px;
+  min-height: 100vh;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  overflow-y: scroll;
+}
+
+.medium-width {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.navbar {
+  padding: 15px 10px;
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 40px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
