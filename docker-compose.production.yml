@@ -1,0 +1,94 @@
+version: '3'
+
+volumes:
+  db:
+  bundle:
+  attachment:
+  nginx-certs:
+  nginx-dhparam:
+  nginx-vhost:
+  nginx-html:
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - CSC_WEB_DATABASE_PASSWORD=change_me_password
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  app: &rails
+    image: ilabsea/csc-web:0.0.1
+    restart: unless-stopped
+    volumes:
+      - bundle:/usr/local/bundle
+      - attachment:/app/public/uploads
+      - ./pids/server.pid:/app/tmp/pids/server.pid
+    depends_on:
+      - db
+
+    environment:
+      - LANG=C.UTF-8
+      - DATABASE_URL=postgres://postgres@db/csc_web_production
+
+      - SETTINGS__SMTP__ADDRESS=smtp.mandrillapp.com
+      - SETTINGS__SMTP__DOMAIN=domain
+      - SETTINGS__SMTP__USER_NAME=email
+      - SETTINGS__SMTP__PASSWORD=key
+      - SETTINGS__SMTP__HOST=domain_or_subdomain
+      - SETTINGS__SMTP__DEFAULT_FROM=no-reply-email
+
+      - VIRTUAL_HOST=domain1, domain2
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=domain
+      - LETSENCRYPT_EMAIL=email
+
+      - SENTRY_LOGGER_DSN=logger_key
+
+      - APP_NAME=Care Score card
+      - APP_SHORTCUT_NAME=CSC
+      - APP_VERSION=0.0.1
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '5'
+
+    command:
+    - /bin/sh
+    - -c
+    - bundle exec puma -e production -b tcp://0.0.0.0:80
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs:ro
+      - nginx-dhparam:/etc/nginx/dhparam
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+      - ./config/proxy_settings.conf:/etc/nginx/conf.d/proxy_settings.conf
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '5'
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs:rw
+      - nginx-dhparam:/etc/nginx/dhparam
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html

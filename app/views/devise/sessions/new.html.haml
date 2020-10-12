@@ -1,0 +1,32 @@
+= render 'devise/shared/logo'
+
+.form-wrapper.pr-1
+  = link_to user_google_oauth2_omniauth_authorize_path, class: 'btn btn-outline-primary w-100' do
+    = image_tag 'google.png', style: 'width: 18px;'
+    = t('devise.sign_in_with', omniauth: 'Gmail')
+
+  .d-flex.flex-row.align-items-center
+    .line.flex-grow-1
+    .or-label OR
+    .line.flex-grow-1
+
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .form-group
+      = f.label :email, t('devise.email')
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+
+    .form-group
+      = f.label :password, t('devise.password')
+      = f.password_field :password, autocomplete: "current-password", class: 'form-control'
+
+    - if devise_mapping.rememberable?
+      .form-group.form-check
+        = f.check_box :remember_me, class: 'form-check-input'
+        = f.label :remember_me, t('devise.remember_me'), class: 'form-check-label'
+    .actions
+      = f.submit "Login", class: 'btn btn-primary w-100 mb-2'
+
+  .text-right
+    = render "devise/shared/links"
+    / = link_to t('about.about_us'), about_us_path, class: 'btn btn-link'
+
