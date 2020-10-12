@@ -13,6 +13,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+
 class LocalNgo < ApplicationRecord
   belongs_to :program
   has_many :cafs
