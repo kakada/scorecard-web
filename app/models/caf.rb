@@ -14,7 +14,6 @@
 #
 class Caf < ApplicationRecord
   belongs_to :local_ngo
-  belongs_to :program
   has_many :scorecards_caf
   has_many :scorecards, through: :scorecards_caf
 
