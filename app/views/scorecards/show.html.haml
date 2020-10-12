@@ -4,37 +4,59 @@
   .border-right.border-left.border-bottom.bg-white
     .card-body
       .row
-        %label.col-sm-2.col-form-label ឆ្នាំ
-        %label.col-sm-10.col-form-label= " : #{@scorecard.conducted_year}"
-
+        %label.col-sm-2.col-form-label= t("scorecard.id")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.uuid}"
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.name")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.name}"
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.sector")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.sector.name}"
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.category")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.category.name}"
       .row
         %label.col-sm-2.col-form-label= t("scorecard.conducted_date")
         %label.col-sm-10.col-form-label= " : #{@scorecard.conducted_date}"
-
       .row
-        %label.col-sm-2.col-form-label= t("scorecard.location")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.location}"
-
+        %label.col-sm-2.col-form-label= t("scorecard.description")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.description}"
       .row
-        %label.col-sm-2.col-form-label= t("scorecard.category")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.category}"
-
+        %label.col-sm-2.col-form-label= t("scorecard.province_id")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.province_id}"
       .row
-        %label.col-sm-2.col-form-label= t("scorecard.sector")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.sector}"
-
+        %label.col-sm-2.col-form-label= t("scorecard.district_id")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.district_id}"
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.commune_id")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.commune_id}"
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.address")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.address}"
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.lat")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.lat}"
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.lng")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.lng}"
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.lng")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.lng}"
       .row
         %label.col-sm-2.col-form-label= t("scorecard.number_of_participant")
         %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_participant}"
-
       .row
         %label.col-sm-2.col-form-label= t("scorecard.number_of_female")
         %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_female}"
-
       .row
         %label.col-sm-2.col-form-label= t("scorecard.number_of_caf")
         %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_caf}"
-
       .row
-        %label.col-sm-2.col-form-label= t("scorecard.caf_members")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.caf_members.join('; ')}"
+        %label.col-sm-2.col-form-label= t("scorecard.planned_start_date")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.planned_start_date}"
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.planned_end_date")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.planned_end_date}"
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.status")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.status}"

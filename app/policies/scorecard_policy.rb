@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LanguagePolicy < ApplicationPolicy
+class ScorecardPolicy < ApplicationPolicy
   def index?
     user.program_admin?
   end

@@ -2,7 +2,21 @@
 
 class CategoriesController < ApplicationController
   def index
-    @pagy, @categories = pagy(current_program.categories.roots.includes(:children))
+    respond_to do |format|
+      format.html {
+        @pagy, @categories = pagy(current_program.categories.roots.includes(:children))
+      }
+
+      format.json {
+        render json: current_program.categories.roots
+      }
+    end
+  end
+
+  def children
+    @category = Category.find(params[:id])
+
+    render json: @category.children
   end
 
   def new

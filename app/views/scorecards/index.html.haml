@@ -1,7 +1,11 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3 Scorecards
+      %h3= t('scorecard.scorecards')
+      = link_to new_scorecard_path, class: 'btn btn-primary' do
+        %i.fas.fa-plus
+
+  = render partial: "shared/no_data", locals: { items: @scorecards }
 
   - if @scorecards.present?
     %table.table.table-hover.medium-width.pretty
@@ -11,14 +15,29 @@
           %th ID
           %th= sortable "category", t('scorecard.category')
           %th= sortable "commune_code", t('scorecard.location')
+          %th
 
       %tbody
         - @scorecards.each_with_index do |scorecard, index|
           %tr
             %td= @pagy.from + index
             %td= link_to scorecard.uuid, scorecard, class: 'btn btn-link p-0'
-            %td= scorecard.category.humanize
-            %td= scorecard.location
+            %td= scorecard.category.name
+            %td
+            %td.text-right
+              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                %i.fas.fa-ellipsis-v
+
+              .dropdown-menu.dropdown-menu-right
+                - if policy(scorecard).update?
+                  = link_to edit_scorecard_path(scorecard), class: "btn dropdown-item" do
+                    %i.fas.fa-pen.drop-menu-icon
+                    %span= t('shared.edit')
+
+                - if policy(scorecard).destroy?
+                  = link_to scorecard_path(scorecard), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('scorecard.are_you_sure_to_delete')} do
+                    %i.fas.fa-trash-alt.drop-menu-icon
+                    %span= t('shared.delete')
 
   - if @pagy.pages > 1
     .pagy-wrapper

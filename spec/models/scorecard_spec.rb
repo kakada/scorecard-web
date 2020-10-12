@@ -6,17 +6,24 @@
 #
 #  id                    :bigint           not null, primary key
 #  uuid                  :string
-#  conducted_year        :integer
+#  sector_id             :integer
+#  category_id           :integer
+#  name                  :string
+#  description           :text
+#  province_id           :string(2)
+#  district_id           :string(4)
+#  commune_id            :string(6)
+#  address               :string
+#  lat                   :string
+#  lng                   :string
 #  conducted_date        :datetime
-#  province_code         :string(2)
-#  district_code         :string(4)
-#  commune_code          :string(6)
-#  category              :integer
-#  sector                :string
 #  number_of_caf         :integer
 #  number_of_participant :integer
 #  number_of_female      :integer
-#  caf_members           :text
+#  planned_start_date    :datetime
+#  planned_end_date      :datetime
+#  status                :integer
+#  program_id            :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #

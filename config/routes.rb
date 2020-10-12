@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   resources :programs
   resources :languages
-  resources :categories
+  resources :categories do
+    get :children, on: :member
+  end
   resources :cafs
 
   namespace :api do

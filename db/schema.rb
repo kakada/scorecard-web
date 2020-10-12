@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_095420) do
 
   create_table "scorecards", force: :cascade do |t|
     t.string "uuid"
+    t.integer "sector_id"
     t.integer "category_id"
     t.string "name"
     t.text "description"
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_095420) do
     t.datetime "planned_start_date"
     t.datetime "planned_end_date"
     t.integer "status"
+    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
