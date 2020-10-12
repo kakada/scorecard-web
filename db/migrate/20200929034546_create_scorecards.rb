@@ -25,7 +25,6 @@ class CreateScorecards < ActiveRecord::Migration[6.0]
       t.datetime :planned_start_date
       t.datetime :planned_end_date
       t.integer  :status
-
       t.integer  :program_id
       t.integer  :local_ngo_id
 

@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(version: 2020_10_16_035429) do
     t.integer "vote_issue_id"
     t.integer "vote_person_id"
     t.integer "score"
+  end
+
+  create_table "cafs", force: :cascade do |t|
+    t.string "name"
+    t.string "province_id", limit: 2
+    t.string "district_id", limit: 4
+    t.string "commune_id", limit: 6
+    t.string "address"
+    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
