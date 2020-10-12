@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2020_10_12_082550) do
     t.integer "vote_issue_id"
     t.integer "vote_person_id"
     t.integer "score"
+  end
+
+  create_table "cafs", force: :cascade do |t|
+    t.string "name"
+    t.string "province_id", limit: 2
+    t.string "district_id", limit: 4
+    t.string "commune_id", limit: 6
+    t.string "address"
+    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -118,7 +127,7 @@ ActiveRecord::Schema.define(version: 2020_10_12_082550) do
 
   create_table "scorecards", force: :cascade do |t|
     t.string "uuid"
-    t.integer "sector_id"
+    t.integer "unit_type_id"
     t.integer "category_id"
     t.string "name"
     t.text "description"

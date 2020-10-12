@@ -37,6 +37,11 @@ class Scorecard < ApplicationRecord
 
   before_create :secure_uuid
 
+  has_many :scorecards_cafs
+  has_many :cafs, through: :scorecards_cafs
+
+  before_create :secure_uuid
+
   SECTORS = %w(primary_school health_center commune)
 
   def location
