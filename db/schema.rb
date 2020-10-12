@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_09_072444) do
+ActiveRecord::Schema.define(version: 2020_10_09_095420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cafs", force: :cascade do |t|
+    t.string "name"
+    t.string "province_id", limit: 2
+    t.string "district_id", limit: 4
+    t.string "commune_id", limit: 6
+    t.string "address"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "code"
@@ -81,17 +92,29 @@ ActiveRecord::Schema.define(version: 2020_10_09_072444) do
 
   create_table "scorecards", force: :cascade do |t|
     t.string "uuid"
-    t.integer "conducted_year"
+    t.integer "category_id"
+    t.string "name"
+    t.text "description"
+    t.string "province_id", limit: 2
+    t.string "district_id", limit: 4
+    t.string "commune_id", limit: 6
+    t.string "address"
+    t.string "lat"
+    t.string "lng"
     t.datetime "conducted_date"
-    t.string "province_code", limit: 2
-    t.string "district_code", limit: 4
-    t.string "commune_code", limit: 6
-    t.integer "category"
-    t.string "sector"
     t.integer "number_of_caf"
     t.integer "number_of_participant"
     t.integer "number_of_female"
-    t.text "caf_members"
+    t.datetime "planned_start_date"
+    t.datetime "planned_end_date"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "scorecards_cafs", force: :cascade do |t|
+    t.integer "caf_id"
+    t.integer "scorecard_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

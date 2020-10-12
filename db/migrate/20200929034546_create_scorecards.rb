@@ -4,17 +4,27 @@ class CreateScorecards < ActiveRecord::Migration[6.0]
   def change
     create_table :scorecards do |t|
       t.string   :uuid
-      t.integer  :conducted_year
+
+      t.integer  :category_id
+      t.string   :name
+      t.text     :description
+
+      t.string   :province_id, limit: 2
+      t.string   :district_id, limit: 4
+      t.string   :commune_id, limit: 6
+      t.string   :address
+      t.string   :lat
+      t.string   :lng
+
       t.datetime :conducted_date
-      t.string   :province_code, limit: 2
-      t.string   :district_code, limit: 4
-      t.string   :commune_code, limit: 6
-      t.integer  :category
-      t.string   :sector
+
       t.integer  :number_of_caf
       t.integer  :number_of_participant
       t.integer  :number_of_female
-      t.text     :caf_members
+
+      t.datetime :planned_start_date
+      t.datetime :planned_end_date
+      t.integer  :status
 
       t.timestamps
     end

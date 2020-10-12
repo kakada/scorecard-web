@@ -4,6 +4,7 @@ class Program < ApplicationRecord
   has_many :users
   has_many :languages
   has_many :categories
+  has_many :cafs
 
   validates :name, presence: true
 

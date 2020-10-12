@@ -28,9 +28,24 @@ class Scorecard < ApplicationRecord
     self_accessment: 2
   }
 
+  has_many :scorecards_cafs
+  has_many :cafs, through: :scorecards_cafs
+
+  before_create :secure_uuid
+
   SECTORS = %w(primary_school health_center commune)
 
   def location
     ::Pumi::Commune.find_by_id(commune_code).try(:address_km)
   end
+
+  private
+    def secure_uuid
+      self.uuid ||= SecureRandom.hex(3)
+
+      return unless self.class.exists?(uuid: uuid)
+
+      self.uuid = SecureRandom.hex(4)
+      secure_uuid
+    end
 end

@@ -35,6 +35,12 @@
           %i.fas.fa-fw.fa-sitemap
           %span Scorecard Category
 
+    - if policy(Caf).create?
+      %li.nav-item{ class: css_active_class('cafs') }
+        %a.nav-link{:href => cafs_path}
+          %i.fas.fa-fw.fa-users
+          %span Caf members
+
     %li.nav-item{ class: css_active_class('scorecards') }
       %a.nav-link{:href => scorecards_path}
         %i.far.fa-fw.fa-clipboard

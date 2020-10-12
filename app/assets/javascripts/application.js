@@ -8,6 +8,8 @@
 
 //= require sb-admin-2
 
+//= require pumi
+
 //= require application/namespace
 //= require application/util
 
