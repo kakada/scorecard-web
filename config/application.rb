@@ -20,5 +20,9 @@ module CscWeb
     Raven.configure do |config|
       config.dsn = ENV["SENTRY_LOGGER_DSN"]
     end
+
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.fallbacks = [:en]
+    config.i18n.available_locales = [:en, :km]
   end
 end

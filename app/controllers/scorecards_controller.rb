@@ -48,7 +48,7 @@ class ScorecardsController < ApplicationController
 
   private
     def sort_column
-      Scorecard.column_names.include?(params[:sort]) ? params[:sort] : "conducted_date"
+      Scorecard.column_names.include?(params[:sort]) ? params[:sort] : "name"
     end
 
     def sort_direction

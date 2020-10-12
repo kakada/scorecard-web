@@ -1,0 +1,5 @@
+en:
+  category:
+    categories: categories
+    name: Name
+    parent: Parent category

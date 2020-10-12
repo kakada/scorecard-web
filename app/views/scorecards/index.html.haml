@@ -13,6 +13,7 @@
         %tr
           %th #
           %th ID
+          %th= sortable "name", t('scorecard.name')
           %th= sortable "category_id", t('scorecard.category')
           %th= sortable "commune_code", t('scorecard.location')
           %th
@@ -22,6 +23,7 @@
           %tr
             %td= @pagy.from + index
             %td= link_to scorecard.uuid, scorecard, class: 'btn btn-link p-0'
+            %td= scorecard.name
             %td= scorecard.category.name
             %td
             %td.text-right
