@@ -1,0 +1,43 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= t('indicator.indicators')
+      = link_to new_indicator_path, class: 'btn btn-primary' do
+        %i.fas.fa-plus
+
+  = render partial: "shared/no_data", locals: { items: @indicators }
+
+  - if @indicators.present?
+    %table.table.table-hover.medium-width.pretty
+      %thead
+        %tr
+          %th #
+          %th= sortable "name", t('indicator.name')
+          %th= sortable "category_id", t('indicator.category')
+          %th
+
+      %tbody
+        - @indicators.each_with_index do |indicator, index|
+          %tr
+            %td= @pagy.from + index
+            %td= indicator.name
+            %td= indicator.category.name
+            %td
+            %td.text-right
+              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                %i.fas.fa-ellipsis-v
+
+              .dropdown-menu.dropdown-menu-right
+                - if policy(indicator).update?
+                  = link_to edit_indicator_path(indicator), class: "btn dropdown-item" do
+                    %i.fas.fa-pen.drop-menu-icon
+                    %span= t('shared.edit')
+
+                - if policy(indicator).destroy?
+                  = link_to indicator_path(indicator), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('indicator.are_you_sure_to_delete')} do
+                    %i.fas.fa-trash-alt.drop-menu-icon
+                    %span= t('shared.delete')
+
+  - if @pagy.pages > 1
+    .pagy-wrapper
+      != pagy_bootstrap_nav(@pagy)
