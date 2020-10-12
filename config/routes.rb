@@ -17,7 +17,10 @@ Rails.application.routes.draw do
   resources :categories do
     get :children, on: :member
   end
-  resources :cafs
+
+  resources :local_ngos do
+    resources :cafs
+  end
 
   namespace :api do
     namespace :v1 do

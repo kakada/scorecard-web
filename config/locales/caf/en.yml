@@ -1,0 +1,8 @@
+en:
+  caf:
+    cafs: Cafs
+    name: Name
+    sex: Sex
+    tel: Telephone
+    date_of_birth: Date of birth
+    address: Address

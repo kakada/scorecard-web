@@ -13,7 +13,7 @@
 #  updated_at  :datetime         not null
 #
 class Caf < ApplicationRecord
-  belongs_to :program
+  belongs_to :local_ngo
   has_many :scorecards_caf
   has_many :scorecards, through: :scorecards_caf
 

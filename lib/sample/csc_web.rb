@@ -3,6 +3,7 @@
 require_relative "user"
 require_relative "program"
 require_relative "category"
+require_relative "local_ngo"
 require_relative "caf"
 require_relative "scorecard"
 
@@ -12,6 +13,7 @@ module Sample
       ::Sample::Program.load
       ::Sample::User.load
       ::Sample::Category.load
+      ::Sample::LocalNgo.load
       ::Sample::Caf.load
       # ::Sample::RaisedPerson.load
       # ::Sample::RaisedIssue.load

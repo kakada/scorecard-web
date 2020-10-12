@@ -13,8 +13,8 @@ class Program < ApplicationRecord
   has_many :users
   has_many :languages
   has_many :categories
-  has_many :cafs
   has_many :scorecards
+  has_many :local_ngos
 
   validates :name, presence: true
 
