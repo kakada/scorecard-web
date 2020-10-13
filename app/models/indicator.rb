@@ -2,11 +2,12 @@
 #
 # Table name: indicators
 #
-#  id          :bigint           not null, primary key
-#  category_id :integer
-#  tag         :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                 :bigint           not null, primary key
+#  categorizable_id   :integer
+#  categorizable_type :string
+#  tag                :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
 #
 class Indicator < ApplicationRecord
   belongs_to :categorizable, :polymorphic => true

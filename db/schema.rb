@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_13_023741) do
+ActiveRecord::Schema.define(version: 2020_10_13_095448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,7 +74,8 @@ ActiveRecord::Schema.define(version: 2020_10_13_023741) do
   end
 
   create_table "indicators", force: :cascade do |t|
-    t.integer "category_id"
+    t.integer "categorizable_id"
+    t.string "categorizable_type"
     t.string "tag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -195,6 +196,13 @@ ActiveRecord::Schema.define(version: 2020_10_13_023741) do
     t.text "activity"
     t.float "rating_median_score"
     t.string "rating_result"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "name"
+    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

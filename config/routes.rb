@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get :children, on: :member
     resources :indicators
   end
+  resources :templates
 
   resources :local_ngos do
     resources :cafs
