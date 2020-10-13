@@ -15,6 +15,7 @@ class Program < ApplicationRecord
   has_many :categories
   has_many :scorecards
   has_many :local_ngos
+  has_many :indicators
 
   validates :name, presence: true
 

@@ -12,16 +12,16 @@
       %thead
         %tr
           %th #
-          %th= sortable "name", t('indicator.name')
           %th= sortable "category_id", t('indicator.category')
+          %th= sortable "tag", t('indicator.tag')
           %th
 
       %tbody
         - @indicators.each_with_index do |indicator, index|
           %tr
             %td= @pagy.from + index
-            %td= indicator.name
             %td= indicator.category.name
+            %td= indicator.tag
             %td
             %td.text-right
               %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}

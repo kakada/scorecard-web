@@ -3,7 +3,6 @@ class CreateIndicators < ActiveRecord::Migration[6.0]
     create_table :indicators do |t|
       t.integer :sector_id
       t.integer :category_id
-      t.string  :name
       t.string  :tag
       t.integer :program_id
 

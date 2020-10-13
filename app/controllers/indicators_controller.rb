@@ -48,7 +48,7 @@ class IndicatorsController < ApplicationController
 
   private
     def sort_column
-      Indicator.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      Indicator.column_names.include?(params[:sort]) ? params[:sort] : "tag"
     end
 
     def sort_direction
@@ -56,6 +56,8 @@ class IndicatorsController < ApplicationController
     end
 
     def indicator_params
-      params.require(:indicator).permit(:name, :sector_id, :category_id, :name, :tag)
+      params.require(:indicator).permit(:name, :sector_id, :category_id, :name, :tag,
+        languages_indicators_attributes: [ :id, :language_id, :language_code, :content, :audio, :remove_audio ]
+      )
     end
 end

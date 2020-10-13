@@ -14,6 +14,7 @@
 //= require application/util
 
 //= require categories
+//= require indicators
 
 document.addEventListener('turbolinks:load', function() {
   let currentPage = CW.Util.getCurrentPage();

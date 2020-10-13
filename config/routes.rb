@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :indicators
+  resource :download, only: [:show]
 
   namespace :api do
     namespace :v1 do

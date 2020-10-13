@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_12_094650) do
+ActiveRecord::Schema.define(version: 2020_10_13_023741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 2020_10_12_094650) do
   create_table "indicators", force: :cascade do |t|
     t.integer "sector_id"
     t.integer "category_id"
-    t.string "name"
     t.string "tag"
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
@@ -92,10 +91,21 @@ ActiveRecord::Schema.define(version: 2020_10_12_094650) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+
   create_table "predefined_issues", force: :cascade do |t|
     t.string "scorecard_uuid"
     t.text "content"
     t.string "audio"
+  end
+
+  create_table "languages_indicators", force: :cascade do |t|
+    t.integer "language_id"
+    t.string "language_code"
+    t.integer "indicator_id"
+    t.string "content"
+    t.string "audio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "local_ngos", force: :cascade do |t|
