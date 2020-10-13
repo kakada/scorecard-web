@@ -6,7 +6,7 @@
   .dropdown-menu.dropdown-menu-right
     - if !category.root? && policy(Indicator).create?
       = link_to category_indicators_path(category), class: "btn dropdown-item" do
-        %i.fas.fa-pen.drop-menu-icon
+        %i.fas.fa-pencil-ruler.drop-menu-icon
         %span= t('category.manage_indicator')
 
     - if policy(category).update?

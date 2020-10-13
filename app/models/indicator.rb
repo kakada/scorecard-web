@@ -1,5 +1,14 @@
+# == Schema Information
+#
+# Table name: indicators
+#
+#  id          :bigint           not null, primary key
+#  category_id :integer
+#  tag         :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 class Indicator < ApplicationRecord
-  belongs_to :sector, class_name: 'Category'
   belongs_to :category
   has_many :languages_indicators
   has_many :languages, through: :languages_indicators

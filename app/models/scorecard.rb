@@ -24,6 +24,7 @@
 #  planned_end_date      :datetime
 #  status                :integer
 #  program_id            :integer
+#  local_ngo_id          :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #

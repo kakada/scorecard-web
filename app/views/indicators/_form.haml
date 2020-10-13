@@ -1,27 +1,24 @@
-.w-75
-  #sector.form-group
-    = f.label(:sector_id)
-    = f.hidden_field(:sector_id)
-    = f.select(:sector_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_target => "category", :pumi_select_collection_url => categories_path(format: :json), :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: 'form-control'})
+.w-75.view-center
+  = simple_form_for [@category, @indicator] do |f|
+    .w-75
+      .form-group
+        %label= t('indicator.category')
+        .form-control= @category.name
 
-  #category.form-group
-    = f.label(:category_id)
-    = f.hidden_field(:category_id)
-    = f.select(:category_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "category", :pumi_select_collection_url => children_category_path(:id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#category", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control'})
+      = f.input :tag, label: t('indicator.tag')
 
-  = f.input :tag, label: t('scorecard.tag')
+    .d-flex.mb-2
+      %strong.w-25= t('indicator.language')
+      .d-flex.w-75
+        %strong.w-50= t('indicator.name')
+        %strong.w-50= t('indicator.audio')
 
-.d-flex.mb-2
-  %strong.w-25= t('indicator.language')
-  .d-flex.w-75
-    %strong.w-50= t('indicator.content')
-    %strong.w-50= t('indicator.audio')
-- current_program.languages.each do |lang|
-  - obj = @indicator.languages_indicators.select{ |a| a.language_id==lang.id }.first || f.object.languages_indicators.new
+    - current_program.languages.each do |lang|
+      - obj = @indicator.languages_indicators.select{ |a| a.language_id==lang.id }.first || f.object.languages_indicators.new
 
-  = f.fields_for :languages_indicators, obj do |builder|
-    = render 'language_indicator_field', f: builder, language: lang
+      = f.fields_for :languages_indicators, obj do |builder|
+        = render 'language_indicator_field', f: builder, language: lang
 
-.actions
-  = f.submit t('shared.save'), class: 'btn btn-primary'
-  = link_to t('shared.cancel'), indicators_path, class: 'btn btn-secondary'
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), category_indicators_path(@category), class: 'btn btn-secondary'

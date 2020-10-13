@@ -1,9 +1,14 @@
 #content
   %nav.navbar.navbar-expand-lg.navbar-light.bg-light
     .container-fluid
-      %h3= t('indicator.indicators')
-      = link_to new_indicator_path, class: 'btn btn-primary' do
-        %i.fas.fa-plus
+      %h3= "#{@category.name}: #{t('indicator.indicators')}"
+      %div
+        = link_to categories_path, class: 'btn btn-primary btn-info mr-2' do
+          %i.fas.fa-chevron-left
+          = t('shared.back')
+
+        = link_to new_category_indicator_path(@category), class: 'btn btn-primary' do
+          %i.fas.fa-plus
 
   = render partial: "shared/no_data", locals: { items: @indicators }
 
@@ -17,25 +22,7 @@
           %th
 
       %tbody
-        - @indicators.each_with_index do |indicator, index|
-          %tr
-            %td= @pagy.from + index
-            %td= indicator.category.name
-            %td= indicator.tag
-            %td.text-right
-              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                %i.fas.fa-ellipsis-v
-
-              .dropdown-menu.dropdown-menu-right
-                - if policy(indicator).update?
-                  = link_to edit_indicator_path(indicator), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
-
-                - if policy(indicator).destroy?
-                  = link_to indicator_path(indicator), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('indicator.are_you_sure_to_delete')} do
-                    %i.fas.fa-trash-alt.drop-menu-icon
-                    %span= t('shared.delete')
+        = render partial: 'indicator', collection: @indicators
 
   - if @pagy.pages > 1
     .pagy-wrapper

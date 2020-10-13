@@ -2,5 +2,6 @@ en:
   indicator:
     indicators: Indicators
     language: Language
-    content: Content
+    name: Name
     audio: Audio
+    category: Category

@@ -74,10 +74,8 @@ ActiveRecord::Schema.define(version: 2020_10_13_023741) do
   end
 
   create_table "indicators", force: :cascade do |t|
-    t.integer "sector_id"
     t.integer "category_id"
     t.string "tag"
-    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
