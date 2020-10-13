@@ -16,10 +16,11 @@
 #  updated_at     :datetime         not null
 #
 class Category < ApplicationRecord
+  include Categorizable
+
   acts_as_nested_set scope: [:program_id]
 
   belongs_to :program
-  has_many   :indicators
 
   validates :name, presence: true
   validates :code, presence: true

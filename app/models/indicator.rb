@@ -9,7 +9,7 @@
 #  updated_at  :datetime         not null
 #
 class Indicator < ApplicationRecord
-  belongs_to :category
+  belongs_to :categorizable, :polymorphic => true
   has_many :languages_indicators
   has_many :languages, through: :languages_indicators
 

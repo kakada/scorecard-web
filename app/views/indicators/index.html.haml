@@ -3,10 +3,11 @@
     .container-fluid
       %h3= "#{@category.name}: #{t('indicator.indicators')}"
       %div
-        = link_to categories_path, class: 'btn btn-primary btn-info mr-2' do
+        = link_to 'Generate to template', '#', class: 'btn btn-secondary'
+        = link_to 'Import from template', '#', class: 'btn btn-success'
+        = link_to categories_path, class: 'btn btn-info mr-2' do
           %i.fas.fa-chevron-left
           = t('shared.back')
-
         = link_to new_category_indicator_path(@category), class: 'btn btn-primary' do
           %i.fas.fa-plus
 
