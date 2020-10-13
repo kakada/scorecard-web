@@ -91,6 +91,15 @@ ActiveRecord::Schema.define(version: 2020_10_16_035429) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "indicators", force: :cascade do |t|
+    t.integer "sector_id"
+    t.integer "category_id"
+    t.string "tag"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "languages_indicators", force: :cascade do |t|
     t.integer "language_id"
     t.string "language_code"
@@ -113,10 +122,21 @@ ActiveRecord::Schema.define(version: 2020_10_16_035429) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+
   create_table "predefined_issues", force: :cascade do |t|
     t.string "scorecard_uuid"
     t.text "content"
     t.string "audio"
+  end
+
+  create_table "languages_indicators", force: :cascade do |t|
+    t.integer "language_id"
+    t.string "language_code"
+    t.integer "indicator_id"
+    t.string "content"
+    t.string "audio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "local_ngos", force: :cascade do |t|
