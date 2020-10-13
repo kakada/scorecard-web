@@ -41,11 +41,11 @@
           %i.fas.fa-fw.fa-users
           %span Local Ngo
 
-    - if policy(Indicator).create?
-      %li.nav-item{ class: css_active_class('indicators') }
-        %a.nav-link{:href => indicators_path}
-          %i.fas.fa-fw.fa-users
-          %span Indicator
+    / - if policy(Indicator).create?
+    /   %li.nav-item{ class: css_active_class('indicators') }
+    /     %a.nav-link{:href => indicators_path}
+    /       %i.fas.fa-fw.fa-users
+    /       %span Indicator
 
     %li.nav-item{ class: css_active_class('scorecards') }
       %a.nav-link{:href => scorecards_path}

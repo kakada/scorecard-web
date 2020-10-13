@@ -16,13 +16,13 @@ Rails.application.routes.draw do
   resources :languages
   resources :categories do
     get :children, on: :member
+    resources :indicators
   end
 
   resources :local_ngos do
     resources :cafs
   end
 
-  resources :indicators
   resource :download, only: [:show]
 
   namespace :api do

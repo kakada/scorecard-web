@@ -11,41 +11,9 @@
     .medium-width
       .category-header
         %strong= t('category.name')
-      %div
-        - @categories.each do |category|
-          %div
-            .d-flex.category
-              %div.flex-grow-1= category.name
-              %div.text-right
 
-              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                %i.fas.fa-ellipsis-v
+      - @categories.each do |category|
+        = render 'category', category: category
 
-              .dropdown-menu.dropdown-menu-right
-                - if policy(category).update?
-                  = link_to edit_category_path(category), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
-
-                - if policy(category).destroy?
-                  = link_to category_path(category), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('category.are_you_sure_to_delete')} do
-                    %i.fas.fa-trash-alt.drop-menu-icon
-                    %span= t('shared.delete')
-
-            - category.children.each do |child|
-              .d-flex.category.sub-category
-                %div.flex-grow-1= child.name
-                %div.text-right
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
-
-                .dropdown-menu.dropdown-menu-right
-                  - if policy(child).update?
-                    = link_to edit_category_path(child), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
-
-                  - if policy(child).destroy?
-                    = link_to category_path(child), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('category.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+        - category.children.each do |child|
+          = render 'category', category: child
