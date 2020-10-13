@@ -1,4 +1,6 @@
 en:
   indicator:
     indicators: Indicators
-    name: Name
+    language: Language
+    content: Content
+    audio: Audio

@@ -12,10 +12,10 @@
   = f.input :tag, label: t('scorecard.tag')
 
 .d-flex.mb-2
-  %strong.w-25 Language
+  %strong.w-25= t('indicator.language')
   .d-flex.w-75
-    %strong.w-50 Content
-    %strong.w-50 Audio
+    %strong.w-50= t('indicator.content')
+    %strong.w-50= t('indicator.audio')
 - current_program.languages.each do |lang|
   - obj = @indicator.languages_indicators.select{ |a| a.language_id==lang.id }.first || f.object.languages_indicators.new
 
