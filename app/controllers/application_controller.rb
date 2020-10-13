@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
 
   layout :set_layout
 
+  def current_program
+    @current_program ||= current_user.try(:program)
+  end
+  helper_method :current_program
+
   private
     def set_layout
       devise_controller? ? "layouts/minimal" : "layouts/application"

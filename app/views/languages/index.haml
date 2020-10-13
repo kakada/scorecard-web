@@ -1,0 +1,35 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= t('language.languages')
+      = link_to new_language_path, class: 'btn btn-primary' do
+        %i.fas.fa-plus
+
+  = render partial: "shared/no_data", locals: { items: @languages }
+
+  - if @languages.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th= t('language.code')
+          %th= t('language.name')
+          %th
+      %tbody
+        - @languages.each do |language|
+          %tr
+            %td= language.code
+            %td= language.name
+            %td.text-right
+              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                %i.fas.fa-ellipsis-v
+
+              .dropdown-menu.dropdown-menu-right
+                - if policy(language).update?
+                  = link_to edit_language_path(language), class: "btn dropdown-item" do
+                    %i.fas.fa-pen.drop-menu-icon
+                    %span= t('shared.edit')
+
+                - if policy(language).destroy?
+                  = link_to language_path(language), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('language.are_you_sure_to_delete')} do
+                    %i.fas.fa-trash-alt.drop-menu-icon
+                    %span= t('shared.delete')

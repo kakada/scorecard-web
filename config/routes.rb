@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :programs
+  resources :languages
 
   namespace :api do
     namespace :v1 do

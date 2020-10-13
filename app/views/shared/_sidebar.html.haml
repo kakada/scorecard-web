@@ -23,6 +23,12 @@
           %i.far.fa-fw.fa-clipboard
           %span Program
 
+    - if policy(Language).create?
+      %li.nav-item{ class: css_active_class('languages') }
+        %a.nav-link{:href => languages_path}
+          %i.fas.fa-fw.fa-language
+          %span Language
+
     %li.nav-item{ class: css_active_class('scorecards') }
       %a.nav-link{:href => scorecards_path}
         %i.far.fa-fw.fa-clipboard

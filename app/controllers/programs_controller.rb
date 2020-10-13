@@ -2,7 +2,7 @@
 
 class ProgramsController < ApplicationController
   def index
-    @pagy, @programs = pagy(Program.all)
+    @pagy, @programs = pagy(authorize Program.all)
   end
 
   def new
