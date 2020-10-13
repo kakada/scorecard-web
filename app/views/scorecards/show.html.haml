@@ -1,0 +1,40 @@
+#content
+  = render 'shared/scorecard_tab_nav'
+
+  .border-right.border-left.border-bottom.bg-white
+    .card-body
+      .row
+        %label.col-sm-2.col-form-label ឆ្នាំ
+        %label.col-sm-10.col-form-label= " : #{@scorecard.conducted_year}"
+
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.conducted_date")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.conducted_date}"
+
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.location")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.location}"
+
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.category")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.category}"
+
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.sector")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.sector}"
+
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.number_of_participant")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_participant}"
+
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.number_of_female")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_female}"
+
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.number_of_caf")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_caf}"
+
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.caf_members")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.caf_members.join('; ')}"
