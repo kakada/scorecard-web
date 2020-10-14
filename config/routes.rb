@@ -16,9 +16,14 @@ Rails.application.routes.draw do
   resources :languages
   resources :categories do
     get :children, on: :member
-    resources :indicators
+    resources :indicators, module: 'categories' do
+      post :import_from_template, on: :collection
+    end
   end
-  resources :templates
+
+  resources :templates do
+    resources :indicators, module: 'templates'
+  end
 
   resources :local_ngos do
     resources :cafs

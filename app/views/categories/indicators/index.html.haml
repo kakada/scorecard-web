@@ -4,7 +4,7 @@
       %h3= "#{@category.name}: #{t('indicator.indicators')}"
       %div
         = link_to 'Generate to template', '#', class: 'btn btn-secondary'
-        = link_to 'Import from template', '#', class: 'btn btn-success'
+        = render 'modal_indicator_from_template'
         = link_to categories_path, class: 'btn btn-info mr-2' do
           %i.fas.fa-chevron-left
           = t('shared.back')

@@ -13,5 +13,6 @@ CW.Util =
       controller[i] = @capitalize(controller[i])
       i++
     pageName = controller.join("") + action
+    console.log(pageName)
 
     return pageName

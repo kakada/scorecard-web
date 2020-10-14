@@ -16,7 +16,8 @@
       %tbody
         - @templates.each do |template|
           %tr
-            %td= template.name
+            %td= link_to template.name, template_indicators_path(template), class: "btn btn-link p-0"
+
             %td.text-right
               %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                 %i.fas.fa-ellipsis-v
