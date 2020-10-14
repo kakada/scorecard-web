@@ -12,7 +12,8 @@
 FactoryBot.define do
   factory :indicator do
     categorizable   { create(:category) }
-    tag             { 'FFaker::Tweet.tags.first' }
+    tag             { FFaker::Tweet.tags.split('#')[1] }
+    name            { FFaker::Name.name }
 
     trait :with_languages_indicators do
       transient do

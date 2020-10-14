@@ -49,7 +49,7 @@ module Templates
 
     private
       def sort_column
-        Indicator.column_names.include?(params[:sort]) ? params[:sort] : "tag"
+        Indicator.column_names.include?(params[:sort]) ? params[:sort] : "name"
       end
 
       def sort_direction
@@ -57,7 +57,7 @@ module Templates
       end
 
       def indicator_params
-        params.require(:indicator).permit(:tag,
+        params.require(:indicator).permit(:tag, :name,
           languages_indicators_attributes: [ :id, :language_id, :language_code, :content, :audio, :remove_audio ]
         )
       end

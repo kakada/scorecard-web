@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_095448) do
     t.integer "categorizable_id"
     t.string "categorizable_type"
     t.string "tag"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

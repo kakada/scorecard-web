@@ -3,13 +3,13 @@
     .container-fluid
       %h3= "#{@category.name}: #{t('indicator.indicators')}"
       %div
-        = render 'modal_clone_to_template'
-        = render 'modal_clone_from_template'
         = link_to categories_path, class: 'btn btn-info mr-2' do
           %i.fas.fa-chevron-left
           = t('shared.back')
         = link_to new_category_indicator_path(@category), class: 'btn btn-primary' do
           %i.fas.fa-plus
+
+        = render 'more_options'
 
   = render partial: "shared/no_data", locals: { items: @indicators }
 
@@ -18,7 +18,7 @@
       %thead
         %tr
           %th #
-          %th= sortable "category_id", t('indicator.category')
+          %th= sortable "name", t('indicator.name')
           %th= sortable "tag", t('indicator.tag')
           %th
 

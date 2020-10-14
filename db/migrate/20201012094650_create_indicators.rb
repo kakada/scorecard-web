@@ -4,6 +4,7 @@ class CreateIndicators < ActiveRecord::Migration[6.0]
       t.integer :categorizable_id
       t.string  :categorizable_type
       t.string  :tag
+      t.string  :name
 
       t.timestamps
     end

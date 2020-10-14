@@ -6,11 +6,12 @@
         .form-control= @category.name
 
       = f.input :tag, label: t('indicator.tag')
+      = f.input :name, label: t('indicator.name')
 
     .d-flex.mb-2
       %strong.w-25= t('indicator.language')
       .d-flex.w-75
-        %strong.w-50= t('indicator.name')
+        %strong.w-50= t('indicator.display_name')
         %strong.w-50= t('indicator.audio')
 
     - current_program.languages.each do |lang|

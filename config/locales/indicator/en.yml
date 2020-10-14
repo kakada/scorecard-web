@@ -7,3 +7,6 @@ en:
     category: Category
     template: Template
     template_name: Template name
+    clone_to_template: Clone to new template
+    copy_from_template: Copy from a template
+    display_name: Display name
