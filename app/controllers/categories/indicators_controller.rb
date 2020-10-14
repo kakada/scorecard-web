@@ -47,10 +47,16 @@ module Categories
       redirect_to category_indicators_url(@category)
     end
 
-    def import_from_template
-      ::IndicatorService.new(@category.id, params[:template_id]).clone_from_template
+    def clone_from_template
+      ::IndicatorService.new(params[:category_id]).clone_from_template(params[:template_id])
 
       redirect_to category_indicators_url(@category)
+    end
+
+    def clone_to_template
+      ::IndicatorService.new(params[:category_id]).clone_to_template(params[:template_name])
+
+      redirect_to templates_url
     end
 
     private

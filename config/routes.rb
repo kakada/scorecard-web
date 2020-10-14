@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   resources :categories do
     get :children, on: :member
     resources :indicators, module: 'categories' do
-      post :import_from_template, on: :collection
+      post :clone_from_template, on: :collection
+      post :clone_to_template, on: :collection
     end
   end
 

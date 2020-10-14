@@ -17,5 +17,17 @@
 #
 FactoryBot.define do
   factory :category do
+    name        { FFaker::Name.name }
+    program
+
+    trait :with_indicators do
+      transient do
+        indicator_count { 1 }
+      end
+
+      after(:create) do |category, evaluator|
+        create_list(:indicator, evaluator.indicator_count, :with_languages_indicators, categorizable: category)
+      end
+    end
   end
 end
