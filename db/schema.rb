@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_072444) do
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
+    t.string "code"
     t.string "name"
     t.integer "parent_id"
     t.integer "lft", null: false
