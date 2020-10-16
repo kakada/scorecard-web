@@ -1,0 +1,1 @@
+window.CW = window.CW || {}
