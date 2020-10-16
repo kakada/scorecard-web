@@ -54,12 +54,14 @@ ActiveRecord::Schema.define(version: 2020_10_13_095448) do
   end
 
   create_table "categories", force: :cascade do |t|
+    t.string "code"
     t.string "name"
     t.integer "parent_id"
     t.integer "lft", null: false
     t.integer "rgt", null: false
     t.integer "depth", default: 0, null: false
     t.integer "children_count", default: 0, null: false
+    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lft"], name: "index_categories_on_lft"
