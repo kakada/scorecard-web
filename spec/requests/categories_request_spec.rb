@@ -2,5 +2,5 @@
 
 require "rails_helper"
 
-RSpec.describe "Languages", type: :request do
+RSpec.describe "Categories", type: :request do
 end

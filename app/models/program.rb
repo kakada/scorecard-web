@@ -3,6 +3,7 @@
 class Program < ApplicationRecord
   has_many :users
   has_many :languages
+  has_many :categories
 
   validates :name, presence: true
 
@@ -10,6 +11,6 @@ class Program < ApplicationRecord
 
   private
     def create_default_language
-      languages.create(code: 'km', name: 'Khmer')
+      languages.create(code: "km", name: "Khmer")
     end
 end

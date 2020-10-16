@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LanguagesController < ApplicationController
   def index
     @pagy, @languages = pagy(Language.all)
@@ -35,7 +37,7 @@ class LanguagesController < ApplicationController
     @language = authorize Language.find(params[:id])
     @language.destroy
 
-    redirect_to programs_url
+    redirect_to categories_url
   end
 
   private

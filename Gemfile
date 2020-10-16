@@ -31,7 +31,7 @@ gem "bootstrap", "~> 4.5.2"
 gem "haml", "~> 5.1.2"
 gem "haml-rails", "~> 2.0"
 gem "jquery-rails",   "~> 4.4.0"
-
+gem "coffee-rails", "~> 5.0.0"
 gem "devise", "~> 4.7.2"
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -44,6 +44,7 @@ gem "pumi", require: "pumi/rails"
 gem "carrierwave", "~> 2.0"
 gem "pundit", "~> 2.1.0"
 gem "simple_form", "~> 5.0.3"
+gem "awesome_nested_set", "~> 3.2.1"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

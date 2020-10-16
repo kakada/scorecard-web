@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe LanguagePolicy, type: :policy do
+RSpec.describe CategoryPolicy, type: :policy do
   let(:user) { User.new }
 
   subject { described_class }
