@@ -1,0 +1,40 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= "#{@local_ngo.name}: #{t('caf.cafs')}"
+      %div
+        = link_to local_ngos_path, class: 'btn btn-primary btn-info mr-2' do
+          %i.fas.fa-chevron-left
+          Back
+
+        = link_to new_local_ngo_caf_path(@local_ngo), class: 'btn btn-primary' do
+          %i.fas.fa-plus
+
+  = render partial: "shared/no_data", locals: { items: @cafs }
+
+  - if @cafs.present?
+    %table.table.table-hover.medium-width
+      %thead
+        %tr
+          %th= t('caf.name')
+          %th= t('caf.address')
+          %th
+      %tbody
+        - @cafs.each do |caf|
+          %tr
+            %td= caf.name
+            %td= caf.address
+            %td.text-right
+              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                %i.fas.fa-ellipsis-v
+
+              .dropdown-menu.dropdown-menu-right
+                - if policy(caf).update?
+                  = link_to edit_local_ngo_caf_path(@local_ngo, caf), class: "btn dropdown-item" do
+                    %i.fas.fa-pen.drop-menu-icon
+                    %span= t('shared.edit')
+
+                - if policy(caf).destroy?
+                  = link_to local_ngo_caf_path(@local_ngo, caf), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('caf.are_you_sure_to_delete')} do
+                    %i.fas.fa-trash-alt.drop-menu-icon
+                    %span= t('shared.delete')

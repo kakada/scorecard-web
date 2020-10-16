@@ -1,0 +1,24 @@
+# frozen_string_literal: true
+
+module Sample
+  class LocalNgo
+    def self.load
+      program = ::Program.find_by name: "CARE"
+
+      local_ngos = ["NGO1", "NGO2"]
+      local_ngos.each do |name|
+        village = ::Pumi::Village.all.sample
+        address = "ផ្ទះលេខ#{rand(1..100)} ផ្លូវលេខ#{rand(100..300)} #{village.address_km}"
+
+        program.local_ngos.create(
+          name: name,
+          village_id: village.id,
+          commune_id: village.commune_id,
+          district_id: village.district_id,
+          province_id: village.province_id,
+          address: address
+        )
+      end
+    end
+  end
+end

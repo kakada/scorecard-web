@@ -2,7 +2,7 @@
 = f.input :code, label: t('category.code')
 
 .form-group
-  %label Parent Category
+  %label= t('category.parent')
   = f.select :parent_id, current_program.categories.roots.pluck(:name, :id), {:include_blank => true}, {class: 'form-control'}
 
 .actions

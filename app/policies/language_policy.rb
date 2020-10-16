@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class LanguagePolicy < ApplicationPolicy
+  def index?
+    user.program_admin?
+  end
+
   def create?
     user.program_admin?
   end

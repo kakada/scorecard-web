@@ -1,9 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: programs
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Program < ApplicationRecord
   has_many :users
   has_many :languages
   has_many :categories
+  has_many :scorecards
+  has_many :local_ngos
 
   validates :name, presence: true
 

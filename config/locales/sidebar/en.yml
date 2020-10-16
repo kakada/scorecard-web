@@ -1,0 +1,7 @@
+en:
+  sidebar:
+    dashboard: 'Dashboard'
+    users: 'Users'
+    about: 'About'
+    logout: 'Logout'
+    version: 'Version'

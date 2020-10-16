@@ -14,7 +14,13 @@ Rails.application.routes.draw do
 
   resources :programs
   resources :languages
-  resources :categories
+  resources :categories do
+    get :children, on: :member
+  end
+
+  resources :local_ngos do
+    resources :cafs
+  end
 
   namespace :api do
     namespace :v1 do
@@ -23,4 +29,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  mount Pumi::Engine => "/pumi"
 end
