@@ -42,33 +42,6 @@ ActiveRecord::Schema.define(version: 2020_10_13_095448) do
     t.index ["rgt"], name: "index_categories_on_rgt"
   end
 
-  create_table "cafs", force: :cascade do |t|
-    t.string "name"
-    t.string "sex"
-    t.string "date_of_birth"
-    t.string "tel"
-    t.string "address"
-    t.integer "local_ngo_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "categories", force: :cascade do |t|
-    t.string "code"
-    t.string "name"
-    t.integer "parent_id"
-    t.integer "lft", null: false
-    t.integer "rgt", null: false
-    t.integer "depth", default: 0, null: false
-    t.integer "children_count", default: 0, null: false
-    t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["lft"], name: "index_categories_on_lft"
-    t.index ["parent_id"], name: "index_categories_on_parent_id"
-    t.index ["rgt"], name: "index_categories_on_rgt"
-  end
-
   create_table "indicators", force: :cascade do |t|
     t.integer "categorizable_id"
     t.string "categorizable_type"
@@ -101,18 +74,6 @@ ActiveRecord::Schema.define(version: 2020_10_13_095448) do
     t.integer "indicator_id"
     t.string "content"
     t.string "audio"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "local_ngos", force: :cascade do |t|
-    t.string "name"
-    t.string "province_id", limit: 2
-    t.string "district_id", limit: 4
-    t.string "commune_id", limit: 6
-    t.string "village_id", limit: 8
-    t.string "address"
-    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
