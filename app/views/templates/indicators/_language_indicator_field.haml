@@ -1,0 +1,20 @@
+.d-flex.mb-2
+  .w-25
+    %label= language.name
+    = f.hidden_field :language_id, value: language.id
+    = f.hidden_field :language_code, value: language.code
+
+  .d-flex.w-75.audio-wrapper
+    %div.w-50= f.text_field :content, class: ['form-control']
+    %div.w-50.pl-2
+      = f.file_field :audio, class: ['form-control audio-input', ('d-none' if f.object.audio.present?)]
+
+      - if f.object.audio.present?
+        .remove-audio-wrapper
+          .d-flex
+            = f.hidden_field :remove_audio, class: 'audio-input-destroy'
+            %a.remove-audio.text-danger.mr-2.pointer
+              %i.far.fa-trash-alt
+
+            = link_to download_path(file: f.object.audio.path), target: "_blank", class: 'btn btn-link p-0 d-block text-truncate' do
+              = f.object.audio_identifier

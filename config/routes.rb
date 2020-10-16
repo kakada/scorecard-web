@@ -16,11 +16,21 @@ Rails.application.routes.draw do
   resources :languages
   resources :categories do
     get :children, on: :member
+    resources :indicators, module: 'categories' do
+      post :clone_from_template, on: :collection
+      post :clone_to_template, on: :collection
+    end
+  end
+
+  resources :templates do
+    resources :indicators, module: 'templates'
   end
 
   resources :local_ngos do
     resources :cafs
   end
+
+  resource :download, only: [:show]
 
   namespace :api do
     namespace :v1 do

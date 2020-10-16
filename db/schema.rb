@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_12_082550) do
+ActiveRecord::Schema.define(version: 2020_10_13_095448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2020_10_12_082550) do
     t.index ["rgt"], name: "index_categories_on_rgt"
   end
 
+  create_table "indicators", force: :cascade do |t|
+    t.integer "categorizable_id"
+    t.string "categorizable_type"
+    t.string "tag"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "issue_ratings", force: :cascade do |t|
     t.integer "vote_issue_id"
     t.integer "vote_person_id"
@@ -59,9 +68,11 @@ ActiveRecord::Schema.define(version: 2020_10_12_082550) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "predefined_issues", force: :cascade do |t|
-    t.string "scorecard_uuid"
-    t.text "content"
+  create_table "languages_indicators", force: :cascade do |t|
+    t.integer "language_id"
+    t.string "language_code"
+    t.integer "indicator_id"
+    t.string "content"
     t.string "audio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -75,6 +86,14 @@ ActiveRecord::Schema.define(version: 2020_10_12_082550) do
     t.string "village_id", limit: 8
     t.string "address"
     t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "predefined_issues", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.text "content"
+    t.string "audio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -104,7 +123,7 @@ ActiveRecord::Schema.define(version: 2020_10_12_082550) do
 
   create_table "scorecards", force: :cascade do |t|
     t.string "uuid"
-    t.integer "sector_id"
+    t.integer "unit_type_id"
     t.integer "category_id"
     t.string "name"
     t.text "description"
@@ -144,6 +163,13 @@ ActiveRecord::Schema.define(version: 2020_10_12_082550) do
     t.text "activity"
     t.float "rating_median_score"
     t.string "rating_result"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "name"
+    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

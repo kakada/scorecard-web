@@ -24,6 +24,7 @@
 #  planned_end_date      :datetime
 #  status                :integer
 #  program_id            :integer
+#  local_ngo_id          :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
@@ -34,6 +35,11 @@ class Scorecard < ApplicationRecord
   has_many :cafs, through: :scorecards_cafs
   belongs_to :sector, class_name: 'Category'
   belongs_to :category
+
+  before_create :secure_uuid
+
+  has_many :scorecards_cafs
+  has_many :cafs, through: :scorecards_cafs
 
   before_create :secure_uuid
 

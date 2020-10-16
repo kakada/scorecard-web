@@ -1,0 +1,14 @@
+= render 'modal_clone_to_template'
+= render 'modal_clone_from_template'
+
+%button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+  %i.fas.fa-ellipsis-v
+
+.dropdown-menu.dropdown-menu-right
+  %a.btn.dropdown-item{"data-target" => "#templateModal", "data-toggle" => "modal", href: '#'}
+    %i.far.fa-clone.drop-menu-icon
+    %span= t("indicator.clone_to_template")
+
+  %a.btn.dropdown-item{"data-target" => "#exampleModal", "data-toggle" => "modal", href: '#'}
+    %i.fas.fa-copy.drop-menu-icon
+    %span= t("indicator.copy_from_template")

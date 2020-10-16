@@ -35,11 +35,23 @@
           %i.fas.fa-fw.fa-sitemap
           %span Scorecard Category
 
+    - if policy(::Template).create?
+      %li.nav-item{ class: css_active_class('templates') }
+        %a.nav-link{:href => templates_path}
+          %i.fas.fa-fw.fa-gopuram
+          %span Indicator Template
+
     - if policy(LocalNgo).create?
       %li.nav-item{ class: css_active_class('local_ngos') }
         %a.nav-link{:href => local_ngos_path}
           %i.fas.fa-fw.fa-users
           %span Local Ngo
+
+    / - if policy(Indicator).create?
+    /   %li.nav-item{ class: css_active_class('indicators') }
+    /     %a.nav-link{:href => indicators_path}
+    /       %i.fas.fa-fw.fa-users
+    /       %span Indicator
 
     %li.nav-item{ class: css_active_class('scorecards') }
       %a.nav-link{:href => scorecards_path}

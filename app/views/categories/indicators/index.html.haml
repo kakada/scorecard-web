@@ -1,0 +1,30 @@
+#content
+  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      %h3= "#{@category.name}: #{t('indicator.indicators')}"
+      %div
+        = link_to categories_path, class: 'btn btn-info mr-2' do
+          %i.fas.fa-chevron-left
+          = t('shared.back')
+        = link_to new_category_indicator_path(@category), class: 'btn btn-primary' do
+          %i.fas.fa-plus
+
+        = render 'more_options'
+
+  = render partial: "shared/no_data", locals: { items: @indicators }
+
+  - if @indicators.present?
+    %table.table.table-hover.medium-width.pretty
+      %thead
+        %tr
+          %th #
+          %th= sortable "name", t('indicator.name')
+          %th= sortable "tag", t('indicator.tag')
+          %th
+
+      %tbody
+        = render partial: 'indicator', collection: @indicators
+
+  - if @pagy.pages > 1
+    .pagy-wrapper
+      != pagy_bootstrap_nav(@pagy)
