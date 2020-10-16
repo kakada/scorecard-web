@@ -29,30 +29,17 @@
 #  updated_at            :datetime         not null
 #
 class Scorecard < ApplicationRecord
-  serialize :caf_members, Array
-
   has_many :scorecards_cafs
   has_many :cafs, through: :scorecards_cafs
-  belongs_to :sector, class_name: 'Category'
+  belongs_to :unit_type, class_name: 'Category'
   belongs_to :category
 
-  before_create :secure_uuid
-
-  has_many :scorecards_cafs
-  has_many :cafs, through: :scorecards_cafs
-
-  before_create :secure_uuid
-
-  has_many :scorecards_cafs
-  has_many :cafs, through: :scorecards_cafs
+  validates :name, presence: true
+  validates :province_id, presence: true
+  validates :unit_type_id, presence: true
+  validates :category_id, presence: true
 
   before_create :secure_uuid
-
-  SECTORS = %w(primary_school health_center commune)
-
-  def location
-    ::Pumi::Commune.find_by_id(commune_code).try(:address_km)
-  end
 
   private
     def secure_uuid
