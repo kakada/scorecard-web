@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 2020_10_16_035429) do
     t.integer "vote_issue_id"
     t.integer "vote_person_id"
     t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "cafs", force: :cascade do |t|
@@ -80,6 +82,8 @@ ActiveRecord::Schema.define(version: 2020_10_16_035429) do
     t.index ["lft"], name: "index_categories_on_lft"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["rgt"], name: "index_categories_on_rgt"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "languages", force: :cascade do |t|
@@ -145,6 +149,14 @@ ActiveRecord::Schema.define(version: 2020_10_16_035429) do
     t.string "village_id", limit: 8
     t.string "address"
     t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "predefined_issues", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.text "content"
+    t.string "audio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
