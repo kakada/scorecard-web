@@ -18,6 +18,7 @@
 FactoryBot.define do
   factory :category do
     name        { FFaker::Name.name }
+    code        { name.upcase.split(' ').map{|n| n[0]}.join('') }
     program
 
     trait :with_indicators do
