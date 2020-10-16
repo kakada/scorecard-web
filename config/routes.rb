@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   end
 
   resource :download, only: [:show]
+  resources :scorecard_types
 
   namespace :api do
     namespace :v1 do

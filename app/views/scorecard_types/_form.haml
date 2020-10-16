@@ -1,0 +1,7 @@
+.w-50.view-center
+  = simple_form_for @scorecard_type do |f|
+    = f.input :name, label: t('scorecard_type.name')
+
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), scorecard_types_path, class: 'btn btn-secondary'

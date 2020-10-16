@@ -6,6 +6,7 @@ require_relative "category"
 require_relative "indicator"
 require_relative "local_ngo"
 require_relative "caf"
+require_relative "scorecard_type"
 require_relative "scorecard"
 
 module Sample
@@ -17,6 +18,7 @@ module Sample
       ::Sample::Indicator.load
       ::Sample::LocalNgo.load
       ::Sample::Caf.load
+      ::Sample::ScorecardType.load
       # ::Sample::RaisedPerson.load
       # ::Sample::RaisedIssue.load
       # ::Sample::Scorecard.load
