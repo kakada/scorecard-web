@@ -21,7 +21,7 @@ module Sample
       ::Sample::ScorecardType.load
       # ::Sample::RaisedPerson.load
       # ::Sample::RaisedIssue.load
-      # ::Sample::Scorecard.load
+      ::Sample::Scorecard.load
     end
   end
 end

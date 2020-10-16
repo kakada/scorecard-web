@@ -1,0 +1,2 @@
+class RaisedIndicator < ApplicationRecord
+end
