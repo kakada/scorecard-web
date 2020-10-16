@@ -6,4 +6,5 @@ class Category < ApplicationRecord
   belongs_to :program
 
   validates :name, presence: true
+  validates :code, presence: true
 end
