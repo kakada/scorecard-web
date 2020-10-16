@@ -10,7 +10,9 @@
         .modal-body
           .form-group
             %label= t('indicator.template')
-            = select_tag "template_id", options_from_collection_for_select(current_program.templates, "id", "name"), class: 'form-control'
+            - options = @templates.map{|template| ["#{template.name} (#{template.indicators.length} indicators)", template.id]}
+
+            = select_tag "template_id", options_for_select(options), class: 'form-control'
 
         .modal-footer
           %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')

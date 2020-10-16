@@ -6,6 +6,7 @@ module Categories
 
     def index
       @pagy, @indicators = pagy(@category.indicators.order(sort_column + " " + sort_direction))
+      @templates = current_program.templates.includes(:indicators)
     end
 
     def show

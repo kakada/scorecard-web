@@ -42,12 +42,6 @@ ActiveRecord::Schema.define(version: 2020_10_13_095448) do
     t.index ["rgt"], name: "index_categories_on_rgt"
   end
 
-  create_table "issue_ratings", force: :cascade do |t|
-    t.integer "vote_issue_id"
-    t.integer "vote_person_id"
-    t.integer "score"
-  end
-
   create_table "cafs", force: :cascade do |t|
     t.string "name"
     t.string "sex"
@@ -82,6 +76,14 @@ ActiveRecord::Schema.define(version: 2020_10_13_095448) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "issue_ratings", force: :cascade do |t|
+    t.integer "vote_issue_id"
+    t.integer "vote_person_id"
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "languages", force: :cascade do |t|
     t.string "code"
     t.string "name"
@@ -89,13 +91,6 @@ ActiveRecord::Schema.define(version: 2020_10_13_095448) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-
-  create_table "predefined_issues", force: :cascade do |t|
-    t.string "scorecard_uuid"
-    t.text "content"
-    t.string "audio"
   end
 
   create_table "languages_indicators", force: :cascade do |t|
@@ -128,6 +123,14 @@ ActiveRecord::Schema.define(version: 2020_10_13_095448) do
     t.string "village_id", limit: 8
     t.string "address"
     t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "predefined_issues", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.text "content"
+    t.string "audio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
