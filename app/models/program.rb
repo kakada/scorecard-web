@@ -16,6 +16,7 @@ class Program < ApplicationRecord
   has_many :templates
   has_many :local_ngos
   has_many :scorecards
+  has_many :scorecard_types
 
   validates :name, presence: true
 

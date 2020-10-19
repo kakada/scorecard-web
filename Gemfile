@@ -31,7 +31,7 @@ gem "bootstrap", "~> 4.5.2"
 gem "haml", "~> 5.1.2"
 gem "haml-rails", "~> 2.0"
 gem "jquery-rails",   "~> 4.4.0"
-gem "coffee-rails", "~> 5.0.0"
+gem "coffee-rails",   "~> 5.0.0"
 
 gem "devise", "~> 4.7.2"
 
