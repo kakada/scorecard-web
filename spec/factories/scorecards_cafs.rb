@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: scorecards_cafs
@@ -11,6 +13,5 @@
 
 FactoryBot.define do
   factory :scorecards_caf do
-
   end
 end

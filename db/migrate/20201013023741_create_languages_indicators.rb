@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateLanguagesIndicators < ActiveRecord::Migration[6.0]
   def change
     create_table :languages_indicators do |t|

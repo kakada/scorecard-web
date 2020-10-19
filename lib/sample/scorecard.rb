@@ -18,7 +18,7 @@ module Sample
         category = ::Category.where.not(parent_id: nil).sample
         local_ngo = ::LocalNgo.all.sample
 
-        scorecard = ::Scorecard.create({
+        ::Scorecard.create({
           name: "Scorecard #{category.name}",
           conducted_date: conducted_date,
           province_id: commune.province_id,

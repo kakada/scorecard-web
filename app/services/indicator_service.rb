@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IndicatorService
   attr_reader :category
 

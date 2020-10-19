@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Templates
   class IndicatorsController < ApplicationController
     helper_method :sort_column, :sort_direction

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: local_ngos
@@ -15,6 +17,7 @@
 #
 FactoryBot.define do
   factory :local_ngo do
-
+    program
+    name        { FFaker::Name.name }
   end
 end

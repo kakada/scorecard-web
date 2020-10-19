@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: indicators
@@ -6,11 +8,12 @@
 #  categorizable_id   :integer
 #  categorizable_type :string
 #  tag                :string
+#  name               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
 class Indicator < ApplicationRecord
-  belongs_to :categorizable, :polymorphic => true
+  belongs_to :categorizable, polymorphic: true
   has_many :languages_indicators
   has_many :languages, through: :languages_indicators
 
@@ -19,6 +22,6 @@ class Indicator < ApplicationRecord
 
   # Nested Attributes
   accepts_nested_attributes_for :languages_indicators, allow_destroy: true, reject_if: lambda { |attributes|
-    attributes['content'].blank? && attributes['audio'].blank?
+    attributes["content"].blank? && attributes["audio"].blank?
   }
 end

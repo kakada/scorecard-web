@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: local_ngos
@@ -16,4 +18,7 @@
 class LocalNgo < ApplicationRecord
   belongs_to :program
   has_many :cafs
+  has_many :scorecards
+
+  validates :name, presence: true
 end

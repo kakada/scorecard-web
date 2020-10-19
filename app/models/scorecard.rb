@@ -6,7 +6,7 @@
 #
 #  id                    :bigint           not null, primary key
 #  uuid                  :string
-#  sector_id             :integer
+#  unit_type_id          :integer
 #  category_id           :integer
 #  name                  :string
 #  description           :text
@@ -31,8 +31,10 @@
 class Scorecard < ApplicationRecord
   has_many :scorecards_cafs
   has_many :cafs, through: :scorecards_cafs
-  belongs_to :unit_type, class_name: 'Category'
+  belongs_to :unit_type, class_name: "Category"
   belongs_to :category
+  belongs_to :local_ngo
+  belongs_to :program
 
   validates :name, presence: true
   validates :province_id, presence: true
