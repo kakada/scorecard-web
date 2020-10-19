@@ -29,12 +29,14 @@
 #  updated_at            :datetime         not null
 #
 class Scorecard < ApplicationRecord
-  has_many :scorecards_cafs
-  has_many :cafs, through: :scorecards_cafs
   belongs_to :unit_type, class_name: "Category"
   belongs_to :category
-  belongs_to :local_ngo
+  belongs_to :local_ngo, optional: true
   belongs_to :program
+  has_many   :scorecards_cafs
+  has_many   :cafs, through: :scorecards_cafs
+  has_many   :raised_indicators, foreign_key: :scorecard_uuid
+  has_many   :custom_indicators, foreign_key: :scorecard_uuid
 
   validates :name, presence: true
   validates :province_id, presence: true

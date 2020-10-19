@@ -29,7 +29,8 @@ module Sample
           number_of_caf: number_of_caf,
           number_of_participant: number_of_participant,
           number_of_female: number_of_female,
-          local_ngo_id: local_ngo.id
+          local_ngo_id: local_ngo.id,
+          program_id: local_ngo.program_id
         })
       end
   end

@@ -8,6 +8,7 @@ require_relative "local_ngo"
 require_relative "caf"
 require_relative "scorecard_type"
 require_relative "scorecard"
+require_relative "raised_indicator"
 
 module Sample
   class CscWeb
@@ -19,9 +20,9 @@ module Sample
       ::Sample::LocalNgo.load
       ::Sample::Caf.load
       ::Sample::ScorecardType.load
-      # ::Sample::RaisedPerson.load
-      # ::Sample::RaisedIssue.load
       ::Sample::Scorecard.load
+      ::Sample::RaisedIndicator.load
+      # ::Sample::RaisedPerson.load
     end
   end
 end

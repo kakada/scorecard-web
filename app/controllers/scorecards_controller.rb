@@ -59,7 +59,7 @@ class ScorecardsController < ApplicationController
       params.require(:scorecard).permit(:name, :unit_type_id, :category_id, :description,
         :province_id, :district_id, :commune_id, :address, :lat, :lng,
         :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,
-        :planned_start_date, :planned_end_date
+        :planned_start_date, :planned_end_date, :local_ngo_id
       )
     end
 end

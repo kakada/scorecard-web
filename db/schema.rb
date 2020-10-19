@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_035429) do
+ActiveRecord::Schema.define(version: 2020_10_19_074019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2020_10_16_035429) do
     t.index ["lft"], name: "index_categories_on_lft"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["rgt"], name: "index_categories_on_rgt"
+  end
+
+  create_table "custom_indicators", force: :cascade do |t|
+    t.string "name"
+    t.string "audio"
+    t.string "tag"
+    t.string "scorecard_uuid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "indicators", force: :cascade do |t|
@@ -105,8 +114,10 @@ ActiveRecord::Schema.define(version: 2020_10_16_035429) do
   end
 
   create_table "raised_indicators", force: :cascade do |t|
-    t.string "scorecard_id"
-    t.integer "indicator_id"
+    t.integer "indicatorable_id"
+    t.string "indicatorable_type"
+    t.integer "raised_person_id"
+    t.string "scorecard_uuid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

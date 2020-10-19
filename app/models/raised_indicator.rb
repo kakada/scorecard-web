@@ -11,4 +11,6 @@
 #  updated_at   :datetime         not null
 #
 class RaisedIndicator < ApplicationRecord
+  belongs_to :scorecard, foreign_key: :scorecard_uuid
+  belongs_to :indicatorable, polymorphic: true
 end
