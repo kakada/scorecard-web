@@ -4,9 +4,9 @@
   .border-right.border-left.border-bottom.bg-white
     .card-body
       %h3 Predefined
-      - @indicators.each do |item|
+      - @indicator[:predefineds].each do |item|
         %div= "[Raised #{item["count"]} times] #{item["name"]}"
 
       %h3 Custom
-      - @custom_indicators.each do |item|
-        %div= item.name
+      - @indicator[:customs].each do |item|
+        %div= item["name"]
