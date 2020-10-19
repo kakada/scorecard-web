@@ -25,6 +25,7 @@
 #  status                :integer
 #  program_id            :integer
 #  local_ngo_id          :integer
+#  scorecard_type_id     :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
@@ -34,6 +35,7 @@ FactoryBot.define do
     unit_type_id { category.parent_id }
     program
     local_ngo
+    scorecard_type
     name         { FFaker::Name.name }
     province_id  { Pumi::Province.all.sample.id }
   end

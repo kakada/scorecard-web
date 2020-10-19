@@ -15,7 +15,7 @@ module Sample
       scorecard.number_of_female.to_i.times do |i|
         custom_indicator = scorecard.custom_indicators.create(
           name: "custom indicator #{i}",
-          audio: ''
+          audio: ""
         )
 
         scorecard.raised_indicators.create(indicatorable: custom_indicator)

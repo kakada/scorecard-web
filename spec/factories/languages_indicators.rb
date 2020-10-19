@@ -16,7 +16,7 @@
 FactoryBot.define do
   factory :languages_indicator do
     language
-    language_code { language.code}
+    language_code { language.code }
     content       { FFaker::Name.name }
     indicator
   end
