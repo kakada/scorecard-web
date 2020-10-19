@@ -1,4 +1,4 @@
-FROM ruby:2.6.4
+FROM ruby:2.7.2
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
@@ -14,6 +14,8 @@ WORKDIR /app
 
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
+
+RUN gem install bundler:2.1.4
 
 RUN bundle install
 
