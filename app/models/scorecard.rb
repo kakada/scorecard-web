@@ -33,6 +33,8 @@ class Scorecard < ApplicationRecord
   belongs_to :category
   belongs_to :local_ngo, optional: true
   belongs_to :program
+  belongs_to :scorecard_type
+
   has_many   :scorecards_cafs
   has_many   :cafs, through: :scorecards_cafs
   has_many   :raised_indicators, foreign_key: :scorecard_uuid
@@ -42,6 +44,7 @@ class Scorecard < ApplicationRecord
   validates :province_id, presence: true
   validates :unit_type_id, presence: true
   validates :category_id, presence: true
+  validates :scorecard_type_id, presence: true
 
   before_create :secure_uuid
 

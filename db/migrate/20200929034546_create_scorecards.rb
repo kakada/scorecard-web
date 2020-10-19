@@ -27,6 +27,7 @@ class CreateScorecards < ActiveRecord::Migration[6.0]
       t.integer  :status
       t.integer  :program_id
       t.integer  :local_ngo_id
+      t.integer  :scorecard_type_id
 
       t.timestamps
     end

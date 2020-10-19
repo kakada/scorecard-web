@@ -12,6 +12,7 @@
 #
 class ScorecardType < ApplicationRecord
   belongs_to :program
+  has_many :scorecards
 
   validates :name, presence: true
 end

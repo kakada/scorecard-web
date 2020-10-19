@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 2020_10_19_074019) do
     t.integer "status"
     t.integer "program_id"
     t.integer "local_ngo_id"
+    t.integer "scorecard_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

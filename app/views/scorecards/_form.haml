@@ -1,5 +1,8 @@
 = f.input :name, label: t('scorecard.name')
 = render "unit_type_and_category_fields", f: f
+
+= f.input :scorecard_type_id, collection: current_program.scorecard_types.pluck(:name, :id), include_blank: false
+
 = f.input :description
 = render "location_fields", f: f
 = f.input :address
