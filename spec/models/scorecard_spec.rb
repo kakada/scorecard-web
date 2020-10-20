@@ -49,7 +49,12 @@ RSpec.describe Scorecard, type: :model do
     let!(:scorecard1) { create(:scorecard, uuid: uuid) }
     let!(:scorecard2) { create(:scorecard, uuid: uuid) }
 
-    it { expect(scorecard2.uuid).not_to eq(uuid) }
-    it { expect(scorecard2.uuid.length).to eq(6) }
+    it "generates uuid with 6 digits" do
+      expect(scorecard2.uuid.length).to eq(6)
+    end
+
+    context "uuid already exist" do
+      it { expect(scorecard2.uuid).not_to eq(uuid) }
+    end
   end
 end
