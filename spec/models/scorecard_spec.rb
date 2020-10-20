@@ -13,9 +13,7 @@
 #  province_id           :string(2)
 #  district_id           :string(4)
 #  commune_id            :string(6)
-#  address               :string
-#  lat                   :string
-#  lng                   :string
+#  year                  :integer
 #  conducted_date        :datetime
 #  number_of_caf         :integer
 #  number_of_participant :integer

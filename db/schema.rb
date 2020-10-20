@@ -146,10 +146,7 @@ ActiveRecord::Schema.define(version: 2020_10_19_074019) do
     t.string "province_id", limit: 2
     t.string "district_id", limit: 4
     t.string "commune_id", limit: 6
-    t.string "address"
-    t.string "lat"
-    t.string "lng"
-    t.string "year"
+    t.integer "year"
     t.datetime "conducted_date"
     t.integer "number_of_caf"
     t.integer "number_of_participant"
