@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "dashboard#show"
 
-  devise_for :users, path: "/", controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, path: "/", controllers: { confirmations: "confirmations", omniauth_callbacks: "users/omniauth_callbacks" }
+
+  # https://github.com/plataformatec/devise/wiki/How-To:-Override-confirmations-so-users-can-pick-their-own-passwords-as-part-of-confirmation-activation
+  as :user do
+    match "/confirmation" => "confirmations#update", via: :put, as: :update_user_confirmation
+  end
 
   resources :scorecards do
     resources :medians
@@ -32,6 +37,7 @@ Rails.application.routes.draw do
 
   resource :download, only: [:show]
   resources :scorecard_types
+  resources :users
 
   namespace :api do
     namespace :v1 do
