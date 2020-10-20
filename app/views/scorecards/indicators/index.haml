@@ -1,0 +1,12 @@
+#content
+  = render 'shared/scorecard_tab_nav'
+
+  .border-right.border-left.border-bottom.bg-white
+    .card-body
+      %h3 Predefined
+      - @indicator[:predefineds].each do |item|
+        %div= "[Raised #{item["count"]} times] #{item["name"]}"
+
+      %h3 Custom
+      - @indicator[:customs].each do |item|
+        %div= item["name"]

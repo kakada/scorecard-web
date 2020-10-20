@@ -21,7 +21,7 @@ module Sample
         sheet.each_with_index do |row, index|
           next if index == 0
 
-          category.indicators.create(name: row['name'], tag: row['tag'])
+          category.indicators.create(name: row["name"], tag: row["tag"])
         end
       end
   end

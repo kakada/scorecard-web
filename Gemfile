@@ -48,6 +48,8 @@ gem "simple_form", "~> 5.0.3"
 gem "awesome_nested_set", "~> 3.2.1"
 gem "roo", "~> 2.8.3"
 
+gem "bootstrap4-datetime-picker-rails", "~> 0.3.1"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]

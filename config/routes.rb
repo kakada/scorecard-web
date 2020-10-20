@@ -7,23 +7,23 @@ Rails.application.routes.draw do
   devise_for :users, path: "/", controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   resources :scorecards do
-    resources :issues
     resources :medians
     resources :swots
+    resources :indicators, module: "scorecards"
   end
 
   resources :programs
   resources :languages
   resources :categories do
     get :children, on: :member
-    resources :indicators, module: 'categories' do
+    resources :indicators, module: "categories" do
       post :clone_from_template, on: :collection
       post :clone_to_template, on: :collection
     end
   end
 
   resources :templates do
-    resources :indicators, module: 'templates'
+    resources :indicators, module: "templates"
   end
 
   resources :local_ngos do

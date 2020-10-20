@@ -6,7 +6,7 @@
 #
 #  id                    :bigint           not null, primary key
 #  uuid                  :string
-#  sector_id             :integer
+#  unit_type_id          :integer
 #  category_id           :integer
 #  name                  :string
 #  description           :text
@@ -25,10 +25,18 @@
 #  status                :integer
 #  program_id            :integer
 #  local_ngo_id          :integer
+#  scorecard_type_id     :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
 FactoryBot.define do
   factory :scorecard do
+    category     { create(:category, :with_parent) }
+    unit_type_id { category.parent_id }
+    program
+    local_ngo
+    scorecard_type
+    name         { FFaker::Name.name }
+    province_id  { Pumi::Province.all.sample.id }
   end
 end

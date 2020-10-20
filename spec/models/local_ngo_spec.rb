@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: local_ngos
@@ -13,9 +15,11 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe LocalNgo, type: :model do
   it { is_expected.to belong_to(:program) }
   it { is_expected.to have_many(:cafs) }
+  it { is_expected.to have_many(:scorecards) }
+  it { is_expected.to validate_presence_of(:name) }
 end

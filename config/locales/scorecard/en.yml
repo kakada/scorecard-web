@@ -2,7 +2,9 @@ en:
   scorecard:
     conducted_date: កាលបរិច្ឆេទ
     location: ទីតាំង
-    category: ប្រភេទ Scorecard
+    unit_type: Unit Type
+    category: Unit Category
+    scorecard_type: ប្រភេទ Scorecard
     sector: វិស័យ
     number_of_participant: ចំនួនអ្នកចូលរួម
     number_of_female: ចំនួនអ្នកចូលរួមស្រី

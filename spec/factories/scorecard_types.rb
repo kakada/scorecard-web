@@ -12,5 +12,7 @@
 #
 FactoryBot.define do
   factory :scorecard_type do
+    name         { FFaker::Name.name }
+    program
   end
 end

@@ -5,6 +5,7 @@
 # Table name: categories
 #
 #  id             :bigint           not null, primary key
+#  code           :string
 #  name           :string
 #  parent_id      :integer
 #  lft            :integer          not null

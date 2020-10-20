@@ -5,6 +5,7 @@
 # Table name: categories
 #
 #  id             :bigint           not null, primary key
+#  code           :string
 #  name           :string
 #  parent_id      :integer
 #  lft            :integer          not null
@@ -18,7 +19,7 @@
 FactoryBot.define do
   factory :category do
     name        { FFaker::Name.name }
-    code        { name.upcase.split(' ').map{|n| n[0]}.join('') }
+    code        { name.upcase.split(" ").map { |n| n[0] }.join("") }
     program
 
     trait :with_indicators do
@@ -28,6 +29,12 @@ FactoryBot.define do
 
       after(:create) do |category, evaluator|
         create_list(:indicator, evaluator.indicator_count, :with_languages_indicators, categorizable: category)
+      end
+    end
+
+    trait :with_parent do
+      after(:create) do |category, evaluator|
+        category.parent_id = create(:category, program_id: category.program_id).id
       end
     end
   end

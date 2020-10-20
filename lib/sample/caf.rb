@@ -13,7 +13,7 @@ module Sample
           name: name,
           sex: %w(Female Male Other).sample,
           date_of_birth: rand(20..50).years.ago,
-          tel: '',
+          tel: "",
           address: address
         )
       end

@@ -1,44 +1,22 @@
 = f.input :name, label: t('scorecard.name')
+= render "unit_type_and_category_fields", f: f
 
-#sector.form-group
-  = f.label(:sector_id)
-  = f.hidden_field(:sector_id)
-  = f.select(:sector_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_target => "category", :pumi_select_collection_url => categories_path(format: :json), :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: 'form-control'})
-
-#category.form-group
-  = f.label(:category_id)
-  = f.hidden_field(:category_id)
-  = f.select(:category_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "category", :pumi_select_collection_url => children_category_path(:id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#category", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control'})
+= f.input :scorecard_type_id, collection: current_program.scorecard_types.pluck(:name, :id), include_blank: false
 
 = f.input :description
-
-#province.form-group
-  = f.label(:province_id)
-  = f.hidden_field(:province_id)
-  = f.select(:province_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_target => "district", :pumi_select_collection_url => pumi.provinces_path, :pumi_select_collection_label_method => "name_en", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: 'form-control'})
-
-#district.form-group
-  = f.label(:district_id)
-  = f.hidden_field(:district_id)
-  = f.select(:district_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "district", :pumi_select_target => "commune", :pumi_select_collection_url => pumi.districts_path(:province_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_en", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#district", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control'})
-
-#commune.form-group
-  = f.label(:commune_id)
-  = f.hidden_field(:commune_id)
-  = f.select(:commune_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "commune", :pumi_select_target => "village", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_en", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control'})
-
+= render "location_fields", f: f
 = f.input :address
 = f.input :lat
 = f.input :lng
-= f.input :conducted_date
+
+= render "date_field", f: f, field: :conducted_date
+= render "date_field", f: f, field: :planned_start_date
+= render "date_field", f: f, field: :planned_end_date
+
 = f.input :number_of_caf
 = f.input :number_of_participant
 = f.input :number_of_female
-= f.input :planned_start_date
-= f.input :planned_end_date
 
 .actions
   = f.submit t('shared.save'), class: 'btn btn-primary'
   = link_to t('shared.cancel'), scorecards_path, class: 'btn btn-secondary'
-
-

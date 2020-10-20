@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: languages_indicators
@@ -14,7 +16,7 @@
 FactoryBot.define do
   factory :languages_indicator do
     language
-    language_code { language.code}
+    language_code { language.code }
     content       { FFaker::Name.name }
     indicator
   end
