@@ -53,7 +53,7 @@ RSpec.describe Scorecard, type: :model do
       expect(scorecard2.uuid.length).to eq(6)
     end
 
-    context "uuid already exist" do
+    context "ensure unique uuid" do
       it { expect(scorecard2.uuid).not_to eq(uuid) }
     end
   end
