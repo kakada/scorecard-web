@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class ProgramPolicy < ApplicationPolicy
+  def index?
+    user.system_admin?
+  end
+
   def create?
     user.system_admin?
   end
@@ -15,11 +19,7 @@ class ProgramPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.system_admin?
-        scope.all
-      else
-        scope.where(id: user.program_id)
-      end
+      scope.all
     end
   end
 end
