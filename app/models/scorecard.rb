@@ -50,6 +50,12 @@ class Scorecard < ApplicationRecord
   before_create :secure_uuid
   before_create :set_name
 
+  def location
+    return if commune_id.nil?
+
+    Pumi::Commune.find_by_id(commune_id).address_km
+  end
+
   private
     def secure_uuid
       self.uuid ||= six_digit_rand
