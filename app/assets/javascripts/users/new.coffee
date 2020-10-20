@@ -16,12 +16,6 @@ CW.UsersNew = do ->
       else
         $('.program').show()
 
-      if event.target.value == 'staff' || event.target.value == 'guest'
-        $('.province-code').show()
-      else
-        $('.province-code').hide()
-        $('.province-code select').val('')
-
   { init: init }
 
 CW.UsersCreate = CW.UsersNew
