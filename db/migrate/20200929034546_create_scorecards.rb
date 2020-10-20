@@ -16,6 +16,7 @@ class CreateScorecards < ActiveRecord::Migration[6.0]
       t.string   :lat
       t.string   :lng
 
+      t.string   :year
       t.datetime :conducted_date
 
       t.integer  :number_of_caf

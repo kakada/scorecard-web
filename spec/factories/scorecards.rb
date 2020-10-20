@@ -31,12 +31,14 @@
 #
 FactoryBot.define do
   factory :scorecard do
+    year         { '2020' }
     category     { create(:category, :with_parent) }
     unit_type_id { category.parent_id }
     program
     local_ngo
     scorecard_type
-    name         { FFaker::Name.name }
-    province_id  { Pumi::Province.all.sample.id }
+    commune_id   { Pumi::Commune.all.sample.id }
+    district_id  { Pumi::Commune.find_by_id(commune_id).district_id }
+    province_id  { Pumi::Commune.find_by_id(commune_id).province_id }
   end
 end

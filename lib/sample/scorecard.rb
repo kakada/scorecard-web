@@ -19,8 +19,8 @@ module Sample
         local_ngo = ::LocalNgo.all.sample
 
         ::Scorecard.create({
-          name: "Scorecard #{category.name}",
           conducted_date: conducted_date,
+          year: conducted_date.year,
           province_id: commune.province_id,
           district_id: commune.district_id,
           commune_id: commune.id,

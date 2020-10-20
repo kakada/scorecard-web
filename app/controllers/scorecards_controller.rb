@@ -56,10 +56,10 @@ class ScorecardsController < ApplicationController
     end
 
     def scorecard_params
-      params.require(:scorecard).permit(:name, :unit_type_id, :category_id, :description,
+      params.require(:scorecard).permit(:unit_type_id, :category_id, :description,
         :province_id, :district_id, :commune_id, :address, :lat, :lng,
         :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,
-        :planned_start_date, :planned_end_date, :local_ngo_id, :scorecard_type_id
+        :planned_start_date, :planned_end_date, :local_ngo_id, :scorecard_type_id, :year
       )
     end
 end

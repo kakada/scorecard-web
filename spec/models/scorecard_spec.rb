@@ -39,10 +39,12 @@ RSpec.describe Scorecard, type: :model do
   it { is_expected.to have_many(:scorecards_cafs) }
   it { is_expected.to have_many(:cafs).through(:scorecards_cafs) }
 
-  it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_presence_of(:province_id) }
+  it { is_expected.to validate_presence_of(:year) }
   it { is_expected.to validate_presence_of(:unit_type_id) }
   it { is_expected.to validate_presence_of(:category_id) }
+  it { is_expected.to validate_presence_of(:province_id) }
+  it { is_expected.to validate_presence_of(:district_id) }
+  it { is_expected.to validate_presence_of(:commune_id) }
 
   describe "#secure_uuid" do
     let!(:uuid) { SecureRandom.random_number(1..999999).to_s.rjust(6, '0') }
