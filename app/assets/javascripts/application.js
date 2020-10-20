@@ -15,6 +15,8 @@
 
 //= require categories
 //= require indicators
+//= require users/index
+//= require users/new
 
 document.addEventListener('turbolinks:load', function() {
   let currentPage = CW.Util.getCurrentPage();

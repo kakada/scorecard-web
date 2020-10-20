@@ -13,7 +13,6 @@ body {
   min-height: 100vh;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  overflow-y: scroll;
 }
 
 .medium-width {
@@ -44,4 +43,11 @@ body {
 
 .no-data {
   padding-top: 50px;
+}
+
+.pagy-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  margin: 0 auto;
 }
