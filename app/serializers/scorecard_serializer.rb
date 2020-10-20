@@ -31,7 +31,7 @@ class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :category_name, :scorecard_type_name, :category_id,
              :name, :description, :location, :year, :conducted_date,
              :number_of_caf, :number_of_participant, :number_of_female,
-             :planned_start_date, :planned_end_date, :status,
+             :planned_start_date, :planned_end_date, :status, :scorecard_type_id,
              :program_id, :local_ngo_id, :local_ngo_name, :province, :district, :commune
 
   def unit_type_name
