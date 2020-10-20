@@ -36,6 +36,7 @@ RSpec.describe Scorecard, type: :model do
   it { is_expected.to belong_to(:category) }
   it { is_expected.to have_many(:scorecards_cafs) }
   it { is_expected.to have_many(:cafs).through(:scorecards_cafs) }
+  it { is_expected.to have_many(:languages).through(:program) }
 
   it { is_expected.to validate_presence_of(:year) }
   it { is_expected.to validate_presence_of(:unit_type_id) }

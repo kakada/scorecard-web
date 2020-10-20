@@ -44,6 +44,10 @@ Rails.application.routes.draw do
       resources :languages do
         get :download, on: :member
       end
+
+      resources :scorecards, only: [:show, :update] do
+        resources :languages, only: [:index]
+      end
     end
   end
 

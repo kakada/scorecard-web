@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+require "rails_helper"
+
+RSpec.describe "Api::V1::LanguagesController", type: :request do
+  describe "GET #index" do
+    let!(:program) { create(:program) }
+    let!(:scorecard) { create(:scorecard, program: program) }
+
+    before {
+      headers = { "ACCEPT" => "application/json" }
+      get "/api/v1/scorecards/#{scorecard.uuid}/languages", :headers => headers
+    }
+
+    it { expect(response.content_type).to eq("application/json; charset=utf-8") }
+    it { expect(response.status).to eq(200) }
+    it { expect(response.body).not_to be_nil }
+  end
+end
