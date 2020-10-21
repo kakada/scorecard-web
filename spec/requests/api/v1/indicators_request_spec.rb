@@ -2,15 +2,15 @@
 
 require "rails_helper"
 
-RSpec.describe "Api::V1::LanguagesController", type: :request do
+RSpec.describe "Api::V1::IndicatorsController", type: :request do
   describe "GET #index" do
     let!(:user) { create(:user) }
-    let!(:program) { create(:program) }
+    let!(:category) { create(:category, :with_indicators) }
     let(:json_response) { JSON.parse(response.body) }
 
     before {
       headers = { "ACCEPT" => "application/json", "Authorization" => user.authentication_token }
-      get "/api/v1/programs/#{program.id}/languages", headers: headers
+      get "/api/v1/categories/#{category.id}/indicators", headers: headers
     }
 
     it { expect(response.content_type).to eq("application/json; charset=utf-8") }

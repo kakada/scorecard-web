@@ -4,15 +4,9 @@ module Api
   module V1
     class LanguagesController < ApiController
       def index
-        scorecard = Scorecard.find_by(uuid: params[:scorecard_id])
+        program = Program.find_by(id: params[:program_id])
 
-        render json: scorecard.languages
-      end
-
-      def download
-        @language = ::Language.find_by(code: params[:id])
-
-        send_file @language.json_file.path, disposition: "attachment"
+        render json: program.languages
       end
     end
   end

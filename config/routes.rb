@@ -41,13 +41,15 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :languages do
-        get :download, on: :member
-      end
-
-      resources :scorecards, only: [:show, :update] do
+      resources :programs, only: [] do
         resources :languages, only: [:index]
       end
+
+      resources :categories, only: [] do
+        resources :indicators, only: [:index]
+      end
+
+      resources :scorecards, only: [:show, :update]
 
       resources :local_ngos, only: [] do
         resources :cafs, only: [:index]
