@@ -51,11 +51,15 @@ class Scorecard < ApplicationRecord
 
   private
     def secure_uuid
-      self.uuid ||= SecureRandom.hex(3)
+      self.uuid ||= six_digit_rand
 
       return unless self.class.exists?(uuid: uuid)
 
-      self.uuid = SecureRandom.hex(4)
+      self.uuid = six_digit_rand
       secure_uuid
+    end
+
+    def six_digit_rand
+      SecureRandom.random_number(1..999999).to_s.rjust(6, '0')
     end
 end
