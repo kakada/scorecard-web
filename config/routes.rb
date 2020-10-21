@@ -49,6 +49,10 @@ Rails.application.routes.draw do
         resources :languages, only: [:index]
       end
 
+      resources :local_ngos, only: [] do
+        resources :cafs, only: [:index]
+      end
+
       post   "sign_in",  to: "sessions#create"
       delete "sign_out", to: "sessions#destroy"
     end

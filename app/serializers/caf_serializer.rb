@@ -14,14 +14,6 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
-
-FactoryBot.define do
-  factory :caf do
-    name          { FFaker::Name.name }
-    sex           { %w(female male other).sample }
-    date_of_birth { rand(18..70).years.ago }
-    tel           { FFaker::PhoneNumber.phone_number }
-    address       { FFaker::Address.street_name}
-    local_ngo
-  end
+class CafSerializer < ActiveModel::Serializer
+  attributes :id, :name, :sex, :date_of_birth, :tel, :address, :local_ngo_id
 end
