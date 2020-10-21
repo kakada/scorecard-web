@@ -29,7 +29,7 @@
 #
 FactoryBot.define do
   factory :scorecard do
-    year         { '2020' }
+    year         { Date.today.year }
     category     { create(:category, :with_parent) }
     unit_type_id { category.parent_id }
     program
