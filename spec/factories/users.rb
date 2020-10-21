@@ -18,8 +18,28 @@
 #  updated_at             :datetime         not null
 #  role                   :integer
 #  program_id             :integer
+#  authentication_token   :string           default("")
+#  token_expired_date     :datetime
 #
 FactoryBot.define do
   factory :user do
+    email         { FFaker::Internet.email }
+    password      { FFaker::Internet.password }
+    role          { "program_admin" }
+    confirmed_at  { DateTime.now }
+    program
+
+    trait :system_admin do
+      role { "system_admin" }
+      program     { nil }
+    end
+
+    trait :staff do
+      role { "staff" }
+    end
+
+    trait :guest do
+      role { "guest" }
+    end
   end
 end

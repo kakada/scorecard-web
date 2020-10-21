@@ -48,6 +48,9 @@ Rails.application.routes.draw do
       resources :scorecards, only: [:show, :update] do
         resources :languages, only: [:index]
       end
+
+      post   "sign_in",  to: "sessions#create"
+      delete "sign_out", to: "sessions#destroy"
     end
   end
 

@@ -18,8 +18,11 @@
 #  updated_at             :datetime         not null
 #  role                   :integer
 #  program_id             :integer
+#  authentication_token   :string           default("")
+#  token_expired_date     :datetime
 #
 class User < ApplicationRecord
+  include Confirmable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -32,19 +35,25 @@ class User < ApplicationRecord
     guest: 4
   }
 
+  ROLES = roles.keys.map { |r| [r.titlecase, r] }
+
+  # Association
   belongs_to :program, optional: true
 
-  delegate :name, to: :program, prefix: :program, allow_nil: true
-
+  # Validation
   validates :role, presence: true
-  validates :program_id, presence: true, unless: -> { role == 'system_admin' }
+  validates :program_id, presence: true, unless: -> { role == "system_admin" }
 
-  ROLES = roles.keys.map { |r| [r.titlecase, r] }
+  # Callback
+  before_create :generate_authentication_token
+
+  # Delegation
+  delegate :name, to: :program, prefix: :program, allow_nil: true
 
   # Class methods
   def self.filter(params)
     scope = all
-    scope = scope.where('email LIKE ?', "%#{params[:email]}%") if params[:email].present?
+    scope = scope.where("email LIKE ?", "%#{params[:email]}%") if params[:email].present?
     scope
   end
 
@@ -54,36 +63,19 @@ class User < ApplicationRecord
     user
   end
 
-  # Confirm password later
-  def password_match?
-    errors[:password] << I18n.t('errors.messages.blank') if password.blank?
-    errors[:password_confirmation] << I18n.t('errors.messages.blank') if password_confirmation.blank?
-    errors[:password_confirmation] << I18n.translate('errors.messages.confirmation', attribute: 'password') if password != password_confirmation
-    password == password_confirmation && !password.blank?
+  def self.from_authentication_token(token)
+    self.where(authentication_token: token).where("token_expired_date >= ?", Time.zone.now).first
   end
 
-  # new function to set the password without knowing the current
-  # password used in our confirmation controller.
-  def attempt_set_password(params)
-    p = {}
-    p[:password] = params[:password]
-    p[:password_confirmation] = params[:password_confirmation]
-    update_attributes(p)
+  # Instant methods
+  def regenerate_authentication_token!
+    generate_authentication_token
+    self.save
   end
 
-  # new function to return whether a password has been set
-  def no_password?
-    encrypted_password.blank?
-  end
-
-  # Devise::Models:unless_confirmed` method doesn't exist in Devise 2.0.0 anymore.
-  # Instead you should use `pending_any_confirmation`.
-  def only_if_unconfirmed
-    pending_any_confirmation { yield }
-  end
-
-  protected
-    def password_required?
-      confirmed? ? super : false
+  private
+    def generate_authentication_token
+      self.authentication_token = Devise.friendly_token
+      self.token_expired_date = (ENV.fetch("TOKEN_EXPIRED_IN_DAY") { 1 }).to_i.day.from_now
     end
 end
