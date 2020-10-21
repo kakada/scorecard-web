@@ -13,9 +13,7 @@
 #  province_id           :string(2)
 #  district_id           :string(4)
 #  commune_id            :string(6)
-#  address               :string
-#  lat                   :string
-#  lng                   :string
+#  year                  :integer
 #  conducted_date        :datetime
 #  number_of_caf         :integer
 #  number_of_participant :integer
@@ -41,13 +39,16 @@ class Scorecard < ApplicationRecord
   has_many   :raised_indicators, foreign_key: :scorecard_uuid
   has_many   :custom_indicators, foreign_key: :scorecard_uuid
 
-  validates :name, presence: true
+  validates :year, presence: true
   validates :province_id, presence: true
+  validates :district_id, presence: true
+  validates :commune_id, presence: true
   validates :unit_type_id, presence: true
   validates :category_id, presence: true
   validates :scorecard_type_id, presence: true
 
   before_create :secure_uuid
+  before_create :set_name
 
   private
     def secure_uuid
@@ -61,5 +62,9 @@ class Scorecard < ApplicationRecord
 
     def six_digit_rand
       SecureRandom.random_number(1..999999).to_s.rjust(6, '0')
+    end
+
+    def set_name
+      self.name = "#{commune_id}-#{year}-#{unit_type_id.to_s.rjust(2, '0')}"
     end
 end

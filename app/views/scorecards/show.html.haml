@@ -7,6 +7,9 @@
         %label.col-sm-2.col-form-label= t("scorecard.id")
         %label.col-sm-10.col-form-label= " : #{@scorecard.uuid}"
       .row
+        %label.col-sm-2.col-form-label= t("scorecard.year")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.year}"
+      .row
         %label.col-sm-2.col-form-label= t("scorecard.name")
         %label.col-sm-10.col-form-label= " : #{@scorecard.name}"
       .row
@@ -33,15 +36,6 @@
       .row
         %label.col-sm-2.col-form-label= t("scorecard.commune_id")
         %label.col-sm-10.col-form-label= " : #{@scorecard.commune_id}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.address")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.address}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.lat")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.lat}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.lng")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.lng}"
       .row
         %label.col-sm-2.col-form-label= t("scorecard.lng")
         %label.col-sm-10.col-form-label= " : #{@scorecard.lng}"

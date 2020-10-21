@@ -13,9 +13,7 @@
 #  province_id           :string(2)
 #  district_id           :string(4)
 #  commune_id            :string(6)
-#  address               :string
-#  lat                   :string
-#  lng                   :string
+#  year                  :integer
 #  conducted_date        :datetime
 #  number_of_caf         :integer
 #  number_of_participant :integer
@@ -31,12 +29,14 @@
 #
 FactoryBot.define do
   factory :scorecard do
+    year         { Date.today.year }
     category     { create(:category, :with_parent) }
     unit_type_id { category.parent_id }
     program
     local_ngo
     scorecard_type
-    name         { FFaker::Name.name }
-    province_id  { Pumi::Province.all.sample.id }
+    commune_id   { Pumi::Commune.all.sample.id }
+    district_id  { Pumi::Commune.find_by_id(commune_id).district_id }
+    province_id  { Pumi::Commune.find_by_id(commune_id).province_id }
   end
 end

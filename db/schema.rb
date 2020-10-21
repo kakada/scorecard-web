@@ -122,15 +122,6 @@ ActiveRecord::Schema.define(version: 2020_10_19_074019) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "raised_issues", force: :cascade do |t|
-    t.string "scorecard_uuid"
-    t.integer "raised_person_id"
-    t.text "content"
-    t.string "audio"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "raised_people", force: :cascade do |t|
     t.string "scorecard_uuid"
     t.string "gender"
@@ -155,9 +146,7 @@ ActiveRecord::Schema.define(version: 2020_10_19_074019) do
     t.string "province_id", limit: 2
     t.string "district_id", limit: 4
     t.string "commune_id", limit: 6
-    t.string "address"
-    t.string "lat"
-    t.string "lng"
+    t.integer "year"
     t.datetime "conducted_date"
     t.integer "number_of_caf"
     t.integer "number_of_participant"
