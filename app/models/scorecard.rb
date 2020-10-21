@@ -38,7 +38,6 @@ class Scorecard < ApplicationRecord
   has_many   :cafs, through: :scorecards_cafs
   has_many   :raised_indicators, foreign_key: :scorecard_uuid
   has_many   :custom_indicators, foreign_key: :scorecard_uuid
-  has_many   :languages, through: :program
 
   validates :year, presence: true
   validates :province_id, presence: true
@@ -50,6 +49,9 @@ class Scorecard < ApplicationRecord
 
   before_create :secure_uuid
   before_create :set_name
+
+  accepts_nested_attributes_for :scorecards_cafs, allow_destroy: true
+  accepts_nested_attributes_for :raised_indicators, allow_destroy: true
 
   def location
     return if commune_id.nil?

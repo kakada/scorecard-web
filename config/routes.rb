@@ -49,7 +49,9 @@ Rails.application.routes.draw do
         resources :indicators, only: [:index]
       end
 
-      resources :scorecards, only: [:show, :update]
+      resources :scorecards, only: [:show, :update] do
+        resources :custom_indicators, only: [:create]
+      end
 
       resources :local_ngos, only: [] do
         resources :cafs, only: [:index]
