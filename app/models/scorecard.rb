@@ -68,7 +68,7 @@ class Scorecard < ApplicationRecord
     end
 
     def six_digit_rand
-      SecureRandom.random_number(1..999999).to_s.rjust(6, '0')
+      SecureRandom.random_number(1..999999).to_s.rjust(6, "0")
     end
 
     def set_name

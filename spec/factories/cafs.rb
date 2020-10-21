@@ -21,7 +21,7 @@ FactoryBot.define do
     sex           { %w(female male other).sample }
     date_of_birth { rand(18..70).years.ago }
     tel           { FFaker::PhoneNumber.phone_number }
-    address       { FFaker::Address.street_name}
+    address       { FFaker::Address.street_name }
     local_ngo
   end
 end

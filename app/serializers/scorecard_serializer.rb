@@ -13,9 +13,7 @@
 #  province_id           :string(2)
 #  district_id           :string(4)
 #  commune_id            :string(6)
-#  address               :string
-#  lat                   :string
-#  lng                   :string
+#  year                  :integer
 #  conducted_date        :datetime
 #  number_of_caf         :integer
 #  number_of_participant :integer
@@ -31,10 +29,10 @@
 #
 class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :category_name, :scorecard_type_name,
-             :name, :description, :location, :address, :lat, :lng,
-             :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,
-             :planned_start_date, :planned_end_date, :status, :program_id, :local_ngo_id,
-             :scorecard_type_id, :local_ngo_name
+             :name, :description, :location, :year, :conducted_date,
+             :number_of_caf, :number_of_participant, :number_of_female,
+             :planned_start_date, :planned_end_date, :status,
+             :program_id, :local_ngo_id, :local_ngo_name, :province, :district, :commune
 
   def unit_type_name
     object.unit_type.name
@@ -51,4 +49,21 @@ class ScorecardSerializer < ActiveModel::Serializer
   def local_ngo_name
     object.local_ngo.name
   end
+
+  def commune
+    _commune.name_km
+  end
+
+  def district
+    _commune.district.name_km
+  end
+
+  def province
+    _commune.province.name_km
+  end
+
+  private
+    def _commune
+      @_commune ||= Pumi::Commune.find_by_id(object.commune_id)
+    end
 end

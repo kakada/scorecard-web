@@ -46,7 +46,7 @@ RSpec.describe Scorecard, type: :model do
   it { is_expected.to validate_presence_of(:commune_id) }
 
   describe "#secure_uuid" do
-    let!(:uuid) { SecureRandom.random_number(1..999999).to_s.rjust(6, '0') }
+    let!(:uuid) { SecureRandom.random_number(1..999999).to_s.rjust(6, "0") }
     let!(:scorecard1) { create(:scorecard, uuid: uuid) }
     let!(:scorecard2) { create(:scorecard, uuid: uuid) }
 
