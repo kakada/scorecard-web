@@ -1,0 +1,9 @@
+km:
+  local_ngo:
+    local_ngos: Local NGOs
+    name: Name
+    province: Province
+    disctrict: District
+    commune: Commune
+    village: Village
+    address: Address

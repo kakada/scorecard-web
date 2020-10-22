@@ -1,7 +1,14 @@
 en:
   sidebar:
-    dashboard: 'Dashboard'
-    users: 'Users'
-    about: 'About'
-    logout: 'Logout'
-    version: 'Version'
+    dashboard: Dashboard
+    user: User
+    about: About
+    logout: Logout
+    version: Version
+    program: Program
+    language: Language
+    scorecard_category: Scorecard Category
+    indicator_template: Indicator Template
+    local_ngo: Local Ngo
+    scorecard_type: Scorecard Type
+    scorecard: Scorecard

@@ -1,0 +1,6 @@
+km:
+  category:
+    categories: categories
+    name: Name
+    parent: Parent category
+    manage_indicator: Manage Indicator

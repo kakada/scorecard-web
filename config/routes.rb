@@ -39,7 +39,11 @@ Rails.application.routes.draw do
 
   resource :download, only: [:show]
   resources :scorecard_types
-  resources :users
+  resources :users do
+    collection do
+      post :update_locale
+    end
+  end
 
   namespace :api do
     namespace :v1 do

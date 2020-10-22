@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :set_raven_context
+  before_action :set_locale
 
   layout :set_layout
 
@@ -30,5 +31,9 @@ class ApplicationController < ActionController::Base
 
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def set_locale
+      I18n.locale = current_user.try(:language_code) || I18n.default_locale
     end
 end

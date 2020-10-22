@@ -1,10 +1,10 @@
 %ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordion
   / Sidebar - Brand
-  %a.sidebar-brand.d-flex.align-items-center.justify-content-center{:href => "index.html"}
-    .sidebar-brand-icon.rotate-n-15
+  %a.sidebar-brand.d-flex.align-items-center.justify-content-center{:href => root_path}
+    .sidebar-brand-icon
       %i.fas.fa-laugh-wink
     .sidebar-brand-text.mx-3
-      CARE
+      Scorecard
 
   / Divider
   %hr.sidebar-divider.my-0/
@@ -15,54 +15,54 @@
     %li.nav-item{ class: css_active_class('dashboard') }
       %a.nav-link{:href => root_path}
         %i.fas.fa-fw.fa-tachometer-alt
-        %span Dashboard
+        %span= t("sidebar.dashboard")
 
     - if policy(Program).create?
       %li.nav-item{ class: css_active_class('programs') }
         %a.nav-link{:href => programs_path}
           %i.far.fa-fw.fa-clipboard
-          %span Program
+          %span= t("sidebar.program")
 
     - if policy(User).update?
       %li.nav-item{ class: css_active_class('users') }
         = link_to users_path, class: 'nav-link' do
           %i.fas.fa-fw.fa-user
-          %span Users
+          %span= t("sidebar.user")
 
     - if policy(Language).create?
       %li.nav-item{ class: css_active_class('languages') }
         %a.nav-link{:href => languages_path}
           %i.fas.fa-fw.fa-language
-          %span Language
+          %span= t("sidebar.language")
 
     - if policy(Category).create?
       %li.nav-item{ class: css_active_class('categories') }
         %a.nav-link{:href => categories_path}
           %i.fas.fa-fw.fa-sitemap
-          %span Scorecard Category
+          %span= t("sidebar.scorecard_category")
 
     - if policy(::Template).create?
       %li.nav-item{ class: css_active_class('templates') }
         %a.nav-link{:href => templates_path}
           %i.fas.fa-fw.fa-gopuram
-          %span Indicator Template
+          %span= t("sidebar.indicator_template")
 
     - if policy(LocalNgo).create?
       %li.nav-item{ class: css_active_class('local_ngos') }
         %a.nav-link{:href => local_ngos_path}
           %i.fas.fa-fw.fa-users
-          %span Local Ngo
+          %span= t("sidebar.local_ngo")
 
     - if policy(ScorecardType).create?
       %li.nav-item{ class: css_active_class('scorecard_types') }
         %a.nav-link{:href => scorecard_types_path}
           %i.fas.fa-fw.fa-th-large
-          %span Scorecard Type
+          %span= t("sidebar.scorecard_type")
 
     %li.nav-item{ class: css_active_class('scorecards') }
       %a.nav-link{:href => scorecards_path}
         %i.far.fa-fw.fa-clipboard
-        %span Scorecard
+        %span= t("sidebar.scorecard")
 
     %li.nav-item
       = link_to destroy_user_session_path, method: :delete, class: 'nav-link' do
@@ -73,9 +73,16 @@
     %hr.sidebar-divider.d-none.d-md-block/
 
   / Sidebar Toggler (Sidebar)
-  .text-center.d-none.d-md-inline
+  .text-center.d-none.d-md-inline.mt-3
     %button#sidebarToggle.rounded-circle.border-0
 
-  / Version
-  .version
-    = "#{t('sidebar.version')}: #{ENV.fetch('APP_VERSION') { 'development' }}"
+  .footer
+    .language.text-white
+      = simple_form_for(current_user, url: update_locale_users_path, method: :post, remote: true, html: { id: "switch-language" }) do |f|
+        %label= switch_language_data[:label]
+        = f.hidden_field :language_code, value: switch_language_data[:language_code]
+        = f.submit switch_language_data[:submit_label], class: "btn btn-outline-light language"
+
+    / Version
+    .version
+      %span= "#{t('sidebar.version')}: #{ENV.fetch('APP_VERSION') { 'development' }}"

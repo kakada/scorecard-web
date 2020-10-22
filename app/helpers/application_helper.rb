@@ -21,4 +21,20 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, { sort: column, direction: direction }, { class: css_class }
   end
+
+  def switch_language_data
+    if current_user.language_code == "km"
+      {
+        label: "ប្ដូរភាសា៖",
+        language_code: "en",
+        submit_label: "English"
+      }
+    else
+      {
+        label: "Change language:",
+        language_code: "km",
+        submit_label: "ខ្មែរ"
+      }
+    end
+  end
 end
