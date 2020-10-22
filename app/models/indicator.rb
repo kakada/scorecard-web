@@ -13,10 +13,11 @@
 #  updated_at         :datetime         not null
 #
 class Indicator < ApplicationRecord
+  include Indicatorable
+
   belongs_to :categorizable, polymorphic: true
   has_many :languages_indicators
   has_many :languages, through: :languages_indicators
-  has_many :raised_indicators
 
   validates :name, presence: true, uniqueness: { scope: [:categorizable_id, :categorizable_type] }
   validates :tag, presence: true

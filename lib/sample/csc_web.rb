@@ -9,6 +9,8 @@ require_relative "caf"
 require_relative "scorecard_type"
 require_relative "scorecard"
 require_relative "raised_indicator"
+require_relative "voting_indicator"
+require_relative "rating"
 
 module Sample
   class CscWeb
@@ -22,6 +24,8 @@ module Sample
       ::Sample::ScorecardType.load
       ::Sample::Scorecard.load
       ::Sample::RaisedIndicator.load
+      ::Sample::VotingIndicator.load
+      ::Sample::Rating.load
       # ::Sample::RaisedPerson.load
     end
   end

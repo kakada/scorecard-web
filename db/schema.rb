@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_21_025832) do
+ActiveRecord::Schema.define(version: 2020_10_22_070951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,14 +60,6 @@ ActiveRecord::Schema.define(version: 2020_10_21_025832) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "issue_ratings", force: :cascade do |t|
-    t.integer "vote_issue_id"
-    t.integer "vote_person_id"
-    t.integer "score"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "languages", force: :cascade do |t|
     t.string "code"
     t.string "name"
@@ -99,14 +91,6 @@ ActiveRecord::Schema.define(version: 2020_10_21_025832) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "predefined_issues", force: :cascade do |t|
-    t.string "scorecard_uuid"
-    t.text "content"
-    t.string "audio"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "programs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -126,6 +110,16 @@ ActiveRecord::Schema.define(version: 2020_10_21_025832) do
     t.string "scorecard_uuid"
     t.string "gender"
     t.integer "age"
+    t.boolean "disability", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "voting_indicator_id"
+    t.integer "voting_person_id"
+    t.string "scorecard_uuid"
+    t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -211,19 +205,32 @@ ActiveRecord::Schema.define(version: 2020_10_21_025832) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "vote_issues", force: :cascade do |t|
-    t.string "scorecard_uuid"
-    t.string "content"
-    t.string "audio"
-    t.string "display_order"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "vote_people", force: :cascade do |t|
     t.string "scorecard_uuid"
     t.string "gender"
     t.integer "age"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "voting_indicators", force: :cascade do |t|
+    t.integer "indicatorable_id"
+    t.string "indicatorable_type"
+    t.string "scorecard_uuid"
+    t.float "median"
+    t.text "strength"
+    t.text "weakness"
+    t.text "improvement"
+    t.text "next_step"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "voting_people", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.string "gender"
+    t.integer "age"
+    t.boolean "disability", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

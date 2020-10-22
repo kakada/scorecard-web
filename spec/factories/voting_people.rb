@@ -1,18 +1,17 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
-# Table name: vote_issues
+# Table name: voting_people
 #
 #  id             :bigint           not null, primary key
 #  scorecard_uuid :string
-#  content        :string
-#  audio          :string
-#  display_order  :string
+#  gender         :string
+#  age            :integer
+#  disability     :boolean          default(FALSE)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
 FactoryBot.define do
-  factory :vote_issue do
+  factory :voting_person do
+    
   end
 end

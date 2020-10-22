@@ -3,3 +3,7 @@
 
   .border-right.border-left.border-bottom.bg-white
     .card-body
+      %h3 Voting Indicators
+      - @voting_indicators.each do |indicator|
+        %div
+          %span= "#{indicator.indicatorable.name}: #{indicator.median}"

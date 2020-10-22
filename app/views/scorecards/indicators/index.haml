@@ -3,10 +3,17 @@
 
   .border-right.border-left.border-bottom.bg-white
     .card-body
-      %h3 Predefined
-      - @indicator[:predefineds].each do |item|
-        %div= "[Raised #{item["count"]} times] #{item["name"]}"
+      .mb-4
+        %h3 Raised Indicators
 
-      %h3 Custom
-      - @indicator[:customs].each do |item|
-        %div= item["name"]
+        %h4 Predefined
+        - @indicator[:predefineds].each do |item|
+          %div= "[Raised #{item["count"]} times] #{item["name"]}"
+
+        %h4.mt-4 Custom
+        - @indicator[:customs].each do |item|
+          %div= item["name"]
+
+      %h3 Voting Indicators
+      - @voting_indicators.each do |indicator|
+        %div= indicator.indicatorable.name

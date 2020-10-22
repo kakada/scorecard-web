@@ -13,7 +13,9 @@
 #  updated_at     :datetime         not null
 #
 class CustomIndicator < ApplicationRecord
-  belongs_to :scorecard, foreign_key: :scorecard_uuid
+  include Indicatorable
 
   mount_uploader :audio, AudioUploader
+
+  belongs_to :scorecard, foreign_key: :scorecard_uuid
 end
