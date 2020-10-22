@@ -2,7 +2,7 @@ km:
   caf:
     cafs: Cafs
     name: ឈ្មោះ
-    sex: Sex
-    tel: Telephone
+    sex: ភេទ
+    tel: លេខទូរស័ព្ទ
     date_of_birth: ថ្ងៃកំណើត
     address: អាស័យដ្ឋាន

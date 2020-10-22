@@ -1,19 +1,18 @@
 en:
   scorecard:
-    conducted_date: កាលបរិច្ឆេទ
-    location: ទីតាំង
+    conducted_date: Conducted date
+    location: Location
     unit_type: Unit Type
     category: Unit Category
-    scorecard_type: ប្រភេទ Scorecard
-    sector: វិស័យ
-    number_of_participant: ចំនួនអ្នកចូលរួម
-    number_of_female: ចំនួនអ្នកចូលរួមស្រី
-    number_of_caf: ចំនួនអ្នកសម្របសម្រួល
-    caf_members: ឈ្មោះអ្នកសម្របសម្រួល
-    scorecard_info: ព័ត៌មាន Scorecard
-    issue_list: បញ្ហាដែលបានលើកឡើង
-    median_table: តារាង មេដ្យាន
-    swot_table: តារាង ភាពខ្លាំងភាពខ្សោយ
+    scorecard_type: Scorecard Type
+    sector: Sector
+    number_of_participant: Number of participant
+    number_of_female: Number of female
+    number_of_caf: Number of caf
+    scorecard_info: Scorecard Information
+    issue_list: Issue list
+    median_table: Median table
+    swot_table: SWOT table
     content: Content
     tag: Tag
     year: Year

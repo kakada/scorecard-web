@@ -1,6 +1,6 @@
 km:
   category:
-    categories: categories
-    name: Name
+    categories: Categories
+    name: ឈ្មោះ
     parent: Parent category
     manage_indicator: Manage Indicator
