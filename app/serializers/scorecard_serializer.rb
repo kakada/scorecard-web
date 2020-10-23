@@ -28,7 +28,7 @@
 #  updated_at            :datetime         not null
 #
 class ScorecardSerializer < ActiveModel::Serializer
-  attributes :uuid, :unit_type_name, :category_name, :scorecard_type_name,
+  attributes :uuid, :unit_type_name, :category_name, :scorecard_type_name, :category_id,
              :name, :description, :location, :year, :conducted_date,
              :number_of_caf, :number_of_participant, :number_of_female,
              :planned_start_date, :planned_end_date, :status,
