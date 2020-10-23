@@ -4,6 +4,6 @@
   %li.nav-item
     = link_to t("scorecard.issue_list"), scorecard_indicators_path(@scorecard), class: ['nav-link', css_nested_active_class("scorecards/indicators")]
   %li.nav-item
-    = link_to t("scorecard.median_table"), scorecard_medians_path(@scorecard), class: ['nav-link', css_nested_active_class('medians')]
+    = link_to t("scorecard.median_table"), scorecard_medians_path(@scorecard), class: ['nav-link', css_nested_active_class('scorecards/medians')]
   %li.nav-item
-    = link_to t("scorecard.swot_table"), scorecard_swots_path(@scorecard), class: ['nav-link', css_nested_active_class('swots')]
+    = link_to t("scorecard.swot_table"), scorecard_swots_path(@scorecard), class: ['nav-link', css_nested_active_class('scorecards/swots')]

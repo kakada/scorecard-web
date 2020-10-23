@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   end
 
   resources :scorecards do
-    resources :medians
-    resources :swots
-    resources :indicators, module: "scorecards"
+    scope module: "scorecards" do
+      resources :medians
+      resources :swots
+      resources :indicators
+    end
   end
 
   resources :programs
