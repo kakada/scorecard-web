@@ -3,4 +3,20 @@
 
   .border-right.border-left.border-bottom.bg-white
     .card-body
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th{:scope => "col"} Indicator
+            %th{:scope => "col"} Strength
+            %th{:scope => "col"} Weakness
+            %th{:scope => "col"} Improvement
+            %th{:scope => "col"} Next Step
 
+        %tbody
+          - @voting_indicators.each do |indicator|
+            %tr
+              %td= indicator.indicatorable.name
+              %td= indicator.strength
+              %td= indicator.weakness
+              %td= indicator.improvement
+              %td= indicator.next_step

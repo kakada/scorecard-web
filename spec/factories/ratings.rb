@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: ratings
@@ -12,6 +14,5 @@
 #
 FactoryBot.define do
   factory :rating do
-    
   end
 end

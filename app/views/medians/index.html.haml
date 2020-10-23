@@ -3,7 +3,16 @@
 
   .border-right.border-left.border-bottom.bg-white
     .card-body
-      %h3 Voting Indicators
-      - @voting_indicators.each do |indicator|
-        %div
-          %span= "#{indicator.indicatorable.name}: #{indicator.median}"
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th{:scope => "col"} Which indicators best represent these themes?
+            %th{:scope => "col"} Median Score
+            %th{:scope => "col"} Why did the group choose this score?
+
+        %tbody
+          - @voting_indicators.each do |indicator|
+            %tr
+              %td= indicator.indicatorable.name
+              %td= VotingIndicator.medians[indicator.median]
+              %td= indicator.median.humanize

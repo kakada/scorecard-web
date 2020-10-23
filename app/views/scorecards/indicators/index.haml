@@ -3,17 +3,22 @@
 
   .border-right.border-left.border-bottom.bg-white
     .card-body
-      .mb-4
-        %h3 Raised Indicators
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th{:scope => "col"} Which indicators have been raised?
+            %th{:scope => "col"} How many times?
+            %th{:scope => "col"} What indicator type?
 
-        %h4 Predefined
-        - @indicator[:predefineds].each do |item|
-          %div= "[Raised #{item["count"]} times] #{item["name"]}"
+        %tbody
+          - @indicator[:predefineds].each do |indicator|
+            %tr
+              %td= indicator["name"]
+              %td= indicator["count"]
+              %td Predefined
 
-        %h4.mt-4 Custom
-        - @indicator[:customs].each do |item|
-          %div= item["name"]
-
-      %h3 Voting Indicators
-      - @voting_indicators.each do |indicator|
-        %div= indicator.indicatorable.name
+          - @indicator[:customs].each do |indicator|
+            %tr
+              %td= indicator["name"]
+              %td 1
+              %td Custom

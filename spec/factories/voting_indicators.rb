@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: voting_indicators
@@ -16,6 +18,5 @@
 #
 FactoryBot.define do
   factory :voting_indicator do
-    
   end
 end

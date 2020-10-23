@@ -217,7 +217,7 @@ ActiveRecord::Schema.define(version: 2020_10_22_070951) do
     t.integer "indicatorable_id"
     t.string "indicatorable_type"
     t.string "scorecard_uuid"
-    t.float "median"
+    t.integer "median"
     t.text "strength"
     t.text "weakness"
     t.text "improvement"
