@@ -19,6 +19,7 @@
 class VotingIndicator < ApplicationRecord
   belongs_to :scorecard, foreign_key: :scorecard_uuid
   belongs_to :indicatorable, polymorphic: true
+  has_many :ratings
 
   enum median: {
     very_bad: 1,

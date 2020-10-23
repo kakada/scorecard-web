@@ -162,20 +162,6 @@ ActiveRecord::Schema.define(version: 2020_10_22_070951) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "swots", force: :cascade do |t|
-    t.string "scorecard_uuid"
-    t.integer "voting_issue_id"
-    t.integer "display_order"
-    t.text "strength"
-    t.text "weakness"
-    t.text "improvement"
-    t.text "activity"
-    t.float "rating_median_score"
-    t.string "rating_result"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "templates", force: :cascade do |t|
     t.string "name"
     t.integer "program_id"
