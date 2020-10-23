@@ -20,7 +20,6 @@
 #  program_id             :integer
 #  authentication_token   :string           default("")
 #  token_expired_date     :datetime
-#  language_code          :string           default("en")
 #
 FactoryBot.define do
   factory :user do
