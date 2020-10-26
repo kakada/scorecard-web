@@ -1,0 +1,14 @@
+- if flash[:notice] == t('scorecard.create_successfully')
+  #scorecardModal.modal{:role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %h5.modal-title Scorecard
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+        .modal-body
+          %p
+            %span.btn.btn-link= @scorecard.uuid
+            %sapn ប្រើលេខកូដនេះសម្រាប់ទាញយក Scorecard
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.close")

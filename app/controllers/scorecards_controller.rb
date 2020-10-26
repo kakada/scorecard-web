@@ -19,7 +19,8 @@ class ScorecardsController < ApplicationController
     @scorecard = authorize current_program.scorecards.new(scorecard_params)
 
     if @scorecard.save
-      redirect_to scorecards_url
+      flash[:notice] = t('scorecard.create_successfully')
+      redirect_to scorecard_url(@scorecard)
     else
       render :new
     end

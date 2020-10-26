@@ -12,9 +12,9 @@
 = render "date_field", f: f, field: :planned_start_date
 = render "date_field", f: f, field: :planned_end_date
 
-= f.input :number_of_caf
-= f.input :number_of_participant
-= f.input :number_of_female
+= f.input :number_of_caf, input_html: { readonly: true }
+= f.input :number_of_participant, input_html: { readonly: true }
+= f.input :number_of_female, input_html: { readonly: true }
 
 .actions
   = f.submit t('shared.save'), class: 'btn btn-primary'
