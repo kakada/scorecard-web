@@ -46,6 +46,7 @@ class Scorecard < ApplicationRecord
   validates :unit_type_id, presence: true
   validates :category_id, presence: true
   validates :scorecard_type_id, presence: true
+  validates :local_ngo_id, presence: true
 
   before_create :secure_uuid
   before_create :set_name
