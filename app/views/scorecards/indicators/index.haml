@@ -19,6 +19,14 @@
 
           - @indicator[:customs].each do |indicator|
             %tr
-              %td= indicator["name"]
+              %td
+                %div= indicator["name"]
+
+                - if indicator.audio.present?
+                  %audio.mt-2{:controls => ""}
+                    %source{:src => indicator.audio_url, :type => "audio/ogg"}
+                      %source{:src => indicator.audio_url, :type => "audio/mpeg"}
+                        Your browser does not support the audio element.
               %td 1
               %td Custom
+
