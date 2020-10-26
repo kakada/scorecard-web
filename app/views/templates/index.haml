@@ -1,34 +1,34 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('template.templates')
-      = link_to new_template_path, class: 'btn btn-primary' do
-        %i.fas.fa-plus
+= render "shared/page_title", title: t("template.templates"), url: new_template_path
 
-  = render partial: "shared/no_data", locals: { items: @templates }
+.card.shadow.mb-4.categories
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @templates }
 
-  - if @templates.present?
-    %table.table.table-hover.medium-width
-      %thead
-        %tr
-          %th= t('template.name')
-          %th
-      %tbody
-        - @templates.each do |template|
+    - if @templates.present?
+      = render "shared/pagination_title"
+
+      %table.table.table-hover
+        %thead
           %tr
-            %td= link_to template.name, template_indicators_path(template), class: "btn btn-link p-0"
+            %th= t('template.name')
+            %th
 
-            %td.text-right
-              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                %i.fas.fa-ellipsis-v
+        %tbody
+          - @templates.each do |template|
+            %tr
+              %td= link_to template.name, template_indicators_path(template), class: "btn btn-link p-0"
 
-              .dropdown-menu.dropdown-menu-right
-                - if policy(template).update?
-                  = link_to edit_template_path(template), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
+              %td.text-right
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
 
-                - if policy(template).destroy?
-                  = link_to template_path(template), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('template.are_you_sure_to_delete')} do
-                    %i.fas.fa-trash-alt.drop-menu-icon
-                    %span= t('shared.delete')
+                .dropdown-menu.dropdown-menu-right
+                  - if policy(template).update?
+                    = link_to edit_template_path(template), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span= t('shared.edit')
+
+                  - if policy(template).destroy?
+                    = link_to template_path(template), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('template.are_you_sure_to_delete')} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span= t('shared.delete')

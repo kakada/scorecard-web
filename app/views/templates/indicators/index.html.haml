@@ -1,28 +1,32 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= "#{@template.name}: #{t('indicator.indicators')}"
-      %div
-        = link_to templates_path, class: 'btn btn-info mr-2' do
-          %i.fas.fa-chevron-left
-          = t('shared.back')
-        = link_to new_template_indicator_path(@template), class: 'btn btn-primary' do
-          %i.fas.fa-plus
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= "#{@template.name}: #{t('indicator.indicators')}"
+  %div
+    = link_to templates_path, class: 'btn btn-info mr-2 btn-sm shadow-sm' do
+      %i.fas.fa-chevron-left
+      = t('shared.back')
 
-  = render partial: "shared/no_data", locals: { items: @indicators }
+    %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_template_indicator_path(@template) }
+      %i.fas.fa-plus.fa-sm.text-white-50
+      = t("shared.add_new")
 
-  - if @indicators.present?
-    %table.table.table-hover.medium-width.pretty
-      %thead
-        %tr
-          %th #
-          %th= sortable "name", t('indicator.name')
-          %th= sortable "tag", t('indicator.tag')
-          %th
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @indicators }
 
-      %tbody
-        = render partial: 'indicator', collection: @indicators
+    - if @indicators.present?
+      = render "shared/pagination_title"
 
-  - if @pagy.pages > 1
-    .pagy-wrapper
-      != pagy_bootstrap_nav(@pagy)
+      %table.table.table-hover.pretty
+        %thead
+          %tr
+            %th #
+            %th= sortable "name", t('indicator.name')
+            %th= sortable "tag", t('indicator.tag')
+            %th
+
+        %tbody
+          = render partial: 'indicator', collection: @indicators
+
+    - if @pagy.pages > 1
+      .pagy-wrapper
+        != pagy_bootstrap_nav(@pagy)

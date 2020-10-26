@@ -1,33 +1,36 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('scorecard_type.scorecard_types')
-      = link_to new_scorecard_type_path, class: 'btn btn-primary' do
-        %i.fas.fa-plus
+= render "shared/page_title", title: t("scorecard_type.scorecard_types"), url: new_scorecard_type_path
 
-  = render partial: "shared/no_data", locals: { items: @scorecard_types }
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @scorecard_types }
 
-  - if @scorecard_types.present?
-    %table.table.table-hover.medium-width
-      %thead
-        %tr
-          %th= t('scorecard_type.name')
-          %th
-      %tbody
-        - @scorecard_types.each do |scorecard_type|
+    - if @scorecard_types.present?
+      = render "shared/pagination_title"
+
+      %table.table.table-hover
+        %thead
           %tr
-            %td= scorecard_type.name
-            %td.text-right
-              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                %i.fas.fa-ellipsis-v
+            %th= t('scorecard_type.name')
+            %th
+        %tbody
+          - @scorecard_types.each do |scorecard_type|
+            %tr
+              %td= scorecard_type.name
+              %td.text-right
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
 
-              .dropdown-menu.dropdown-menu-right
-                - if policy(scorecard_type).update?
-                  = link_to edit_scorecard_type_path(scorecard_type), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
+                .dropdown-menu.dropdown-menu-right
+                  - if policy(scorecard_type).update?
+                    = link_to edit_scorecard_type_path(scorecard_type), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span= t('shared.edit')
 
-                - if policy(scorecard_type).destroy?
-                  = link_to scorecard_type_path(scorecard_type), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('scorecard_type.are_you_sure_to_delete')} do
-                    %i.fas.fa-trash-alt.drop-menu-icon
-                    %span= t('shared.delete')
+                  - if policy(scorecard_type).destroy?
+                    = link_to scorecard_type_path(scorecard_type), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('scorecard_type.are_you_sure_to_delete')} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span= t('shared.delete')
+
+    - if @pagy.pages > 1
+      .pagy-wrapper
+        != pagy_bootstrap_nav(@pagy)

@@ -23,3 +23,5 @@ en:
     no_result_found: 'No result found!'
     apply: 'Apply'
     unlock: 'Unlock'
+    add_new: Add New
+    pagination_title: "Displaying items <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"

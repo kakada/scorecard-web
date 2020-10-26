@@ -1,0 +1,8 @@
+- url ||= nil
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= title
+
+  - if url.present?
+    %a.btn.btn-primary.btn-sm.shadow-sm{ href: url }
+      %i.fas.fa-plus.fa-sm.text-white-50
+      = t("shared.add_new")

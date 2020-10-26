@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   end
 
   resources :local_ngos do
-    resources :cafs
+    resources :cafs, module: "local_ngos"
   end
 
   resource :download, only: [:show]

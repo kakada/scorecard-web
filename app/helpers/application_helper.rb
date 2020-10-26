@@ -21,4 +21,12 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, { sort: column, direction: direction }, { class: css_class }
   end
+
+  def render_notice
+    content_tag(:div, notice, class: "alert alert-primary", role: "alert") if notice
+  end
+
+  def render_alert
+    content_tag(:div, alert, class: "alert alert-danger", role: "alert") if alert
+  end
 end
