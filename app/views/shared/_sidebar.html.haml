@@ -64,11 +64,6 @@
         %i.far.fa-fw.fa-clipboard
         %span= t("sidebar.scorecard")
 
-    %li.nav-item
-      = link_to destroy_user_session_path, method: :delete, class: 'nav-link' do
-        %i.fas.fa-fw.fa-key
-        %span= t('sidebar.logout')
-
     / Divider
     %hr.sidebar-divider.d-none.d-md-block/
 
@@ -77,12 +72,6 @@
     %button#sidebarToggle.rounded-circle.border-0
 
   .footer
-    .language.text-white
-      = simple_form_for(current_user, url: update_locale_users_path, method: :post, remote: true, html: { id: "switch-language" }) do |f|
-        %label= switch_language_data[:label]
-        = f.hidden_field :language_code, value: switch_language_data[:language_code]
-        = f.submit switch_language_data[:submit_label], class: "btn btn-outline-light language"
-
     / Version
     .version
       %span= "#{t('sidebar.version')}: #{ENV.fetch('APP_VERSION') { 'development' }}"

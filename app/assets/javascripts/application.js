@@ -11,7 +11,6 @@
 // *** Datetime picker
 //= require moment
 //= require tempusdominus-bootstrap-4.js
-
 //= require pumi
 
 //= require application/namespace

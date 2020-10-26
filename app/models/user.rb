@@ -78,4 +78,8 @@ class User < ApplicationRecord
       self.authentication_token = Devise.friendly_token
       self.token_expired_date = (ENV.fetch("TOKEN_EXPIRED_IN_DAY") { 1 }).to_i.day.from_now
     end
+
+    def display_name
+      email.split('@').first.upcase
+    end
 end
