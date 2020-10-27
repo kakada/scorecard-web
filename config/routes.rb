@@ -41,9 +41,24 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :languages do
-        get :download, on: :member
+      resources :programs, only: [] do
+        resources :languages, only: [:index]
       end
+
+      resources :categories, only: [] do
+        resources :indicators, only: [:index]
+      end
+
+      resources :scorecards, only: [:show, :update] do
+        resources :custom_indicators, only: [:create]
+      end
+
+      resources :local_ngos, only: [] do
+        resources :cafs, only: [:index]
+      end
+
+      post   "sign_in",  to: "sessions#create"
+      delete "sign_out", to: "sessions#destroy"
     end
   end
 

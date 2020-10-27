@@ -47,6 +47,7 @@ gem "pundit", "~> 2.1.0"
 gem "simple_form", "~> 5.0.3"
 gem "awesome_nested_set", "~> 3.2.1"
 gem "roo", "~> 2.8.3"
+gem "active_model_serializers", "~> 0.10.10"
 
 gem "bootstrap4-datetime-picker-rails", "~> 0.3.1"
 

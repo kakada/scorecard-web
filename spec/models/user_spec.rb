@@ -18,6 +18,8 @@
 #  updated_at             :datetime         not null
 #  role                   :integer
 #  program_id             :integer
+#  authentication_token   :string           default("")
+#  token_expired_date     :datetime
 #
 require "rails_helper"
 

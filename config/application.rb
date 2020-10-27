@@ -18,7 +18,7 @@ module CscWeb
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     Raven.configure do |config|
-      config.dsn = ENV["SENTRY_LOGGER_DSN"]
+      config.dsn = ENV["SENTRY_DSN"]
     end
 
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]

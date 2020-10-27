@@ -3,10 +3,10 @@
 module Api
   module V1
     class LanguagesController < ApiController
-      def download
-        @language = ::Language.find_by(code: params[:id])
+      def index
+        program = Program.find_by(id: params[:program_id])
 
-        send_file @language.json_file.path, disposition: "attachment"
+        render json: program.languages
       end
     end
   end

@@ -46,9 +46,19 @@ class Scorecard < ApplicationRecord
   validates :unit_type_id, presence: true
   validates :category_id, presence: true
   validates :scorecard_type_id, presence: true
+  validates :local_ngo_id, presence: true
 
   before_create :secure_uuid
   before_create :set_name
+
+  accepts_nested_attributes_for :scorecards_cafs, allow_destroy: true
+  accepts_nested_attributes_for :raised_indicators, allow_destroy: true
+
+  def location
+    return if commune_id.nil?
+
+    Pumi::Commune.find_by_id(commune_id).address_km
+  end
 
   private
     def secure_uuid
@@ -61,7 +71,7 @@ class Scorecard < ApplicationRecord
     end
 
     def six_digit_rand
-      SecureRandom.random_number(1..999999).to_s.rjust(6, '0')
+      SecureRandom.random_number(1..999999).to_s.rjust(6, "0")
     end
 
     def set_name
