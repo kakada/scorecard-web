@@ -8,7 +8,7 @@
 #  indicatorable_id   :integer
 #  indicatorable_type :string
 #  scorecard_uuid     :string
-#  median             :float
+#  median             :integer
 #  strength           :text
 #  weakness           :text
 #  improvement        :text

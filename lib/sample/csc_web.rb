@@ -7,6 +7,7 @@ require_relative "indicator"
 require_relative "local_ngo"
 require_relative "caf"
 require_relative "scorecard_type"
+require_relative "location"
 require_relative "scorecard"
 require_relative "raised_indicator"
 require_relative "voting_indicator"
@@ -16,6 +17,7 @@ module Sample
   class CscWeb
     def self.load_samples
       ::Sample::Program.load
+      ::Sample::Location.load
       ::Sample::User.load
       ::Sample::Category.load
       ::Sample::Indicator.load

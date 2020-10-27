@@ -26,6 +26,7 @@
 #  scorecard_type_id     :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  location_code         :string
 #
 class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :category_name, :scorecard_type_name, :category_id,

@@ -26,6 +26,7 @@
 #  scorecard_type_id     :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  location_code         :string
 #
 require "rails_helper"
 
@@ -34,6 +35,8 @@ RSpec.describe Scorecard, type: :model do
   it { is_expected.to belong_to(:local_ngo).optional }
   it { is_expected.to belong_to(:unit_type).class_name("Category") }
   it { is_expected.to belong_to(:category) }
+  it { is_expected.to belong_to(:location).optional }
+
   it { is_expected.to have_many(:scorecards_cafs) }
   it { is_expected.to have_many(:cafs).through(:scorecards_cafs) }
 

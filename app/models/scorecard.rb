@@ -26,6 +26,7 @@
 #  scorecard_type_id     :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  location_code         :string
 #
 class Scorecard < ApplicationRecord
   belongs_to :unit_type, class_name: "Category"
@@ -33,6 +34,7 @@ class Scorecard < ApplicationRecord
   belongs_to :local_ngo, optional: true
   belongs_to :program
   belongs_to :scorecard_type
+  belongs_to :location, foreign_key: :location_code, optional: true
 
   has_many   :scorecards_cafs
   has_many   :cafs, through: :scorecards_cafs
@@ -50,16 +52,18 @@ class Scorecard < ApplicationRecord
   validates :scorecard_type_id, presence: true
   validates :local_ngo_id, presence: true
 
+  before_validation :set_location_code
+
   before_create :secure_uuid
   before_create :set_name
 
   accepts_nested_attributes_for :scorecards_cafs, allow_destroy: true
   accepts_nested_attributes_for :raised_indicators, allow_destroy: true
 
-  def location
-    return if commune_id.nil?
+  def location_name(address = "address_km")
+    return if location_code.blank?
 
-    Pumi::Commune.find_by_id(commune_id).address_km
+    "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("#{address}".to_sym)
   end
 
   private
@@ -78,5 +82,9 @@ class Scorecard < ApplicationRecord
 
     def set_name
       self.name = "#{commune_id}-#{year}-#{unit_type_id.to_s.rjust(2, '0')}"
+    end
+
+    def set_location_code
+      self.location_code = commune_id
     end
 end
