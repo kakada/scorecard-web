@@ -4,10 +4,11 @@
 #
 # Table name: programs
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :bigint           not null, primary key
+#  name            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  datetime_format :string           default("YYYY-MM-DD")
 #
 class Program < ApplicationRecord
   has_many :users
@@ -22,6 +23,11 @@ class Program < ApplicationRecord
   validates :name, presence: true
 
   after_create :create_default_language
+
+  DATETIME_FORMATS = {
+    "YYYY-MM-DD" => "%Y-%m-%d",
+    "DD-MM-YYYY" => "%d-%m-%Y"
+  }
 
   private
     def create_default_language

@@ -20,6 +20,7 @@
 #  program_id             :integer
 #  authentication_token   :string           default("")
 #  token_expired_date     :datetime
+#  language_code          :string           default("en")
 #
 class User < ApplicationRecord
   include Confirmable
@@ -73,13 +74,13 @@ class User < ApplicationRecord
     self.save
   end
 
+  def display_name
+    email.split("@").first.upcase
+  end
+
   private
     def generate_authentication_token
       self.authentication_token = Devise.friendly_token
       self.token_expired_date = (ENV.fetch("TOKEN_EXPIRED_IN_DAY") { 1 }).to_i.day.from_now
-    end
-
-    def display_name
-      email.split('@').first.upcase
     end
 end

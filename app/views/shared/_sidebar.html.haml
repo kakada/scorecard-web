@@ -64,6 +64,12 @@
         %i.far.fa-fw.fa-clipboard
         %span= t("sidebar.scorecard")
 
+    - if current_program.present? && policy(Program).update?
+      %li.nav-item{ class: css_nested_active_class('programs/settings') }
+        %a.nav-link{:href => setting_path}
+          %i.fas.fa-fw.fa-wrench
+          %span= t('sidebar.settings')
+
     / Divider
     %hr.sidebar-divider.d-none.d-md-block/
 

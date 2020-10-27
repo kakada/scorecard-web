@@ -13,7 +13,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body{ id: css_class_name }
-    #wrapper
+    #wrapper{ 'data-date-format' => current_program.try(:datetime_format) }
       = render 'shared/sidebar'
 
       #content-wrapper
