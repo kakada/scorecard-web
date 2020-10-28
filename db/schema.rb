@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_22_070951) do
+ActiveRecord::Schema.define(version: 2020_10_27_062123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,17 @@ ActiveRecord::Schema.define(version: 2020_10_22_070951) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|
+    t.string "name_en", null: false
+    t.string "name_km", null: false
+    t.string "kind", null: false
+    t.string "parent_id"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "programs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -153,6 +164,7 @@ ActiveRecord::Schema.define(version: 2020_10_22_070951) do
     t.integer "scorecard_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "location_code"
   end
 
   create_table "scorecards_cafs", force: :cascade do |t|

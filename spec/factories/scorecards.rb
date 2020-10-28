@@ -26,6 +26,7 @@
 #  scorecard_type_id     :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  location_code         :string
 #
 FactoryBot.define do
   factory :scorecard do
