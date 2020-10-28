@@ -2,7 +2,7 @@
 
 class LanguagesController < ApplicationController
   def index
-    @pagy, @languages = pagy(Language.all)
+    @pagy, @languages = pagy(policy_scope(authorize Language.order(sort_column + " " + sort_direction)))
   end
 
   def new
@@ -43,5 +43,9 @@ class LanguagesController < ApplicationController
   private
     def language_params
       params.require(:language).permit(:code, :name)
+    end
+
+    def sort_column
+      Language.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
     end
 end

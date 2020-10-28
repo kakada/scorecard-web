@@ -7,15 +7,18 @@
     - if @languages.present?
       = render "shared/pagination_title"
 
-      %table.table.table-hover
+      %table.table.table-hover.pretty
         %thead
           %tr
-            %th= t('language.code')
-            %th= t('language.name')
+            %th= t('shared.number')
+            %th= sortable "code", t("language.code")
+            %th= sortable "name", t("language.name")
             %th
+
         %tbody
-          - @languages.each do |language|
+          - @languages.each_with_index do |language, index|
             %tr
+              %td= @pagy.from + index
               %td= language.code
               %td= language.name
               %td.text-right

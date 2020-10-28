@@ -6,24 +6,18 @@
     = render partial: "shared/no_data", locals: { items: @users }
 
     - if @users.present?
-      .pagy-wrapper
-        .d-flex.flex-grow-1
-          .flex-grow-1.d-flex.align-items-center.mb-2
-            %span= t('user.pagination_title', from: @pagy.from, to: @pagy.to, total: @pagy.count).html_safe
+      = render "shared/pagination_title"
 
-          - if @pagy.pages > 1
-            != pagy_bootstrap_nav(@pagy)
-
-    - if @users.present?
       %table.table.table-hover.pretty
         %thead
           %tr
-            %th= t('user.number')
+            %th= t('shared.number')
             %th= sortable "email", t("user.email")
             %th= sortable "role", t("user.role")
             %th= t('user.program')
             %th= t('user.status')
             %th
+
         %tbody
           - @users.each_with_index do |user, index|
             %tr

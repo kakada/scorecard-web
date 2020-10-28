@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  helper_method :sort_column
-
   def index
     @pagy, @users = pagy(policy_scope(authorize User.filter(params).order(sort_column + " " + sort_direction).includes(:program)))
   end
