@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   include Pagy::Backend
 
-  helper_method :sort_direction
-  helper_method :sort_column
+  helper_method :sort_column, :sort_direction
 
   protect_from_forgery prepend: true
 

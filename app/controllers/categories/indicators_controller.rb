@@ -2,7 +2,6 @@
 
 module Categories
   class IndicatorsController < ApplicationController
-    helper_method :sort_column, :sort_direction
     before_action :set_category
 
     def index
@@ -63,11 +62,7 @@ module Categories
 
     private
       def sort_column
-        Indicator.column_names.include?(params[:sort]) ? params[:sort] : "name"
-      end
-
-      def sort_direction
-        %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+        Indicator.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
       end
 
       def indicator_params
