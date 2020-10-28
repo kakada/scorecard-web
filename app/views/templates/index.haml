@@ -7,15 +7,17 @@
     - if @templates.present?
       = render "shared/pagination_title"
 
-      %table.table.table-hover
+      %table.table.table-hover.pretty
         %thead
           %tr
-            %th= t('template.name')
+            %th= t('shared.number')
+            %th= sortable "name", t("template.name")
             %th
 
         %tbody
-          - @templates.each do |template|
+          - @templates.each_with_index do |template, index|
             %tr
+              %td= @pagy.from + index
               %td= link_to template.name, template_indicators_path(template), class: "btn btn-link p-0"
 
               %td.text-right
