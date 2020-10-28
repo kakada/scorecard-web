@@ -2,7 +2,7 @@
 
 class ScorecardTypesController < ApplicationController
   def index
-    @pagy, @scorecard_types = pagy(current_program.scorecard_types)
+    @pagy, @scorecard_types = pagy(current_program.scorecard_types.order(sort_column + " " + sort_direction))
   end
 
   def new
@@ -43,5 +43,9 @@ class ScorecardTypesController < ApplicationController
   private
     def scorecard_type_params
       params.require(:scorecard_type).permit(:name)
+    end
+
+    def sort_column
+      ScorecardType.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
     end
 end
