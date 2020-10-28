@@ -30,7 +30,15 @@ class ApplicationController < ActionController::Base
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : default_sort_direction
+    end
+
+    def default_sort_column
+      "created_at"
+    end
+
+    def default_sort_direction
+      "asc"
     end
 
     def set_locale

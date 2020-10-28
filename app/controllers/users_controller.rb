@@ -63,10 +63,10 @@ class UsersController < ApplicationController
     end
 
     def sort_column
-      User.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+      User.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
     end
 
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    def default_sort_direction
+      "desc"
     end
 end
