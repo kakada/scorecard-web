@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 2020_10_22_070951) do
     t.integer "program_id"
     t.string "authentication_token", default: ""
     t.datetime "token_expired_date"
+    t.string "language_code", default: "en"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

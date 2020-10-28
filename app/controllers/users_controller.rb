@@ -44,12 +44,29 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def update_locale
+    current_user.language_code = locale_params[:language_code]
+    if current_user.save
+      head :ok
+    else
+      render json: current_user.errors.messages
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(:email, :role, :program_id)
     end
 
+    def locale_params
+      params.require(:user).permit(:language_code)
+    end
+
     def sort_column
-      User.column_names.include?(params[:sort]) ? params[:sort] : "email"
+      User.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end

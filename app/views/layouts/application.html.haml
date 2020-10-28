@@ -16,9 +16,12 @@
     #wrapper
       = render 'shared/sidebar'
 
-      #content-wrapper.overflow-auto
-        / Begin Page Content
-        = yield
+      #content-wrapper
+        = render 'shared/topbar'
+
+        #content.container-fluid
+          = render "shared/notify_message"
+          = yield
 
     = render 'shared/button_scroll_to_top'
     = render 'shared/modal_logout'

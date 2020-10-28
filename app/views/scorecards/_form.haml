@@ -1,21 +1,21 @@
-= f.input :year, label: t('scorecard.year')
-= render "unit_type_and_category_fields", f: f
+.w-50.view-center
+  = simple_form_for @scorecard do |f|
+    = f.input :year, label: t('scorecard.year')
+    = render "unit_type_and_category_fields", f: f
 
-= f.input :scorecard_type_id, collection: current_program.scorecard_types.pluck(:name, :id), include_blank: false
+    = f.input :scorecard_type_id, collection: current_program.scorecard_types.pluck(:name, :id), include_blank: false
+    = f.input :local_ngo_id, collection: current_program.local_ngos.pluck(:name, :id), include_blank: false
+    = f.input :description
 
-= f.input :local_ngo_id, collection: current_program.local_ngos.pluck(:name, :id), include_blank: false
+    = render "location_fields", f: f
+    = render "date_field", f: f, field: :conducted_date
+    = render "date_field", f: f, field: :planned_start_date
+    = render "date_field", f: f, field: :planned_end_date
 
-= f.input :description
-= render "location_fields", f: f
+    = f.input :number_of_caf, input_html: { readonly: true }
+    = f.input :number_of_participant, input_html: { readonly: true }
+    = f.input :number_of_female, input_html: { readonly: true }
 
-= render "date_field", f: f, field: :conducted_date
-= render "date_field", f: f, field: :planned_start_date
-= render "date_field", f: f, field: :planned_end_date
-
-= f.input :number_of_caf, input_html: { readonly: true }
-= f.input :number_of_participant, input_html: { readonly: true }
-= f.input :number_of_female, input_html: { readonly: true }
-
-.actions
-  = f.submit t('shared.save'), class: 'btn btn-primary'
-  = link_to t('shared.cancel'), scorecards_path, class: 'btn btn-secondary'
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), scorecards_path, class: 'btn btn-secondary'

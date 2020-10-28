@@ -1,0 +1,25 @@
+km:
+  shared:
+    no_data_found: 'No data found'
+    use_plus_to_add_item: 'Please use (+) button to add items!'
+    edit: 'Edit'
+    delete: 'Delete'
+    cancel: 'Cancel'
+    save: 'Save'
+    back: 'Back'
+    done: 'Done'
+    reset: 'Reset'
+    cannot_be_blank: 'cannot be blank'
+    is_invalid_value: 'is invalid value'
+    value_should_be_from_to: "the value should be from %{from} to %{to}"
+    search: 'Search'
+    please_select: please select
+    status_on: 'On'
+    status_off: 'Off'
+    setup: 'Setup'
+    change: 'Change'
+    learn_more: 'Learn more'
+    need_help: 'Need help?'
+    no_result_found: 'No result found!'
+    apply: 'Apply'
+    unlock: 'Unlock'

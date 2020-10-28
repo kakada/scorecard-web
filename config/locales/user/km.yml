@@ -1,0 +1,18 @@
+km:
+  user:
+    users: 'Users'
+    email: 'Email'
+    role: 'Role'
+    program: 'Program'
+    status: 'Status'
+    copy_confirm_link: 'Copy confirm link'
+    are_you_sure_to_delete: 'Are you sure to delete this user?'
+    copied: 'Copied!'
+    new_users: 'New Users'
+    active: 'Active'
+    pending: 'Pending'
+    number: 'No'
+    province: 'Province'
+    edit_user: 'Edit user'
+    full_name: 'Full name'
+    pagination_title: "Displaying users <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"

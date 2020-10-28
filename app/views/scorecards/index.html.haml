@@ -1,45 +1,44 @@
-#content
-  %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    .container-fluid
-      %h3= t('scorecard.scorecards')
-      = link_to new_scorecard_path, class: 'btn btn-primary' do
-        %i.fas.fa-plus
+= render "shared/page_title", title: t("scorecard.scorecards"), url: new_scorecard_path
 
-  = render partial: "shared/no_data", locals: { items: @scorecards }
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @scorecards }
 
-  - if @scorecards.present?
-    %table.table.table-hover.medium-width.pretty
-      %thead
-        %tr
-          %th #
-          %th ID
-          %th= sortable "name", t('scorecard.name')
-          %th= sortable "category_id", t('scorecard.category')
-          %th= sortable "commune_code", t('scorecard.location')
-          %th
+    - if @scorecards.present?
+      = render "shared/pagination_title"
 
-      %tbody
-        - @scorecards.each_with_index do |scorecard, index|
+      %table.table.table-hover
+        %thead
           %tr
-            %td= @pagy.from + index
-            %td= link_to scorecard.uuid, scorecard, class: 'btn btn-link p-0'
-            %td= scorecard.name
-            %td= scorecard.category.name
-            %td.text-right
-              %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                %i.fas.fa-ellipsis-v
+            %th #
+            %th ID
+            %th= sortable "name", t('scorecard.name')
+            %th= sortable "category_id", t('scorecard.category')
+            %th= sortable "commune_code", t('scorecard.location')
+            %th
 
-              .dropdown-menu.dropdown-menu-right
-                - if policy(scorecard).update?
-                  = link_to edit_scorecard_path(scorecard), class: "btn dropdown-item" do
-                    %i.fas.fa-pen.drop-menu-icon
-                    %span= t('shared.edit')
+        %tbody
+          - @scorecards.each_with_index do |scorecard, index|
+            %tr
+              %td= @pagy.from + index
+              %td= link_to scorecard.uuid, scorecard, class: 'btn btn-link p-0'
+              %td= scorecard.name
+              %td= scorecard.category.name
+              %td.text-right
+                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                  %i.fas.fa-ellipsis-v
 
-                - if policy(scorecard).destroy?
-                  = link_to scorecard_path(scorecard), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('scorecard.are_you_sure_to_delete')} do
-                    %i.fas.fa-trash-alt.drop-menu-icon
-                    %span= t('shared.delete')
+                .dropdown-menu.dropdown-menu-right
+                  - if policy(scorecard).update?
+                    = link_to edit_scorecard_path(scorecard), class: "btn dropdown-item" do
+                      %i.fas.fa-pen.drop-menu-icon
+                      %span= t('shared.edit')
 
-  - if @pagy.pages > 1
-    .pagy-wrapper
-      != pagy_bootstrap_nav(@pagy)
+                  - if policy(scorecard).destroy?
+                    = link_to scorecard_path(scorecard), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('scorecard.are_you_sure_to_delete')} do
+                      %i.fas.fa-trash-alt.drop-menu-icon
+                      %span= t('shared.delete')
+
+    - if @pagy.pages > 1
+      .pagy-wrapper
+        != pagy_bootstrap_nav(@pagy)

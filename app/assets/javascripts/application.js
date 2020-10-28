@@ -11,11 +11,11 @@
 // *** Datetime picker
 //= require moment
 //= require tempusdominus-bootstrap-4.js
-
 //= require pumi
 
 //= require application/namespace
 //= require application/util
+//= require sidebar
 
 //= require categories
 //= require indicators
@@ -24,6 +24,8 @@
 //= require users/new
 
 document.addEventListener('turbolinks:load', function() {
+  CW.Sidebar.init();
+
   $('.datetimepicker').datetimepicker({format: 'YYYY-MM-DD'});
 
   let currentPage = CW.Util.getCurrentPage();

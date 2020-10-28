@@ -34,12 +34,16 @@ Rails.application.routes.draw do
   end
 
   resources :local_ngos do
-    resources :cafs
+    resources :cafs, module: "local_ngos"
   end
 
   resource :download, only: [:show]
   resources :scorecard_types
-  resources :users
+  resources :users do
+    collection do
+      post :update_locale
+    end
+  end
 
   namespace :api do
     namespace :v1 do

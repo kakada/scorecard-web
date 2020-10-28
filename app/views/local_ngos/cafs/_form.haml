@@ -1,0 +1,11 @@
+.w-50.view-center
+  = simple_form_for [@local_ngo, @caf] do |f|
+    = f.input :name, label: t('local_ngo.name')
+    = f.input :sex
+    = f.input :date_of_birth
+    = f.input :tel
+    = f.input :address
+
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), local_ngo_cafs_path(@local_ngo), class: 'btn btn-secondary'
