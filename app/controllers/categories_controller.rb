@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @pagy, @categories = pagy(current_program.categories.roots.includes(:children))
+        @pagy, @categories = pagy(current_program.categories.roots.reorder(sort_column + " " + sort_direction).includes(:children))
       }
 
       format.json {
@@ -57,5 +57,9 @@ class CategoriesController < ApplicationController
   private
     def category_params
       params.require(:category).permit(:name, :code, :parent_id)
+    end
+
+    def sort_column
+      Category.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
     end
 end
