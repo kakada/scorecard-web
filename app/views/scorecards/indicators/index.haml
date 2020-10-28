@@ -3,10 +3,30 @@
 
   .border-right.border-left.border-bottom.bg-white
     .card-body
-      %h3 Predefined
-      - @indicator[:predefineds].each do |item|
-        %div= "[Raised #{item["count"]} times] #{item["name"]}"
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th{:scope => "col"} Which indicators have been raised?
+            %th{:scope => "col"} How many times?
+            %th{:scope => "col"} What indicator type?
 
-      %h3 Custom
-      - @indicator[:customs].each do |item|
-        %div= item["name"]
+        %tbody
+          - @indicator[:predefineds].each do |indicator|
+            %tr
+              %td= indicator["name"]
+              %td= indicator["count"]
+              %td Predefined
+
+          - @indicator[:customs].each do |indicator|
+            %tr
+              %td
+                %div= indicator["name"]
+
+                - if indicator.audio.present?
+                  %audio.mt-2{:controls => ""}
+                    %source{:src => indicator.audio_url, :type => "audio/ogg"}
+                      %source{:src => indicator.audio_url, :type => "audio/mpeg"}
+                        Your browser does not support the audio element.
+              %td 1
+              %td Custom
+

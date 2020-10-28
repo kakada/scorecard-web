@@ -41,7 +41,6 @@ GEM
       actionpack (>= 4.1, < 6.1)
       activemodel (>= 4.1, < 6.1)
       case_transform (>= 0.2)
-      globalid (>= 0.3.6)
       jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (6.0.3.4)
       activesupport (= 6.0.3.4)

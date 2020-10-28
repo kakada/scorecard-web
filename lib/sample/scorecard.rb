@@ -11,7 +11,7 @@ module Sample
     private
       def self.build_scorecard
         number_of_caf = rand(1..5)
-        number_of_participant = rand(5..15)
+        number_of_participant = rand(10..15)
         number_of_female = rand(1...number_of_participant)
         conducted_date = Date.today
         commune = ::Pumi::Commune.all.sample

@@ -1,7 +1,7 @@
 .form-group
   - id = field
   %label= t("scorecard.#{field}")
-  .input-group.date.datetimepicker{id: id, "data-target-input" => "nearest"}
+  .input-group.date.datetimepicker{ id: id, "data-target-input" => "nearest" }
     = f.text_field field, class: ['form-control datetimepicker-input'], autocomplete: 'off', "data-target" => "##{id}", "data-toggle" => "datetimepicker", placeholder: 'YYYY-MM-DD'
     .input-group-append{"data-target" => "##{id}", "data-toggle" => "datetimepicker"}
       .input-group-text

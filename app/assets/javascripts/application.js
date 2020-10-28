@@ -19,6 +19,7 @@
 
 //= require categories
 //= require indicators
+//= require scorecards
 //= require users/index
 //= require users/new
 

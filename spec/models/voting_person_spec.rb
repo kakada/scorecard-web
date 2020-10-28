@@ -2,18 +2,18 @@
 
 # == Schema Information
 #
-# Table name: vote_issues
+# Table name: voting_people
 #
 #  id             :bigint           not null, primary key
 #  scorecard_uuid :string
-#  content        :string
-#  audio          :string
-#  display_order  :string
+#  gender         :string
+#  age            :integer
+#  disability     :boolean          default(FALSE)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
 require "rails_helper"
 
-RSpec.describe VoteIssue, type: :model do
+RSpec.describe VotingPerson, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

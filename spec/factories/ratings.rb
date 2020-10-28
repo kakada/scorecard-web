@@ -2,22 +2,17 @@
 
 # == Schema Information
 #
-# Table name: swots
+# Table name: ratings
 #
 #  id                  :bigint           not null, primary key
+#  voting_indicator_id :integer
+#  voting_person_id    :integer
 #  scorecard_uuid      :string
-#  voting_issue_id     :integer
-#  display_order       :integer
-#  strength            :text
-#  weakness            :text
-#  improvement         :text
-#  activity            :text
-#  rating_median_score :float
-#  rating_result       :string
+#  score               :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
 FactoryBot.define do
-  factory :swot do
+  factory :rating do
   end
 end

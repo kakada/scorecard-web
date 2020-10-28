@@ -36,8 +36,10 @@ class Scorecard < ApplicationRecord
 
   has_many   :scorecards_cafs
   has_many   :cafs, through: :scorecards_cafs
-  has_many   :raised_indicators, foreign_key: :scorecard_uuid
   has_many   :custom_indicators, foreign_key: :scorecard_uuid
+  has_many   :raised_indicators, foreign_key: :scorecard_uuid
+  has_many   :voting_indicators, foreign_key: :scorecard_uuid
+  has_many   :ratings, foreign_key: :scorecard_uuid
 
   validates :year, presence: true
   validates :province_id, presence: true

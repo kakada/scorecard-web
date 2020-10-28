@@ -2,15 +2,17 @@
 
 # == Schema Information
 #
-# Table name: predefined_issues
+# Table name: voting_people
 #
 #  id             :bigint           not null, primary key
 #  scorecard_uuid :string
-#  content        :text
-#  audio          :string
+#  gender         :string
+#  age            :integer
+#  disability     :boolean          default(FALSE)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-class PredefinedIssue < ApplicationRecord
-  belongs_to :scorecard, foreign_key: :scorecard_uuid
+FactoryBot.define do
+  factory :voting_person do
+  end
 end

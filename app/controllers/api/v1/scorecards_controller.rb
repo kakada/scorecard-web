@@ -17,7 +17,6 @@ module Api
         else
           render json: { errors: @scorecard.errors }, status: :unprocessable_entity
         end
-
       end
 
       private
