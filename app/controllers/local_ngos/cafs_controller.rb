@@ -5,7 +5,7 @@ module LocalNgos
     before_action :set_local_ngo
 
     def index
-      @pagy, @cafs = pagy(@local_ngo.cafs)
+      @pagy, @cafs = pagy(@local_ngo.cafs.order(sort_column + " " + sort_direction))
     end
 
     def new
@@ -50,6 +50,10 @@ module LocalNgos
 
       def caf_params
         params.require(:caf).permit(:name, :sex, :date_of_birth, :tel, :address)
+      end
+
+      def sort_column
+        Caf.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
       end
   end
 end

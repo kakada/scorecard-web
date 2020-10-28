@@ -7,15 +7,18 @@
     - if @local_ngos.present?
       = render "shared/pagination_title"
 
-      %table.table.table-hover
+      %table.table.table-hover.pretty
         %thead
           %tr
-            %th= t('local_ngo.name')
+            %th= t('shared.number')
+            %th= sortable "name", t("local_ngo.name")
             %th= t('local_ngo.address')
             %th
+
         %tbody
-          - @local_ngos.each do |local_ngo|
+          - @local_ngos.each_with_index do |local_ngo, index|
             %tr
+              %td= @pagy.from + index
               %td= link_to local_ngo.name, local_ngo_cafs_path(local_ngo), class: 'btn btn-link p-0'
               %td= local_ngo.address
               %td.text-right
