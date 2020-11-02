@@ -1,0 +1,13 @@
+%button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+  %i.fas.fa-ellipsis-v
+
+.dropdown-menu.dropdown-menu-right
+  %a.btn.dropdown-item{"data-target" => "#importModal", "data-toggle" => "modal", href: '#'}
+    %i.fas.fa-file-import.drop-menu-icon
+    %span Import from file
+
+  %a.btn.dropdown-item{ href: '/local_ngos_and_cafs.xlsx', target: "_blank" }
+    %i.fas.fa-cloud-download-alt.drop-menu-icon
+    %span Download sample form
+
+= render "modal_import_local"

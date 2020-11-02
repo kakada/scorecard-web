@@ -40,8 +40,14 @@ class LocalNgosController < ApplicationController
     redirect_to local_ngos_url
   end
 
+  def import
+    LocalNgoService.new(current_program.id).import(params[:file])
+
+    redirect_to local_ngos_url
+  end
+
   private
     def local_ngo_params
-      params.require(:local_ngo).permit(:name, :province_id, :district_id, :commune_id, :village_id, :address)
+      params.require(:local_ngo).permit(:name, :province_id, :district_id, :commune_id, :village_id, target_province_ids: [])
     end
 end

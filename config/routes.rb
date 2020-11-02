@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   resources :local_ngos do
     resources :cafs, module: "local_ngos"
+    post :import, on: :collection
   end
 
   resource :download, only: [:show]

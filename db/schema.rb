@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_27_074010) do
+ActiveRecord::Schema.define(version: 2020_10_28_095553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,10 +85,11 @@ ActiveRecord::Schema.define(version: 2020_10_27_074010) do
     t.string "district_id", limit: 4
     t.string "commune_id", limit: 6
     t.string "village_id", limit: 8
-    t.string "address"
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "code"
+    t.string "target_province_ids"
   end
 
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|
