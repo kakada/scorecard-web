@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @pagy, @categories = pagy(current_program.categories.roots.includes(:children))
+        @pagy, @categories = pagy(current_program.categories.roots.reorder(sort_column + " " + sort_direction).includes(:children))
       }
 
       format.json {

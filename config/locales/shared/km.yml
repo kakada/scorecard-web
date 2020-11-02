@@ -23,3 +23,6 @@ km:
     no_result_found: 'No result found!'
     apply: 'Apply'
     unlock: 'Unlock'
+    add_new: បង្កើតថ្មី
+    pagination_title: "បង្ហាញទិន្ន័យ <b>%{from}</b> - <b>%{to}</b> នៃចំនួនសរុប <b>%{total}</b>"
+    number: "No"

@@ -2,7 +2,7 @@
 
 class LocalNgosController < ApplicationController
   def index
-    @pagy, @local_ngos = pagy(current_program.local_ngos)
+    @pagy, @local_ngos = pagy(current_program.local_ngos.order(sort_column + " " + sort_direction))
   end
 
   def new

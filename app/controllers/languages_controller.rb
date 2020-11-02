@@ -2,7 +2,7 @@
 
 class LanguagesController < ApplicationController
   def index
-    @pagy, @languages = pagy(Language.all)
+    @pagy, @languages = pagy(policy_scope(authorize current_program.languages.order(sort_column + " " + sort_direction)))
   end
 
   def new

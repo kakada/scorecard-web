@@ -7,7 +7,7 @@
     - if @scorecards.present?
       = render "shared/pagination_title"
 
-      %table.table.table-hover
+      %table.table.table-hover.pretty
         %thead
           %tr
             %th #
@@ -20,7 +20,7 @@
         %tbody
           - @scorecards.each_with_index do |scorecard, index|
             %tr
-              %td= @pagy.from + index
+              %td= scorecard.id
               %td= link_to scorecard.uuid, scorecard, class: 'btn btn-link p-0'
               %td= scorecard.name
               %td= scorecard.category.name

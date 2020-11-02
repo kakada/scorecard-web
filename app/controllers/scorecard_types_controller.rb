@@ -2,7 +2,7 @@
 
 class ScorecardTypesController < ApplicationController
   def index
-    @pagy, @scorecard_types = pagy(current_program.scorecard_types)
+    @pagy, @scorecard_types = pagy(current_program.scorecard_types.order(sort_column + " " + sort_direction))
   end
 
   def new

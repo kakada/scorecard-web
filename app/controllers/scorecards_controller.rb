@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ScorecardsController < ApplicationController
-  helper_method :sort_column, :sort_direction
-
   def index
     @pagy, @scorecards = pagy(Scorecard.order(sort_column + " " + sort_direction).includes(:category))
   end
@@ -48,14 +46,6 @@ class ScorecardsController < ApplicationController
   end
 
   private
-    def sort_column
-      Scorecard.column_names.include?(params[:sort]) ? params[:sort] : "name"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-    end
-
     def scorecard_params
       params.require(:scorecard).permit(:unit_type_id, :category_id, :description,
         :province_id, :district_id, :commune_id, :year, :conducted_date,

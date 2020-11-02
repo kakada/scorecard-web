@@ -2,7 +2,7 @@
 
 class TemplatesController < ApplicationController
   def index
-    @pagy, @templates = pagy(current_program.templates)
+    @pagy, @templates = pagy(current_program.templates.order(sort_column + " " + sort_direction))
   end
 
   def children
