@@ -13,7 +13,7 @@ km:
     is_invalid_value: 'is invalid value'
     value_should_be_from_to: "the value should be from %{from} to %{to}"
     search: 'Search'
-    please_select: please select
+    please_select: សូមជ្រើសរើស
     status_on: 'On'
     status_off: 'Off'
     setup: 'Setup'
@@ -26,3 +26,5 @@ km:
     add_new: បង្កើតថ្មី
     pagination_title: "បង្ហាញទិន្ន័យ <b>%{from}</b> - <b>%{to}</b> នៃចំនួនសរុប <b>%{total}</b>"
     number: "No"
+    import_from_file: Import from file
+    download_sample_form: Download sample form

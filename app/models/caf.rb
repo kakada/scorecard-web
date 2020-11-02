@@ -19,5 +19,8 @@ class Caf < ApplicationRecord
   has_many :scorecards_caf
   has_many :scorecards, through: :scorecards_caf
 
+  GENDERS = %w(female male other)
+
   validates :name, presence: true
+  validates :sex, inclusion: { in: GENDERS }, allow_blank: true
 end

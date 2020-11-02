@@ -1,13 +1,9 @@
-%button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-  %i.fas.fa-ellipsis-v
+%a.btn.btn-secondary.btn-sm.shadow-sm{ "data-target" => "#importModal", "data-toggle" => "modal", href: '#' }
+  %i.fas.fa-file-import.fa-sm.text-white-50
+  = t("shared.import_from_file")
 
-.dropdown-menu.dropdown-menu-right
-  %a.btn.dropdown-item{"data-target" => "#importModal", "data-toggle" => "modal", href: '#'}
-    %i.fas.fa-file-import.drop-menu-icon
-    %span Import from file
-
-  %a.btn.dropdown-item{ href: '/local_ngos_and_cafs.xlsx', target: "_blank" }
-    %i.fas.fa-cloud-download-alt.drop-menu-icon
-    %span Download sample form
+%a.btn.btn-secondary.btn-sm.shadow-sm{ href: '/local_ngos_and_cafs.xlsx', target: "_blank" }
+  %i.fas.fa-cloud-download-alt.fa-sm.text-white-50
+  = t("shared.download_sample_form")
 
 = render "modal_import_local"

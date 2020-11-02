@@ -21,10 +21,7 @@ class LocalNgo < ApplicationRecord
   has_many :cafs
   has_many :scorecards
 
-  validates :name, presence: true
-  before_validation :cleanup_target_province_ids
-
-  serialize :target_province_ids, Array
+  validates :name, presence: true, uniqueness: { scope: :program_id }
 
   def address(address_local = "address_km")
     address_code = village_id.presence || commune_id.presence || district_id.presence || province_id.presence
@@ -34,13 +31,8 @@ class LocalNgo < ApplicationRecord
   end
 
   def target_province_names
-
-  end
-
-  private
-    def cleanup_target_province_ids
-      return if target_province_ids.blank?
-
-      self.target_province_ids = target_province_ids.reject(&:blank?)
+    if ids = target_province_ids.split(",").presence
+      Pumi::Province.all.select { |p| ids.include?(p.id) }.map(&:name_km).join(", ")
     end
+  end
 end

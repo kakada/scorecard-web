@@ -1,3 +1,32 @@
 // Place all the styles related to the local_ngos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.tagify {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(white, .8);
+}
+
+/* Suggestions items */
+.tagify__dropdown.provinces-list {
+  font-size: 14px;
+
+  .tagify__dropdown__item {
+    padding: .5em .7em;
+  }
+
+  strong{
+    width: 100%;
+    font-weight: 500;
+  }
+
+  .addAll{
+    border-bottom: 1px solid #DDD;
+  }
+}
+
+/* Tags items */
+.tagify__tag{
+  white-space: nowrap;
+}
