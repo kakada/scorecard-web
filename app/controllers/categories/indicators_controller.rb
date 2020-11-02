@@ -70,9 +70,5 @@ module Categories
       def set_category
         @category = Category.find(params[:category_id])
       end
-
-      def sort_column
-        Indicator.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
-      end
   end
 end

@@ -51,9 +51,5 @@ module LocalNgos
       def caf_params
         params.require(:caf).permit(:name, :sex, :date_of_birth, :tel, :address)
       end
-
-      def sort_column
-        Caf.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
-      end
   end
 end

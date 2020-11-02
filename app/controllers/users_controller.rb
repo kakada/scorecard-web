@@ -59,12 +59,4 @@ class UsersController < ApplicationController
     def locale_params
       params.require(:user).permit(:language_code)
     end
-
-    def sort_column
-      User.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
-    end
-
-    def default_sort_direction
-      "desc"
-    end
 end

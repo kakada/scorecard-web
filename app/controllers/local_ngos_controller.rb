@@ -44,8 +44,4 @@ class LocalNgosController < ApplicationController
     def local_ngo_params
       params.require(:local_ngo).permit(:name, :province_id, :district_id, :commune_id, :village_id, :address)
     end
-
-    def sort_column
-      LocalNgo.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
-    end
 end

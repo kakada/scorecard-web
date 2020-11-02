@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   include Pagy::Backend
+  include SortOrder
 
   helper_method :sort_column, :sort_direction
 
@@ -27,22 +28,6 @@ class ApplicationController < ActionController::Base
     def set_raven_context
       Raven.user_context(id: session[:current_user_id]) # or anything else in session
       Raven.extra_context(params: params.to_unsafe_h, url: request.url)
-    end
-
-    def sort_column
-      default_sort_column
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : default_sort_direction
-    end
-
-    def default_sort_column
-      "created_at"
-    end
-
-    def default_sort_direction
-      "asc"
     end
 
     def set_locale

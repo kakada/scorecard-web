@@ -10,7 +10,7 @@
       %table.table.table-hover.pretty
         %thead
           %tr
-            %th= t('shared.number')
+            %th= sortable "id", t('shared.number')
             %th= sortable "name", t("local_ngo.name")
             %th= t('local_ngo.address')
             %th
@@ -18,7 +18,7 @@
         %tbody
           - @local_ngos.each_with_index do |local_ngo, index|
             %tr
-              %td= @pagy.from + index
+              %td= local_ngo.id
               %td= link_to local_ngo.name, local_ngo_cafs_path(local_ngo), class: 'btn btn-link p-0'
               %td= local_ngo.address
               %td.text-right

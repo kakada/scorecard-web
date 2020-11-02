@@ -10,14 +10,14 @@
       %table.table.table-hover.pretty
         %thead
           %tr
-            %th= t('shared.number')
+            %th= sortable "id", t('shared.number')
             %th= sortable "name", t("template.name")
             %th
 
         %tbody
           - @templates.each_with_index do |template, index|
             %tr
-              %td= @pagy.from + index
+              %td= template.id
               %td= link_to template.name, template_indicators_path(template), class: "btn btn-link p-0"
 
               %td.text-right

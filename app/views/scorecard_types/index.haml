@@ -10,13 +10,13 @@
       %table.table.table-hover.pretty
         %thead
           %tr
-            %th= t('shared.number')
+            %th= sortable "id", t('shared.number')
             %th= sortable "name", t("scorecard_type.name")
             %th
         %tbody
           - @scorecard_types.each_with_index do |scorecard_type, index|
             %tr
-              %td= @pagy.from + index
+              %td= scorecard_type.id
               %td= scorecard_type.name
               %td.text-right
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}

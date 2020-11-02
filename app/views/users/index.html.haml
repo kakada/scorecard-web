@@ -11,7 +11,7 @@
       %table.table.table-hover.pretty
         %thead
           %tr
-            %th= t('shared.number')
+            %th= sortable "id", t('shared.number')
             %th= sortable "email", t("user.email")
             %th= sortable "role", t("user.role")
             %th= t('user.program')
@@ -21,7 +21,7 @@
         %tbody
           - @users.each_with_index do |user, index|
             %tr
-              %td= @pagy.from + index
+              %td= user.id
               %td= user.email
               %td= user.role.titlecase
               %td= user.program_name

@@ -50,8 +50,4 @@ class TemplatesController < ApplicationController
     def template_params
       params.require(:template).permit(:name)
     end
-
-    def sort_column
-      ::Template.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
-    end
 end

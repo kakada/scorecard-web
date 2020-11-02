@@ -58,8 +58,4 @@ class CategoriesController < ApplicationController
     def category_params
       params.require(:category).permit(:name, :code, :parent_id)
     end
-
-    def sort_column
-      Category.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
-    end
 end

@@ -10,7 +10,7 @@
       %table.table.table-hover.pretty
         %thead
           %tr
-            %th= t('shared.number')
+            %th= sortable "id", t('shared.number')
             %th= sortable "code", t("language.code")
             %th= sortable "name", t("language.name")
             %th
@@ -18,7 +18,7 @@
         %tbody
           - @languages.each_with_index do |language, index|
             %tr
-              %td= @pagy.from + index
+              %td= language.id
               %td= language.code
               %td= language.name
               %td.text-right

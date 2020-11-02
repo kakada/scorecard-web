@@ -49,10 +49,6 @@ module Templates
     end
 
     private
-      def sort_column
-        Indicator.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
-      end
-
       def indicator_params
         params.require(:indicator).permit(:tag, :name,
           languages_indicators_attributes: [ :id, :language_id, :language_code, :content, :audio, :remove_audio ]

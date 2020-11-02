@@ -44,8 +44,4 @@ class ScorecardTypesController < ApplicationController
     def scorecard_type_params
       params.require(:scorecard_type).permit(:name)
     end
-
-    def sort_column
-      ScorecardType.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
-    end
 end

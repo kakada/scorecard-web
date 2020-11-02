@@ -46,10 +46,6 @@ class ScorecardsController < ApplicationController
   end
 
   private
-    def sort_column
-      Scorecard.column_names.include?(params[:sort]) ? params[:sort] : default_sort_column
-    end
-
     def scorecard_params
       params.require(:scorecard).permit(:unit_type_id, :category_id, :description,
         :province_id, :district_id, :commune_id, :year, :conducted_date,
