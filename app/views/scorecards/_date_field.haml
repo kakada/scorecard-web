@@ -2,7 +2,9 @@
   - id = field
   %label= t("scorecard.#{field}")
   .input-group.date.datetimepicker{ id: id, "data-target-input" => "nearest" }
-    = f.text_field field, class: ['form-control datetimepicker-input'], autocomplete: 'off', "data-target" => "##{id}", "data-toggle" => "datetimepicker", placeholder: 'YYYY-MM-DD'
+    - value = f.object[field].try(:strftime, Program::DATETIME_FORMATS[current_program.datetime_format])
+
+    = f.text_field field, value: value, class: ['form-control datetimepicker-input'], autocomplete: 'off', "data-target" => "##{id}", "data-toggle" => "datetimepicker", placeholder: current_program.datetime_format
     .input-group-append{"data-target" => "##{id}", "data-toggle" => "datetimepicker"}
       .input-group-text
         %i.fas.fa-calendar-alt

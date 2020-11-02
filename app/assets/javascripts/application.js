@@ -15,7 +15,8 @@
 
 //= require application/namespace
 //= require application/util
-//= require sidebar
+//= require common/topbar
+//= require common/datetime_picker
 
 //= require categories
 //= require indicators
@@ -24,9 +25,8 @@
 //= require users/new
 
 document.addEventListener('turbolinks:load', function() {
-  CW.Sidebar.init();
-
-  $('.datetimepicker').datetimepicker({format: 'YYYY-MM-DD'});
+  CW.Common.Topbar.init();
+  CW.Common.DatetimePicker.init();
 
   let currentPage = CW.Util.getCurrentPage();
   !!CW[currentPage] && CW[currentPage].init();

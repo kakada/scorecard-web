@@ -1,4 +1,4 @@
-CW.Sidebar = do ->
+CW.Common.Topbar = do ->
   init = ->
     switchLanguage()
     onSubmitLanguage()

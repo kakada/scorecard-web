@@ -1,0 +1,13 @@
+= render "shared/page_title", title: t("program.program_settings")
+
+.card.shadow.mb-4
+  .card-body
+    .w-50.view-center
+      = simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
+        .dotted-line.d-flex
+          %label.flex-grow-1= t('program.datetime_format')
+          %div
+            = current_program.datetime_format
+            %a.pointer.badge.badge-info.text-white{'data-target' => '#datetime-format', 'data-toggle' => 'modal'}= t('shared.edit')
+
+            = render 'modal_datetime_format', f: f

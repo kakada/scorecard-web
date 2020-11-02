@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Array
   def median
     return nil if self.empty?

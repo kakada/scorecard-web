@@ -20,7 +20,13 @@ Rails.application.routes.draw do
   end
 
   resources :programs
+
+  scope module: :programs do
+    resource :setting, only: [:show, :update]
+  end
+
   resources :languages
+
   resources :categories do
     get :children, on: :member
     resources :indicators, module: "categories" do
