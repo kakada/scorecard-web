@@ -17,10 +17,8 @@ class LocalNgoService
 
   private
     def import_local_ngos(sheet)
-      sheet = sheet.parse(headers: true)
-      sheet.each_with_index do |row, index|
-        next if index == 0
-
+      rows = sheet.parse(headers: true)
+      rows[1..-1].each do |row|
         lngo = program.local_ngos.find_or_initialize_by(code: row["code"])
         lngo.update({
           name: row["name"],
@@ -34,22 +32,24 @@ class LocalNgoService
     end
 
     def import_cafs(sheet)
-      sheet = sheet.parse(headers: true)
+      rows = sheet.parse(headers: true)
       lngo = nil
-      sheet.each_with_index do |row, index|
-        # Skip Header
-        next if index == 0
 
+      rows[1..-1].each do |row|
         lngo = program.local_ngos.find_by(code: row["local_ngo_code"]) if row["local_ngo_code"].present?
-        next if lngo.nil? || row["full_name"].blank?
-
-        lngo.cafs.create({
-          name: row["full_name"],
-          sex: row["gender"].to_s.downcase,
-          date_of_birth: row["date_of_birth"],
-          tel: row["tel"],
-          address: row["address"]
-        })
+        create_caf(lngo, row)
       end
+    end
+
+    def create_caf(lngo, row)
+      return if lngo.nil? || row["full_name"].blank?
+
+      lngo.cafs.create({
+        name: row["full_name"],
+        sex: row["gender"].to_s.downcase,
+        date_of_birth: row["date_of_birth"],
+        tel: row["tel"],
+        address: row["address"]
+      })
     end
 end

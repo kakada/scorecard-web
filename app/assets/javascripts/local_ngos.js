@@ -1,17 +1,21 @@
 CW.Local_ngosNew = (() => {
-  var addAllSuggestionsElm;
-  var tagify;
-  var provinces;
+  var provinces = [];
 
-  return { init }
+  return {
+    init
+  }
 
   function init() {
-    assignTargetProvinceToTags();
+    assignProvinces();
+    assignTargetProvinceToTagsInput();
     initTagify();
   }
 
-  function assignTargetProvinceToTags() {
-    var provinces = $('input[name=tags]').data('collection').map(x => ({"value": x.id, "name": x.name_km}));
+  function assignProvinces() {
+    provinces = $('input[name=tags]').data('collection').map(x => ({"value": x.id, "name": x.name_km}));
+  }
+
+  function assignTargetProvinceToTagsInput() {
     var selectedProvinces = $("#local_ngo_target_province_ids").val().split(',');
     var data = provinces.filter(pro => selectedProvinces.includes(pro.value));
 
@@ -19,17 +23,15 @@ CW.Local_ngosNew = (() => {
   }
 
   function initTagify() {
-    var provinces = $('input[name=tags]').data('collection').map(x => ({"value": x.id, "name": x.name_km}));
-
-    tagify = new Tagify($('input[name=tags]')[0], {
+    var tagify = new Tagify($('input[name=tags]')[0], {
       enforceWhitelist: true,
-      skipInvalid: true, // do not remporarily add invalid tags
+      skipInvalid: true,
       dropdown: {
         closeOnSelect: false,
         enabled: 0,
         maxItems: 25,
         classname: 'provinces-list',
-        searchKeys: ['name']  // very important to set by which keys to search for suggesttions when typing
+        searchKeys: ['name']
       },
       templates: {
         tag: tagTemplate,
@@ -38,21 +40,14 @@ CW.Local_ngosNew = (() => {
       whitelist: provinces
     })
 
-    tagify.on('dropdown:show dropdown:updated', onDropdownShow)
-    tagify.on('dropdown:select', onSelectSuggestion)
-    tagify.on('remove', function(e) {
-      assignDataToInputTargetProvince();
-    });
-
-    tagify.on('add', function(e) {
-      assignDataToInputTargetProvince();
-    });
+    tagify.on('remove', assignDataToInputTargetProvince);
+    tagify.on('add', assignDataToInputTargetProvince);
   }
 
-  function assignDataToInputTargetProvince() {
-    var data = $("tag").map((i, dom) => $(dom).attr('value')).toArray();
+  function assignDataToInputTargetProvince(e) {
+    var data = $("tag").map((i, dom) => $(dom).attr('value')).toArray().join(',');
 
-    $("#local_ngo_target_province_ids").val(data.join(','));
+    $("#local_ngo_target_province_ids").val(data);
   }
 
   function tagTemplate(tagData){
@@ -80,34 +75,6 @@ CW.Local_ngosNew = (() => {
             <strong>${tagData.name}</strong>
         </div>
     `
-  }
-
-  function onDropdownShow(e){
-    var dropdownContentElm = e.detail.tagify.DOM.dropdown.content;
-
-    if( tagify.suggestedListItems.length > 1 ) {
-      addAllSuggestionsElm = getAddAllSuggestionsElm();
-
-      // insert "addAllSuggestionsElm" as the first element in the suggestions list
-      dropdownContentElm.insertBefore(addAllSuggestionsElm, dropdownContentElm.firstChild)
-    }
-  }
-
-  function onSelectSuggestion(e){
-    if( e.detail.elm == addAllSuggestionsElm ) {
-      tagify.dropdown.selectAll.call(tagify);
-      assignDataToInputTargetProvince();
-    }
-  }
-
-  // create a "add all" custom suggestion element every time the dropdown changes
-  function getAddAllSuggestionsElm(){
-    // suggestions items should be based on "dropdownItem" template
-    return tagify.parseTemplate('dropdownItem', [{
-        class: "addAll",
-        name: "Add all"
-      }]
-    )
   }
 
 })();
