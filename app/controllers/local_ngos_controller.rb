@@ -41,7 +41,7 @@ class LocalNgosController < ApplicationController
   end
 
   def import
-    LocalNgoService.new(current_program.id).import(params[:file])
+    ProgramSpreadsheet.new(current_program.id).import(params[:file])
 
     redirect_to local_ngos_url
   end

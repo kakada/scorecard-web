@@ -48,7 +48,7 @@ class ScorecardSerializer < ActiveModel::Serializer
   end
 
   def local_ngo_name
-    object.local_ngo.name
+    object.local_ngo.try(:name)
   end
 
   def commune
