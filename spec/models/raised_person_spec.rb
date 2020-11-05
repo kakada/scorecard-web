@@ -4,13 +4,15 @@
 #
 # Table name: raised_people
 #
-#  id             :bigint           not null, primary key
-#  scorecard_uuid :string
-#  gender         :string
-#  age            :integer
-#  disability     :boolean          default(FALSE)
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id              :bigint           not null, primary key
+#  scorecard_uuid  :string
+#  gender          :string
+#  age             :integer
+#  disability      :boolean          default(FALSE)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  ethnic_minority :boolean
+#  id_poor         :boolean
 #
 require "rails_helper"
 

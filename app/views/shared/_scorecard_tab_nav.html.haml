@@ -2,7 +2,7 @@
   %li.nav-item
     = link_to t("scorecard.scorecard_info"), scorecard_path(@scorecard), class: ['nav-link', css_nested_active_class('scorecards')]
   %li.nav-item
-    = link_to t("scorecard.issue_list"), scorecard_indicators_path(@scorecard), class: ['nav-link', css_nested_active_class("scorecards/indicators")]
+    = link_to t("scorecard.proposed_criteria"), scorecard_indicators_path(@scorecard), class: ['nav-link', css_nested_active_class("scorecards/indicators")]
   %li.nav-item
     = link_to t("scorecard.indicator_development"), scorecard_medians_path(@scorecard), class: ['nav-link', css_nested_active_class('scorecards/medians')]
   %li.nav-item
