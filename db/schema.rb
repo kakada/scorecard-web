@@ -227,8 +227,8 @@ ActiveRecord::Schema.define(version: 2020_11_05_033720) do
     t.integer "median"
     t.text "strength"
     t.text "weakness"
-    t.text "improvement"
-    t.text "next_step"
+    t.text "desired_change"
+    t.text "suggested_action"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

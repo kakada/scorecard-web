@@ -11,8 +11,8 @@
 #  median             :integer
 #  strength           :text
 #  weakness           :text
-#  improvement        :text
-#  next_step          :text
+#  desired_change     :text
+#  suggested_action   :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

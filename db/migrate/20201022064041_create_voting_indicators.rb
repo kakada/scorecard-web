@@ -9,8 +9,8 @@ class CreateVotingIndicators < ActiveRecord::Migration[6.0]
       t.integer :median
       t.text    :strength
       t.text    :weakness
-      t.text    :improvement
-      t.text    :next_step
+      t.text    :desired_change
+      t.text    :suggested_action
 
       t.timestamps
     end

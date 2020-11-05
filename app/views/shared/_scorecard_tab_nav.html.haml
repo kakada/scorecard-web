@@ -1,9 +1,10 @@
 %ul.nav.nav-tabs.nav-justified
-  %li.nav-item
-    = link_to t("scorecard.scorecard_info"), scorecard_path(@scorecard), class: ['nav-link', css_nested_active_class('scorecards')]
-  %li.nav-item
-    = link_to t("scorecard.proposed_criteria"), scorecard_indicators_path(@scorecard), class: ['nav-link', css_nested_active_class("scorecards/indicators")]
-  %li.nav-item
-    = link_to t("scorecard.indicator_development"), scorecard_medians_path(@scorecard), class: ['nav-link', css_nested_active_class('scorecards/medians')]
-  %li.nav-item
-    = link_to t("scorecard.swot_table"), scorecard_swots_path(@scorecard), class: ['nav-link', css_nested_active_class('scorecards/swots')]
+  %li.nav-item{class: css_nested_active_class('scorecards')}
+    = link_to t("scorecard.scorecard_info"), scorecard_path(@scorecard), class: ['nav-link']
+  %li.nav-item{class: css_nested_active_class('scorecards/indicators')}
+    = link_to t("scorecard.proposed_criteria"), scorecard_indicators_path(@scorecard), class: ['nav-link']
+  %li.nav-item{class: css_nested_active_class('scorecards/medians')}
+    = link_to t("scorecard.indicator_development"), scorecard_medians_path(@scorecard), class: ['nav-link']
+  %li.nav-item{class: css_nested_active_class('scorecards/swots')}
+    = link_to t("scorecard.swot_table"), scorecard_swots_path(@scorecard), class: ['nav-link']
+
