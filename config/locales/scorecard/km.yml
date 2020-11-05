@@ -10,8 +10,7 @@ km:
     number_of_female: ចំនួនអ្នកចូលរួមស្រី
     number_of_caf: ចំនួនអ្នកសម្របសម្រួល
     scorecard_info: ព័ត៌មាន Scorecard
-    median_table: តារាង មេដ្យាន
-    swot_table: តារាង ភាពខ្លាំងភាពខ្សោយ
+    swot_table: តារាងសកម្មភាពអាទិភាពផ្អែកលើលក្ខណៈវិនិច្ឆ័យ
     content: Content
     tag: Tag
     year: ឆ្នាំ
@@ -22,3 +21,9 @@ km:
     number_of_youth: ចំនួនយុវជន
     number_of_id_poor: ចំនួនអ្នមានបណ្ណក្រីក្រ
     proposed_criteria: លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
+    median: ពិន្ទុមធ្យម
+    strength: ចំនុចខ្លាំង
+    weakness: ចំនុចខ្សោយ (បញ្ហា)
+    desired_change: ការផ្លាស់ប្តូរដែលចង់បាន (តម្រូវការ)
+    suggested_action: សកម្មភាពដែលស្នើឡើង (ដំណោះស្រាយ)
+    criteria: លក្ខណៈវិនិច្ឆ័យ

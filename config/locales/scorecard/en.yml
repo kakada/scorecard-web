@@ -10,8 +10,7 @@ en:
     number_of_female: Number of female
     number_of_caf: Number of caf
     scorecard_info: Scorecard Information
-    median_table: Median table
-    swot_table: SWOT table
+    swot_table: Priority actions based on criteria
     content: Content
     tag: Tag
     year: Year
@@ -22,3 +21,9 @@ en:
     number_of_youth: Number of youth
     number_of_id_poor: Number of id poor
     proposed_criteria: Proposed Criteria
+    median: Average Score
+    strength: Strength
+    weakness: Weakness (reflection)
+    desired_change: Desired change (demand)
+    suggested_action: Suggested actions (solution)
+    criteria: Criteria
