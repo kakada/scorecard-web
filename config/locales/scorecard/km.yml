@@ -10,7 +10,6 @@ km:
     number_of_female: ចំនួនអ្នកចូលរួមស្រី
     number_of_caf: ចំនួនអ្នកសម្របសម្រួល
     scorecard_info: ព័ត៌មាន Scorecard
-    issue_list: បញ្ហាដែលបានលើកឡើង
     median_table: តារាង មេដ្យាន
     swot_table: តារាង ភាពខ្លាំងភាពខ្សោយ
     content: Content
@@ -18,6 +17,8 @@ km:
     year: ឆ្នាំ
     indicator_development: Indicator development
     create_successfully: បង្កើតបានជោគជ័យ
+    number_of_disability: ចំនួនជនពិការ
     number_of_ethnic_minority: ចំនួនជនជាតិភាគតិច
     number_of_youth: ចំនួនយុវជន
     number_of_id_poor: ចំនួនអ្នមានបណ្ណក្រីក្រ
+    proposed_criteria: លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
