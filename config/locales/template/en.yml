@@ -2,5 +2,5 @@ en:
   template:
     templates: Templates
     name: Name
-    parent: Parent category
+    parent: Parent facility
     manage_indicator: Manage Indicator

@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: categories
+# Table name: facilities
 #
 #  id             :bigint           not null, primary key
 #  code           :string
@@ -17,7 +17,7 @@
 #  updated_at     :datetime         not null
 #
 FactoryBot.define do
-  factory :category do
+  factory :facility do
     name        { FFaker::Name.name }
     code        { name.upcase.split(" ").map { |n| n[0] }.join("") }
     program
@@ -27,14 +27,14 @@ FactoryBot.define do
         indicator_count { 1 }
       end
 
-      after(:create) do |category, evaluator|
-        create_list(:indicator, evaluator.indicator_count, :with_languages_indicators, categorizable: category)
+      after(:create) do |facility, evaluator|
+        create_list(:indicator, evaluator.indicator_count, :with_languages_indicators, categorizable: facility)
       end
     end
 
     trait :with_parent do
-      after(:create) do |category, evaluator|
-        category.parent_id = create(:category, program_id: category.program_id).id
+      after(:create) do |facility, evaluator|
+        facility.parent_id = create(:facility, program_id: facility.program_id).id
       end
     end
   end

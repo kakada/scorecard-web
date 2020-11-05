@@ -1,6 +1,6 @@
-km:
-  template:
-    templates: Templates
+en:
+  facility:
+    facilities: Facilities
     name: Name
     parent: Parent facility
     manage_indicator: Manage Indicator

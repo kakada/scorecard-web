@@ -14,7 +14,7 @@
 #
 FactoryBot.define do
   factory :indicator do
-    categorizable   { create(:category) }
+    categorizable   { create(:facility) }
     tag             { FFaker::Tweet.tags.split("#")[1] }
     name            { FFaker::Name.name }
 

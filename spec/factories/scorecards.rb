@@ -7,7 +7,7 @@
 #  id                        :bigint           not null, primary key
 #  uuid                      :string
 #  unit_type_id              :integer
-#  category_id               :integer
+#  facility_id               :integer
 #  name                      :string
 #  description               :text
 #  province_id               :string(2)
@@ -35,8 +35,8 @@
 FactoryBot.define do
   factory :scorecard do
     year         { Date.today.year }
-    category     { create(:category, :with_parent) }
-    unit_type_id { category.parent_id }
+    facility     { create(:facility, :with_parent) }
+    unit_type_id { facility.parent_id }
     program
     local_ngo
     scorecard_type

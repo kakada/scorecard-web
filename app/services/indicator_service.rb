@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
 class IndicatorService
-  attr_reader :category
+  attr_reader :facility
 
-  def initialize(category_id)
-    @category = Category.find_by(id: category_id)
+  def initialize(facility_id)
+    @facility = Facility.find_by(id: facility_id)
   end
 
   def clone_from_template(template_id)
     template = ::Template.find_by(id: template_id)
 
-    clone_indicator(template, category)
+    clone_indicator(template, facility)
   end
 
   def clone_to_template(template_name)
-    template = category.program.templates.new(name: template_name)
+    template = facility.program.templates.new(name: template_name)
 
-    clone_indicator(category, template)
+    clone_indicator(facility, template)
   end
 
   private

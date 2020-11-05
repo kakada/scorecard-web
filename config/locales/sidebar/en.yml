@@ -7,7 +7,7 @@ en:
     version: Version
     program: Program
     language: Language
-    scorecard_category: Scorecard Category
+    scorecard_facility: Scorecard Facility
     indicator_template: Indicator Template
     local_ngo: Local Ngo
     scorecard_type: Scorecard Type

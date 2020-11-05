@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: categories
+# Table name: facilities
 #
 #  id             :bigint           not null, primary key
 #  code           :string
@@ -18,7 +18,7 @@
 #
 require "rails_helper"
 
-RSpec.describe Category, type: :model do
+RSpec.describe Facility, type: :model do
   it { is_expected.to belong_to(:program) }
   it { is_expected.to validate_presence_of(:name) }
 end

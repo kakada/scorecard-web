@@ -2,7 +2,7 @@
 
 class ScorecardsController < ApplicationController
   def index
-    @pagy, @scorecards = pagy(Scorecard.order(sort_column + " " + sort_direction).includes(:category))
+    @pagy, @scorecards = pagy(Scorecard.order(sort_column + " " + sort_direction).includes(:facility))
   end
 
   def show
@@ -47,7 +47,7 @@ class ScorecardsController < ApplicationController
 
   private
     def scorecard_params
-      params.require(:scorecard).permit(:unit_type_id, :category_id, :description,
+      params.require(:scorecard).permit(:unit_type_id, :facility_id, :description,
         :province_id, :district_id, :commune_id, :year, :conducted_date,
         :number_of_caf, :number_of_participant, :number_of_female,
         :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,

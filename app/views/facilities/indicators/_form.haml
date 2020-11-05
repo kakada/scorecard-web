@@ -1,9 +1,9 @@
 .w-75.view-center
-  = simple_form_for [@category, @indicator] do |f|
+  = simple_form_for [@facility, @indicator] do |f|
     .w-75
       .form-group
-        %label= t('indicator.category')
-        .form-control= @category.name
+        %label= t('indicator.facility')
+        .form-control= @facility.name
 
       = f.input :tag, label: t('indicator.tag')
       = f.input :name, label: t('indicator.name')
@@ -22,4 +22,4 @@
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'
-      = link_to t('shared.cancel'), category_indicators_path(@category), class: 'btn btn-secondary'
+      = link_to t('shared.cancel'), facility_indicators_path(@facility), class: 'btn btn-secondary'

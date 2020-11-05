@@ -1,7 +1,7 @@
 .w-50.view-center
   = simple_form_for @scorecard do |f|
     = f.input :year, label: t('scorecard.year')
-    = render "unit_type_and_category_fields", f: f
+    = render "unit_type_and_facility_fields", f: f
     = f.input :scorecard_type_id, collection: current_program.scorecard_types.pluck(:name, :id), include_blank: false
     = f.input :local_ngo_id, collection: current_program.local_ngos.pluck(:name, :id), include_blank: false
     = f.input :description

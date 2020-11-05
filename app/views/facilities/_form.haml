@@ -1,0 +1,12 @@
+.w-50.view-center
+  = simple_form_for @facility do |f|
+    = f.input :name, label: t('facility.name')
+    = f.input :code, label: t('facility.code')
+
+    .form-group
+      %label= t('facility.parent')
+      = f.select :parent_id, current_program.facilities.roots.pluck(:name, :id), {:include_blank => true}, {class: 'form-control'}
+
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), facilities_path, class: 'btn btn-secondary'

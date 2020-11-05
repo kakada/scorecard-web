@@ -31,8 +31,8 @@ class LocalNgo < ApplicationRecord
   end
 
   def target_province_names
-    if ids = target_province_ids.split(",").presence
-      Pumi::Province.all.select { |p| ids.include?(p.id) }.map(&:name_km).join(", ")
-    end
+    return if target_province_ids.blank?
+
+    Pumi::Province.all.select { |p| target_province_ids.split(",").include?(p.id) }.map(&:name_km).join(", ")
   end
 end

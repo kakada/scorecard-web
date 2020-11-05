@@ -27,9 +27,9 @@ Rails.application.routes.draw do
 
   resources :languages
 
-  resources :categories do
+  resources :facilities do
     get :children, on: :member
-    resources :indicators, module: "categories" do
+    resources :indicators, module: "facilities" do
       post :clone_from_template, on: :collection
       post :clone_to_template, on: :collection
     end
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
         resources :languages, only: [:index]
       end
 
-      resources :categories, only: [] do
+      resources :facilities, only: [] do
         resources :indicators, only: [:index]
       end
 

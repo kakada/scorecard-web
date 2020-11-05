@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateCategories < ActiveRecord::Migration[6.0]
+class CreateFacilities < ActiveRecord::Migration[6.0]
   def change
-    create_table :categories do |t|
+    create_table :facilities do |t|
       t.string  :code
       t.string  :name
       t.integer :parent_id, null: true, index: true

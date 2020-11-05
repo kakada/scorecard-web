@@ -8,7 +8,6 @@ module Sample
       local_ngos = ["NGO1", "NGO2"]
       local_ngos.each do |name|
         village = ::Pumi::Village.all.sample
-        address = "ផ្ទះលេខ#{rand(1..100)} ផ្លូវលេខ#{rand(100..300)} #{village.address_km}"
 
         program.local_ngos.create(
           name: name,
@@ -16,7 +15,6 @@ module Sample
           commune_id: village.commune_id,
           district_id: village.district_id,
           province_id: village.province_id,
-          address: address
         )
       end
     end

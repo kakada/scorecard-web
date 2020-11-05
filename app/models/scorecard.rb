@@ -7,7 +7,7 @@
 #  id                        :bigint           not null, primary key
 #  uuid                      :string
 #  unit_type_id              :integer
-#  category_id               :integer
+#  facility_id               :integer
 #  name                      :string
 #  description               :text
 #  province_id               :string(2)
@@ -33,8 +33,8 @@
 #  number_of_id_poor         :integer
 #
 class Scorecard < ApplicationRecord
-  belongs_to :unit_type, class_name: "Category"
-  belongs_to :category
+  belongs_to :unit_type, class_name: "Facility"
+  belongs_to :facility
   belongs_to :local_ngo, optional: true
   belongs_to :program
   belongs_to :scorecard_type
@@ -52,7 +52,7 @@ class Scorecard < ApplicationRecord
   validates :district_id, presence: true
   validates :commune_id, presence: true
   validates :unit_type_id, presence: true
-  validates :category_id, presence: true
+  validates :facility_id, presence: true
   validates :scorecard_type_id, presence: true
   validates :local_ngo_id, presence: true
 

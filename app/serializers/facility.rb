@@ -17,6 +17,6 @@
 #  updated_at     :datetime         not null
 #
 
-class CategorySerializer < ActiveModel::Serializer
+class FacilitySerializer < ActiveModel::Serializer
   attributes :id, :code, :name, :parent_id, :program_id
 end
