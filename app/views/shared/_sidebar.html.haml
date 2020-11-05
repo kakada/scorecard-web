@@ -35,11 +35,11 @@
           %i.fas.fa-fw.fa-language
           %span= t("sidebar.language")
 
-    - if policy(Category).create?
-      %li.nav-item{ class: css_active_class('categories') }
-        %a.nav-link{:href => categories_path}
+    - if policy(Facility).create?
+      %li.nav-item{ class: css_active_class('facilities') }
+        %a.nav-link{:href => facilities_path}
           %i.fas.fa-fw.fa-sitemap
-          %span= t("sidebar.scorecard_category")
+          %span= t("sidebar.scorecard_facility")
 
     - if policy(::Template).create?
       %li.nav-item{ class: css_active_class('templates') }

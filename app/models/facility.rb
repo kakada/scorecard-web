@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: categories
+# Table name: facilities
 #
 #  id             :bigint           not null, primary key
 #  code           :string
@@ -16,7 +16,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-class Category < ApplicationRecord
+class Facility < ApplicationRecord
   include Categorizable
 
   acts_as_nested_set scope: [:program_id]

@@ -19,7 +19,7 @@
 //= require common/topbar
 //= require common/datetime_picker
 
-//= require categories
+//= require facilities
 //= require indicators
 //= require scorecards
 //= require users/index

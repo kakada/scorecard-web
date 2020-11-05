@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CategoryPolicy < ApplicationPolicy
+class FacilityPolicy < ApplicationPolicy
   def index?
     user.program_admin?
   end

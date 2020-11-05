@@ -7,7 +7,7 @@
 #  id                        :bigint           not null, primary key
 #  uuid                      :string
 #  unit_type_id              :integer
-#  category_id               :integer
+#  facility_id               :integer
 #  name                      :string
 #  description               :text
 #  province_id               :string(2)
@@ -33,7 +33,7 @@
 #  number_of_id_poor         :integer
 #
 class ScorecardSerializer < ActiveModel::Serializer
-  attributes :uuid, :unit_type_name, :category_name, :scorecard_type_name, :category_id,
+  attributes :uuid, :unit_type_name, :facility_name, :scorecard_type_name, :facility_id,
              :name, :description, :location, :year, :conducted_date,
              :number_of_caf, :number_of_participant, :number_of_female,
              :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
@@ -44,8 +44,8 @@ class ScorecardSerializer < ActiveModel::Serializer
     object.unit_type.name
   end
 
-  def category_name
-    object.category.name
+  def facility_name
+    object.facility.name
   end
 
   def scorecard_type_name

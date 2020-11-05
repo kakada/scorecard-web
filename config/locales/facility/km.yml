@@ -1,6 +1,6 @@
 km:
-  category:
-    categories: Categories
+  facility:
+    facilities: facilities
     name: ឈ្មោះ
-    parent: Parent category
+    parent: Parent facility
     manage_indicator: Manage Indicator

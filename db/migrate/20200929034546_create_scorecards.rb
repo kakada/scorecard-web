@@ -5,7 +5,7 @@ class CreateScorecards < ActiveRecord::Migration[6.0]
     create_table :scorecards do |t|
       t.string   :uuid
       t.integer  :unit_type_id
-      t.integer  :category_id
+      t.integer  :facility_id
       t.string   :name
       t.text     :description
 

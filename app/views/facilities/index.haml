@@ -1,0 +1,17 @@
+= render "shared/page_title", title: t("facility.facilities"), url: new_facility_path
+
+.card.shadow.mb-4.facilities
+  .card-body.pretty
+    = render partial: "shared/no_data", locals: { items: @facilities }
+
+    - if @facilities.present?
+      = render "shared/pagination_title"
+
+      .facility-header
+        %strong= sortable "name", t("facility.name")
+
+      - @facilities.each do |facility|
+        = render 'facility', facility: facility
+
+        - facility.children.each do |child|
+          = render 'facility', facility: child

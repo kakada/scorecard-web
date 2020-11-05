@@ -3,7 +3,7 @@ en:
     conducted_date: Conducted date
     location: Location
     unit_type: Unit Type
-    category: Unit Category
+    facility: Facility
     scorecard_type: Scorecard Type
     sector: Sector
     number_of_participant: Number of participant

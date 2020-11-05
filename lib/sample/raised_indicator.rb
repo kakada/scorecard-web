@@ -8,7 +8,7 @@ module Sample
 
       scorecard.number_of_participant.to_i.times do |i|
         scorecard.raised_indicators.create(
-          indicatorable: scorecard.category.indicators.sample
+          indicatorable: scorecard.facility.indicators.sample
         )
       end
 

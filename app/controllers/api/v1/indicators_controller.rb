@@ -4,9 +4,9 @@ module Api
   module V1
     class IndicatorsController < ApiController
       def index
-        category = Category.find(params[:category_id])
+        facility = Facility.find(params[:facility_id])
 
-        render json: category.indicators
+        render json: facility.indicators
       end
     end
   end

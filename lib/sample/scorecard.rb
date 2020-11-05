@@ -15,7 +15,7 @@ module Sample
         number_of_female = rand(1...number_of_participant)
         conducted_date = Date.today
         commune = ::Pumi::Commune.all.sample
-        category = ::Category.where.not(parent_id: nil).sample
+        facility = ::Facility.where.not(parent_id: nil).sample
         local_ngo = ::LocalNgo.all.sample
 
         ::Scorecard.create({
@@ -24,8 +24,8 @@ module Sample
           province_id: commune.province_id,
           district_id: commune.district_id,
           commune_id: commune.id,
-          category_id: category.id,
-          unit_type_id: category.parent_id,
+          facility_id: facility.id,
+          unit_type_id: facility.parent_id,
           number_of_caf: number_of_caf,
           number_of_participant: number_of_participant,
           number_of_female: number_of_female,

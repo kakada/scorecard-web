@@ -4,7 +4,7 @@ en:
     language: Language
     name: Name
     audio: Audio
-    category: Category
+    facility: Facility
     template: Template
     template_name: Template name
     clone_to_template: Clone to new template

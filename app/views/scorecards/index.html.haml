@@ -13,7 +13,7 @@
             %th #
             %th ID
             %th= sortable "name", t('scorecard.name')
-            %th= sortable "category_id", t('scorecard.category')
+            %th= sortable "facility_id", t('scorecard.facility')
             %th= sortable "commune_code", t('scorecard.location')
             %th
 
@@ -23,7 +23,7 @@
               %td= scorecard.id
               %td= link_to scorecard.uuid, scorecard, class: 'btn btn-link p-0'
               %td= scorecard.name
-              %td= scorecard.category.name
+              %td= scorecard.facility.name
               %td= scorecard.location_name
               %td.text-right
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}

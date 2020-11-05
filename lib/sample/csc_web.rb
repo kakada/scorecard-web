@@ -2,7 +2,7 @@
 
 require_relative "user"
 require_relative "program"
-require_relative "category"
+require_relative "facility"
 require_relative "indicator"
 require_relative "local_ngo"
 require_relative "caf"
@@ -19,7 +19,7 @@ module Sample
       ::Sample::Program.load
       ::Sample::Location.load
       ::Sample::User.load
-      ::Sample::Category.load
+      ::Sample::Facility.load
       ::Sample::Indicator.load
       ::Sample::LocalNgo.load
       ::Sample::Caf.load

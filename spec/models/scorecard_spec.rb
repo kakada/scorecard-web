@@ -7,7 +7,7 @@
 #  id                        :bigint           not null, primary key
 #  uuid                      :string
 #  unit_type_id              :integer
-#  category_id               :integer
+#  facility_id               :integer
 #  name                      :string
 #  description               :text
 #  province_id               :string(2)
@@ -37,8 +37,8 @@ require "rails_helper"
 RSpec.describe Scorecard, type: :model do
   it { is_expected.to belong_to(:program) }
   it { is_expected.to belong_to(:local_ngo).optional }
-  it { is_expected.to belong_to(:unit_type).class_name("Category") }
-  it { is_expected.to belong_to(:category) }
+  it { is_expected.to belong_to(:unit_type).class_name("Facility") }
+  it { is_expected.to belong_to(:facility) }
   it { is_expected.to belong_to(:location).optional }
 
   it { is_expected.to have_many(:scorecards_cafs) }
@@ -46,7 +46,7 @@ RSpec.describe Scorecard, type: :model do
 
   it { is_expected.to validate_presence_of(:year) }
   it { is_expected.to validate_presence_of(:unit_type_id) }
-  it { is_expected.to validate_presence_of(:category_id) }
+  it { is_expected.to validate_presence_of(:facility_id) }
   it { is_expected.to validate_presence_of(:province_id) }
   it { is_expected.to validate_presence_of(:district_id) }
   it { is_expected.to validate_presence_of(:commune_id) }

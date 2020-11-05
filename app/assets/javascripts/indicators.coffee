@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-CW.CategoriesIndicatorsNew = do ->
+CW.FacilitiesIndicatorsNew = do ->
   init = ->
     onRemoveAudio()
     onChangeAudio()
@@ -22,11 +22,11 @@ CW.CategoriesIndicatorsNew = do ->
 
   { init: init }
 
-CW.CategoriesIndicatorsCreate = CW.CategoriesIndicatorsNew
-CW.CategoriesIndicatorsEdit = CW.CategoriesIndicatorsNew
-CW.CategoriesIndicatorsUpdate = CW.CategoriesIndicatorsNew
+CW.FacilitiesIndicatorsCreate = CW.FacilitiesIndicatorsNew
+CW.FacilitiesIndicatorsEdit = CW.FacilitiesIndicatorsNew
+CW.FacilitiesIndicatorsUpdate = CW.FacilitiesIndicatorsNew
 
-CW.TemplatesIndicatorsNew = CW.CategoriesIndicatorsNew
-CW.TemplatesIndicatorsCreate = CW.CategoriesIndicatorsNew
-CW.TemplatesIndicatorsEdit = CW.CategoriesIndicatorsNew
-CW.TemplatesIndicatorsUpdate = CW.CategoriesIndicatorsNew
+CW.TemplatesIndicatorsNew = CW.FacilitiesIndicatorsNew
+CW.TemplatesIndicatorsCreate = CW.FacilitiesIndicatorsNew
+CW.TemplatesIndicatorsEdit = CW.FacilitiesIndicatorsNew
+CW.TemplatesIndicatorsUpdate = CW.FacilitiesIndicatorsNew

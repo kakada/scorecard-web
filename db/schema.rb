@@ -26,7 +26,16 @@ ActiveRecord::Schema.define(version: 2020_11_05_033720) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "custom_indicators", force: :cascade do |t|
+    t.string "name"
+    t.string "audio"
+    t.string "tag"
+    t.string "scorecard_uuid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "facilities", force: :cascade do |t|
     t.string "code"
     t.string "name"
     t.integer "parent_id"
@@ -37,18 +46,9 @@ ActiveRecord::Schema.define(version: 2020_11_05_033720) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["lft"], name: "index_categories_on_lft"
-    t.index ["parent_id"], name: "index_categories_on_parent_id"
-    t.index ["rgt"], name: "index_categories_on_rgt"
-  end
-
-  create_table "custom_indicators", force: :cascade do |t|
-    t.string "name"
-    t.string "audio"
-    t.string "tag"
-    t.string "scorecard_uuid"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lft"], name: "index_facilities_on_lft"
+    t.index ["parent_id"], name: "index_facilities_on_parent_id"
+    t.index ["rgt"], name: "index_facilities_on_rgt"
   end
 
   create_table "indicators", force: :cascade do |t|
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_033720) do
   create_table "scorecards", force: :cascade do |t|
     t.string "uuid"
     t.integer "unit_type_id"
-    t.integer "category_id"
+    t.integer "facility_id"
     t.string "name"
     t.text "description"
     t.string "province_id", limit: 2
