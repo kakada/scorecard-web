@@ -1,4 +1,11 @@
-= render "shared/page_title", title: t("local_ngo.local_ngos"), url: new_local_ngo_path
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t("local_ngo.local_ngos")
+  %div
+    = render "more_option"
+
+    %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
+      %i.fas.fa-plus.fa-sm.text-white-50
+      = t("shared.add_new")
 
 .card.shadow.mb-4
   .card-body
@@ -13,6 +20,7 @@
             %th= sortable "id", t('shared.number')
             %th= sortable "name", t("local_ngo.name")
             %th= t('local_ngo.address')
+            %th= t('local_ngo.target_provinces')
             %th
 
         %tbody
@@ -21,6 +29,7 @@
               %td= local_ngo.id
               %td= link_to local_ngo.name, local_ngo_cafs_path(local_ngo), class: 'btn btn-link p-0'
               %td= local_ngo.address
+              %td= local_ngo.target_province_names
               %td.text-right
                 %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
                   %i.fas.fa-ellipsis-v

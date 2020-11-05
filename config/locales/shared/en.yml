@@ -13,7 +13,7 @@ en:
     is_invalid_value: 'is invalid value'
     value_should_be_from_to: "the value should be from %{from} to %{to}"
     search: 'Search'
-    please_select: please select
+    please_select: Please select
     status_on: 'On'
     status_off: 'Off'
     setup: 'Setup'
@@ -26,3 +26,5 @@ en:
     add_new: Add New
     pagination_title: "Displaying items <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"
     number: "No"
+    import_from_file: Import from file
+    download_sample_form: Download sample form
