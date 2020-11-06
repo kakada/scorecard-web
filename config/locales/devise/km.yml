@@ -51,6 +51,14 @@ km:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+    email: 'អ៊ីមែល'
+    password: 'ពាក្យសម្ងាត់'
+    remember_me: 'ចងចាំខ្ញុំ'
+    login: 'ចូលគណនី'
+    forgot_your_password: 'ភ្លេចលេខសំងាត់?'
+    dont_receive_unlock_instruction: "តើអ្នកមិនបានទទួលការណែនាំអំពីការដោះសោទេឬ?"
+    sign_in_with: "ចូលគណនីជាមួយ %{omniauth}"
+    send_me_reset_pwd_instruction: 'សូមផ្ញើការណែនាំពាក្យសម្ងាត់ខ្ញុំឡើងវិញ'
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"
