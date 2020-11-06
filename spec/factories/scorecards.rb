@@ -23,7 +23,7 @@
 #  status                    :integer
 #  program_id                :integer
 #  local_ngo_id              :integer
-#  scorecard_type_id         :integer
+#  scorecard_type            :integer
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  location_code             :string
@@ -39,7 +39,7 @@ FactoryBot.define do
     unit_type_id { facility.parent_id }
     program
     local_ngo
-    scorecard_type
+    scorecard_type { Scorecard::SCORECARD_TYPES.sample.last }
     commune_id   { Pumi::Commune.all.sample.id }
     district_id  { Pumi::Commune.find_by_id(commune_id).district_id }
     province_id  { Pumi::Commune.find_by_id(commune_id).province_id }

@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_033720) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "datetime_format", default: "YYYY-MM-DD"
+    t.string "datetime_format", default: "DD-MM-YYYY"
   end
 
   create_table "raised_indicators", force: :cascade do |t|
@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_033720) do
     t.integer "status"
     t.integer "program_id"
     t.integer "local_ngo_id"
-    t.integer "scorecard_type_id"
+    t.integer "scorecard_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "location_code"

@@ -45,7 +45,6 @@ Rails.application.routes.draw do
   end
 
   resource :download, only: [:show]
-  resources :scorecard_types
   resources :users do
     collection do
       post :update_locale

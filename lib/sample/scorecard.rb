@@ -31,7 +31,7 @@ module Sample
           number_of_female: number_of_female,
           local_ngo_id: local_ngo.id,
           program_id: local_ngo.program_id,
-          scorecard_type_id: local_ngo.program.scorecard_types.sample.id
+          scorecard_type: ::Scorecard::SCORECARD_TYPES.sample.last
         })
       end
   end

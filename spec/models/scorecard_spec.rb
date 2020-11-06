@@ -23,7 +23,7 @@
 #  status                    :integer
 #  program_id                :integer
 #  local_ngo_id              :integer
-#  scorecard_type_id         :integer
+#  scorecard_type            :integer
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  location_code             :string

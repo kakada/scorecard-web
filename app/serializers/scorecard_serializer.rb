@@ -23,7 +23,7 @@
 #  status                    :integer
 #  program_id                :integer
 #  local_ngo_id              :integer
-#  scorecard_type_id         :integer
+#  scorecard_type            :integer
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  location_code             :string
@@ -33,11 +33,11 @@
 #  number_of_id_poor         :integer
 #
 class ScorecardSerializer < ActiveModel::Serializer
-  attributes :uuid, :unit_type_name, :facility_name, :scorecard_type_name, :facility_id,
+  attributes :uuid, :unit_type_name, :facility_name, :scorecard_type, :facility_id,
              :name, :description, :location, :year, :conducted_date,
              :number_of_caf, :number_of_participant, :number_of_female,
              :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
-             :planned_start_date, :planned_end_date, :status, :scorecard_type_id,
+             :planned_start_date, :planned_end_date, :status,
              :program_id, :local_ngo_id, :local_ngo_name, :province, :district, :commune
 
   def unit_type_name
@@ -46,10 +46,6 @@ class ScorecardSerializer < ActiveModel::Serializer
 
   def facility_name
     object.facility.name
-  end
-
-  def scorecard_type_name
-    object.scorecard_type.name
   end
 
   def local_ngo_name
