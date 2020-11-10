@@ -7,13 +7,13 @@
 #  id                 :bigint           not null, primary key
 #  categorizable_id   :integer
 #  categorizable_type :string
-#  tag                :string
+#  tag_id             :integer
 #  name               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
 class IndicatorSerializer < ActiveModel::Serializer
-  attributes :id, :name, :tag
+  attributes :id, :name, :tag_id
 
   belongs_to :categorizable
   has_many :languages_indicators

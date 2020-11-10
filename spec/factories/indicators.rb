@@ -7,7 +7,7 @@
 #  id                 :bigint           not null, primary key
 #  categorizable_id   :integer
 #  categorizable_type :string
-#  tag                :string
+#  tag_id             :integer
 #  name               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -15,7 +15,7 @@
 FactoryBot.define do
   factory :indicator do
     categorizable   { create(:facility) }
-    tag             { FFaker::Tweet.tags.split("#")[1] }
+    tag
     name            { FFaker::Name.name }
 
     trait :with_languages_indicators do

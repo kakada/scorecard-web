@@ -4,7 +4,7 @@ module Scorecards
   class IndicatorsController < ApplicationController
     def index
       @scorecard = Scorecard.find(params[:scorecard_id])
-      @indicator = RaisedIndicatorService.new(@scorecard.uuid).indicators
+      @tags = Scorecards::ProposedCriteria.new(@scorecard.uuid).tags
     end
   end
 end

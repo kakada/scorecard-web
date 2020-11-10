@@ -7,21 +7,19 @@ module Sample
 
       xlsx = Roo::Spreadsheet.open(path)
       xlsx.each_with_pagename do |page_name, sheet|
-        sheet = sheet.parse(headers: true)
+        rows = sheet.parse(headers: true)
         facility = ::Facility.find_by(name: page_name)
 
-        create_indicators(sheet, facility)
+        create_indicators(rows, facility)
       end
     end
 
     private
-      def self.create_indicators(sheet, facility)
+      def self.create_indicators(rows, facility)
         return if facility.nil?
 
-        sheet.each_with_index do |row, index|
-          next if index == 0
-
-          facility.indicators.create(name: row["name"], tag: row["tag"])
+        rows[1..-1].each_with_index do |row, index|
+          facility.indicators.create(name: row["name"], tag_attributes: { name: row["tag"] })
         end
       end
   end

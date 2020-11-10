@@ -6,24 +6,36 @@ module Sample
       scorecard = ::Scorecard.first
       return if scorecard.nil?
 
-      scorecard.number_of_participant.to_i.times do |i|
-        scorecard.raised_indicators.create(
-          indicatorable: scorecard.facility.indicators.sample
-        )
-      end
-
-      scorecard.number_of_female.to_i.times do |i|
-        custom_indicator = scorecard.custom_indicators.create(
-          name: "custom_indicator_#{i}",
-          audio: ""
-        )
-        assign_audio(custom_indicator)
-
-        scorecard.raised_indicators.create(indicatorable: custom_indicator)
-      end
+      create_proposed_criteria_with_predefined_indicator(scorecard)
+      create_proposed_criteria_with_custom_indicator(scorecard)
     end
 
     private
+      def self.create_proposed_criteria_with_predefined_indicator(scorecard)
+        indicators = scorecard.facility.indicators
+
+        scorecard.number_of_participant.to_i.times do |i|
+          create_proposed_criteria(scorecard, indicators.sample)
+        end
+      end
+
+      def self.create_proposed_criteria_with_custom_indicator(scorecard)
+        scorecard.number_of_female.to_i.times do |i|
+          custom_indicator = scorecard.custom_indicators.create(
+            name: "custom_indicator_#{i}",
+            audio: "",
+            tag_attributes: { name: "other" }
+          )
+          assign_audio(custom_indicator)
+
+          create_proposed_criteria(scorecard, custom_indicator)
+        end
+      end
+
+      def self.create_proposed_criteria(scorecard, indicator)
+        scorecard.raised_indicators.create(indicatorable: indicator, tag_id: indicator.tag_id)
+      end
+
       def self.assign_audio(indicator)
         audio = indicators.select { |file| file.split("/").last.split(".").first == indicator[:name] }.first
         return if audio.nil? || !File.exist?(audio)

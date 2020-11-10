@@ -13,6 +13,6 @@
         %tbody
           - @voting_indicators.each do |indicator|
             %tr
-              %td= indicator.indicatorable.name
+              %td= indicator.indicatorable.tag_name
               %td= VotingIndicator.medians[indicator.median]
               %td= indicator.median.humanize

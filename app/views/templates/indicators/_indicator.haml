@@ -1,7 +1,8 @@
 %tr
   %td= indicator.id
   %td= indicator.name
-  %td= indicator.tag
+  %td
+    %span.badge.badge-pill.badge-secondary= indicator.tag_name
   %td.text-right
     %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
       %i.fas.fa-ellipsis-v
