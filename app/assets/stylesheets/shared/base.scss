@@ -51,3 +51,13 @@ body {
   justify-content: flex-end;
   margin: 0 auto;
 }
+
+.file-control-wrapper {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  input:focus {
+    outline: none;
+  }
+}

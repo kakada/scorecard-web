@@ -12,7 +12,7 @@
       %strong.w-25= t('indicator.language')
       .d-flex.w-75
         %strong.w-50= t('indicator.name')
-        %strong.w-50= t('indicator.audio')
+        %strong.w-50.pl-2= t('indicator.audio')
 
     - current_program.languages.each do |lang|
       - obj = @indicator.languages_indicators.select{ |a| a.language_id==lang.id }.first || f.object.languages_indicators.new

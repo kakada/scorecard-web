@@ -11,7 +11,7 @@ CW.FacilitiesIndicatorsNew = do ->
     $(document).on 'click', '.remove-audio', (e) =>
       wrapper = $(e.target).parents('.audio-wrapper')
       window.me = wrapper
-      wrapper.find('.audio-input').removeClass('d-none')
+      wrapper.find('.audio-input').parent().removeClass('d-none')
       wrapper.find('.audio-input-destroy').val(1)
       wrapper.find('.remove-audio-wrapper').hide()
 

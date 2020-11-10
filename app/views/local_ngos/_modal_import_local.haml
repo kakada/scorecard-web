@@ -10,7 +10,8 @@
         .modal-body
           .form-group
             %label Excel file
-            = f.file_field :file, class: 'form-control', accept: ".xls,.xlsx"
+            .form-control.file-control-wrapper
+              = f.file_field :file, accept: ".xls,.xlsx"
 
         .modal-footer
           %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
