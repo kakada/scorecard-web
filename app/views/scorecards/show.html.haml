@@ -20,7 +20,7 @@
         %label.col-sm-10.col-form-label= " : #{@scorecard.facility.name}"
       .row
         %label.col-sm-2.col-form-label= t("scorecard.scorecard_type")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.scorecard_type.name}"
+        %label.col-sm-10.col-form-label= " : #{@scorecard.scorecard_type.humanize}"
       .row
         %label.col-sm-2.col-form-label= t("scorecard.conducted_date")
         %label.col-sm-10.col-form-label= " : #{@scorecard.conducted_date}"
@@ -28,14 +28,8 @@
         %label.col-sm-2.col-form-label= t("scorecard.description")
         %label.col-sm-10.col-form-label= " : #{@scorecard.description}"
       .row
-        %label.col-sm-2.col-form-label= t("scorecard.province_id")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.province_id}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.district_id")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.district_id}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.commune_id")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.commune_id}"
+        %label.col-sm-2.col-form-label= t("scorecard.location")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.location_name}"
       .row
         %label.col-sm-2.col-form-label= t("scorecard.number_of_participant")
         %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_participant}"

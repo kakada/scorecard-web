@@ -53,12 +53,6 @@
           %i.fas.fa-fw.fa-users
           %span= t("sidebar.local_ngo")
 
-    - if policy(ScorecardType).create?
-      %li.nav-item{ class: css_active_class('scorecard_types') }
-        %a.nav-link{:href => scorecard_types_path}
-          %i.fas.fa-fw.fa-th-large
-          %span= t("sidebar.scorecard_type")
-
     %li.nav-item{ class: css_active_class('scorecards') }
       %a.nav-link{:href => scorecards_path}
         %i.far.fa-fw.fa-clipboard

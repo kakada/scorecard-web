@@ -23,7 +23,7 @@
 #  status                    :integer
 #  program_id                :integer
 #  local_ngo_id              :integer
-#  scorecard_type_id         :integer
+#  scorecard_type            :integer
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  location_code             :string
@@ -37,7 +37,6 @@ class Scorecard < ApplicationRecord
   belongs_to :facility
   belongs_to :local_ngo, optional: true
   belongs_to :program
-  belongs_to :scorecard_type
   belongs_to :location, foreign_key: :location_code, optional: true
 
   has_many   :scorecards_cafs
@@ -53,7 +52,7 @@ class Scorecard < ApplicationRecord
   validates :commune_id, presence: true
   validates :unit_type_id, presence: true
   validates :facility_id, presence: true
-  validates :scorecard_type_id, presence: true
+  validates :scorecard_type, presence: true
   validates :local_ngo_id, presence: true
 
   before_validation :set_location_code
@@ -63,6 +62,13 @@ class Scorecard < ApplicationRecord
 
   accepts_nested_attributes_for :scorecards_cafs, allow_destroy: true
   accepts_nested_attributes_for :raised_indicators, allow_destroy: true
+
+  enum scorecard_type: {
+    self_assessment: 1,
+    community_scorecard: 2
+  }
+
+  SCORECARD_TYPES = scorecard_types.keys.map { |r| [r.titlecase, r] }
 
   def location_name(address = "address_km")
     return if location_code.blank?

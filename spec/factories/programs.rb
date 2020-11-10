@@ -8,7 +8,7 @@
 #  name            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  datetime_format :string           default("YYYY-MM-DD")
+#  datetime_format :string           default("DD-MM-YYYY")
 #
 FactoryBot.define do
   factory :program do

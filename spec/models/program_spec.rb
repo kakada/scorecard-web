@@ -8,7 +8,7 @@
 #  name            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  datetime_format :string           default("YYYY-MM-DD")
+#  datetime_format :string           default("DD-MM-YYYY")
 #
 require "rails_helper"
 
@@ -17,7 +17,6 @@ RSpec.describe Program, type: :model do
   it { is_expected.to have_many(:languages) }
   it { is_expected.to have_many(:facilities) }
   it { is_expected.to have_many(:local_ngos) }
-  it { is_expected.to have_many(:scorecard_types) }
   it { is_expected.to validate_presence_of(:name) }
 
   describe "#after_create" do

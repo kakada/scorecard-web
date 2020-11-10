@@ -19,7 +19,7 @@ km:
     number_of_disability: ចំនួនជនពិការ
     number_of_ethnic_minority: ចំនួនជនជាតិភាគតិច
     number_of_youth: ចំនួនយុវជន
-    number_of_id_poor: ចំនួនអ្នមានបណ្ណក្រីក្រ
+    number_of_id_poor: ចំនួនអ្នកមានបណ្ណក្រីក្រ
     proposed_criteria: លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
     median: ពិន្ទុមធ្យម
     strength: ចំនុចខ្លាំង
@@ -27,3 +27,4 @@ km:
     desired_change: ការផ្លាស់ប្តូរដែលចង់បាន (តម្រូវការ)
     suggested_action: សកម្មភាពដែលស្នើឡើង (ដំណោះស្រាយ)
     criteria: លក្ខណៈវិនិច្ឆ័យ
+    implementer: អ្នកអនុវត្ត(Local Ngo)

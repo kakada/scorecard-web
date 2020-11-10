@@ -8,7 +8,7 @@
 #  name            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  datetime_format :string           default("YYYY-MM-DD")
+#  datetime_format :string           default("DD-MM-YYYY")
 #
 class Program < ApplicationRecord
   has_many :users
@@ -17,7 +17,6 @@ class Program < ApplicationRecord
   has_many :templates
   has_many :local_ngos
   has_many :scorecards
-  has_many :scorecard_types
   has_many :local_ngos
 
   validates :name, presence: true
