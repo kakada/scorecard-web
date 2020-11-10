@@ -7,7 +7,8 @@
   .d-flex.w-75.audio-wrapper
     %div.w-50= f.text_field :content, class: ['form-control']
     %div.w-50.pl-2
-      = f.file_field :audio, class: ['form-control audio-input', ('d-none' if f.object.audio.present?)]
+      .form-control.file-control-wrapper{ class: ('d-none' if f.object.audio.present?) }
+        = f.file_field :audio, class: 'audio-input'
 
       - if f.object.audio.present?
         .remove-audio-wrapper
