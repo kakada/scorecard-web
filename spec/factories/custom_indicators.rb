@@ -7,7 +7,7 @@
 #  id             :bigint           not null, primary key
 #  name           :string
 #  audio          :string
-#  tag            :string
+#  tag_id         :integer
 #  scorecard_uuid :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

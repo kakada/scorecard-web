@@ -5,7 +5,9 @@
         %label= t('indicator.template')
         .form-control= @template.name
 
-      = f.input :tag, label: t('indicator.tag')
+      = f.fields_for :tag, (@indicator.tag || @indicator.build_tag ) do |builder|
+        = builder.input :name, label: t('indicator.tag')
+
       = f.input :name, label: t('indicator.name')
 
     .d-flex.mb-2

@@ -5,7 +5,7 @@ module Scorecards
     def index
       @scorecard = Scorecard.find(params[:scorecard_id])
 
-      @voting_indicators = @scorecard.voting_indicators
+      @voting_indicators = @scorecard.voting_indicators.order(median: :desc)
     end
   end
 end

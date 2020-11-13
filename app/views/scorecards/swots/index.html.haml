@@ -16,7 +16,7 @@
         %tbody
           - @voting_indicators.each do |indicator|
             %tr
-              %td= indicator.indicatorable.name
+              %td= indicator.indicatorable.tag_name
               %td.text-center= VotingIndicator.medians[indicator.median]
               %td= indicator.strength
               %td= indicator.weakness

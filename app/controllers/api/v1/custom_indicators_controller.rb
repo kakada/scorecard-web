@@ -16,7 +16,7 @@ module Api
 
       private
         def custom_indicator_params
-          params.require(:custom_indicator).permit(:id, :tag, :name, :audio)
+          params.require(:custom_indicator).permit(:id, :name, :audio, tag_attributes: [:id, :name])
         end
     end
   end

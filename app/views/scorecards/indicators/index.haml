@@ -6,27 +6,11 @@
       %table.table.table-bordered
         %thead
           %tr
-            %th{:scope => "col"} Which indicators have been raised?
+            %th{:scope => "col"} Which criteria have been raised?
             %th{:scope => "col"} How many times?
-            %th{:scope => "col"} What indicator type?
 
         %tbody
-          - @indicator[:predefineds].each do |indicator|
+          - @tags.each do |tag|
             %tr
-              %td= indicator["name"]
-              %td= indicator["count"]
-              %td Predefined
-
-          - @indicator[:customs].each do |indicator|
-            %tr
-              %td
-                %div= indicator["name"]
-
-                - if indicator.audio.present?
-                  %audio.mt-2{:controls => ""}
-                    %source{:src => indicator.audio_url, :type => "audio/ogg"}
-                      %source{:src => indicator.audio_url, :type => "audio/mpeg"}
-                        Your browser does not support the audio element.
-              %td 1
-              %td Custom
-
+              %td= tag["name"]
+              %td= tag["count"]

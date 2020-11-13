@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_05_033720) do
+ActiveRecord::Schema.define(version: 2020_11_10_074832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,10 +29,10 @@ ActiveRecord::Schema.define(version: 2020_11_05_033720) do
   create_table "custom_indicators", force: :cascade do |t|
     t.string "name"
     t.string "audio"
-    t.string "tag"
     t.string "scorecard_uuid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "tag_id"
   end
 
   create_table "facilities", force: :cascade do |t|
@@ -54,10 +54,10 @@ ActiveRecord::Schema.define(version: 2020_11_05_033720) do
   create_table "indicators", force: :cascade do |t|
     t.integer "categorizable_id"
     t.string "categorizable_type"
-    t.string "tag"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "tag_id"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_033720) do
     t.string "scorecard_uuid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "tag_id"
   end
 
   create_table "raised_people", force: :cascade do |t|
@@ -178,6 +179,13 @@ ActiveRecord::Schema.define(version: 2020_11_05_033720) do
   create_table "scorecards_cafs", force: :cascade do |t|
     t.integer "caf_id"
     t.integer "scorecard_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.string "color"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
