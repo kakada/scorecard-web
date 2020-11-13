@@ -6,7 +6,7 @@
         .form-control= @facility.name
 
       = f.fields_for :tag, (@indicator.tag || @indicator.build_tag ) do |builder|
-        = builder.input :name, label: t('indicator.tag')
+        = builder.input :name, label: t('indicator.tag'), input_html: { readonly: !@indicator.tag_editable? }
 
       = f.input :name, label: t('indicator.name')
 

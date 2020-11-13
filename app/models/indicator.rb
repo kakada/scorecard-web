@@ -26,4 +26,8 @@ class Indicator < ApplicationRecord
   accepts_nested_attributes_for :languages_indicators, allow_destroy: true, reject_if: lambda { |attributes|
     attributes["content"].blank? && attributes["audio"].blank?
   }
+
+  def tag_editable?
+    raised_indicators.blank?
+  end
 end
