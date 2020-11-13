@@ -140,13 +140,6 @@ ActiveRecord::Schema.define(version: 2020_11_10_074832) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "scorecard_types", force: :cascade do |t|
-    t.string "name"
-    t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "scorecards", force: :cascade do |t|
     t.string "uuid"
     t.integer "unit_type_id"
