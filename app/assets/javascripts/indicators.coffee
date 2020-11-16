@@ -18,7 +18,7 @@ CW.FacilitiesIndicatorsNew = do ->
   onChangeAudio = ->
     $(document).on 'change', '.audio-input', (e) =>
       wrapper = $(e.target).parents('.audio-wrapper')
-      !!wrapper.find('.audio-input-destroy') && wrapper.find('.audio-input-destroy').val(1)
+      !!wrapper.find('.audio-input-destroy') && wrapper.find('.audio-input-destroy').val(0)
 
   { init: init }
 
