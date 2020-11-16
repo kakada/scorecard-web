@@ -6,10 +6,8 @@
       .row
         %label.col-sm-2.col-form-label= t("scorecard.id")
         %label.col-sm-10.col-form-label
-          %input.input-for-copy{ value: @scorecard.uuid }
-          = link_to '#', class: "btn btn-default btn-copy p-0 text-dark" do
-            = " : #{@scorecard.uuid}"
-            %i.far.fa-copy
+          = " : #{@scorecard.uuid}"
+          = render 'scorecard_copy', scorecard: @scorecard
 
       .row
         %label.col-sm-2.col-form-label= t("scorecard.year")
@@ -67,4 +65,3 @@
         %label.col-sm-10.col-form-label= " : #{@scorecard.status}"
 
 = render "modal_scorecard_uuid"
-= render "shared/toast_copy"

@@ -8,7 +8,10 @@
             %span{"aria-hidden" => "true"} ×
         .modal-body
           %p
-            %span.btn.btn-link= @scorecard.uuid
+            %span.text-primary
+              = @scorecard.uuid
+              = render 'scorecard_copy', scorecard: @scorecard
+
             %sapn ប្រើលេខកូដនេះសម្រាប់ទាញយក Scorecard
         .modal-footer
           %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.close")

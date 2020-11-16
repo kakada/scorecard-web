@@ -23,10 +23,7 @@
               %td= scorecard.id
               %td
                 = link_to scorecard.uuid, scorecard, class: 'btn btn-link p-0'
-
-                %input.input-for-copy{ value: scorecard.uuid }
-                = link_to '#', class: "btn btn-default btn-copy p-0 text-dark" do
-                  %i.far.fa-copy
+                = render 'scorecard_copy', scorecard: scorecard
 
               %td= scorecard.name
               %td= scorecard.facility.name
@@ -49,5 +46,3 @@
     - if @pagy.pages > 1
       .pagy-wrapper
         != pagy_bootstrap_nav(@pagy)
-
-= render "shared/toast_copy"
