@@ -16,7 +16,7 @@ class Indicator < ApplicationRecord
   include Indicatorable
   include Tagable
 
-  belongs_to :categorizable, polymorphic: true
+  belongs_to :categorizable, polymorphic: true, touch: true
   has_many :languages_indicators
   has_many :languages, through: :languages_indicators
 
@@ -27,7 +27,7 @@ class Indicator < ApplicationRecord
     attributes["content"].blank? && attributes["audio"].blank?
   }
 
-  def tag_editable?
+  def editable_tag?
     raised_indicators.blank?
   end
 end

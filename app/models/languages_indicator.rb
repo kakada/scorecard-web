@@ -16,7 +16,7 @@
 #
 class LanguagesIndicator < ApplicationRecord
   belongs_to :language
-  belongs_to :indicator
+  belongs_to :indicator, touch: true
 
   mount_uploader :audio, AudioUploader
 

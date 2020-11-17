@@ -18,7 +18,7 @@ require "rails_helper"
 
 RSpec.describe LanguagesIndicator, type: :model do
   it { is_expected.to belong_to(:language) }
-  it { is_expected.to belong_to(:indicator) }
+  it { is_expected.to belong_to(:indicator).touch(true) }
   it { is_expected.to validate_presence_of(:content) }
 
   describe "#after_create, version is 0" do
@@ -35,5 +35,11 @@ RSpec.describe LanguagesIndicator, type: :model do
     }
 
     it { expect(languages_indicator.version).to eq(1) }
+  end
+
+  it "should touch the indicator" do
+    languages_indicator = build(:languages_indicator)
+    languages_indicator.indicator.should_receive(:touch)
+    languages_indicator.save!
   end
 end
