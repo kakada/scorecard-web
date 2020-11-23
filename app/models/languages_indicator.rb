@@ -12,12 +12,20 @@
 #  audio         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  version       :integer          default(0)
 #
 class LanguagesIndicator < ApplicationRecord
   belongs_to :language
-  belongs_to :indicator
+  belongs_to :indicator, touch: true
 
   mount_uploader :audio, AudioUploader
 
   validates :content, presence: true
+
+  before_update :increase_version
+
+  private
+    def increase_version
+      self.version = version + 1
+    end
 end

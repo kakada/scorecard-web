@@ -19,7 +19,7 @@ class IndicatorSerializer < ActiveModel::Serializer
   has_many :languages_indicators
 
   class LanguagesIndicatorSerializer < ActiveModel::Serializer
-    attributes :id, :language_code, :content, :audio
+    attributes :id, :language_code, :content, :audio, :version
 
     def audio
       object.audio_url

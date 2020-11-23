@@ -12,6 +12,7 @@
 #  audio         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  version       :integer          default(0)
 #
 FactoryBot.define do
   factory :languages_indicator do
