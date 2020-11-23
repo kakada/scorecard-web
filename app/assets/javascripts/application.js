@@ -29,6 +29,7 @@
 document.addEventListener('turbolinks:load', function() {
   CW.Common.Topbar.init();
   CW.Common.DatetimePicker.init();
+  $('[data-toggle="tooltip"]').tooltip();
 
   let currentPage = CW.Util.getCurrentPage();
   !!CW[currentPage] && CW[currentPage].init();
