@@ -71,7 +71,7 @@ RSpec.describe LanguagesIndicator, type: :model do
 
     it "return validate file size message" do
       languages_indicator.valid?
-      expect(languages_indicator.errors[:audio]).to eq ["should be less than 2MB"]
+      expect(languages_indicator.errors[:audio]).to eq [I18n.t("indicator.must_be_less_than_2mb")]
     end
   end
 end
