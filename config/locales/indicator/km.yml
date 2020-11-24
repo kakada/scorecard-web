@@ -10,4 +10,5 @@ km:
     clone_to_template: Clone to new template
     copy_from_template: Copy from a template
     display_name: Display name
-    audio_format_and_size_hint: (format .mp3, max size 2 MB)
+    audio_format_and_size_hint: (format .mp3, not exceed 2 MB)
+    must_be_less_than_2mb: must be less than 2MB

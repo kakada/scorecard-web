@@ -32,6 +32,6 @@ class LanguagesIndicator < ApplicationRecord
     end
 
     def audio_size_validation
-      errors[:audio] << "should be less than 2MB" if audio.size > 2.megabytes
+      errors[:audio] << I18n.t('indicator.must_be_less_than_2mb') if audio.size > 2.megabytes
     end
 end
