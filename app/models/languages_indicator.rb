@@ -21,11 +21,17 @@ class LanguagesIndicator < ApplicationRecord
   mount_uploader :audio, AudioUploader
 
   validates :content, presence: true
+  validates :audio, presence: true
+  validate :audio_size_validation
 
   before_update :increase_version
 
   private
     def increase_version
       self.version = version + 1
+    end
+
+    def audio_size_validation
+      errors[:audio] << I18n.t('indicator.must_be_less_than_2mb') if audio.size > 2.megabytes
     end
 end

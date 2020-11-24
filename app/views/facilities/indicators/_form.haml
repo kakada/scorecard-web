@@ -13,8 +13,14 @@
     .d-flex.mb-2
       %strong.w-25= t('indicator.language')
       .d-flex.w-75
-        %strong.w-50= t('indicator.display_name')
-        %strong.w-50.pl-2= t('indicator.audio')
+        %strong.w-50
+          = t('indicator.display_name')
+          %abbr{title: 'required'} *
+        .w-50.pl-2
+          %strong
+            = t('indicator.audio')
+            %abbr{title: 'required'} *
+          %span= t("indicator.audio_format_and_size_hint")
 
     - current_program.languages.each do |lang|
       - obj = @indicator.languages_indicators.select{ |a| a.language_id==lang.id }.first || f.object.languages_indicators.new

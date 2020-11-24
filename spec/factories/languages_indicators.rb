@@ -20,5 +20,6 @@ FactoryBot.define do
     language_code { language.code }
     content       { FFaker::Name.name }
     indicator
+    audio         { Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "files", "audio.mp3")) }
   end
 end
