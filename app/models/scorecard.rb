@@ -39,8 +39,8 @@ class Scorecard < ApplicationRecord
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
 
-  has_many   :scorecards_cafs
-  has_many   :cafs, through: :scorecards_cafs
+  has_many   :facilitators, foreign_key: :scorecard_uuid
+  has_many   :cafs, through: :facilitators
   has_many   :custom_indicators, foreign_key: :scorecard_uuid
   has_many   :raised_indicators, foreign_key: :scorecard_uuid
   has_many   :voting_indicators, foreign_key: :scorecard_uuid
@@ -60,7 +60,7 @@ class Scorecard < ApplicationRecord
   before_create :secure_uuid
   before_create :set_name
 
-  accepts_nested_attributes_for :scorecards_cafs, allow_destroy: true
+  accepts_nested_attributes_for :facilitators, allow_destroy: true
   accepts_nested_attributes_for :raised_indicators, allow_destroy: true
 
   enum scorecard_type: {
