@@ -39,12 +39,13 @@ class Scorecard < ApplicationRecord
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
 
-  has_many   :facilitators, foreign_key: :scorecard_uuid
+  has_many   :facilitators, foreign_key: :scorecard_uuid, dependent: :destroy
   has_many   :cafs, through: :facilitators
-  has_many   :custom_indicators, foreign_key: :scorecard_uuid
-  has_many   :raised_indicators, foreign_key: :scorecard_uuid
-  has_many   :voting_indicators, foreign_key: :scorecard_uuid
-  has_many   :ratings, foreign_key: :scorecard_uuid
+  has_many   :participants, foreign_key: :scorecard_uuid, dependent: :destroy
+  has_many   :custom_indicators, foreign_key: :scorecard_uuid, dependent: :destroy
+  has_many   :raised_indicators, foreign_key: :scorecard_uuid, dependent: :destroy
+  has_many   :voting_indicators, foreign_key: :scorecard_uuid, dependent: :destroy
+  has_many   :ratings, foreign_key: :scorecard_uuid, dependent: :destroy
 
   validates :year, presence: true
   validates :province_id, presence: true
@@ -61,7 +62,10 @@ class Scorecard < ApplicationRecord
   before_create :set_name
 
   accepts_nested_attributes_for :facilitators, allow_destroy: true
+  accepts_nested_attributes_for :participants, allow_destroy: true
   accepts_nested_attributes_for :raised_indicators, allow_destroy: true
+  accepts_nested_attributes_for :voting_indicators, allow_destroy: true
+  accepts_nested_attributes_for :ratings, allow_destroy: true
 
   enum scorecard_type: {
     self_assessment: 1,

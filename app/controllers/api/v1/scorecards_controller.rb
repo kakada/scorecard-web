@@ -21,10 +21,19 @@ module Api
 
       private
         def scorecard_params
-          params.require(:scorecard).permit(:conducted_date,
-            :number_of_caf, :number_of_participant, :number_of_female,
-            scorecards_cafs_attributes: [ :id, :caf_id, :_destroy ],
-            raised_indicators_attributes: [ :id, :indicatorable_id, :indicatorable_type, :raised_person_id, :_destroy ]
+          params.require(:scorecard).permit(
+            :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,
+            :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
+            facilitators_attributes: [ :id, :caf_id, :position, :scorecard_uuid ],
+            participants_attributes: [ :uuid, :age, :gender, :disability, :minority, :youth, :poor_card, :scorecard_uuid ],
+            raised_indicators_attributes: [
+              :uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :scorecard_uuid, tag_attributes: [:name]
+            ],
+            voting_indicators_attributes: [
+              :uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :scorecard_uuid,
+              :median, :strength, :weakness, :desired_change, :suggested_action
+            ],
+            ratings_attributes: [ :id, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ],
           )
         end
     end

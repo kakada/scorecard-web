@@ -1,7 +1,7 @@
 class CreateParticipants < ActiveRecord::Migration[6.0]
   def change
-    create_table :participants do |t|
-      t.string  :uuid
+    create_table :participants, id: false do |t|
+      t.primary_key :uuid, :string
       t.string  :scorecard_uuid
       t.integer :age
       t.string  :gender

@@ -15,5 +15,7 @@
 #  updated_at     :datetime         not null
 #
 class Participant < ApplicationRecord
-  belongs_to :scorecard, foreign_key: :scorecard_uuid
+  belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
+
+  before_create :secure_uuid
 end

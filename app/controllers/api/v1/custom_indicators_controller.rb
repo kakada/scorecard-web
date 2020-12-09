@@ -3,20 +3,30 @@
 module Api
   module V1
     class CustomIndicatorsController < ApiController
-      def create
-        scorecard = Scorecard.find_by(uuid: params[:scorecard_id])
-        custom_indicator = scorecard.custom_indicators.new(custom_indicator_params)
+      before_action :assign_params
+      before_action :assign_scorecard
 
-        if custom_indicator.save
+      def create
+        custom_indicator = @scorecard.custom_indicators.find_or_initialize_by(uuid: indicator_params[:uuid])
+
+        if custom_indicator.update(indicator_params)
           render json: custom_indicator, status: :created
         else
-          render json: { errors: custom_indicator.errors }, status: :unprocessable_entity
+          render json: { error: custom_indicator.errors }, status: :unprocessable_entity
         end
       end
 
       private
-        def custom_indicator_params
-          params.require(:custom_indicator).permit(:id, :name, :audio, tag_attributes: [:id, :name])
+        def assign_params
+          params['custom_indicator'] = JSON.parse(params['custom_indicator'])
+        end
+
+        def assign_scorecard
+          @scorecard = Scorecard.find_by(uuid: params[:scorecard_id])
+        end
+
+        def indicator_params
+          params.require(:custom_indicator).permit(:uuid, :name, tag_attributes: [:id, :name]).merge(audio: params[:audio])
         end
     end
   end

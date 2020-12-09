@@ -17,7 +17,7 @@
 #  updated_at         :datetime         not null
 #
 class VotingIndicator < ApplicationRecord
-  belongs_to :scorecard, foreign_key: :scorecard_uuid
+  belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
   belongs_to :indicatorable, polymorphic: true
   has_many :ratings
 
@@ -28,4 +28,6 @@ class VotingIndicator < ApplicationRecord
     good: 4,
     very_good: 5
   }
+
+  before_create :secure_uuid
 end

@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tag_id"
+    t.string "uuid"
   end
 
   create_table "facilitators", force: :cascade do |t|
@@ -121,8 +122,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "participants", force: :cascade do |t|
-    t.string "uuid"
+  create_table "participants", primary_key: "uuid", id: :string, force: :cascade do |t|
     t.string "scorecard_uuid"
     t.integer "age"
     t.string "gender"
@@ -144,22 +144,11 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
   create_table "raised_indicators", force: :cascade do |t|
     t.integer "indicatorable_id"
     t.string "indicatorable_type"
-    t.integer "raised_person_id"
     t.string "scorecard_uuid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tag_id"
-  end
-
-  create_table "raised_people", force: :cascade do |t|
-    t.string "scorecard_uuid"
-    t.string "gender"
-    t.integer "age"
-    t.boolean "disability", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.boolean "ethnic_minority"
-    t.boolean "id_poor"
+    t.string "participant_uuid"
   end
 
   create_table "rating_scales", force: :cascade do |t|
@@ -171,13 +160,13 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "ratings", force: :cascade do |t|
-    t.integer "voting_indicator_id"
-    t.integer "voting_person_id"
+  create_table "ratings", primary_key: "uuid", id: :string, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string "scorecard_uuid"
     t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "voting_indicator_uuid"
+    t.string "participant_uuid"
   end
 
   create_table "scorecards", force: :cascade do |t|
@@ -246,7 +235,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "voting_indicators", force: :cascade do |t|
+  create_table "voting_indicators", primary_key: "uuid", id: :string, default: "uuid_generate_v4()", force: :cascade do |t|
     t.integer "indicatorable_id"
     t.string "indicatorable_type"
     t.string "scorecard_uuid"
