@@ -18,6 +18,7 @@ class Program < ApplicationRecord
   has_many :local_ngos
   has_many :scorecards
   has_many :local_ngos
+  has_many :rating_scales
 
   validates :name, presence: true
 
@@ -27,6 +28,8 @@ class Program < ApplicationRecord
     "YYYY-MM-DD" => "%Y-%m-%d",
     "DD-MM-YYYY" => "%d-%m-%Y"
   }
+
+  accepts_nested_attributes_for :rating_scales, allow_destroy: true
 
   private
     def create_default_language

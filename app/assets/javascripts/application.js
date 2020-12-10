@@ -25,6 +25,7 @@
 //= require users/index
 //= require users/new
 //= require local_ngos
+//= require scorecards_settings/rating
 
 document.addEventListener('turbolinks:load', function() {
   CW.Common.Topbar.init();

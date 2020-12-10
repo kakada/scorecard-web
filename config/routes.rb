@@ -19,6 +19,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :scorecards do
+    namespace :settings do
+      resources :ratings, only: [:index, :create]
+    end
+  end
+
   resources :programs
 
   scope module: :programs do

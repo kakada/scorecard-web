@@ -1,4 +1,14 @@
-= render "shared/page_title", title: t("scorecard.scorecards"), url: new_scorecard_path
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t("scorecard.scorecards")
+  %div
+    %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_settings_ratings_path }
+      %i.fas.fa-wrench.fa-sm.text-white-50
+      = t("sidebar.settings")
+
+    %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_scorecard_path }
+      %i.fas.fa-plus.fa-sm.text-white-50
+      = t("shared.add_new")
+
 
 .card.shadow.mb-4
   .card-body
