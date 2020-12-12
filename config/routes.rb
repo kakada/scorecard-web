@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :programs, only: [] do
         resources :languages, only: [:index]
+        resources :rating_scales, only: [:index]
       end
 
       resources :facilities, only: [] do
