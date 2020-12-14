@@ -1,33 +1,29 @@
 .border-right.border-left.border-bottom.bg-white
-  .card-body.view-center
+  .card-body{style: 'overflow-x: scroll;'}
     = simple_form_for current_program, url: scorecards_settings_ratings_path, method: 'post' do |f|
-      .d-flex.mb-2
-        %strong.w-25= t('rating_scale.rating_code')
-        .w-75
-          .d-flex
-            %strong.w-25= t('rating_scale.language')
-            %div
-              %strong
-                = t('indicator.audio')
-                %abbr{title: 'required'} *
-              %span= t("indicator.audio_format_and_size_hint")
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th
 
-      - RatingScale.defaults.each do |hash_obj|
-        - rating_scale = current_program.rating_scales.select{ |a| a.code==hash_obj[:code] }.first || RatingScale.new(hash_obj)
+            - current_program.languages.each do |lang|
+              %th= lang.name
 
-        = f.fields_for :rating_scales, rating_scale do |ff|
-          = ff.hidden_field :id, value: rating_scale.id
-          = ff.hidden_field :code, value: rating_scale.code
-          = ff.hidden_field :value, value: rating_scale.value
-          = ff.hidden_field :name, value: rating_scale.name
+        %tbody
+          - RatingScale.defaults.each do |hash_obj|
+            - rating_scale = current_program.rating_scales.select{ |a| a.code==hash_obj[:code] }.first || RatingScale.new(hash_obj)
 
-          .d-flex.mb-2
-            .w-25= ff.object.code
-            .w-75
-              - current_program.languages.each do |lang|
-                .d-flex
-                  %div.w-25= lang.name
-                  %div.mb-2.audio-wrapper
+            = f.fields_for :rating_scales, rating_scale do |ff|
+              %tr
+                %td
+                  = ff.hidden_field :id, value: rating_scale.id
+                  = ff.hidden_field :code, value: rating_scale.code
+                  = ff.hidden_field :value, value: rating_scale.value
+                  = ff.hidden_field :name, value: rating_scale.name
+                  = rating_scale.code
+
+                - current_program.languages.each do |lang|
+                  %td.audio-wrapper
                     - obj = rating_scale.language_rating_scales.select{ |a| a.language_id==lang.id }.first || ff.object.language_rating_scales.new
 
                     = ff.fields_for :language_rating_scales, obj do |builder|
