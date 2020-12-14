@@ -17,6 +17,7 @@ RSpec.describe Program, type: :model do
   it { is_expected.to have_many(:languages) }
   it { is_expected.to have_many(:facilities) }
   it { is_expected.to have_many(:local_ngos) }
+  it { is_expected.to have_many(:rating_scales) }
   it { is_expected.to validate_presence_of(:name) }
 
   describe "#after_create" do

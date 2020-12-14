@@ -1,0 +1,16 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t('scorecard.scorecard_settings')
+  %div
+    %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }
+      %i.fas.fa-arrow-left.fa-sm.text-white-50
+      = t("shared.back")
+
+
+%ul.nav.nav-tabs.nav-justified
+  %li.nav-item{class: css_nested_active_class('scorecards/settings/ratings')}
+    = link_to t('rating_scale.rating'), scorecards_settings_ratings_path, class: ['nav-link']
+
+  - 3.times do |i|
+    %li.nav-item
+
+= render 'form'
