@@ -5,9 +5,11 @@
         %thead
           %tr
             %th
-
             - current_program.languages.each do |lang|
-              %th= lang.name
+              %th
+                = lang.name
+                %span{"data-toggle" => "tooltip", "data-placement" => "right", title: "#{t('indicator.audio')} #{t('indicator.audio_format_and_size_hint')}"}
+                  %i.fas.fa-info-circle
 
         %tbody
           - RatingScale.defaults.each do |hash_obj|
@@ -26,10 +28,12 @@
                   %td.audio-wrapper
                     - obj = rating_scale.language_rating_scales.select{ |a| a.language_id==lang.id }.first || ff.object.language_rating_scales.new
 
-                    = ff.fields_for :language_rating_scales, obj do |builder|
+                    = ff.simple_fields_for :language_rating_scales, obj do |builder|
                       = builder.hidden_field :id, value: obj.id
                       = builder.hidden_field :language_id, value: lang.id
                       = builder.hidden_field :language_code, value: lang.code
+
+                      = builder.input :content, label: false, input_html: {placeholder: 'Display name'}
 
                       - audio = obj.audio
                       - error_audio = obj.errors[:audio]

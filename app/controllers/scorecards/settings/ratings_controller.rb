@@ -20,7 +20,7 @@ module Scorecards
             rating_scales_attributes: [
               :id, :code, :name, :value,
               language_rating_scales_attributes: [
-                :id, :language_id, :language_code, :audio, :remove_audio
+                :id, :language_id, :language_code, :content, :audio, :remove_audio
               ]
             ]
           )

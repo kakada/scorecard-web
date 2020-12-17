@@ -17,4 +17,6 @@ class LanguageRatingScale < ApplicationRecord
 
   belongs_to :language
   belongs_to :rating_scale
+
+  validates :content, presence: true
 end
