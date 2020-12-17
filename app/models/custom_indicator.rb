@@ -19,4 +19,6 @@ class CustomIndicator < ApplicationRecord
   mount_uploader :audio, AudioUploader
 
   belongs_to :scorecard, foreign_key: :scorecard_uuid
+
+  before_create :secure_uuid
 end

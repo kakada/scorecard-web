@@ -10,8 +10,8 @@ RSpec.describe "Api::V1::CustomIndicatorsController", type: :request do
 
     before {
       headers = { "ACCEPT" => "application/json", "Authorization" => user.authentication_token }
-      params = { name: "Staff not commig on time", tag_attributes: { name: "timing" }, audio: "" }
-      post "/api/v1/scorecards/#{scorecard.uuid}/custom_indicators", params: { custom_indicator: params }, headers: headers
+      params = { name: "Staff not commig on time", tag_attributes: { name: "timing" }, audio: "" };
+      post "/api/v1/scorecards/#{scorecard.uuid}/custom_indicators", params: { custom_indicator: params.to_json }, headers: headers
     }
 
     it { expect(response.content_type).to eq("application/json; charset=utf-8") }

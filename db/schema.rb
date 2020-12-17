@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tag_id"
+    t.string "uuid"
+  end
+
+  create_table "facilitators", force: :cascade do |t|
+    t.integer "caf_id"
+    t.integer "scorecard_uuid"
+    t.string "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "facilities", force: :cascade do |t|
@@ -113,6 +122,18 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "participants", primary_key: "uuid", id: :string, force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.integer "age"
+    t.string "gender"
+    t.boolean "disability", default: false
+    t.boolean "minority", default: false
+    t.boolean "poor_card", default: false
+    t.boolean "youth", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "programs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -123,22 +144,11 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
   create_table "raised_indicators", force: :cascade do |t|
     t.integer "indicatorable_id"
     t.string "indicatorable_type"
-    t.integer "raised_person_id"
     t.string "scorecard_uuid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tag_id"
-  end
-
-  create_table "raised_people", force: :cascade do |t|
-    t.string "scorecard_uuid"
-    t.string "gender"
-    t.integer "age"
-    t.boolean "disability", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.boolean "ethnic_minority"
-    t.boolean "id_poor"
+    t.string "participant_uuid"
   end
 
   create_table "rating_scales", force: :cascade do |t|
@@ -150,13 +160,13 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "ratings", force: :cascade do |t|
-    t.integer "voting_indicator_id"
-    t.integer "voting_person_id"
+  create_table "ratings", primary_key: "uuid", id: :string, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string "scorecard_uuid"
     t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "voting_indicator_uuid"
+    t.string "participant_uuid"
   end
 
   create_table "scorecards", force: :cascade do |t|
@@ -186,13 +196,6 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
     t.integer "number_of_ethnic_minority"
     t.integer "number_of_youth"
     t.integer "number_of_id_poor"
-  end
-
-  create_table "scorecards_cafs", force: :cascade do |t|
-    t.integer "caf_id"
-    t.integer "scorecard_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|
@@ -232,15 +235,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "vote_people", force: :cascade do |t|
-    t.string "scorecard_uuid"
-    t.string "gender"
-    t.integer "age"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "voting_indicators", force: :cascade do |t|
+  create_table "voting_indicators", primary_key: "uuid", id: :string, default: "uuid_generate_v4()", force: :cascade do |t|
     t.integer "indicatorable_id"
     t.string "indicatorable_type"
     t.string "scorecard_uuid"
@@ -249,15 +244,6 @@ ActiveRecord::Schema.define(version: 2020_12_11_063205) do
     t.text "weakness"
     t.text "desired_change"
     t.text "suggested_action"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "voting_people", force: :cascade do |t|
-    t.string "scorecard_uuid"
-    t.string "gender"
-    t.integer "age"
-    t.boolean "disability", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

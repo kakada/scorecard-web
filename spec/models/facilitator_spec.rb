@@ -1,18 +1,16 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
-# Table name: vote_people
+# Table name: facilitators
 #
 #  id             :bigint           not null, primary key
-#  scorecard_uuid :string
-#  gender         :string
-#  age            :integer
+#  caf_id         :integer
+#  scorecard_uuid :integer
+#  position       :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe VotePerson, type: :model do
+RSpec.describe Facilitator, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
