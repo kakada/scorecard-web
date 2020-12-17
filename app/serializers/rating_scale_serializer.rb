@@ -4,7 +4,7 @@ class RatingScaleSerializer < ActiveModel::Serializer
   has_many :language_rating_scales
 
   class LanguageRatingScaleSerializer < ActiveModel::Serializer
-    attributes :id, :language_code, :audio
+    attributes :id, :language_code, :audio, :content
 
     def audio
       object.audio_url

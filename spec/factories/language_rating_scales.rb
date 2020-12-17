@@ -14,6 +14,7 @@
 #
 FactoryBot.define do
   factory :language_rating_scale do
+    content       { RatingScale.defaults.sample[:name] }
     language
     language_code { language.code }
     rating_scale

@@ -19,7 +19,7 @@ class RatingScale < ApplicationRecord
   accepts_nested_attributes_for :language_rating_scales, allow_destroy: true, reject_if: lambda { |attributes|
     attributes["audio"] = nil if attributes["remove_audio"] == "1"
 
-    return attributes["id"].blank? && attributes["audio"].blank?
+    return attributes["id"].blank? && attributes["content"].blank? && attributes["audio"].blank?
   }
 
   def self.defaults

@@ -20,6 +20,7 @@ RSpec.describe LanguageRatingScale, type: :model do
   it { is_expected.to belong_to(:language) }
   it { is_expected.to belong_to(:rating_scale) }
   it { is_expected.to validate_presence_of(:audio) }
+  it { is_expected.to validate_presence_of(:content) }
 
   describe "validate file format" do
     let(:language_rating_scale) { create(:language_rating_scale) }
