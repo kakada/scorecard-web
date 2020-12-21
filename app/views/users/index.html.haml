@@ -28,27 +28,16 @@
 
               %td.status{ class: ('active' if user.confirmed?) }
                 = user.confirmed? ? t('user.active') : t('user.pending')
+
               %td.text-right
                 - if policy(user).destroy?
-                  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                    %i.fas.fa-ellipsis-v
+                  - unless user.confirmed?
+                    %input.confirm-link{ value: confirmation_url(user, confirmation_token: user.confirmation_token) }
 
-                  .dropdown-menu.dropdown-menu-right
-                    - unless user.confirmed?
-                      %input.confirm-link{ value: confirmation_url(user, confirmation_token: user.confirmation_token) }
-                      = link_to '#', class: "btn dropdown-item btn-copy" do
-                        %i.far.fa-copy.drop-menu-icon
-                        %span= t('user.copy_confirm_link')
+                    = link_to '#', class: "btn btn-circle btn-sm btn-info mr-2 btn-copy" do
+                      %i.far.fa-copy
 
-                    - if policy(user).update?
-                      = link_to edit_user_path(user), class: "btn dropdown-item" do
-                        %i.fas.fa-pen.drop-menu-icon
-                        %span= t('shared.edit')
-
-                    - if policy(user).destroy?
-                      = link_to user_path(user), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('user.are_you_sure_to_delete')} do
-                        %i.fas.fa-trash-alt.drop-menu-icon
-                        %span= t('shared.delete')
+                  = render 'shared/action_buttons', edit_url: edit_user_path(user), delete_url: user_path(user), object: user
 
       - if @pagy.pages > 1
         .pagy-wrapper

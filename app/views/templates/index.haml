@@ -21,16 +21,4 @@
               %td= link_to template.name, template_indicators_path(template), class: "btn btn-link p-0"
 
               %td.text-right
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
-
-                .dropdown-menu.dropdown-menu-right
-                  - if policy(template).update?
-                    = link_to edit_template_path(template), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
-
-                  - if policy(template).destroy?
-                    = link_to template_path(template), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('template.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                = render 'shared/action_buttons', edit_url: edit_template_path(template), delete_url: template_path(template), object: template

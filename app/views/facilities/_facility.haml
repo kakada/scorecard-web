@@ -1,20 +1,8 @@
 .d-flex.facility{ class: ('sub-facility' unless facility.root?) }
   .flex-grow-1= facility.name
-  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-    %i.fas.fa-ellipsis-v
 
-  .dropdown-menu.dropdown-menu-right
-    - if !facility.root? && policy(Indicator).create?
-      = link_to facility_indicators_path(facility), class: "btn dropdown-item" do
-        %i.fas.fa-pencil-ruler.drop-menu-icon
-        %span= t('facility.manage_indicator')
+  - if !facility.root? && policy(Indicator).create?
+    = link_to facility_indicators_path(facility), class: "btn btn-circle btn-sm btn-info mr-2" do
+      %i.fas.fa-pencil-ruler
 
-    - if policy(facility).update?
-      = link_to edit_facility_path(facility), class: "btn dropdown-item" do
-        %i.fas.fa-pen.drop-menu-icon
-        %span= t('shared.edit')
-
-    - if policy(facility).destroy?
-      = link_to facility_path(facility), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('facility.are_you_sure_to_delete')} do
-        %i.fas.fa-trash-alt.drop-menu-icon
-        %span= t('shared.delete')
+  = render 'shared/action_buttons', edit_url: edit_facility_path(facility), delete_url: facility_path(facility), object: facility

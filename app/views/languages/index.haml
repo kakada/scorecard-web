@@ -22,16 +22,4 @@
               %td= language.code
               %td= language.name
               %td.text-right
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
-
-                .dropdown-menu.dropdown-menu-right
-                  - if policy(language).update?
-                    = link_to edit_language_path(language), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
-
-                  - if policy(language).destroy?
-                    = link_to language_path(language), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('language.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                = render 'shared/action_buttons', edit_url: edit_language_path(language), delete_url: language_path(language), object: language

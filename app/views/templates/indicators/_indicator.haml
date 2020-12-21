@@ -4,16 +4,4 @@
   %td
     %span.badge.badge-pill.badge-secondary= indicator.tag_name
   %td.text-right
-    %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-      %i.fas.fa-ellipsis-v
-
-    .dropdown-menu.dropdown-menu-right
-      - if policy(indicator).update?
-        = link_to edit_template_indicator_path(@template, indicator), class: "btn dropdown-item" do
-          %i.fas.fa-pen.drop-menu-icon
-          %span= t('shared.edit')
-
-      - if policy(indicator).destroy?
-        = link_to template_indicator_path(@template, indicator), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('indicator.are_you_sure_to_delete')} do
-          %i.fas.fa-trash-alt.drop-menu-icon
-          %span= t('shared.delete')
+    = render 'shared/action_buttons', edit_url: edit_template_indicator_path(@template, indicator), delete_url: template_indicator_path(@template, indicator), object: indicator

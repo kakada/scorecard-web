@@ -31,16 +31,4 @@
               %td= local_ngo.address
               %td= local_ngo.target_province_names
               %td.text-right
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
-
-                .dropdown-menu.dropdown-menu-right
-                  - if policy(local_ngo).update?
-                    = link_to edit_local_ngo_path(local_ngo), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
-
-                  - if policy(local_ngo).destroy?
-                    = link_to local_ngo_path(local_ngo), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('local_ngo.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                = render 'shared/action_buttons', edit_url: edit_local_ngo_path(local_ngo), delete_url: local_ngo_path(local_ngo), object: local_ngo

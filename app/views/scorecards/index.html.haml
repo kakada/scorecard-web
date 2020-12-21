@@ -9,7 +9,6 @@
       %i.fas.fa-plus.fa-sm.text-white-50
       = t("shared.add_new")
 
-
 .card.shadow.mb-4
   .card-body
     = render partial: "shared/no_data", locals: { items: @scorecards }
@@ -39,19 +38,7 @@
               %td= scorecard.facility.name
               %td= scorecard.location_name
               %td.text-right
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
-
-                .dropdown-menu.dropdown-menu-right
-                  - if policy(scorecard).update?
-                    = link_to edit_scorecard_path(scorecard), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
-
-                  - if policy(scorecard).destroy?
-                    = link_to scorecard_path(scorecard), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('scorecard.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                = render 'shared/action_buttons', edit_url: edit_scorecard_path(scorecard), delete_url: scorecard_path(scorecard), object: scorecard
 
     - if @pagy.pages > 1
       .pagy-wrapper
