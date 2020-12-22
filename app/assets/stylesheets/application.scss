@@ -21,6 +21,7 @@
 
 @import "shared/base";
 @import "shared/sidebar";
+@import "shared/sortable";
 
 @import "devise";
 @import "dashboard";
@@ -29,3 +30,4 @@
 @import "users";
 @import "settings";
 @import "local_ngos";
+@import "indicators";
