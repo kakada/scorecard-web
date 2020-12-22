@@ -7,9 +7,9 @@ en:
     version: Version
     program: Program
     language: Language
-    scorecard_facility: Scorecard Facility
-    indicator_template: Indicator Template
-    local_ngo: Local Ngo
+    scorecard_facility: Facility / Indicators
+    indicator_template: Template / Indicators
+    local_ngo: Local Ngo / Cafs
     scorecard_type: Scorecard Type
     scorecard: Scorecard
-    confirm_logout: Are you sure you want to logout?
+    settings: Settings

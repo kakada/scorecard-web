@@ -1,11 +1,12 @@
-= render "shared/page_title", title: t("language.languages"), url: new_language_path
+= render "shared/scorecard_setting_tab_nav"
 
 .card.shadow.mb-4
   .card-body
     = render partial: "shared/no_data", locals: { items: @languages }
 
+    = render "shared/pagination_title", objects: @languages, url: new_language_path
+
     - if @languages.present?
-      = render "shared/pagination_title"
 
       %table.table.table-hover.pretty
         %thead

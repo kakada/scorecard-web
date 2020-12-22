@@ -29,29 +29,29 @@
           %i.fas.fa-fw.fa-user
           %span= t("sidebar.user")
 
-    - if policy(Language).create?
-      %li.nav-item{ class: css_active_class('languages') }
-        %a.nav-link{:href => languages_path}
-          %i.fas.fa-fw.fa-language
-          %span= t("sidebar.language")
+    / - if policy(Language).create?
+    /   %li.nav-item{ class: css_active_class('languages') }
+    /     %a.nav-link{:href => languages_path}
+    /       %i.fas.fa-fw.fa-language
+    /       %span= t("sidebar.language")
 
-    - if policy(Facility).create?
-      %li.nav-item{ class: css_active_class('facilities') }
-        %a.nav-link{:href => facilities_path}
-          %i.fas.fa-fw.fa-sitemap
-          %span= t("sidebar.scorecard_facility")
+    / - if policy(Facility).create?
+    /   %li.nav-item{ class: css_active_class('facilities') }
+    /     %a.nav-link{:href => facilities_path}
+    /       %i.fas.fa-fw.fa-sitemap
+    /       %span= t("sidebar.scorecard_facility")
 
-    - if policy(::Template).create?
-      %li.nav-item{ class: css_active_class('templates') }
-        %a.nav-link{:href => templates_path}
-          %i.fas.fa-fw.fa-gopuram
-          %span= t("sidebar.indicator_template")
+    / - if policy(::Template).create?
+    /   %li.nav-item{ class: css_active_class('templates') }
+    /     %a.nav-link{:href => templates_path}
+    /       %i.fas.fa-fw.fa-gopuram
+    /       %span= t("sidebar.indicator_template")
 
-    - if policy(LocalNgo).create?
-      %li.nav-item{ class: css_active_class('local_ngos') }
-        %a.nav-link{:href => local_ngos_path}
-          %i.fas.fa-fw.fa-users
-          %span= t("sidebar.local_ngo")
+    / - if policy(LocalNgo).create?
+    /   %li.nav-item{ class: css_active_class('local_ngos') }
+    /     %a.nav-link{:href => local_ngos_path}
+    /       %i.fas.fa-fw.fa-users
+    /       %span= t("sidebar.local_ngo")
 
     %li.nav-item{ class: css_active_class('scorecards') }
       %a.nav-link{:href => scorecards_path}
