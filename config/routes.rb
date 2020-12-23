@@ -41,9 +41,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :templates do
-    resources :indicators, module: "templates"
-  end
+  resources :templates
 
   resources :local_ngos do
     resources :cafs, module: "local_ngos"

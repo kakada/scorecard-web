@@ -1,9 +1,9 @@
 .form-group
-  = f.label(:unit_type_id)
+  = f.label(:unit_type_id, t('scorecard.unit_type'))
   = f.hidden_field(:unit_type_id)
   = f.select(:unit_type_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_target => "facility", :pumi_select_collection_url => facilities_path(format: :json), :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: 'form-control'})
 
 .form-group
-  = f.label(:facility_id)
+  = f.label(:facility_id, t('scorecard.facility'))
   = f.hidden_field(:facility_id)
   = f.select(:facility_id, [], {:include_blank => "Please select"}, {:data => {:pumi_select_id => "facility", :pumi_select_collection_url => children_facility_path(:id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#facility", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control'})

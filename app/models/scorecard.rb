@@ -72,7 +72,7 @@ class Scorecard < ApplicationRecord
     community_scorecard: 2
   }
 
-  SCORECARD_TYPES = scorecard_types.keys.map { |r| [r.titlecase, r] }
+  SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
 
   def location_name(address = "address_km")
     return if location_code.blank?

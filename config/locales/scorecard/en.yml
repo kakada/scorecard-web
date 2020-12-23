@@ -29,3 +29,13 @@ en:
     criteria: Criteria
     implementer: Implementer(Local Ngo)
     scorecard_settings: Scorecard Settings
+    self_assessment: Self assessment
+    community_scorecard: Community scorecard
+    province: Province
+    district: District
+    commune: Commune
+    description: Description
+    new_scorecard: New scorecard
+    edit_scorecard: Edit scorecard
+    planned_start_date: Planned start date
+    planned_end_date: Planned end date

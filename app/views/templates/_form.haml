@@ -3,7 +3,7 @@
     = f.input :name, label: t('facility.name')
 
     %label
-      Criterias
+      = t('indicator.criterias')
       %button.btn.btn-collapse-all-trigger{ type: :button }
         %i.fas.fa-caret-right
 
@@ -11,7 +11,7 @@
       = f.simple_fields_for :indicators, f.object.indicators do |builder|
         = render 'shared/indicators/indicator_fields', f: builder
 
-      = link_to_add_fields "+ Add Criteria", f, :indicators, { partial: 'shared/indicators/indicator_fields' }
+      = link_to_add_fields t('indicator.add_criteria'), f, :indicators, { partial: 'shared/indicators/indicator_fields' }
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'

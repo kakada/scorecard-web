@@ -1,14 +1,17 @@
 km:
   indicator:
-    indicators: Indicators
-    language: Language
-    name: Name
-    audio: Audio
+    indicators: លក្ខណៈវិនិច្ឆ័យ
+    language: ភាសា
+    name: ឈ្មោះ
+    audio: សំលេង
     facility: Facility
-    template: Template
-    template_name: Template name
-    clone_to_template: Clone to new template
-    copy_from_template: Copy from a template
-    display_name: Display name
-    audio_format_and_size_hint: (format .mp3, not exceed 2 MB)
-    must_be_less_than_2mb: must be less than 2MB
+    template: គំរូ
+    template_name: ឈ្មោះគំរូ
+    clone_to_template: ក្លូនទៅនឹងគំរូថ្មី
+    copy_from_template: ចម្លងពីគំរូមួយ
+    display_name: បង្ហាញឈ្មោះ
+    audio_format_and_size_hint: (ទ្រង់ទ្រាយ .mp3, មិនលើសពី 2 មេកាបៃ)
+    must_be_less_than_2mb: ត្រូវតិចជាង 2 មេកាបៃ
+    criterias: លក្ខណៈវិនិច្ឆ័យ
+    add_criteria: + បន្ថែមលក្ខណៈវិនិច្ឆ័យ
+    tag: Tag

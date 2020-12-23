@@ -1,7 +1,0 @@
-%tr
-  %td= indicator.id
-  %td= indicator.name
-  %td
-    %span.badge.badge-pill.badge-secondary= indicator.tag_name
-  %td.text-right
-    = render 'shared/action_buttons', edit_url: edit_template_indicator_path(@template, indicator), delete_url: template_indicator_path(@template, indicator), object: indicator

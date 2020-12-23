@@ -4,3 +4,5 @@ km:
     name: Name
     parent: Parent facility
     manage_indicator: Manage Indicator
+    edit_template: កែតម្រូវគំរូ
+    new_template: បង្កើតគំរូថ្មី

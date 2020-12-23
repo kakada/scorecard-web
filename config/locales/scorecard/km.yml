@@ -14,7 +14,7 @@ km:
     content: Content
     tag: Tag
     year: ឆ្នាំ
-    indicator_development: Indicator development
+    indicator_development: ការអភិវឌ្ឍន៍លក្ខណៈវិនិច្ឆ័យ
     create_successfully: បង្កើតបានជោគជ័យ
     number_of_disability: ចំនួនជនពិការ
     number_of_ethnic_minority: ចំនួនជនជាតិភាគតិច
@@ -29,3 +29,13 @@ km:
     criteria: លក្ខណៈវិនិច្ឆ័យ
     implementer: អ្នកអនុវត្ត(Local Ngo)
     scorecard_settings: Scorecard Settings
+    self_assessment: ការវាយតម្លៃដោយខ្លួនឯង
+    community_scorecard: ប័ណ្ណពិន្ទុសហគមន៍
+    province: ខេត្ត
+    district: ស្រុក
+    commune: ឃុំ
+    description: បរិយាយ
+    new_scorecard: ប័ណ្ណពិន្ទុថ្មី
+    edit_scorecard: កែតម្រូវប័ណ្ណពិន្ទុ
+    planned_start_date: កាលបរិច្ឆេទចាប់ផ្តើមដែលបានគ្រោងទុក
+    planned_end_date: កាលបរិច្ឆេទបញ្ចប់ដែលបានគ្រោងទុក

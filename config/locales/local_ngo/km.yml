@@ -1,10 +1,10 @@
 km:
   local_ngo:
     local_ngos: Local NGOs
-    name: Name
-    province: Province
-    disctrict: District
-    commune: Commune
-    village: Village
-    address: Address
+    name: ឈ្មោះ
+    province: ខេត្ត
+    disctrict: ស្រុក
+    commune: ឃុំ
+    village: ភូមិ
+    address: អាស័យដ្ឋាន
     target_provinces: ខេត្តគោលដៅ

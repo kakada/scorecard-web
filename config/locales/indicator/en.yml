@@ -12,3 +12,6 @@ en:
     display_name: Display name
     audio_format_and_size_hint: (format .mp3, not exceed 2 MB)
     must_be_less_than_2mb: must be less than 2MB
+    criterias: Criterias
+    add_criteria: + Add Criteria
+    tag: Tag

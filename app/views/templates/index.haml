@@ -12,14 +12,14 @@
         %thead
           %tr
             %th= sortable "id", t('shared.number')
-            %th= sortable "name", t("template.name")
+            %th= sortable "name", t("shared.name")
             %th
 
         %tbody
           - @templates.each_with_index do |template, index|
             %tr
               %td= template.id
-              %td= link_to template.name, template_indicators_path(template), class: "btn btn-link p-0"
+              %td= link_to template.name, edit_template_path(template), class: "btn btn-link p-0"
 
               %td.text-right
                 = render 'shared/action_buttons', edit_url: edit_template_path(template), delete_url: template_path(template), object: template
