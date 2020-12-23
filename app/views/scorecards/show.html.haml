@@ -1,4 +1,6 @@
-#content
+= render 'page_title'
+
+#contents
   = render 'shared/scorecard_tab_nav'
 
   .border-right.border-left.border-bottom.bg-white
@@ -13,7 +15,7 @@
         %label.col-sm-2.col-form-label= t("scorecard.year")
         %label.col-sm-10.col-form-label= " : #{@scorecard.year}"
       .row
-        %label.col-sm-2.col-form-label= t("scorecard.name")
+        %label.col-sm-2.col-form-label= t("shared.name")
         %label.col-sm-10.col-form-label= " : #{@scorecard.name}"
       .row
         %label.col-sm-2.col-form-label= t("scorecard.unit_type")
@@ -23,7 +25,10 @@
         %label.col-sm-10.col-form-label= " : #{@scorecard.facility.name}"
       .row
         %label.col-sm-2.col-form-label= t("scorecard.scorecard_type")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.scorecard_type.humanize}"
+        %label.col-sm-10.col-form-label= " : " + t("scorecard.#{@scorecard.scorecard_type}")
+      .row
+        %label.col-sm-2.col-form-label= t("scorecard.local_ngo")
+        %label.col-sm-10.col-form-label= " : #{@scorecard.local_ngo_name}"
       .row
         %label.col-sm-2.col-form-label= t("scorecard.conducted_date")
         %label.col-sm-10.col-form-label= " : #{@scorecard.conducted_date}"

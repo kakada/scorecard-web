@@ -28,7 +28,7 @@ km:
     suggested_action: សកម្មភាពដែលស្នើឡើង (ដំណោះស្រាយ)
     criteria: លក្ខណៈវិនិច្ឆ័យ
     implementer: អ្នកអនុវត្ត(Local Ngo)
-    scorecard_settings: Scorecard Settings
+    scorecard_settings: ការកំណត់ប័ណ្ណពិន្ទុ
     self_assessment: ការវាយតម្លៃដោយខ្លួនឯង
     community_scorecard: ប័ណ្ណពិន្ទុសហគមន៍
     province: ខេត្ត
@@ -39,3 +39,6 @@ km:
     edit_scorecard: កែតម្រូវប័ណ្ណពិន្ទុ
     planned_start_date: កាលបរិច្ឆេទចាប់ផ្តើមដែលបានគ្រោងទុក
     planned_end_date: កាលបរិច្ឆេទបញ្ចប់ដែលបានគ្រោងទុក
+    local_ngo: អ្នកអនុវត្ត(Local Ngo)
+    id: លេខសម្គាល់
+    scorecard_detail: សេចក្តីលម្អិតប័ណ្ណពិន្ទុ

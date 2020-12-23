@@ -1,14 +1,14 @@
 .w-75.view-center
   = simple_form_for [@facility, @indicator] do |f|
-    .w-75
-      .form-group
-        %label= t('indicator.facility')
-        .form-control= @facility.name
 
-      = f.fields_for :tag, (@indicator.tag || @indicator.build_tag ) do |builder|
-        = builder.input :name, label: t('indicator.tag'), input_html: { readonly: !@indicator.editable_tag? }
+    .form-group
+      %label= t('indicator.facility')
+      .form-control= @facility.name
 
-      = f.input :name, label: t('indicator.name')
+    = f.fields_for :tag, (@indicator.tag || @indicator.build_tag ) do |builder|
+      = builder.input :name, label: t('indicator.tag'), input_html: { readonly: !@indicator.editable_tag? }
+
+    = f.input :name, label: t('indicator.name')
 
     .d-flex.mb-2
       %strong.w-25= t('indicator.language')

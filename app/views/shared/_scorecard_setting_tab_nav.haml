@@ -19,13 +19,13 @@
         %span= t("sidebar.scorecard_facility")
 
   - if policy(::Template).create?
-    %li.nav-item{ class: css_active_class('templates') }
+    %li.nav-item{ class: css_nested_active_class('templates') }
       %a.nav-link{:href => templates_path}
-        %i.fas.fa-fw.fa-gopuram
+        %i.fas.fa-fw.fa-bookmark
         %span= t("sidebar.indicator_template")
 
   - if policy(LocalNgo).create?
-    %li.nav-item{ class: css_active_class('local_ngos') }
+    %li.nav-item{ class: css_nested_active_class('local_ngos') }
       %a.nav-link{:href => local_ngos_path}
         %i.fas.fa-fw.fa-users
         %span= t("sidebar.local_ngo")

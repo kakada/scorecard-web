@@ -47,6 +47,8 @@ class Scorecard < ApplicationRecord
   has_many   :voting_indicators, foreign_key: :scorecard_uuid, dependent: :destroy
   has_many   :ratings, foreign_key: :scorecard_uuid, dependent: :destroy
 
+  delegate  :name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
+
   validates :year, presence: true
   validates :province_id, presence: true
   validates :district_id, presence: true

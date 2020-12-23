@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def css_active_class(controller_name)
-    return "active" if params["controller"].split("/")[0] == controller_name
+    return "active" if request.path.split("/")[1] == controller_name
   end
 
   def css_nested_active_class(controller_name)
