@@ -40,6 +40,11 @@
           %i.fas.fa-fw.fa-wrench
           %span= t('sidebar.settings')
 
+    %li.nav-item{ class: css_active_class('about') }
+      %a.nav-link{:href => about_path}
+        %i.fas.fa-fw.fa-exclamation-circle
+        %span= t('sidebar.about')
+
     / Divider
     %hr.sidebar-divider.d-none.d-md-block/
 
