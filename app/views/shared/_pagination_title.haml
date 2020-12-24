@@ -13,8 +13,8 @@
           != pagy_bootstrap_nav(@pagy)
 
 
+  .flex-grow-1
   - if url.present?
-    .flex-grow-1
     %a.btn.btn-primary.btn-sm.shadow-sm{ href: url }
       %i.fas.fa-plus.fa-sm.text-white-50
       = label

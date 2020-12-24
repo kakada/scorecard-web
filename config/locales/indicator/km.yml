@@ -4,7 +4,7 @@ km:
     language: ភាសា
     name: ឈ្មោះ
     audio: សំលេង
-    facility: Facility
+    facility: វិស័យ
     template: គំរូ
     template_name: ឈ្មោះគំរូ
     clone_to_template: ក្លូនទៅនឹងគំរូថ្មី
@@ -14,5 +14,5 @@ km:
     must_be_less_than_2mb: ត្រូវតិចជាង 2 មេកាបៃ
     criterias: លក្ខណៈវិនិច្ឆ័យ
     add_criteria: + បន្ថែមលក្ខណៈវិនិច្ឆ័យ
-    tag: Tag
+    tag: ថេក
     add_new: បន្ថែមលក្ខណៈវិនិច្ឆ័យថ្មី

@@ -1,7 +1,7 @@
 km:
   shared:
-    no_data_found: 'No data found'
-    use_plus_to_add_item: 'Please use (+) button to add items!'
+    no_data_found: មិនមានទិន្នន័យ
+    use_plus_to_add_item: សូមប្រើប៊ូតុង (+) ដើម្បីបន្ថែមទិន្នន័យ!
     edit: កែតម្រូវ
     delete: លុប
     cancel: បោះបង់

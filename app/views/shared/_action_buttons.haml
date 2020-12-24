@@ -3,5 +3,5 @@
     %i.fas.fa-pen
 
 - if policy(object).destroy?
-  = link_to delete_url, method: :delete, class: "btn btn-circle btn-sm btn-danger", :data => { confirm: t('shared.are_you_sure_to_delete'), toggle: 'tooltip', placement: 'top', title: t('shared.delete') } do
+  = link_to delete_url, method: :delete, class: "btn btn-circle btn-sm btn-danger", data: { confirm: t('shared.are_you_sure_to_delete'), toggle: 'tooltip', placement: 'top', title: t('shared.delete') } do
     %i.fas.fa-trash-alt

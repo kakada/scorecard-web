@@ -1,5 +1,6 @@
 en:
   scorecard:
+    scorecards: Scorecards
     conducted_date: Conducted date
     location: Location
     unit_type: Unit Type
@@ -42,3 +43,4 @@ en:
     local_ngo: Local ngo
     id: ID
     scorecard_detail: Scorecard detail
+    add_new: Add new scorecard
