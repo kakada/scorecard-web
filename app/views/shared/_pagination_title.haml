@@ -1,5 +1,6 @@
 - objects ||= []
 - url ||= ''
+- label ||= t("shared.add_new")
 
 .d-flex.mb-3
   - if objects.present?
@@ -16,4 +17,4 @@
     .flex-grow-1
     %a.btn.btn-primary.btn-sm.shadow-sm{ href: url }
       %i.fas.fa-plus.fa-sm.text-white-50
-      = t("shared.add_new")
+      = label

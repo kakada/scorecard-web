@@ -4,7 +4,7 @@
   .card-body.pretty
     = render partial: "shared/no_data", locals: { items: @facilities }
 
-    = render "shared/pagination_title", objects: @facilities, url: new_facility_path
+    = render "shared/pagination_title", objects: @facilities, url: new_facility_path, label: t('facility.add_new')
 
     - if @facilities.present?
 

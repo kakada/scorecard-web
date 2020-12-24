@@ -3,3 +3,8 @@ en:
     rating_code: Rating code
     language: Language
     rating: Rating
+    very_bad: Very bad
+    bad: Bad
+    acceptable: Acceptable
+    good: Good
+    very_good: Very good

@@ -19,12 +19,14 @@
 
               = f.fields_for :rating_scales, rating_scale do |ff|
                 %tr
-                  %td
+                  %td.text-center
                     = ff.hidden_field :id, value: rating_scale.id
                     = ff.hidden_field :code, value: rating_scale.code
                     = ff.hidden_field :value, value: rating_scale.value
                     = ff.hidden_field :name, value: rating_scale.name
-                    = rating_scale.code
+
+                    = image_tag "#{rating_scale.code}.png", style: 'width: 50px; margin-bottom: 6px'
+                    = t("rating_scale.#{rating_scale.code}")
 
                   = render 'language_rating_scales', f: ff, rating_scale: rating_scale
 

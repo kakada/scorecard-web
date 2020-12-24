@@ -4,7 +4,7 @@
   .card-body
     = render partial: "shared/no_data", locals: { items: @languages }
 
-    = render "shared/pagination_title", objects: @languages, url: new_language_path
+    = render "shared/pagination_title", objects: @languages, url: new_language_path, label: t('language.add_new')
 
     - if @languages.present?
 

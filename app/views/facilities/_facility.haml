@@ -2,7 +2,7 @@
   .flex-grow-1= facility.name
 
   - if !facility.root? && policy(Indicator).create?
-    = link_to facility_indicators_path(facility), class: "btn btn-circle btn-sm btn-info mr-2" do
+    = link_to facility_indicators_path(facility), class: "btn btn-circle btn-sm btn-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('facility.manage_indicator') } do
       %i.fas.fa-pencil-ruler
 
   = render 'shared/action_buttons', edit_url: edit_facility_path(facility), delete_url: facility_path(facility), object: facility

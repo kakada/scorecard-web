@@ -3,3 +3,8 @@ km:
     rating_code: កូដ
     language: ភាសា
     rating: Rating
+    very_bad: មិនពេញចិត្តខ្លាំង
+    bad: មិនពេញចិត្ត
+    acceptable: ទទួលយកបាន
+    good: ពេញចិត្ត
+    very_good: ពេញចិត្តខ្លាំង

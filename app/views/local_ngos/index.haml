@@ -13,7 +13,7 @@
 
         %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
           %i.fas.fa-plus.fa-sm.text-white-50
-          = t("shared.add_new")
+          = t("local_ngo.add_new")
 
     - if @local_ngos.present?
 
@@ -30,8 +30,12 @@
           - @local_ngos.each_with_index do |local_ngo, index|
             %tr
               %td= local_ngo.id
-              %td= link_to local_ngo.name, local_ngo_cafs_path(local_ngo), class: 'btn btn-link p-0'
+              %td= local_ngo.name
               %td= local_ngo.address
               %td= local_ngo.target_province_names
               %td.text-right
+                - if policy(local_ngo).update?
+                  = link_to local_ngo_cafs_path(local_ngo), class: "btn btn-circle btn-sm btn-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('local_ngo.manage_caf') } do
+                    %i.fas.fa-pencil-ruler
+
                 = render 'shared/action_buttons', edit_url: edit_local_ngo_path(local_ngo), delete_url: local_ngo_path(local_ngo), object: local_ngo
