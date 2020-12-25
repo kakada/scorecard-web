@@ -26,7 +26,8 @@
                     = ff.hidden_field :name, value: rating_scale.name
 
                     = image_tag "#{rating_scale.code}.png", style: 'width: 50px; margin-bottom: 6px'
-                    = t("rating_scale.#{rating_scale.code}")
+                    %div
+                      = t("rating_scale.#{rating_scale.code}")
 
                   = render 'language_rating_scales', f: ff, rating_scale: rating_scale
 

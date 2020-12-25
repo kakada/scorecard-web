@@ -12,10 +12,12 @@ class LanguagesController < ApplicationController
   def create
     @language = authorize current_program.languages.new(language_params)
 
-    if @language.save
-      redirect_to languages_url
-    else
-      render :new
+    respond_to do |format|
+      if @language.save
+        format.js { redirect_to languages_path }
+      else
+        format.js
+      end
     end
   end
 
@@ -26,10 +28,12 @@ class LanguagesController < ApplicationController
   def update
     @language = authorize Language.find(params[:id])
 
-    if @language.update_attributes(language_params)
-      redirect_to languages_url
-    else
-      render :edit
+    respond_to do |format|
+      if @language.update(language_params)
+        format.js { redirect_to languages_path }
+      else
+        format.js
+      end
     end
   end
 
