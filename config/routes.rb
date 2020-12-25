@@ -55,6 +55,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :about, only: [:show]
+
   namespace :api do
     namespace :v1 do
       resources :programs, only: [] do
