@@ -14,6 +14,8 @@
 //= require pumi
 //= require tagify.min
 //= require jquery-sortable
+//= require typeahead
+//= require bloodhound.min
 
 //= require application/namespace
 //= require application/util

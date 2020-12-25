@@ -7,7 +7,7 @@
       %button.btn.btn-collapse-all-trigger{ type: :button }
         %i.fas.fa-caret-right
 
-    %ol.fields.sortable
+    %ol.fields.sortable{ 'data-tags' => Tag.pluck(:name) }
       = f.simple_fields_for :indicators, f.object.indicators do |builder|
         = render 'shared/indicators/indicator_fields', f: builder
 
