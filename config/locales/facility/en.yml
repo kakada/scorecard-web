@@ -4,3 +4,4 @@ en:
     name: Name
     parent: Parent facility
     manage_indicator: Manage Indicator
+    add_new: Add new facility

@@ -1,4 +1,6 @@
 km:
   program:
-    programs: programs
-    name: Name
+    programs: ប្រូក្រាម
+    name: ឈ្មោះ
+    datetime_format: ទម្រង់កាលបរិច្ឆេទ
+    program_settings: ការកំណត់ប្រូក្រាម

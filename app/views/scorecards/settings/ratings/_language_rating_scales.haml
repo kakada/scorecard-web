@@ -1,0 +1,27 @@
+- current_program.languages.each do |lang|
+  %td.audio-wrapper
+    - obj = rating_scale.language_rating_scales.select{ |a| a.language_id==lang.id }.first || f.object.language_rating_scales.new
+    - audio = obj.audio
+    - error_audio = obj.errors[:audio]
+
+    = f.simple_fields_for :language_rating_scales, obj do |ff|
+      = ff.hidden_field :id, value: obj.id
+      = ff.hidden_field :language_id, value: lang.id
+      = ff.hidden_field :language_code, value: lang.code
+      = ff.input :content, label: false, input_html: {placeholder: 'Display name'}
+
+      %div{class: ('form-group-invalid' if error_audio.present?)}
+        .form-control.file-control-wrapper{ class: [('d-none' if error_audio.blank? && audio.present?), ('is-invalid' if error_audio.present?)] }
+          = ff.file_field :audio, class: 'audio-input', accept: ".mp3,audio/*"
+
+        .invalid-feedback= error_audio.join('; ')
+
+      - if error_audio.blank? && audio.present?
+        .remove-audio-wrapper
+          .d-flex.align-items-center
+            = ff.hidden_field :remove_audio, class: 'audio-input-destroy'
+            %a.remove-audio.text-danger.mr-2.pointer
+              %i.far.fa-trash-alt
+
+            = link_to download_path(file: audio.path), target: "_blank", class: 'btn btn-link p-0 d-block text-truncate' do
+              = ff.object.audio_identifier

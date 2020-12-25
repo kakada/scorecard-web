@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: "dashboard#show"
+  root to: "scorecards#index"
 
   devise_for :users, path: "/", controllers: { confirmations: "confirmations", omniauth_callbacks: "users/omniauth_callbacks" }
 
@@ -31,9 +31,9 @@ Rails.application.routes.draw do
     resource :setting, only: [:show, :update]
   end
 
-  resources :languages
+  resources :languages, path: '/scorecards/settings/languages'
 
-  resources :facilities do
+  resources :facilities, path: '/scorecards/settings/facilities' do
     get :children, on: :member
     resources :indicators, module: "facilities" do
       post :clone_from_template, on: :collection
@@ -41,11 +41,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :templates do
-    resources :indicators, module: "templates"
-  end
+  resources :templates, path: '/scorecards/settings/templates'
 
-  resources :local_ngos do
+  resources :local_ngos, path: '/scorecards/settings/local_ngos' do
     resources :cafs, module: "local_ngos"
     post :import, on: :collection
   end

@@ -1,13 +1,13 @@
 .d-sm-flex.align-items-center.justify-content-between.mb-4
   %h1.h3.mb-0.text-gray-800= "#{@facility.name}: #{t('indicator.indicators')}"
   %div
-    = link_to facilities_path, class: 'btn btn-info mr-2 btn-sm shadow-sm' do
+    = link_to facilities_path, class: 'btn btn-secondary mr-2 btn-sm shadow-sm' do
       %i.fas.fa-chevron-left
       = t('shared.back')
 
     %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_facility_indicator_path(@facility) }
       %i.fas.fa-plus.fa-sm.text-white-50
-      = t("shared.add_new")
+      = t("indicator.add_new")
 
     = render 'more_options'
 

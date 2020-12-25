@@ -13,6 +13,7 @@
 //= require tempusdominus-bootstrap-4.js
 //= require pumi
 //= require tagify.min
+//= require jquery-sortable
 
 //= require application/namespace
 //= require application/util
@@ -20,6 +21,7 @@
 //= require common/datetime_picker
 
 //= require facilities
+//= require templates
 //= require indicators
 //= require scorecards
 //= require users/index

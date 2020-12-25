@@ -1,0 +1,43 @@
+- indicator = f.object
+
+%li
+  %fieldset.fieldset.field-wrapper.border.mb-2
+    .d-flex
+      %button.btn.btn-move{type: :button, class: ('d-none' unless indicator.persisted?  || indicator.errors.present?)}
+        %i.fa.fa-arrows-alt
+
+      .d-flex.flex-grow-1.border-left
+        .d-flex.flex-grow-1.pt-3
+          %div
+            %button.btn.collapse-trigger{ type: :button, class: ('d-none' unless indicator.persisted? || indicator.errors.present? ) }
+              %i.fas.fa-caret-right
+
+          .d-flex.flex-grow-1.pr-3
+            = f.hidden_field :display_order, class: 'display-order'
+
+            = f.input :name, label: false, input_html: { placeholder: t('indicator.name'), class: ['field-name', ('no-style as-title' if indicator.persisted?)] }, wrapper_html: { class: ["flex-grow-1 pr-3", ('pl-3' unless indicator.persisted?)] }
+
+            = f.fields_for :tag, (indicator.tag || indicator.build_tag ) do |builder|
+              = builder.input :name, label: false, input_html: { placeholder: t('indicator.tag'), class: ['field-tag', ('no-style as-tag' if indicator.persisted?)] }, wrapper_html: { class: "w-25" }
+
+            .ml-3{ class: ('d-none' if indicator.persisted? || indicator.errors.present?) }
+              %button.btn.btn-outline-primary.btn-add-field{type: 'button'} Add
+
+        .d-flex.align-items-center.border-left
+          = f.hidden_field :_destroy
+
+          %button.btn.text-danger.remove_fields
+            %i.fas.fa-trash-alt.icon-delete
+
+    .collapse-content.p-3.border-top{ style: ('display: block;' if indicator.errors.present? ) }
+      .d-flex.mb-2
+        %strong.w-25= t('indicator.language')
+        .d-flex.w-75
+          %strong.w-50= t('indicator.name')
+          %strong.w-50.pl-2= t('indicator.audio')
+
+      - current_program.languages.each do |lang|
+        - language_indicator = indicator.languages_indicators.select{ |a| a.language_id==lang.id }.first || indicator.languages_indicators.new
+
+        = f.fields_for :languages_indicators, language_indicator do |builder|
+          = render 'shared/indicators/language_indicator_field', f: builder, language: lang

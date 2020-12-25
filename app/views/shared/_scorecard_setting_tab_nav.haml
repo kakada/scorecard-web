@@ -1,0 +1,36 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t('scorecard.scorecard_settings')
+  %div
+    %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }
+      %i.fas.fa-arrow-left.fa-sm.text-white-50
+      = t("shared.back")
+
+%ul.nav.nav-tabs.nav-justified
+  - if policy(Language).create?
+    %li.nav-item{ class: css_nested_active_class('languages') }
+      %a.nav-link{:href => languages_path}
+        %i.fas.fa-fw.fa-language
+        = t("sidebar.language")
+
+  - if policy(Facility).create?
+    %li.nav-item{ class: css_nested_active_class('facilities') }
+      %a.nav-link{:href => facilities_path}
+        %i.fas.fa-fw.fa-sitemap
+        %span= t("sidebar.scorecard_facility")
+
+  - if policy(::Template).create?
+    %li.nav-item{ class: css_nested_active_class('templates') }
+      %a.nav-link{:href => templates_path}
+        %i.fas.fa-fw.fa-bookmark
+        %span= t("sidebar.indicator_template")
+
+  - if policy(LocalNgo).create?
+    %li.nav-item{ class: css_nested_active_class('local_ngos') }
+      %a.nav-link{:href => local_ngos_path}
+        %i.fas.fa-fw.fa-users
+        %span= t("sidebar.local_ngo")
+
+  %li.nav-item{ class: css_nested_active_class('scorecards/settings/ratings') }
+    %a.nav-link{:href => scorecards_settings_ratings_path}
+      %i.fas.fa-fw.fa-star
+      %span= t("sidebar.rating")

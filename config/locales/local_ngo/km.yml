@@ -1,10 +1,12 @@
 km:
   local_ngo:
-    local_ngos: Local NGOs
-    name: Name
-    province: Province
-    disctrict: District
-    commune: Commune
-    village: Village
-    address: Address
+    local_ngos: អង្គការក្នុងស្រុក (Local NGOs)
+    name: ឈ្មោះ
+    province: ខេត្ត
+    disctrict: ស្រុក
+    commune: ឃុំ
+    village: ភូមិ
+    address: អាស័យដ្ឋាន
     target_provinces: ខេត្តគោលដៅ
+    manage_caf: គ្រប់គ្រងអ្នកសម្របសម្រួល
+    add_new: បន្ថែមអង្គការក្នុងស្រុកថ្មី

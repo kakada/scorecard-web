@@ -1,0 +1,29 @@
+.d-flex.mb-2
+  .w-25
+    %label= language.name
+    = f.hidden_field :language_id, value: language.id
+    = f.hidden_field :language_code, value: language.code
+
+  .d-flex.w-75.audio-wrapper
+    - error_name = f.object.errors[:content]
+    - error_audio = f.object.errors[:audio]
+
+    .w-50{class: ('form-group-invalid' if error_name.present?)}
+      = f.text_field :content, class: ['form-control', ('is-invalid' if error_name.present?)]
+      .invalid-feedback= error_name.join('; ')
+
+    .w-50.pl-2{class: ('form-group-invalid' if error_audio.present?)}
+      .form-control.file-control-wrapper{ class: [('d-none' if (error_audio.blank? && f.object.audio.present?)), ('is-invalid' if error_audio.present?)] }
+        = f.file_field :audio, class: 'audio-input', accept: ".mp3,audio/*"
+
+      .invalid-feedback= error_audio.join('; ')
+
+      - if error_audio.blank? && f.object.audio.present?
+        .remove-audio-wrapper
+          .d-flex.align-items-center
+            = f.hidden_field :remove_audio, class: 'audio-input-destroy'
+            %a.remove-audio.text-danger.mr-2.pointer
+              %i.far.fa-trash-alt
+
+            = link_to download_path(file: f.object.audio.path), target: "_blank", class: 'btn btn-link p-0 d-block text-truncate' do
+              = f.object.audio_identifier

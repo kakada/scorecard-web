@@ -47,6 +47,8 @@ class Scorecard < ApplicationRecord
   has_many   :voting_indicators, foreign_key: :scorecard_uuid, dependent: :destroy
   has_many   :ratings, foreign_key: :scorecard_uuid, dependent: :destroy
 
+  delegate  :name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
+
   validates :year, presence: true
   validates :province_id, presence: true
   validates :district_id, presence: true
@@ -72,7 +74,7 @@ class Scorecard < ApplicationRecord
     community_scorecard: 2
   }
 
-  SCORECARD_TYPES = scorecard_types.keys.map { |r| [r.titlecase, r] }
+  SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
 
   def location_name(address = "address_km")
     return if location_code.blank?

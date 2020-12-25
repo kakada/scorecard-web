@@ -1,6 +1,17 @@
-.w-50.view-center
+.w-75.view-center
   = simple_form_for @template do |f|
     = f.input :name, label: t('facility.name')
+
+    %label
+      = t('indicator.criterias')
+      %button.btn.btn-collapse-all-trigger{ type: :button }
+        %i.fas.fa-caret-right
+
+    %ol.fields.sortable
+      = f.simple_fields_for :indicators, f.object.indicators do |builder|
+        = render 'shared/indicators/indicator_fields', f: builder
+
+      = link_to_add_fields t('indicator.add_criteria'), f, :indicators, { partial: 'shared/indicators/indicator_fields' }
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'

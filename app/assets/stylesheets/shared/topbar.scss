@@ -1,0 +1,21 @@
+.topbar .dropdown-list {
+
+  width: 160px !important;
+
+  .dropdown-item {
+    height: 46px;
+  }
+
+  .dropdown-item .dropdown-list-image {
+    $size: 1.6rem;
+
+    height: $size;
+    width: $size;
+
+    img {
+      height: $size;
+      width: $size;
+    }
+  }
+
+}

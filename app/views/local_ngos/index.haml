@@ -1,24 +1,27 @@
-.d-sm-flex.align-items-center.justify-content-between.mb-4
-  %h1.h3.mb-0.text-gray-800= t("local_ngo.local_ngos")
-  %div
-    = render "more_option"
-
-    %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
-      %i.fas.fa-plus.fa-sm.text-white-50
-      = t("shared.add_new")
+= render "shared/scorecard_setting_tab_nav"
 
 .card.shadow.mb-4
   .card-body
     = render partial: "shared/no_data", locals: { items: @local_ngos }
 
+    .d-sm-flex
+      = render "shared/pagination_title", objects: @local_ngos
+      .flex-grow-1
+
+      %div
+        = render "more_option"
+
+        %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
+          %i.fas.fa-plus.fa-sm.text-white-50
+          = t("local_ngo.add_new")
+
     - if @local_ngos.present?
-      = render "shared/pagination_title"
 
       %table.table.table-hover.pretty
         %thead
           %tr
             %th= sortable "id", t('shared.number')
-            %th= sortable "name", t("local_ngo.name")
+            %th= sortable "name", t("shared.name")
             %th= t('local_ngo.address')
             %th= t('local_ngo.target_provinces')
             %th
@@ -27,20 +30,12 @@
           - @local_ngos.each_with_index do |local_ngo, index|
             %tr
               %td= local_ngo.id
-              %td= link_to local_ngo.name, local_ngo_cafs_path(local_ngo), class: 'btn btn-link p-0'
+              %td= local_ngo.name
               %td= local_ngo.address
               %td= local_ngo.target_province_names
               %td.text-right
-                %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                  %i.fas.fa-ellipsis-v
+                - if policy(local_ngo).update?
+                  = link_to local_ngo_cafs_path(local_ngo), class: "btn btn-circle btn-sm btn-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('local_ngo.manage_caf') } do
+                    %i.fas.fa-pencil-ruler
 
-                .dropdown-menu.dropdown-menu-right
-                  - if policy(local_ngo).update?
-                    = link_to edit_local_ngo_path(local_ngo), class: "btn dropdown-item" do
-                      %i.fas.fa-pen.drop-menu-icon
-                      %span= t('shared.edit')
-
-                  - if policy(local_ngo).destroy?
-                    = link_to local_ngo_path(local_ngo), method: :delete, class: "btn dropdown-item", :data => {:confirm => t('local_ngo.are_you_sure_to_delete')} do
-                      %i.fas.fa-trash-alt.drop-menu-icon
-                      %span= t('shared.delete')
+                = render 'shared/action_buttons', edit_url: edit_local_ngo_path(local_ngo), delete_url: local_ngo_path(local_ngo), object: local_ngo

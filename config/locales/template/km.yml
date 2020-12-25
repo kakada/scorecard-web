@@ -1,6 +1,9 @@
 km:
   template:
-    templates: Templates
-    name: Name
-    parent: Parent facility
-    manage_indicator: Manage Indicator
+    templates: ទម្រង់
+    name: ឈ្មោះ
+    parent: ប្រភេទមេ
+    manage_indicator: គ្រប់គ្រងលក្ខណៈវិនិច្ឆ័យ
+    edit_template: កែតម្រូវគំរូ
+    new_template: បង្កើតគំរូថ្មី
+    add_new: បន្ថែមទម្រង់ថ្មី

@@ -1,0 +1,6 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t("scorecard.scorecard_detail") + ": #{@scorecard.uuid}-(#{@scorecard.name})"
+  %div
+    %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }
+      %i.fas.fa-arrow-left.fa-sm.text-white-50
+      = t("sidebar.back")

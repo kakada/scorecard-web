@@ -1,20 +1,21 @@
 km:
   scorecard:
+    scorecards: ប័ណ្ណពិន្ទុ
     conducted_date: កាលបរិច្ឆេទ
     location: ទីតាំង
-    unit_type: Unit Type
-    facility: Facility
-    scorecard_type: ប្រភេទ Scorecard
+    unit_type: ប្រភេទវិស័យ
+    facility: វិស័យ
+    scorecard_type: ប្រភេទប័ណ្ណពិន្ទុ
     sector: វិស័យ
     number_of_participant: ចំនួនអ្នកចូលរួម
     number_of_female: ចំនួនអ្នកចូលរួមស្រី
     number_of_caf: ចំនួនអ្នកសម្របសម្រួល
-    scorecard_info: ព័ត៌មាន Scorecard
+    scorecard_info: ព័ត៌មានប័ណ្ណពិន្ទុ
     swot_table: តារាងសកម្មភាពអាទិភាពផ្អែកលើលក្ខណៈវិនិច្ឆ័យ
-    content: Content
-    tag: Tag
+    content: មាតិការ
+    tag: ថេក
     year: ឆ្នាំ
-    indicator_development: Indicator development
+    indicator_development: ការអភិវឌ្ឍន៍លក្ខណៈវិនិច្ឆ័យ
     create_successfully: បង្កើតបានជោគជ័យ
     number_of_disability: ចំនួនជនពិការ
     number_of_ethnic_minority: ចំនួនជនជាតិភាគតិច
@@ -28,4 +29,18 @@ km:
     suggested_action: សកម្មភាពដែលស្នើឡើង (ដំណោះស្រាយ)
     criteria: លក្ខណៈវិនិច្ឆ័យ
     implementer: អ្នកអនុវត្ត(Local Ngo)
-    scorecard_settings: Scorecard Settings
+    scorecard_settings: ការកំណត់ប័ណ្ណពិន្ទុ
+    self_assessment: ការវាយតម្លៃដោយខ្លួនឯង
+    community_scorecard: ប័ណ្ណពិន្ទុសហគមន៍
+    province: ខេត្ត
+    district: ស្រុក
+    commune: ឃុំ
+    description: បរិយាយ
+    new_scorecard: ប័ណ្ណពិន្ទុថ្មី
+    edit_scorecard: កែតម្រូវប័ណ្ណពិន្ទុ
+    planned_start_date: កាលបរិច្ឆេទចាប់ផ្តើមដែលបានគ្រោងទុក
+    planned_end_date: កាលបរិច្ឆេទបញ្ចប់ដែលបានគ្រោងទុក
+    local_ngo: អ្នកអនុវត្ត(Local Ngo)
+    id: លេខសម្គាល់
+    scorecard_detail: សេចក្តីលម្អិតប័ណ្ណពិន្ទុ
+    add_new: បន្ថែមប័ណ្ណពិន្ទុថ្មី

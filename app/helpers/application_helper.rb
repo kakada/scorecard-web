@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def css_active_class(controller_name)
-    return "active" if params["controller"].split("/")[0] == controller_name
+    return "active" if request.path.split("/")[1] == controller_name
   end
 
   def css_nested_active_class(controller_name)
@@ -28,5 +28,16 @@ module ApplicationHelper
 
   def render_alert
     content_tag(:div, alert, class: "alert alert-danger", role: "alert") if alert
+  end
+
+  def link_to_add_fields(name, f, association, option = {})
+    new_object = f.object.send(association).klass.new
+    id = new_object.object_id
+    fields = f.fields_for(association, new_object, child_index: id) do |builder|
+      partial = option[:partial].presence || association.to_s.singularize + '_fields'
+      render(partial, f: builder, option: option)
+    end
+
+    link_to(name, '#', class: "add_#{association} btn", data: { id: id, fields: fields.gsub("\n", '') })
   end
 end

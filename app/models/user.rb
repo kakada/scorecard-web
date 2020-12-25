@@ -80,6 +80,7 @@ class User < ApplicationRecord
 
   private
     def generate_authentication_token
+      self.encrypted_password ||= ""
       self.authentication_token = Devise.friendly_token
       self.token_expired_date = (ENV.fetch("TOKEN_EXPIRED_IN_DAY") { 1 }).to_i.day.from_now
     end

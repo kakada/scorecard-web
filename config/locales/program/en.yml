@@ -2,3 +2,5 @@ en:
   program:
     programs: Programs
     name: Name
+    datetime_format: DateTime format
+    program_settings: Program settings

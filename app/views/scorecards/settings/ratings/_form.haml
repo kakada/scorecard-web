@@ -1,58 +1,34 @@
-.border-right.border-left.border-bottom.bg-white
-  .card-body{style: 'overflow-x: scroll;'}
+.card.shadow.mb-4
+  .card-body
     = simple_form_for current_program, url: scorecards_settings_ratings_path, method: 'post' do |f|
-      %table.table.table-bordered
-        %thead
-          %tr
-            %th
-            - current_program.languages.each do |lang|
+
+      %div{style: 'overflow-x: scroll;'}
+        %table.table.table-bordered
+          %thead
+            %tr
               %th
-                = lang.name
-                %span{"data-toggle" => "tooltip", "data-placement" => "right", title: "#{t('indicator.audio')} #{t('indicator.audio_format_and_size_hint')}"}
-                  %i.fas.fa-info-circle
+              - current_program.languages.each do |lang|
+                %th
+                  = lang.name
+                  %span{"data-toggle" => "tooltip", "data-placement" => "right", title: "#{t('indicator.audio')} #{t('indicator.audio_format_and_size_hint')}"}
+                    %i.fas.fa-info-circle
 
-        %tbody
-          - RatingScale.defaults.each do |hash_obj|
-            - rating_scale = current_program.rating_scales.select{ |a| a.code==hash_obj[:code] }.first || RatingScale.new(hash_obj)
+          %tbody
+            - RatingScale.defaults.each do |hash_obj|
+              - rating_scale = current_program.rating_scales.select{ |a| a.code==hash_obj[:code] }.first || RatingScale.new(hash_obj)
 
-            = f.fields_for :rating_scales, rating_scale do |ff|
-              %tr
-                %td
-                  = ff.hidden_field :id, value: rating_scale.id
-                  = ff.hidden_field :code, value: rating_scale.code
-                  = ff.hidden_field :value, value: rating_scale.value
-                  = ff.hidden_field :name, value: rating_scale.name
-                  = rating_scale.code
+              = f.fields_for :rating_scales, rating_scale do |ff|
+                %tr
+                  %td.text-center
+                    = ff.hidden_field :id, value: rating_scale.id
+                    = ff.hidden_field :code, value: rating_scale.code
+                    = ff.hidden_field :value, value: rating_scale.value
+                    = ff.hidden_field :name, value: rating_scale.name
 
-                - current_program.languages.each do |lang|
-                  %td.audio-wrapper
-                    - obj = rating_scale.language_rating_scales.select{ |a| a.language_id==lang.id }.first || ff.object.language_rating_scales.new
+                    = image_tag "#{rating_scale.code}.png", style: 'width: 50px; margin-bottom: 6px'
+                    = t("rating_scale.#{rating_scale.code}")
 
-                    = ff.simple_fields_for :language_rating_scales, obj do |builder|
-                      = builder.hidden_field :id, value: obj.id
-                      = builder.hidden_field :language_id, value: lang.id
-                      = builder.hidden_field :language_code, value: lang.code
-
-                      = builder.input :content, label: false, input_html: {placeholder: 'Display name'}
-
-                      - audio = obj.audio
-                      - error_audio = obj.errors[:audio]
-
-                      %div{class: ('form-group-invalid' if error_audio.present?)}
-                        .form-control.file-control-wrapper{ class: [('d-none' if error_audio.blank? && audio.present?), ('is-invalid' if error_audio.present?)] }
-                          = builder.file_field :audio, class: 'audio-input', accept: ".mp3,audio/*"
-
-                        .invalid-feedback= error_audio.join('; ')
-
-                      - if error_audio.blank? && audio.present?
-                        .remove-audio-wrapper
-                          .d-flex.align-items-center
-                            = builder.hidden_field :remove_audio, class: 'audio-input-destroy'
-                            %a.remove-audio.text-danger.mr-2.pointer
-                              %i.far.fa-trash-alt
-
-                            = link_to download_path(file: audio.path), target: "_blank", class: 'btn btn-link p-0 d-block text-truncate' do
-                              = builder.object.audio_identifier
+                  = render 'language_rating_scales', f: ff, rating_scale: rating_scale
 
       .actions
         = f.submit t('shared.save'), class: 'btn btn-primary'

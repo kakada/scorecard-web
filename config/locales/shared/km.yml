@@ -1,30 +1,33 @@
 km:
   shared:
-    no_data_found: 'No data found'
-    use_plus_to_add_item: 'Please use (+) button to add items!'
-    edit: 'Edit'
-    delete: 'Delete'
-    cancel: 'Cancel'
-    save: 'Save'
-    back: 'Back'
-    done: 'Done'
-    reset: 'Reset'
-    cannot_be_blank: 'cannot be blank'
-    is_invalid_value: 'is invalid value'
-    value_should_be_from_to: "the value should be from %{from} to %{to}"
-    search: 'Search'
+    no_data_found: មិនមានទិន្នន័យ
+    use_plus_to_add_item: សូមប្រើប៊ូតុង (+) ដើម្បីបន្ថែមទិន្នន័យ!
+    edit: កែតម្រូវ
+    delete: លុប
+    cancel: បោះបង់
+    save: រក្សាទុក
+    back: ថយក្រោយ
+    done: រួចរាល់
+    reset: កំណត់ឡើងវិញ
+    cannot_be_blank: មិនអាចទទេរ
+    is_invalid_value: គឺជាតម្លៃមិនត្រឹមត្រូវ
+    value_should_be_from_to: "តម្លៃចាប់ពី %{from} រហូតដល់ %{to}"
+    search: ស្វែងរក
     please_select: សូមជ្រើសរើស
-    status_on: 'On'
-    status_off: 'Off'
-    setup: 'Setup'
-    change: 'Change'
-    learn_more: 'Learn more'
-    need_help: 'Need help?'
-    no_result_found: 'No result found!'
-    apply: 'Apply'
-    unlock: 'Unlock'
+    status_on: បើក
+    status_off: បិទ
+    setup: កំណត់
+    change: ផ្លាស់ប្ដូរ
+    learn_more: មើលបន្ថែម
+    need_help: ត្រូវការជំនួយ?
+    no_result_found: រកមិនឃើញលទ្ធផល
+    apply: អនុវត្ត
+    unlock: ដោះសោ
     add_new: បង្កើតថ្មី
     pagination_title: "បង្ហាញទិន្ន័យ <b>%{from}</b> - <b>%{to}</b> នៃចំនួនសរុប <b>%{total}</b>"
-    number: "No"
-    import_from_file: Import from file
-    download_sample_form: Download sample form
+    number: លេខរៀង
+    import_from_file: បញ្ចូលទិន្នន័យពី File
+    download_sample_form: ទាញយកទម្រង់គំរូ
+    are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបវាឬ?
+    confirm_logout: តើអ្នកពិតជាចង់ចាកចេញឬទេ?
+    name: ឈ្មោះ

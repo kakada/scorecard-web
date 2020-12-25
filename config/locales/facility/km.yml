@@ -1,6 +1,7 @@
 km:
   facility:
-    facilities: facilities
+    facilities: វិស័យ
     name: ឈ្មោះ
-    parent: Parent facility
-    manage_indicator: Manage Indicator
+    parent: ប្រភេទមេ
+    manage_indicator: គ្រប់គ្រងលក្ខណៈវិនិច្ឆ័យ
+    add_new: បន្ថែម Facility ថ្មី
