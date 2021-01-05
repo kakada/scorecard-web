@@ -1,5 +1,7 @@
+- remote ||= false
+
 - if policy(object).update?
-  %a.btn.btn-circle.btn-sm.btn-warning.mr-1{ "data-toggle" => "tooltip", "data-placement" => "top", title: t("shared.edit"), href: edit_url}
+  = link_to edit_url, remote: remote, class: "btn btn-circle btn-sm btn-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
     %i.fas.fa-pen
 
 - if policy(object).destroy?

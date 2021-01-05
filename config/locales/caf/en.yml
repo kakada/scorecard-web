@@ -1,8 +1,9 @@
 en:
   caf:
-    cafs: Cafs
+    cafs: Community Accountability Facilitators (CAFs)
     name: Name
     sex: Sex
     tel: Telephone
     date_of_birth: Date of birth
     address: Address
+    add_new: Add New CAFs
