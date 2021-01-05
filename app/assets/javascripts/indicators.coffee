@@ -6,6 +6,7 @@ CW.FacilitiesIndicatorsNew = do ->
   init = ->
     onRemoveAudio()
     onChangeAudio()
+    CW.TemplatesNew.initTypeahead()
 
   onRemoveAudio = ->
     $(document).on 'click', '.remove-audio', (e) =>

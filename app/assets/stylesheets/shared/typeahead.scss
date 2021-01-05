@@ -1,0 +1,14 @@
+.tt-menu {
+  min-width: 180px;
+
+  .tt-dataset {
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+
+    .tt-suggestion {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+  }
+}

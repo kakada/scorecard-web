@@ -1,6 +1,7 @@
 CW.TemplatesNew = do ->
   init = ->
     initSortable()
+    initTypeahead()
 
     onRemoveAudio()
     onChangeAudio()
@@ -11,6 +12,26 @@ CW.TemplatesNew = do ->
     onClickBtnAdd()
     onClickCollapseTrigger()
     onClickCollapseAllTrigger()
+
+  initTypeahead = (parentDom)->
+    tags = $("[data-tags]").data('tags')
+
+    tags = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.whitespace,
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: tags
+    })
+
+    parentDom = parentDom || document
+    $(parentDom).find('.typeahead').typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1
+    },
+    {
+      name: 'tags',
+      source: tags
+    });
 
   onClickCollapseAllTrigger = ->
     $('.btn-collapse-all-trigger').on 'click', (e) =>
@@ -93,7 +114,9 @@ CW.TemplatesNew = do ->
   appendField = (dom) ->
     time = new Date().getTime()
     regexp = new RegExp($(dom).data('id'), 'g')
-    $(dom).before($(dom).data('fields').replace(regexp, time))
+    newDom = $($(dom).data('fields').replace(regexp, time))
+    $(dom).before(newDom)
+    initTypeahead(newDom)
 
   onClickRemoveField = ->
     $(document).on 'click', 'form .remove_fields', (event) ->
@@ -104,7 +127,10 @@ CW.TemplatesNew = do ->
     $(dom).parent().find('input[type=hidden]').val('1')
     $(dom).closest('fieldset').hide()
 
-  { init: init }
+  {
+    init: init,
+    initTypeahead: initTypeahead
+  }
 
 CW.TemplatesCreate = CW.TemplatesNew
 CW.TemplatesEdit = CW.TemplatesNew

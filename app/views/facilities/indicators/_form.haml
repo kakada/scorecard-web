@@ -6,7 +6,12 @@
       .form-control= @facility.name
 
     = f.fields_for :tag, (@indicator.tag || @indicator.build_tag ) do |builder|
-      = builder.input :name, label: t('indicator.tag'), input_html: { readonly: !@indicator.editable_tag? }
+      .w-100{ 'data-tags' => Tag.pluck(:name) }
+        %label
+          = t('indicator.tag')
+          %abbr{title: 'required'} *
+        %div
+          = builder.input :name, label: false, input_html: { readonly: !@indicator.editable_tag?, class: 'typeahead' }
 
     = f.input :name, label: t('indicator.name')
 
