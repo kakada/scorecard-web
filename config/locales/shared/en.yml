@@ -31,3 +31,5 @@ en:
     are_you_sure_to_delete: Are you sure to delete it?
     confirm_logout: Are you sure you want to logout?
     name: Name
+    close: Close
+    view_detail: View Detail

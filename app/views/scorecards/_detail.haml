@@ -1,0 +1,60 @@
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.id")
+  %label.col-sm-8.col-form-label
+    = " : #{@scorecard.uuid}"
+    = render 'scorecard_copy', scorecard: @scorecard
+
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.year")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.year}"
+.row
+  %label.col-sm-4.col-form-label= t("shared.name")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.name}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.unit_type")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.unit_type.name}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.facility")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.facility.name}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.scorecard_type")
+  %label.col-sm-8.col-form-label= " : " + t("scorecard.#{@scorecard.scorecard_type}")
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.local_ngo")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.local_ngo_name}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.conducted_date")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.conducted_date}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.description")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.description}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.location")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.location_name}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.number_of_participant")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_participant}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.number_of_female")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_female}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.number_of_caf")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_caf}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.number_of_disability")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_disability}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.number_of_ethnic_minority")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_ethnic_minority}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.number_of_youth")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_youth}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.number_of_id_poor")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_id_poor}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.planned_start_date")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.planned_start_date}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.planned_end_date")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.planned_end_date}"

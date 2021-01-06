@@ -1,0 +1,11 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th{:scope => "col"}= t("scorecard.which_criteria_selected")
+      %th{:scope => "col"}= t("scorecard.median")
+
+  %tbody
+    - @voting_indicators.each do |indicator|
+      %tr
+        %td= indicator.indicatorable.name
+        %td= VotingIndicator.medians[indicator.median]
