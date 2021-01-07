@@ -1,0 +1,19 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th.align-middle.text-center{:scope => "col"}= t("scorecard.criteria")
+      %th.align-middle.text-center{:scope => "col"}= t("scorecard.median")
+      %th.align-middle.text-center{:scope => "col"}= t("scorecard.strength")
+      %th.align-middle.text-center{:scope => "col"}= t("scorecard.weakness")
+      %th.align-middle.text-center{:scope => "col"}= t("scorecard.desired_change")
+      %th.align-middle.text-center{:scope => "col"}= t("scorecard.suggested_action")
+
+  %tbody
+    - @voting_indicators.each do |indicator|
+      %tr
+        %td= indicator.indicatorable.name
+        %td.text-center= VotingIndicator.medians[indicator.median]
+        %td= indicator.strength
+        %td= indicator.weakness
+        %td= indicator.desired_change
+        %td= indicator.suggested_action

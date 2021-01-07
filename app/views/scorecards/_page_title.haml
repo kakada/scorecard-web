@@ -1,6 +1,12 @@
-.d-sm-flex.align-items-center.justify-content-between.mb-4
-  %h1.h3.mb-0.text-gray-800= t("scorecard.scorecard_detail") + ": #{@scorecard.uuid}-(#{@scorecard.name})"
+.d-sm-flex.mb-4
+  .d-flex.flex-column.flex-grow-1
+    %h1.h3.mb-0.text-gray-800= t("scorecard.scorecard_detail") + ": #{@scorecard.uuid}-(#{@scorecard.name})"
+    .my-2.card-subtitle.text-muted
+      = "#{@scorecard.year}; #{@scorecard.location_name}; #{@scorecard.facility.name}; "
+      = t("scorecard.#{@scorecard.scorecard_type}")
+
   %div
     %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }
       %i.fas.fa-arrow-left.fa-sm.text-white-50
-      = t("sidebar.back")
+      = t("shared.back")
+

@@ -30,7 +30,7 @@ km:
     criteria: លក្ខណៈវិនិច្ឆ័យ
     implementer: អ្នកអនុវត្ត(Local Ngo)
     scorecard_settings: ការកំណត់ប័ណ្ណពិន្ទុ
-    self_assessment: ការវាយតម្លៃដោយខ្លួនឯង
+    self_assessment: ការវាយតម្លៃខ្លួនឯង
     community_scorecard: ប័ណ្ណពិន្ទុសហគមន៍
     province: ខេត្ត
     district: ស្រុក
@@ -44,3 +44,9 @@ km:
     id: លេខសម្គាល់
     scorecard_detail: សេចក្តីលម្អិតប័ណ្ណពិន្ទុ
     add_new: បន្ថែមប័ណ្ណពិន្ទុថ្មី
+    setup: ការកំណត់ប័ណ្ណពិន្ទុ
+    which_criteria_raised: តើលក្ខណៈវិនិច្ឆ័យណាខ្លះត្រូវបានលើកឡើង?
+    how_many_times: ចំនួនប៉ុន្មានដង?
+    which_criteria_selected: តើលក្ខណៈវិនិច្ឆ័យណាខ្លះត្រូវបានជ្រើសរើស?
+    number_of_proposed_criteria: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានស្នើ"
+    number_of_selected_criteria: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស"

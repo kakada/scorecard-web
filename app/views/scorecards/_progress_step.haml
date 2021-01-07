@@ -1,0 +1,16 @@
+- disabled ||= false
+- sub_title ||= ''
+
+%li
+  .content
+    .card.mb-2
+      .card-body.d-flex
+        .flex-grow-1
+          %h6= label
+          .card-subtitle.text-muted= disabled ? '' : sub_title
+
+        %div
+          - if disabled
+            %button.btn.btn-secondary{ disabled: true }= t("shared.view_detail")
+          - else
+            = link_to t("shared.view_detail"), url, remote: true, class: "btn btn-primary"

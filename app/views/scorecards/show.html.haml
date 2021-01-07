@@ -1,69 +1,18 @@
 = render 'page_title'
 
 #contents
-  = render 'shared/scorecard_tab_nav'
+  %ol.timeline
+    = render 'progress_step', label: t("scorecard.setup"), url: scorecard_path(@scorecard), sub_title: scorecard_setup_sub_title
 
-  .border-right.border-left.border-bottom.bg-white
-    .card-body
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.id")
-        %label.col-sm-10.col-form-label
-          = " : #{@scorecard.uuid}"
-          = render 'scorecard_copy', scorecard: @scorecard
+    - disabled_button = @scorecard.raised_indicators.blank?
 
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.year")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.year}"
-      .row
-        %label.col-sm-2.col-form-label= t("shared.name")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.name}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.unit_type")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.unit_type.name}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.facility")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.facility.name}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.scorecard_type")
-        %label.col-sm-10.col-form-label= " : " + t("scorecard.#{@scorecard.scorecard_type}")
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.local_ngo")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.local_ngo_name}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.conducted_date")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.conducted_date}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.description")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.description}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.location")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.location_name}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.number_of_participant")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_participant}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.number_of_female")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_female}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.number_of_caf")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_caf}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.number_of_disability")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_disability}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.number_of_ethnic_minority")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_ethnic_minority}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.number_of_youth")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_youth}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.number_of_id_poor")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.number_of_id_poor}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.planned_start_date")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.planned_start_date}"
-      .row
-        %label.col-sm-2.col-form-label= t("scorecard.planned_end_date")
-        %label.col-sm-10.col-form-label= " : #{@scorecard.planned_end_date}"
+    - num_proposed_criteria = @scorecard.raised_indicators.pluck(:indicatorable_id, :indicatorable_type).uniq.length
 
+    = render 'progress_step', label: t("scorecard.proposed_criteria"), url: scorecard_indicators_path(@scorecard), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_proposed_criteria')}: #{num_proposed_criteria}"
+
+    = render 'progress_step', label: t("scorecard.indicator_development"), url: scorecard_medians_path(@scorecard), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_selected_criteria')}: #{@scorecard.voting_indicators.length}"
+
+    = render 'progress_step', label: t("scorecard.swot_table"), url: scorecard_swots_path(@scorecard), disabled: disabled_button
+
+= render "main_modal"
 = render "modal_scorecard_uuid"
