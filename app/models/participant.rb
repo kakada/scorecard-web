@@ -18,4 +18,6 @@ class Participant < ApplicationRecord
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
 
   before_create :secure_uuid
+
+  GENDERS=%w(female male other)
 end

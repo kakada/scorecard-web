@@ -3,9 +3,17 @@
     %tr
       %th{:scope => "col"}= t('scorecard.which_criteria_raised')
       %th{:scope => "col"}= t('scorecard.how_many_times')
+      %th{:scope => "col"}= t('scorecard.participant')
 
   %tbody
     - @criterias.each do |criterias|
       %tr
         %td= criterias["name"]
         %td= criterias["count"]
+        %td
+          = "Female(#{criterias['female_count']}); "
+          = "Minority(#{criterias['minority_count']}); "
+          = "Disability(#{criterias['disability_count']}); "
+          = "Poor(#{criterias['poor_card_count']}); "
+          = "Youth(#{criterias['youth_count']});"
+

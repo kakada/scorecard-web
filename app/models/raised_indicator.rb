@@ -18,4 +18,5 @@ class RaisedIndicator < ApplicationRecord
 
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
   belongs_to :indicatorable, polymorphic: true
+  belongs_to :tag, optional: true
 end

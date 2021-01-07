@@ -15,5 +15,6 @@
 #
 FactoryBot.define do
   factory :raised_indicator do
+    tag
   end
 end

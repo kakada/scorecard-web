@@ -16,6 +16,8 @@
 #
 FactoryBot.define do
   factory :participant do
-    
+    scorecard
+    age      { rand(20..65) }
+    gender   { Participant::GENDERS.sample }
   end
 end
