@@ -1,19 +1,26 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th{:scope => "col"}= t('scorecard.which_criteria_raised')
-      %th{:scope => "col"}= t('scorecard.how_many_times')
-      %th{:scope => "col"}= t('scorecard.participant')
+      %th{:scope => "col"}= t('scorecard.proposed_criterias')
+      %th{:scope => "col"}= t('scorecard.raised_times')
 
   %tbody
-    - @criterias.each do |criterias|
+    - @criterias.each do |criteria|
       %tr
-        %td= criterias["name"]
-        %td= criterias["count"]
         %td
-          = "Female(#{criterias['female_count']}); "
-          = "Minority(#{criterias['minority_count']}); "
-          = "Disability(#{criterias['disability_count']}); "
-          = "Poor(#{criterias['poor_card_count']}); "
-          = "Youth(#{criterias['youth_count']});"
+          %div.mb-2= criteria["name"]
+          %div.text-muted.card-subtitle.text-sm
+            - if criteria["female_count"] > 0
+              %span{"data-toggle" => "tooltip", "data-placement" => "top", title: t('scorecard.female')}
+                %i.fas.fa-venus
 
+              %span= "#{criteria['female_count']};"
+
+            - %w(minority disability poor_card youth).each do |field|
+              - if criteria["#{field}_count"] > 0
+                %span{"data-toggle" => "tooltip", "data-placement" => "top", title: t("scorecard.#{field}")}
+                  %span.text-uppercase= field[0]
+
+                %span= "#{criteria[field + '_count']};"
+
+        %td= criteria["count"]
