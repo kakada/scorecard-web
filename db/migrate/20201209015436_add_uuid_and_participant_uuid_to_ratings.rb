@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddUuidAndParticipantUuidToRatings < ActiveRecord::Migration[6.0]
   def change
     add_column :ratings, :uuid, :string, default: "uuid_generate_v4()", null: false

@@ -31,9 +31,9 @@ Rails.application.routes.draw do
     resource :setting, only: [:show, :update]
   end
 
-  resources :languages, path: '/scorecards/settings/languages'
+  resources :languages, path: "/scorecards/settings/languages"
 
-  resources :facilities, path: '/scorecards/settings/facilities' do
+  resources :facilities, path: "/scorecards/settings/facilities" do
     get :children, on: :member
     resources :indicators, module: "facilities" do
       post :clone_from_template, on: :collection
@@ -41,9 +41,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :templates, path: '/scorecards/settings/templates'
+  resources :templates, path: "/scorecards/settings/templates"
 
-  resources :local_ngos, path: '/scorecards/settings/local_ngos' do
+  resources :local_ngos, path: "/scorecards/settings/local_ngos" do
     resources :cafs, module: "local_ngos"
     post :import, on: :collection
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: facilitators
@@ -11,6 +13,5 @@
 #
 FactoryBot.define do
   factory :facilitator do
-    
   end
 end

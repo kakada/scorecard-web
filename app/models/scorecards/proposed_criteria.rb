@@ -20,7 +20,7 @@ module Scorecards
 
     def criterias
       _criterias = group_indicators.map do |key, value|
-        raised_indicators.select{ |indi| indi.indicatorable_id == key[0] && indi.indicatorable_type == key[1] }[0].indicatorable
+        raised_indicators.select { |indi| indi.indicatorable_id == key[0] && indi.indicatorable_type == key[1] }[0].indicatorable
       end
 
       _criterias.map do |indi|
@@ -32,14 +32,14 @@ module Scorecards
     end
 
     private
-      def assign_participant_info(criteria={}, indicator)
-        uuids = raised_indicators.select{ |rd| rd.indicatorable_id == indicator.id && rd.indicatorable_type == indicator.class.name }.pluck(:participant_uuid)
+      def assign_participant_info(criteria = {}, indicator)
+        uuids = raised_indicators.select { |rd| rd.indicatorable_id == indicator.id && rd.indicatorable_type == indicator.class.name }.pluck(:participant_uuid)
 
         %w(minority disability poor_card youth).each do |field|
           criteria["#{field}_count"] = raised_participants.select { |participant| uuids.include?(participant.uuid) && !!participant[field] }.length
         end
 
-        criteria["female_count"] = raised_participants.select { |participant| uuids.include?(participant.uuid) && participant.gender == 'female'}.length
+        criteria["female_count"] = raised_participants.select { |participant| uuids.include?(participant.uuid) && participant.gender == "female" }.length
         criteria
       end
 

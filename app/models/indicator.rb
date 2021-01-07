@@ -7,10 +7,11 @@
 #  id                 :bigint           not null, primary key
 #  categorizable_id   :integer
 #  categorizable_type :string
-#  tag_id             :integer
 #  name               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  tag_id             :integer
+#  display_order      :integer
 #
 class Indicator < ApplicationRecord
   include Indicatorable
