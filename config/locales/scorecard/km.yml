@@ -22,7 +22,8 @@ km:
     number_of_youth: ចំនួនយុវជន
     number_of_id_poor: ចំនួនអ្នកមានបណ្ណក្រីក្រ
     proposed_criteria: លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
-    median: ពិន្ទុមធ្យម
+    median: មេដ្យាន
+    average_score: ពិន្ទុមធ្យម
     strength: ចំនុចខ្លាំង
     weakness: ចំនុចខ្សោយ (បញ្ហា)
     desired_change: ការផ្លាស់ប្តូរដែលចង់បាន (តម្រូវការ)
@@ -56,3 +57,4 @@ km:
     youth: យុវជន
     disability: ពិការភាព
     female: ស្រី
+    selected_criterias: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស

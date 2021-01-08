@@ -22,7 +22,8 @@ en:
     number_of_youth: Number of youth
     number_of_id_poor: Number of id poor
     proposed_criteria: Proposed Criteria
-    median: Average Score
+    median: Median
+    average_score: Average Score
     strength: Strength
     weakness: Weakness (reflection)
     desired_change: Desired change (demand)
@@ -56,3 +57,4 @@ en:
     youth: Youth
     disability: Disability
     female: Female
+    selected_criterias: Selected criterias

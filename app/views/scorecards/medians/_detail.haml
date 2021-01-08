@@ -1,11 +1,20 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th{:scope => "col"}= t("scorecard.which_criteria_selected")
-      %th{:scope => "col"}= t("scorecard.median")
+      %th{:scope => "col"}= t("scorecard.selected_criterias")
+      %th{:scope => "col"}
+        = t("scorecard.average_score")
+        %div= "(#{t('scorecard.median')})"
 
   %tbody
-    - @voting_indicators.each do |indicator|
+    - @voting_indicators.each do |criteria|
       %tr
-        %td= indicator.indicatorable.name
-        %td= VotingIndicator.medians[indicator.median]
+        %td
+          .mb-1= criteria["name"]
+          .d-flex
+            - VotingIndicator.medians.keys.each do |item|
+              .d-flex.rating-wrapper
+                = image_tag item, style: 'width: 24px'
+                .flex-grow-1.d-flex.align-items-center.justify-content-center= criteria["#{item}_count"]
+
+        %td= VotingIndicator.medians[criteria["median"]]
