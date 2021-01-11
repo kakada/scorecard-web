@@ -106,8 +106,8 @@ CW.TemplatesNew = do ->
       !!wrapper.find('.audio-input-destroy') && wrapper.find('.audio-input-destroy').val(0)
 
   onClickAddField = ->
-    $('form .add_indicators').off('click')
-    $('form .add_indicators').on 'click', (event) ->
+    $('form .add_field').off('click')
+    $('form .add_field').on 'click', (event) ->
       event.preventDefault()
       appendField(this)
 
@@ -129,7 +129,9 @@ CW.TemplatesNew = do ->
 
   {
     init: init,
-    initTypeahead: initTypeahead
+    initTypeahead: initTypeahead,
+    onClickAddField: onClickAddField,
+    onClickRemoveField: onClickRemoveField
   }
 
 CW.TemplatesCreate = CW.TemplatesNew

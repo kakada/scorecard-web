@@ -11,3 +11,11 @@
             %a.pointer.badge.badge-info.text-white{'data-target' => '#datetime-format', 'data-toggle' => 'modal'}= t('shared.edit')
 
             = render 'modal_datetime_format', f: f
+
+      .dotted-line.d-flex
+        %label.flex-grow-1= t('program.contacts')
+        %div
+          = current_program.contacts.take(2).map(&:value).join('; ')
+          %a.pointer.badge.badge-info.text-white{href: contacts_path, 'data-remote' => true}= t('shared.setup')
+
+          = render 'programs/contacts/modal'

@@ -1,0 +1,17 @@
+%li
+  %fieldset.fieldset.field-wrapper.mb-2
+    .d-flex.align-items-center
+      .d-flex.w-100
+        .flex-1
+          = f.input :contact_type, label: false, collection: Contact::CONTACT_TYPES, input_html: {class: 'flex-grow-1'}
+
+        .mr-1
+
+        .flex-1
+          = f.input :value, label: false, input_html: {class: 'flex-grow-1'}
+
+        .d-flex.align-items-start
+          = f.hidden_field :_destroy
+
+          %button.btn.text-danger.remove_fields
+            %i.fas.fa-trash-alt.icon-delete
