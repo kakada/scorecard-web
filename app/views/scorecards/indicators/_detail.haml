@@ -1,11 +1,27 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th{:scope => "col"}= t('scorecard.which_criteria_raised')
-      %th{:scope => "col"}= t('scorecard.how_many_times')
+      %th{:scope => "col"}= t('scorecard.proposed_criterias')
+      %th{:scope => "col"}= t('scorecard.raised_times')
 
   %tbody
-    - @criterias.each do |criterias|
+    - @criterias.each do |criteria|
       %tr
-        %td= criterias["name"]
-        %td= criterias["count"]
+        %td
+          .mb-2= criteria["name"]
+
+          .text-muted.card-subtitle.text-sm
+            - if criteria["female_count"] > 0
+              %span{"data-toggle" => "tooltip", "data-placement" => "top", title: t('scorecard.female')}
+                = "<i class='fas fa-venus'></i>:".html_safe
+
+              %span= "#{criteria['female_count']}, "
+
+            - %w(minority disability poor_card youth).each do |field|
+              - if criteria["#{field}_count"] > 0
+                %span{"data-toggle" => "tooltip", "data-placement" => "top", title: t("scorecard.#{field}")}
+                  %span.text-uppercase= "#{field[0]}: "
+
+                %span= "#{criteria[field + '_count']}, "
+
+        %td= criteria["count"]

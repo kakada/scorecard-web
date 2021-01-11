@@ -11,6 +11,7 @@
 #  audio           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  content         :string
 #
 require "rails_helper"
 

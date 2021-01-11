@@ -18,7 +18,7 @@ module Api
 
       private
         def assign_params
-          params['custom_indicator'] = JSON.parse(params['custom_indicator'])
+          params["custom_indicator"] = JSON.parse(params["custom_indicator"])
         end
 
         def assign_scorecard

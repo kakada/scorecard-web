@@ -2,7 +2,7 @@
 
 module ScorecardsHelper
   def scorecard_setup_sub_title
-    return '' unless @scorecard.number_of_participant.present?
+    return "" unless @scorecard.number_of_participant.present?
 
     str = "#{t('scorecard.number_of_participant')}: #{@scorecard.number_of_participant}; "
     str += "#{t('scorecard.number_of_female')}: #{@scorecard.number_of_female || 0}; "

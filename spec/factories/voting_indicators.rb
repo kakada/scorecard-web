@@ -4,7 +4,6 @@
 #
 # Table name: voting_indicators
 #
-#  id                 :bigint           not null, primary key
 #  indicatorable_id   :integer
 #  indicatorable_type :string
 #  scorecard_uuid     :string
@@ -15,6 +14,7 @@
 #  suggested_action   :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  uuid               :string           default("uuid_generate_v4()"), not null, primary key
 #
 FactoryBot.define do
   factory :voting_indicator do

@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: participants
 #
-#  id             :bigint           not null, primary key
-#  uuid           :string
+#  uuid           :string           not null, primary key
 #  scorecard_uuid :string
 #  age            :integer
 #  gender         :string
@@ -14,7 +15,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Participant, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"

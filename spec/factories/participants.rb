@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: participants
 #
-#  id             :bigint           not null, primary key
-#  uuid           :string
+#  uuid           :string           not null, primary key
 #  scorecard_uuid :string
 #  age            :integer
 #  gender         :string
@@ -16,6 +17,8 @@
 #
 FactoryBot.define do
   factory :participant do
-    
+    scorecard
+    age      { rand(20..65) }
+    gender   { Participant::GENDERS.sample }
   end
 end

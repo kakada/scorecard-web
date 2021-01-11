@@ -22,7 +22,8 @@ en:
     number_of_youth: Number of youth
     number_of_id_poor: Number of id poor
     proposed_criteria: Proposed Criteria
-    median: Average Score
+    median: Median
+    average_score: Average Score
     strength: Strength
     weakness: Weakness (reflection)
     desired_change: Desired change (demand)
@@ -46,7 +47,14 @@ en:
     add_new: Add new scorecard
     setup: Setup
     which_criteria_raised: Which criterias have been raised?
-    how_many_times: How many times?
-    which_criteria_selected: Which criterias have been selected?
+    raised_times: Raised times
+    proposed_criterias: Proposed criterias
     number_of_proposed_criteria: Number of proposed criterias
     number_of_selected_criteria: Number of selected criterias
+    participant: Participant
+    poor_card: Poor card
+    minority: Minority
+    youth: Youth
+    disability: Disability
+    female: Female
+    selected_criterias: Selected criterias

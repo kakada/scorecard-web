@@ -22,7 +22,8 @@ km:
     number_of_youth: ចំនួនយុវជន
     number_of_id_poor: ចំនួនអ្នកមានបណ្ណក្រីក្រ
     proposed_criteria: លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
-    median: ពិន្ទុមធ្យម
+    median: មេដ្យាន
+    average_score: ពិន្ទុមធ្យម
     strength: ចំនុចខ្លាំង
     weakness: ចំនុចខ្សោយ (បញ្ហា)
     desired_change: ការផ្លាស់ប្តូរដែលចង់បាន (តម្រូវការ)
@@ -46,7 +47,14 @@ km:
     add_new: បន្ថែមប័ណ្ណពិន្ទុថ្មី
     setup: ការកំណត់ប័ណ្ណពិន្ទុ
     which_criteria_raised: តើលក្ខណៈវិនិច្ឆ័យណាខ្លះត្រូវបានលើកឡើង?
-    how_many_times: ចំនួនប៉ុន្មានដង?
-    which_criteria_selected: តើលក្ខណៈវិនិច្ឆ័យណាខ្លះត្រូវបានជ្រើសរើស?
+    raised_times: ចំនួនដង
+    proposed_criterias: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
     number_of_proposed_criteria: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានស្នើ"
     number_of_selected_criteria: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស"
+    participant: អ្នកចូលរួម
+    poor_card: មានប័ណ្ណក្រីក្រ
+    minority: ជនជាតិភាគតិច
+    youth: យុវជន
+    disability: ពិការភាព
+    female: ស្រី
+    selected_criterias: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
