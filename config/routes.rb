@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   namespace :scorecards do
     namespace :settings do
-      resources :ratings, only: [:index, :create]
+      resources :ratings, only: [:index]
     end
   end
 
@@ -29,6 +29,9 @@ Rails.application.routes.draw do
 
   scope module: :programs do
     resource :setting, only: [:show, :update]
+    resources :contacts, only: [:index] do
+      put :upsert, on: :collection
+    end
   end
 
   resources :languages, path: "/scorecards/settings/languages"
@@ -62,6 +65,7 @@ Rails.application.routes.draw do
       resources :programs, only: [] do
         resources :languages, only: [:index]
         resources :rating_scales, only: [:index]
+        resources :contacts, only: [:index]
       end
 
       resources :facilities, only: [] do

@@ -38,6 +38,6 @@ module ApplicationHelper
       render(partial, f: builder, option: option)
     end
 
-    link_to(name, "#", class: "add_#{association} btn", data: { id: id, fields: fields.gsub("\n", "") })
+    link_to(name, "#", class: "add_field add_#{association} btn", data: { id: id, fields: fields.gsub("\n", "") })
   end
 end
