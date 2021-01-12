@@ -21,6 +21,8 @@
 #  authentication_token   :string           default("")
 #  token_expired_date     :datetime
 #  language_code          :string           default("en")
+#  unlock_token           :string
+#  locked_at              :datetime
 #
 require "rails_helper"
 

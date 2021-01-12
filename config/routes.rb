@@ -53,9 +53,8 @@ Rails.application.routes.draw do
 
   resource :download, only: [:show]
   resources :users do
-    collection do
-      post :update_locale
-    end
+    put :unlock_access, on: :member
+    post :update_locale, on: :collection
   end
 
   resource :about, only: [:show]
@@ -78,6 +77,10 @@ Rails.application.routes.draw do
 
       resources :local_ngos, only: [] do
         resources :cafs, only: [:index]
+      end
+
+      resources :users, only: [] do
+        put :lock_access, on: :collection
       end
 
       post   "sign_in",  to: "sessions#create"

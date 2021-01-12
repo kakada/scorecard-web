@@ -19,6 +19,10 @@ class UserPolicy < ApplicationPolicy
     false
   end
 
+  def unlock_access?
+    update?
+  end
+
   def roles
     if user.system_admin?
       User::ROLES

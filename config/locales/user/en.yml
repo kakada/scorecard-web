@@ -8,8 +8,9 @@ en:
     copy_confirm_link: Copy confirm link
     copied: Copied!
     new_users: New Users
-    active: Active
+    actived: Actived
     pending: Pending
+    locked: Locked
     number: 'No'
     province: Province
     edit_user: Edit user

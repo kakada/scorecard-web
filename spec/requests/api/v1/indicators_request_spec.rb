@@ -9,7 +9,7 @@ RSpec.describe "Api::V1::IndicatorsController", type: :request do
     let(:json_response) { JSON.parse(response.body) }
 
     before {
-      headers = { "ACCEPT" => "application/json", "Authorization" => user.authentication_token }
+      headers = { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" }
       get "/api/v1/facilities/#{facility.id}/indicators", headers: headers
     }
 
