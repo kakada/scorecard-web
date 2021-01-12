@@ -3,7 +3,7 @@
 module Api
   module V1
     class SessionsController < ApiController
-      skip_before_action :authenticate_with_token!
+      skip_before_action :restrict_access
 
       def create
         user = User.find_by(email: user_params[:email])

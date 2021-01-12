@@ -13,8 +13,12 @@
     color: orange;
   }
 
-  .status.active {
+  .status.actived {
     color: green;
+  }
+
+  .status.locked {
+    color: red;
   }
 
   .search-email {

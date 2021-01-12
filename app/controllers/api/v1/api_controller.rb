@@ -5,16 +5,17 @@ module Api
     class ApiController < ActionController::Base
       protect_from_forgery with: :null_session
 
-      before_action :authenticate_with_token!
+      before_action :restrict_access
 
-      def current_user
-        @current_user ||= User.from_authentication_token(request.headers["Authorization"])
-      end
+      attr_reader :current_user
       helper_method :current_user
 
       private
-        def authenticate_with_token!
-          render json: { errors: "Not authenticated" }, status: :unauthorized unless current_user.present?
+        def restrict_access
+          authenticate_or_request_with_http_token do |token, _options|
+            @current_user = User.from_authentication_token(token)
+            @current_user.present? && !@current_user.access_locked?
+          end
         end
     end
   end

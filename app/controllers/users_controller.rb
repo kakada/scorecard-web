@@ -51,6 +51,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def unlock_access
+    @user = authorize User.find(params[:id])
+    @user.unlock_access!
+
+    redirect_to users_url
+  end
+
   private
     def user_params
       params.require(:user).permit(:email, :role, :program_id)

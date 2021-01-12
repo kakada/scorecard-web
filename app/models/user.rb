@@ -21,12 +21,14 @@
 #  authentication_token   :string           default("")
 #  token_expired_date     :datetime
 #  language_code          :string           default("en")
+#  unlock_token           :string
+#  locked_at              :datetime
 #
 class User < ApplicationRecord
   include Confirmable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
+  devise :database_authenticatable, :registerable, :confirmable, :lockable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   enum role: {
@@ -76,6 +78,13 @@ class User < ApplicationRecord
 
   def display_name
     email.split("@").first.upcase
+  end
+
+  def status
+    return "locked" if access_locked?
+    return "actived" if confirmed?
+
+    "pending"
   end
 
   private

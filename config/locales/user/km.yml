@@ -8,8 +8,9 @@ km:
     copy_confirm_link: ថតចម្លងតំណភ្ជាប់
     copied: ត្រូវបានថតចម្លង!
     new_users: អ្នកប្រើប្រាស់ថ្មី
-    active: សកម្ម
+    actived: សកម្ម
     pending: រង់ចាំ
+    locked: ជាប់សោ
     number: លេខរៀង
     province: ខេត្ត
     edit_user: កែតម្រូវអ្នកប្រើប្រាស់

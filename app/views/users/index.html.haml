@@ -26,8 +26,8 @@
               %td= user.role.titlecase
               %td= user.program_name
 
-              %td.status{ class: ('active' if user.confirmed?) }
-                = user.confirmed? ? t('user.active') : t('user.pending')
+              %td.status{ class: user.status }
+                = t("user.#{user.status}")
 
               %td.text-right
                 - if policy(user).destroy?
@@ -36,6 +36,10 @@
 
                     = link_to '#', class: "btn btn-circle btn-sm btn-info mr-2 btn-copy", data: { toggle: 'tooltip', placement: 'top', title: t('user.copy_confirm_link') } do
                       %i.far.fa-copy
+
+                  - if user.access_locked?
+                    = link_to unlock_access_user_path(user), class: "btn btn-circle btn-sm btn-success mr-2 btn-copy", data: { toggle: 'tooltip', placement: 'top', title: t('shared.unlock') }, method: :put do
+                      %i.fas.fa-unlock
 
                   = render 'shared/action_buttons', edit_url: edit_user_path(user), delete_url: user_path(user), object: user
 
