@@ -1,15 +1,23 @@
 # frozen_string_literal: true
 
+require_relative "raised_indicator"
+require_relative "voting_indicator"
+require_relative "rating"
+
 module Sample
   class Scorecard
     def self.load
       1.times do |i|
-        build_scorecard
+        scorecard = create_scorecard
+
+        ::Sample::RaisedIndicator.load(scorecard)
+        ::Sample::VotingIndicator.load(scorecard)
+        ::Sample::Rating.load(scorecard)
       end
     end
 
     private
-      def self.build_scorecard
+      def self.create_scorecard
         number_of_caf = rand(1..5)
         number_of_participant = rand(10..15)
         number_of_female = rand(1...number_of_participant)

@@ -2,10 +2,7 @@
 
 module Sample
   class Rating
-    def self.load
-      scorecard = ::Scorecard.first
-      return if scorecard.nil?
-
+    def self.load(scorecard)
       scorecard.number_of_participant.to_i.times do |i|
         scorecard.voting_indicators.each do |indi|
           scorecard.ratings.create(

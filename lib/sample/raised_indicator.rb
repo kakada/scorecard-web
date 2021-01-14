@@ -2,10 +2,7 @@
 
 module Sample
   class RaisedIndicator
-    def self.load
-      scorecard = ::Scorecard.first
-      return if scorecard.nil?
-
+    def self.load(scorecard)
       create_proposed_criteria_with_predefined_indicator(scorecard)
       create_proposed_criteria_with_custom_indicator(scorecard)
     end

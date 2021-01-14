@@ -2,10 +2,7 @@
 
 module Sample
   class VotingIndicator
-    def self.load
-      scorecard = ::Scorecard.first
-      return if scorecard.nil?
-
+    def self.load(scorecard)
       indicators = RaisedIndicatorService.new(scorecard.uuid).indicators
       predefineds = indicators[:predefineds]
       customs = indicators[:customs]
