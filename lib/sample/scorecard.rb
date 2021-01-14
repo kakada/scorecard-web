@@ -4,11 +4,12 @@ require_relative "base"
 require_relative "raised_indicator"
 require_relative "voting_indicator"
 require_relative "rating"
+require "ndjson"
 
 module Sample
   class Scorecard < ::Sample::Base
     def self.load
-      1.times do |i|
+      2.times do |i|
         scorecard = create_scorecard
 
         ::Sample::RaisedIndicator.load(scorecard)
@@ -17,16 +18,30 @@ module Sample
       end
     end
 
-    def self.export
-      data = []
-      ::Scorecard.find_each do |scorecard|
-        data << build_scorecard(scorecard)
-      end
+    def self.export(json_type="json")
+      return unless %w(json ndjson).include? json_type
 
-      write_to_file(data, 'scorecards')
+      self.send("export_as_#{json_type}")
     end
 
     private
+      def self.export_as_json
+        data = []
+        ::Scorecard.find_each do |scorecard|
+          data << build_scorecard(scorecard)
+        end
+
+        write_to_file(data, "scorecards")
+      end
+
+      def self.export_as_ndjson
+        generator = NDJSON::Generator.new(get_file_path("scorecard_ndjson"))
+
+        ::Scorecard.find_each do |scorecard|
+          generator.write(build_scorecard(scorecard))
+        end
+      end
+
       def self.build_scorecard(scorecard)
         _scorecard = scorecard.as_json
         _scorecard["location"] = scorecard.location.try(:as_json)

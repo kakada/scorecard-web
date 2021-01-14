@@ -19,8 +19,8 @@ if Rails.env.development? || Rails.env.test?
     end
 
     desc "Loads sample data"
-    task export: :environment do
-      Sample::CscWeb.export
+    task :export, [:json_type] => :environment do |task, args|
+      Sample::CscWeb.export(args[:json_type])
     end
   end
 end

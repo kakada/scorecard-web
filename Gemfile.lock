@@ -189,6 +189,7 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    ndjson (1.0.0)
     nio4r (2.5.4)
     nokogiri (1.11.0)
       mini_portile2 (~> 2.5.0)
@@ -390,6 +391,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jquery-rails (~> 4.4.0)
   listen (~> 3.2)
+  ndjson (~> 1.0.0)
   omniauth-google-oauth2
   pagy (~> 3.5)
   pg (>= 0.18, < 2.0)

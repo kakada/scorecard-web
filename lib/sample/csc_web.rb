@@ -22,8 +22,8 @@ module Sample
       ::Sample::Scorecard.load
     end
 
-    def self.export
-      ::Sample::Scorecard.export
+    def self.export(json_type = "json")
+      ::Sample::Scorecard.export(json_type)
     end
   end
 end
