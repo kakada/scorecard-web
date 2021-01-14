@@ -17,5 +17,10 @@ if Rails.env.development? || Rails.env.test?
     task load: [:clean_db] do
       Sample::CscWeb.load_samples
     end
+
+    desc "Loads sample data"
+    task export: :environment do
+      Sample::CscWeb.export
+    end
   end
 end

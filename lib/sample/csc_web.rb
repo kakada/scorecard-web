@@ -21,5 +21,9 @@ module Sample
       ::Sample::Caf.load
       ::Sample::Scorecard.load
     end
+
+    def self.export
+      ::Sample::Scorecard.export
+    end
   end
 end

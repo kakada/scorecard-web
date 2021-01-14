@@ -4,7 +4,7 @@ module Scorecards
   class IndicatorsController < ApplicationController
     def index
       @scorecard = Scorecard.find(params[:scorecard_id])
-      @criterias = Scorecards::ProposedCriteria.new(@scorecard.uuid).criterias
+      @criterias = Scorecards::ProposedCriteria.new(@scorecard).criterias
 
       respond_to do |format|
         format.js

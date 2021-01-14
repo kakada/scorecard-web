@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+require_relative "base"
 require_relative "raised_indicator"
 require_relative "voting_indicator"
 require_relative "rating"
 
 module Sample
-  class Scorecard
+  class Scorecard < ::Sample::Base
     def self.load
       1.times do |i|
         scorecard = create_scorecard
@@ -16,7 +17,24 @@ module Sample
       end
     end
 
+    def self.export
+      data = []
+      ::Scorecard.find_each do |scorecard|
+        data << build_scorecard(scorecard)
+      end
+
+      write_to_file(data, 'scorecards')
+    end
+
     private
+      def self.build_scorecard(scorecard)
+        _scorecard = scorecard.as_json
+        _scorecard["location"] = scorecard.location.try(:as_json)
+        _scorecard["proposed_criterias"] = ::Scorecards::ProposedCriteria.new(scorecard).criterias
+        _scorecard["voting_criterias"] = ::Scorecards::VotingCriteria.new(scorecard).criterias
+        _scorecard
+      end
+
       def self.create_scorecard
         number_of_caf = rand(1..5)
         number_of_participant = rand(10..15)
