@@ -4,9 +4,9 @@ module Api
   module V1
     class ContactsController < ApiController
       def index
-        program = Program.find_by(id: params[:program_id])
+        program = current_user.program
 
-        render json: program.contacts
+        render json: program.try(:contacts) || []
       end
     end
   end

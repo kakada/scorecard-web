@@ -4,14 +4,14 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::ContactsController", type: :request do
   describe "GET #index" do
-    let!(:user) { create(:user) }
     let!(:program) { create(:program) }
+    let!(:user) { create(:user, program: program) }
     let!(:contact) { create(:contact, program_id: program.id) }
     let(:json_response) { JSON.parse(response.body) }
 
     before {
-      headers = { "ACCEPT" => "application/json", "Authorization" => user.authentication_token }
-      get "/api/v1/programs/#{program.id}/contacts", headers: headers
+      headers = { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" }
+      get "/api/v1/contacts", headers: headers
     }
 
     it { expect(response.content_type).to eq("application/json; charset=utf-8") }
