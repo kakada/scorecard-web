@@ -13,7 +13,7 @@
         .d-flex.align-items-center
           %label.mr-3= t('program.datetime_format')
 
-          = f.input :datetime_format, collection: Program::DATETIME_FORMATS.keys, include_blank: false, label: false
+          = f.input :datetime_format, collection: Program::DATETIME_FORMATS.keys, include_blank: false, label: false, input_html: {class: 'custom-select'}
 
       .modal-footer
         %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')
