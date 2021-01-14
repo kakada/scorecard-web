@@ -64,8 +64,9 @@ Rails.application.routes.draw do
       resources :programs, only: [] do
         resources :languages, only: [:index]
         resources :rating_scales, only: [:index]
-        resources :contacts, only: [:index]
       end
+
+      resources :contacts, only: [:index]
 
       resources :facilities, only: [] do
         resources :indicators, only: [:index]
