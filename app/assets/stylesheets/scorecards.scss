@@ -25,62 +25,16 @@
 }
 //===****===
 
-ol.timeline {
-  position: relative;
-  list-style: none;
-  counter-reset: my-awesome-counter;
-
-  li {
-    counter-increment: my-awesome-counter;
-    margin: 0.25rem;
-    position: relative;
-    margin: 0;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  li:last-child {
-    &:before {
-      background-color: transparent;
-    }
-  }
-
-  li::before {
-    content: '';
-    background-color: #FF9F55;
-    width: 4px;
-    height: 100%;
-    display: block;
-    position: absolute;
-    left: -4px;
-    top: 2rem;
-  }
-
-  li::after {
-    content: counter(my-awesome-counter);
-    background-color: white;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    display: inline-block;
-    color: #000;
-    text-align: center;
-    margin-right: 0.5rem;
-    position: absolute;
-    left: -19px;
-    top: 16px;
-    border: 4px solid #FF9F55;
-  }
-
-  .content {
-    overflow: hidden;
-  }
-}
-
 #scorecards-show {
   .modal-dialog {
     @media (min-width: 576px) {
       max-width: 700px;
     }
   }
+}
+
+.veticial-line {
+  height: 30px;
+  margin-left: 20px;
+  border-left: 2px dashed;
 }

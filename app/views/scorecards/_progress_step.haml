@@ -1,16 +1,15 @@
 - disabled ||= false
-- sub_title ||= ''
+- sub_title = sub_title.presence || '_'
 
-%li
-  .content
-    .card.mb-2
-      .card-body.d-flex
-        .flex-1
-          %h6= label
-          .card-subtitle.text-muted= disabled ? '' : sub_title
+.card
+  .card-header
+    .d-flex
+      .flex-grow-1= label
 
-        %div
-          - if disabled
-            %button.btn.btn-secondary{ disabled: true }= t("shared.view_detail")
-          - else
-            = link_to t("shared.view_detail"), url, remote: true, class: "btn btn-primary"
+  .card-body
+    .d-flex
+      .flex-1= disabled ? '_' : sub_title
+
+      %div
+        - unless disabled
+          = link_to t("shared.view_detail"), url, remote: true, class: "btn btn-primary"

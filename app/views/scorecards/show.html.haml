@@ -1,18 +1,23 @@
 = render 'page_title'
 
 #contents
-  %ol.timeline
-    = render 'progress_step', label: t("scorecard.setup"), url: scorecard_path(@scorecard), sub_title: scorecard_setup_sub_title
+  = render 'progress_step', label: "1. #{t('scorecard.setup')}", url: scorecard_path(@scorecard), sub_title: scorecard_setup_sub_title
 
-    - disabled_button = @scorecard.raised_indicators.blank?
+  - disabled_button = @scorecard.raised_indicators.blank?
 
-    - num_proposed_criteria = @scorecard.raised_indicators.pluck(:indicatorable_id, :indicatorable_type).uniq.length
+  - num_proposed_criteria = @scorecard.raised_indicators.pluck(:indicatorable_id, :indicatorable_type).uniq.length
 
-    = render 'progress_step', label: t("scorecard.proposed_criteria"), url: scorecard_indicators_path(@scorecard), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_proposed_criteria')}: #{num_proposed_criteria}"
+  .veticial-line
 
-    = render 'progress_step', label: t("scorecard.indicator_development"), url: scorecard_medians_path(@scorecard), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_selected_criteria')}: #{@scorecard.voting_indicators.length}"
+  = render 'progress_step', label: "2. #{t('scorecard.proposed_criteria')}", url: scorecard_indicators_path(@scorecard), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_proposed_criteria')}: #{num_proposed_criteria}"
 
-    = render 'progress_step', label: t("scorecard.swot_table"), url: scorecard_swots_path(@scorecard), disabled: disabled_button
+  .veticial-line
+
+  = render 'progress_step', label: "3. #{t('scorecard.indicator_development')}", url: scorecard_medians_path(@scorecard), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_selected_criteria')}: #{@scorecard.voting_indicators.length}"
+
+  .veticial-line
+
+  = render 'progress_step', label: "4. #{t('scorecard.swot_table')}", url: scorecard_swots_path(@scorecard), disabled: disabled_button
 
 = render "main_modal"
 = render "modal_scorecard_uuid"
