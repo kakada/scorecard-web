@@ -4,3 +4,5 @@ en:
     tel: លេខទូរស័ព្ទ
     email: អ៊ីមែល
     value: តម្លៃ
+    tel_placeholder: '023111222'
+    email_placeholder: abc@exmple.com

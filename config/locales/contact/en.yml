@@ -4,3 +4,5 @@ en:
     tel: Tel
     email: Email
     value: Value
+    tel_placeholder: '023111222'
+    email_placeholder: abc@exmple.com
