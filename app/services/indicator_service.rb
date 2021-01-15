@@ -8,14 +8,16 @@ class IndicatorService
   end
 
   def clone_from_template(template_id)
-    template = ::Template.find_by(id: template_id)
+    return unless template_id.present?
 
+    template = ::Template.find_by(id: template_id)
     clone_indicator(template, facility)
   end
 
   def clone_to_template(template_name)
-    template = facility.program.templates.new(name: template_name)
+    return unless template_name.present?
 
+    template = facility.program.templates.new(name: template_name)
     clone_indicator(facility, template)
   end
 

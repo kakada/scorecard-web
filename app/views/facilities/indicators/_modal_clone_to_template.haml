@@ -9,8 +9,11 @@
       = form_for '', :url => clone_to_template_facility_indicators_path(@facility) do |f|
         .modal-body
           .form-group
-            %label= t('indicator.template_name')
-            = text_field_tag 'template_name', '', class: 'form-control'
+            %label
+              = t('indicator.template_name')
+              %abbr.abbr-required{:title => "required"} *
+
+            = text_field_tag 'template_name', '', class: 'form-control', required: true
 
         .modal-footer
           %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')

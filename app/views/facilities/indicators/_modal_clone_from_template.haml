@@ -9,10 +9,13 @@
       = form_for '', :url => clone_from_template_facility_indicators_path(@facility) do |f|
         .modal-body
           .form-group
-            %label= t('indicator.template')
+            %label
+              = t('indicator.template')
+              %abbr.abbr-required{:title => "required"} *
+
             - options = @templates.map{|template| ["#{template.name} (#{template.indicators.length} indicators)", template.id]}
 
-            = select_tag "template_id", options_for_select(options), class: 'form-control'
+            = select_tag "template_id", options_for_select(options), class: 'form-control custom-select', required: true
 
         .modal-footer
           %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
