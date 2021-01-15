@@ -1,55 +1,31 @@
 # frozen_string_literal: true
 
-require_relative "base"
-require_relative "raised_indicator"
-require_relative "voting_indicator"
-require_relative "rating"
-require "ndjson"
+require_relative "sample"
 
 module Sample
-  class Scorecard < ::Sample::Base
-    def self.load
-      2.times do |i|
+  class Scorecard
+    def self.load(count = 2)
+      dependent_models = %w(RaisedIndicator VotingIndicator Rating)
+
+      count.times do |i|
         scorecard = create_scorecard
 
-        ::Sample::RaisedIndicator.load(scorecard)
-        ::Sample::VotingIndicator.load(scorecard)
-        ::Sample::Rating.load(scorecard)
+        dependent_models.each do |model|
+          "::Sample::#{model.camelcase}".constantize.load(scorecard)
+        rescue
+          Rails.logger.warn "Model #{model} is unknwon"
+        end
       end
     end
 
-    def self.export(json_type="json")
-      return unless %w(json ndjson).include? json_type
-
-      self.send("export_as_#{json_type}")
+    def self.export(type = "json")
+      class_name = "Exporters::#{type.camelcase}Exporter"
+      class_name.constantize.new(::Scorecard.all).export("scorecards")
+    rescue
+      Rails.logger.warn "#{class_name} is unknwon"
     end
 
     private
-      def self.export_as_json
-        data = []
-        ::Scorecard.find_each do |scorecard|
-          data << build_scorecard(scorecard)
-        end
-
-        write_to_file(data, "scorecards")
-      end
-
-      def self.export_as_ndjson
-        generator = NDJSON::Generator.new(get_file_path("scorecard_ndjson"))
-
-        ::Scorecard.find_each do |scorecard|
-          generator.write(build_scorecard(scorecard))
-        end
-      end
-
-      def self.build_scorecard(scorecard)
-        _scorecard = scorecard.as_json
-        _scorecard["location"] = scorecard.location.try(:as_json)
-        _scorecard["proposed_criterias"] = ::Scorecards::ProposedCriteria.new(scorecard).criterias
-        _scorecard["voting_criterias"] = ::Scorecards::VotingCriteria.new(scorecard).criterias
-        _scorecard
-      end
-
       def self.create_scorecard
         number_of_caf = rand(1..5)
         number_of_participant = rand(10..15)
