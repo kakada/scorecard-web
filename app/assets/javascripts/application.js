@@ -30,6 +30,7 @@
 //= require users/new
 //= require local_ngos
 //= require scorecards_settings/rating
+//= require scorecards_settings/contact
 
 document.addEventListener('turbolinks:load', function() {
   CW.Common.Topbar.init();

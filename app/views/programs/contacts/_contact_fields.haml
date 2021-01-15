@@ -3,12 +3,12 @@
     .d-flex.align-items-center
       .d-flex.w-100
         .flex-1
-          = f.input :contact_type, label: false, collection: Contact::CONTACT_TYPES, input_html: {class: 'flex-grow-1 custom-select'}
+          = f.input :contact_type, label: false, collection: Contact::CONTACT_TYPES, input_html: {class: 'flex-1 custom-select contact-type', 'data-placeholders' => placeholders.to_json}, include_blank: false
 
         .mr-1
 
         .flex-1
-          = f.input :value, label: false, input_html: {class: 'flex-grow-1'}
+          = f.input :value, label: false, placeholder: get_placeholder(f.object.contact_type), input_html: {class: 'flex-1 contact-value'}
 
         .d-flex.align-items-start
           = f.hidden_field :_destroy

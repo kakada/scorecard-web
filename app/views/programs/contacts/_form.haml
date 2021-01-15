@@ -1,9 +1,5 @@
 = simple_form_for @program, url: '/contacts/upsert', method: :put, class: 'setting', remote: true do |f|
   .modal-body.form-inline
-    .d-flex.w-100{style: 'padding-right: 38px;'}
-      .mb-1.flex-1= t('contact.contact_type')
-      .mb-1.flex-1= t('contact.value')
-
     %ol.fields.sortable.w-100
       = f.simple_fields_for :contacts, f.object.contacts do |builder|
         = render 'contact_fields', f: builder
