@@ -15,7 +15,7 @@ RSpec.describe Scorecards::ProposedCriteria, type: :model do
     let!(:indicator2) { create(:indicator) }
     let!(:indicator3) { create(:indicator) }
 
-    let(:criterias) { Scorecards::ProposedCriteria.new(scorecard.uuid).criterias }
+    let(:criterias) { Scorecards::ProposedCriteria.new(scorecard).criterias }
     let(:criteria1) { criterias.select { |c| c["id"] == indicator1.id }[0] }
     let(:criteria2) { criterias.select { |c| c["id"] == indicator2.id }[0] }
     let(:criteria3) { criterias.select { |c| c["id"] == indicator3.id }[0] }

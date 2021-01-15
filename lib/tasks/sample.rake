@@ -17,5 +17,17 @@ if Rails.env.development? || Rails.env.test?
     task load: [:clean_db] do
       Sample::CscWeb.load_samples
     end
+
+    desc "Loads sample data"
+    task :export, [:json_type] => :environment do |task, args|
+      filetype = args[:json_type] || "json"
+      Sample::CscWeb.export(filetype)
+    end
+
+    desc "Simulate scorecard data"
+    task :load_scorecard, [:count] => :environment do |task, args|
+      count = (args[:count] || 1).to_i
+      ::Sample::Scorecard.load(count)
+    end
   end
 end

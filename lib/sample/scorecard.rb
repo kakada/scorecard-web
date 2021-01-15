@@ -1,15 +1,32 @@
 # frozen_string_literal: true
 
+require_relative "sample"
+
 module Sample
   class Scorecard
-    def self.load
-      1.times do |i|
-        build_scorecard
+    def self.load(count = 2)
+      dependent_models = %w(RaisedIndicator VotingIndicator Rating)
+
+      count.times do |i|
+        scorecard = create_scorecard
+
+        dependent_models.each do |model|
+          "::Sample::#{model.camelcase}".constantize.load(scorecard)
+        rescue
+          Rails.logger.warn "Model #{model} is unknwon"
+        end
       end
     end
 
+    def self.export(type = "json")
+      class_name = "Exporters::#{type.camelcase}Exporter"
+      class_name.constantize.new(::Scorecard.all).export("scorecards")
+    rescue
+      Rails.logger.warn "#{class_name} is unknwon"
+    end
+
     private
-      def self.build_scorecard
+      def self.create_scorecard
         number_of_caf = rand(1..5)
         number_of_participant = rand(10..15)
         number_of_female = rand(1...number_of_participant)

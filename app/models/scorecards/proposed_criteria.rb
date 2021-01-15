@@ -4,8 +4,8 @@ module Scorecards
   class ProposedCriteria
     attr_reader :scorecard
 
-    def initialize(scorecard_uuid)
-      @scorecard = Scorecard.find_by(uuid: scorecard_uuid)
+    def initialize(scorecard)
+      @scorecard = scorecard
     end
 
     def tags

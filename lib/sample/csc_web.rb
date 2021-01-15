@@ -1,16 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "user"
-require_relative "program"
-require_relative "facility"
-require_relative "indicator"
-require_relative "local_ngo"
-require_relative "caf"
-require_relative "location"
-require_relative "scorecard"
-require_relative "raised_indicator"
-require_relative "voting_indicator"
-require_relative "rating"
+require_relative "sample"
 
 module Sample
   class CscWeb
@@ -23,10 +13,10 @@ module Sample
       ::Sample::LocalNgo.load
       ::Sample::Caf.load
       ::Sample::Scorecard.load
-      ::Sample::RaisedIndicator.load
-      ::Sample::VotingIndicator.load
-      ::Sample::Rating.load
-      # ::Sample::RaisedPerson.load
+    end
+
+    def self.export(filetype = "json")
+      ::Sample::Scorecard.export(filetype)
     end
   end
 end
