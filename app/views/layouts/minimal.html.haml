@@ -13,6 +13,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body.devise-form
+    = render "shared/notify_message"
     .column
       .wrapper
         = yield
