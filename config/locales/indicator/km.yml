@@ -16,3 +16,10 @@ km:
     add_criteria: + បន្ថែមលក្ខណៈវិនិច្ឆ័យ
     tag: ថេក
     add_new: បន្ថែមលក្ខណៈវិនិច្ឆ័យថ្មី
+    image: រូបភាព
+    recommended_image: រូបភាពដែលបានណែនាំ
+    up_to_1mb: រហូតដល់ 1 MB
+    other_not_perfect: ក្រៅពីនេះអាចធ្វើឲ្យរូបភាពដែលបង្ហាញមិនសូវស្អាត
+    edit_indicator: កែតម្រូវលក្ខណៈវិនិច្ឆ័យ
+    new_indicator: លក្ខណៈវិនិច្ឆ័យថ្មី
+    must_be_less_than_1mb: ត្រូវតិចជាង 1 មេកាបៃ

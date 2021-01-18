@@ -4,22 +4,11 @@
 
 CW.FacilitiesIndicatorsNew = do ->
   init = ->
-    onRemoveAudio()
-    onChangeAudio()
     CW.TemplatesNew.initTypeahead()
-
-  onRemoveAudio = ->
-    $(document).on 'click', '.remove-audio', (e) =>
-      wrapper = $(e.target).parents('.audio-wrapper')
-
-      wrapper.find('.audio-input').parent().removeClass('d-none')
-      wrapper.find('.audio-input-destroy').val(1)
-      wrapper.find('.remove-audio-wrapper').hide()
-
-  onChangeAudio = ->
-    $(document).on 'change', '.audio-input', (e) =>
-      wrapper = $(e.target).parents('.audio-wrapper')
-      !!wrapper.find('.audio-input-destroy') && wrapper.find('.audio-input-destroy').val(0)
+    CW.TemplatesNew.onRemoveAudio()
+    CW.TemplatesNew.onChangeAudio()
+    CW.TemplatesNew.onChangeImageFile()
+    CW.TemplatesNew.onClickButtonDeleteImage()
 
   { init: init }
 

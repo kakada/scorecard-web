@@ -50,7 +50,7 @@ class TemplatesController < ApplicationController
     def template_params
       params.require(:template).permit(:name,
         indicators_attributes: [
-          :id, :name, :display_order, :_destroy,
+          :id, :name, :display_order, :_destroy, :image, :remove_image,
           languages_indicators_attributes: [ :id, :language_id, :language_code, :content, :audio, :remove_audio ],
           tag_attributes: [ :id, :name ]
         ]

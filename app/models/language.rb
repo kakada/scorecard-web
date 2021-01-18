@@ -13,8 +13,6 @@
 #  updated_at :datetime         not null
 #
 class Language < ApplicationRecord
-  mount_uploader :json_file, JsonFileUploader
-
   belongs_to :program
   has_many :languages_indicators
   has_many :indicators, through: :languages_indicators

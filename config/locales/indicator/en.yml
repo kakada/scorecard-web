@@ -16,3 +16,10 @@ en:
     add_criteria: + Add Criteria
     tag: Tag
     add_new: Add new indicator
+    image: Image
+    recommended_image: Recommended image is
+    up_to_1mb: Up to 1 MB
+    other_not_perfect: Other may affect the pefect rendering
+    edit_indicator: Edit Criteria
+    new_indicator: New Criteria
+    must_be_less_than_1mb: must be less than 1MB
