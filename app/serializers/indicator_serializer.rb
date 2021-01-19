@@ -12,6 +12,7 @@
 #  updated_at         :datetime         not null
 #  tag_id             :integer
 #  display_order      :integer
+#  image              :string
 #
 class IndicatorSerializer < ActiveModel::Serializer
   attributes :id, :name, :tag_id, :tag_name

@@ -12,6 +12,7 @@
 #  updated_at         :datetime         not null
 #  tag_id             :integer
 #  display_order      :integer
+#  image              :string
 #
 class Indicator < ApplicationRecord
   include Indicatorable
@@ -38,7 +39,7 @@ class Indicator < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   def image_or_default
-    image_url || 'default_image.png'
+    image_url || "default_image.png"
   end
 
   def editable_tag?
