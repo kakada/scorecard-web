@@ -1,11 +1,10 @@
 .footer.p-3
-  .d-flex.justify-content-center.align-items-center
-    .d-inline-block.mx-4
-      .d-inline-block
-        %span.text-center.mb-2 Funded by
+  .medium-width.d-flex
+    .d-flex.mx-4.flex-1
+      .d-inline-block.flex-1
+        %span.text-center.mb-2= t('about.funded_by')
         = link_to 'https://endingpandemics.org/', title: 'Ending Pandemics', target: '_blank' do
-          = image_tag 'care_logo.png', class: 'footer-logo mx-2', alt: 'Care Cambodia'
-      .d-inline-block.mx-4
-        %span.text-center.mb-2 Developed by
-        = link_to 'http://ilabsoutheastasia.org/', title: 'InSTEDD iLab Southeast Asia', target: '_blank' do
-          = image_tag 'instedd-ilabsea.png', class: 'footer-logo mx-2', alt: 'InSTEDD iLab Southeast Asia'
+          = image_tag 'eu.png', class: 'footer-logo mx-2', alt: 'Care Cambodia'
+
+      .d-flex.align-items-center
+        = "#{t('about.version')}: #{ENV['APP_VERSION']}"
