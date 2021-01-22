@@ -23,6 +23,7 @@
 #  language_code          :string           default("en")
 #  unlock_token           :string
 #  locked_at              :datetime
+#  failed_attempts        :integer          default(0)
 #
 class User < ApplicationRecord
   include Confirmable

@@ -62,7 +62,7 @@ module Facilities
 
     private
       def indicator_params
-        params.require(:indicator).permit(:name,
+        params.require(:indicator).permit(:name, :image, :remove_image,
           languages_indicators_attributes: [ :id, :language_id, :language_code, :content, :audio, :remove_audio ],
           tag_attributes: [:id, :name, :_distroy]
         )

@@ -12,6 +12,7 @@
 #  updated_at         :datetime         not null
 #  tag_id             :integer
 #  display_order      :integer
+#  image              :string
 #
 FactoryBot.define do
   factory :indicator do

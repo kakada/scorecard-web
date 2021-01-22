@@ -1,5 +1,6 @@
 .w-75.view-center
   = simple_form_for [@facility, @indicator] do |f|
+    = render 'indicator_image_form', f: f
 
     .form-group
       %label= t('indicator.facility')

@@ -12,6 +12,7 @@
 #  updated_at         :datetime         not null
 #  tag_id             :integer
 #  display_order      :integer
+#  image              :string
 #
 class Indicator < ApplicationRecord
   include Indicatorable
@@ -22,6 +23,7 @@ class Indicator < ApplicationRecord
   has_many :languages, through: :languages_indicators
 
   validates :name, presence: true, uniqueness: { scope: [:categorizable_id, :categorizable_type] }
+  validate :image_size_validation
 
   before_create :set_display_order
 
@@ -33,6 +35,13 @@ class Indicator < ApplicationRecord
     return attributes["id"].blank? && attributes["content"].blank? && attributes["audio"].blank?
   }
 
+  # Uploader
+  mount_uploader :image, ImageUploader
+
+  def image_or_default
+    image_url || "default_image.png"
+  end
+
   def editable_tag?
     raised_indicators.blank?
   end
@@ -40,5 +49,9 @@ class Indicator < ApplicationRecord
   private
     def set_display_order
       self.display_order ||= categorizable.present? && categorizable.indicators.maximum(:display_order).to_i + 1
+    end
+
+    def image_size_validation
+      errors[:image] << I18n.t("indicator.must_be_less_than_1mb") if image.size > 1.megabytes
     end
 end

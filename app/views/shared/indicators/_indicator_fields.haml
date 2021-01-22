@@ -17,6 +17,8 @@
 
             = f.input :name, label: false, input_html: { placeholder: t('indicator.name'), class: ['field-name', ('no-style as-title' if indicator.persisted?)] }, wrapper_html: { class: ["flex-grow-1 pr-3", ('pl-3' unless indicator.persisted?)] }
 
+            = render "shared/indicators/indicator_image_form", f: f
+
             = f.fields_for :tag, (indicator.tag || indicator.build_tag ) do |builder|
               = builder.input :name, label: false, input_html: { placeholder: t('indicator.tag'), class: ['field-tag typeahead', ('no-style as-tag' if indicator.persisted?)] }, wrapper_html: { class: "w-25" }
 

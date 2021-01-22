@@ -12,15 +12,20 @@
 #  updated_at         :datetime         not null
 #  tag_id             :integer
 #  display_order      :integer
+#  image              :string
 #
 class IndicatorSerializer < ActiveModel::Serializer
-  attributes :id, :name, :tag_id, :tag_name
+  attributes :id, :name, :tag_id, :tag_name, :image
 
   belongs_to :categorizable
   has_many :languages_indicators
 
   def tag_name
     object.tag_name
+  end
+
+  def image
+    object.image_url
   end
 
   class LanguagesIndicatorSerializer < ActiveModel::Serializer

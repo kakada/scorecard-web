@@ -13,6 +13,9 @@ CW.TemplatesNew = do ->
     onClickCollapseTrigger()
     onClickCollapseAllTrigger()
 
+    onChangeImageFile()
+    onClickButtonDeleteImage()
+
   initTypeahead = (parentDom)->
     tags = $("[data-tags]").data('tags')
 
@@ -110,6 +113,8 @@ CW.TemplatesNew = do ->
     $('form .add_field').on 'click', (event) ->
       event.preventDefault()
       appendField(this)
+      # For image tooltip
+      $('[data-toggle="tooltip"]').tooltip()
 
   appendField = (dom) ->
     time = new Date().getTime()
@@ -127,11 +132,54 @@ CW.TemplatesNew = do ->
     $(dom).parent().find('input[type=hidden]').val('1')
     $(dom).closest('fieldset').hide()
 
+  #=========Image rendering
+  onClickButtonDeleteImage = ->
+    $(document).on 'click', '.btn-delete', (event)->
+      parent = $(event.target).parents('.image-wrapper')
+      showDefaultImage(parent)
+      hideDeleteButton(parent)
+      setCheckRemoveAvatar(parent)
+
+  onChangeImageFile = ->
+    $(document). on 'change', '.image-file', (event)->
+      parent = $(event.target).parents('.image-wrapper')
+      readURL(this, parent)
+      showButtonDelete(parent)
+      setUncheckRemoveAvatar(parent)
+
+  setCheckRemoveAvatar = (parentDom)->
+    $(parentDom).find('.remove-image-checkbock').attr('checked', true)
+
+  showDefaultImage = (parentDom)->
+    parentDom.find('.display-image').attr 'src', parentDom.find('.display-image').data('default')
+
+  hideDeleteButton = (parentDom)->
+    parentDom.find('.btn-delete').addClass 'd-none'
+
+  readURL = (input, parentDom) ->
+    if input.files and input.files[0]
+      reader = new FileReader
+
+      reader.onload = (e) ->
+        parentDom.find('.display-image').attr 'src', e.target.result
+
+      reader.readAsDataURL input.files[0]
+
+  showButtonDelete = (parentDom)->
+    parentDom.find('.btn-delete').removeClass 'd-none'
+
+  setUncheckRemoveAvatar = (parentDom)->
+    parentDom.find('.remove-image-checkbock').attr 'checked', false
+
   {
     init: init,
     initTypeahead: initTypeahead,
+    onRemoveAudio: onRemoveAudio,
+    onChangeAudio: onChangeAudio,
     onClickAddField: onClickAddField,
-    onClickRemoveField: onClickRemoveField
+    onClickRemoveField: onClickRemoveField,
+    onChangeImageFile: onChangeImageFile,
+    onClickButtonDeleteImage: onClickButtonDeleteImage
   }
 
 CW.TemplatesCreate = CW.TemplatesNew
