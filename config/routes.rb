@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   namespace :scorecards do
     namespace :settings do
-      resources :ratings, only: [:index]
+      resources :ratings, only: [:index, :create]
     end
   end
 
