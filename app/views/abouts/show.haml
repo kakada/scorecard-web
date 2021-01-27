@@ -19,12 +19,16 @@
     %h5= t('about.funded_by')
 
   .d-flex.justify-content-center.align-items-center.mb-4
-    = image_tag 'eu.png', alt: 'EU', style: 'width: 224px'
+    = link_to 'https://eeas.europa.eu/delegations/cambodia_en', target: '_blank' do
+      = image_tag 'eu.png', alt: 'EU', style: 'width: 224px'
 
   .d-flex.justify-content-center.align-items-center.mt-5.mb-3
     %h5= t('about.implemented_by')
 
   .d-flex.justify-content-center.align-items-center.pb-4
-    = image_tag 'care_logo.png', alt: 'CARE', style: 'width: 224px'
-    = image_tag 'api.png', alt: 'API', style: 'width: 112px; margin-left: 30px; margin-right: 30px;'
-    = image_tag 'instedd-ilabsea.png', alt: 'InSTEDD iLabSEA', style: 'width: 245px;'
+    = link_to 'https://www.care-cambodia.org/', target: '_blank' do
+      = image_tag 'care_logo.png', alt: 'CARE', style: 'width: 224px'
+    = link_to 'https://apiinstitute.org/', target: '_blank' do
+      = image_tag 'api.png', alt: 'API', style: 'width: 112px; margin-left: 30px; margin-right: 30px;'
+    = link_to 'http://ilabsoutheastasia.org', target: '_blank' do
+      = image_tag 'instedd-ilabsea.png', alt: 'InSTEDD iLabSEA', style: 'width: 245px;'
