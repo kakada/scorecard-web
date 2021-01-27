@@ -2,9 +2,10 @@
   / Sidebar - Brand
   %a.sidebar-brand.d-flex.align-items-center.justify-content-center{:href => root_path}
     .sidebar-brand-icon
-      %i.fas.fa-laugh-wink
+      = image_tag 'csc_logo.png', style: "width: 50px"
+
     .sidebar-brand-text.mx-3
-      Scorecard
+      = t('sidebar.community_scorecard')
 
   / Divider
   %hr.sidebar-divider.my-0/
