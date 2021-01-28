@@ -1,3 +1,9 @@
 .logo-wrapper
-  %h3.mb-3.text-center{style: 'width: 400px; margin: 0 auto;'}= "#{ENV['APP_NAME']} (#{ENV['APP_SHORTCUT_NAME']})"
-  .flex-row.text-center
+  %h3.mb-3.text-center{style: 'width: 400px; margin: 0 auto;'}
+    = ENV['APP_NAME']
+
+    - if shortcut_name = ENV['APP_SHORTCUT_NAME'].presence
+      = "(#{shortcut_name})"
+
+  .pt-4.flex-row.text-center.justify-content-conter
+    = image_tag 'csc_logo.png', style: "width: 300px"

@@ -9,6 +9,9 @@
     height: 100%;
     overflow-y: scroll;
   }
+  .medium-width {
+    width: 906px;
+  }
 
   .wrapper {
     display: flex;
@@ -24,7 +27,6 @@
 
     .logo-wrapper {
       padding-right: 140px;
-      padding-left: 60px;
     }
 
     .title {

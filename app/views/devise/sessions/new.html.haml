@@ -23,10 +23,12 @@
       .form-group.form-check
         = f.check_box :remember_me, class: 'form-check-input'
         = f.label :remember_me, t('devise.remember_me'), class: 'form-check-label'
-    .actions
+    .actions.form-group
       = f.submit "Login", class: 'btn btn-primary w-100 mb-2'
 
-  .text-right
-    = render "devise/shared/links"
-    / = link_to t('about.about_us'), about_us_path, class: 'btn btn-link'
+  .text-right.mb-4
+    .form-group
+      = render "devise/shared/links"
+    .form-group
+      = link_to t('about.about_us'), about_path
 
