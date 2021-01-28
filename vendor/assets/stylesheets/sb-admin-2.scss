@@ -41,6 +41,9 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+$primary: #e4761e;
+$hoverColor: #cc5c00;
+
 *,
 *::before,
 *::after {
@@ -2379,14 +2382,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: $primary;
+  border-color: $primary;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: $hoverColor;
+  border-color: $hoverColor;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -9883,8 +9886,8 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #4e73df;
-  background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+  background-color: $primary;
+  background-image: linear-gradient(180deg, $primary 10%, #E68E48 100%);
   background-size: cover;
 }
 
