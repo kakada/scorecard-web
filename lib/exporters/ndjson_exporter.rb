@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative "base_exporter"
 require "ndjson"
 
 class Exporters::NdjsonExporter < Exporters::BaseExporter
