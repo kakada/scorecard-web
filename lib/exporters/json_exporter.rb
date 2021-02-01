@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "base_exporter"
+
 class Exporters::JsonExporter < Exporters::BaseExporter
   def export(filename)
     data = []
