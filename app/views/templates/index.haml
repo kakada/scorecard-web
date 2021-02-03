@@ -2,11 +2,10 @@
 
 .card.shadow.mb-4.facilities
   .card-body
-    = render partial: "shared/no_data", locals: { items: @templates }
-
-    = render "shared/pagination_title", objects: @templates, url: new_template_path, label: t('template.add_new')
+    = render partial: "shared/no_data", locals: { items: @templates, url: new_template_path, label: t('template.add_new') }
 
     - if @templates.present?
+      = render "shared/pagination_title", objects: @templates, url: new_template_path, label: t('template.add_new')
 
       %table.table.table-hover.pretty
         %thead

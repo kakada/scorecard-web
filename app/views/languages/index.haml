@@ -2,11 +2,10 @@
 
 .card.shadow.mb-4
   .card-body
-    = render partial: "shared/no_data", locals: { items: @languages }
-
-    = render "shared/pagination_title", objects: @languages, url: new_language_path, remote: true, label: t('language.add_new')
+    = render partial: "shared/no_data", locals: { items: @languages, url: new_language_path, remote: true, label: t('language.add_new') }
 
     - if @languages.present?
+      = render "shared/pagination_title", objects: @languages, url: new_language_path, remote: true, label: t('language.add_new')
 
       %table.table.table-hover.pretty
         %thead
