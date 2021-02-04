@@ -1,14 +1,27 @@
+- province_errors = @scorecard.errors[:province_id]
 .form-group
-  = f.label(:province_id, t('scorecard.province'))
+  = f.label(:province_id) do
+    = t('scorecard.province')
+    %abbr{title: "required"} *
   = f.hidden_field(:province_id)
-  = f.select(:province_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_target => "district", :pumi_select_collection_url => pumi.provinces_path, :pumi_select_collection_label_method => "name_#{current_user.language_code}", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: 'form-control custom-select'})
+  = f.select(:province_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_target => "district", :pumi_select_collection_url => pumi.provinces_path, :pumi_select_collection_label_method => "name_#{current_user.language_code}", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: ['form-control custom-select', ('is-invalid' if province_errors.present?)]})
+  .invalid-feedback.d-block= province_errors.join(';')
 
+- disctrict_errors = @scorecard.errors[:district_id]
 .form-group
-  = f.label(:district_id, t('scorecard.district'))
+  = f.label(:district_id) do
+    = t('scorecard.district')
+    %abbr{title: "required"} *
   = f.hidden_field(:district_id)
-  = f.select(:district_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => "district", :pumi_select_target => "commune", :pumi_select_collection_url => pumi.districts_path(:province_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_#{current_user.language_code}", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#district", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control custom-select'})
+  = f.select(:district_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => "district", :pumi_select_target => "commune", :pumi_select_collection_url => pumi.districts_path(:province_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_#{current_user.language_code}", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#district", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: ['form-control custom-select', ('is-invalid' if disctrict_errors.present?)]})
+  .invalid-feedback.d-block= disctrict_errors.join(';')
 
+- commune_errors = @scorecard.errors[:commune_id]
 .form-group
-  = f.label(:commune_id, t('scorecard.commune'))
+  = f.label(:commune_id) do
+    = t('scorecard.commune')
+    %abbr{title: "required"} *
   = f.hidden_field(:commune_id)
-  = f.select(:commune_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => "commune", :pumi_select_target => "village", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_#{current_user.language_code}", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control custom-select'})
+  = f.select(:commune_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => "commune", :pumi_select_target => "village", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_#{current_user.language_code}", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: ['form-control custom-select', ('is-invalid' if commune_errors.present?)]})
+
+  .invalid-feedback.d-block= @scorecard.errors[:commune_id].join(';')

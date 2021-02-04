@@ -2,20 +2,19 @@
 
 .card.shadow.mb-4
   .card-body
-    = render partial: "shared/no_data", locals: { items: @local_ngos }
-
-    .d-sm-flex
-      = render "shared/pagination_title", objects: @local_ngos
-      .flex-grow-1
-
-      %div
-        = render "more_option"
-
-        %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
-          %i.fas.fa-plus.fa-sm.text-white-50
-          = t("local_ngo.add_new")
+    = render partial: "shared/no_data", locals: { items: @local_ngos, url: new_local_ngo_path, label: t("local_ngo.add_new") }
 
     - if @local_ngos.present?
+      .d-sm-flex
+        = render "shared/pagination_title", objects: @local_ngos
+        .flex-grow-1
+
+        %div
+          = render "more_option"
+
+          %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
+            %i.fas.fa-plus.fa-sm.text-white-50
+            = t("local_ngo.add_new")
 
       %table.table.table-hover.pretty
         %thead

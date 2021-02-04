@@ -1,17 +1,18 @@
 .d-sm-flex.align-items-center.justify-content-between.mb-4
-  %h1.h3.mb-0.text-gray-800= "#{@local_ngo.name}: #{t('caf.cafs')}"
+  %h1.h3.mb-0.text-gray-800.flex-1= "#{@local_ngo.name}: #{t('caf.cafs')}"
   %div
     = link_to local_ngos_path, class: 'btn btn-secondary mr-2 btn-sm shadow-sm' do
       %i.fas.fa-chevron-left
       = t('shared.back')
 
-    %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_caf_path(@local_ngo) }
-      %i.fas.fa-plus.fa-sm.text-white-50
-      = t("caf.add_new")
+    - if @cafs.present?
+      %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_caf_path(@local_ngo) }
+        %i.fas.fa-plus.fa-sm.text-white-50
+        = t("caf.add_new")
 
 .card.shadow.mb-4
   .card-body
-    = render partial: "shared/no_data", locals: { items: @cafs }
+    = render partial: "shared/no_data", locals: { items: @cafs, url: new_local_ngo_caf_path(@local_ngo), label: t("caf.add_new") }
 
     - if @cafs.present?
       = render "shared/pagination_title"
