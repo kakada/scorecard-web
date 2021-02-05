@@ -38,6 +38,7 @@ FactoryBot.define do
     facility     { create(:facility, :with_parent) }
     unit_type_id { facility.parent_id }
     program
+    creator
     local_ngo
     scorecard_type { Scorecard::SCORECARD_TYPES.sample.last }
     commune_id   { Pumi::Commune.all.sample.id }

@@ -2,24 +2,27 @@
 
 class ScorecardPolicy < ApplicationPolicy
   def index?
-    user.program_admin?
+    true
   end
 
   def create?
-    user.program_admin?
+    user.program_admin? || user.staff?
   end
 
   def update?
-    user.program_admin?
+    create?
   end
 
   def destroy?
-    user.program_admin?
+    create?
   end
 
   class Scope < Scope
     def resolve
-      scope.all
+      return scope.all if user.system_admin?
+      return scope.where(local_ngo_id: user.local_ngo_id) if user.lngo?
+
+      scope.where(program_id: user.program_id)
     end
   end
 end

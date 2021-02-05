@@ -38,6 +38,7 @@ class Scorecard < ApplicationRecord
   belongs_to :local_ngo, optional: true
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
+  belongs_to :creator, class_name: "User"
 
   has_many   :facilitators, foreign_key: :scorecard_uuid, dependent: :destroy
   has_many   :cafs, through: :facilitators
