@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def update
     @user = authorize User.find(params[:id])
 
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       redirect_to users_url
     else
       flash.now[:alert] = @user.errors.full_messages
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :role, :program_id)
+      params.require(:user).permit(:email, :role, :program_id, :local_ngo_id)
     end
 
     def locale_params

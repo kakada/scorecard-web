@@ -19,7 +19,9 @@ class LocalNgoPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.all
+      return scope.all if user.system_admin?
+
+      scope.where(program_id: user.program_id)
     end
   end
 end

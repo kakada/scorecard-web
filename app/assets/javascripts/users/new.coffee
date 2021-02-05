@@ -1,20 +1,49 @@
 CW.UsersNew = do ->
   init = ->
-    handleDisplayProgram()
+    initDisplayProgram()
+    initDisplayLocalNgo()
     onChangeRole()
 
-  handleDisplayProgram = ->
-    if $('.role').val() != 'system_admin'
-      $('.program').show()
+  initDisplayLocalNgo = ->
+    if !!$('.role').val() && $('.role').val() == 'lngo'
+      showLocalNgo()
+
+  initDisplayProgram = ->
+    if !!$('.role').val() && $('.role').val() != 'system_admin'
+      showProgram()
 
   onChangeRole = ->
     $('.role').off('change')
     $('.role').on 'change', (event) ->
-      if event.target.value == 'system_admin'
-        $('.program').hide()
-        $('.program select').val('')
-      else
-        $('.program').show()
+      role = event.target.value
+      handleProgram(role)
+      handleLocalNgo(role)
+
+  handleProgram = (role) ->
+    if role == 'system_admin'
+      hideProgram()
+    else
+      showProgram()
+
+  handleLocalNgo = (role) ->
+    if role == 'lngo'
+      showLocalNgo()
+    else
+      hideLocalNgo()
+
+  showLocalNgo = ->
+    $('.local-ngo').removeClass('d-none')
+
+  hideLocalNgo = ->
+    $('.local-ngo').addClass('d-none')
+    $('.local-ngo select').val('')
+
+  showProgram = ->
+    $('.program').removeClass('d-none')
+
+  hideProgram = ->
+    $('.program').addClass('d-none')
+    $('.program select').val('')
 
   { init: init }
 

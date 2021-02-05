@@ -36,23 +36,31 @@ class User < ApplicationRecord
     system_admin: 1,
     program_admin: 2,
     staff: 3,
-    guest: 4
+    lngo: 4
   }
 
-  ROLES = roles.keys.map { |r| [r.titlecase, r] }
+  ROLES = [
+    ["System Admin", "system_admin"],
+    ["Admin", "program_admin"],
+    ["Staff/Officer", "staff"],
+    ["Lngo", "lngo"]
+  ]
 
   # Association
   belongs_to :program, optional: true
+  belongs_to :local_ngo, optional: true
 
   # Validation
   validates :role, presence: true
-  validates :program_id, presence: true, unless: -> { role == "system_admin" }
+  validates :program_id, presence: true, unless: -> { system_admin? }
+  validates :local_ngo_id, presence: true, if: -> { lngo? }
 
   # Callback
   before_create :generate_authentication_token
 
   # Delegation
   delegate :name, to: :program, prefix: :program, allow_nil: true
+  delegate :name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
 
   # Class methods
   def self.filter(params)
