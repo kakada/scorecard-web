@@ -34,7 +34,7 @@ module Facilities
     def update
       @indicator = authorize @facility.indicators.find(params[:id])
 
-      if @indicator.update_attributes(indicator_params)
+      if @indicator.update(indicator_params)
         redirect_to facility_indicators_url(@facility)
       else
         render :edit
