@@ -33,6 +33,8 @@
 #  number_of_id_poor         :integer
 #
 class Scorecard < ApplicationRecord
+  include Lockable
+
   belongs_to :unit_type, class_name: "Facility"
   belongs_to :facility
   belongs_to :local_ngo, optional: true
@@ -63,7 +65,6 @@ class Scorecard < ApplicationRecord
 
   before_create :secure_uuid
   before_create :set_name
-  before_update :validate_locked_scorecard
 
   accepts_nested_attributes_for :facilitators, allow_destroy: true
   accepts_nested_attributes_for :participants, allow_destroy: true
@@ -104,9 +105,5 @@ class Scorecard < ApplicationRecord
 
     def set_location_code
       self.location_code = commune_id
-    end
-
-    def validate_locked_scorecard
-      errors.add :locked_at, message: "is already locked!" if locked_at.present?
     end
 end

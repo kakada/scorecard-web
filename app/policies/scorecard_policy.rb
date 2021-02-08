@@ -10,7 +10,7 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def update?
-    create? && record.locked_at.nil?
+    create? && !record.access_locked?
   end
 
   def destroy?

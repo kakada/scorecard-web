@@ -3,6 +3,7 @@
 module Api
   module V1
     class ApiController < ActionController::Base
+      include Pundit
       protect_from_forgery with: :null_session
 
       before_action :restrict_access
