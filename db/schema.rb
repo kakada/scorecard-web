@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_05_093445) do
+ActiveRecord::Schema.define(version: 2021_02_08_040326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_093445) do
     t.integer "number_of_youth"
     t.integer "number_of_id_poor"
     t.integer "creator_id"
+    t.datetime "locked_at"
   end
 
   create_table "tags", force: :cascade do |t|
