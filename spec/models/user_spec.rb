@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
 
   describe "validate presence of program_id" do
     context "is system_admin" do
-      before { allow(subject).to receive(:system_admin?).and_return(true)}
+      before { allow(subject).to receive(:system_admin?).and_return(true) }
       it { is_expected.not_to validate_presence_of(:program_id) }
     end
 
@@ -53,7 +53,7 @@ RSpec.describe User, type: :model do
 
   describe "validate presence of local_ngo_id" do
     context "is lngo" do
-      before { allow(subject).to receive(:lngo?).and_return(true)}
+      before { allow(subject).to receive(:lngo?).and_return(true) }
       it { is_expected.to validate_presence_of(:local_ngo_id) }
     end
 

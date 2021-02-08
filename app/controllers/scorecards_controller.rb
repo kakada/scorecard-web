@@ -57,6 +57,6 @@ class ScorecardsController < ApplicationController
         :number_of_caf, :number_of_participant, :number_of_female,
         :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
         :planned_start_date, :planned_end_date, :local_ngo_id, :scorecard_type
-      ).merge({creator_id: current_user.id})
+      ).merge({ creator_id: current_user.id })
     end
 end

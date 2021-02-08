@@ -4,9 +4,12 @@ module Scorecards
   module Settings
     class RatingsController < ApplicationController
       def index
+        authorize RatingScale
       end
 
       def create
+        authorize RatingScale
+
         if current_program.update(ratings_params)
           redirect_to scorecards_settings_ratings_path
         else

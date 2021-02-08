@@ -2,7 +2,7 @@
 
 class FacilityPolicy < ApplicationPolicy
   def index?
-    user.program_admin?
+    user.program_admin? || user.staff?
   end
 
   def create?
