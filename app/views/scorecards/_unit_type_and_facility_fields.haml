@@ -1,17 +1,4 @@
-.form-group
-  = f.label(:unit_type_id) do
-    = t('scorecard.unit_type')
-    %abbr{title: "required"} *
-  = f.hidden_field(:unit_type_id)
-  = f.select(:unit_type_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_target => "facility", :pumi_select_collection_url => facilities_path(format: :json), :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: ['form-control custom-select', ('is-invalid' if @scorecard.errors[:unit_type_id].present?)]})
+= render partial: "select_field", locals: { f: f, field_name: "unit_type_id", select_id: "unit_type", select_target: "facility", select_collection_url: facilities_path(format: :json), select_populate_on_load: true, select_collection_label_method: 'name' }
 
-  .invalid-feedback.d-block= @scorecard.errors[:unit_type_id].join(';')
-
-.form-group
-  = f.label(:facility_id) do
-    = t('scorecard.facility')
-    %abbr{title: "required"} *
-  = f.hidden_field(:facility_id)
-  = f.select(:facility_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => "facility", :pumi_select_collection_url => children_facility_path(:id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#facility", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true, facilities: current_program.facilities.leaves.to_json}, class: ['form-control custom-select facility', ('is-invalid' if @scorecard.errors[:facility_id].present?)]})
-
-  .invalid-feedback.d-block= @scorecard.errors[:facility_id].join(';')
+.facility-wrapper{'data-facilities' => current_program.facilities.leaves.to_json}
+  = render partial: "select_field", locals: { f: f, field_name: "facility_id", select_id: "facility", select_target: "none", select_collection_url: children_facility_path(:id => "FILTER"), select_disabled_target: "#facility", select_collection_label_method: 'name' }

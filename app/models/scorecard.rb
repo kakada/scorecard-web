@@ -52,7 +52,7 @@ class Scorecard < ApplicationRecord
   has_many   :ratings, foreign_key: :scorecard_uuid, dependent: :destroy
 
   delegate  :name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
-  delegate  :name, to: :primary_school, prefix: :primary_school, allow_nil: true
+  delegate  :name_en, :name_km, to: :primary_school, prefix: :primary_school, allow_nil: true
   delegate  :name, to: :facility, prefix: :facility
 
   validates :year, presence: true
@@ -70,6 +70,7 @@ class Scorecard < ApplicationRecord
 
   before_create :secure_uuid
   before_create :set_name
+  before_save   :clear_primary_school_code, unless: -> { facility.try(:subset).present? }
 
   accepts_nested_attributes_for :facilitators, allow_destroy: true
   accepts_nested_attributes_for :participants, allow_destroy: true
@@ -116,5 +117,9 @@ class Scorecard < ApplicationRecord
 
     def set_location_code
       self.location_code = commune_id
+    end
+
+    def clear_primary_school_code
+      self.primary_school_code = nil
     end
 end

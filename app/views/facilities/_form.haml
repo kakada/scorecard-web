@@ -7,7 +7,7 @@
       %label= t('facility.parent')
       = f.select :parent_id, current_program.facilities.roots.pluck(:name, :id), {:include_blank => true}, {class: 'form-control custom-select'}
 
-    .form-group
+    .form-group.subset.d-none
       %label= t('facility.subset')
       = f.select :subset, Facility::SUBSETS.pluck(:name, :code), {:include_blank => true}, {class: 'form-control custom-select'}
 

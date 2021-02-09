@@ -14,7 +14,7 @@ module ScorecardsHelper
   end
 
   def scorecard_descriptions
-    descriptions = ['year', 'location_name', 'facility_name', 'primary_school_name'].map { |method| @scorecard.send(method) }
+    descriptions = ['year', 'location_name', 'facility_name', "primary_school_name_#{current_user.language_code}"].map { |method| @scorecard.send(method) }
     descriptions = descriptions.select{ |des| des.present? }
     descriptions.push(t("scorecard.#{@scorecard.scorecard_type}"))
     descriptions.join('; ')

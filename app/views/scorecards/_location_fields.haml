@@ -1,36 +1,8 @@
-- province_errors = @scorecard.errors[:province_id]
-.form-group
-  = f.label(:province_id) do
-    = t('scorecard.province')
-    %abbr{title: "required"} *
-  = f.hidden_field(:province_id)
-  = f.select(:province_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_target => "district", :pumi_select_collection_url => pumi.provinces_path, :pumi_select_collection_label_method => "name_#{current_user.language_code}", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: ['form-control custom-select', ('is-invalid' if province_errors.present?)]})
-  .invalid-feedback.d-block= province_errors.join(';')
+= render partial: "select_field", locals: { f: f, field_name: "province_id", select_id: "proince", select_target: "district", select_collection_url: pumi.provinces_path, select_populate_on_load: true }
 
-- disctrict_errors = @scorecard.errors[:district_id]
-.form-group
-  = f.label(:district_id) do
-    = t('scorecard.district')
-    %abbr{title: "required"} *
-  = f.hidden_field(:district_id)
-  = f.select(:district_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => "district", :pumi_select_target => "commune", :pumi_select_collection_url => pumi.districts_path(:province_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_#{current_user.language_code}", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#district", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: ['form-control custom-select', ('is-invalid' if disctrict_errors.present?)]})
-  .invalid-feedback.d-block= disctrict_errors.join(';')
+= render partial: "select_field", locals: { f: f, field_name: "district_id", select_id: "district", select_target: "commune", select_collection_url: pumi.districts_path(:province_id => "FILTER"), select_disabled_target: "#district" }
 
-- commune_errors = @scorecard.errors[:commune_id]
-.form-group
-  = f.label(:commune_id) do
-    = t('scorecard.commune')
-    %abbr{title: "required"} *
-  = f.hidden_field(:commune_id)
-  = f.select(:commune_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => "commune", :pumi_select_target => "primary_school", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_#{current_user.language_code}", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: ['form-control custom-select', ('is-invalid' if commune_errors.present?)]})
+= render partial: "select_field", locals: { f: f, field_name: "commune_id", select_id: "commune", select_target: "primary_school", select_collection_url: pumi.communes_path(:district_id => "FILTER"), select_disabled_target: "#commune" }
 
-  .invalid-feedback.d-block= commune_errors.join(';')
-
-.form-group.subset.d-none
-  = f.label(:primary_school_code) do
-    = t('scorecard.primary_school')
-    %abbr{title: "required"} *
-  = f.hidden_field(:primary_school_code)
-  = f.select(:primary_school_code, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => "primary_school", :pumi_select_collection_url => primary_schools_path(:id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#primary_school", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true, facilities: current_program.facilities.leaves.to_json}, class: ['form-control custom-select', ('is-invalid' if @scorecard.errors[:primary_school_code].present?)]})
-
-  .invalid-feedback.d-block= @scorecard.errors[:primary_school_code].join(';')
+.subset.d-none
+  = render partial: "select_field", locals: { f: f, field_name: "primary_school_code", select_id: "primary_school", select_target: "none", select_collection_url: primary_schools_path(:commune_id => "FILTER"), select_disabled_target: "#primary_school"}

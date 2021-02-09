@@ -4,8 +4,28 @@ CW.FacilitiesNew = (() => {
   }
 
   function init() {
-    onKeyupFacilityName()
-    onKeyupFacilityCode()
+    onKeyupFacilityName();
+    onKeyupFacilityCode();
+    handleDisplaySubset($('#facility_parent_id').val());
+    onChangeFacility();
+  }
+
+  function handleDisplaySubset(value) {
+    let subsetDom = $('.subset');
+
+    if(!!value) {
+      subsetDom.removeClass('d-none');
+    } else {
+      subsetDom.find('select').val('');
+      subsetDom.addClass('d-none');
+    }
+  }
+
+  function onChangeFacility() {
+    $('#facility_parent_id').off('change')
+    $('#facility_parent_id').on('change', (event) => {
+      handleDisplaySubset(event.target.value);
+    })
   }
 
   function onKeyupFacilityName() {

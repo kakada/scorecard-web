@@ -17,10 +17,10 @@
   %label.col-sm-4.col-form-label= t("scorecard.facility")
   %label.col-sm-8.col-form-label= " : #{@scorecard.facility.name}"
 
-- if @scorecard.primary_school_name.present?
+- if primary_school = @scorecard["primary_school_name_#{current_user.language_code}"].presence
   .row
     %label.col-sm-4.col-form-label= t("scorecard.primary_school")
-    %label.col-sm-8.col-form-label= " : #{@scorecard.primary_school_name}"
+    %label.col-sm-8.col-form-label= " : #{primary_school}"
 
 .row
   %label.col-sm-4.col-form-label= t("scorecard.scorecard_type")

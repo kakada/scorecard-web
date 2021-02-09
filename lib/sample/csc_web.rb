@@ -7,6 +7,7 @@ module Sample
     def self.load_samples
       ::Sample::Program.load
       ::Sample::Location.load
+      ::Sample::PrimarySchool.load
       ::Sample::LocalNgo.load
       ::Sample::User.load
       ::Sample::Facility.load
