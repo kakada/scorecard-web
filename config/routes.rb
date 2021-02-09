@@ -59,6 +59,8 @@ Rails.application.routes.draw do
 
   resource :about, only: [:show]
 
+  resources :primary_schools, only: [:index]
+
   namespace :api do
     namespace :v1 do
       resources :programs, only: [] do

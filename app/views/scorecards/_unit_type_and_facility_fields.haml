@@ -12,6 +12,6 @@
     = t('scorecard.facility')
     %abbr{title: "required"} *
   = f.hidden_field(:facility_id)
-  = f.select(:facility_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => "facility", :pumi_select_collection_url => children_facility_path(:id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#facility", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: ['form-control custom-select', ('is-invalid' if @scorecard.errors[:facility_id].present?)]})
+  = f.select(:facility_id, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => "facility", :pumi_select_collection_url => children_facility_path(:id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#facility", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true, facilities: current_program.facilities.leaves.to_json}, class: ['form-control custom-select facility', ('is-invalid' if @scorecard.errors[:facility_id].present?)]})
 
   .invalid-feedback.d-block= @scorecard.errors[:facility_id].join(';')

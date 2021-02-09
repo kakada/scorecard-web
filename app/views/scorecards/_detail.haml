@@ -16,6 +16,12 @@
 .row
   %label.col-sm-4.col-form-label= t("scorecard.facility")
   %label.col-sm-8.col-form-label= " : #{@scorecard.facility.name}"
+
+- if @scorecard.primary_school_name.present?
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.primary_school")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.primary_school_name}"
+
 .row
   %label.col-sm-4.col-form-label= t("scorecard.scorecard_type")
   %label.col-sm-8.col-form-label= " : " + t("scorecard.#{@scorecard.scorecard_type}")

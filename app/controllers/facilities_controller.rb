@@ -56,6 +56,6 @@ class FacilitiesController < ApplicationController
 
   private
     def facility_params
-      params.require(:facility).permit(:name, :code, :parent_id)
+      params.require(:facility).permit(:name, :code, :parent_id, :subset)
     end
 end

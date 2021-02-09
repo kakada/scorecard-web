@@ -13,6 +13,13 @@ module ScorecardsHelper
     str
   end
 
+  def scorecard_descriptions
+    descriptions = ['year', 'location_name', 'facility_name', 'primary_school_name'].map { |method| @scorecard.send(method) }
+    descriptions = descriptions.select{ |des| des.present? }
+    descriptions.push(t("scorecard.#{@scorecard.scorecard_type}"))
+    descriptions.join('; ')
+  end
+
   def css_active_tab(is_active)
     return "active" if is_active
   end

@@ -41,6 +41,7 @@ class Scorecard < ApplicationRecord
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
   belongs_to :creator, class_name: "User"
+  belongs_to :primary_school, foreign_key: :primary_school_code, optional: true
 
   has_many   :facilitators, foreign_key: :scorecard_uuid, dependent: :destroy
   has_many   :cafs, through: :facilitators
@@ -51,6 +52,8 @@ class Scorecard < ApplicationRecord
   has_many   :ratings, foreign_key: :scorecard_uuid, dependent: :destroy
 
   delegate  :name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
+  delegate  :name, to: :primary_school, prefix: :primary_school, allow_nil: true
+  delegate  :name, to: :facility, prefix: :facility
 
   validates :year, presence: true
   validates :province_id, presence: true
@@ -60,6 +63,8 @@ class Scorecard < ApplicationRecord
   validates :facility_id, presence: true
   validates :scorecard_type, presence: true
   validates :local_ngo_id, presence: true
+  validates :primary_school_code, presence: true, if: -> { facility.try(:subset).present? }
+  validates :primary_school_code, uniqueness: { scope: :commune_id }, allow_nil: true
 
   before_validation :set_location_code
 

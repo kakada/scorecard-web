@@ -25,4 +25,8 @@ class Facility < ApplicationRecord
 
   validates :name, presence: true
   validates :code, presence: true
+
+  SUBSETS = [
+    { code: 'ps', name: 'Primary School', dataset: "PrimarySchool" }
+  ]
 end

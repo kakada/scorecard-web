@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_08_040326) do
+ActiveRecord::Schema.define(version: 2021_02_09_024144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2021_02_08_040326) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "subset"
     t.index ["lft"], name: "index_facilities_on_lft"
     t.index ["parent_id"], name: "index_facilities_on_parent_id"
     t.index ["rgt"], name: "index_facilities_on_rgt"
@@ -145,6 +146,15 @@ ActiveRecord::Schema.define(version: 2021_02_08_040326) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "primary_schools", force: :cascade do |t|
+    t.string "code"
+    t.string "name_en"
+    t.string "name_km"
+    t.string "commune_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "programs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -209,6 +219,7 @@ ActiveRecord::Schema.define(version: 2021_02_08_040326) do
     t.integer "number_of_id_poor"
     t.integer "creator_id"
     t.datetime "locked_at"
+    t.string "primary_school_code"
   end
 
   create_table "tags", force: :cascade do |t|
