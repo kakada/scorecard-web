@@ -51,6 +51,8 @@ RSpec.describe Scorecard, type: :model do
   it { is_expected.to validate_presence_of(:province_id) }
   it { is_expected.to validate_presence_of(:district_id) }
   it { is_expected.to validate_presence_of(:commune_id) }
+  it { is_expected.to validate_presence_of(:planned_start_date) }
+  it { is_expected.to validate_presence_of(:planned_end_date) }
 
   describe "#secure_uuid" do
     let!(:uuid) { SecureRandom.random_number(1..999999).to_s.rjust(6, "0") }
@@ -103,6 +105,33 @@ RSpec.describe Scorecard, type: :model do
       let!(:scorecard) { create(:scorecard, locked_at: nil) }
 
       it { expect(scorecard.access_locked?).to be_falsey }
+    end
+  end
+
+  describe "validate planned_end_date" do
+    let!(:local_ngo) { create(:local_ngo) }
+
+    context "before planned_start_date" do
+      let(:scorecard)  { build(:scorecard, local_ngo: local_ngo, planned_start_date: Date.yesterday, planned_end_date: Date.today) }
+
+      it { expect(scorecard.valid?).to be_truthy }
+    end
+
+    context "equal to planned_start_date" do
+      let(:scorecard)  { build(:scorecard, local_ngo: local_ngo, planned_start_date: Date.today, planned_end_date: Date.today) }
+
+      it { expect(scorecard.valid?).to be_truthy }
+    end
+
+    context "after planned_start_date" do
+      let(:scorecard)  { build(:scorecard, local_ngo: local_ngo, planned_start_date: Date.tomorrow, planned_end_date: Date.today) }
+
+      it { expect(scorecard.valid?).to be_falsey }
+
+      it "raises errors" do
+        scorecard.valid?
+        expect(scorecard.errors.include? :planned_end_date)
+      end
     end
   end
 end

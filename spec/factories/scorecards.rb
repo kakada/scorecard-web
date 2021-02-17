@@ -44,5 +44,7 @@ FactoryBot.define do
     commune_id   { Pumi::Commune.all.sample.id }
     district_id  { Pumi::Commune.find_by_id(commune_id).district_id }
     province_id  { Pumi::Commune.find_by_id(commune_id).province_id }
+    planned_start_date { 7.days.from_now }
+    planned_end_date { planned_start_date }
   end
 end
