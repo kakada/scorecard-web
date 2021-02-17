@@ -14,7 +14,9 @@
             %th= sortable "id", t('shared.number')
             %th= sortable "email", t("user.email")
             %th= sortable "role", t("user.role")
-            %th= t('user.program')
+            %th= t('user.local_ngo')
+            - if current_user.system_admin?
+              %th= t('user.program')
             %th= t('user.status')
             %th
 
@@ -24,8 +26,9 @@
               %td= user.id
               %td= user.email
               %td= user.role.titlecase
-              %td= user.program_name
-
+              %td= user.local_ngo_name
+              - if current_user.system_admin?
+                %td= user.program_name
               %td.status{ class: user.status }
                 = t("user.#{user.status}")
 

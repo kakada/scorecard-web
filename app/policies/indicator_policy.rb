@@ -2,19 +2,19 @@
 
 class IndicatorPolicy < ApplicationPolicy
   def index?
-    user.program_admin?
+    user.program_admin? || user.staff?
   end
 
   def create?
-    user.program_admin?
+    user.program_admin? || user.staff?
   end
 
   def update?
-    user.program_admin?
+    create?
   end
 
   def destroy?
-    user.program_admin?
+    create?
   end
 
   class Scope < Scope

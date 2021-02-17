@@ -26,7 +26,7 @@
 #  failed_attempts        :integer          default(0)
 #
 FactoryBot.define do
-  factory :user do
+  factory :user, aliases: [:creator] do
     email         { FFaker::Internet.email }
     password      { FFaker::Internet.password }
     role          { "program_admin" }

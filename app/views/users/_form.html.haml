@@ -3,11 +3,15 @@
     = f.input :email, label: t('user.email'), input_html: { readonly: @user.persisted? }
     = f.input :role, label: t('user.role'), collection: policy(User).roles, input_html: { class: 'role custom-select' }
 
-    .program.hidden
-      - if current_program.present?
-        = f.input :program_id, label: t('user.program'), collection: policy_scope(Program.all), selected: current_program.id, input_html: { readonly: true, class: 'custom-select' }
-      - else
+    .local-ngo.d-none
+      = f.input :local_ngo_id, label: t('user.local_ngo'), collection: policy_scope(LocalNgo).pluck(:name, :id), input_html: { class: 'custom-select' }
+
+    - if current_program.present?
+      = f.hidden_field :program_id, value: current_program.id
+    - else
+      .program.d-none
         = f.input :program_id, label: t('user.program'), collection: policy_scope(Program.all), input_html: {class: 'custom-select'}
+
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), users_path, class: 'btn btn-secondary'

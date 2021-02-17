@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LocalNgoPolicy < ApplicationPolicy
+class RatingScalePolicy < ApplicationPolicy
   def index?
     user.program_admin? || user.staff?
   end
@@ -19,9 +19,7 @@ class LocalNgoPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope.all if user.system_admin?
-
-      scope.where(program_id: user.program_id)
+      scope.all
     end
   end
 end

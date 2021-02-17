@@ -36,6 +36,7 @@ require "rails_helper"
 
 RSpec.describe Scorecard, type: :model do
   it { is_expected.to belong_to(:program) }
+  it { is_expected.to belong_to(:creator).class_name("User") }
   it { is_expected.to belong_to(:local_ngo).optional }
   it { is_expected.to belong_to(:unit_type).class_name("Facility") }
   it { is_expected.to belong_to(:facility) }
