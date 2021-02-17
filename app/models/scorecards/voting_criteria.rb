@@ -9,9 +9,10 @@ module Scorecards
     end
 
     def criterias
-      scorecard.voting_indicators.includes(:indicatorable).order(median: :desc).map do |indicator|
+      scorecard.voting_indicators.includes(:indicatorable, ratings: :participant).order(median: :desc).map do |indicator|
         criteria = indicator.as_json
         criteria = assign_rating_info(criteria, indicator)
+        criteria = assign_participant_info(criteria, indicator)
         criteria["name"] = indicator.indicatorable.name
         criteria
       end
@@ -21,6 +22,18 @@ module Scorecards
       def assign_rating_info(criteria = {}, indicator)
         VotingIndicator.medians.each do |key, value|
           criteria["#{key}_count"] = scorecard.ratings.select { |rating| rating.voting_indicator_uuid == indicator.uuid && rating.score == value }.length
+        end
+
+        criteria
+      end
+
+      def assign_participant_info(criteria = {}, indicator)
+        ratings = indicator.ratings.select { |rating| !!rating.participant && rating.participant.gender == "female" }
+        criteria["female_median_score"] = ratings.collect(&:score).mean.to_f.round_up_half
+
+        %w(minority disability poor_card youth).each do |field|
+          ratings = indicator.ratings.select { |rating| !!rating.participant && rating.participant[field] }
+          criteria["#{field}_average_score"] = ratings.collect(&:score).mean.to_f.round_up_half
         end
 
         criteria

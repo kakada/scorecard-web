@@ -5,7 +5,7 @@ require_relative "sample"
 module Sample
   class Scorecard
     def self.load(count = 2)
-      dependent_models = %w(RaisedIndicator VotingIndicator Rating)
+      dependent_models = %w(Participant RaisedIndicator VotingIndicator Rating)
 
       count.times do |i|
         scorecard = create_scorecard

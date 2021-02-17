@@ -11,17 +11,6 @@
           .mb-2= criteria["name"]
 
           .text-muted.card-subtitle.text-sm
-            - if criteria["female_count"] > 0
-              %span{"data-toggle" => "tooltip", "data-placement" => "top", title: t('scorecard.female')}
-                = "<i class='fas fa-venus'></i>:".html_safe
-
-              %span= "#{criteria['female_count']}, "
-
-            - %w(minority disability poor_card youth).each do |field|
-              - if criteria["#{field}_count"] > 0
-                %span{"data-toggle" => "tooltip", "data-placement" => "top", title: t("scorecard.#{field}")}
-                  %span.text-uppercase= "#{field[0]}: "
-
-                %span= "#{criteria[field + '_count']}, "
+            = participant_information(criteria, 'count').html_safe
 
         %td= criteria["count"]

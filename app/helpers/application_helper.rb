@@ -47,4 +47,23 @@ module ApplicationHelper
     format = current_program.try(:datetime_format) || Program::DATETIME_FORMATS.keys[0]
     date.strftime(Program::DATETIME_FORMATS[format])
   end
+
+  def participant_information(criteria, agg_function)
+    %w(female minority disability poor_card youth).map do |field|
+      participant_tooltip(criteria, agg_function, field)
+    end.compact.join(', ')
+  end
+
+  private
+    def participant_tooltip(criteria, agg_function, field)
+      value = criteria["#{field}_#{agg_function}"].to_i
+      return unless value > 0
+
+      tooltip_title = t("scorecard.#{field}")
+      str = "<span data-toggle='tooltip' data-placement='top' title=#{tooltip_title}>"
+      str += field == "female" ? "<i class='fas fa-venus'></i>: " : "<span class='text-uppercase'>#{field[0]}: </span>"
+      str += "</span>"
+      str += "<span>#{value}</span>"
+      str
+    end
 end
