@@ -14,10 +14,6 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def destroy?
-    create? && record.locked_at.nil?
-  end
-
-  def destroy?
     update?
   end
 

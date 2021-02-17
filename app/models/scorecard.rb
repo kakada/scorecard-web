@@ -85,6 +85,12 @@ class Scorecard < ApplicationRecord
     "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("#{address}".to_sym)
   end
 
+  def self.filter(params)
+    scope = all
+    scope = scope.where.not(locked_at: nil) if params[:locked].present?
+    scope
+  end
+
   private
     def secure_uuid
       self.uuid ||= six_digit_rand

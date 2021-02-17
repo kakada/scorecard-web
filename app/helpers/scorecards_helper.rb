@@ -12,4 +12,8 @@ module ScorecardsHelper
     str += "#{t('scorecard.poor_card')}: #{@scorecard.number_of_id_poor || 0}"
     str
   end
+
+  def css_active_tab(is_active)
+    return "active" if is_active
+  end
 end

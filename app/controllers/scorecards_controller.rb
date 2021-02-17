@@ -2,7 +2,7 @@
 
 class ScorecardsController < ApplicationController
   def index
-    @pagy, @scorecards = pagy(policy_scope(Scorecard.order(sort_column + " " + sort_direction).includes(:facility)))
+    @pagy, @scorecards = pagy(policy_scope(Scorecard.filter(params).order(sort_column + " " + sort_direction).includes(:facility)))
   end
 
   def show
