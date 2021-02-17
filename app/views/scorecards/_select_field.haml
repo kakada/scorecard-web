@@ -5,7 +5,7 @@
 - select_collection_url ||= pumi.districts_path(:province_id => "FILTER")
 - select_disabled_target ||= "#district"
 - select_populate_on_load ||= false
-- select_collection_label_method ||= "name_#{current_user.language_code}"
+- select_collection_label_method ||= "name_#{I18n.locale}"
 
 .form-group
   = f.label(field_name) do

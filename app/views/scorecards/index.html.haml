@@ -45,7 +45,7 @@
               %td= scorecard.year
               %td= scorecard.name
               %td= scorecard.facility.name
-              %td= scorecard.location_name
+              %td= scorecard_location(scorecard)
               %td.text-right
                 - if scorecard.access_locked?
                   %span{data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.finished')}}

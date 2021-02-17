@@ -27,6 +27,6 @@ class Facility < ApplicationRecord
   validates :code, presence: true
 
   SUBSETS = [
-    { code: 'ps', name: 'Primary School', dataset: "PrimarySchool" }
+    { code: "ps", name: "Primary School", dataset: "PrimarySchool" }
   ]
 end

@@ -41,6 +41,7 @@ class ScorecardSerializer < ActiveModel::Serializer
              :program_id, :local_ngo_id, :local_ngo_name, :province, :district, :commune
 
   belongs_to :facility
+  belongs_to :primary_school
 
   def unit_type_name
     object.unit_type.name
