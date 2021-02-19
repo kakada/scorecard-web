@@ -16,6 +16,7 @@
 .row
   %label.col-sm-4.col-form-label= t("scorecard.facility")
   %label.col-sm-8.col-form-label= " : #{@scorecard.facility.name}"
+
 .row
   %label.col-sm-4.col-form-label= t("scorecard.scorecard_type")
   %label.col-sm-8.col-form-label= " : " + t("scorecard.#{@scorecard.scorecard_type}")
@@ -30,7 +31,7 @@
   %label.col-sm-8.col-form-label= " : #{@scorecard.description}"
 .row
   %label.col-sm-4.col-form-label= t("scorecard.location")
-  %label.col-sm-8.col-form-label= " : #{@scorecard.location_name}"
+  %label.col-sm-8.col-form-label= " : #{scorecard_location(@scorecard)}"
 .row
   %label.col-sm-4.col-form-label= t("scorecard.number_of_participant")
   %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_participant}"

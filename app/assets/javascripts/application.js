@@ -25,7 +25,8 @@
 //= require facilities
 //= require templates
 //= require indicators
-//= require scorecards
+//= require scorecards/show
+//= require scorecards/new
 //= require users/index
 //= require users/new
 //= require local_ngos

@@ -53,7 +53,7 @@ class ScorecardsController < ApplicationController
   private
     def scorecard_params
       params.require(:scorecard).permit(:unit_type_id, :facility_id, :description,
-        :province_id, :district_id, :commune_id, :year,
+        :province_id, :district_id, :commune_id, :year, :primary_school_code,
         :planned_start_date, :planned_end_date, :local_ngo_id, :scorecard_type
       ).merge({ creator_id: current_user.id })
     end

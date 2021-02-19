@@ -2,8 +2,7 @@
   .d-flex.flex-column.flex-grow-1
     %h1.h3.mb-0.text-gray-800= t("scorecard.scorecard_detail") + ": #{@scorecard.uuid}-(#{@scorecard.name})"
     .my-2.card-subtitle.text-muted
-      = "#{@scorecard.year}; #{@scorecard.location_name}; #{@scorecard.facility.name}; "
-      = t("scorecard.#{@scorecard.scorecard_type}")
+      = scorecard_descriptions
 
   %div
     %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }

@@ -13,6 +13,23 @@ module ScorecardsHelper
     str
   end
 
+  def scorecard_descriptions
+    descriptions = ["year", "facility_name"].map { |method| @scorecard.send(method) }
+    descriptions.push(t("scorecard.#{@scorecard.scorecard_type}"))
+    descriptions.push(scorecard_location(@scorecard))
+    descriptions.join("; ")
+  end
+
+  def scorecard_location(scorecard)
+    str = [scorecard.location_name]
+
+    if primary_school = scorecard.send("primary_school_name_#{I18n.locale}").presence
+      str.unshift("#{t('scorecard.primary_school')}#{primary_school}")
+    end
+
+    str.join(" ")
+  end
+
   def css_active_tab(is_active)
     return "active" if is_active
   end

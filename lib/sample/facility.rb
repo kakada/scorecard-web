@@ -8,7 +8,7 @@ module Sample
       education = program.facilities.create(name: "Education", code: "E")
 
       health.children.create(name: "Health Center", program_id: program.id, code: "HC")
-      education.children.create(name: "Primary School", program_id: program.id, code: "PS")
+      education.children.create(name: "Primary School", program_id: program.id, code: "PS", subset: ::Facility::SUBSETS.first[:code])
     end
   end
 end

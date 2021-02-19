@@ -72,3 +72,4 @@ yarn-debug.log*
 !/storage/.keep
 
 /lib/sample/assets/csv/locations.csv
+/lib/sample/assets/csv/primary_schools.csv
