@@ -10,9 +10,10 @@ module Api
       end
 
       def update
-        @scorecard = Scorecard.find_by(uuid: params[:id])
+        @scorecard = authorize Scorecard.find_by(uuid: params[:id])
 
         if @scorecard.update(scorecard_params)
+          @scorecard.lock_access!
           render json: @scorecard, status: :ok
         else
           render json: { errors: @scorecard.errors }, status: :unprocessable_entity

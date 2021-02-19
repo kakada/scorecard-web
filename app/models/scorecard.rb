@@ -33,6 +33,8 @@
 #  number_of_id_poor         :integer
 #
 class Scorecard < ApplicationRecord
+  include Lockable
+
   belongs_to :unit_type, class_name: "Facility"
   belongs_to :facility
   belongs_to :local_ngo, optional: true
@@ -81,6 +83,12 @@ class Scorecard < ApplicationRecord
     return if location_code.blank?
 
     "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("#{address}".to_sym)
+  end
+
+  def self.filter(params)
+    scope = all
+    scope = scope.where.not(locked_at: nil) if params[:locked].present?
+    scope
   end
 
   private

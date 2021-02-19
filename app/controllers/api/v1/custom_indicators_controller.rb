@@ -7,6 +7,8 @@ module Api
       before_action :assign_scorecard
 
       def create
+        authorize @scorecard, :update?
+
         custom_indicator = @scorecard.custom_indicators.find_or_initialize_by(uuid: indicator_params[:uuid])
 
         if custom_indicator.update(indicator_params)

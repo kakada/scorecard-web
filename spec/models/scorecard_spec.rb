@@ -65,4 +65,44 @@ RSpec.describe Scorecard, type: :model do
       it { expect(scorecard2.uuid).not_to eq(uuid) }
     end
   end
+
+  describe "validate #locked_scorecard" do
+    let!(:scorecard) { create(:scorecard, locked_at: DateTime.now) }
+
+    it { expect(scorecard.update(name: "test")).to be_falsey }
+
+    it "raises is locked error" do
+      scorecard.update(name: "test")
+      expect(scorecard.errors[:base]).to eq([I18n.t("scorecard.record_is_locked")])
+    end
+  end
+
+  describe "#lock_access!" do
+    let!(:scorecard) { create(:scorecard) }
+    before { scorecard.lock_access! }
+
+    it { expect(scorecard.locked_at).not_to be_nil }
+  end
+
+  describe "#unlock_access!" do
+    let!(:scorecard) { create(:scorecard, locked_at: Time.now.utc) }
+    before { scorecard.unlock_access! }
+
+    it { expect(scorecard.locked_at).to be_nil }
+    it { expect(scorecard.update(name: "test")).to be_truthy }
+  end
+
+  describe "#access_locked?" do
+    context "true" do
+      let!(:scorecard) { create(:scorecard, locked_at: Time.now.utc) }
+
+      it { expect(scorecard.access_locked?).to be_truthy }
+    end
+
+    context "false" do
+      let!(:scorecard) { create(:scorecard, locked_at: nil) }
+
+      it { expect(scorecard.access_locked?).to be_falsey }
+    end
+  end
 end

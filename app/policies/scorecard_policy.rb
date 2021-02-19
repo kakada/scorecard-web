@@ -10,11 +10,11 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def update?
-    create?
+    create? && !record.access_locked?
   end
 
   def destroy?
-    create?
+    update?
   end
 
   class Scope < Scope

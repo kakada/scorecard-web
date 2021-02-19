@@ -1,4 +1,4 @@
-- if policy(Scorecard).update?
+- if policy(Scorecard).create?
   .d-sm-flex.align-items-center.justify-content-between.mb-4
     %h1.h3.mb-0.text-gray-800= t("scorecard.scorecards")
     %div
@@ -13,6 +13,12 @@
 
 .card.shadow.mb-4
   .card-body
+    %ul.nav.nav-tabs
+      %li.nav-item{class: css_active_tab(!request.query_string.present?)}
+        %a.nav-link{href: scorecards_path}= t('scorecard.all')
+      %li.nav-item{class: css_active_tab(params[:locked].present?)}
+        %a.nav-link{href: scorecards_path(locked: true)}= t('scorecard.finished')
+
     = render partial: "shared/no_data", locals: { items: @scorecards }
 
     - if @scorecards.present?
@@ -40,6 +46,9 @@
               %td= scorecard.facility.name
               %td= scorecard.location_name
               %td.text-right
+                - if scorecard.access_locked?
+                  %span{data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.finished')}}
+                    %i.fas.fa-lock
                 = render 'shared/action_buttons', edit_url: edit_scorecard_path(scorecard), delete_url: scorecard_path(scorecard), object: scorecard
 
     - if @pagy.pages > 1
