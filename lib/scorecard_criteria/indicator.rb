@@ -1,0 +1,49 @@
+# frozen_string_literal: true
+
+require_relative "scorecard_criteria"
+
+module ScorecardCriteria
+  class Indicator < ::ScorecardCriteria::Base
+    def self.load
+      xlsx = Roo::Spreadsheet.open(file_path("indicator.xlsx"))
+      xlsx.each_with_pagename do |page_name, sheet|
+        rows = sheet.parse(headers: true)
+        facility_code = page_name[/\((.*?)\)/, 1]
+        facility = ::Facility.find_by(code: facility_code)
+
+        upsert_indicators(rows, facility)
+      end
+    end
+
+    private
+      def self.upsert_indicators(rows, facility)
+        return if facility.nil?
+
+        rows[1..-1].each_with_index do |row, index|
+          indicator_name = row["Scorecard Criterias"]
+          next if indicator_name.blank?
+
+          indicator = facility.indicators.find_or_initialize_by(name: indicator_name)
+          indicator.update(tag_attributes: { name: indicator_name })
+
+          upsert_languages_indicators(facility, indicator, row)
+        end
+      end
+
+      def self.upsert_languages_indicators(facility, indicator, row)
+        facility.program.languages.each do |language|
+          audio = get_audio(language, row)
+
+          next if audio.nil?
+
+          lang_indi = indicator.languages_indicators.find_or_initialize_by(language_code: language.code)
+          lang_indi.update(
+            language_id: language.id,
+            language_code: language.code,
+            content: "#{indicator.name} (#{language.code})",
+            audio: Pathname.new(audio).open
+          )
+        end
+      end
+  end
+end

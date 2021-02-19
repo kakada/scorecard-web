@@ -14,7 +14,7 @@
 #
 class RatingScale < ApplicationRecord
   belongs_to :program
-  has_many :language_rating_scales
+  has_many :language_rating_scales, dependent: :destroy
 
   accepts_nested_attributes_for :language_rating_scales, allow_destroy: true, reject_if: lambda { |attributes|
     attributes["audio"] = nil if attributes["remove_audio"] == "1"

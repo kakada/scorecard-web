@@ -1,0 +1,7 @@
+code,name,parent_code
+PA,Public Administration,
+CA,Commune Administrative,PA
+ED,Education,
+PS,Primary School,ED
+HE,Health,
+HC,Health Center,HE
