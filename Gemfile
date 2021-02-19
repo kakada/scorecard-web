@@ -54,6 +54,7 @@ gem "bootstrap4-datetime-picker-rails", "~> 0.3.1"
 gem "strip_attributes", "~> 1.11.0"
 gem "ndjson", "~> 1.0.0"
 gem "fog-aws", "~> 3.8.0"
+gem "date_validator", "~> 0.10.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -65,6 +65,8 @@ class Scorecard < ApplicationRecord
   validates :local_ngo_id, presence: true
   validates :primary_school_code, presence: true, if: -> { facility.try(:subset).present? }
   validates :primary_school_code, uniqueness: { scope: :commune_id }, allow_nil: true
+  validates :planned_start_date, presence: true
+  validates :planned_end_date, presence: true, date: { after_or_equal_to: :planned_start_date }
 
   before_validation :set_location_code
 
