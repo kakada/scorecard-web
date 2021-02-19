@@ -73,7 +73,7 @@ RSpec.describe Scorecard, type: :model do
 
     it "raises is locked error" do
       scorecard.update(name: "test")
-      expect(scorecard.errors[:base]).to eq(["the recored is locked!"])
+      expect(scorecard.errors[:base]).to eq([I18n.t("scorecard.record_is_locked")])
     end
   end
 

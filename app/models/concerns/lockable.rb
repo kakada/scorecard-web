@@ -22,7 +22,7 @@ module Lockable
 
     private
       def locked_scorecard
-        errors.add :base, "the recored is locked!" if access_locked?
+        errors.add :base, I18n.t("scorecard.record_is_locked") if access_locked?
       end
   end
 end
