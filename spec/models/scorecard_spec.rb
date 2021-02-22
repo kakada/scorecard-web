@@ -42,8 +42,12 @@ RSpec.describe Scorecard, type: :model do
   it { is_expected.to belong_to(:facility) }
   it { is_expected.to belong_to(:location).optional }
 
-  it { is_expected.to have_many(:facilitators) }
+  it { is_expected.to have_many(:facilitators).dependent(:destroy) }
   it { is_expected.to have_many(:cafs).through(:facilitators) }
+  it { is_expected.to have_many(:participants).dependent(:destroy) }
+  it { is_expected.to have_many(:custom_indicators).dependent(:destroy) }
+  it { is_expected.to have_many(:raised_indicators).dependent(:destroy) }
+  it { is_expected.to have_many(:voting_indicators).dependent(:destroy) }
 
   it { is_expected.to validate_presence_of(:year) }
   it { is_expected.to validate_presence_of(:unit_type_id) }

@@ -21,4 +21,5 @@ require "rails_helper"
 RSpec.describe VotingIndicator, type: :model do
   it { is_expected.to belong_to(:scorecard).optional }
   it { is_expected.to belong_to(:indicatorable) }
+  it { is_expected.to have_many(:ratings).dependent(:destroy) }
 end

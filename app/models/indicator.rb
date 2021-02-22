@@ -19,7 +19,7 @@ class Indicator < ApplicationRecord
   include Tagable
 
   belongs_to :categorizable, polymorphic: true, touch: true
-  has_many :languages_indicators
+  has_many :languages_indicators, dependent: :destroy
   has_many :languages, through: :languages_indicators
 
   validates :name, presence: true, uniqueness: { scope: [:categorizable_id, :categorizable_type] }
