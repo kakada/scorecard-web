@@ -11,8 +11,8 @@ module ScorecardCriteria
       csv = CSV.read(file_path("language.csv"))
       csv.shift
       csv.each do |data|
-        loc = program.languages.find_or_initialize_by(code: data[0])
-        loc.update(name_en: data[1], name_km: data[2])
+        language = program.languages.find_or_initialize_by(code: data[0])
+        language.update(name_en: data[1], name_km: data[2])
       end
     end
   end
