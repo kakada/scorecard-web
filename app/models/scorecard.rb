@@ -93,6 +93,10 @@ class Scorecard < ApplicationRecord
     "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("#{address}".to_sym)
   end
 
+  def status
+    !!locked_at ? "completed" : "planned"
+  end
+
   def self.filter(params)
     scope = all
     scope = scope.where.not(locked_at: nil) if params[:locked].present?

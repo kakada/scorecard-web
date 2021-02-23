@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_09_024144) do
+ActiveRecord::Schema.define(version: 2021_02_23_101443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,6 +220,7 @@ ActiveRecord::Schema.define(version: 2021_02_09_024144) do
     t.integer "creator_id"
     t.datetime "locked_at"
     t.string "primary_school_code"
+    t.index ["uuid"], name: "index_scorecards_on_uuid"
   end
 
   create_table "tags", force: :cascade do |t|

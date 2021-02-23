@@ -64,3 +64,5 @@ en:
     record_is_locked: The recored is locked!
     primary_school: Primary school
     code: Code
+    status: Status
+    submitted_at: Submitted date

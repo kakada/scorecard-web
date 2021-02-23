@@ -35,6 +35,7 @@
             %th= sortable "name", t('shared.name')
             %th= sortable "facility_id", t('scorecard.facility')
             %th= sortable "commune_code", t('scorecard.location')
+            %th= t('scorecard.status')
             %th= sortable "locked_at", t('scorecard.submitted_at')
             %th
 
@@ -49,6 +50,8 @@
               %td= scorecard.name
               %td= scorecard.facility.name
               %td= scorecard_location(scorecard)
+              %th{ class: scorecard.status }
+                = t("scorecard.#{scorecard.status}")
               %td
                 - if scorecard.locked_at.present?
                   = l(scorecard.locked_at, format: :long)
