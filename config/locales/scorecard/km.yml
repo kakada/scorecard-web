@@ -58,7 +58,11 @@ km:
     disability: ពិការភាព
     female: ស្រី
     selected_criterias: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
-    finished: បញ្ចប់រួចរាល់
+    completed: អនុវត្តរួចរាល់
+    planned: នឹងត្រូវអនុវត្ត
     all: ទាំងអស់
     record_is_locked: ប័ណ្ណពិន្ទុនេះត្រូវបានចាក់សោ!
     primary_school: បឋមសិក្សា
+    code: លេខកូដ
+    status: ស្ថានភាព
+    submitted_at: កាលបរិច្ឆេទទទួលបានសំណើរ

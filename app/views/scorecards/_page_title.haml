@@ -1,6 +1,11 @@
 .d-sm-flex.mb-4
   .d-flex.flex-column.flex-grow-1
-    %h1.h3.mb-0.text-gray-800= t("scorecard.scorecard_detail") + ": #{@scorecard.uuid}-(#{@scorecard.name})"
+    .d-flex.align-items-center
+      %h1.h3.mb-0.text-gray-800
+        = t("scorecard.scorecard_detail") + ": #{@scorecard.uuid}-(#{@scorecard.name})"
+      %div
+        = status_html.html_safe
+
     .my-2.card-subtitle.text-muted
       = scorecard_descriptions
 
@@ -8,4 +13,3 @@
     %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }
       %i.fas.fa-arrow-left.fa-sm.text-white-50
       = t("shared.back")
-

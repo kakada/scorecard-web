@@ -33,4 +33,9 @@ module ScorecardsHelper
   def css_active_tab(is_active)
     return "active" if is_active
   end
+
+  def status_html
+    css_klass = @scorecard.status == "completed" ? "badge-success" : "badge-warning";
+    "<span class='badge #{css_klass}'>#{@scorecard.status}</span>"
+  end
 end

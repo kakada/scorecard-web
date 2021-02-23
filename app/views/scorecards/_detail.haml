@@ -59,3 +59,8 @@
 .row
   %label.col-sm-4.col-form-label= t("scorecard.planned_end_date")
   %label.col-sm-8.col-form-label= " : #{@scorecard.planned_end_date}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.status")
+  %label.col-sm-8.col-form-label
+    = " : "
+    %span{ class: @scorecard.status }= t("scorecard.#{@scorecard.status}")
