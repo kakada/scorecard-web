@@ -33,4 +33,5 @@ km:
     name: ឈ្មោះ
     close: បិទ
     view_detail: មើលលម្អិត
-    created_date: កាលបរិច្ឆេទ
+    created_date: កាលបរិច្ឆេទបង្កើត
+    updated_date: កាលបរិច្ឆេទធ្វើបច្ចុប្បន្នភាព

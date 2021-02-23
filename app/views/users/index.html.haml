@@ -11,19 +11,21 @@
       %table.table.table-hover.pretty
         %thead
           %tr
-            %th= sortable "id", t('shared.number')
+            %th #
             %th= sortable "email", t("user.email")
             %th= sortable "role", t("user.role")
             %th= t('user.local_ngo')
             - if current_user.system_admin?
               %th= t('user.program')
             %th= t('user.status')
+            %th= t('shared.created_date')
+            %th= t('shared.updated_date')
             %th
 
         %tbody
           - @users.each_with_index do |user, index|
             %tr
-              %td= user.id
+              %td= @pagy.from + index
               %td= user.email
               %td= user.role.titlecase
               %td= user.local_ngo_name
@@ -31,6 +33,8 @@
                 %td= user.program_name
               %td.status{ class: user.status }
                 = t("user.#{user.status}")
+              %td= l(user.created_at, format: :long)
+              %td= l(user.updated_at, format: :long)
 
               %td.text-right
                 - if policy(user).destroy?
