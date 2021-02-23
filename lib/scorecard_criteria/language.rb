@@ -12,7 +12,7 @@ module ScorecardCriteria
       csv.shift
       csv.each do |data|
         loc = program.languages.find_or_initialize_by(code: data[0])
-        loc.update(name: data[1])
+        loc.update(name_en: data[1], name_km: data[2])
       end
     end
   end

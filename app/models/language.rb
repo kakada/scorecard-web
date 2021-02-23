@@ -18,5 +18,10 @@ class Language < ApplicationRecord
   has_many :indicators, through: :languages_indicators
 
   validates :code, presence: true
-  validates :name, presence: true
+  validates :name_en, presence: true
+  validates :name_km, presence: true
+
+  def name
+    self["name_#{I18n.locale}"]
+  end
 end

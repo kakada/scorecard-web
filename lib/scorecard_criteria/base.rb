@@ -14,7 +14,7 @@ module ScorecardCriteria
     end
 
     def self.get_audio(language, row)
-      column = "#{language.name} (#{language.code})" # Khmer (km)
+      column = "#{language.name_en} (#{language.code})" # Khmer (km)
 
       if filename = row[column].presence
         audios.select { |file| file.split("/").last.split(".").first == "#{filename.split('.').first}" }.first

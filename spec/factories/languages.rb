@@ -14,8 +14,9 @@
 #
 FactoryBot.define do
   factory :language do
-    code  { FFaker::Locale.code }
-    name  { FFaker::Locale.language }
+    code     { FFaker::Locale.code }
+    name_en  { FFaker::Locale.language }
+    name_km  { name_en }
     program
   end
 end
