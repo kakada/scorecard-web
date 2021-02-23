@@ -33,8 +33,12 @@
                 %td= user.program_name
               %td.status{ class: user.status }
                 = t("user.#{user.status}")
-              %td= l(user.created_at, format: :long)
-              %td= l(user.updated_at, format: :long)
+              %td
+                %span.date{ "data-date" => l(user.created_at, format: :long) }
+                  = time_ago_in_words(user.created_at)
+              %td
+                %span.date{ "data-date" => l(user.updated_at, format: :long) }
+                  = time_ago_in_words(user.updated_at)
 
               %td.text-right
                 - if policy(user).destroy?
