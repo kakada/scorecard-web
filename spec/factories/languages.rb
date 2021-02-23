@@ -6,16 +6,18 @@
 #
 #  id         :bigint           not null, primary key
 #  code       :string
-#  name       :string
+#  name_en    :string
 #  json_file  :string
 #  program_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  name_km    :string
 #
 FactoryBot.define do
   factory :language do
-    code  { FFaker::Locale.code }
-    name  { FFaker::Locale.language }
+    code     { FFaker::Locale.code }
+    name_en  { FFaker::Locale.language }
+    name_km  { name_en }
     program
   end
 end

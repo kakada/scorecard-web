@@ -6,11 +6,12 @@
 #
 #  id         :bigint           not null, primary key
 #  code       :string
-#  name       :string
+#  name_en    :string
 #  json_file  :string
 #  program_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  name_km    :string
 #
 class Language < ApplicationRecord
   belongs_to :program
@@ -18,5 +19,10 @@ class Language < ApplicationRecord
   has_many :indicators, through: :languages_indicators
 
   validates :code, presence: true
-  validates :name, presence: true
+  validates :name_en, presence: true
+  validates :name_km, presence: true
+
+  def name
+    self["name_#{I18n.locale}"]
+  end
 end
