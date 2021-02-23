@@ -1,0 +1,19 @@
+- url ||= ''
+- label ||= t("shared.add_new")
+- remote ||= false
+
+- if items.blank?
+  .text-center.no-data
+    %h2= t('shared.no_data_found')
+
+    - if !request.query_string.present?
+      %p= t('shared.use_plus_to_add_item')
+
+      %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_scorecard_path }
+        %i.fas.fa-plus.fa-sm.text-white-50
+        = t("scorecard.add_new")
+
+    - if url.present?
+      = link_to url, remote: remote, class: "btn btn-primary btn-sm shadow-sm" do
+        %i.fas.fa-plus.fa-sm.text-white-50
+        = label

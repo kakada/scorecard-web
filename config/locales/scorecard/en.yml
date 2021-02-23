@@ -58,7 +58,9 @@ en:
     disability: Disability
     female: Female
     selected_criterias: Selected criterias
-    finished: Finished
+    completed: Completed
+    planned: Planned
     all: All
     record_is_locked: The recored is locked!
     primary_school: Primary school
+    code: Code

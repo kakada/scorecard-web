@@ -96,6 +96,7 @@ class Scorecard < ApplicationRecord
   def self.filter(params)
     scope = all
     scope = scope.where.not(locked_at: nil) if params[:locked].present?
+    scope = scope.where(locked_at: nil) if params[:planned].present?
     scope
   end
 

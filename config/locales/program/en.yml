@@ -2,7 +2,7 @@ en:
   program:
     programs: Programs
     name: Name
-    datetime_format: DateTime format
+    datetime_format: Date format
     program_settings: Program settings
     contacts: Contacts
     add_contact: + Add Contact
