@@ -15,6 +15,7 @@
 #  program_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  subset         :string
 #
 FactoryBot.define do
   factory :facility do

@@ -24,6 +24,7 @@
 #  unlock_token           :string
 #  locked_at              :datetime
 #  failed_attempts        :integer          default(0)
+#  local_ngo_id           :integer
 #
 require "rails_helper"
 

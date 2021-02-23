@@ -31,6 +31,9 @@
 #  number_of_ethnic_minority :integer
 #  number_of_youth           :integer
 #  number_of_id_poor         :integer
+#  creator_id                :integer
+#  locked_at                 :datetime
+#  primary_school_code       :string
 #
 require "rails_helper"
 
