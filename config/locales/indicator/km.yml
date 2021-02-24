@@ -13,7 +13,7 @@ km:
     audio_format_and_size_hint: (ទ្រង់ទ្រាយ .mp3, មិនលើសពី 2 មេកាបៃ)
     must_be_less_than_2mb: ត្រូវតិចជាង 2 មេកាបៃ
     criterias: លក្ខណៈវិនិច្ឆ័យ
-    add_criteria: + បន្ថែមលក្ខណៈវិនិច្ឆ័យ
+    add_indicator: + បន្ថែមលក្ខណៈវិនិច្ឆ័យ
     tag: ថេក
     add_new: បន្ថែមលក្ខណៈវិនិច្ឆ័យថ្មី
     image: រូបភាព

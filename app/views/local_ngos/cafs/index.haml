@@ -15,7 +15,7 @@
     = render partial: "shared/no_data", locals: { items: @cafs, url: new_local_ngo_caf_path(@local_ngo), label: t("caf.add_new") }
 
     - if @cafs.present?
-      = render "shared/pagination_title"
+      = render "shared/pagination_title", objects: @cafs
 
       %table.table.table-hover.pretty
         %thead

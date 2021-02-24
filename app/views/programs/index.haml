@@ -5,7 +5,7 @@
     = render partial: "shared/no_data", locals: { items: @programs }
 
     - if @programs.present?
-      = render "shared/pagination_title"
+      = render "shared/pagination_title", objects: @programs
 
       %table.table.table-hover
         %thead

@@ -13,10 +13,11 @@
 
 .card.shadow.mb-4
   .card-body
+    = render "filter"
     = render partial: "shared/no_data", locals: { items: @indicators }
 
     - if @indicators.present?
-      = render "shared/pagination_title"
+      = render "shared/pagination_title", objects: @indicators
 
       %table.table.table-hover.pretty
         %thead
