@@ -11,20 +11,19 @@
         %i.fas.fa-plus.fa-sm.text-white-50
         = t("scorecard.add_new")
 
+%ul.nav.nav-tabs
+  %li.nav-item{class: css_active_tab(!request.query_string.present?)}
+    %a.nav-link{href: scorecards_path}= t('scorecard.all')
+  %li.nav-item{class: css_active_tab(params[:locked].present?)}
+    %a.nav-link{href: scorecards_path(locked: true)}= t('scorecard.completed')
+  %li.nav-item{class: css_active_tab(params[:planned].present?)}
+    %a.nav-link{href: scorecards_path(planned: true)}= t('scorecard.planned')
 .card.shadow.mb-4
   .card-body
-    %ul.nav.nav-tabs
-      %li.nav-item{class: css_active_tab(!request.query_string.present?)}
-        %a.nav-link{href: scorecards_path}= t('scorecard.all')
-      %li.nav-item{class: css_active_tab(params[:locked].present?)}
-        %a.nav-link{href: scorecards_path(locked: true)}= t('scorecard.completed')
-      %li.nav-item{class: css_active_tab(params[:planned].present?)}
-        %a.nav-link{href: scorecards_path(planned: true)}= t('scorecard.planned')
-
     = render partial: "no_data", locals: { items: @scorecards }
 
     - if @scorecards.present?
-      = render "shared/pagination_title"
+      = render "shared/pagination_title", objects: @scorecards
 
       %table.table.table-hover.pretty
         %thead
