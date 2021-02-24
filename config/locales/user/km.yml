@@ -16,3 +16,5 @@ km:
     edit_user: កែតម្រូវអ្នកប្រើប្រាស់
     full_name: ឈ្មោះពេញ
     add_new: បន្ថែមអ្នកប្រើប្រាស់ថ្មី
+    resend_confirmation: ផ្ញើតំណភ្ជាប់ម្តងទៀត
+    resend_confirmation_successfully: ផ្ញើតំណភ្ជាប់ម្តងទៀតដោយជោគជ័យ!

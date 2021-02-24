@@ -58,6 +58,13 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def resend_confirmation
+    @user = User.find_by(id: params[:id])
+    @user.send_confirmation_instructions
+
+    redirect_to users_url, notice: I18n.t("user.resend_confirmation_successfully")
+  end
+
   private
     def user_params
       params.require(:user).permit(:email, :role, :program_id, :local_ngo_id)

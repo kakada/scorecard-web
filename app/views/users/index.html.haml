@@ -35,9 +35,12 @@
               %td.text-right
                 - if policy(user).destroy?
                   - unless user.confirmed?
+                    = link_to resend_confirmation_user_path(user), :method => :post, class: "btn btn-circle btn-sm btn-success", data: { toggle: 'tooltip', placement: 'top', title: t('user.resend_confirmation') } do
+                      %i.fas.fa-share-square
+
                     %input.confirm-link{ value: confirmation_url(user, confirmation_token: user.confirmation_token) }
 
-                    = link_to '#', class: "btn btn-circle btn-sm btn-info mr-2 btn-copy", data: { toggle: 'tooltip', placement: 'top', title: t('user.copy_confirm_link') } do
+                    = link_to '#', class: "btn btn-circle btn-sm btn-info mr-1 btn-copy", data: { toggle: 'tooltip', placement: 'top', title: t('user.copy_confirm_link') } do
                       %i.far.fa-copy
 
                   - if user.access_locked?

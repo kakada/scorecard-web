@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   resources :users do
     put :unlock_access, on: :member
     post :update_locale, on: :collection
+    post :resend_confirmation, on: :member
   end
 
   resource :about, only: [:show]
