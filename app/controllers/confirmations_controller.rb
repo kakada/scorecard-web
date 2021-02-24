@@ -55,6 +55,7 @@ class ConfirmationsController < Devise::ConfirmationsController
     end
 
     def do_confirm
+      @confirmable.save
       @confirmable.confirm
       set_flash_message :notice, :confirmed
       sign_in_and_redirect(resource_name, @confirmable)

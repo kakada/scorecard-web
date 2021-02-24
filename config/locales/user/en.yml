@@ -16,3 +16,5 @@ en:
     edit_user: Edit user
     full_name: Full name
     add_new: Add new user
+    resend_confirmation: Resend confirmation
+    resend_confirmation_successfully: Resend the confirmation successfully!
