@@ -25,7 +25,8 @@ module CscWeb
     config.i18n.fallbacks = [:en]
     config.i18n.available_locales = [:en, :km]
 
-    config.time_zone = 'Bangkok'
+    # Time zone list: https://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html
+    config.time_zone = ENV["TIME_ZONE"] || "Bangkok"
     config.active_record.default_timezone = :local
   end
 end
