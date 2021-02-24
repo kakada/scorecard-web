@@ -4,12 +4,12 @@
     = render "unit_type_and_facility_fields", f: f
     = f.input :scorecard_type, label: t('scorecard.scorecard_type'), collection: Scorecard::SCORECARD_TYPES, input_html: { class: 'custom-select'}
 
-    = f.input :local_ngo_id, label: t("scorecard.implementer"), collection: current_program.local_ngos.pluck(:name, :id), include_blank: false, input_html: { class: 'custom-select'}
-    = f.input :description, label: t('scorecard.description')
-
     = render "location_fields", f: f
     = render "date_field", f: f, field: :planned_start_date
     = render "date_field", f: f, field: :planned_end_date
+
+    = f.input :local_ngo_id, label: t("scorecard.implementer"), collection: current_program.local_ngos.pluck(:name, :id), include_blank: false, input_html: { class: 'custom-select'}
+    = f.input :description, label: t('scorecard.description')
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'
