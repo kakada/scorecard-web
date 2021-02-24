@@ -30,4 +30,8 @@ class Facility < ApplicationRecord
   SUBSETS = [
     { code: "ps", name: "Primary School", dataset: "PrimarySchool" }
   ]
+
+  def has_child
+    subset.present?
+  end
 end

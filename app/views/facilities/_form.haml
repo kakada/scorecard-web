@@ -5,7 +5,7 @@
 
     .form-group
       %label= t('facility.parent')
-      = f.select :parent_id, current_program.facilities.roots.pluck(:name, :id), {:include_blank => true}, {class: 'form-control custom-select'}
+      = f.select :parent_id, current_program.facilities.roots.pluck(:name, :id), {:include_blank => true}, {class: 'form-control custom-select', disabled: @facility.persisted?}
 
     .form-group.subset.d-none
       %label= t('facility.subset')

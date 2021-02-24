@@ -2,6 +2,6 @@ en:
   facility:
     facilities: Facilities
     name: Name
-    parent: Parent facility
+    parent: Unit
     manage_indicator: Manage Indicator
     add_new: Add new facility
