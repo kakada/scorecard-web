@@ -46,6 +46,14 @@ class Indicator < ApplicationRecord
     raised_indicators.blank?
   end
 
+  # Class methods
+  def self.filter(params)
+    scope = all
+    scope = scope.where('LOWER(name) LIKE ?', "%#{params[:name].downcase}%") if params[:name].present?
+    scope = scope.where(categorizable_id: params[:facility_id], categorizable_type: 'Facility') if params[:facility_id].present?
+    scope
+  end
+
   private
     def set_display_order
       self.display_order ||= categorizable.present? && categorizable.indicators.maximum(:display_order).to_i + 1

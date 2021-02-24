@@ -13,6 +13,7 @@
 
 .card.shadow.mb-4
   .card-body
+    = render "filter"
     = render partial: "shared/no_data", locals: { items: @indicators }
 
     - if @indicators.present?

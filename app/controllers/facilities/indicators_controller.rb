@@ -5,7 +5,7 @@ module Facilities
     before_action :set_facility
 
     def index
-      @pagy, @indicators = pagy(@facility.indicators.order(sort_column + " " + sort_direction))
+      @pagy, @indicators = pagy(Indicator.filter(filter_params).order(sort_column + " " + sort_direction))
       @templates = current_program.templates.includes(:indicators)
     end
 
@@ -66,6 +66,10 @@ module Facilities
           languages_indicators_attributes: [ :id, :language_id, :language_code, :content, :audio, :remove_audio ],
           tag_attributes: [:id, :name, :_distroy]
         )
+      end
+
+      def filter_params
+        params.permit(:name).merge({facility_id: @facility.id})
       end
 
       def set_facility
