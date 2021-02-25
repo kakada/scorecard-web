@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2021_02_25_040239) do
 
   create_table "facilities", force: :cascade do |t|
     t.string "code"
-    t.string "name"
+    t.string "name_en"
     t.integer "parent_id"
     t.integer "lft", null: false
     t.integer "rgt", null: false
@@ -63,7 +63,9 @@ ActiveRecord::Schema.define(version: 2021_02_25_040239) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "subset"
+    t.string "dataset"
+    t.boolean "default", default: false
+    t.string "name_km"
     t.index ["lft"], name: "index_facilities_on_lft"
     t.index ["parent_id"], name: "index_facilities_on_parent_id"
     t.index ["rgt"], name: "index_facilities_on_rgt"

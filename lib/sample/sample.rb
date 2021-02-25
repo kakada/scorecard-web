@@ -5,7 +5,6 @@ Dir["/app/lib/exporters/*.rb"].each { |file| require file }
 
 require_relative "user"
 require_relative "program"
-require_relative "facility"
 require_relative "primary_school"
 require_relative "indicator"
 require_relative "local_ngo"
@@ -16,3 +15,5 @@ require_relative "voting_indicator"
 require_relative "rating"
 require_relative "raised_indicator"
 require_relative "scorecard"
+
+require "scorecard_criteria/scorecard_criteria"

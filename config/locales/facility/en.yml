@@ -5,3 +5,8 @@ en:
     parent: Unit
     manage_indicator: Manage Indicator
     add_new: Add new facility
+    name_en: Name in English
+    name_km: Name in Khmer
+    code: Code
+    already_in_used: Can't delete, it's already in used.
+    dataset: Dataset

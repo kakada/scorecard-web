@@ -4,7 +4,7 @@ class FacilitiesController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @pagy, @facilities = pagy(current_program.facilities.roots.reorder(sort_column + " " + sort_direction).includes(:children))
+        @pagy, @facilities = pagy(current_program.facilities.roots.reorder(sort_column + " " + sort_direction).includes(:children, :unit_scorecards, :scorecards))
       }
 
       format.json {
@@ -33,20 +33,6 @@ class FacilitiesController < ApplicationController
     end
   end
 
-  def edit
-    @facility = authorize Facility.find(params[:id])
-  end
-
-  def update
-    @facility = authorize Facility.find(params[:id])
-
-    if @facility.update_attributes(facility_params)
-      redirect_to facilities_url
-    else
-      render :edit
-    end
-  end
-
   def destroy
     @facility = authorize Facility.find(params[:id])
     @facility.destroy
@@ -56,6 +42,6 @@ class FacilitiesController < ApplicationController
 
   private
     def facility_params
-      params.require(:facility).permit(:name, :code, :parent_id, :subset)
+      params.require(:facility).permit(:name_en, :name_km, :code, :parent_id, :has_child, :dataset)
     end
 end

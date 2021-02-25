@@ -1,15 +1,26 @@
 .w-50.view-center
   = simple_form_for @facility do |f|
-    = f.input :name, label: t('facility.name')
+    = f.input :name_en, label: t('facility.name_en')
+    = f.input :name_km, label: t('facility.name_km')
     = f.input :code, label: t('facility.code')
 
     .form-group
       %label= t('facility.parent')
-      = f.select :parent_id, current_program.facilities.roots.pluck(:name, :id), {:include_blank => true}, {class: 'form-control custom-select', disabled: @facility.persisted?}
+      = f.select :parent_id, current_program.facilities.roots.pluck(:"name_#{I18n.locale}", :id), {:include_blank => true}, {class: 'form-control custom-select'}
 
-    .form-group.subset.d-none
-      %label= t('facility.subset')
-      = f.select :subset, Facility::SUBSETS.pluck(:name, :code), {:include_blank => true}, {class: 'form-control custom-select'}
+    .dataset.d-none
+      .form-group
+        %label= t('facility.dataset')
+        .d-flex
+          .form-check
+            %label.form-check-label.form-check-toggle
+              %input.form-check-input{type: 'checkbox', name: "facility[has_child]", checked: f.object.has_child, disabled: !f.object.parent_id.present?}
+              %span
+
+          .form-group.flex-1
+            - dataset_error = f.object.errors[:dataset]
+            = f.select :dataset, Facility::DATASETS.pluck(:"name_#{I18n.locale}", :code), {:include_blank => true}, { class: ['form-control custom-select', ('is-invalid' if dataset_error.present?)], disabled: !f.object.has_child }
+            .invalid-feedback.d-block= dataset_error.join(';')
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'

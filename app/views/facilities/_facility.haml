@@ -1,8 +1,22 @@
-.d-flex.facility{ class: ('sub-facility' unless facility.root?) }
-  .flex-grow-1= facility.name
+.d-flex.facility
+  .name{ class: ('sub-facility' unless facility.root?) }
+    = "#{facility.name} (#{facility.code})"
+
+  .w-25
+    - if facility.dataset.present?
+      = Facility::DATASETS.select{|s| s[:code] == facility.dataset }[0][:"name_#{I18n.locale}"]
+
+  .flex-1
+    - unless facility.root?
+      %span.date{ "data-date" => l(facility.created_at, format: :long) }
+        = time_ago_in_words(facility.created_at)
 
   - if !facility.root? && policy(Indicator).create?
     = link_to facility_indicators_path(facility), class: "btn btn-circle btn-sm btn-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('facility.manage_indicator') } do
       %i.fas.fa-pencil-ruler
 
-  = render 'shared/action_buttons', edit_url: edit_facility_path(facility), delete_url: facility_path(facility), object: facility
+  - if policy(facility).destroy?
+    - title = facility.locked? ? t('facility.already_in_used') : t('shared.delete')
+    %span{ data: { toggle: 'tooltip', placement: 'top', title: title }}
+      = link_to facility_path(facility), method: :delete, class: ["btn btn-circle btn-sm btn-danger", ("disabled" if facility.locked?)], 'data-confirm' => t('shared.are_you_sure_to_delete') do
+        %i.fas.fa-trash-alt
