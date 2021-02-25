@@ -16,22 +16,27 @@
 .row
   %label.col-sm-4.col-form-label= t("scorecard.facility")
   %label.col-sm-8.col-form-label= " : #{@scorecard.facility.name}"
-
 .row
   %label.col-sm-4.col-form-label= t("scorecard.scorecard_type")
   %label.col-sm-8.col-form-label= " : " + t("scorecard.#{@scorecard.scorecard_type}")
 .row
+  %label.col-sm-4.col-form-label= t("scorecard.location")
+  %label.col-sm-8.col-form-label= " : #{scorecard_location(@scorecard)}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.conducted_date")
+  %label.col-sm-8.col-form-label= " : #{date_format(@scorecard.conducted_date)}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.planned_start_date")
+  %label.col-sm-8.col-form-label= " : #{date_format(@scorecard.planned_start_date)}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.planned_end_date")
+  %label.col-sm-8.col-form-label= " : #{date_format(@scorecard.planned_end_date)}"
+.row
   %label.col-sm-4.col-form-label= t("scorecard.local_ngo")
   %label.col-sm-8.col-form-label= " : #{@scorecard.local_ngo_name}"
 .row
-  %label.col-sm-4.col-form-label= t("scorecard.conducted_date")
-  %label.col-sm-8.col-form-label= " : #{@scorecard.conducted_date}"
-.row
   %label.col-sm-4.col-form-label= t("scorecard.description")
   %label.col-sm-8.col-form-label= " : #{@scorecard.description}"
-.row
-  %label.col-sm-4.col-form-label= t("scorecard.location")
-  %label.col-sm-8.col-form-label= " : #{scorecard_location(@scorecard)}"
 .row
   %label.col-sm-4.col-form-label= t("scorecard.number_of_participant")
   %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_participant}"
@@ -53,12 +58,6 @@
 .row
   %label.col-sm-4.col-form-label= t("scorecard.number_of_id_poor")
   %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_id_poor}"
-.row
-  %label.col-sm-4.col-form-label= t("scorecard.planned_start_date")
-  %label.col-sm-8.col-form-label= " : #{@scorecard.planned_start_date}"
-.row
-  %label.col-sm-4.col-form-label= t("scorecard.planned_end_date")
-  %label.col-sm-8.col-form-label= " : #{@scorecard.planned_end_date}"
 .row
   %label.col-sm-4.col-form-label= t("scorecard.status")
   %label.col-sm-8.col-form-label

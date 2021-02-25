@@ -40,4 +40,11 @@ module ApplicationHelper
 
     link_to(name, "#", class: "add_field add_#{association} btn", data: { id: id, fields: fields.gsub("\n", "") })
   end
+
+  def date_format(date)
+    return unless date.present?
+
+    format = current_program.try(:datetime_format) || Program::DATETIME_FORMATS.keys[0]
+    date.strftime(Program::DATETIME_FORMATS[format])
+  end
 end
