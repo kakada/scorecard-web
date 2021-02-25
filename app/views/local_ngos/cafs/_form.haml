@@ -1,10 +1,18 @@
 .w-50.view-center
   = simple_form_for [@local_ngo, @caf] do |f|
     = f.input :name, label: t('local_ngo.name')
-    = f.input :sex
-    = f.input :date_of_birth
-    = f.input :tel
-    = f.input :address
+
+    .form-group
+      %label= t('caf.gender')
+      .d-flex
+        - Caf::GENDERS.each do |gender|
+          .mr-3
+            = f.radio_button :sex, gender
+            = label :sex, t("caf.#{gender}")
+
+    = render "shared/date_field", f: f, field: :date_of_birth, label: t('caf.date_of_birth')
+    = f.input :tel, label: t('caf.tel')
+    = f.input :address, label: t('caf.address')
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'

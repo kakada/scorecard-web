@@ -5,8 +5,8 @@
     = f.input :scorecard_type, label: t('scorecard.scorecard_type'), collection: Scorecard::SCORECARD_TYPES, input_html: { class: 'custom-select'}
 
     = render "location_fields", f: f
-    = render "date_field", f: f, field: :planned_start_date
-    = render "date_field", f: f, field: :planned_end_date
+    = render "shared/date_field", f: f, field: :planned_start_date, label: t("scorecard.planned_start_date"), required: true
+    = render "shared/date_field", f: f, field: :planned_end_date, label: t("scorecard.planned_end_date"), required: true
 
     = f.input :local_ngo_id, label: t("scorecard.implementer"), collection: current_program.local_ngos.pluck(:name, :id), include_blank: false, input_html: { class: 'custom-select'}
     = f.input :description, label: t('scorecard.description')

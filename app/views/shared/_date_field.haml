@@ -1,13 +1,16 @@
-- errors = @scorecard.errors[field]
+- errors = f.object.errors[field]
+- label ||= ""
+- required ||= false
+- id = field
 
 .form-group
-  - id = field
   %label
-    = t("scorecard.#{field}")
-    %abbr{title: "required"} *
+    = label
+    - if required
+      %abbr{title: "required"} *
 
   .input-group.date.datetimepicker{ id: id, "data-target-input" => "nearest" }
-    - value = f.object[field].try(:strftime, Program::DATETIME_FORMATS[current_program.datetime_format])
+    - value = date_format(f.object[field])
 
     = f.text_field field, value: value, class: ['form-control datetimepicker-input', ('is-invalid' if errors.present?)], autocomplete: 'off', "data-target" => "##{id}", "data-toggle" => "datetimepicker", placeholder: current_program.datetime_format
     .input-group-append{"data-target" => "##{id}", "data-toggle" => "datetimepicker"}
