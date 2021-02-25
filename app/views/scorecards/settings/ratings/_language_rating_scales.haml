@@ -23,5 +23,5 @@
             %a.remove-audio.text-danger.mr-2.pointer
               %i.far.fa-trash-alt
 
-            = link_to download_path(file: audio.path), target: "_blank", class: 'btn btn-link p-0 d-block text-truncate' do
+            = link_to audio.url, target: "_blank", class: 'btn btn-link p-0 d-block text-truncate' do
               = ff.object.audio_identifier
