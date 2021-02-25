@@ -97,7 +97,11 @@ class Scorecard < ApplicationRecord
   end
 
   def status
-    !!locked_at ? "completed" : "planned"
+    completed? ? "completed" : "planned"
+  end
+
+  def completed?
+    !!locked_at
   end
 
   def self.filter(params)
