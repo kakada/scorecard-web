@@ -10,7 +10,6 @@
 #  median             :integer
 #  strength           :text
 #  weakness           :text
-#  desired_change     :text
 #  suggested_action   :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -28,6 +27,10 @@ class VotingIndicator < ApplicationRecord
     good: 4,
     very_good: 5
   }
+
+  serialize :strength, Array
+  serialize :weakness, Array
+  serialize :suggested_action, Array
 
   before_create :secure_uuid
 end

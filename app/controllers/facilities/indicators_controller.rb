@@ -69,7 +69,7 @@ module Facilities
       end
 
       def filter_params
-        params.permit(:name).merge({facility_id: @facility.id})
+        params.permit(:name).merge({ facility_id: @facility.id })
       end
 
       def set_facility
