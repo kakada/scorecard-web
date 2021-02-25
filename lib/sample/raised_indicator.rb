@@ -12,7 +12,7 @@ module Sample
         indicators = scorecard.facility.indicators
 
         scorecard.number_of_participant.to_i.times do |i|
-          create_proposed_criteria(scorecard, indicators.sample)
+          create_proposed_criteria(scorecard, indicators.sample, i)
         end
       end
 
@@ -25,12 +25,17 @@ module Sample
           )
           assign_audio(custom_indicator)
 
-          create_proposed_criteria(scorecard, custom_indicator)
+          create_proposed_criteria(scorecard, custom_indicator, i)
         end
       end
 
-      def self.create_proposed_criteria(scorecard, indicator)
-        scorecard.raised_indicators.create(indicatorable: indicator, tag_id: indicator.tag_id)
+      def self.create_proposed_criteria(scorecard, indicator, participant_index)
+        participant = scorecard.participants[participant_index]
+        scorecard.raised_indicators.create(
+          indicatorable: indicator,
+          tag_id: indicator.tag_id,
+          participant_uuid: participant.uuid
+        )
       end
 
       def self.assign_audio(indicator)

@@ -17,4 +17,8 @@
                 = image_tag item, style: 'width: 24px'
                 .flex-grow-1.d-flex.align-items-center.justify-content-center= criteria["#{item}_count"]
 
+          .text-muted.card-subtitle.text-sm.mt-2
+            %span= "#{t('scorecard.average_score')}: "
+            = participant_information(criteria, 'average_score').html_safe
+
         %td= VotingIndicator.medians[criteria["median"]]

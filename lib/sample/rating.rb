@@ -4,10 +4,13 @@ module Sample
   class Rating
     def self.load(scorecard)
       scorecard.number_of_participant.to_i.times do |i|
+        participant = scorecard.participants[i]
+
         scorecard.voting_indicators.each do |indi|
           scorecard.ratings.create(
             voting_indicator_uuid: indi.uuid,
-            score: rand(1..5)
+            score: rand(1..5),
+            participant_uuid: participant.try(:uuid)
           )
         end
       end
