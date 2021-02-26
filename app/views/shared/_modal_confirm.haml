@@ -1,0 +1,13 @@
+/ Logout Modal
+.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1", id: "confirmModal#{object.id}"}
+  .modal-dialog.modal-dialog-centered{:role => "document"}
+    .modal-content.text-black
+      .modal-header
+        %h5#exampleModalLabel.modal-title= t("shared.delete")
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body.text-left
+        = t("shared.are_you_sure_to_delete")
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
+        = link_to t("shared.delete"), delete_url, method: :delete, class: "btn btn-primary"
