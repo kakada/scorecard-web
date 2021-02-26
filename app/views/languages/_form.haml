@@ -1,7 +1,8 @@
 .view-center
   = simple_form_for @language, remote: true do |f|
     = f.input :code, label: t('language.code')
-    = f.input :name, label: t('language.name')
+    = f.input :name_en, label: t('language.name_en')
+    = f.input :name_km, label: t('language.name_km')
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'
