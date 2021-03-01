@@ -3,8 +3,8 @@ CW.Common.Timeago = do ->
     onClickDate();
 
   onClickDate = ->
-    $(document).off('click', '.date')
-    $(document).on 'click', '.date', (event)->
+    $(document).off('click', '.timeago')
+    $(document).on 'click', '.timeago', (event)->
       $(this).html($(this).data('date'))
       $(this).off 'click'
 

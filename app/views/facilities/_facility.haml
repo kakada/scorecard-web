@@ -8,7 +8,7 @@
 
   .flex-1
     - unless facility.root?
-      %span.date{ "data-date" => l(facility.created_at, format: :long) }
+      %span.timeago{ "data-date" => l(facility.created_at, format: :long) }
         = time_ago_in_words(facility.created_at)
 
   - if !facility.root? && policy(Indicator).create?
