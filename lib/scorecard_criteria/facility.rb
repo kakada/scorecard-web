@@ -12,8 +12,11 @@ module ScorecardCriteria
       csv.shift
       csv.each do |data|
         facility = program.facilities.find_or_initialize_by(code: data[0])
-        facility.name = data[1]
-        facility.parent_id = program.facilities.find_by(code: data[2]).id if data[2].present?
+        facility.name_en = data[1]
+        facility.name_km = data[2]
+        facility.parent_id = program.facilities.find_by(code: data[3]).id if data[3].present?
+        facility.default = data[4]
+        facility.dataset = data[5]
         facility.save
       end
     end

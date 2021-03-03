@@ -1,4 +1,4 @@
-= render partial: "select_field", locals: { f: f, field_name: "unit_type_id", select_id: "unit_type", select_target: "facility", select_collection_url: facilities_path(format: :json), select_populate_on_load: true, select_collection_label_method: 'name' }
+= render partial: "select_field", locals: { f: f, field_name: "unit_type_id", select_id: "unit_type", select_target: "facility", select_collection_url: facilities_path(format: :json), select_populate_on_load: true, select_collection_label_method: "name_#{I18n.locale}" }
 
 .facility-wrapper{'data-facilities' => current_program.facilities.leaves.to_json}
-  = render partial: "select_field", locals: { f: f, field_name: "facility_id", select_id: "facility", select_target: "none", select_collection_url: children_facility_path(:id => "FILTER"), select_disabled_target: "#facility", select_collection_label_method: 'name' }
+  = render partial: "select_field", locals: { f: f, field_name: "facility_id", select_id: "facility", select_target: "none", select_collection_url: children_facility_path(:id => "FILTER"), select_disabled_target: "#facility", select_collection_label_method: "name_#{I18n.locale}" }

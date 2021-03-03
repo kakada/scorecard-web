@@ -19,8 +19,9 @@
 #
 FactoryBot.define do
   factory :facility do
-    name        { FFaker::Name.name }
-    code        { name.upcase.split(" ").map { |n| n[0] }.join("") }
+    name_en        { FFaker::Name.name }
+    name_km        { name_en }
+    code           { name.upcase.split(" ").map { |n| n[0] }.join("") }
     program
 
     trait :with_indicators do

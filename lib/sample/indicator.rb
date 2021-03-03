@@ -8,7 +8,7 @@ module Sample
       xlsx = Roo::Spreadsheet.open(path)
       xlsx.each_with_pagename do |page_name, sheet|
         rows = sheet.parse(headers: true)
-        facility = ::Facility.find_by(name: page_name)
+        facility = ::Facility.find_by(name_en: page_name)
 
         create_indicators(rows, facility)
       end

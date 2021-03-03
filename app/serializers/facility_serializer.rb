@@ -18,5 +18,5 @@
 #
 
 class FacilitySerializer < ActiveModel::Serializer
-  attributes :id, :code, :name, :parent_id, :program_id
+  attributes :id, :code, :name_en, :name_km, :parent_id, :program_id
 end

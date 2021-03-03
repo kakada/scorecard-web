@@ -32,7 +32,7 @@ module Sample
         number_of_female = rand(1...number_of_participant)
         conducted_date = Date.today
         facility = ::Facility.where.not(parent_id: nil).sample
-        primary_school = ::PrimarySchool.all.sample if facility.subset.present?
+        primary_school = ::PrimarySchool.all.sample if facility.dataset.present?
         commune = primary_school.present? ? ::Pumi::Commune.find_by_id(primary_school.commune_id) : ::Pumi::Commune.all.sample
         local_ngo = ::LocalNgo.all.sample
 

@@ -1,7 +1,6 @@
 CW.UsersIndex = do ->
   init = ->
     onClickBtnCopyConfirmLink()
-    onClickDate()
 
   onClickBtnCopyConfirmLink = ->
     $(document).off('click', '.btn-copy')
@@ -12,11 +11,5 @@ CW.UsersIndex = do ->
 
       event.preventDefault()
       $('.toast').toast('show')
-
-  onClickDate = ->
-    $(document).off('click', '.date')
-    $(document).on 'click', '.date', (event)->
-      $(this).html($(this).data('date'))
-      $(this).off 'click'
 
   { init: init }

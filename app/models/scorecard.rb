@@ -66,7 +66,7 @@ class Scorecard < ApplicationRecord
   validates :facility_id, presence: true
   validates :scorecard_type, presence: true
   validates :local_ngo_id, presence: true
-  validates :primary_school_code, presence: true, if: -> { facility.try(:subset).present? }
+  validates :primary_school_code, presence: true, if: -> { facility.try(:dataset).present? }
   validates :primary_school_code, uniqueness: { scope: :commune_id }, allow_nil: true
   validates :planned_start_date, presence: true
   validates :planned_end_date, presence: true, date: { after_or_equal_to: :planned_start_date }
@@ -75,7 +75,7 @@ class Scorecard < ApplicationRecord
 
   before_create :secure_uuid
   before_create :set_name
-  before_save   :clear_primary_school_code, unless: -> { facility.try(:subset).present? }
+  before_save   :clear_primary_school_code, unless: -> { facility.try(:dataset).present? }
 
   accepts_nested_attributes_for :facilitators, allow_destroy: true
   accepts_nested_attributes_for :participants, allow_destroy: true

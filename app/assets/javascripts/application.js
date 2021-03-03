@@ -21,6 +21,7 @@
 //= require application/util
 //= require common/topbar
 //= require common/datetime_picker
+//= require common/timeago
 
 //= require facilities
 //= require templates
@@ -36,6 +37,7 @@
 document.addEventListener('turbolinks:load', function() {
   CW.Common.Topbar.init();
   CW.Common.DatetimePicker.init();
+  CW.Common.Timeago.init();
   $('[data-toggle="tooltip"]').tooltip();
 
   let currentPage = CW.Util.getCurrentPage();

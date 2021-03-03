@@ -34,10 +34,10 @@
               %td.status{ class: user.status }
                 = t("user.#{user.status}")
               %td
-                %span.date{ "data-date" => l(user.created_at, format: :long) }
+                %span.timeago{ "data-date" => l(user.created_at, format: :long) }
                   = time_ago_in_words(user.created_at)
               %td
-                %span.date{ "data-date" => l(user.updated_at, format: :long) }
+                %span.timeago{ "data-date" => l(user.updated_at, format: :long) }
                   = time_ago_in_words(user.updated_at)
 
               %td.text-right

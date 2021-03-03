@@ -1,7 +1,7 @@
-code,name,parent_code
-PA,Public Administration,
-CA,Commune Administrative,PA
-ED,Education,
-PS,Primary School,ED
-HE,Health,
-HC,Health Center,HE
+code,name_en,name_km,parent_code,default,dataset
+PA,Public Administration,រដ្ឋបាល​សាធារណៈ,,true,
+CA,Commune Administrative,រដ្ឋបាលឃុំសង្កាត់,PA,true,
+ED,Education,ការអប់រំ,,true,
+PS,Primary School,បឋមសិក្សា,ED,true,ps
+HE,Health,សុខភាព,,true,
+HC,Health Center,មណ្ឌលសុខភាព,HE,true,

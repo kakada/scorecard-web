@@ -6,31 +6,41 @@ CW.FacilitiesNew = (() => {
   function init() {
     onKeyupFacilityName();
     onKeyupFacilityCode();
-    handleDisplaySubset($('#facility_parent_id').val());
+    handleDisplayDataset($('#facility_parent_id').val());
     onChangeFacility();
+    onSwitchHasChild();
   }
 
-  function handleDisplaySubset(value) {
-    let subsetDom = $('.subset');
+  function onSwitchHasChild() {
+    $("[name='facility[has_child]']").on("change", (e) => {
+      let hasChild = !!$("[name='facility[has_child]']:checked").length;
+      $("#facility_dataset").attr("disabled", !hasChild);
+    })
+  }
+
+  function handleDisplayDataset(value) {
+    let dom = $('.dataset');
+
+    $("[name='facility[has_child]']").attr("disabled", !value);
 
     if(!!value) {
-      subsetDom.removeClass('d-none');
+      dom.removeClass('d-none');
     } else {
-      subsetDom.find('select').val('');
-      subsetDom.addClass('d-none');
+      dom.find('select').val('');
+      dom.addClass('d-none');
     }
   }
 
   function onChangeFacility() {
     $('#facility_parent_id').off('change')
     $('#facility_parent_id').on('change', (event) => {
-      handleDisplaySubset(event.target.value);
+      handleDisplayDataset(event.target.value);
     })
   }
 
   function onKeyupFacilityName() {
-    $(document).off('keyup', '#facility_name')
-    $(document).on('keyup', '#facility_name', function(event) {
+    $(document).off('keyup', '#facility_name_en')
+    $(document).on('keyup', '#facility_name_en', function(event) {
       let value = event.target.value.toUpperCase().split(" ").map(x => x.charAt(0)).join('')
 
       $('#facility_code').val(value)
@@ -40,7 +50,7 @@ CW.FacilitiesNew = (() => {
   function onKeyupFacilityCode() {
     $(document).off('keyup', '#facility_code')
     $(document).on('keyup', '#facility_code', function(event) {
-      $(document).off('keyup', '#facility_name');
+      $(document).off('keyup', '#facility_name_en');
     });
   }
 

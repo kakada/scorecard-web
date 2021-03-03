@@ -10,7 +10,7 @@ module Sample
       ::Sample::PrimarySchool.load
       ::Sample::LocalNgo.load
       ::Sample::User.load
-      ::Sample::Facility.load
+      ::ScorecardCriteria::Facility.load
       ::Sample::Indicator.load
       ::Sample::Caf.load
       ::Sample::Scorecard.load

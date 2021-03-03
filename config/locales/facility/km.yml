@@ -2,6 +2,11 @@ km:
   facility:
     facilities: វិស័យ
     name: ឈ្មោះ
-    parent: ប្រភេទមេ
+    parent: យូនីត
     manage_indicator: គ្រប់គ្រងលក្ខណៈវិនិច្ឆ័យ
     add_new: បន្ថែម Facility ថ្មី
+    name_en: ឈ្មោះជាភាសាអង់គ្លេស
+    name_km: ឈ្មោះជាភាសាខ្មែរ
+    code: លេខកូដ
+    already_in_used: មិនអាចលុបបានទេ ព្រោះកំពុងប្រើប្រាស់
+    dataset: សំណុំទិន្នន័យ
