@@ -5,7 +5,7 @@
     = render partial: "shared/no_data", locals: { items: @languages, url: new_language_path, remote: true, label: t('language.add_new') }
 
     - if @languages.present?
-      = render "shared/pagination_title", objects: @languages, url: new_language_path, remote: true, label: t('language.add_new')
+      = render "shared/pagination_title", objects: @languages, url: new_language_path, remote: true, label: t('language.add_new'), hide_pagy: true
 
       %table.table.table-hover.pretty
         %thead

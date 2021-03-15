@@ -5,7 +5,7 @@
     = render partial: "shared/no_data", locals: { items: @facilities, url: new_facility_path, label: t('facility.add_new') }
 
     - if @facilities.present?
-      = render "shared/pagination_title", objects: @facilities, url: new_facility_path, label: t('facility.add_new')
+      = render "shared/pagination_title", objects: @facilities, url: new_facility_path, label: t('facility.add_new'), hide_pagy: true
 
       .d-flex.facility-header
         %strong.name= sortable "name_#{I18n.locale}", t("facility.name")
