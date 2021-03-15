@@ -11,7 +11,7 @@ module Sample
 
         local_ngo.cafs.create(
           name: name,
-          sex: %w(Female Male Other).sample,
+          sex: %w(female male other).sample,
           date_of_birth: rand(20..50).years.ago,
           tel: "",
           address: address
