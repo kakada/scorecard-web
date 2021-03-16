@@ -7,9 +7,7 @@
       = Facility::DATASETS.select{|s| s[:code] == facility.dataset }[0][:"name_#{I18n.locale}"]
 
   .flex-1
-    - unless facility.root?
-      %span.timeago{ "data-date" => l(facility.created_at, format: :long) }
-        = time_ago_in_words(facility.created_at)
+    = timeago(facility.created_at).html_safe
 
   - if !facility.root? && policy(Indicator).create?
     = link_to facility_indicators_path(facility), class: "btn btn-circle btn-sm btn-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('facility.manage_indicator') } do

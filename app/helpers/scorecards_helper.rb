@@ -34,8 +34,8 @@ module ScorecardsHelper
     return "active" if is_active
   end
 
-  def status_html
-    css_klass = @scorecard.completed? ? "badge-success" : "badge-warning"
-    "<span class='badge #{css_klass}'>#{@scorecard.status}</span>"
+  def status_html(scorecard)
+    css_klass = scorecard.completed? ? "badge-success" : "badge-warning"
+    "<span class='badge #{css_klass}'>#{scorecard.status}</span>"
   end
 end

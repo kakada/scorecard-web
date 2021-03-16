@@ -18,8 +18,8 @@
             - if current_user.system_admin?
               %th= t('user.program')
             %th= t('user.status')
-            %th= t('shared.created_date')
-            %th= t('shared.updated_date')
+            %th= t('shared.created_at')
+            %th= t('shared.updated_at')
             %th
 
         %tbody
@@ -33,13 +33,8 @@
                 %td= user.program_name
               %td.status{ class: user.status }
                 = t("user.#{user.status}")
-              %td
-                %span.timeago{ "data-date" => l(user.created_at, format: :long) }
-                  = time_ago_in_words(user.created_at)
-              %td
-                %span.timeago{ "data-date" => l(user.updated_at, format: :long) }
-                  = time_ago_in_words(user.updated_at)
-
+              %td= timeago(user.created_at).html_safe
+              %td= timeago(user.updated_at).html_safe
               %td.text-right
                 - if policy(user).destroy?
                   - unless user.confirmed?

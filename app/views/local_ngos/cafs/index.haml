@@ -20,16 +20,18 @@
       %table.table.table-hover.pretty
         %thead
           %tr
-            %th= sortable "id", t('shared.number')
+            %th #
             %th= sortable "name", t("caf.name")
             %th= t('caf.address')
+            %th= sortable "created_at", t("shared.created_at")
             %th
 
         %tbody
           - @cafs.each_with_index do |caf, index|
             %tr
-              %td= caf.id
+              %td= @pagy.from + index
               %td= caf.name
               %td= caf.address
+              %td= timeago(caf.created_at).html_safe
               %td.text-right
                 = render 'shared/action_buttons', edit_url: edit_local_ngo_caf_path(@local_ngo, caf), delete_url: local_ngo_caf_path(@local_ngo, caf), object: caf

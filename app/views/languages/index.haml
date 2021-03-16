@@ -14,6 +14,7 @@
             %th= sortable "code", t("language.code")
             %th= sortable "name_en", t("language.name_en")
             %th= sortable "name_km", t("language.name_km")
+            %th= sortable "created_at", t("shared.created_at")
             %th
 
         %tbody
@@ -23,6 +24,7 @@
               %td= language.code
               %td= language.name_en
               %td= language.name_km
+              %td= timeago(language.created_at).html_safe
               %td.text-right
                 = render 'shared/action_buttons', edit_url: edit_language_path(language), delete_url: language_path(language), object: language, remote: true
 

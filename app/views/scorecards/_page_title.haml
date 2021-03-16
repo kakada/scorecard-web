@@ -4,7 +4,7 @@
       %h1.h3.mb-0.text-gray-800
         = t("scorecard.scorecard_detail") + ": #{@scorecard.uuid}-(#{@scorecard.name})"
       %div
-        = status_html.html_safe
+        = status_html(@scorecard).html_safe
 
     .my-2.card-subtitle.text-muted
       = scorecard_descriptions

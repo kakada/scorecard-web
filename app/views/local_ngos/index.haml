@@ -19,19 +19,21 @@
       %table.table.table-hover.pretty
         %thead
           %tr
-            %th= sortable "id", t('shared.number')
+            %th #
             %th= sortable "name", t("shared.name")
             %th= t('local_ngo.address')
             %th= t('local_ngo.target_provinces')
+            %th= sortable "created_at", t("shared.created_at")
             %th
 
         %tbody
           - @local_ngos.each_with_index do |local_ngo, index|
             %tr
-              %td= local_ngo.id
+              %td= @pagy.from + index
               %td= local_ngo.name
               %td= local_ngo.address
               %td= local_ngo.target_province_names
+              %td= timeago(local_ngo.created_at).html_safe
               %td.text-right
                 - if policy(local_ngo).update?
                   = link_to local_ngo_cafs_path(local_ngo), class: "btn btn-circle btn-sm btn-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('local_ngo.manage_caf') } do
