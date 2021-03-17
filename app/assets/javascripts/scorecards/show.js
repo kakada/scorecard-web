@@ -1,6 +1,7 @@
 CW.ScorecardsShow = (() => {
   return {
-    init
+    init,
+    onClickBtnCopy
   }
 
   function init() {
@@ -48,5 +49,3 @@ CW.ScorecardsShow = (() => {
   }
 
 })();
-
-CW.ScorecardsIndex = CW.ScorecardsShow

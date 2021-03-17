@@ -23,7 +23,7 @@
   %label.col-sm-4.col-form-label= t("scorecard.location")
   %label.col-sm-8.col-form-label= " : #{scorecard_location(@scorecard)}"
 .row
-  %label.col-sm-4.col-form-label= t("scorecard.conducted_date")
+  %label.col-sm-4.col-form-label= t("scorecard.conducted_at")
   %label.col-sm-8.col-form-label= " : #{date_format(@scorecard.conducted_date)}"
 .row
   %label.col-sm-4.col-form-label= t("scorecard.planned_start_date")
@@ -62,4 +62,4 @@
   %label.col-sm-4.col-form-label= t("scorecard.status")
   %label.col-sm-8.col-form-label
     = " : "
-    %span{ class: @scorecard.status }= t("scorecard.#{@scorecard.status}")
+    = status_html(@scorecard).html_safe

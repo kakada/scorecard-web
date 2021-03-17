@@ -38,3 +38,12 @@
   margin-left: 20px;
   border-left: 2px dashed;
 }
+
+.filter-input {
+  width: 280px;
+  margin-right: 12px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

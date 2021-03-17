@@ -11,13 +11,8 @@
         %i.fas.fa-plus.fa-sm.text-white-50
         = t("scorecard.add_new")
 
-%ul.nav.nav-tabs
-  %li.nav-item{class: css_active_tab(!request.query_string.present?)}
-    %a.nav-link{href: scorecards_path}= t('scorecard.all')
-  %li.nav-item{class: css_active_tab(params[:planned].present?)}
-    %a.nav-link{href: scorecards_path(planned: true)}= t('scorecard.planned')
-  %li.nav-item{class: css_active_tab(params[:locked].present?)}
-    %a.nav-link{href: scorecards_path(locked: true)}= t('scorecard.completed')
+= render 'scorecards/index/nav_tabs'
+= render 'scorecards/index/filter'
 
 .card.shadow.mb-4
   .card-body
@@ -34,10 +29,12 @@
             %th= sortable "year", t('scorecard.year')
             %th= sortable "name", t('shared.name')
             %th= sortable "facility_id", t('scorecard.facility')
-            %th= sortable "commune_code", t('scorecard.location')
+            %th= t('scorecard.implementer')
+            %th= t('scorecard.location')
             %th= t('scorecard.status')
             %th= sortable "created_at", t('shared.created_at')
             %th= sortable "locked_at", t('scorecard.submitted_at')
+            %th= sortable "conducted_date", t('scorecard.conducted_at')
             %th
 
         %tbody
@@ -50,10 +47,12 @@
               %td= scorecard.year
               %td= scorecard.name
               %td= scorecard.facility.name
+              %td= scorecard.local_ngo.name
               %td= scorecard_location(scorecard)
               %th= status_html(scorecard).html_safe
               %td= timeago(scorecard.created_at).html_safe
               %td= timeago(scorecard.locked_at).html_safe
+              %td= timeago(scorecard.conducted_date).html_safe
               %td.text-right{style: 'min-width: 90px'}
                 - if scorecard.access_locked?
                   %span{data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.completed')}}

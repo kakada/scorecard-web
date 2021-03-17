@@ -26,6 +26,8 @@
 //= require facilities
 //= require templates
 //= require indicators
+//= require scorecards/datepicker_popup
+//= require scorecards/index
 //= require scorecards/show
 //= require scorecards/new
 //= require users/index
