@@ -56,6 +56,9 @@ gem "ndjson", "~> 1.0.0"
 gem "fog-aws", "~> 3.8.0"
 gem "date_validator", "~> 0.10.0"
 
+gem 'whenever', "~> 1.0.0", require: false
+gem "database_cleaner-active_record", "~> 1.8.0"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
@@ -82,7 +85,6 @@ group :test do
   gem "capybara", ">= 2.15"
   gem "selenium-webdriver"
   # Easy installation and use of web drivers to run system tests with browsers
-  gem "database_cleaner-active_record", "~> 1.8.0"
   gem "shoulda-matchers", "~> 4.0"
   gem "webdrivers"
 end

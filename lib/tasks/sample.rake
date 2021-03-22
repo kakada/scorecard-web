@@ -2,7 +2,7 @@
 
 require "sample/csc_web"
 
-if Rails.env.development? || Rails.env.test?
+if ENV["ENABLE_RESET_DATA_SCHEDULE"] == "true" || Rails.env.development? || Rails.env.test?
   namespace :sample do
     desc "Clean db"
     task clean_db: :environment do

@@ -6,13 +6,15 @@ module Sample
   class CscWeb
     def self.load_samples
       ::Sample::Program.load
+      ::ScorecardCriteria::Language.load
       ::Sample::Location.load
       ::Sample::PrimarySchool.load
       ::Sample::LocalNgo.load
       ::Sample::User.load
       ::ScorecardCriteria::Facility.load
-      ::Sample::Indicator.load
+      ::ScorecardCriteria::Indicator.load
       ::Sample::Caf.load
+      ::ScorecardCriteria::RatingScale.load
       ::Sample::Scorecard.load
     end
 

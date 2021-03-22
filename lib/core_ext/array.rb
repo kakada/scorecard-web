@@ -2,7 +2,7 @@
 
 class Array
   def median
-    return nil if self.empty?
+    return if self.empty?
     raise "requires all number" if !self.all?(Numeric)
 
     sorted = self.sort
@@ -11,6 +11,8 @@ class Array
   end
 
   def mean
+    return if self.empty?
+
     self.sum / size
   end
 end
