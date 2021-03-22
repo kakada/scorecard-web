@@ -52,7 +52,7 @@ module ApplicationHelper
   def participant_information(criteria, agg_function)
     %w(female minority disability poor_card youth).map do |field|
       participant_tooltip(criteria, agg_function, field)
-    end.compact.join(', ')
+    end.compact.join(", ")
   end
 
   def timeago(date)

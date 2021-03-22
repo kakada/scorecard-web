@@ -36,12 +36,23 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     end
 
     context "is locked" do
-      before { scorecard.lock_access! }
+      before {
+        scorecard.lock_access!
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
+      }
 
-      it "raises error" do
-        expect {
-          put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
-        }.to raise_error(Pundit::NotAuthorizedError)
+      it "return 403" do
+        expect(JSON.parse(response.body)["errors"][0]["code"]).to eq(403)
+      end
+    end
+
+    context "scorecard is not found" do
+      before {
+        put "/api/v1/scorecards/#{scorecard.uuid}abc", params: { scorecard: params }, headers: headers
+      }
+
+      it "return 404" do
+        expect(JSON.parse(response.body)["errors"][0]["code"]).to eq(404)
       end
     end
   end

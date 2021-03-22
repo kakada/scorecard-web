@@ -25,6 +25,8 @@ module Api
 
         def assign_scorecard
           @scorecard = Scorecard.find_by(uuid: params[:scorecard_id])
+
+          raise ActiveRecord::RecordNotFound, with: :render_record_not_found if @scorecard.nil?
         end
 
         def indicator_params

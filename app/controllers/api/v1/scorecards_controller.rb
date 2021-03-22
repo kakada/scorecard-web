@@ -3,14 +3,14 @@
 module Api
   module V1
     class ScorecardsController < ApiController
-      def show
-        @scorecard = Scorecard.find_by(uuid: params[:id])
+      before_action :assign_scorecard
 
+      def show
         render json: @scorecard
       end
 
       def update
-        @scorecard = authorize Scorecard.find_by(uuid: params[:id])
+        authorize @scorecard
 
         if @scorecard.update(scorecard_params)
           @scorecard.lock_access!
@@ -21,6 +21,12 @@ module Api
       end
 
       private
+        def assign_scorecard
+          @scorecard = Scorecard.find_by(uuid: params[:id])
+
+          raise ActiveRecord::RecordNotFound, with: :render_record_not_found if @scorecard.nil?
+        end
+
         def scorecard_params
           params.require(:scorecard).permit(
             :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,

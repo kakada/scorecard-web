@@ -21,12 +21,23 @@ RSpec.describe "Api::V1::CustomIndicatorsController", type: :request do
     end
 
     context "scorecard is locked!" do
-      before { scorecard.lock_access! }
+      before {
+        scorecard.lock_access!
+        post "/api/v1/scorecards/#{scorecard.uuid}/custom_indicators", params: { custom_indicator: params.to_json }, headers: headers
+      }
 
-      it "raises error" do
-        expect {
-          post "/api/v1/scorecards/#{scorecard.uuid}/custom_indicators", params: { custom_indicator: params.to_json }, headers: headers
-        }.to raise_error(Pundit::NotAuthorizedError)
+      it "return 403" do
+        expect(JSON.parse(response.body)["errors"][0]["code"]).to eq(403)
+      end
+    end
+
+    context "scorecard is not found" do
+      before {
+        post "/api/v1/scorecards/#{scorecard.uuid}abc/custom_indicators", params: { custom_indicator: params.to_json }, headers: headers
+      }
+
+      it "return 404" do
+        expect(JSON.parse(response.body)["errors"][0]["code"]).to eq(404)
       end
     end
   end
