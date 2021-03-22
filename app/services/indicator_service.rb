@@ -21,7 +21,73 @@ class IndicatorService
     clone_indicator(facility, template)
   end
 
+  def import(param_zip_file)
+    Zip::File.open(param_zip_file) do |zipfile|
+      @zipfile = zipfile
+
+      upsert_indicators if facility.present?
+    end
+  end
+
   private
+    def upsert_indicators
+      entry = @zipfile.select{|ent| ent.name == 'indicators/indicators.csv'}[0]
+      rows = CSV.parse(entry.get_input_stream.read, :headers=>true)
+      rows.each do |row|
+        indicator_name = row["Scorecard Criterias"]
+        next unless indicator_name.present?
+
+        indicator = facility.indicators.find_or_initialize_by(name: indicator_name)
+        indicator.update(indicator_params(row))
+
+        upsert_languages_indicators(indicator, row)
+      end
+    end
+
+    def indicator_params(row)
+      param = { tag_attributes: { name: (row["tag"] || row["Scorecard Criterias"]) } }
+
+      if image_path = extract_file(row['image']).presence
+        param[:image] = Pathname.new(image_path).open
+      end
+
+      param
+    end
+
+    def upsert_languages_indicators(indicator, row)
+      facility.program.languages.each do |language|
+        audio = get_audio(language, row)
+
+        next unless audio.present?
+
+        lang_indi = indicator.languages_indicators.find_or_initialize_by(language_code: language.code)
+        lang_indi.update(
+          language_id: language.id,
+          language_code: language.code,
+          content: "#{indicator.name} (#{language.code})",
+          audio: Pathname.new(audio).open
+        )
+      end
+    end
+
+    def get_audio(language, row)
+      column = "#{language.name_en} (#{language.code})" # Khmer (km)
+      extract_file(row[column])
+    end
+
+    def extract_file(filename)
+      return unless filename.present?
+
+      file = @zipfile.select { |file| file.name.split("/").last.split(".").first == "#{filename.split('.').first}" }.first
+      return unless file.present?
+
+      file_destination = File.join( "public/uploads/tmp", file.name )
+      FileUtils::mkdir_p(File.dirname(file_destination))
+      @zipfile.extract(file, file_destination) { true }
+
+      file_destination
+    end
+
     def clone_indicator(from_obj, to_obj)
       from_obj.indicators.each do |old_indicator|
         new_indicator = to_obj.indicators.new(clean_attributes(old_indicator))
