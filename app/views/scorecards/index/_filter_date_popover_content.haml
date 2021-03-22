@@ -1,0 +1,32 @@
+#popover-content.flex-column
+  %ul#myTab.nav.nav-tabs{role: 'tablist'}
+    %li.nav-item
+      %a#absolute-tab.nav-link.btn.btn-link{'aria-controls' => 'absolute', 'aria-selected' => 'true', 'data-toggle' => 'tab', href: '#absolute', role: 'tab'}= t('scorecard.absolute')
+    %li.nav-item
+      %a#relative-tab.nav-link.btn.btn-link{'aria-controls' => 'relative', 'aria-selected' => 'false', 'data-toggle' => 'tab', href: '#relative', role: 'tab'}= t('scorecard.relative')
+
+  .tab-content
+    #absolute.tab-pane.fade{'aria-labelledby' => 'absolute-tab', role: 'tabpanel'}
+      #datepicker
+      .d-flex.action
+        %button.btn-reset.btn.btn-outline-secondary= t('shared.reset')
+
+    #relative.tab-pane.fade{"aria-labelledby" => "relative-tab", role: "tabpanel"}
+      .d-flex.inputs-wrapper
+        .flex-1.form-group.number-input-wrapper
+          %input.number-input.form-control{ type: 'number' }
+          .error-message.invalid-feedback= t('scorecard.must_be_bigger_than_zero')
+
+        .flex-1.form-group
+          %select.date-type-input.form-control
+            - filter_date_options.each do |option|
+              %option{value: option[:value]}= option[:label]
+
+      .d-flex.start-date-wrapper
+        %label= t('scorecard.start_date')
+        .flex-1
+          %input.form-control.start-date-input{readonly: true}
+
+      .d-flex.action
+        %button.btn-reset.btn.btn-outline-secondary= t('shared.reset')
+        %button.btn-done.btn.btn-outline-primary= t('shared.done')

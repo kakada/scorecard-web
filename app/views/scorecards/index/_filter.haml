@@ -1,0 +1,26 @@
+%form{ action: '/scorecards', method: 'get' }
+  = hidden_field_tag :filter, params[:filter]
+
+  .d-flex.my-2
+    = text_field_tag(:uuid, params[:uuid], class: 'form-control filter-input', placeholder: t('scorecard.code'), id: 'scorecard_code')
+
+    = render 'scorecards/index/filter_date'
+
+    %div.mr-2
+      %button.btn.btn-light{type: :submit}
+        %i.fas.fa-search
+        = t('shared.search')
+    %div
+      %a.btn.advance-search{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample", :role => "button"}
+        = t('scorecard.advance_search')
+        %i.fas.fa-angle-down
+
+  #collapseExample.collapse
+    .d-flex.mb-2
+      = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_province")
+
+      = select_tag :year, options_for_select(current_program.scorecards.pluck(:year).uniq, params[:year]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_year")
+
+      = select_tag :facility_id, options_for_select(current_program.facilities.leaves.pluck("name_#{I18n.locale}", :id), params[:facility_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_facility")
+
+      = select_tag :local_ngo_id, options_for_select(current_program.local_ngos.pluck(:name, :id), params[:local_ngo_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_local_ngo")

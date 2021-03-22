@@ -33,5 +33,5 @@ en:
     name: Name
     close: Close
     view_detail: View Detail
-    created_date: Created date
-    updated_date: Updated date
+    created_at: Created at
+    updated_at: Updated at

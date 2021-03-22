@@ -55,6 +55,15 @@ module ApplicationHelper
     end.compact.join(', ')
   end
 
+  def timeago(date)
+    return "" unless date.present?
+
+    str = "<span class='timeago' data-date='#{l(date, format: :long)}'>"
+    str += time_ago_in_words(date)
+    str += "</span>"
+    str
+  end
+
   private
     def participant_tooltip(criteria, agg_function, field)
       value = criteria["#{field}_#{agg_function}"].to_i

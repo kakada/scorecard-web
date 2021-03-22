@@ -10,7 +10,7 @@
       .d-flex.facility-header
         %strong.name= sortable "name_#{I18n.locale}", t("facility.name")
         %strong.w-25= t("facility.dataset")
-        %strong.flex-1= t("shared.created_date")
+        %strong.flex-1= t("shared.created_at")
 
       - @facilities.each do |facility|
         = render 'facility', facility: facility

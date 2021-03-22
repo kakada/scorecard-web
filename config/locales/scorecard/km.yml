@@ -1,7 +1,7 @@
 km:
   scorecard:
     scorecards: ប័ណ្ណដាក់ពិន្ទុ
-    conducted_date: កាលបរិច្ឆេទ
+    conducted_at: កាលបរិច្ឆេទអនុវត្ត
     location: ទីតាំង
     unit_type: ប្រភេទវិស័យ
     facility: វិស័យ
@@ -58,11 +58,22 @@ km:
     disability: ពិការភាព
     female: ស្រី
     selected_criterias: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
-    completed: អនុវត្តរួចរាល់
-    planned: នឹងត្រូវអនុវត្ត
+    completed: អនុវត្តរួចរាល់ (completed)
+    planned: នឹងត្រូវអនុវត្ត (planned)
     all: ទាំងអស់
     record_is_locked: ប័ណ្ណដាក់ពិន្ទុនេះត្រូវបានចាក់សោ!
     primary_school: បឋមសិក្សា
     code: លេខកូដ
     status: ស្ថានភាព
     submitted_at: កាលបរិច្ឆេទទទួលបានសំណើរ
+    any_province: គ្រប់ខេត្ត
+    any_year: គ្រប់ឆ្នាំ
+    any_facility: គ្រប់វិស័យ
+    any_local_ngo: គ្រប់អ្នកអនុវត្ត
+    absolute: Absolute
+    relative: Relative
+    start_date: ថ្ងៃចាប់ផ្តើម
+    must_be_bigger_than_zero: 'ត្រូវតែ > 0'
+    filter_by_date: ច្រោះតាមកាលបរិច្ឆេទអនុវត្ត
+    advance_search: ស្វែងរកបន្ថែម
+    implementer: អ្នកអនុវត្ត

@@ -1,7 +1,7 @@
 en:
   scorecard:
     scorecards: Scorecards
-    conducted_date: Conducted date
+    conducted_at: Conducted at
     location: Location
     unit_type: Unit Type
     facility: Facility
@@ -65,4 +65,15 @@ en:
     primary_school: Primary school
     code: Code
     status: Status
-    submitted_at: Submitted date
+    submitted_at: Submitted at
+    any_province: Any province
+    any_year: Any year
+    any_facility: Any facility
+    any_local_ngo: Any local NGO
+    absolute: Absolute
+    relative: Relative
+    start_date: Start date
+    must_be_bigger_than_zero: 'Must be > 0'
+    filter_by_date: Filter by conducted date
+    advance_search: Advance search
+    implementer: Local NGO
