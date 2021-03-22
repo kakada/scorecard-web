@@ -6,7 +6,7 @@
 
     - if @local_ngos.present?
       .d-sm-flex
-        = render "shared/pagination_title", objects: @local_ngos
+        = render "shared/pagination_title", objects: @local_ngos, hide_pagy: true
         .flex-grow-1
 
         %div
