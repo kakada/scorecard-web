@@ -41,6 +41,12 @@
           %i.fas.fa-fw.fa-wrench
           %span= t('sidebar.settings')
 
+    - if policy(PdfTemplate).index?
+      %li.nav-item{ class: [css_active_class('pdf_templates'), css_nested_active_class('pdf_templates')] }
+        %a.nav-link{:href => pdf_templates_path}
+          %i.far.fa-fw.fa-file-pdf
+          %span= t("sidebar.pdf_template")
+
     %li.nav-item{ class: css_active_class('about') }
       %a.nav-link{:href => about_path}
         %i.fas.fa-fw.fa-exclamation-circle

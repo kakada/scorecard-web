@@ -1,0 +1,24 @@
+= render "shared/page_title", title: t("pdf_template.pdf_template"), url: new_pdf_template_path, label: t("pdf_template.new_pdf_template")
+
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @pdf_templates, url: new_pdf_template_path, label: t("pdf_template.new_pdf_template") }
+
+    - if @pdf_templates.present?
+      = render "shared/pagination_title", objects: @pdf_templates
+
+      %table.table.table-hover
+        %thead
+          %tr
+            %th= t('pdf_template.name')
+            %th
+        %tbody
+          - @pdf_templates.each do |pdf_template|
+            %tr
+              %td= pdf_template.name
+              %td.text-right
+                = render 'shared/action_buttons', edit_url: edit_pdf_template_path(pdf_template), delete_url: pdf_template_path(pdf_template), object: pdf_template
+
+    - if @pagy.pages > 1
+      .pagy-wrapper
+        != pagy_bootstrap_nav(@pagy)

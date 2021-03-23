@@ -1,0 +1,39 @@
+.mb-4
+  .overflow-hidden
+    %h1.h3.mb-0.float-left{style: 'line-height: 40px;'}
+      = t("scorecard.scorecard_detail") + ": #{@scorecard.uuid}-(#{@scorecard.name})"
+
+    .float-left.ml-2.mt-2
+      = status_html(@scorecard).html_safe
+
+  .my-2.card-subtitle.text-muted
+    = scorecard_descriptions
+
+#content
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th.align-middle.text-center{:scope => "col"}= t("scorecard.criteria")
+        %th.align-middle.text-center{:scope => "col"}= t("scorecard.median")
+        %th.align-middle.text-center{:scope => "col"}= t("scorecard.strength")
+        %th.align-middle.text-center{:scope => "col"}= t("scorecard.weakness")
+        %th.align-middle.text-center{:scope => "col"}= t("scorecard.suggested_action")
+
+    %tbody
+      - @voting_indicators.each do |indicator|
+        %tr
+          %td= indicator.indicatorable.name
+          %td.text-center
+            = t("rating_scale.#{indicator.median}") + " (#{VotingIndicator.medians[indicator.median]})"
+          %td
+            %ul
+              - indicator.strength.each do |str|
+                %li= str
+          %td
+            %ul
+              - indicator.weakness.each do |str|
+                %li= str
+          %td
+            %ul
+              - indicator.suggested_action.each do |str|
+                %li= str

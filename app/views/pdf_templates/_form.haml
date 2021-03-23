@@ -1,0 +1,8 @@
+.w-75.view-center
+  = simple_form_for @pdf_template do |f|
+    = f.input :name, label: t('pdf_template.name')
+    = f.rich_text_area :content
+
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), pdf_templates_path, class: 'btn btn-secondary'

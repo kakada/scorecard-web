@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :pdf_templates
+
   resources :languages, path: "/scorecards/settings/languages"
 
   resources :facilities, path: "/scorecards/settings/facilities", only: [:index, :new, :create, :destroy] do

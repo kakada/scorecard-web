@@ -11,6 +11,10 @@ class ScorecardsController < ApplicationController
     respond_to do |format|
       format.html
       format.js
+      format.pdf do
+        @voting_indicators = @scorecard.voting_indicators.includes(:indicatorable).order(median: :DESC)
+        render pdf: "scorecard_#{@scorecard.id}"
+      end
     end
   end
 
