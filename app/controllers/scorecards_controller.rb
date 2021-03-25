@@ -12,8 +12,8 @@ class ScorecardsController < ApplicationController
       format.html
       format.js
       format.pdf do
-        @voting_indicators = @scorecard.voting_indicators.includes(:indicatorable).order(median: :DESC)
-        render pdf: "scorecard_#{@scorecard.id}"
+        render pdf: "scorecard_#{@scorecard.uuid}",
+               inline: ScorecardInterpretor.new(@scorecard).message
       end
     end
   end

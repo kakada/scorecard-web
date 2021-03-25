@@ -58,10 +58,17 @@ module ApplicationHelper
   def timeago(date)
     return "" unless date.present?
 
-    str = "<span class='timeago' data-date='#{l(date, format: :long)}'>"
+    str = "<span class='timeago' data-date='#{l(date)}'>"
     str += time_ago_in_words(date)
     str += "</span>"
     str
+  end
+
+  def program_languages
+    [
+      { code: "km", label: I18n.t("language.km"), image: "khmer.png" },
+      { code: "en", label: I18n.t("language.en"), image: "english.png" }
+    ]
   end
 
   private

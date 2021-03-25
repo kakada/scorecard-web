@@ -56,7 +56,7 @@ gem "ndjson", "~> 1.0.0"
 gem "fog-aws", "~> 3.8.0"
 gem "date_validator", "~> 0.10.0"
 
-gem 'whenever', "~> 1.0.0", require: false
+gem "whenever", "~> 1.0.0", require: false
 gem "database_cleaner-active_record", "~> 1.8.0"
 
 gem "wicked_pdf",                 "~> 2.1.0"

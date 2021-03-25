@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PdfTemplatesController < ApplicationController
   def index
     @pagy, @pdf_templates = pagy(current_program.pdf_templates.order(sort_column + " " + sort_direction))
@@ -40,6 +42,6 @@ class PdfTemplatesController < ApplicationController
 
   private
     def pdf_template_params
-      params.require(:pdf_template).permit(:name, :content, :default)
+      params.require(:pdf_template).permit(:name, :content, :language_code)
     end
 end

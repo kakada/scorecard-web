@@ -36,7 +36,10 @@
 #  primary_school_code       :string
 #
 class Scorecard < ApplicationRecord
-  include Lockable
+  include Scorecards::Lockable
+  include Scorecards::Location
+  include Scorecards::Filter
+  include Scorecards::TemplateField
 
   belongs_to :unit_type, class_name: "Facility"
   belongs_to :facility
@@ -71,8 +74,6 @@ class Scorecard < ApplicationRecord
   validates :planned_start_date, presence: true
   validates :planned_end_date, presence: true, date: { after_or_equal_to: :planned_start_date }
 
-  before_validation :set_location_code
-
   before_create :secure_uuid
   before_create :set_name
   before_save   :clear_primary_school_code, unless: -> { facility.try(:dataset).present? }
@@ -90,31 +91,12 @@ class Scorecard < ApplicationRecord
 
   SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
 
-  def location_name(address = "address_km")
-    return if location_code.blank?
-
-    "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("#{address}".to_sym)
-  end
-
   def status
     completed? ? "completed" : "planned"
   end
 
   def completed?
-    !!locked_at
-  end
-
-  def self.filter(params={})
-    scope = all
-    scope = scope.where('uuid LIKE ?', "%#{params[:uuid].downcase}%") if params[:uuid].present?
-    scope = scope.where('conducted_date >= ?', params[:start_date]) if params[:start_date].present?
-    scope = scope.where(facility_id: params[:facility_id]) if params[:facility_id].present?
-    scope = scope.where(local_ngo_id: params[:local_ngo_id]) if params[:local_ngo_id].present?
-    scope = scope.where(province_id: params[:province_id]) if params[:province_id].present?
-    scope = scope.where(year: params[:year].to_i) if params[:year].present?
-    scope = scope.where(locked_at: nil) if params[:filter] == 'planned'
-    scope = scope.where.not(locked_at: nil) if params[:filter] == 'locked'
-    scope
+    access_locked?
   end
 
   private
@@ -133,10 +115,6 @@ class Scorecard < ApplicationRecord
 
     def set_name
       self.name = "#{commune_id}-#{year}-#{unit_type_id.to_s.rjust(2, '0')}"
-    end
-
-    def set_location_code
-      self.location_code = commune_id
     end
 
     def clear_primary_school_code

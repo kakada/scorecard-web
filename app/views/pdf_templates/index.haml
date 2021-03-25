@@ -11,11 +11,15 @@
         %thead
           %tr
             %th= t('pdf_template.name')
+            %th= t('pdf_template.language_code')
+            %th= t('shared.created_at')
             %th
         %tbody
           - @pdf_templates.each do |pdf_template|
             %tr
               %td= pdf_template.name
+              %td= t("language.#{pdf_template.language_code}")
+              %td= timeago(pdf_template.created_at).html_safe
               %td.text-right
                 = render 'shared/action_buttons', edit_url: edit_pdf_template_path(pdf_template), delete_url: pdf_template_path(pdf_template), object: pdf_template
 

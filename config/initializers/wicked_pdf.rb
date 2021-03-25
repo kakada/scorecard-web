@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # WickedPDF Global Configuration
 #
 # Use this to set up shared configuration options for your entire application.
@@ -17,9 +19,9 @@ WickedPdf.config = {
 
   # Layout file to be used for all PDFs
   # (but can be overridden in `render :pdf` calls)
-  layout: 'pdf.html',
+  layout: "pdf.html",
   margin:  { top: 16, bottom: 16, left: 16, right: 16 },
-  orientation: 'Landscape'
+  orientation: "Landscape"
 
   # Using wkhtmltopdf without an X server can be achieved by enabling the
   # 'use_xvfb' flag. This will wrap all wkhtmltopdf commands around the

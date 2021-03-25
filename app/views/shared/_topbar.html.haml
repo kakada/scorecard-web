@@ -16,17 +16,12 @@
         = simple_form_for(current_user, url: update_locale_users_path, method: :post, remote: true, html: { id: "switch-language" }) do |f|
           = f.hidden_field :language_code
 
-          %a.switch-language.dropdown-item.d-flex.align-items-center{'data-language' => 'km'}
-            .dropdown-list-image.mr-3
-              = image_tag "khmer.png", alt: "locale", size: "24x24", class: "mr-2"
-            .font-weight-bold
-              .text-truncate= t('language.km')
-
-          %a.switch-language.dropdown-item.d-flex.align-items-center{'data-language' => 'en'}
-            .dropdown-list-image.mr-3
-              = image_tag "english.png", alt: "locale", size: "24x24", class: "mr-2"
-            .font-weight-bold
-              .text-truncate= t('language.en')
+          - program_languages.each do |language|
+            %a.switch-language.dropdown-item.d-flex.align-items-center{'data-language' => language[:code]}
+              .dropdown-list-image.mr-3
+                = image_tag language[:image], alt: "locale", size: "24x24", class: "mr-2"
+              .font-weight-bold
+                .text-truncate= language[:label]
 
     .topbar-divider.d-none.d-sm-block
     / Nav Item - User Information

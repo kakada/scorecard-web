@@ -2,11 +2,11 @@
 
 class PdfTemplatePolicy < ApplicationPolicy
   def index?
-    user.program_admin? || user.staff?
+    user.program_admin?
   end
 
   def create?
-   index?
+    user.program_admin?
   end
 
   def update?

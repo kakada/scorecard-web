@@ -41,15 +41,15 @@ module ScorecardsHelper
 
   def filter_date_options
     [
-      { label: 'Days ago', value: 'Day' },
-      { label: 'Weeks ago', value: 'Week' },
-      { label: 'Months ago', value: 'Month' },
-      { label: 'Years ago', value: 'Year' }
+      { label: "Days ago", value: "Day" },
+      { label: "Weeks ago", value: "Week" },
+      { label: "Months ago", value: "Month" },
+      { label: "Years ago", value: "Year" }
     ]
   end
 
   def filter_date_popover
-    dom = render('scorecards/index/filter_date_popover_content')
-    content_tag(:div, '', class: 'hidden filter-date', data: { html: dom.gsub("\n", '') })
+    dom = render("scorecards/index/filter_date_popover_content")
+    content_tag(:div, "", class: "hidden filter-date", data: { html: dom.gsub("\n", "") })
   end
 end
