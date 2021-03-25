@@ -38,7 +38,7 @@ gem "devise", "~> 4.7.2"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.2", require: false
 
-gem "omniauth-google-oauth2"
+gem "omniauth-google-oauth2", "~>1.0.0"
 gem "sentry-raven", "~> 3.0.4"
 gem "pagy", "~> 3.5"
 gem "pumi", require: "pumi/rails"
@@ -78,6 +78,7 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
 
   gem "annotate", "~> 3.1.1"
+  gem "bundler-audit", "~>0.8.0"
 end
 
 group :test do
