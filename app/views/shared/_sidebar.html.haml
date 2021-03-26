@@ -35,6 +35,13 @@
         %i.far.fa-fw.fa-clipboard
         %span= t("sidebar.scorecard")
 
+    - if policy(PdfTemplate).index?
+      %li.nav-item{ class: [css_active_class('pdf_templates'), css_nested_active_class('pdf_templates')] }
+        %a.nav-link{:href => pdf_templates_path}
+          %i.far.fa-fw.fa-file-pdf
+          %span= t("sidebar.pdf_template")
+
+
     - if current_program.present? && policy(Program).update?
       %li.nav-item{ class: css_nested_active_class('programs/settings') }
         %a.nav-link{:href => setting_path}

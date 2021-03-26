@@ -16,6 +16,7 @@
 //= require jquery-sortable
 //= require typeahead
 //= require bloodhound.min
+//= require jquery.richtext
 
 //= require application/namespace
 //= require application/util
@@ -35,6 +36,7 @@
 //= require local_ngos
 //= require scorecards_settings/rating
 //= require scorecards_settings/contact
+//= require pdf_templates
 
 document.addEventListener('turbolinks:load', function() {
   CW.Common.Topbar.init();

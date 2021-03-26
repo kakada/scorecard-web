@@ -19,6 +19,7 @@ class Program < ApplicationRecord
   has_many :scorecards
   has_many :rating_scales
   has_many :contacts
+  has_many :pdf_templates
 
   validates :name, presence: true
 

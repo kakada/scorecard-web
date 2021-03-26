@@ -1,0 +1,8 @@
+en:
+  pdf_template:
+    pdf_template: PDF template
+    name: Name
+    new_pdf_template: New PDF template
+    edit_pdf_template: Edit PDF template
+    language_code: Language code
+    content: Content

@@ -25,6 +25,7 @@ services:
       - bundle:/usr/local/bundle
       - attachment:/app/public/uploads
       - ./pids/server.pid:/app/tmp/pids/server.pid
+      - ./vendor/assets/fonts:/usr/share/fonts
     depends_on:
       - db
 

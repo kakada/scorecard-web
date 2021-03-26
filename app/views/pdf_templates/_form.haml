@@ -1,0 +1,23 @@
+.w-75.view-center
+  = simple_form_for @pdf_template do |f|
+    = f.input :name, label: t('pdf_template.name')
+
+    .form-group
+      = f.label :language_code do
+        = t("pdf_template.language_code")
+        %abbr{title: "required"} *
+
+      = f.select(:language_code, program_languages.pluck(:label, :code),{}, class: 'form-control custom-select')
+
+      .d-block.invalid-feedback
+        = f.object.errors[:language_code].join(';')
+
+    = f.input :content, label: t('pdf_template.content')
+
+    %div
+      - Scorecard.template_fields.each do |field|
+        %a.btn.btn-link.template-field{"data-code" => field[:code]}= field[:name]
+
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), pdf_templates_path, class: 'btn btn-secondary'

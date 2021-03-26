@@ -11,6 +11,10 @@ class ScorecardsController < ApplicationController
     respond_to do |format|
       format.html
       format.js
+      format.pdf do
+        render pdf: "scorecard_#{@scorecard.uuid}",
+               inline: ScorecardInterpretor.new(@scorecard).message
+      end
     end
   end
 

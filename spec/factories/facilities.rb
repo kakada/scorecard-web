@@ -6,7 +6,7 @@
 #
 #  id             :bigint           not null, primary key
 #  code           :string
-#  name           :string
+#  name_en        :string
 #  parent_id      :integer
 #  lft            :integer          not null
 #  rgt            :integer          not null
@@ -15,7 +15,9 @@
 #  program_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  subset         :string
+#  dataset        :string
+#  default        :boolean          default(FALSE)
+#  name_km        :string
 #
 FactoryBot.define do
   factory :facility do
