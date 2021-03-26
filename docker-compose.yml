@@ -36,3 +36,10 @@ services:
     command: 'bin/maildev --web 3080 --smtp 1025 --incoming-user smtp --incoming-pass smtp'
     ports:
       - '3080:3080'
+
+  ngrok:
+    image: wernight/ngrok
+    ports:
+      - 4040:4040
+    environment:
+      NGROK_PORT: 'web:3000'

@@ -20,6 +20,8 @@ class Program < ApplicationRecord
   has_many :rating_scales
   has_many :contacts
   has_many :pdf_templates
+  has_many :chat_groups
+  has_one  :telegram_bot, dependent: :destroy
 
   validates :name, presence: true
 
@@ -32,6 +34,9 @@ class Program < ApplicationRecord
 
   accepts_nested_attributes_for :rating_scales, allow_destroy: true
   accepts_nested_attributes_for :contacts, allow_destroy: true
+  accepts_nested_attributes_for :telegram_bot, allow_destroy: true
+
+  delegate :enabled, to: :telegram_bot, prefix: :telegram_bot, allow_nil: true
 
   private
     def create_default_language

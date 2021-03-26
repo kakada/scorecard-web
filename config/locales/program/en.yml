@@ -6,3 +6,5 @@ en:
     program_settings: Program settings
     contacts: Contacts
     add_contact: + Add Contact
+    telegram_notification: Telegram notification
+    email_notification: Email notification

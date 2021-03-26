@@ -17,7 +17,7 @@ module Programs
     private
       def program_params
         params.require(:program).permit(
-          :datetime_format
+          :datetime_format, :enable_email_notification
         )
       end
   end
