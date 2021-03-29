@@ -1,0 +1,9 @@
+= render "shared/page_title", title: t("sidebar.notification")
+
+#contents
+  - milestones = Scorecard::MILESTONES
+  - milestones.each_with_index do |milestone, index|
+    = render 'message', label: "Alert notification: scorecard in #{milestone}", milestone: milestone
+
+    - if index < milestones.length - 1
+      .veticial-line

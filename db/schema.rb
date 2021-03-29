@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_26_064408) do
+ActiveRecord::Schema.define(version: 2021_03_29_092445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,13 +159,14 @@ ActiveRecord::Schema.define(version: 2021_03_26_064408) do
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.string "milestone"
+    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "notifications", force: :cascade do |t|
     t.string "provider"
-    t.text "emails"
+    t.text "emails", default: [], array: true
     t.integer "message_id"
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
@@ -268,6 +269,7 @@ ActiveRecord::Schema.define(version: 2021_03_26_064408) do
     t.integer "creator_id"
     t.datetime "locked_at"
     t.string "primary_school_code"
+    t.string "milestone"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end
 

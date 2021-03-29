@@ -21,6 +21,7 @@ class Program < ApplicationRecord
   has_many :contacts
   has_many :pdf_templates
   has_many :chat_groups
+  has_many :messages
   has_one  :telegram_bot, dependent: :destroy
 
   validates :name, presence: true

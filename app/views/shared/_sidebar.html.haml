@@ -41,6 +41,11 @@
           %i.far.fa-fw.fa-file-pdf
           %span= t("sidebar.pdf_template")
 
+    - if policy(Message).index?
+      %li.nav-item{ class: [css_active_class('messages'), css_nested_active_class('messages')] }
+        %a.nav-link{ :href => messages_path }
+          %i.far.fa-fw.fa-bell
+          %span= t("sidebar.notification")
 
     - if current_program.present? && policy(Program).update?
       %li.nav-item{ class: css_nested_active_class('programs/settings') }

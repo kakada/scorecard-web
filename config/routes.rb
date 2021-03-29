@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "scorecards#index"
@@ -40,6 +42,7 @@ Rails.application.routes.draw do
   end
 
   resources :pdf_templates
+  resources :messages
 
   resources :languages, path: "/scorecards/settings/languages"
 
@@ -105,4 +108,13 @@ Rails.application.routes.draw do
 
   # Telegram
   telegram_webhook TelegramWebhooksController
+
+  if Rails.env.production?
+    # Sidekiq
+    authenticate :user, lambda { |u| u.system_admin? } do
+      mount Sidekiq::Web => '/sidekiq'
+    end
+  else
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

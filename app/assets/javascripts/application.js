@@ -39,6 +39,7 @@
 //= require pdf_templates
 //= require program_settings/show
 //= require telegram_bots/show
+//= require messages
 
 document.addEventListener('turbolinks:load', function() {
   CW.Common.Topbar.init();

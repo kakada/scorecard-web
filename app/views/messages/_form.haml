@@ -1,0 +1,15 @@
+.w-50.view-center
+  = simple_form_for @message, html: { id: 'message-form' } do |f|
+    = f.input :content, label: "Message"
+    = f.input :milestone, as: :hidden
+
+    .email-notification
+      = render 'messages/notifications/email', f: f
+
+    .telegram-notification
+      = render 'messages/notifications/telegram', f: f
+
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), messages_path, class: 'btn btn-secondary'
+

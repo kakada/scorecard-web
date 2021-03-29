@@ -1,0 +1,15 @@
+- milestone ||= "downloaded"
+- message = @messages.select { |ms| ms.milestone == milestone }.first
+- url = message.present? ? edit_message_path(message) : new_message_path(milestone: milestone)
+
+.card
+  .card-header
+    .d-flex
+      .flex-grow-1= label
+
+  .card-body
+    .d-flex
+      .flex-1= message.try(:content) || '_'
+
+      %div
+        = link_to t("shared.setup"), url, class: "btn btn-primary"

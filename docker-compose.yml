@@ -12,7 +12,7 @@ services:
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
 
-  web:
+  web: &rails
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -28,8 +28,17 @@ services:
     depends_on:
       - db
       - smtp
+      - redis
     stdin_open: true
     tty: true
+
+  sidekiq:
+    <<: *rails
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    ports: []
+
+  redis:
+    image: redis:5.0.6
 
   smtp:
     image: 'djfarrelly/maildev:latest'
