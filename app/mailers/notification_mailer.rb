@@ -3,6 +3,6 @@
 class NotificationMailer < ApplicationMailer
   def notify(emails, body_message)
     @body_message = body_message
-    mail(to: emails, subject: 'Scorecard Notification')
+    mail(to: emails, subject: "Scorecard Notification")
   end
 end

@@ -34,7 +34,7 @@ gem "jquery-rails",   "~> 4.4.0"
 gem "coffee-rails",   "~> 5.0.0"
 
 # gem "devise", "~> 4.7.2"
-gem "devise", github: 'heartcombo/devise', branch: 'ca-omniauth-2'
+gem "devise", github: "heartcombo/devise", branch: "ca-omniauth-2"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.2", require: false

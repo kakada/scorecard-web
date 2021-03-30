@@ -6,7 +6,17 @@ CW.MessagesNew = (() => {
   function init() {
     initEmailEditor();
     onFormSubmit();
+    onClickTemplateField();
   }
+
+  function onClickTemplateField() {
+    $(".template-field").on('click', function(e) {
+      let text = '{{' + $(this).data('code') + '}}';
+      CW.Util.insertToTextArea('message_content', text);
+      e.preventDefault();
+    });
+  }
+
 
   function initEmailEditor() {
     let input = document.querySelector('textarea[name="message[email_notification_attributes][emails]"]');

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_092445) do
+ActiveRecord::Schema.define(version: 2021_03_30_033508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -270,6 +270,7 @@ ActiveRecord::Schema.define(version: 2021_03_29_092445) do
     t.datetime "locked_at"
     t.string "primary_school_code"
     t.string "milestone"
+    t.string "finished_date_on_app"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end
 

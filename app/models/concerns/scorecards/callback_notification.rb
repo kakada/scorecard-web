@@ -12,7 +12,7 @@ module Scorecards::CallbackNotification
         return if message.nil?
 
         message.notifications.each do |notification|
-          notification.provider.constantize.find(notification.id).notify_async
+          notification.notify_async(self.id)
         end
       end
   end

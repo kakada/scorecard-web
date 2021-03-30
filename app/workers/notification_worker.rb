@@ -3,11 +3,12 @@
 class NotificationWorker
   include Sidekiq::Worker
 
-  def perform(id, klass_name)
-    notification = klass_name.constantize.find_by(id: id)
+  def perform(id, scorecard_id)
+    notification = Notification.find_by(id: id)
 
     return if notification.nil?
 
-    notification.notify_groups
+    display_message = notification.message.display_content(scorecard_id)
+    notification.notify_groups(display_message)
   end
 end

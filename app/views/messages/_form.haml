@@ -1,7 +1,12 @@
 .w-50.view-center
   = simple_form_for @message, html: { id: 'message-form' } do |f|
-    = f.input :content, label: "Message"
     = f.input :milestone, as: :hidden
+    = f.input :content, label: "Message", input_html: { rows: 5 }
+
+    .template-codes.border.mb-3
+      - Messages::TemplateCode.fields.each do |field|
+        %a.btn.btn-link.template-field{"data-code" => field[:code]}
+          = field[:name]
 
     .email-notification
       = render 'messages/notifications/email', f: f
@@ -12,4 +17,3 @@
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), messages_path, class: 'btn btn-secondary'
-
