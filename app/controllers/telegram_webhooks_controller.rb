@@ -4,21 +4,34 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   include Telegram::Bot::UpdatesController::MessageContext
 
   def message(message)
-    if group = message["migrate_to_chat_id"].present? && ChatGroup.find_by(chat_id: message["chat"]["id"].to_s).presence
-      return group.update(chat_id: message["migrate_to_chat_id"], chat_type: ChatGroup::TELEGRAM_SUPER_GROUP)
-    end
+    return migrate_chat_group(message) if message["migrate_to_chat_id"].present?
+    return unless managing_member?(message)
 
-    # {"id"=>952424355, "is_bot"=>true, "first_name"=>"ebs_bot", "username"=>"ebs_system_bot"}
-    member = message["left_chat_member"] || message["new_chat_member"]
-    return unless member.present? && member["is_bot"]
-
-    # "chat"=>{"id"=>-369435878, "title"=>"ebs-group-chat", "type"=>"group", "all_members_are_administrators"=>true}
-    chat = message["chat"]
-    return unless ChatGroup::TELEGRAM_CHAT_TYPES.include?(chat["type"])
-
-    if program = TelegramBot.where("token LIKE ?", "#{member['id']}%").first.try(:program).presence
-      group = program.chat_groups.find_or_initialize_by(chat_id: chat["id"].to_s, provider: "Telegram")
-      group.update_attributes(title: chat["title"], actived: message["new_chat_member"].present?, chat_type: chat["type"])
-    end
+    upsert_chat_group(message)
   end
+
+  private
+    def migrate_chat_group(message)
+      group = ChatGroup.find_by(chat_id: message["chat"]["id"].to_s)
+      return if group.nil?
+
+      group.update(chat_id: message["migrate_to_chat_id"], chat_type: ChatGroup::TELEGRAM_SUPER_GROUP)
+    end
+
+    def managing_member?(message)
+      @member = message["left_chat_member"] || message["new_chat_member"]
+      @member.present? && @member["is_bot"] && ChatGroup::TELEGRAM_CHAT_TYPES.include?(message["chat"]["type"])
+    end
+
+    def upsert_chat_group(message)
+      program = TelegramBot.where("token LIKE ?", "#{@member["id"]}%").first.try(:program)
+      return if program.nil?
+
+      group = program.chat_groups.find_or_initialize_by(chat_id: message["chat"]["id"].to_s, provider: "Telegram")
+      group.update(
+        title: message["chat"]["title"],
+        actived: message["new_chat_member"].present?,
+        chat_type: message["chat"]["type"]
+      )
+    end
 end

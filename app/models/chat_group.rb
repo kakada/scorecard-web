@@ -16,6 +16,7 @@
 #  updated_at :datetime         not null
 #
 class ChatGroup < ApplicationRecord
+  belongs_to :program
   has_many :chat_groups_notifications
   has_many :notifications, through: :chat_groups_notifications
 

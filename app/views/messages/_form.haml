@@ -1,7 +1,7 @@
 .w-50.view-center
   = simple_form_for @message, html: { id: 'message-form' } do |f|
     = f.input :milestone, as: :hidden
-    = f.input :content, label: "Message", input_html: { rows: 5 }
+    = f.input :content, label: t("message.message"), input_html: { rows: 5 }
 
     .template-codes.border.mb-3
       - Messages::TemplateCode.fields.each do |field|

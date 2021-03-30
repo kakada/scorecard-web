@@ -3,7 +3,7 @@
 #contents
   - milestones = Scorecard::MILESTONES
   - milestones.each_with_index do |milestone, index|
-    = render 'message', label: "Alert notification: scorecard in #{milestone}", milestone: milestone
+    = render 'message', milestone: milestone
 
     - if index < milestones.length - 1
       .veticial-line

@@ -50,7 +50,7 @@ class Scorecard < ApplicationRecord
   }
 
   SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
-  MILESTONES = %w(downloaded running summitted)
+  MILESTONES = %w(downloaded running submitted)
 
   belongs_to :unit_type, class_name: "Facility"
   belongs_to :facility

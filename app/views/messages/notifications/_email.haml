@@ -1,9 +1,9 @@
 = f.simple_fields_for :email_notification do |ff|
   .form-group
     %label
-      = t('milestone.email_to')
+      = t('message.email_to')
 
     - if !current_program.enable_email_notification?
-      .small.ml-4= t('milestone.to_enable_email', url: setting_path).html_safe
+      .small.ml-4= t('message.to_enable_email', url: setting_path).html_safe
     - else
       = ff.input :emails, label: false, input_html: { id: 'notification-emails', class: 'h-auto' }

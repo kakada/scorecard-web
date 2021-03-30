@@ -4,8 +4,9 @@
 
 .card
   .card-header
-    .d-flex
-      .flex-grow-1= label
+    = t("message.notification_in_milestone")
+    = ": "
+    = t("message.scorecard_#{milestone}")
 
   .card-body
     .d-flex

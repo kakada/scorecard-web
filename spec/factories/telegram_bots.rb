@@ -15,5 +15,6 @@
 #
 FactoryBot.define do
   factory :telegram_bot do
+    program
   end
 end
