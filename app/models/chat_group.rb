@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: chat_groups
+#
+#  id         :bigint           not null, primary key
+#  title      :string
+#  chat_id    :string
+#  actived    :boolean          default(TRUE)
+#  reason     :text
+#  provider   :string
+#  program_id :integer
+#  chat_type  :string           default("group")
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class ChatGroup < ApplicationRecord
   has_many :chat_groups_notifications
   has_many :notifications, through: :chat_groups_notifications

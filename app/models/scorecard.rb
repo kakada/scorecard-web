@@ -34,6 +34,8 @@
 #  creator_id                :integer
 #  locked_at                 :datetime
 #  primary_school_code       :string
+#  milestone                 :string
+#  finished_date_on_app      :string
 #
 class Scorecard < ApplicationRecord
   include Scorecards::Lockable

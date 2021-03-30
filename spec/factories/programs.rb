@@ -4,11 +4,12 @@
 #
 # Table name: programs
 #
-#  id              :bigint           not null, primary key
-#  name            :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  datetime_format :string           default("DD-MM-YYYY")
+#  id                        :bigint           not null, primary key
+#  name                      :string
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  datetime_format           :string           default("DD-MM-YYYY")
+#  enable_email_notification :boolean          default(FALSE)
 #
 FactoryBot.define do
   factory :program do
