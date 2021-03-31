@@ -1,5 +1,8 @@
 .w-50.view-center
   = simple_form_for @message, html: { id: 'message-form' } do |f|
+    .form-group
+      = form_check_toggle({ name: "message[actived]", checked: f.object.actived, label: I18n.t("message.set_message_active")}).html_safe
+
     = f.input :milestone, as: :hidden
     = f.input :content, label: t("message.message"), input_html: { rows: 5 }
 

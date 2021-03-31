@@ -41,7 +41,7 @@ class MessagesController < ApplicationController
 
   private
     def message_params
-      params.require(:message).permit(:content, :milestone,
+      params.require(:message).permit(:id, :content, :milestone, :actived,
         telegram_notification_attributes: [ chat_group_ids: [] ],
         email_notification_attributes: [ :id, :emails ]
       )

@@ -8,6 +8,7 @@
 #  content    :text
 #  milestone  :string
 #  program_id :integer
+#  actived    :boolean          default(TRUE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

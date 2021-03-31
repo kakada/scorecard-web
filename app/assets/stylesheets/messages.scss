@@ -1,3 +1,97 @@
 // Place all the styles related to the messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#messages-index {
+  .active-telegram-icon {
+    color: #0088cc;
+  }
+
+  .disabled-bg {
+    background-color: rgba(0,0,0,0.1);
+  }
+
+  .control {
+    width: 50px;
+    height: 26px;
+    overflow: hidden;
+  }
+
+  .font-size-24 {
+    font-size: 24px;
+  }
+
+  .overflow-content {
+    .fv-body-blur {
+      display: block;
+    }
+
+    .fv-btns-wrapper {
+      display: block;
+    }
+
+    .more {
+      display: block;
+    }
+
+    .less {
+      display: none;
+    }
+
+    .btn-truncate {
+      font-size: 12px;
+      color: #6a737d;
+      text-decoration: none;
+      border: 0;
+      background: none;
+      padding: 8px 0;
+      user-select: none;
+      outline: none;
+    }
+
+    &.detail-on {
+      .fv-body-wrapper {
+        max-height: none;
+        overflow: visible;
+      }
+
+      .fv-body-blur {
+        display: none;
+      }
+
+      .more {
+        display: none;
+      }
+
+      .less {
+        display: block;
+      }
+    }
+  }
+
+  .fv-btns-wrapper {
+    display: none;
+
+    .octicon {
+      vertical-align: text-bottom;
+      fill: #6a737d;
+    }
+  }
+
+  .fv-body-wrapper {
+    max-height: 54px;
+    overflow: hidden;
+    position: relative;
+    word-break: break-all;
+  }
+
+  .fv-body-blur {
+    display: none;
+    height: 32px;
+    background: linear-gradient(0deg,#fafafa,hsla(0,0%,100%,0));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
