@@ -32,7 +32,6 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(response.content_type).to eq("application/json; charset=utf-8") }
       it { expect(response).to have_http_status(:ok) }
       it { expect(scorecard.reload.number_of_participant).to eq(15) }
-      it { expect(scorecard.reload.access_locked?).to be_truthy }
     end
 
     context "is locked" do
@@ -53,6 +52,30 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
       it "return 404" do
         expect(JSON.parse(response.body)["errors"][0]["code"]).to eq(404)
+      end
+    end
+
+    context "scorecard milestone is downloaded" do
+      before {
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: { milestone: 'downloaded'} }, headers: headers
+      }
+
+      it "update milestone to downloaded" do
+        expect(scorecard.reload.milestone).to eq('downloaded')
+      end
+
+      it "doesn't lock_access" do
+        expect(scorecard.reload.access_locked?).to be_falsey
+      end
+    end
+
+    context "update milestone" do
+      before {
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: { milestone: 'submitted'} }, headers: headers
+      }
+
+      it "lock_access" do
+        expect(scorecard.reload.access_locked?).to be_truthy
       end
     end
   end

@@ -52,6 +52,12 @@ class Scorecard < ApplicationRecord
   SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
   MILESTONES = %w(downloaded running submitted)
 
+  MILESTONES.each do |mile|
+    define_method "#{mile}?" do
+      milestone == mile
+    end
+  end
+
   belongs_to :unit_type, class_name: "Facility"
   belongs_to :facility
   belongs_to :local_ngo, optional: true
