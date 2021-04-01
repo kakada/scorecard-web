@@ -15,7 +15,7 @@
 module Notifications
   class Email < ::Notification
     def notify_async(scorecard_id)
-      return unless program.enable_email_notification?
+      return unless program.enable_email_notification? && message.actived
 
       NotificationWorker.perform_async(id, scorecard_id)
     end
