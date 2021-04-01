@@ -11,13 +11,13 @@ CW.ScorecardsNew = (() => {
   function handleDisplaySubset(value) {
     let facilities = $('.facility-wrapper').data('facilities');
     let facility = facilities.filter(f => f.id == value)[0];
-    let subsetDom = $('.subset');
+    let datasetDom = $('.dataset');
 
-    if(!!facility && !!facility.subset) {
-      subsetDom.removeClass('d-none');
+    if(!!facility && !!facility.dataset) {
+      datasetDom.removeClass('d-none');
     } else {
-      subsetDom.find('select').val('');
-      subsetDom.addClass('d-none');
+      datasetDom.find('select').val('');
+      datasetDom.addClass('d-none');
     }
   }
 
