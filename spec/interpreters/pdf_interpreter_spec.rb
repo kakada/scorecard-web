@@ -2,12 +2,12 @@
 
 require "rails_helper"
 
-RSpec.describe ScorecardInterpretor do
+RSpec.describe PdfTemplateInterpreter do
   describe "#pdf_template" do
     let!(:pdf_template_km) { create(:pdf_template) }
     let!(:program) { pdf_template_km.program }
     let!(:scorecard) { create(:scorecard, program: program) }
-    let(:interpretor) { ScorecardInterpretor.new(scorecard) }
+    let(:interpretor) { PdfTemplateInterpreter.new(scorecard) }
 
     context "program pdf_template en exist" do
       let!(:pdf_template_en) { create(:pdf_template, language_code: "en", program: program) }
@@ -27,15 +27,15 @@ RSpec.describe ScorecardInterpretor do
   describe "#message" do
     let!(:program) { create(:program) }
     let!(:scorecard) { create(:scorecard, program: program) }
-    let(:interpretor) { ScorecardInterpretor.new(scorecard) }
+    let(:interpretor) { PdfTemplateInterpreter.new(scorecard) }
 
     context "no program pdf_template" do
       it { expect(interpretor.pdf_template).to eq(nil) }
-      it { expect(interpretor.message).to eq(nil) }
+      it { expect(interpretor.interpreted_message).to eq("") }
     end
 
-    context "template code 'v_result_table' exist" do
-      let!(:pdf_template_km) { create(:pdf_template, content: "<div>{{v_result_table}}</div>", program: program) }
+    context "template code 'swot.result_table' exist" do
+      let!(:pdf_template_km) { create(:pdf_template, content: "<div>{{swot.result_table}}</div>", program: program) }
       let!(:voting_indicator) { create(:voting_indicator, scorecard: scorecard, median: 1) }
       let(:t_head) {
         str = %w(criteria average_score strength weakness suggested_action).map { |col|
@@ -64,7 +64,7 @@ RSpec.describe ScorecardInterpretor do
 
       before { I18n.locale = :km }
 
-      it { expect(interpretor.message).to eq(html) }
+      it { expect(interpretor.interpreted_message).to eq(html) }
     end
   end
 end

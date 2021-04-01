@@ -33,7 +33,6 @@ gem "haml-rails", "~> 2.0"
 gem "jquery-rails",   "~> 4.4.0"
 gem "coffee-rails",   "~> 5.0.0"
 
-# gem "devise", "~> 4.7.2"
 gem "devise", github: "heartcombo/devise", branch: "ca-omniauth-2"
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -66,6 +65,8 @@ gem "telegram-bot", "~> 0.15.3"
 
 gem "mimemagic", "~> 0.3.6"
 gem "sidekiq", "~> 6.2.0"
+
+gem "mimemagic", "~> 0.3.6"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -41,7 +41,6 @@ class Scorecard < ApplicationRecord
   include Scorecards::Lockable
   include Scorecards::Location
   include Scorecards::Filter
-  include Scorecards::TemplateField
   include Scorecards::CallbackNotification
 
   enum scorecard_type: {

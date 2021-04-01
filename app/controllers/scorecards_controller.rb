@@ -13,7 +13,7 @@ class ScorecardsController < ApplicationController
       format.js
       format.pdf do
         render pdf: "scorecard_#{@scorecard.uuid}",
-               inline: ScorecardInterpretor.new(@scorecard).message
+               inline: PdfTemplateInterpreter.new(@scorecard.id).interpreted_message
       end
     end
   end
