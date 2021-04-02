@@ -1,0 +1,12 @@
+= simple_form_for current_program, url: '/telegram_bot/upsert', method: :put, class: 'setting', remote: true do |f|
+  .modal-body
+    = f.fields_for :telegram_bot, @telegram_bot do |ff|
+      = form_check_toggle({name: "program[telegram_bot_attributes][enabled]", checked: ff.object.enabled, label: t('program.telegram_notification')}).html_safe
+
+      .tokens{class: ('hidden' unless ff.object.enabled?)}
+        = ff.input :token
+        = ff.input :username
+
+  .modal-footer
+    %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')
+    = f.submit t('shared.save'), class: 'btn btn-primary'

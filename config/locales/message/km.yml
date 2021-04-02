@@ -1,0 +1,21 @@
+km:
+  message:
+    notification: ការជូនដំណឹង
+    message: សារ
+    email_to: ផ្ញើរទៅកាន់អ៊ីមែល
+    to_enable_email: "ដើម្បីបើកដំណើរការ ការជូនដំណឹងតាមអ៊ីម៉ែល, សូមចូលទៅកាន់ <a href=%{url} class='text-primary'>ការកំណត់</a>"
+    to_enable_telegram: "ដើម្បីបើកដំណើរការ ការជូនដំណឹងតាមតេលេក្រាម, សូមចូលទៅកាន់ <a href=%{url} class='text-primary'>ការកំណត់</a>"
+    telegram_chat_group: ក្រុមជជែកក្នុង Telegram
+    learn_more_to_add_bot_to_group: "មិនទាន់មានក្រុមនៅឡើយទេ, <a href=%{url} class='text-primary' data-turbolinks=false>ស្វែង​យល់​បន្ថែម</a> អំពីរបៀបប្រើប្រាស់"
+    milestone: ដំណាក់កាល
+    scorecard_downloaded: ប័ណ្ណដាក់ពិន្ទុត្រូវបានទាញយក
+    scorecard_running: ប័ណ្ណដាក់ពិន្ទុកំពុងដំណើរការ
+    scorecard_submitted: ប័ណ្ណដាក់ពិន្ទុត្រូវបានដាក់ស្នើ
+    notify_to: ការជូនដំណឹងទៅកាន់
+    telegram_notification_inactive: ការជូនដំណឹងតាម Telegram គឺអសកម្ម
+    no_chat_group_selected: គ្មានក្រុមជជែកត្រូវបានជ្រើសរើសទេ
+    email_notification_inactived: ការជូនដំណឹងតាមអ៊ីមែលគឺអសកម្ម
+    no_email_selected: គ្មានអ៊ីមែលត្រូវបានជ្រើសរើសទេ
+    set_message_active: កំណត់សារឱ្យសកម្ម
+    show_more: 'បង្ហាញថែម'
+    show_less: 'បង្ហាញតិច'

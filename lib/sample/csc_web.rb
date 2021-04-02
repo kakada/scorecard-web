@@ -7,7 +7,7 @@ module Sample
     def self.load_samples
       ::Sample::Program.load
       ::ScorecardCriteria::Language.load
-      ::Sample::PdtTemplate.load
+      ::Sample::PdfTemplate.load
       ::Sample::Location.load
       ::Sample::PrimarySchool.load
       ::Sample::LocalNgo.load

@@ -1,0 +1,29 @@
+- milestone ||= "downloaded"
+- message = @messages.select { |ms| ms.milestone == milestone }.first
+- url = message.present? ? edit_message_path(message) : new_message_path(milestone: milestone)
+- is_disabled = message.present? && !message.actived?
+
+.card
+  .card-header.d-flex{class: ('disabled-bg' if is_disabled)}
+    .flex-1
+      = t("message.milestone")
+      = ": "
+      = t("message.scorecard_#{milestone}")
+
+    .d-flex.align-items-center
+      = telegram_icon_status(message).html_safe
+      .ml-1
+      = email_icon_status(message).html_safe
+
+      - if message.present?
+        .control.ml-2
+          = simple_form_for message do |f|
+            = form_check_toggle({ name: "message[actived]", checked: f.object.actived }).html_safe
+
+      = link_to t("shared.setup"), url, class: "btn btn-primary btn-sm ml-2"
+
+  .card-body{class: ('disabled-bg' if is_disabled)}
+    - if message.present?
+      = render 'message_body', message: message
+    - else
+      = "_"

@@ -4,11 +4,12 @@
 #
 # Table name: programs
 #
-#  id              :bigint           not null, primary key
-#  name            :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  datetime_format :string           default("DD-MM-YYYY")
+#  id                        :bigint           not null, primary key
+#  name                      :string
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  datetime_format           :string           default("DD-MM-YYYY")
+#  enable_email_notification :boolean          default(FALSE)
 #
 class Program < ApplicationRecord
   has_many :users
@@ -20,6 +21,9 @@ class Program < ApplicationRecord
   has_many :rating_scales
   has_many :contacts
   has_many :pdf_templates
+  has_many :chat_groups
+  has_many :messages
+  has_one  :telegram_bot, dependent: :destroy
 
   validates :name, presence: true
 
@@ -32,6 +36,9 @@ class Program < ApplicationRecord
 
   accepts_nested_attributes_for :rating_scales, allow_destroy: true
   accepts_nested_attributes_for :contacts, allow_destroy: true
+  accepts_nested_attributes_for :telegram_bot, allow_destroy: true
+
+  delegate :enabled, to: :telegram_bot, prefix: :telegram_bot, allow_nil: true
 
   private
     def create_default_language

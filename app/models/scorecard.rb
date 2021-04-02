@@ -34,12 +34,23 @@
 #  creator_id                :integer
 #  locked_at                 :datetime
 #  primary_school_code       :string
+#  milestone                 :string
+#  finished_date_on_app      :string
 #
 class Scorecard < ApplicationRecord
   include Scorecards::Lockable
   include Scorecards::Location
   include Scorecards::Filter
   include Scorecards::TemplateField
+  include Scorecards::CallbackNotification
+
+  enum scorecard_type: {
+    self_assessment: 1,
+    community_scorecard: 2
+  }
+
+  SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
+  MILESTONES = %w(downloaded running submitted)
 
   belongs_to :unit_type, class_name: "Facility"
   belongs_to :facility
@@ -73,6 +84,7 @@ class Scorecard < ApplicationRecord
   validates :primary_school_code, uniqueness: { scope: :commune_id }, allow_nil: true
   validates :planned_start_date, presence: true
   validates :planned_end_date, presence: true, date: { after_or_equal_to: :planned_start_date }
+  validates :milestone, inclusion: { in: MILESTONES, allow_blank: true }
 
   before_create :secure_uuid
   before_create :set_name
@@ -83,13 +95,6 @@ class Scorecard < ApplicationRecord
   accepts_nested_attributes_for :raised_indicators, allow_destroy: true
   accepts_nested_attributes_for :voting_indicators, allow_destroy: true
   accepts_nested_attributes_for :ratings, allow_destroy: true
-
-  enum scorecard_type: {
-    self_assessment: 1,
-    community_scorecard: 2
-  }
-
-  SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
 
   def status
     completed? ? "completed" : "planned"

@@ -1,0 +1,4 @@
+.dotted-line.d-flex
+  %label.flex-1= t('program.email_notification')
+  .control{style: 'margin-right: -26px;'}
+    = form_check_toggle({name: "program[enable_email_notification]", checked: f.object.enable_email_notification}).html_safe

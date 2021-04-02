@@ -1,0 +1,21 @@
+en:
+  message:
+    notification: Notification
+    message: Message
+    email_to: Email to
+    to_enable_email: "To enable email notification, please to go <a href=%{url} class='text-primary'>setting</a>"
+    to_enable_telegram: "To enable telegram notification, please to go <a href=%{url} class='text-primary'>setting</a>"
+    telegram_chat_group: Telegram chat group
+    learn_more_to_add_bot_to_group: "There is no group yet, <a href=%{url} class='text-primary' data-turbolinks=false>learn more</a> how to use"
+    milestone: Milestone
+    scorecard_downloaded: Scorecard is downloaded
+    scorecard_running: Scorecard is running
+    scorecard_submitted: Scorecard is submitted
+    notify_to: Notify to
+    telegram_notification_inactive: Telegram notification is inactive
+    no_chat_group_selected: No chat group is selected
+    email_notification_inactived: Email notification is inactive
+    no_email_selected: No email is selected
+    set_message_active: Set message to active
+    show_more: Show more
+    show_less: Show less

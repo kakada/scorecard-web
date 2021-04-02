@@ -1,0 +1,37 @@
+km:
+  telegram_bot:
+    telegram_bot: 'Telegram Bot'
+    token: 'Token'
+    username: 'ឈ្មោះអ្នកប្រើប្រាស់'
+    actived: 'Actived'
+    setup_instruction: 'សូមរៀបចំ Telegram bot របស់អ្នក'
+    valid_bot: 'Bot ដំណើរការ'
+    invalid_bot: 'Bot មិនត្រឹមត្រូវ ឬបានបិទ'
+    enabled_notification: 'Enabled notification'
+    you_can_configure_your_bot: 'អ្នកអាចកំណត់រចនាសម្ព័ន្ធ bot របស់អ្នកដើម្បីទាក់ទងជាមួយមនុស្សដោយប្រើ Telegram notification.'
+    visit_bot_father_to_create_newbot: 'ចូលទៅកាន់ Bot Father ដើម្បីបង្កើត Telegram bot'
+    create_new_bot: 'ដើម្បីបង្កើត Telegram bot'
+    using_the_bot_father: 'សូមប្រើ Bot Father។'
+    to_create_a_newbot: 'ដើម្បីបង្កើត Telegram bot'
+    send_command: 'សូមផ្ញើពាក្យបញ្ជា'
+    specify_a_friendly_name: 'បញ្ជាក់ឈ្មោះ'
+    give_the_bot_a_friendly_name: 'ដាក់ឈ្មោះ Telegram bot ឱ្យងាយសម្រាប់បង្ហាញព័ត៌មាននៅទំនាក់ទំនងនិងកន្លែងផ្សេងទៀត។'
+    specify_a_username: 'បញ្ជាក់ឈ្មោះអ្នកប្រើ'
+    give_the_bot_a_unique_username: 'ដាក់ឈ្មោះ username ដែលមិនជាន់ឈ្មោះអ្នកដ៏ទៃ'
+    username_note: "ចំណាំ: The Username is a short name, to be used in mentions and t.me links. Usernames are 5-32 characters long and are case insensitive, but may only include Latin characters, numbers, and underscores. Your bot's username must end in 'bot', e.g. 'tetris_bot' or 'TetrisBot'."
+    copy_the_access_token: 'ចម្លង the access token'
+    copy_the_bot_access_token: "ចម្លង the Telegram bot's access token."
+    token_note: "ចំណាំ: The token is a string along the lines of <code>110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALD</code> saw that is required to authorize the bot and send requests to the Bot API. Keep your token secure and store it safely, it can be used by anyone to control your bot."
+    enter_the_bot_token: "បញ្ចូល the Telegram bot's access token"
+    go_to_setting: "ចូលទៅកាន់ <b>Setting</b> ហើយចុចប៊ូតុង <b class='badge badge-info'>Setup</b>។"
+    enable_telegram_notification: "ចុចបើក telegram notification ហើយបញ្ចូលព័ត៌មាន token និង username ហើយចុចប៊ូតុង <button class='btn btn-primary btn-sm'>save</button>"
+    telegram_chat_group: 'ក្រុមជជែកក្នុង Telegram'
+    to_add_group_chat: 'ដើម្បីបញ្ចូល Telegram bot ទៅក្នុងក្រុមជជែក Telegram, ដំបូងចូលទៅកាន់កម្មវិធី Telegram ហើយរើសក្រុមដែលអ្នកចង់បាន'
+    add_member: 'បន្ថែមសមាជិក'
+    to_add_member: 'ចុចលើប៊ូតុង ចុចបី ហើយជ្រើសរើស Add Memebers'
+    search_bot_name: 'ស្វែងរកឈ្មោះរបស់ Bot'
+    to_search_bot_name: 'ស្វែងរកឈ្មោះរបស់ Bot ហើយចុចលើលទ្ធផលដែលរកឃើញ និងចុចលើប៊ូតុង "ADD"'
+    added_to_the_group: 'បានបញ្ចូលទៅក្នុងក្រុម'
+    successfully_added_to_group: 'bot ត្រូវបានបញ្ចូលក្នុងក្រុមដោយជោគជ័យ'
+    added_group_to_system: 'បានបញ្ចូលទៅក្នុងប្រព័ន្ធ'
+    successfully_added_to_system: 'ឈ្មោះក្រុមត្រូវបានបញ្ចូលក្នុងប្រព័ន្ធដោយខ្លួនឯង'

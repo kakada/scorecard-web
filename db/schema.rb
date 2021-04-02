@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_065059) do
+ActiveRecord::Schema.define(version: 2021_03_30_033508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,25 @@ ActiveRecord::Schema.define(version: 2021_03_23_065059) do
     t.string "tel"
     t.string "address"
     t.integer "local_ngo_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "chat_groups", force: :cascade do |t|
+    t.string "title"
+    t.string "chat_id"
+    t.boolean "actived", default: true
+    t.text "reason"
+    t.string "provider"
+    t.integer "program_id"
+    t.string "chat_type", default: "group"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "chat_groups_notifications", force: :cascade do |t|
+    t.integer "chat_group_id"
+    t.integer "notification_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -137,6 +156,23 @@ ActiveRecord::Schema.define(version: 2021_03_23_065059) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.string "milestone"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "provider"
+    t.text "emails", default: [], array: true
+    t.integer "message_id"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "participants", primary_key: "uuid", id: :string, force: :cascade do |t|
     t.string "scorecard_uuid"
     t.integer "age"
@@ -172,6 +208,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_065059) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "datetime_format", default: "DD-MM-YYYY"
+    t.boolean "enable_email_notification", default: false
   end
 
   create_table "raised_indicators", force: :cascade do |t|
@@ -232,12 +269,24 @@ ActiveRecord::Schema.define(version: 2021_03_23_065059) do
     t.integer "creator_id"
     t.datetime "locked_at"
     t.string "primary_school_code"
+    t.string "milestone"
+    t.string "finished_date_on_app"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.string "color"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "telegram_bots", force: :cascade do |t|
+    t.string "token"
+    t.string "username"
+    t.boolean "enabled", default: false
+    t.boolean "actived", default: false
+    t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

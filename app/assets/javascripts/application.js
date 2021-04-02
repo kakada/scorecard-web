@@ -37,12 +37,17 @@
 //= require scorecards_settings/rating
 //= require scorecards_settings/contact
 //= require pdf_templates
+//= require program_settings/show
+//= require telegram_bots/show
+//= require messages/index
+//= require messages/new
 
 document.addEventListener('turbolinks:load', function() {
   CW.Common.Topbar.init();
   CW.Common.DatetimePicker.init();
   CW.Common.Timeago.init();
   $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="popover"]').popover();
 
   let currentPage = CW.Util.getCurrentPage();
   !!CW[currentPage] && CW[currentPage].init();

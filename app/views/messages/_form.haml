@@ -1,0 +1,22 @@
+.w-50.view-center
+  = simple_form_for @message, html: { id: 'message-form' } do |f|
+    .form-group
+      = form_check_toggle({ name: "message[actived]", checked: f.object.actived, label: I18n.t("message.set_message_active")}).html_safe
+
+    = f.input :milestone, as: :hidden
+    = f.input :content, label: t("message.message"), input_html: { rows: 5 }
+
+    .template-codes.border.mb-3
+      - Templates::NotificationMessageField.all.each do |field|
+        %a.btn.btn-link.template-field{"data-code" => field[:code]}
+          = field[:name]
+
+    .email-notification
+      = render 'messages/notifications/email', f: f
+
+    .telegram-notification
+      = render 'messages/notifications/telegram', f: f
+
+    .actions
+      = f.submit t('shared.save'), class: 'btn btn-primary'
+      = link_to t('shared.cancel'), messages_path, class: 'btn btn-secondary'

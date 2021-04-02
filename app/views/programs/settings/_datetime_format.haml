@@ -1,0 +1,7 @@
+.dotted-line.d-flex
+  %label.flex-grow-1= t('program.datetime_format')
+  %div
+    = current_program.datetime_format
+    %a.pointer.badge.badge-info.text-white{'data-target' => '#datetime-format', 'data-toggle' => 'modal'}= t('shared.edit')
+
+    = render 'modal_datetime_format', f: f
