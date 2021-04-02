@@ -60,6 +60,12 @@ module Facilities
       redirect_to templates_url
     end
 
+    def import
+      ::IndicatorService.new(params[:facility_id]).import(params[:file])
+
+      redirect_to facility_indicators_url(@facility)
+    end
+
     private
       def indicator_params
         params.require(:indicator).permit(:name, :image, :remove_image,

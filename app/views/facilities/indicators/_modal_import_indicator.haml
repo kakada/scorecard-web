@@ -1,0 +1,18 @@
+#importModalIndicator.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "Import from file", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#templateModalLabel.modal-title Import from file
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+
+      = form_for '', url: import_facility_indicators_path(@facility) do |f|
+        .modal-body
+          .form-group
+            %label Excel file
+            .form-control.file-control-wrapper
+              = f.file_field :file, accept: ".zip,.rar,.7zip"
+
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
+          %button.btn.btn-primary{:type => "submit"}= t('shared.done')

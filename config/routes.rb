@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     resources :indicators, module: "facilities" do
       post :clone_from_template, on: :collection
       post :clone_to_template, on: :collection
+      post :import, on: :collection
     end
   end
 

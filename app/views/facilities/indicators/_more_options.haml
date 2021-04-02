@@ -12,3 +12,14 @@
   %a.btn.dropdown-item{"data-target" => "#exampleModal", "data-toggle" => "modal", href: '#'}
     %i.fas.fa-copy.drop-menu-icon
     %span= t("indicator.copy_from_template")
+
+
+  %a.btn.dropdown-item{ "data-target" => "#importModalIndicator", "data-toggle" => "modal", href: '#' }
+    %i.fas.fa-file-import.drop-menu-icon
+    = t("shared.import_from_file")
+
+  %a.btn.dropdown-item{ href: '/indicators.zip', target: "_blank" }
+    %i.fas.fa-cloud-download-alt.drop-menu-icon
+    = t("shared.download_sample_form")
+
+= render "modal_import_indicator"
