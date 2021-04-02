@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Messages
-  class TemplateCode
-    def self.fields
+module Templates
+  class NotificationMessageField
+    def self.all
       [
         { name: "scorecard_code", code: "scorecard.uuid" },
         { name: "scorecard_type", code: "scorecard.facility_name" },

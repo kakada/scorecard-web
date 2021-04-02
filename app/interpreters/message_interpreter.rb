@@ -12,16 +12,16 @@ class MessageInterpreter
     return message if scorecard.nil?
 
     sms = message
-    codes.each do |code|
-      sms = sms.gsub(/#{"{{" + code + "}}"}/, get_field_value(code).to_s)
+    embeded_fields.each do |embeded_field|
+      sms = sms.gsub(/#{"{{" + embeded_field + "}}"}/, get_field_value(embeded_field).to_s)
     end
     sms
   end
 
   private
-    def get_field_value(code)
-      model = code.split(".")[0]
-      field = code.split(".")[1]
+    def get_field_value(embeded_field)
+      model = embeded_field.split(".")[0]
+      field = embeded_field.split(".")[1]
       value = "Messages::#{model.camelcase}Interpreter".constantize.new(scorecard).load(field)
 
       "<b>#{value}</b>"
@@ -30,7 +30,7 @@ class MessageInterpreter
         ""
     end
 
-    def codes
-      @codes ||= message.scan(/{{([^}]*)}}/).flatten.uniq
+    def embeded_fields
+      @embeded_fields ||= message.scan(/{{([^}]*)}}/).flatten.uniq
     end
 end
