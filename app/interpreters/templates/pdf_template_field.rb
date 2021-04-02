@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module PdfTemplates
-  class TemplateCode
-    def self.fields
+module Templates
+  class PdfTemplateField
+    def self.all
       [
         { name: "province", code: "scorecard.province" },
         { name: "district", code: "scorecard.district" },

@@ -15,7 +15,7 @@
     = f.input :content, label: t('pdf_template.content')
 
     %div
-      - PdfTemplates::TemplateCode.fields.each do |field|
+      - Templates::PdfTemplateField.all.each do |field|
         %a.btn.btn-link.template-field{"data-code" => field[:code]}= field[:name]
 
     .actions
