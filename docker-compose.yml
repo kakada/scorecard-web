@@ -3,6 +3,7 @@ version: '3'
 volumes:
   db:
   bundle:
+  elastic:
 
 services:
   db:
@@ -29,6 +30,14 @@ services:
       - db
       - smtp
       - redis
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_REQUEST_TIMEOUT=300 #seconds
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=elastic
+      - ELASTIC_COMPRESSION=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
     stdin_open: true
     tty: true
 
@@ -39,6 +48,24 @@ services:
 
   redis:
     image: redis:5.0.6
+
+  elasticsearch:
+    image: elasticsearch:7.9.1
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=elastic
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - xpack.security.enabled=false
+    volumes:
+      - elastic:/usr/share/elasticsearch/data
+    healthcheck:
+      test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    ports:
+      - 9200:9200
 
   smtp:
     image: 'djfarrelly/maildev:latest'

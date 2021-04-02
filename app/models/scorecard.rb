@@ -42,6 +42,7 @@ class Scorecard < ApplicationRecord
   include Scorecards::Location
   include Scorecards::Filter
   include Scorecards::CallbackNotification
+  include Scorecards::Elasticsearch
 
   enum scorecard_type: {
     self_assessment: 1,
@@ -94,6 +95,9 @@ class Scorecard < ApplicationRecord
   before_create :secure_uuid
   before_create :set_name
   before_save   :clear_primary_school_code, unless: -> { facility.try(:dataset).present? }
+
+  after_commit  :index_document_async, on: [:create, :update]
+  after_destroy :delete_document_async
 
   accepts_nested_attributes_for :facilitators, allow_destroy: true
   accepts_nested_attributes_for :participants, allow_destroy: true
