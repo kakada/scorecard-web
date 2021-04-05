@@ -15,7 +15,7 @@
 module Notifications
   class Telegram < ::Notification
     def notify_async(scorecard_id)
-      return unless program.telegram_bot_enabled && message.actived
+      return unless program.telegram_bot_enabled && message.actived?
 
       NotificationWorker.perform_async(id, scorecard_id)
     end

@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_033508) do
     t.text "content"
     t.string "milestone"
     t.integer "program_id"
+    t.boolean "actived", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
