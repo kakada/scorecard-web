@@ -1,0 +1,49 @@
+km:
+  date:
+    formats:
+      default: "%d %b %Y"
+      long: "%A, %d %B %Y"
+  time:
+    formats:
+      default: "%d %b %Y"
+      long: "%I:%M%p, %A, %d %B %Y"
+      nice: "%I:%M %P, %d %b %Y"
+  datetime:
+    formats:
+      default: "%d %b %Y"
+
+    distance_in_words:
+      half_a_minute: "កន្លះនាទីមុន"
+      less_than_x_seconds:
+        one:   "តិចជាង 1 វិនាទីមុន"
+        other: "តិចជាង %{count} វិនាទីមុន"
+      x_seconds:
+        one:   "1 វិនាទីមុន"
+        other: "%{count} វិនាទីមុន"
+      less_than_x_minutes:
+        one:   "តិចជាង 1 នាទីមុន"
+        other: "តិចជាង %{count} នាទីមុន"
+      x_minutes:
+        one:   "1 នាទីមុន"
+        other: "%{count} នាទីមុន"
+      about_x_hours:
+        one:   "ប្រហែល 1 ម៉ោងមុន"
+        other: "ប្រហែល %{count} ម៉ោងមុន"
+      x_days:
+        one:   "1 ថ្ងៃមុន"
+        other: "%{count} ថ្ងៃមុន"
+      about_x_months:
+        one:   "ប្រហែលជា 1 ខែមុន"
+        other: "ប្រហែលជា %{count} ខែមុន"
+      x_months:
+        one:   "1 ខែ​កន្លងទៅ"
+        other: "%{count} ខែ​កន្លងទៅ"
+      about_x_years:
+        one:   "ប្រហែល 1 ឆ្នាំហើយ"
+        other: "ប្រហែល %{count} ឆ្នាំហើយ"
+      over_x_years:
+        one:   "ជាង 1 ឆ្នាំហើយ"
+        other: "ជាង %{count} ឆ្នាំហើយ"
+      almost_x_years:
+        one:   "ជិត 1 ឆ្នាំហើយ"
+        other: "ជិត %{count} ឆ្នាំហើយ"
