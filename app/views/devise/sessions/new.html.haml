@@ -20,8 +20,8 @@
       = f.password_field :password, autocomplete: "current-password", class: 'form-control'
 
     - if devise_mapping.rememberable?
-      .form-group.form-check
-        = f.check_box :remember_me, class: 'form-check-input'
+      .form-group.form-check.pt-1
+        = f.check_box :remember_me
         = f.label :remember_me, t('devise.remember_me'), class: 'form-check-label'
     .actions.form-group
       = f.submit "Login", class: 'btn btn-primary w-100 mb-2'
@@ -31,6 +31,8 @@
       = render "devise/shared/links"
     .form-group
       = link_to t('about.about_us'), about_path
+    .form-group
+      = link_to "Download app", "/scorecard_app.apk"
 
   - if ENV["ENABLE_RESET_DATA_SCHEDULE"] == 'true'
     .alert.alert-info

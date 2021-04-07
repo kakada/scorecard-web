@@ -22,14 +22,6 @@ module ApplicationHelper
     link_to title, { sort: column, direction: direction }, { class: css_class }
   end
 
-  def render_notice
-    content_tag(:div, notice, class: "alert alert-primary", role: "alert") if notice
-  end
-
-  def render_alert
-    content_tag(:div, alert, class: "alert alert-danger", role: "alert") if alert
-  end
-
   def link_to_add_fields(name, f, association, option = {})
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
