@@ -14,7 +14,7 @@
 #
 class PrimarySchool < ApplicationRecord
   validates :code, presence: true
-  validates :name_km, presence: true
-  validates :name_en, presence: true
+  validates :name_km, presence: true, uniqueness: { scope: :commune_id }
+  validates :name_en, presence: true, uniqueness: { scope: :commune_id }
   validates :commune_id, presence: true
 end
