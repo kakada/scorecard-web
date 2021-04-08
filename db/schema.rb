@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_033508) do
+ActiveRecord::Schema.define(version: 2021_04_08_043453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,6 +240,14 @@ ActiveRecord::Schema.define(version: 2021_03_30_033508) do
     t.string "participant_uuid"
   end
 
+  create_table "scorecard_progresses", force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.integer "status"
+    t.string "device_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "scorecards", force: :cascade do |t|
     t.string "uuid"
     t.integer "unit_type_id"
@@ -270,8 +278,9 @@ ActiveRecord::Schema.define(version: 2021_03_30_033508) do
     t.integer "creator_id"
     t.datetime "locked_at"
     t.string "primary_school_code"
-    t.string "milestone"
     t.string "finished_date_on_app"
+    t.integer "downloaded_count", default: 0
+    t.integer "progress"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end
 

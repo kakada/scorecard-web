@@ -31,8 +31,8 @@ class IndicatorService
 
   private
     def upsert_indicators
-      entry = @zipfile.select{|ent| ent.name == 'indicators/indicators.csv'}[0]
-      rows = CSV.parse(entry.get_input_stream.read, :headers=>true)
+      entry = @zipfile.select { |ent| ent.name == "indicators/indicators.csv" }[0]
+      rows = CSV.parse(entry.get_input_stream.read, headers: true)
       rows.each do |row|
         indicator_name = row["Scorecard Criterias"]
         next unless indicator_name.present?
@@ -47,7 +47,7 @@ class IndicatorService
     def indicator_params(row)
       param = { tag_attributes: { name: (row["tag"] || row["Scorecard Criterias"]) } }
 
-      if image_path = extract_file(row['image']).presence
+      if image_path = extract_file(row["image"]).presence
         param[:image] = Pathname.new(image_path).open
       end
 
@@ -78,11 +78,11 @@ class IndicatorService
     def extract_file(filename)
       return unless filename.present?
 
-      file = @zipfile.select { |file| file.name.split("/").last.split(".").first == "#{filename.split('.').first}" }.first
+      file = @zipfile.select { |entry| entry.name.split("/").last.split(".").first == "#{filename.split('.').first}" }.first
       return unless file.present?
 
-      file_destination = File.join( "public/uploads/tmp", file.name )
-      FileUtils::mkdir_p(File.dirname(file_destination))
+      file_destination = File.join("public/uploads/tmp", file.name)
+      FileUtils.mkdir_p(File.dirname(file_destination))
       @zipfile.extract(file, file_destination) { true }
 
       file_destination

@@ -34,8 +34,9 @@
 #  creator_id                :integer
 #  locked_at                 :datetime
 #  primary_school_code       :string
-#  milestone                 :string
 #  finished_date_on_app      :string
+#  downloaded_count          :integer          default(0)
+#  progress                  :integer
 #
 class Scorecard < ApplicationRecord
   include Scorecards::Lockable
@@ -48,14 +49,9 @@ class Scorecard < ApplicationRecord
     community_scorecard: 2
   }
 
-  SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
-  MILESTONES = %w(downloaded running submitted)
+  enum progress: ScorecardProgress.statuses
 
-  MILESTONES.each do |mile|
-    define_method "#{mile}?" do
-      milestone == mile
-    end
-  end
+  SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
 
   belongs_to :unit_type, class_name: "Facility"
   belongs_to :facility
@@ -72,6 +68,7 @@ class Scorecard < ApplicationRecord
   has_many   :raised_indicators, foreign_key: :scorecard_uuid, dependent: :destroy
   has_many   :voting_indicators, foreign_key: :scorecard_uuid, dependent: :destroy
   has_many   :ratings, foreign_key: :scorecard_uuid, dependent: :destroy
+  has_many   :scorecard_progresses, foreign_key: :scorecard_uuid, primary_key: :uuid, dependent: :destroy
 
   delegate  :name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
   delegate  :name_en, :name_km, to: :primary_school, prefix: :primary_school, allow_nil: true
@@ -89,7 +86,6 @@ class Scorecard < ApplicationRecord
   validates :primary_school_code, uniqueness: { scope: :commune_id }, allow_nil: true
   validates :planned_start_date, presence: true
   validates :planned_end_date, presence: true, date: { after_or_equal_to: :planned_start_date }
-  validates :milestone, inclusion: { in: MILESTONES, allow_blank: true }
 
   before_create :secure_uuid
   before_create :set_name

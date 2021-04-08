@@ -34,8 +34,9 @@
 #  creator_id                :integer
 #  locked_at                 :datetime
 #  primary_school_code       :string
-#  milestone                 :string
 #  finished_date_on_app      :string
+#  downloaded_count          :integer          default(0)
+#  progress                  :integer
 #
 FactoryBot.define do
   factory :scorecard do
