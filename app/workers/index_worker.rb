@@ -21,7 +21,7 @@ class IndexWorker
       program = Program.find_by(id: program_id)
       client.delete(index: program.index_name, id: scorecard_uuid) if program.present?
     rescue Elasticsearch::Transport::Transport::Errors::NotFound
-      logger.debug "Scorecard not found, ID: #{scorecard_uuid}"
+      logger.warn "Scorecard not found, ID: #{scorecard_uuid}"
     end
 
     def client
