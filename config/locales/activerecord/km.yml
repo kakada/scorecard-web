@@ -1,0 +1,16 @@
+en:
+  errors:
+    messages:
+      required: តម្រូវអោយមានទិន្នន័យ
+      taken: ត្រូវបានគេយកទៅហើយ
+  activerecord:
+    errors:
+      messages:
+        blank: មិនអាចទទេ
+        invalid: មិនត្រឹមត្រូវ
+        not_a_date: ត្រូវតែជាកាលបរិច្ឆេទ
+        date_after: "ត្រូវតែនៅក្រោយ %{date}"
+        date_after_or_equal_to: "ត្រូវតែនៅក្រោយឬស្មើ %{date}"
+        date_before: "ត្រូវតែនៅមុន %{date}"
+        date_before_or_equal_to: "ត្រូវតែមុនឬស្មើ %{date}"
+        date_equal_to: "ត្រូវតែស្មើនឹង %{date}"
