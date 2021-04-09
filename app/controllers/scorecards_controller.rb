@@ -11,6 +11,10 @@ class ScorecardsController < ApplicationController
     respond_to do |format|
       format.html
       format.js
+      format.json do
+        render json: ::ScorecardJsonBuilder.new(@scorecard).build
+      end
+
       format.pdf do
         render pdf: "scorecard_#{@scorecard.uuid}",
                inline: PdfTemplateInterpreter.new(@scorecard.id).interpreted_message

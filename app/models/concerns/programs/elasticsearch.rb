@@ -21,12 +21,12 @@ module Programs::Elasticsearch
 
       client.indices.create \
         index: index_name,
-        body: { settings: Scorecard.settings.to_hash, mappings: Scorecard.mappings_hash }
+        body: { settings: Scorecard.settings.to_hash, mappings: Scorecard.mappings.to_hash }
     end
 
     private
       def delete_index
-        client.delete_by_query(index: index_name, q: '*'); rescue
+        client.delete_by_query(index: index_name, q: "*"); rescue
       end
 
       def index_documents

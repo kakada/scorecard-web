@@ -35,6 +35,7 @@
 #  locked_at                 :datetime
 #  primary_school_code       :string
 #  finished_date_on_app      :string
+#  language_conducted_code   :string
 #  downloaded_count          :integer          default(0)
 #  progress                  :integer
 #
