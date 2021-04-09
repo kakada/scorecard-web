@@ -7,5 +7,6 @@ production:
 :queues:
   - ["mailers", 2]
   - ["default", 2]
+  - ["index_document", 2]
 
 :max_retries: 15

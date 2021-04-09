@@ -12,6 +12,8 @@
 #  enable_email_notification :boolean          default(FALSE)
 #
 class Program < ApplicationRecord
+  include Programs::Elasticsearch
+
   has_many :users
   has_many :languages
   has_many :facilities

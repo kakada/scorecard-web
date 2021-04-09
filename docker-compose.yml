@@ -3,6 +3,7 @@ version: '3'
 volumes:
   db:
   bundle:
+  elastic:
 
 services:
   db:
@@ -29,8 +30,17 @@ services:
       - db
       - smtp
       - redis
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_REQUEST_TIMEOUT=300 #seconds
     stdin_open: true
     tty: true
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+        max-file: '10'
 
   sidekiq:
     <<: *rails
@@ -39,6 +49,26 @@ services:
 
   redis:
     image: redis:5.0.6
+
+  elasticsearch:
+    image: elasticsearch:7.12.0
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - elastic:/usr/share/elasticsearch/data
+    healthcheck:
+      test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+        max-file: '10'
+    ports:
+      - 9200:9200
 
   smtp:
     image: 'djfarrelly/maildev:latest'

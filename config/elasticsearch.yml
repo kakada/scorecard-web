@@ -1,0 +1,14 @@
+development: &default
+  host: <%= ENV.fetch('ELASTICSEARCH_URL') { 'http://localhost:9200' } %>
+  compression: <%= ENV.fetch('ELASTIC_COMPRESSION') { 'false' } %>
+  user: <%= ENV.fetch('ELASTIC_USERNAME') { 'elastic' } %>
+  password: <%= ENV.fetch('ELASTIC_PASSWORD') { 'elastic' } %>
+  transport_options:
+    request:
+      timeout: !!integer 300
+test:
+  <<: *default
+staging:
+  <<: *default
+production:
+  <<: *default
