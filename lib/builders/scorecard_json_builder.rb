@@ -25,7 +25,7 @@ class ScorecardJsonBuilder
       planned_start_date: scorecard.planned_start_date,
       planned_end_date: scorecard.planned_end_date,
       conducted_at: scorecard.conducted_date,
-      finished_date: scorecard.finished_date_on_app,
+      finished_date: scorecard.finished_date,
       language_conducted: scorecard.language_conducted_code,
       lngo: scorecard.local_ngo_name,
       number_of_caf: scorecard.facilitators.length,
