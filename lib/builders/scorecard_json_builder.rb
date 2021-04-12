@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+Dir["/app/lib/builders/scorecard_json/*.rb"].each { |file| require file }
+
 class ScorecardJsonBuilder
   attr_accessor :scorecard
 
@@ -8,22 +10,37 @@ class ScorecardJsonBuilder
   end
 
   def build
-    _scorecard = scorecard.as_json
-    _scorecard["location"] = scorecard.location.try(:as_json)
-    _scorecard["proposed_criterias"] = ::Scorecards::ProposedCriteria.new(scorecard).criterias
-    _scorecard["voting_criterias"] = ::Scorecards::VotingCriteria.new(scorecard).criterias
-    _scorecard["participants"] = build_participant(scorecard)
-    _scorecard
+    {
+      uuid: scorecard.uuid,
+      type: scorecard.scorecard_type,
+      unit: scorecard.unit_type.name,
+      facility: scorecard.facility_name,
+      location: {
+        province: scorecard.province_id,
+        district: scorecard.district_id,
+        commune: scorecard.commune_id,
+        school: scorecard.primary_school.try("name_#{I18n.locale}")
+      },
+      geo_location: build_geo_location,
+      planned_start_date: scorecard.planned_start_date,
+      planned_end_date: scorecard.planned_end_date,
+      conducted_at: scorecard.conducted_date,
+      finished_date: scorecard.finished_date,
+      language_conducted: scorecard.language_conducted_code,
+      lngo: scorecard.local_ngo_name,
+      number_of_caf: scorecard.facilitators.length,
+      participants: ScorecardJson::ParticipantJsonBuilder.new(scorecard).build,
+      proposed_indicators: ScorecardJson::ProposedIndicatorJsonBuilder.new(scorecard).build,
+      indicator_developments: ScorecardJson::IndicatorDevelopmentJsonBuilder.new(scorecard).build,
+      votings: ScorecardJson::VotingIndicatorJsonBuilder.new(scorecard).build,
+      result: ScorecardJson::ResultJsonBuilder.new(scorecard).build,
+    }
   end
 
   private
-    def build_participant(scorecard)
-      participants = [ { type: "female", count: scorecard.participants.select { |participant| participant.gender == "female" }.length } ]
+    def build_geo_location
+      return {} unless scorecard.location.present? && scorecard.location.latitude.present? && scorecard.location.longitude.present?
 
-      %w(disability minority poor_card youth).each do |type|
-        participants << { type: type, count: scorecard.participants.select { |participant| !!participant.send(type) }.length }
-      end
-
-      participants
+      { lat: scorecard.location.latitude, lon: scorecard.location.longitude }
     end
 end

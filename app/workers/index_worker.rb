@@ -2,7 +2,7 @@
 
 class IndexWorker
   include Sidekiq::Worker
-  sidekiq_options queue: 'index_document'
+  sidekiq_options queue: "index_document"
 
   def perform(operation, scorecard_uuid, program_id)
     case operation.to_s

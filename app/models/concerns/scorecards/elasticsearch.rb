@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'builders/scorecard_json_builder'
+require "builders/scorecard_json_builder"
 
 module Scorecards::Elasticsearch
   extend ActiveSupport::Concern
@@ -8,15 +8,25 @@ module Scorecards::Elasticsearch
   included do
     include Elasticsearch::Model
 
-    mapping date_detection: false do
-      indexes :location_name, type: :text
-      indexes :location, type: :geo_point
-      indexes :created_at, type: :date
-      indexes :updated_at, type: :date
-    end
-
-    def self.mappings_hash
-      mappings.to_hash
+    mapping do
+      indexes :uuid, type: :text
+      indexes :type, type: :text
+      indexes :unit_type, type: :text
+      indexes :facility, type: :text
+      indexes :location, type: :object
+      indexes :geo_location, type: :geo_point
+      indexes :planned_start_date, type: :date
+      indexes :planned_end_date, type: :date
+      indexes :conducted_at, type: :date
+      indexes :finished_date, type: :date
+      indexes :language_conducted, type: :text
+      indexes :lngo, type: :text
+      indexes :number_of_caf, type: :integer
+      indexes :participants, type: :object
+      indexes :proposed_indicators, type: :object
+      indexes :indicator_developments, type: :object
+      indexes :votings, type: :object
+      indexes :result, type: :object
     end
 
     def index_document_async
