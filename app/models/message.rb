@@ -24,7 +24,7 @@ class Message < ApplicationRecord
 
   validates :content, presence: true
   validates :milestone, presence: true
-  validates :milestone, inclusion: { in: Scorecard::MILESTONES }
+  validates :milestone, inclusion: { in: ScorecardProgress.statuses.keys }
 
   def display_content(scorecard_id)
     MessageInterpreter.new(scorecard_id, content).interpreted_message

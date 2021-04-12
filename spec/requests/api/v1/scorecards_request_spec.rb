@@ -55,23 +55,9 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       end
     end
 
-    context "scorecard milestone is downloaded" do
+    context "update and lock_access" do
       before {
-        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: { milestone: 'downloaded'} }, headers: headers
-      }
-
-      it "update milestone to downloaded" do
-        expect(scorecard.reload.milestone).to eq('downloaded')
-      end
-
-      it "doesn't lock_access" do
-        expect(scorecard.reload.access_locked?).to be_falsey
-      end
-    end
-
-    context "update milestone" do
-      before {
-        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: { milestone: 'submitted'} }, headers: headers
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
       }
 
       it "lock_access" do

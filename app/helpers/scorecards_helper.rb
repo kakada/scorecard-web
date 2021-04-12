@@ -36,8 +36,8 @@ module ScorecardsHelper
 
   def status_html(scorecard)
     css_klass = scorecard.completed? ? "badge-success" : "badge-warning"
-    milestone = scorecard.milestone.blank? ? "" : " (#{I18n.t('scorecard.' + scorecard.milestone)})"
-    "<span class='badge #{css_klass}'>#{scorecard.status}#{milestone}</span>"
+    progress = scorecard.progress.blank? ? "" : " (#{I18n.t('scorecard.' + scorecard.progress)})"
+    "<span class='badge #{css_klass}'>#{scorecard.status}#{progress}</span>"
   end
 
   def filter_date_options

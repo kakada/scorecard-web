@@ -13,7 +13,7 @@ module Api
         authorize @scorecard
 
         if @scorecard.update(scorecard_params)
-          @scorecard.lock_access! if @scorecard.submitted?
+          @scorecard.lock_access!
           render json: @scorecard, status: :ok
         else
           render json: { errors: @scorecard.errors }, status: :unprocessable_entity
@@ -31,7 +31,7 @@ module Api
           params.require(:scorecard).permit(
             :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,
             :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
-            :milestone, :finished_date_on_app,
+            :finished_date_on_app,
             facilitators_attributes: [ :id, :caf_id, :position, :scorecard_uuid ],
             participants_attributes: [ :uuid, :age, :gender, :disability, :minority, :youth, :poor_card, :scorecard_uuid ],
             raised_indicators_attributes: [

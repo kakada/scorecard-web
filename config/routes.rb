@@ -90,6 +90,8 @@ Rails.application.routes.draw do
         resources :custom_indicators, only: [:create]
       end
 
+      resources :scorecard_progresses, only: [:create]
+
       resources :local_ngos, only: [] do
         resources :cafs, only: [:index]
       end

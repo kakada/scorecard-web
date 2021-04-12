@@ -18,7 +18,7 @@ RSpec.describe Scorecards::CallbackNotification do
         allow_any_instance_of(Program).to receive(:enable_email_notification?).and_return(true)
       }
 
-      it { expect { scorecard.update(milestone: "downloaded") }.to change(NotificationWorker.jobs, :size).by(2) }
+      it { expect { scorecard.update(progress: "downloaded") }.to change(NotificationWorker.jobs, :size).by(2) }
     end
   end
 end

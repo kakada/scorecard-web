@@ -1,7 +1,7 @@
 = render "shared/page_title", title: t("sidebar.notification")
 
 #contents
-  - milestones = Scorecard::MILESTONES
+  - milestones = ScorecardProgress.statuses.keys
   - milestones.each_with_index do |milestone, index|
     = render 'message', milestone: milestone
 
