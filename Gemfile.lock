@@ -284,6 +284,8 @@ GEM
       activesupport (>= 3.0.0)
     racc (1.5.2)
     rack (2.2.3)
+    rack-attack (6.5.0)
+      rack (>= 1.0, < 3)
     rack-protection (2.1.0)
       rack
     rack-test (1.1.0)
@@ -482,6 +484,7 @@ DEPENDENCIES
   puma (~> 4.1)
   pumi
   pundit (~> 2.1.0)
+  rack-attack (~> 6.5.0)
   rails (~> 6.0.3, >= 6.0.3.5)
   roo (~> 2.8.3)
   rspec-rails (~> 4.0.1)
