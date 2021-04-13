@@ -34,10 +34,11 @@
 #  creator_id                :integer
 #  locked_at                 :datetime
 #  primary_school_code       :string
-#  language_conducted_code   :string
 #  downloaded_count          :integer          default(0)
 #  progress                  :integer
+#  language_conducted_code   :string
 #  finished_date             :datetime
+#  running_date              :datetime
 #
 require "rails_helper"
 

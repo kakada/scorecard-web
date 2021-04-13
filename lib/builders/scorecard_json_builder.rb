@@ -24,7 +24,9 @@ class ScorecardJsonBuilder
       geo_location: build_geo_location,
       planned_start_date: scorecard.planned_start_date,
       planned_end_date: scorecard.planned_end_date,
+      created_at: scorecard.created_at,
       conducted_at: scorecard.conducted_date,
+      running_date: scorecard.running_date,
       finished_date: scorecard.finished_date,
       language_conducted: scorecard.language_conducted_code,
       lngo: scorecard.local_ngo_name,
@@ -39,7 +41,7 @@ class ScorecardJsonBuilder
 
   private
     def build_geo_location
-      return {} unless scorecard.location.present? && scorecard.location.latitude.present? && scorecard.location.longitude.present?
+      return nil unless scorecard.location.present? && scorecard.location.latitude.present? && scorecard.location.longitude.present?
 
       { lat: scorecard.location.latitude, lon: scorecard.location.longitude }
     end

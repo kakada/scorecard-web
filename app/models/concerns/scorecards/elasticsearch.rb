@@ -17,7 +17,9 @@ module Scorecards::Elasticsearch
       indexes :geo_location, type: :geo_point
       indexes :planned_start_date, type: :date
       indexes :planned_end_date, type: :date
+      indexes :created_at, type: :date
       indexes :conducted_at, type: :date
+      indexes :running_date, type: :date
       indexes :finished_date, type: :date
       indexes :language_conducted, type: :text
       indexes :lngo, type: :text
