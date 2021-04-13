@@ -39,6 +39,7 @@
 #  language_conducted_code   :string
 #  finished_date             :datetime
 #  running_date              :datetime
+#  deleted_at                :datetime
 #
 class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :facility_id, :scorecard_type,

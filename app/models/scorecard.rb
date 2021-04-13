@@ -39,6 +39,7 @@
 #  language_conducted_code   :string
 #  finished_date             :datetime
 #  running_date              :datetime
+#  deleted_at                :datetime
 #
 class Scorecard < ApplicationRecord
   include Scorecards::Lockable
@@ -46,6 +47,8 @@ class Scorecard < ApplicationRecord
   include Scorecards::Filter
   include Scorecards::CallbackNotification
   include Scorecards::Elasticsearch
+
+  acts_as_paranoid
 
   enum scorecard_type: {
     self_assessment: 1,

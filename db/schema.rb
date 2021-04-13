@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_041742) do
+ActiveRecord::Schema.define(version: 2021_04_13_093218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -283,6 +283,8 @@ ActiveRecord::Schema.define(version: 2021_04_13_041742) do
     t.string "language_conducted_code"
     t.datetime "finished_date"
     t.datetime "running_date"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end
 

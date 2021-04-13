@@ -32,15 +32,21 @@ module Scorecards::Elasticsearch
     end
 
     def index_document_async
-      ::IndexWorker.perform_async(:index, uuid, program_id)
+      ::IndexWorker.perform_async(:index, uuid)
     end
 
     def delete_document_async
-      ::IndexWorker.perform_async(:delete, uuid, program_id)
+      ::IndexWorker.perform_async(:delete, uuid)
     end
 
     def index_document
       client.index index: program.index_name, id: uuid, body: as_indexed_json
+    end
+
+    def delete_document
+      client.delete index: program.index_name, id: uuid
+    rescue Elasticsearch::Transport::Transport::Errors::NotFound
+      logger.warn "Scorecard not found, ID: #{uuid}"
     end
 
     def as_indexed_json
