@@ -45,13 +45,7 @@ class IndicatorService
     end
 
     def indicator_params(row)
-      param = { tag_attributes: { name: (row["tag"] || row["Scorecard Criterias"]) } }
-
-      if image_path = extract_file(row["image"]).presence
-        param[:image] = Pathname.new(image_path).open
-      end
-
-      param
+      { tag_attributes: { name: (row["tag"] || row["Scorecard Criterias"]) } }
     end
 
     def upsert_languages_indicators(indicator, row)

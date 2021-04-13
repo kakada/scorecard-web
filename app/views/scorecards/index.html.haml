@@ -51,8 +51,16 @@
               %td= scorecard_location(scorecard)
               %th= status_html(scorecard).html_safe
               %td= timeago(scorecard.created_at).html_safe
-              %td= timeago(scorecard.locked_at).html_safe
-              %td= timeago(scorecard.conducted_date).html_safe
+              %td
+                - if scorecard.locked_at.present?
+                  = timeago(scorecard.locked_at).html_safe
+                - else
+                  = "_"
+              %td
+                - if scorecard.conducted_date.present?
+                  = timeago(scorecard.conducted_date).html_safe
+                - else
+                  = "_"
               %td.text-right{style: 'min-width: 90px'}
 
                 - if scorecard.access_locked?

@@ -7,8 +7,6 @@ CW.FacilitiesIndicatorsNew = do ->
     CW.TemplatesNew.initTypeahead()
     CW.TemplatesNew.onRemoveAudio()
     CW.TemplatesNew.onChangeAudio()
-    CW.TemplatesNew.onChangeImageFile()
-    CW.TemplatesNew.onClickButtonDeleteImage()
 
   { init: init }
 
