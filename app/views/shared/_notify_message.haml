@@ -1,17 +1,17 @@
 - if notice.present?
-  .alert.alert-success.alert-dismissible.fade.show.notify-message{:role => "alert"}
+  .alert.alert-success.alert-dismissible.fade.show.notify-message.ml-2{:role => "alert"}
     = notice
     %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
       %span{"aria-hidden" => "true"} ×
 
 - if alert.present?
-  .alert.alert-warning.alert-dismissible.fade.show.notify-message{:role => "alert"}
+  .alert.alert-warning.alert-dismissible.fade.show.notify-message.ml-2{:role => "alert"}
     = alert
     %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
       %span{"aria-hidden" => "true"} ×
 
 - if flash[:recaptcha_error].present?
-  .alert.alert-warning.alert-dismissible.fade.show.notify-message{:role => "alert"}
+  .alert.alert-warning.alert-dismissible.fade.show.notify-message.ml-2{:role => "alert"}
     = flash[:recaptcha_error]
     %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
       %span{"aria-hidden" => "true"} ×

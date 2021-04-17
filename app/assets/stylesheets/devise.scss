@@ -21,27 +21,26 @@
     padding-top: 90px;
 
     .logo {
-      width: 200px;
-      border-radius: 50%;
+      width: 300px;
     }
 
     .logo-wrapper {
       padding-right: 140px;
     }
 
-    .title {
-      margin-top: 30px;
-      font-size: 16px;
+    .logo-image-wrapper {
+      padding-top: 1.5rem;
     }
 
-    .program {
-      width: 200px;
-      text-align: center;
+    .title {
+      width: 400px;
+      margin: 0 auto;
     }
   }
 
   .form-wrapper {
     width: 366px;
+    padding-right: 0.25rem;
   }
 
   .footer {
@@ -66,5 +65,56 @@
 
   .or-label {
     padding: 16px 8px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .devise-form {
+    display: block;
+    overflow-y: scroll;
+
+    .column {
+      display: block;
+      height: auto;
+      overflow-y: hidden;
+      min-height: 100%;
+    }
+
+    .medium-width {
+      width: 100%;
+      display: block;
+    }
+
+    .wrapper {
+      padding-top: 20px;
+      padding-bottom: 82px;
+
+      .logo {
+        width: 35%;
+      }
+
+      .logo-wrapper {
+        padding-right: 0;
+      }
+
+      .logo-image-wrapper {
+        padding-top: 0;
+      }
+
+      .title {
+        width: 100%;
+        padding: 5px 20px;
+      }
+    }
+
+    .footer {
+      height: 82px;
+      margin-top: -82px;
+    }
+
+    .form-wrapper {
+      width: 100%;
+      padding: 30px 20px 10px 20px;
+    }
   }
 }

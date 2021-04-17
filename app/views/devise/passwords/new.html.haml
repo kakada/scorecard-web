@@ -10,8 +10,8 @@
       = f.label :email, t('devise.email')
       = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
 
-    .actions
+    .actions.form-group
       = f.submit "Send me reset password instructions", class: 'btn btn-primary mb-2 w-100'
 
-  .text-right
+  .text-right.mb-4
     = render "devise/shared/links"

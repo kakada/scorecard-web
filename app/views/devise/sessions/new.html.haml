@@ -1,6 +1,6 @@
 = render 'devise/shared/logo'
 
-.form-wrapper.pr-1
+.form-wrapper
   = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary w-100' do
     = image_tag 'google.png', style: 'width: 18px;'
     = t('devise.sign_in_with', omniauth: 'Gmail')

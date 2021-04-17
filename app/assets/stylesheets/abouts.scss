@@ -1,6 +1,55 @@
 #abouts-show {
+  .logo-wrappers {
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+    padding-bottom: 1.5rem;
+  }
+
   .introduction {
     max-width: 900px;
     text-align: justify;
+  }
+
+  .care-logo {
+    img {
+      width: 224px;
+    }
+  }
+
+  .api-logo {
+    img {
+      width: 112px;
+      margin-left: 30px;
+      margin-right: 30px;
+    }
+  }
+
+  .instedd-logo {
+    img {
+      width: 245px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #abouts-show {
+    .logo-wrappers {
+      display: block;
+      text-align: center;
+    }
+
+    .care-logo {
+      display: block;
+    }
+
+    .api-logo {
+      display: block;
+      margin: 1.5rem 0;
+    }
+
+    .instedd-logo {
+      display: block;
+    }
   }
 }
