@@ -10,6 +10,12 @@
     %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
       %span{"aria-hidden" => "true"} ×
 
+- if flash[:recaptcha_error].present?
+  .alert.alert-warning.alert-dismissible.fade.show.notify-message{:role => "alert"}
+    = flash[:recaptcha_error]
+    %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+      %span{"aria-hidden" => "true"} ×
+
 :javascript
   setTimeout(function() {
     $( ".alert" ).fadeOut( "slow" )
