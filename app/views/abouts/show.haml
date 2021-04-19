@@ -28,10 +28,10 @@
   .d-flex.justify-content-center.align-items-center.mt-5.mb-3
     %h5 អនុវត្តដោយ / Implemented by
 
-  .d-flex.justify-content-center.align-items-center.pb-4
-    = link_to 'https://www.care-cambodia.org/', target: '_blank' do
-      = image_tag 'care_logo.png', alt: 'CARE', style: 'width: 224px'
-    = link_to 'https://apiinstitute.org/', target: '_blank' do
-      = image_tag 'api.png', alt: 'API', style: 'width: 112px; margin-left: 30px; margin-right: 30px;'
-    = link_to 'http://ilabsoutheastasia.org', target: '_blank' do
-      = image_tag 'instedd-ilabsea.png', alt: 'InSTEDD iLabSEA', style: 'width: 245px;'
+  .logo-wrappers
+    = link_to 'https://www.care-cambodia.org/', target: '_blank', class: 'care-logo' do
+      = image_tag 'care_logo.png', alt: 'CARE'
+    = link_to 'https://apiinstitute.org/', target: '_blank', class: 'api-logo' do
+      = image_tag 'api.png', alt: 'API'
+    = link_to 'http://ilabsoutheastasia.org', target: '_blank', class: 'instedd-logo' do
+      = image_tag 'instedd-ilabsea.png', alt: 'InSTEDD iLabSEA'
