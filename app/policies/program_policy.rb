@@ -17,6 +17,10 @@ class ProgramPolicy < ApplicationPolicy
     user.system_admin?
   end
 
+  def es_reindex?
+    user.system_admin?
+  end
+
   class Scope < Scope
     def resolve
       scope.all
