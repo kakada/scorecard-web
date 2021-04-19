@@ -8,3 +8,6 @@ km:
     add_contact: + បន្ថែមលេខទំនាក់ទំនង
     telegram_notification: សេចក្តីជូនដំណឹងតាម Telegram
     email_notification: សេចក្តីជូនដំណឹងតាម Email
+    are_you_sure_to_reindex_elasticsearch_document: តើអ្នកប្រាកដចិត្តថាចង់ reindex elasticsearch document របស់ប្រូក្រាមនេះ?
+    es_reindex: Reindex Document
+    reindex_successfully: Reindex document ដោយជោគជ័យ

@@ -27,7 +27,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :programs
+  resources :programs do
+    get :es_reindex, on: :member
+  end
 
   scope module: :programs do
     resource :setting, only: [:show, :update]
