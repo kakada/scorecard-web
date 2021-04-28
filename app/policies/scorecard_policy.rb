@@ -5,12 +5,16 @@ class ScorecardPolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    create? || user.local_ngo_id == record.local_ngo_id
+  end
+
   def create?
     user.program_admin? || user.staff?
   end
 
   def update?
-    create? && !record.access_locked?
+    show? && !record.access_locked?
   end
 
   def destroy?

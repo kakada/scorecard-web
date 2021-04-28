@@ -46,5 +46,10 @@ FactoryBot.define do
     trait :guest do
       role { "guest" }
     end
+
+    trait :lngo do
+      role { "lngo" }
+      local_ngo_id { create(:local_ngo).id }
+    end
   end
 end
