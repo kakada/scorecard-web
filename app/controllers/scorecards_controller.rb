@@ -6,7 +6,7 @@ class ScorecardsController < ApplicationController
   end
 
   def show
-    @scorecard = Scorecard.find(params[:id])
+    @scorecard = authorize Scorecard.find(params[:id])
 
     respond_to do |format|
       format.html

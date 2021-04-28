@@ -15,6 +15,32 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     it { expect(response.content_type).to eq("application/json; charset=utf-8") }
     it { expect(response.status).to eq(200) }
     it { expect(response.body).not_to be_nil }
+
+    context "different local ngo" do
+      let!(:user) { create(:user, :lngo) }
+      let!(:scorecard) { create(:scorecard) }
+      let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+
+      before {
+        get "/api/v1/scorecards/#{scorecard.uuid}", headers: headers
+      }
+
+      it "return 403" do
+        expect(JSON.parse(response.body)["errors"][0]["code"]).to eq(403)
+      end
+    end
+
+    context "same local ngo" do
+      let!(:user) { create(:user, :lngo) }
+      let!(:scorecard) { create(:scorecard, local_ngo_id: user.local_ngo_id) }
+      let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+
+      before {
+        get "/api/v1/scorecards/#{scorecard.uuid}", headers: headers
+      }
+
+      it { expect(response.status).to eq(200) }
+    end
   end
 
   describe "PUT #update" do
