@@ -48,7 +48,7 @@ class Scorecard < ApplicationRecord
   include Scorecards::CallbackNotification
   include Scorecards::Elasticsearch
 
-  acts_as_paranoid
+  acts_as_paranoid if column_names.include? 'deleted_at'
 
   enum scorecard_type: {
     self_assessment: 1,
