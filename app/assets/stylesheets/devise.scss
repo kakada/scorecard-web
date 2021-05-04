@@ -11,24 +11,18 @@
     height: 100%;
     overflow-y: scroll;
   }
-  // .medium-width {
-  //   width: 906px;
-  // }
 
   .wrapper {
     display: flex;
     justify-content: center;
     margin: 0 auto;
     flex-grow: 1;
-    // padding-top: 90px;
-    // overflow-y: hidden;
 
     .logo {
       width: 300px;
     }
 
     .logo-wrapper {
-      // padding-right: 140px;
       border-right: 1px solid #E2E2E2;
     }
 
