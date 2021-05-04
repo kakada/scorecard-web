@@ -10,10 +10,6 @@
 
   %footer
     .app-description.rounded.my-5.p-3{ style: "background-color: #fff;" }
-      %h6.font-weight-bold សម្រាប់អ្នកមិនមានគណនីហើយដែលចង់ស្វែងយល់បន្ថែម
-      %p if you don't have an account and want to learn more
-
-      %h6.font-weight-bold សូមទាក់ទងមកយើងតាមរយៈ contact@digitalcsc.org
-      %p Please reach out to use via: contact@digitalcsc.org
+      = render 'devise/shared/contact'
 
     = render 'devise/shared/stackholders'
