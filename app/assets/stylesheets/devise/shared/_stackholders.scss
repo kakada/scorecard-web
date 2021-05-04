@@ -1,5 +1,5 @@
-$font-size: 0.75em;
-$height: 50px;
+$font-size: 0.85em;
+$height: 80px;
 .stackholders {
   .text-funded,
   .text-implemented {
@@ -11,7 +11,7 @@ $height: 50px;
   }
 
   .img-implemented {
-    height: $height/ 2;
+    height: $height / 2;
   }
 
   .img-implemented-wrapper {
@@ -22,8 +22,8 @@ $height: 50px;
   }
 }
 
-$font-size-lg: 1em;
-$height-lg: 50px;
+$font-size-lg: 1.2em;
+$height-lg: 65px;
 .stackholders-lg {
   .text-funded,
   .text-implemented {
