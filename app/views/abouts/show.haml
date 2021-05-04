@@ -5,33 +5,28 @@
 
   .row
     .col-md-12
-      %h2.text-center ប័ណ្ណដាក់ពិន្ទុសហគមន៍
-      %h3.text-center= ENV['APP_NAME']
+      .text-center
+        = image_tag 'csc_logo.png', size: '120x120'
 
   .d-flex.justify-content-center.mt-4.mb-3.mx-auto.introduction
-    កម្មវិធីប័ណ្ណដាក់ពិន្ទុឌីជីថល ត្រូវបានបង្កើតឡើងដោយមានការគាំទ្រមូលនិធិពីសហភាពអឺរ៉ុប អនុវត្តដោយអង្គការឃែរកម្ពុជា វិទ្យាស្ថានគោលនយោបាយនិងតស៊ូមតិ និងអង្គការ InSTEDD នៃគម្រោង “គាំទ្រការចូលរួមរបស់ប្រជាពលរដ្ឋប្រកបដោយអត្ថន័យតាមរយៈការប្រើប្រាស់បច្ចេកវិទ្យាឌីជីថល ដើម្បីធ្វើឱ្យសើរឡើងនូវគណនេយ្យភាពសង្គម (Ref: ISAF-II)”។
+    %h5.font-weight-bolder{ style: "line-height: 1.5em"}
+      កម្មវិធីប័ណ្ណដាក់ពិន្ទុឌីជីថល ត្រូវបានបង្កើតឡើងដោយមានការគាំទ្រមូលនិធិពីសហភាពអឺរ៉ុប អនុវត្តដោយអង្គការឃែរកម្ពុជា វិទ្យាស្ថានគោលនយោបាយនិងតស៊ូមតិ និងអង្គការ InSTEDD នៃគម្រោង “គាំទ្រការចូលរួមរបស់ប្រជាពលរដ្ឋប្រកបដោយអត្ថន័យតាមរយៈការប្រើប្រាស់បច្ចេកវិទ្យាឌីជីថល ដើម្បីធ្វើឱ្យសើរឡើងនូវគណនេយ្យភាពសង្គម (Ref: ISAF-II)”។
 
-    ប្រជាពលរដ្ឋ អង្គការដៃគូ និងមន្រ្តីរដ្ឋាភិបាលប្រើប្រាស់កម្មវិធីនេះដើម្បីលើកកម្ពស់ការចូលរួម និងកិច្ចជជែកពិភាក្សារបស់ពួកគេ ក្នុងការធ្វើឱ្យប្រសើរឡើងនូវសេវាសាធារណៈ។
+      ប្រជាពលរដ្ឋ អង្គការដៃគូ និងមន្រ្តីរដ្ឋាភិបាលប្រើប្រាស់កម្មវិធីនេះដើម្បីលើកកម្ពស់ការចូលរួម និងកិច្ចជជែកពិភាក្សារបស់ពួកគេ ក្នុងការធ្វើឱ្យប្រសើរឡើងនូវសេវាសាធារណៈ។
 
-  .d-flex.justify-content-center.mb-4.mx-auto.introduction
+  .d-flex.justify-content-center.mb-4.mx-auto.introduction.text-center
     The digitised scorecard app development is funded by the EU, implemented by CARE, API and InSTEDD iLab SEA under the project “supports civic engagement and improves social accountability by leveraging digital technologies (Re: ISAF-II)”.
 
     The community members, local NGO partners and governmental officials use the app to enhance their participation and dialogue with regards to public services improvement.
 
-  .d-flex.justify-content-center.align-items-center.mt-5.mb-3
-    %h5 គាំទ្រមូលនិធិដោយ / Funded by
+  .d-flex.justify-content-between.my-5.mx-auto.introduction
+    .learn-more
+      %h5.font-weight-bolder សម្រាប់អ្នកមិនមានគណនីហើយដែលចង់ស្វែងយល់បន្ថែម
+      %p if you don't have an account and want to learn more
 
-  .d-flex.justify-content-center.align-items-center.mb-4
-    = link_to 'https://eeas.europa.eu/delegations/cambodia_en', target: '_blank' do
-      = image_tag 'eu.png', alt: 'EU', style: 'width: 224px'
+    .contact
+      %h5.font-weight-bolder សូមទាក់ទងមកយើងតាមរយៈ contact@digitalcsc.org
+      %p Please reach out to use via: contact@digitalcsc.org
 
-  .d-flex.justify-content-center.align-items-center.mt-5.mb-3
-    %h5 អនុវត្តដោយ / Implemented by
-
-  .logo-wrappers
-    = link_to 'https://www.care-cambodia.org/', target: '_blank', class: 'care-logo' do
-      = image_tag 'care_logo.png', alt: 'CARE'
-    = link_to 'https://apiinstitute.org/', target: '_blank', class: 'api-logo' do
-      = image_tag 'api.png', alt: 'API'
-    = link_to 'http://ilabsoutheastasia.org', target: '_blank', class: 'instedd-logo' do
-      = image_tag 'instedd-ilabsea.png', alt: 'InSTEDD iLabSEA'
+  .introduction.mx-auto
+    = render partial: 'devise/shared/stackholders', locals: { wrapper_class: 'stackholders-lg' }

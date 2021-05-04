@@ -1,0 +1,47 @@
+$font-size: 0.75em;
+$height: 50px;
+.stackholders {
+  .text-funded,
+  .text-implemented {
+    font-size: $font-size;
+  }
+
+  .img-funded {
+    height: $height;
+  }
+
+  .img-implemented {
+    height: $height/ 2;
+  }
+
+  .img-implemented-wrapper {
+    height: $height;
+    & > a:not(:last-child) {
+      margin-right: 5px;
+    }
+  }
+}
+
+$font-size-lg: 1em;
+$height-lg: 50px;
+.stackholders-lg {
+  .text-funded,
+  .text-implemented {
+    font-size: $font-size-lg;
+  }
+
+  .img-funded {
+    height: $height-lg *2;
+  }
+
+  .img-implemented {
+    height: $height-lg;
+  }
+
+  .img-implemented-wrapper {
+    height: $height-lg *2;
+    & > a:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+}

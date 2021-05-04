@@ -10,25 +10,10 @@
 
   %footer
     .app-description.rounded.my-5.p-3{ style: "background-color: #fff;" }
-      %p
-        សម្រាប់អ្នកមិនមានគណនីហើយដែលចង់ស្វែងយល់បន្ថែម
-      %p
-        if you don't have an account and want to learn more
-      %p
-        សូមទាក់ទងមកយើងតាមរយៈ contact@digitalcsc.org
-      %p
-        Please reach out to use via: contact@digitalcsc.org
+      %h6.font-weight-bold សម្រាប់អ្នកមិនមានគណនីហើយដែលចង់ស្វែងយល់បន្ថែម
+      %p if you don't have an account and want to learn more
 
-    .stackholders.d-flex.justify-content-between
-      .funded-by.text-center
-        %p.font-weight-bold.text-center{style: "font-size: 0.75em"}
-          គាំទ្រមូលនិធិដោយ / Funded by
-        = image_tag 'eu.png', height: '50', alt: 'Care Cambodia'
+      %h6.font-weight-bold សូមទាក់ទងមកយើងតាមរយៈ contact@digitalcsc.org
+      %p Please reach out to use via: contact@digitalcsc.org
 
-      .implemented-by
-        %p.font-weight-bold.text-center{style: "font-size: 0.75em"}
-          អនុវត្តដោយ / Implemented by
-        .d-flex
-          = image_tag 'care_logo.png', height: '25', alt: 'Care Cambodia'
-          = image_tag 'api.png', height: '25', alt: 'Care Cambodia'
-          = image_tag 'instedd-ilabsea.png', height: '25', alt: 'Care Cambodia'
+    = render 'devise/shared/stackholders'
