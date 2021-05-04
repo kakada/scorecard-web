@@ -1,5 +1,5 @@
 .stackholders.d-flex.justify-content-between{ class: local_assigns[:wrapper_class] }
-  .funded-by.text-center
+  .funded-by.text-center.flex-shrink-0
     %p.font-weight-bold.text-center.text-funded
       គាំទ្រមូលនិធិដោយ / Funded by
     = image_tag 'eu.png', class: 'img-funded', alt: 'Care Cambodia'
@@ -7,7 +7,7 @@
   .implemented-by
     %p.font-weight-bold.text-center.text-implemented
       អនុវត្តដោយ / Implemented by
-    .d-flex.align-items-center.img-implemented-wrapper
+    .d-flex.align-items-center.justify-content-center.flex-wrap.img-implemented-wrapper
       = link_to 'https://www.care-cambodia.org/', target: '_blank' do
         = image_tag 'care_logo.png', class: 'img-implemented', alt: 'Care'
 
