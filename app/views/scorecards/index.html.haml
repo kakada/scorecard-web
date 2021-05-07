@@ -28,7 +28,6 @@
               %th #
               %th= t('scorecard.code')
               %th= sortable "year", t('scorecard.year')
-              %th= sortable "name", t('shared.name')
               %th= sortable "facility_id", t('scorecard.facility')
               %th= t('scorecard.implementer')
               %th= t('scorecard.location')
@@ -46,7 +45,6 @@
                   = link_to scorecard.uuid, scorecard, class: 'btn btn-link p-0'
                   = render 'scorecard_copy', scorecard: scorecard
                 %td= scorecard.year
-                %td= scorecard.name
                 %td= scorecard.facility.name
                 %td= scorecard.local_ngo.name
                 %td= scorecard_location(scorecard)
