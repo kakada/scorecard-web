@@ -20,7 +20,11 @@
     The community members, local NGO partners and governmental officials use the app to enhance their participation and dialogue with regards to public services improvement.
 
   .d-flex.justify-content-between.my-5.mx-auto.introduction
-    = render 'devise/shared/contact'
+    .learn-more
+      %h5.font-weight-bold.text-center
+        សម្រាប់អ្នកមិនមានគណនីហើយដែលចង់ស្វែងយល់បន្ថែមសូមទាក់ទងមកយើងតាមរយៈ support@digital-csc.org
+      %h6.text-center
+        if you don't have an account and want to learn more please reach out to use via: support@digital-csc.org
 
   .introduction.mx-auto
     = render partial: 'devise/shared/stackholders', locals: { wrapper_class: 'stackholders-lg' }
