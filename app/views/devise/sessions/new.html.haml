@@ -40,6 +40,11 @@
     .form-group
       = link_to "ទាញយកកម្មវិធី / Download App", "/scorecard_app.apk"
 
+    .form-group
+      %span
+        = t("sidebar.version")
+        = ENV['APP_VERSION']
+
   - if ENV["ENABLE_RESET_DATA_SCHEDULE"] == 'true'
     .alert.alert-info
       Log in with admin@program.org / 123456 and feel free to do changes as system is reset every night.
