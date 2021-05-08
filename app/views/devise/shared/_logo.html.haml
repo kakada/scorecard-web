@@ -1,4 +1,6 @@
-.logo-wrapper
+.logo-wrapper.p-5.mr-5.d-flex.flex-column.justify-content-center
+  = link_to t("devise.login"), url_for(anchor: :login_form), class: "btn btn-primary position-absolute d-lg-none", style: "top: 15px; right: 15px;"
+
   %h3.title.mb-3.text-center
     = ENV['APP_NAME']
 
@@ -6,4 +8,10 @@
       = "(#{shortcut_name})"
 
   .logo-image-wrapper.flex-row.text-center.justify-content-conter
-    = image_tag 'csc_logo.png', class: 'logo'
+    = image_tag 'csc_logo.png', size: '120x120'
+
+  %footer
+    .app-description.rounded.my-5
+      = render 'devise/shared/contact'
+
+    = render 'devise/shared/stackholders'
