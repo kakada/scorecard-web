@@ -2,7 +2,9 @@
   .funded-by.text-center.flex-shrink-0
     %p.font-weight-bold.text-center.text-funded
       គាំទ្រមូលនិធិដោយ / Funded by
-    = image_tag 'eu.png', class: 'img-funded', alt: 'Care Cambodia'
+
+    = link_to 'https://eeas.europa.eu/delegations/cambodia_en', target: '_blank' do
+      = image_tag 'eu.png', class: 'img-funded', alt: 'EU Cambodia'
 
   .implemented-by
     %p.font-weight-bold.text-center.text-implemented
