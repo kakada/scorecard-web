@@ -1,0 +1,19 @@
+#faq {
+  margin-bottom: 9.375em;
+
+  .faq-body {
+    padding: 15px;
+    margin: 38px;
+    border-left: 2px solid $primary;
+    margin-left: 71px;
+  }
+
+  .heading {
+    padding: 15px;
+    border-top: 1px solid #efefef;
+  }
+
+  .fa-primary {
+    color: $primary;
+  }
+}

@@ -1,84 +1,75 @@
 .container
   .row
     .col-12
-      %h1 Cambodia Blended Digital Scorecard
-      %h5 FAQ
+      %h1.display-4.font-weight-bold.my-4
+        Cambodia Blended Digital Scorecard
+      %h3.mb-4 FAQ
 
-      %p
+      %p.lead
         Blended digital scorecard is a free open source application created under project Supporting meaningful civic engagement for improved accountability by leveraging digital technologies,  implemented by CARE, API & InSTEDD funded by the European Union (EU).
 
-      #accordionExample.accordion
-        .card
-          #headingOne.card-header
-            %h2.mb-0
-              %button.btn.btn-link.btn-block.text-left{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-target" => "#collapseOne", "data-toggle" => "collapse", :type => "button"}
-                Can my project/organization use the blended digital scorecard? 
-          #collapseOne.collapse.show{"aria-labelledby" => "headingOne", "data-parent" => "#accordionExample"}
-            .card-body
-              Yes, of course. Blended digital scorecard is a free and open source tool.
-        .card
-          #headingTwo.card-header
-            %h2.mb-0
-              %button.btn.btn-link.btn-block.text-left.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo", "data-toggle" => "collapse", :type => "button"}
-                Why should I use the free and open source Blended Digital Scorecard?
-          #collapseTwo.collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordionExample"}
-            .card-body
-              Blended Digital Scorecard was designed with a rigorous human-center-designed and field validation. 
-              It provides flexibility for project implementers to create their own form indicators 
-              It support Khmer language, including option to upload audio for indicators
-              It come with the dashboard where the program can view their scorecard implementation progress in real time
+      #faq.accordion
+        %h3.heading#headingOne.font-weight-bold{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-target" => "#collapseOne", "data-toggle" => "collapse" }
+          %i.fa.fa-plus.fa-primary.mr-4
+          Can my project/organization use the blended digital scorecard? 
+        #collapseOne.collapse.show{"aria-labelledby" => "headingOne", "data-parent" => "#faq"}
+          .faq-body
+            Yes, of course. Blended digital scorecard is a free and open source tool.
 
-              See here videos about Blended Digital Scorecard.
-        .card
-          #headingThree.card-header
-            %h2.mb-0
-              %button.btn.btn-link.btn-block.text-left.collapsed{"aria-controls" => "collapseThree", "aria-expanded" => "false", "data-target" => "#collapseThree", "data-toggle" => "collapse", :type => "button"}
-                Why should I not create another new application for the same purpose?
-          #collapseThree.collapse{"aria-labelledby" => "headingThree", "data-parent" => "#accordionExample"}
-            .card-body
-              Save resource, not reinvent the wheel
-              The existing free and open source software has an existing community that you can learn from their experience of implementation and practice. 
-              If you feel that the Blended Digital Scorecard does not fit your needs, we strongly recommend you to consult with our project team to get clarification and information you need before making your final decision in creating a new application.
-        .card
-          #headingFour.card-header
-            %h2.mb-0
-              %button.btn.btn-link.btn-block.text-left.collapsed{"aria-controls" => "collapseFour", "aria-expanded" => "false", "data-target" => "#collapseFour", "data-toggle" => "collapse", :type => "button"}
-                How can I set up the Blended Digital Scorecard tool for my project?
-          #collapseFour.collapse{"aria-labelledby" => "headingFour", "data-parent" => "#accordionExample"}
-            .card-body
-              The package of Blended digital scored has 2 components:
-              Mobile application for Android phone. Link to PlayStore to download the application. 
-              Install the Web and dashboard application on your own server (we recommend using cloud server) 
-              Link to source code repository and installation guide
-              Configure on the mobile application to point to your web application endpoint
+        %h3.heading#headingTwo.font-weight-bold{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-target" => "#collapseOne", "data-toggle" => "collapse" }
+          %i.fa.fa-plus.fa-primary.mr-4
+          Why should I use the free and open source Blended Digital Scorecard?
+        #collapseOne.collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#faq"}
+          .faq-body
+            Blended Digital Scorecard was designed with a rigorous human-center-designed and field validation. 
+            %ul
+              %li It provides flexibility for project implementers to create their own form indicators 
+              %li It support Khmer language, including option to upload audio for indicators
+              %li It come with the dashboard where the program can view their scorecard implementation progress in real time
 
-        .card
-          #headingFive.card-header
-            %h2.mb-0
-              %button.btn.btn-link.btn-block.text-left.collapsed{"aria-controls" => "collapseFive", "aria-expanded" => "false", "data-target" => "#collapseFive", "data-toggle" => "collapse", :type => "button"}
-                Is there a central Blended Digital Scorecard dashboard that provides a big picture from other implementers that use the same tool?
-          #collapseFive.collapse{"aria-labelledby" => "headingFive", "data-parent" => "#accordionExample"}
-            .card-body
-              Yes, you and other implementers that use Blended Digital Scorecard can decide to share your aggregated data from your own server to the central dashboard server. By sharing the aggregated digital scorecard data from your own project, you support the open data and allow the public to view the progress of the scorecard implementation in Cambodia.
-              [image]
+            = link_to "See here videos", "#"
+            %span about Blended Digital Scorecard.
 
-        .card
-          #headingSix.card-header
-            %h2.mb-0
-              %button.btn.btn-link.btn-block.text-left.collapsed{"aria-controls" => "collapseSix", "aria-expanded" => "false", "data-target" => "#collapseSix", "data-toggle" => "collapse", :type => "button"}
-                Where can I learn or get the support to roll out the Blended Digital Scorecard for my project?
-          #collapseSix.collapse{"aria-labelledby" => "headingSix", "data-parent" => "#accordionExample"}
-            .card-body
-              To learn more from implementation roll out, please contact CARE and API
-              For technical aspect, please contact InSTEDD
+        %h3.heading#headingThree.font-weight-bold{"aria-controls" => "collapseThree", "aria-expanded" => "true", "data-target" => "#collapseThree", "data-toggle" => "collapse" }
+          %i.fa.fa-plus.fa-primary.mr-4
+          Why should I not create another new application for the same purpose?
+        #collapseThree.collapse{"aria-labelledby" => "headingThree", "data-parent" => "#faq"}
+          .faq-body
+            Save resource, not reinvent the wheel
+            The existing free and open source software has an existing community that you can learn from their experience of implementation and practice. 
+            If you feel that the Blended Digital Scorecard does not fit your needs, we strongly recommend you to consult with our project team to get clarification and information you need before making your final decision in creating a new application.
+              
+        %h3.heading#headingFour.font-weight-bold{"aria-controls" => "collapseFour", "aria-expanded" => "true", "data-target" => "#collapseFour", "data-toggle" => "collapse" }
+          %i.fa.fa-plus.fa-primary.mr-4
+          How can I set up the Blended Digital Scorecard tool for my project?
+        #collapseFour.collapse{"aria-labelledby" => "headingFour", "data-parent" => "#faq"}
+          .faq-body
+            The package of Blended digital scored has 2 components:
+            Mobile application for Android phone. Link to PlayStore to download the application. 
+            Install the Web and dashboard application on your own server (we recommend using cloud server) 
+            Link to source code repository and installation guide
+            Configure on the mobile application to point to your web application endpoint
 
-        .card
-          #headingSeven.card-header
-            %h2.mb-0
-              %button.btn.btn-link.btn-block.text-left.collapsed{"aria-controls" => "collapseSeven", "aria-expanded" => "false", "data-target" => "#collapseSeven", "data-toggle" => "collapse", :type => "button"}
-                What about data ownership and data security?
-          #collapseSeven.collapse{"aria-labelledby" => "headingSeven", "data-parent" => "#accordionExample"}
-            .card-body
-              The data will be owned and fully managed by your organization at your server.
+        %h3.heading#headingFive.font-weight-bold{"aria-controls" => "collapseFive", "aria-expanded" => "true", "data-target" => "#collapseFive", "data-toggle" => "collapse" }
+          %i.fa.fa-plus.fa-primary.mr-4
+          Is there a central Blended Digital Scorecard dashboard that provides a big picture from other implementers that use the same tool?
+        #collapseFive.collapse{"aria-labelledby" => "headingFive", "data-parent" => "#faq"}
+          .faq-body
+            Yes, you and other implementers that use Blended Digital Scorecard can decide to share your aggregated data from your own server to the central dashboard server. By sharing the aggregated digital scorecard data from your own project, you support the open data and allow the public to view the progress of the scorecard implementation in Cambodia.
+            .my-4
+              = image_tag 'how-score-card-works.png', alt: 'How score card works'
+        
+        %h3.heading#headingSix.font-weight-bold{"aria-controls" => "collapseSix", "aria-expanded" => "true", "data-target" => "#collapseSix", "data-toggle" => "collapse" }
+          %i.fa.fa-plus.fa-primary.mr-4
+          Where can I learn or get the support to roll out the Blended Digital Scorecard for my project?
+        #collapseSix.collapse{"aria-labelledby" => "headingSix", "data-parent" => "#faq"}
+          .faq-body
+            To learn more from implementation roll out, please contact CARE and API
+            For technical aspect, please contact InSTEDD
 
-
+        %h3.heading#headingSeven.font-weight-bold{"aria-controls" => "collapseSeven", "aria-expanded" => "true", "data-target" => "#collapseSeven", "data-toggle" => "collapse" }
+          %i.fa.fa-plus.fa-primary.mr-4
+          What about data ownership and data security?
+        #collapseSeven.collapse{"aria-labelledby" => "headingSeven", "data-parent" => "#faq"}
+          .faq-body
+            The data will be owned and fully managed by your organization at your server.
