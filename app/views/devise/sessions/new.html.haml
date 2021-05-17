@@ -30,13 +30,15 @@
       = recaptcha_tags
 
     .actions.form-group
-      = f.submit "Login", class: 'btn btn-primary w-100 mb-2'
+      = f.submit t("devise.login"), class: 'btn btn-primary w-100 mb-2'
 
   .text-right.mb-4
     .form-group
       = render "devise/shared/links"
     .form-group
       = link_to t('about.about_us'), about_path
+    .form-group
+      = link_to t('faq'), faq_path
     .form-group
       = link_to "ទាញយកកម្មវិធី / Download App", "/scorecard_app.apk"
 
