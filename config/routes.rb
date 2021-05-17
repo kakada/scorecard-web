@@ -71,6 +71,7 @@ Rails.application.routes.draw do
     post :resend_confirmation, on: :member
   end
 
+  get '/faq', to: 'faq#index'
   resource :about, only: [:show]
 
   resources :primary_schools, only: [:index]
