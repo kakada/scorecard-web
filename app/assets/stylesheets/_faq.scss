@@ -11,9 +11,21 @@
   .heading {
     padding: 15px;
     border-top: 1px solid #efefef;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .fa-primary {
     color: $primary;
+  }
+
+  [aria-expanded=true] .fa-plus {
+    display: none;
+  }
+
+  [aria-expanded=false] .fa-minus {
+    display: none;
   }
 }
