@@ -2,10 +2,11 @@
   margin-bottom: 9.375em;
 
   .faq-body {
+    font-size: 1.3em;
     padding: 15px;
-    margin: 38px;
+    margin: 16px;
     border-left: 2px solid $primary;
-    margin-left: 71px;
+    margin-left: 62px;
   }
 
   .heading {
@@ -19,6 +20,10 @@
 
   .fa-primary {
     color: $primary;
+  }
+
+  .list-style-lower-alpha {
+    list-style-type: lower-alpha;
   }
 
   [aria-expanded=true] .fa-plus {
