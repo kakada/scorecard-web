@@ -1,11 +1,11 @@
 .learn-more
-  %h5.font-weight-bold.text-center
+  %h5.font-weight-normal.text-center
     សម្រាប់អ្នកមិនមានគណនីហើយដែលចង់ស្វែងយល់បន្ថែម
   %h6.text-center
     if you don't have an account and want to learn more
 
 .contact
-  %h5.font-weight-bold.text-center
-    សូមទាក់ទងមកយើងតាមរយៈ support@digital-csc.org
+  %h5.font-weight-normal.text-center
+    = "សូមទាក់ទងមកយើងតាមរយៈ #{ENV['CSC_SUPPORT_EMAIL']}"
   %h6.text-center
-    Please reach out to use via: support@digital-csc.org
+    = "Please reach out to use via: #{ENV['CSC_SUPPORT_EMAIL']}"
