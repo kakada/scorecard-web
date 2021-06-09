@@ -15,3 +15,8 @@
       = render 'devise/shared/contact'
 
     = render 'devise/shared/stackholders'
+
+    .qr-code.text-center.mt-5
+      = link_to "ទាញយកកម្មវិធី / Download App", ENV['APP_PLAY_STORE_URL'], target: "_blank"
+      %br
+      = image_tag 'qr-code.png', alt: 'CHC QR code', class: 'qr-code-img mt-3'
