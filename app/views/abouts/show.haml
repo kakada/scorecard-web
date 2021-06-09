@@ -6,10 +6,10 @@
   .row
     .col-md-12
       .text-center
-        = image_tag 'csc_logo.png', size: '120x120', alt: "CSC logo"
+        = image_tag 'csc_logo.png', size: '120x120', alt: "CSC logo", class: "rounded-xl"
 
   .d-flex.justify-content-center.mt-4.mb-3.mx-auto.introduction
-    %h5.font-weight-bolder{ style: "line-height: 1.5em"}
+    %h5.font-weight-normal{ style: "line-height: 1.5em"}
       កម្មវិធីប័ណ្ណដាក់ពិន្ទុឌីជីថល ត្រូវបានបង្កើតឡើងដោយមានការគាំទ្រមូលនិធិពីសហភាពអឺរ៉ុប អនុវត្តដោយអង្គការឃែរកម្ពុជា វិទ្យាស្ថានគោលនយោបាយនិងតស៊ូមតិ និងអង្គការ InSTEDD នៃគម្រោង “គាំទ្រការចូលរួមរបស់ប្រជាពលរដ្ឋប្រកបដោយអត្ថន័យតាមរយៈការប្រើប្រាស់បច្ចេកវិទ្យាឌីជីថល ដើម្បីធ្វើឱ្យសើរឡើងនូវគណនេយ្យភាពសង្គម (Ref: ISAF-II)”។
 
       ប្រជាពលរដ្ឋ អង្គការដៃគូ និងមន្រ្តីរដ្ឋាភិបាលប្រើប្រាស់កម្មវិធីនេះដើម្បីលើកកម្ពស់ការចូលរួម និងកិច្ចជជែកពិភាក្សារបស់ពួកគេ ក្នុងការធ្វើឱ្យប្រសើរឡើងនូវសេវាសាធារណៈ។
@@ -21,10 +21,12 @@
 
   .d-flex.justify-content-between.my-5.mx-auto.introduction
     .learn-more
-      %h5.font-weight-bold.text-center
-        សម្រាប់អ្នកមិនមានគណនីហើយដែលចង់ស្វែងយល់បន្ថែមសូមទាក់ទងមកយើងតាមរយៈ support@digital-csc.org
+      %h5.font-weight-normal.text-center
+        សម្រាប់អ្នកមិនមានគណនីហើយដែលចង់ស្វែងយល់បន្ថែមសូមទាក់ទងមកយើងតាមរយៈ
+        = mail_to ENV['CSC_SUPPORT_EMAIL'], ENV['CSC_SUPPORT_EMAIL']
       %h6.text-center
-        if you don't have an account and want to learn more please reach out to use via: support@digital-csc.org
+        if you don't have an account and want to learn more please reach out to use via:
+        = mail_to ENV['CSC_SUPPORT_EMAIL'], ENV['CSC_SUPPORT_EMAIL']
 
   .introduction.mx-auto
     = render partial: 'devise/shared/stackholders', locals: { wrapper_class: 'stackholders-lg' }
