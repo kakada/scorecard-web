@@ -6,6 +6,8 @@
 
 .contact
   %h5.font-weight-normal.text-center
-    = "សូមទាក់ទងមកយើងតាមរយៈ #{ENV['CSC_SUPPORT_EMAIL']}"
+    សូមទាក់ទងមកយើងតាមរយៈ
+    = mail_to ENV['CSC_SUPPORT_EMAIL'], ENV['CSC_SUPPORT_EMAIL']
   %h6.text-center
-    = "Please reach out to use via: #{ENV['CSC_SUPPORT_EMAIL']}"
+    Please reach out to use via: 
+    = mail_to ENV['CSC_SUPPORT_EMAIL'], ENV['CSC_SUPPORT_EMAIL']
