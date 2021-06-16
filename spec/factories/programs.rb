@@ -14,5 +14,11 @@
 FactoryBot.define do
   factory :program do
     name    { FFaker::Name.name }
+
+    skip_callback { true }
+
+    trait :allow_callback do
+      skip_callback { false }
+    end
   end
 end
