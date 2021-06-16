@@ -58,6 +58,12 @@ pumi =
       $.getJSON collectionUrl.replace(filterInterpolationKey, filterValue), (data) ->
         $.each data, (index, item) ->
           select.append($('<option>').text(item[labelMethod]).val(item[valueMethod]))
+
+        if pumi.getDataAttribute(select, 'allow-none')
+          option = { en: 'None', km: 'មិនមាន' }
+          languageCode = $("[data-language-code]").data('languageCode') || 'en'
+          select.append($('<option>').text(option[languageCode]).val('none'))
+
         defaultValue = pumi.getDataAttribute(select, 'default-value')
         if !!defaultValue
           select.val(defaultValue)

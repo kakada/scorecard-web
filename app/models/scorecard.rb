@@ -48,7 +48,7 @@ class Scorecard < ApplicationRecord
   include Scorecards::CallbackNotification
   include Scorecards::Elasticsearch
 
-  acts_as_paranoid if column_names.include? 'deleted_at'
+  acts_as_paranoid if column_names.include? "deleted_at"
 
   enum scorecard_type: {
     self_assessment: 1,
@@ -129,7 +129,7 @@ class Scorecard < ApplicationRecord
     end
 
     def set_name
-      self.name = "#{commune_id}-#{year}-#{unit_type_id.to_s.rjust(2, '0')}"
+      self.name = "#{location_code}-#{year}-#{unit_type_id.to_s.rjust(2, '0')}"
     end
 
     def clear_primary_school_code

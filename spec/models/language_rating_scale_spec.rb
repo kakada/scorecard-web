@@ -37,6 +37,6 @@ RSpec.describe LanguageRatingScale, type: :model do
       uploader.remove!
     end
 
-    it { expect(uploader.extension_whitelist).to include("mp3") }
+    it { expect(uploader.extension_allowlist).to include("mp3") }
   end
 end
