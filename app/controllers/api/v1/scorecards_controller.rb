@@ -6,7 +6,7 @@ module Api
       before_action :assign_scorecard
 
       def show
-        authorize @scorecard
+        authorize @scorecard, :download?
 
         render json: @scorecard
       end
