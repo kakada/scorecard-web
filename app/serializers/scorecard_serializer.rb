@@ -59,21 +59,4 @@ class ScorecardSerializer < ActiveModel::Serializer
   def local_ngo_name
     object.local_ngo.try(:name)
   end
-
-  def commune
-    _commune.name_km
-  end
-
-  def district
-    _commune.district.name_km
-  end
-
-  def province
-    _commune.province.name_km
-  end
-
-  private
-    def _commune
-      @_commune ||= Pumi::Commune.find_by_id(object.commune_id)
-    end
 end

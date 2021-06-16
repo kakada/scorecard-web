@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 class ScorecardsController < ApplicationController
+  before_action :set_scorecard, only: [:show, :edit, :update, :destroy]
+
   def index
     @pagy, @scorecards = pagy(policy_scope(Scorecard.filter(filter_params).order(sort_column + " " + sort_direction).includes(:facility, :local_ngo)))
   end
 
   def show
-    @scorecard = authorize Scorecard.find(params[:id])
+    authorize @scorecard
 
     respond_to do |format|
       format.html
@@ -31,18 +33,18 @@ class ScorecardsController < ApplicationController
 
     if @scorecard.save
       flash[:notice] = t("scorecard.create_successfully")
-      redirect_to scorecard_url(@scorecard)
+      redirect_to scorecard_url(@scorecard.uuid)
     else
       render :new
     end
   end
 
   def edit
-    @scorecard = authorize Scorecard.find(params[:id])
+    authorize @scorecard
   end
 
   def update
-    @scorecard = authorize Scorecard.find(params[:id])
+    authorize @scorecard
 
     if @scorecard.update_attributes(scorecard_params)
       redirect_to scorecards_url
@@ -52,13 +54,17 @@ class ScorecardsController < ApplicationController
   end
 
   def destroy
-    @scorecard = authorize Scorecard.find(params[:id])
+    authorize @scorecard
     @scorecard.destroy
 
     redirect_to scorecards_url
   end
 
   private
+    def set_scorecard
+      @scorecard = Scorecard.find_by uuid: params[:id]
+    end
+
     def scorecard_params
       params.require(:scorecard).permit(:unit_type_id, :facility_id, :description,
         :province_id, :district_id, :commune_id, :year, :primary_school_code,
