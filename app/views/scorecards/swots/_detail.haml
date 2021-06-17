@@ -22,5 +22,7 @@
               %li= str
         %td
           %ul
-            - indicator.suggested_action.each do |str|
-              %li= str
+            - indicator.suggested_actions.each do |action|
+              %li
+                = action.content
+                = "(selected)" if action.selected

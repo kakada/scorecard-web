@@ -41,7 +41,8 @@ module Api
             ],
             voting_indicators_attributes: [
               :uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :scorecard_uuid,
-              :median, strength: [], weakness: [], suggested_action: []
+              :median, strength: [], weakness: [], suggested_action: [],
+              suggested_actions_attributes: [ :voting_indicator_uuid, :scorecard_uuid, :content, :selected ]
             ],
             ratings_attributes: [ :id, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ],
           )
