@@ -85,11 +85,10 @@ class IndicatorService
     def clone_indicator(from_obj, to_obj)
       from_obj.indicators.each do |old_indicator|
         new_indicator = to_obj.indicators.new(clean_attributes(old_indicator))
-        new_indicator.image = File.open(old_indicator.image.file.file) if old_indicator.image.present?
 
         old_indicator.languages_indicators.each do |lang_indi|
           new_lang_indi = new_indicator.languages_indicators.new(clean_attributes(lang_indi))
-          new_lang_indi.audio = File.open(lang_indi.audio.file.file) if lang_indi.audio.present?
+          new_lang_indi.audio = lang_indi.audio
         end
       end
 
