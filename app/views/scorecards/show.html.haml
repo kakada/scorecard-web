@@ -19,10 +19,5 @@
 
   = render 'progress_step', label: "4. #{t('scorecard.swot_table')}", url: scorecard_swots_path(@scorecard.uuid), disabled: disabled_button
 
-  - @scorecard.scorecard_references.each do |ref|
-    %a.btn.btn-link{href: ref.attachment_url, download: true, target: '_blank'}
-      %i.fas.fa-cloud-download-alt
-      %span= ref.attachment_identifier
-
 = render "main_modal"
 = render "modal_scorecard_uuid"
