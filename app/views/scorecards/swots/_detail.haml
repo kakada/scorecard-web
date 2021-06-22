@@ -26,3 +26,12 @@
               %li
                 = action.content
                 = "(selected)" if action.selected
+
+- if references = @scorecard.scorecard_references.presence
+  .mb-2
+    %label= t('scorecard.references')
+    - references.each do |ref|
+      %div
+        %a.btn.btn-link{href: ref.attachment_url, download: true, target: '_blank'}
+          %i.fas.fa-cloud-download-alt
+          %span= ref.attachment_identifier
