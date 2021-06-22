@@ -1,5 +1,5 @@
 .logo-wrapper.p-5.mr-5.d-flex.flex-column.justify-content-center
-  = link_to t("devise.login"), url_for(anchor: :login_form), class: "btn btn-primary position-absolute d-lg-none", style: "top: 30px; right: 30px;"
+  = link_to t("devise.sign_in"), url_for(anchor: :login_form), class: "btn btn-primary position-absolute d-lg-none", style: "top: 30px; right: 30px;"
 
   %h3.title.mb-3.text-center
     = ENV['APP_NAME']
@@ -8,10 +8,15 @@
       = "(#{shortcut_name})"
 
   .logo-image-wrapper.flex-row.text-center.justify-content-conter
-    = image_tag 'csc_logo.png', size: '120x120'
+    = image_tag 'csc_logo.png', size: '120x120', class: 'rounded-xl'
 
   %footer
     .app-description.rounded.my-5
       = render 'devise/shared/contact'
 
     = render 'devise/shared/stackholders'
+
+    .qr-code.text-center.mt-5
+      = link_to "ទាញយកកម្មវិធី / Download App", ENV['APP_PLAY_STORE_URL'], target: "_blank"
+      %br
+      = image_tag 'qr-code.png', alt: 'CHC QR code', class: 'qr-code-img mt-3'

@@ -1,7 +1,7 @@
 = render 'devise/shared/logo'
 
 .form-wrapper#login_form
-  %h2.font-weight-bold.text-center.my-5
+  %h2.font-weight-normal.text-center.my-5
     ចូលប្រើ / Sign in
   = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary w-100' do
     = image_tag 'google.png', style: 'width: 18px;'
@@ -30,18 +30,16 @@
       = recaptcha_tags
 
     .actions.form-group
-      = f.submit "Login", class: 'btn btn-primary w-100 mb-2'
+      = f.submit t("devise.sign_in"), class: 'btn btn-primary w-100 mb-2'
 
   .text-right.mb-4
     .form-group
       = render "devise/shared/links"
     .form-group
       = link_to t('about.about_us'), about_path
-    .form-group
-      = link_to "ទាញយកកម្មវិធី / Download App", "/scorecard_app.apk"
 
     .form-group
-      %span
+      %span.fs-xs
         = t("sidebar.version")
         = ENV['APP_VERSION']
 

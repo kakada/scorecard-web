@@ -55,7 +55,7 @@ en:
     email: 'Email'
     password: 'Password'
     remember_me: 'Remember me'
-    login: 'Log in'
+    sign_in: 'Sign in'
     forgot_your_password: 'Forgot your password?'
     dont_receive_unlock_instruction: "Didn't receive unlock instructions?"
     sign_in_with: "Sign in with %{omniauth}"

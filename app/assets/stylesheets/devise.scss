@@ -64,6 +64,12 @@
   .or-label {
     padding: 16px 8px;
   }
+
+  .qr-code {
+    &-img {
+      width: 120px;
+    }
+  }
 }
 
 @media screen and (max-width: 992px) {

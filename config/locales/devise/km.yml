@@ -55,7 +55,7 @@ km:
     email: 'អ៊ីមែល'
     password: 'ពាក្យសម្ងាត់'
     remember_me: 'ចងចាំខ្ញុំ'
-    login: 'ចូលគណនី'
+    sign_in: 'ចូលគណនី'
     forgot_your_password: 'ភ្លេចលេខសំងាត់?'
     dont_receive_unlock_instruction: "តើអ្នកមិនបានទទួលការណែនាំអំពីការដោះសោទេឬ?"
     sign_in_with: "ចូលគណនីជាមួយ %{omniauth}"
