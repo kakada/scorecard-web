@@ -3,7 +3,7 @@
 module Scorecards
   class MediansController < ApplicationController
     def index
-      @scorecard = Scorecard.find(params[:scorecard_id])
+      @scorecard = Scorecard.find_by(uuid: params[:scorecard_id])
       @voting_indicators = Scorecards::VotingCriteria.new(@scorecard).criterias
 
       respond_to do |format|
