@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_093218) do
+ActiveRecord::Schema.define(version: 2021_06_17_032356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -286,6 +286,15 @@ ActiveRecord::Schema.define(version: 2021_04_13_093218) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
+  end
+
+  create_table "suggested_actions", force: :cascade do |t|
+    t.string "voting_indicator_uuid"
+    t.string "content"
+    t.boolean "selected"
+    t.string "scorecard_uuid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|

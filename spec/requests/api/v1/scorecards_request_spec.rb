@@ -107,4 +107,34 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       end
     end
   end
+
+  describe "PUT #update, suggested_actions_attributes" do
+    let!(:user)       { create(:user) }
+    let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
+    let!(:indicator)   { facility.indicators.first }
+    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
+    let(:json_response) { JSON.parse(response.body) }
+    let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+    let(:params)      { { voting_indicators_attributes: [ {
+                          uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid,
+                          suggested_actions_attributes: [
+                            { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action1", selected: true },
+                            { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action2", selected: false },
+                          ]
+                        }] }
+                      }
+    let(:voting_indicators) { scorecard.reload.voting_indicators }
+
+    context "success" do
+      before {
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
+      }
+
+      it { expect(response.content_type).to eq("application/json; charset=utf-8") }
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(voting_indicators.length).to eq(1) }
+      it { expect(voting_indicators.first.suggested_actions.length).to eq(2) }
+      it { expect(voting_indicators.first.suggested_actions.selecteds.length).to eq(1) }
+    end
+  end
 end

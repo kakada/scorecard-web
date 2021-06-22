@@ -15,6 +15,8 @@ module Sample
         rescue
           Rails.logger.warn "Model #{model} is unknwon"
         end
+
+        scorecard.lock_access!
       end
     end
 
