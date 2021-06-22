@@ -13,6 +13,7 @@
 #
 class Program < ApplicationRecord
   include Programs::Elasticsearch
+  attr_accessor :skip_callback
 
   has_many :users
   has_many :languages
@@ -30,6 +31,7 @@ class Program < ApplicationRecord
   validates :name, presence: true
 
   after_create :create_default_language
+  after_create :create_default_rating_scale, unless: :skip_callback
 
   DATETIME_FORMATS = {
     "YYYY-MM-DD" => "%Y-%m-%d",
@@ -45,5 +47,9 @@ class Program < ApplicationRecord
   private
     def create_default_language
       languages.create(code: "km", name_en: "Khmer", name_km: "ខ្មែរ")
+    end
+
+    def create_default_rating_scale
+      rating_scales.create_defaults(languages.first)
     end
 end
