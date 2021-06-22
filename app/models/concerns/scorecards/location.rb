@@ -17,16 +17,18 @@ module Scorecards::Location
     end
 
     def district
-      Pumi::District.find_by_id(district_id)["name_#{I18n.locale}"]
+      Pumi::District.find_by_id(district_id).try("name_#{I18n.locale}")
     end
 
     def commune
-      Pumi::Commune.find_by_id(commune_id)["name_#{I18n.locale}"]
+      Pumi::Commune.find_by_id(commune_id).try("name_#{I18n.locale}")
     end
 
     private
       def set_location_code
         self.location_code = commune_id
+        self.location_code = district_id if commune_id == "none"
+        self.location_code = province_id if district_id == "none"
       end
   end
 end

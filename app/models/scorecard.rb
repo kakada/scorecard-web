@@ -129,7 +129,7 @@ class Scorecard < ApplicationRecord
     end
 
     def set_name
-      self.name = "#{commune_id}-#{year}-#{unit_type_id.to_s.rjust(2, '0')}"
+      self.name = "#{location_code}-#{year}-#{unit_type_id.to_s.rjust(2, '0')}"
     end
 
     def clear_primary_school_code
