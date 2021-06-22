@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Api::V1::ScorecardsController", type: :request do
   describe "GET #show" do
     let!(:user) { create(:user) }
-    let!(:scorecard) { create(:scorecard) }
+    let!(:scorecard)  { create(:scorecard, program_id: user.program_id) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
 
     before {
@@ -32,7 +32,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
     context "same local ngo" do
       let!(:user) { create(:user, :lngo) }
-      let!(:scorecard) { create(:scorecard, local_ngo_id: user.local_ngo_id) }
+      let!(:scorecard) { create(:scorecard, local_ngo_id: user.local_ngo_id, program_id: user.program_id) }
       let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
 
       before {
@@ -43,9 +43,25 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     end
   end
 
+  describe "GET #show" do
+    context "different program" do
+      let!(:user) { create(:user) }
+      let!(:scorecard) { create(:scorecard) }
+      let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+
+      before {
+        get "/api/v1/scorecards/#{scorecard.uuid}", headers: headers
+      }
+
+      it "return 403" do
+        expect(JSON.parse(response.body)["errors"][0]["code"]).to eq(403)
+      end
+    end
+  end
+
   describe "PUT #update" do
     let!(:user)       { create(:user) }
-    let!(:scorecard)  { create(:scorecard, number_of_participant: 3) }
+    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program_id: user.program_id) }
     let(:json_response) { JSON.parse(response.body) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { number_of_caf: 3, number_of_participant: 15, number_of_female: 5 } }

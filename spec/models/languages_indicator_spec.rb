@@ -17,8 +17,6 @@
 require "rails_helper"
 
 RSpec.describe LanguagesIndicator, type: :model do
-  include CarrierWave::Test::Matchers
-
   it { is_expected.to belong_to(:language) }
   it { is_expected.to belong_to(:indicator).touch(true) }
   it { is_expected.to validate_presence_of(:content) }
@@ -60,11 +58,11 @@ RSpec.describe LanguagesIndicator, type: :model do
       uploader.remove!
     end
 
-    it { expect(uploader.extension_whitelist).to include("mp3") }
+    it { expect(uploader.extension_allowlist).to include("mp3") }
   end
 
   describe "validate file size" do
-    let(:big_file) { Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "files", "big_audio.mp3")) }
+    let(:big_file) { File.open(Rails.root.join("spec", "fixtures", "files", "big_audio.mp3")) }
     let(:languages_indicator) { build(:languages_indicator, audio: big_file) }
 
     it { expect(languages_indicator.valid?).to be_falsey }

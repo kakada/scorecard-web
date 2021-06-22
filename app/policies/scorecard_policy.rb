@@ -6,7 +6,14 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def show?
-    create? || user.local_ngo_id == record.local_ngo_id
+    return true if user.system_admin?
+    return true if (user.program_admin? || user.staff?) && (user.program_id == record.program_id)
+    return true if user.local_ngo_id == record.local_ngo_id
+    false
+  end
+
+  def download?
+    (user.program_id == record.program_id) && (create? || user.local_ngo_id == record.local_ngo_id)
   end
 
   def create?
@@ -14,7 +21,7 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def update?
-    show? && !record.access_locked?
+    create? && !record.access_locked?
   end
 
   def destroy?
