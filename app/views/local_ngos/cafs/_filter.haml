@@ -1,0 +1,8 @@
+%form{ action: local_ngo_cafs_path(@local_ngo), method: 'get' }
+  .form-row
+    .form-group
+      .input-group
+        = text_field_tag(:keyword, params[:keyword], class: 'form-control w-search', placeholder: t('caf.search'))
+        .input-group-append
+          .input-group-text
+            %i.fas.fa-search

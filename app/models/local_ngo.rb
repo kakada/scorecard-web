@@ -35,4 +35,14 @@ class LocalNgo < ApplicationRecord
 
     Pumi::Province.all.select { |p| target_province_ids.split(",").include?(p.id) }.map(&:name_km).join(", ")
   end
+
+  def self.filter(params)
+    scope = all
+    if params[:keyword].present?
+      province_ids = Pumi::Province.all.select { |p| p.name_km.downcase.include?(params[:keyword].downcase) || p.name_en.downcase.include?(params[:keyword].downcase) }.map(&:id)
+      scope = scope.where("LOWER(name) LIKE ? OR province_id IN (?)", "%#{params[:keyword].downcase}%", province_ids)
+    end
+    scope = scope.where(program_id: params[:program_id]) if params[:program_id].present?
+    scope
+  end
 end
