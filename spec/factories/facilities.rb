@@ -43,7 +43,7 @@ FactoryBot.define do
     end
 
     trait :dataset do
-      dataset     { 'ps' }
+      dataset     { "ps" }
 
       before(:create) do |facility, evaluator|
         create(:primary_school)

@@ -156,10 +156,10 @@ RSpec.describe Scorecard, type: :model do
       before { new_scorecard.save }
 
       it { expect(new_scorecard.save).to be_falsey }
-      it { expect(new_scorecard.errors[:commune_id]).to include I18n.t('errors.messages.taken') }
+      it { expect(new_scorecard.errors[:commune_id]).to include I18n.t("errors.messages.taken") }
     end
 
-    context 'different commune_id' do
+    context "different commune_id" do
       before {
         new_scorecard.commune_id = "none"
       }
@@ -167,7 +167,7 @@ RSpec.describe Scorecard, type: :model do
       it { expect(new_scorecard.save).to be_truthy }
     end
 
-    context 'different scorecard_type' do
+    context "different scorecard_type" do
       before {
         new_scorecard.scorecard_type = :self_assessment
       }
@@ -175,7 +175,7 @@ RSpec.describe Scorecard, type: :model do
       it { expect(new_scorecard.save).to be_truthy }
     end
 
-    context 'different facility_id' do
+    context "different facility_id" do
       let(:facility) {
         fac = scorecard.facility.dup
         fac.update(name_en: "new facility")
@@ -189,7 +189,7 @@ RSpec.describe Scorecard, type: :model do
       it { expect(new_scorecard.save).to be_truthy }
     end
 
-    context 'different year' do
+    context "different year" do
       before {
         new_scorecard.year = 2022
       }
@@ -197,7 +197,7 @@ RSpec.describe Scorecard, type: :model do
       it { expect(new_scorecard.save).to be_truthy }
     end
 
-    context 'different program' do
+    context "different program" do
       before {
         new_scorecard.program = create(:program)
       }
@@ -205,7 +205,7 @@ RSpec.describe Scorecard, type: :model do
       it { expect(new_scorecard.save).to be_truthy }
     end
 
-    context 'commune_id none' do
+    context "commune_id none" do
       before {
         scorecard.update(commune_id: "none")
         new_scorecard.commune_id = "none"
@@ -213,9 +213,9 @@ RSpec.describe Scorecard, type: :model do
 
       it { expect(new_scorecard.save).to be_falsey }
 
-      context 'different district_id' do
+      context "different district_id" do
         before {
-          district = Pumi::District.where(province_id: scorecard.province_id).select {|dis| dis.id != scorecard.district_id }.first
+          district = Pumi::District.where(province_id: scorecard.province_id).select { |dis| dis.id != scorecard.district_id }.first
           new_scorecard.district_id = district.id
         }
 
@@ -223,7 +223,7 @@ RSpec.describe Scorecard, type: :model do
       end
     end
 
-    context 'district_id none' do
+    context "district_id none" do
       before {
         scorecard.update(commune_id: "none", district_id: "none")
         new_scorecard.commune_id = "none"
@@ -232,7 +232,7 @@ RSpec.describe Scorecard, type: :model do
 
       it { expect(new_scorecard.save).to be_falsey }
 
-      context 'different district_id' do
+      context "different district_id" do
         before {
           district = Pumi::District.where(province_id: scorecard.province_id).first
           new_scorecard.district_id = district.id
@@ -253,10 +253,10 @@ RSpec.describe Scorecard, type: :model do
       }
 
       it { expect(new_scorecard.save).to be_falsey }
-      it { expect(new_scorecard.errors[:primary_school_code]).to include I18n.t('errors.messages.taken') }
+      it { expect(new_scorecard.errors[:primary_school_code]).to include I18n.t("errors.messages.taken") }
     end
 
-    context 'different primary school code' do
+    context "different primary school code" do
       before {
         ps = create(:primary_school, commune_id: scorecard.commune_id)
         new_scorecard.primary_school_code = ps.code
