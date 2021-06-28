@@ -7,7 +7,7 @@ module Sample
       u.confirm
 
       %w[CARE].each do |program_name|
-        ::Program.create(name: program_name)
+        ::Program.create(name: program_name, shortcut_name: program_name[0..9])
       end
     end
   end

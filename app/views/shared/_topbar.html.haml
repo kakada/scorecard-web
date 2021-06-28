@@ -6,32 +6,41 @@
   / Topbar Navbar
   %ul.navbar-nav.ml-auto
     %li.nav-item.dropdown.no-arrow.mx-1
+      / Language display
       %a#languageDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
         - language = { en: "english.png", km: "khmer.png" }
         = image_tag language[I18n.locale], alt: "locale", size: "24x24", class: "mr-2", 'data-language-code' => I18n.locale
-        %span= t("language.#{I18n.locale}")
+        %span.text-gray-600.small= t("language.#{I18n.locale}")
         %i.fas.fa-angle-down.fa-fw
 
+      / Language dropdown list
       .dropdown-list.dropdown-menu.dropdown-menu-right.shadow.animated--grow-in{"aria-labelledby" => "languageDropdown"}
         = simple_form_for(current_user, url: update_locale_users_path, method: :post, remote: true, html: { id: "switch-language" }) do |f|
           = f.hidden_field :language_code
 
           - program_languages.each do |language|
-            %a.switch-language.dropdown-item.d-flex.align-items-center{'data-language' => language[:code]}
+            %a.switch-language.dropdown-item.d-flex.align-items-center.pointer{'data-language' => language[:code], href: '#'}
               .dropdown-list-image.mr-3
                 = image_tag language[:image], alt: "locale", size: "24x24", class: "mr-2"
-              .font-weight-bold
-                .text-truncate= language[:label]
+              .text-truncate= language[:label]
 
     .topbar-divider.d-none.d-sm-block
+
     / Nav Item - User Information
     %li.nav-item.dropdown.no-arrow
+      / User display
       %a#userDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-        %span.mr-2.d-none.d-lg-inline.text-gray-600.small
-          = current_user.display_name
+        %span.mr-2.d-none.d-lg-inline.text-gray-600.small= current_user.display_name
+
         = image_tag 'default_profile.png', alt: 'profile', class: 'img-profile img-thumbnail rounded-circle'
 
+      / Profile dropdown
       .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in{"aria-labelledby" => "userDropdown"}
+        %a.dropdown-item.d-flex.align-items-center.border-bottom.mb-2
+          .dropdown-list-image.mr-2.img-profile
+            = image_tag 'default_profile.png', alt: 'profile', class: 'img-thumbnail rounded-circle'
+          = current_user.email
+
         %a.dropdown-item{"data-target" => "#logoutModal", "data-toggle" => "modal", :href => "#"}
-          %i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-400
+          %i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-600
           = t("sidebar.logout")
