@@ -8,7 +8,7 @@ RSpec.describe "Api::V1::ScorecardReferencesController", type: :request do
     let!(:scorecard)  { create(:scorecard, program: user.program) }
     let(:json_response) { JSON.parse(response.body) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
-    let(:params)      { { uuid: "123", kind: 'swot_result' } }
+    let(:params)      { { uuid: "123", kind: "swot_result" } }
 
     context "success" do
       before {

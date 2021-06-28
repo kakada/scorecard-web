@@ -4,8 +4,9 @@
     .sidebar-brand-icon
       = image_tag 'csc_logo.png', style: "width: 50px"
 
-    .sidebar-brand-text.mx-3
-      = t('sidebar.community_scorecard')
+    .sidebar-brand-text.mx-3.flex-1
+      %div= t('sidebar.community_scorecard')
+      .program-name.mt-1= "@#{current_program.try(:shortcut_name) || "Admin"}"
 
   / Divider
   %hr.sidebar-divider.my-0/

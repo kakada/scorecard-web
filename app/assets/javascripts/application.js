@@ -41,6 +41,7 @@
 //= require telegram_bots/show
 //= require messages/index
 //= require messages/new
+//= require programs/new
 
 document.addEventListener('turbolinks:load', function() {
   CW.Common.Topbar.init();

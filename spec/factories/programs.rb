@@ -10,6 +10,7 @@
 #  updated_at                :datetime         not null
 #  datetime_format           :string           default("DD-MM-YYYY")
 #  enable_email_notification :boolean          default(FALSE)
+#  shortcut_name             :string
 #
 FactoryBot.define do
   factory :program do

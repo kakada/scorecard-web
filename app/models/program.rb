@@ -10,6 +10,7 @@
 #  updated_at                :datetime         not null
 #  datetime_format           :string           default("DD-MM-YYYY")
 #  enable_email_notification :boolean          default(FALSE)
+#  shortcut_name             :string
 #
 class Program < ApplicationRecord
   include Programs::Elasticsearch
@@ -28,7 +29,8 @@ class Program < ApplicationRecord
   has_many :messages
   has_one  :telegram_bot, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
+  validates :shortcut_name, presence: true, uniqueness: true
 
   after_create :create_default_language
   after_create :create_default_rating_scale, unless: :skip_callback
