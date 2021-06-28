@@ -47,6 +47,7 @@ document.addEventListener('turbolinks:load', function() {
   CW.Common.Topbar.init();
   CW.Common.DatetimePicker.init();
   CW.Common.Timeago.init();
+  $("[role='tooltip']").remove();
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
 

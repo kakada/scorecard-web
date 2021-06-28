@@ -41,5 +41,13 @@ FactoryBot.define do
         facility.parent_id = create(:facility, program_id: facility.program_id).id
       end
     end
+
+    trait :dataset do
+      dataset     { "ps" }
+
+      before(:create) do |facility, evaluator|
+        create(:primary_school)
+      end
+    end
   end
 end

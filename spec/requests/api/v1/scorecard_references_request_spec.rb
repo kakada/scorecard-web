@@ -12,7 +12,7 @@ RSpec.describe "Api::V1::ScorecardReferencesController", type: :request do
 
     context "success" do
       before {
-        post "/api/v1/scorecards/#{scorecard.uuid}/scorecard_references", params: { scorecard_reference: params.to_json, attachment: file_fixture("reference_image.png") }, headers: headers
+        post "/api/v1/scorecards/#{scorecard.uuid}/scorecard_references", params: { scorecard_reference: params.to_json, attachment: Rack::Test::UploadedFile.new(Rails.root.join("spec/fixtures/files/reference_image.png")) }, headers: headers
       }
 
       it { expect(response.content_type).to eq("application/json; charset=utf-8") }

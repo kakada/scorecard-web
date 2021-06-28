@@ -5,7 +5,7 @@ module LocalNgos
     before_action :set_local_ngo
 
     def index
-      @pagy, @cafs = pagy(authorize @local_ngo.cafs.order(sort_column + " " + sort_direction))
+      @pagy, @cafs = pagy(authorize Caf.filter(params.merge(local_ngo_id: @local_ngo.id)).order(sort_column + " " + sort_direction))
     end
 
     def new

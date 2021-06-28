@@ -2,19 +2,21 @@
 
 .card.shadow.mb-4
   .card-body
+    .d-flex
+      .flex-grow-1
+        = render 'filter'
+
+      %div
+        = render "more_option"
+        %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
+          %i.fas.fa-plus.fa-sm.text-white-50
+          = t("local_ngo.add_new")
+
     = render partial: "shared/no_data", locals: { items: @local_ngos, url: new_local_ngo_path, label: t("local_ngo.add_new") }
 
     - if @local_ngos.present?
       .d-sm-flex
-        = render "shared/pagination_title", objects: @local_ngos, hide_pagy: true
-        .flex-grow-1
-
-        %div
-          = render "more_option"
-
-          %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
-            %i.fas.fa-plus.fa-sm.text-white-50
-            = t("local_ngo.add_new")
+        = render "shared/pagination_title", objects: @local_ngos
 
       %table.table.table-hover.pretty
         %thead
@@ -40,3 +42,7 @@
                     %i.fas.fa-pencil-ruler
 
                 = render 'shared/action_buttons', edit_url: edit_local_ngo_path(local_ngo), delete_url: local_ngo_path(local_ngo), object: local_ngo
+
+    - if @pagy.pages > 1
+      .pagy-wrapper
+        != pagy_bootstrap_nav(@pagy)

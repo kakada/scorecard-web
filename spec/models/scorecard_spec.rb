@@ -147,4 +147,122 @@ RSpec.describe Scorecard, type: :model do
       end
     end
   end
+
+  describe "validate unique commune_id" do
+    let!(:scorecard) { create(:scorecard, scorecard_type: :community_scorecard, year: 2021) }
+    let!(:new_scorecard) { scorecard.dup }
+
+    context "duplicate commune_id" do
+      before { new_scorecard.save }
+
+      it { expect(new_scorecard.save).to be_falsey }
+      it { expect(new_scorecard.errors[:commune_id]).to include I18n.t("errors.messages.taken") }
+    end
+
+    context "different commune_id" do
+      before {
+        new_scorecard.commune_id = "none"
+      }
+
+      it { expect(new_scorecard.save).to be_truthy }
+    end
+
+    context "different scorecard_type" do
+      before {
+        new_scorecard.scorecard_type = :self_assessment
+      }
+
+      it { expect(new_scorecard.save).to be_truthy }
+    end
+
+    context "different facility_id" do
+      let(:facility) {
+        fac = scorecard.facility.dup
+        fac.update(name_en: "new facility")
+        fac
+      }
+
+      before {
+        new_scorecard.facility = facility
+      }
+
+      it { expect(new_scorecard.save).to be_truthy }
+    end
+
+    context "different year" do
+      before {
+        new_scorecard.year = 2022
+      }
+
+      it { expect(new_scorecard.save).to be_truthy }
+    end
+
+    context "different program" do
+      before {
+        new_scorecard.program = create(:program)
+      }
+
+      it { expect(new_scorecard.save).to be_truthy }
+    end
+
+    context "commune_id none" do
+      before {
+        scorecard.update(commune_id: "none")
+        new_scorecard.commune_id = "none"
+      }
+
+      it { expect(new_scorecard.save).to be_falsey }
+
+      context "different district_id" do
+        before {
+          district = Pumi::District.where(province_id: scorecard.province_id).select { |dis| dis.id != scorecard.district_id }.first
+          new_scorecard.district_id = district.id
+        }
+
+        it { expect(new_scorecard.save).to be_truthy }
+      end
+    end
+
+    context "district_id none" do
+      before {
+        scorecard.update(commune_id: "none", district_id: "none")
+        new_scorecard.commune_id = "none"
+        new_scorecard.district_id = "none"
+      }
+
+      it { expect(new_scorecard.save).to be_falsey }
+
+      context "different district_id" do
+        before {
+          district = Pumi::District.where(province_id: scorecard.province_id).first
+          new_scorecard.district_id = district.id
+        }
+
+        it { expect(new_scorecard.save).to be_truthy }
+      end
+    end
+  end
+
+  describe "validate unique primary school code" do
+    let!(:scorecard) { create(:scorecard, :with_primary_school) }
+    let!(:new_scorecard) { scorecard.dup }
+
+    context "duplicate" do
+      before {
+        new_scorecard.save
+      }
+
+      it { expect(new_scorecard.save).to be_falsey }
+      it { expect(new_scorecard.errors[:primary_school_code]).to include I18n.t("errors.messages.taken") }
+    end
+
+    context "different primary school code" do
+      before {
+        ps = create(:primary_school, commune_id: scorecard.commune_id)
+        new_scorecard.primary_school_code = ps.code
+      }
+
+      it { expect(new_scorecard.save).to be_truthy }
+    end
+  end
 end
