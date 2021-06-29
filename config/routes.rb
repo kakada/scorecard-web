@@ -75,6 +75,8 @@ Rails.application.routes.draw do
 
   resources :primary_schools, only: [:index]
 
+  resources :mobile_notifications, only: [:index, :new, :create]
+
   namespace :api do
     namespace :v1 do
       resources :programs, only: [] do
@@ -83,6 +85,7 @@ Rails.application.routes.draw do
       end
 
       resources :contacts, only: [:index]
+      resource  :mobile_tokens, only: [:update]
 
       resources :facilities, only: [] do
         resources :indicators, only: [:index]

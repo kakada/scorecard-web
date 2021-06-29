@@ -48,6 +48,12 @@
           %i.far.fa-fw.fa-bell
           %span= t("sidebar.notification")
 
+    - if policy(MobileNotification).index?
+      %li.nav-item{ class: [css_active_class('mobile_notifications')] }
+        %a.nav-link{ :href => mobile_notifications_path }
+          %i.fab.fa-fw.fa-android
+          %span= t("sidebar.mobile_notification")
+
     - if current_program.present? && policy(Program).update?
       %li.nav-item{ class: css_nested_active_class('programs/settings') }
         %a.nav-link{:href => setting_path}

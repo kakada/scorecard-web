@@ -1,0 +1,33 @@
+.mobile-notifications-form {
+  .preview-background {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: flex;
+    margin: 4px;
+    padding: 60px 20px 4px;
+    background-image: url(image_path('mobile.png'));
+    width: 370px;
+  }
+
+  .card-box {
+    overflow: hidden;
+    width: 100%;
+    background-color: #fff;
+    min-height: 60px;
+    padding: 10px;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 12px;
+  }
+
+  .text-body {
+    font-size: 12px;
+  }
+
+  .text-wrapper {
+    overflow: hidden;
+    word-break: break-all;
+  }
+}
