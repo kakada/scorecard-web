@@ -14,20 +14,21 @@ module ScorecardsHelper
   end
 
   def scorecard_descriptions
-    descriptions = ["year", "facility_name"].map { |method| @scorecard.send(method) }
+    descriptions = ["<span><i class='fas fa-calendar-alt mr-1'></i>#{@scorecard.year}</span>"]
     descriptions.push(t("scorecard.#{@scorecard.scorecard_type}"))
-    descriptions.push(scorecard_location(@scorecard))
-    descriptions.join("; ")
+    descriptions.push(@scorecard.facility_name)
+    descriptions.push("<span><i class='fas fa-map-marker-alt mr-1'></i>#{scorecard_location(@scorecard)}</span>")
+    descriptions.join(", ")
   end
 
   def scorecard_location(scorecard)
-    str = [scorecard.location_name]
+    return scorecard.location_name unless scorecard.primary_school.present?
 
-    if primary_school = scorecard.send("primary_school_name_#{I18n.locale}").presence
-      str.unshift("#{t('scorecard.primary_school')}#{primary_school}")
-    end
+    label = t('scorecard.primary_school')
+    school_name = scorecard.primary_school_name
+    primary_school = I18n.locale == :km ? "#{label}#{school_name}" : "#{school_name} #{label},"
 
-    str.join(" ")
+    [primary_school, scorecard.location_name].join(" ")
   end
 
   def css_active_tab(is_active)
@@ -53,4 +54,11 @@ module ScorecardsHelper
     dom = render("scorecards/index/filter_date_popover_content")
     content_tag(:div, "", class: "hidden filter-date", data: { html: dom.gsub("\n", "") })
   end
+
+  def date_html(date)
+    return "" unless date.present?
+
+    "<span><i class='fas fa-calendar-alt mr-1'></i>#{date_format(date)}</span>"
+  end
+
 end

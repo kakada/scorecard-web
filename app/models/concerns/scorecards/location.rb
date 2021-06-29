@@ -9,7 +9,7 @@ module Scorecards::Location
     def location_name(address = "address_km")
       return if location_code.blank?
 
-      "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("#{address}".to_sym)
+      "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("address_#{I18n.locale}".to_sym)
     end
 
     def province

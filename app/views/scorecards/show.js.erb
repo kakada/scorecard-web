@@ -1,3 +1,4 @@
 $('#mainModal .modal-title').html("<%= t('scorecard.setup') %>");
-$('#mainModal .modal-body').html('<%= j render("detail") %>');
+$('#mainModal .card-subtitle').html("<%= scorecard_descriptions.html_safe %>");
+$('#mainModal .modal-body').html('<%= j render("scorecards/show/detail") %>');
 $("#mainModal").modal("show");
