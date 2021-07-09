@@ -7,7 +7,7 @@
         = status_html(@scorecard).html_safe
 
     .my-2.card-subtitle.text-muted
-      = scorecard_descriptions
+      = scorecard_descriptions.html_safe
 
   %div
     %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }

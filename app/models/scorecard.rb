@@ -81,6 +81,7 @@ class Scorecard < ApplicationRecord
   delegate  :name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
   delegate  :name_en, :name_km, to: :primary_school, prefix: :primary_school, allow_nil: true
   delegate  :name, to: :facility, prefix: :facility
+  delegate  :name, to: :primary_school, prefix: :primary_school, allow_nil: true
 
   validates :year, presence: true
   validates :province_id, presence: true
@@ -134,7 +135,7 @@ class Scorecard < ApplicationRecord
     end
 
     def set_name
-      self.name = "#{location_code}-#{year}-#{unit_type_id.to_s.rjust(2, '0')}"
+      self.name = "#{location_code}-#{year}"
     end
 
     def clear_primary_school_code

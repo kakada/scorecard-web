@@ -1,0 +1,56 @@
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.status")
+  %label.col-sm-8.col-form-label= " : #{status_html(@scorecard)}".html_safe
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.id")
+  %label.col-sm-8.col-form-label
+    = " : #{@scorecard.uuid}"
+    = render 'scorecard_copy', scorecard: @scorecard
+.row
+  %label.col-sm-4.col-form-label= t("shared.name")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.name}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.facility")
+  %label.col-sm-8.col-form-label
+    = " : #{@scorecard.unit_type.name} → #{@scorecard.facility_name}"
+    = " → #{@scorecard.primary_school_name}" if @scorecard.primary_school.present?
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.conducted_at")
+  %label.col-sm-8.col-form-label= " : #{date_html(@scorecard.conducted_date)}".html_safe
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.planned_start_date")
+  %label.col-sm-8.col-form-label= " : #{date_html(@scorecard.planned_start_date)}".html_safe
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.planned_end_date")
+  %label.col-sm-8.col-form-label= " : #{date_html(@scorecard.planned_end_date)}".html_safe
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.local_ngo")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.local_ngo_name}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.description")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.description}"
+
+%fieldset.section
+  %legend.d-inline.px-2
+    %small= t('scorecard.participant_info')
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.number_of_participant")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_participant}"
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.number_of_female")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_female}"
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.number_of_disability")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_disability}"
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.number_of_ethnic_minority")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_ethnic_minority}"
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.number_of_youth")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_youth}"
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.number_of_id_poor")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_id_poor}"
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.number_of_caf")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_caf}"

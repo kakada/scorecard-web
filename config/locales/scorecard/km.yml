@@ -4,7 +4,7 @@ km:
     conducted_at: កាលបរិច្ឆេទអនុវត្ត
     location: ទីតាំង
     unit_type: ប្រភេទវិស័យ
-    facility: វិស័យ
+    facility: ទីតាំងសេវា
     scorecard_type: ប្រភេទប័ណ្ណដាក់ពិន្ទុ
     sector: វិស័យ
     number_of_participant: ចំនួនអ្នកចូលរួម
@@ -81,3 +81,6 @@ km:
     running: កំពុងដំណើរការ
     submitted: បានដាក់ស្នើ
     references: ឯកសារយោង
+    implemented_date: កាលបរិច្ឆេទអនុវត្ត
+    submitted_date: កាលបរិច្ឆេទទទួលបានសំណើរ
+    participant_info: ព័ត៌មានរបស់អ្នកចូលរួម

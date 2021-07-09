@@ -17,4 +17,8 @@ class PrimarySchool < ApplicationRecord
   validates :name_km, presence: true, uniqueness: { scope: :commune_id }
   validates :name_en, presence: true, uniqueness: { scope: :commune_id }
   validates :commune_id, presence: true
+
+  def name
+    self["name_#{I18n.locale}"]
+  end
 end
