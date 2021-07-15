@@ -24,7 +24,7 @@ module ScorecardsHelper
   def scorecard_location(scorecard)
     return scorecard.location_name unless scorecard.primary_school.present?
 
-    label = t('scorecard.primary_school')
+    label = t("scorecard.primary_school")
     school_name = scorecard.primary_school_name
     primary_school = I18n.locale == :km ? "#{label}#{school_name}" : "#{school_name} #{label},"
 
@@ -60,5 +60,4 @@ module ScorecardsHelper
 
     "<span><i class='fas fa-calendar-alt mr-1'></i>#{date_format(date)}</span>"
   end
-
 end

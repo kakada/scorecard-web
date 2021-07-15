@@ -63,4 +63,26 @@ RSpec.describe User, type: :model do
       it { is_expected.not_to validate_presence_of(:local_ngo_id) }
     end
   end
+
+  describe "#regenerate_authentication_token!" do
+    let!(:user) { create(:user) }
+
+    context "token is expired" do
+      before {
+        user.update(authentication_token: "a1b2c3d4", token_expired_date: DateTime.yesterday)
+        user.regenerate_authentication_token!
+      }
+
+      it { expect(user.reload.authentication_token).not_to eq("a1b2c3d4") }
+    end
+
+    context "token is not expired" do
+      before {
+        user.update(authentication_token: "a1b2c3d4", token_expired_date: DateTime.tomorrow)
+        user.regenerate_authentication_token!
+      }
+
+      it { expect(user.reload.authentication_token).to eq("a1b2c3d4") }
+    end
+  end
 end

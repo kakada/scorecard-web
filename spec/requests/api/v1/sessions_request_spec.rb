@@ -56,6 +56,32 @@ RSpec.describe "Api::V1::SessionsController", type: :request do
         expect(json_response["error"]).to eq("Invalid email or password!")
       end
     end
+
+    context "token_expired_date is expired" do
+      before(:each) do
+        user.update(authentication_token: "a1b2c3d4", token_expired_date: DateTime.yesterday)
+        post "/api/v1/sign_in", params: { user: { email: user.email, password: "password" } }
+      end
+
+      it { expect(response.status).to eq(200) }
+
+      it "responses with user authentication_token" do
+        expect(json_response["authentication_token"]).not_to eq("a1b2c3d4")
+      end
+    end
+
+    context "token_expired_date is not expired" do
+      before(:each) do
+        user.update(authentication_token: "a1b2c3d4", token_expired_date: DateTime.tomorrow)
+        post "/api/v1/sign_in", params: { user: { email: user.email, password: "password" } }
+      end
+
+      it { expect(response.status).to eq(200) }
+
+      it "responses with user authentication_token" do
+        expect(json_response["authentication_token"]).to eq("a1b2c3d4")
+      end
+    end
   end
 
   describe "DELETE #destroy" do
