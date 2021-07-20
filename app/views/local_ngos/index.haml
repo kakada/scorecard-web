@@ -24,7 +24,7 @@
             %th #
             %th= sortable "name", t("shared.name")
             %th= t('local_ngo.address')
-            %th= t('local_ngo.target_provinces')
+            %th= sortable "target_provinces", t('local_ngo.target_provinces')
             %th= sortable "created_at", t("shared.created_at")
             %th
 
@@ -34,7 +34,7 @@
               %td= @pagy.from + index
               %td= local_ngo.name
               %td= local_ngo.address
-              %td= local_ngo.target_province_names
+              %td= local_ngo.target_provinces
               %td= timeago(local_ngo.created_at).html_safe
               %td.text-right
                 - if policy(local_ngo).update?

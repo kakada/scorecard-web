@@ -24,4 +24,12 @@ RSpec.describe LocalNgo, type: :model do
   it { is_expected.to have_many(:scorecards) }
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_uniqueness_of(:name).scoped_to(:program_id) }
+
+  describe 'before_save, set target_provinces' do
+    let!(:ngo) { create(:local_ngo, target_province_ids: "01,02") }
+    let!(:province1) { Pumi::Province.find_by_id("01") }
+    let!(:province2) { Pumi::Province.find_by_id("02") }
+
+    it { expect(ngo.target_provinces).to eq("#{province1.name_km}, #{province2.name_km}") }
+  end
 end
