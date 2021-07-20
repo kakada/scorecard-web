@@ -23,6 +23,8 @@ class LocalNgo < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { scope: :program_id }
 
+  before_save :set_target_provinces, if: :will_save_change_to_target_province_ids?
+
   def address(address_local = "address_km")
     address_code = village_id.presence || commune_id.presence || district_id.presence || province_id.presence
     return if address_code.nil?
@@ -30,19 +32,26 @@ class LocalNgo < ApplicationRecord
     "Pumi::#{Location.location_kind(address_code).titlecase}".constantize.find_by_id(address_code).try("#{address_local}".to_sym)
   end
 
-  def target_province_names
-    return if target_province_ids.blank?
-
-    Pumi::Province.all.select { |p| target_province_ids.split(",").include?(p.id) }.map(&:name_km).join(", ")
-  end
-
-  def self.filter(params)
-    scope = all
-    if params[:keyword].present?
-      province_ids = Pumi::Province.all.select { |p| p.name_km.downcase.include?(params[:keyword].downcase) || p.name_en.downcase.include?(params[:keyword].downcase) }.map(&:id)
-      scope = scope.where("LOWER(name) LIKE ? OR province_id IN (?)", "%#{params[:keyword].downcase}%", province_ids)
+  class << self
+    def filter(params)
+      scope = all
+      scope = by_keyword(params[:keyword], scope) if params[:keyword].present?
+      scope = scope.where(program_id: params[:program_id]) if params[:program_id].present?
+      scope
     end
-    scope = scope.where(program_id: params[:program_id]) if params[:program_id].present?
-    scope
+
+    private
+      def by_keyword(keyword, scope)
+        return scope unless keyword.present?
+
+        province_ids = Pumi::Province.all.select { |p| p.name_km.downcase.include?(keyword.downcase) || p.name_en.downcase.include?(keyword.downcase) }.map(&:id)
+
+        scope.where("LOWER(name) LIKE ? OR LOWER(target_provinces) LIKE ? OR province_id IN (?)", "%#{keyword.downcase}%", "%#{keyword.downcase}%", province_ids)
+      end
   end
+
+  private
+    def set_target_provinces
+      self.target_provinces = Pumi::Province.all.select { |p| target_province_ids.split(",").include?(p.id) }.sort_by{|x| x.id}.map(&:name_km).join(", ")
+    end
 end
