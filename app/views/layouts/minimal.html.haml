@@ -16,7 +16,11 @@
 
   %body.devise-form
     = render "shared/notify_message"
+
     .column
       .wrapper.medium-width
-        = yield
+        = render 'devise/shared/logo'
+
+        .d-flex.flex-column.align-items-center.justify-content-center
+          = yield
 
