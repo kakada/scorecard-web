@@ -9,7 +9,6 @@ class MobileNotificationPolicy < ApplicationPolicy
     index?
   end
 
-
   class Scope < Scope
     def resolve
       return scope.all if user.system_admin?

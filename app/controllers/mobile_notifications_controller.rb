@@ -6,11 +6,11 @@ class MobileNotificationsController < ApplicationController
   end
 
   def new
-    @notification = MobileNotification.new
+    @notification = authorize MobileNotification.new
   end
 
   def create
-    @notification = MobileNotification.new(notification_params)
+    @notification = authorize MobileNotification.new(notification_params)
 
     if @notification.save
       redirect_to mobile_notifications_url
