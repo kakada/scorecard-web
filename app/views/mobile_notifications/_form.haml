@@ -1,0 +1,45 @@
+.d-flex.mobile-notifications-form
+  .flex-1.mr-4
+    = simple_form_for @notification do |f|
+      .form-group
+        %label
+          = t('mobile_notification.notification_title')
+          = "(#{t('mobile_notification.max_title')})"
+
+        = f.input :title, label: false, input_html: { maxlength: 64}
+
+        .text-right.small{style: 'margin-top: -12px'}
+          %span.title-count 0
+          %span /
+          %span 64
+
+      .form-group
+        %label
+          = t('mobile_notification.notification_text')
+          = "(#{t('mobile_notification.max_body')})"
+          %abbr.text-danger{title: 'required'} *
+
+        = f.input :body, label: false, input_html: { maxlength: 255}
+
+        .text-right.small{style: 'margin-top: -12px'}
+          %span.body-count 0
+          %span /
+          %span 255
+
+      .actions.text-right
+        = link_to t('shared.cancel'), mobile_notifications_url, class: 'btn btn-secondary'
+        = f.submit t('mobile_notification.push_notification'), class: 'btn btn-primary'
+
+  %div
+    .preview-background
+      .card-box
+        .d-flex.align-items-center
+          .mr-2
+            = image_tag 'csc_logo.png', size: '18x18', class: 'rounded'
+          .flex-1.small ប័ណ្ណដាក់ពិន្ទុ
+          %span.toggle-trigger.pointer
+            %i.fas.fa-chevron-down{style: 'font-size: 12px'}
+
+        .text-wrapper.mt-2
+          .title.text-truncate
+          .text-body.text-truncate

@@ -42,6 +42,7 @@
 //= require messages/index
 //= require messages/new
 //= require programs/new
+//= require mobile_notifications
 
 document.addEventListener('turbolinks:load', function() {
   CW.Common.Topbar.init();

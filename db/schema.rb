@@ -166,6 +166,24 @@ ActiveRecord::Schema.define(version: 2021_07_20_083304) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "mobile_notifications", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "success_count"
+    t.integer "failure_count"
+    t.integer "creator_id"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "mobile_tokens", force: :cascade do |t|
+    t.string "token"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.string "provider"
     t.text "emails", default: [], array: true

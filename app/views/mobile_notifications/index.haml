@@ -1,0 +1,38 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t("mobile_notification.notification")
+  - if @notifications.present?
+    = link_to new_mobile_notification_path, class: "btn btn-primary btn-sm shadow-sm" do
+      %i.fas.fa-plus.fa-sm.text-white-50
+      = t('shared.add_new')
+
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @notifications, url: new_mobile_notification_path, label: t('shared.add_new') }
+
+    - if @notifications.present?
+      = render "shared/pagination_title", objects: @notifications
+
+      %table.table.table-hover
+        %thead
+          %tr
+            %th #
+            %th= t('mobile_notification.notification_title')
+            %th= t('mobile_notification.notification_text')
+            %th= t('shared.created_at')
+            %th
+        %tbody
+          - @notifications.each_with_index do |notification, index|
+            %tr
+              %td= @pagy.from + index
+              %td= notification.title
+              %td= notification.body
+              %td= timeago(notification.created_at).html_safe
+              %td
+                - if notification.success_count.present?
+                  %span.badge.badge-success Delivered
+                - else
+                  %span.badge.badge-info Sent
+
+    - if @pagy.pages > 1
+      .pagy-wrapper
+        != pagy_bootstrap_nav(@pagy)

@@ -1,0 +1,10 @@
+en:
+  mobile_notification:
+    notification: Mobile Notifications
+    edit_notification: Edit Notification
+    new_notification: New Notification
+    notification_title: Notification title
+    notification_text: Notification text
+    max_title: max 64 characters
+    max_body: max 255 characters
+    push_notification: Push Notification

@@ -1,0 +1,10 @@
+km:
+  mobile_notification:
+    notification: សេចក្ដីជូនដំណឹងតាមទូរស័ព្ទ
+    edit_notification: កែតម្រូវសេចក្ដីជូនដំណឹង
+    new_notification: បង្កើតសេចក្ដីជូនដំណឹង
+    notification_title: ចំណងជើងជូនដំណឹង
+    notification_text: អត្ថបទជូនដំណឹង
+    max_title: អតិបរមា 64 តួ
+    max_body: អតិបរមា 255 តួ
+    push_notification: បញ្ជូនការជូនដំណឹង

@@ -50,6 +50,7 @@ class User < ApplicationRecord
   # Association
   belongs_to :program, optional: true
   belongs_to :local_ngo, optional: true
+  has_many   :mobile_notifications, foreign_key: :creator_id
 
   # Validation
   validates :role, presence: true
