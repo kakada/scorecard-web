@@ -83,6 +83,8 @@ class User < ApplicationRecord
 
   # Instant methods
   def regenerate_authentication_token!
+    return if token_expired_date > Time.zone.now
+
     generate_authentication_token
     self.save
   end
