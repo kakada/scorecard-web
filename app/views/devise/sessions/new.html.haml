@@ -1,7 +1,5 @@
-= render 'devise/shared/logo'
-
 .form-wrapper#login_form
-  %h2.font-weight-normal.text-center.my-5
+  %h2.font-weight-normal.text-center.my-4
     ចូលប្រើ / Sign in
   = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-outline-primary w-100' do
     = image_tag 'google.png', style: 'width: 18px;'
@@ -32,7 +30,7 @@
     .actions.form-group
       = f.submit t("devise.sign_in"), class: 'btn btn-primary w-100 mb-2'
 
-  .text-right.mb-4
+  .text-right.mb-3
     .form-group
       = render "devise/shared/links"
     .form-group
