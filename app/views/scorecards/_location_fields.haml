@@ -5,4 +5,4 @@
 = render partial: "select_field", locals: { f: f, field_name: "commune_id", select_id: "commune", select_target: "primary_school", select_collection_url: pumi.communes_path(:district_id => "FILTER"), select_disabled_target: "#commune", select_allow_none: true }
 
 .dataset.d-none
-  = render partial: "select_field", locals: { f: f, field_name: "primary_school_code", select_id: "primary_school", select_target: "none", select_collection_url: primary_schools_path(:commune_id => "FILTER"), select_disabled_target: "#primary_school"}
+  = render partial: "select_field", locals: { f: f, field_name: "primary_school_code", select_id: "primary_school", select_target: "none", select_collection_url: api_v1_primary_schools_path(:commune_id => "FILTER"), select_disabled_target: "#primary_school"}

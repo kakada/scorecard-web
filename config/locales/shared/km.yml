@@ -35,3 +35,11 @@ km:
     view_detail: មើលលម្អិត
     created_at: កាលបរិច្ឆេទបង្កើត
     updated_at: កាលបរិច្ឆេទធ្វើបច្ចុប្បន្នភាព
+    province: ខេត្ត
+    district: ស្រុក
+    commune: ឃុំ
+    village: ភូមិ
+    any_province: គ្រប់ខេត្ត
+    any_district: គ្រប់ស្រុក
+    any_commune: គ្រប់ឃុំ
+    any_village: គ្រប់ភូមិ
