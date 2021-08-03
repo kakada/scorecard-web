@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTargetProvincesToLocalNgos < ActiveRecord::Migration[6.0]
   def up
     add_column :local_ngos, :target_provinces, :string

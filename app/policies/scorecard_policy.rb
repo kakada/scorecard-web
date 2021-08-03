@@ -16,8 +16,12 @@ class ScorecardPolicy < ApplicationPolicy
     (user.program_id == record.program_id) && (create? || user.local_ngo_id == record.local_ngo_id)
   end
 
+  def submit?
+    download? && !record.access_locked?
+  end
+
   def create?
-    user.program_admin? || user.staff? || user.lngo?
+    user.program_admin? || user.staff?
   end
 
   def update?

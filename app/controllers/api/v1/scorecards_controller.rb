@@ -12,7 +12,7 @@ module Api
       end
 
       def update
-        authorize @scorecard
+        authorize @scorecard, :submit?
 
         if @scorecard.update(scorecard_params)
           @scorecard.lock_access!
