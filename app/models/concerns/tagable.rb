@@ -4,7 +4,7 @@ module Tagable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :tag
+    belongs_to :tag, optional: true
 
     delegate :name, to: :tag, prefix: :tag, allow_nil: true
 
@@ -13,7 +13,7 @@ module Tagable
     }
 
     def tag_attributes=(attribute)
-      self.tag = Tag.find_or_create_by(name: attribute[:name].downcase)
+      self.tag = Tag.find_or_create_by(name: attribute[:name].downcase) if attribute[:name].present?
     end
   end
 end

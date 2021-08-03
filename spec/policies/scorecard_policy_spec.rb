@@ -123,4 +123,64 @@ RSpec.describe ScorecardPolicy do
       end
     end
   end
+
+  permissions :submit? do
+    context "scorecard is under different program_id" do
+      let(:scorecard) { create(:scorecard) }
+      let(:user) { User.new(role: :program_admin) }
+
+      it "denies access" do
+        expect(subject).not_to permit(user, scorecard)
+      end
+    end
+
+    context "scorecard is under different local ngo" do
+      let(:scorecard) { create(:scorecard) }
+      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+
+      it "denies access" do
+        expect(subject).not_to permit(user, scorecard)
+      end
+    end
+
+    context "scorecard is locked" do
+      let(:scorecard) { create(:scorecard) }
+      let(:user) { User.new(role: :staff, program_id: scorecard.program_id) }
+
+      before {
+        scorecard.lock_access!
+      }
+
+      it "denies access" do
+        expect(subject).not_to permit(user, scorecard)
+      end
+    end
+
+    context "scorecard is under the same local ngo" do
+      let(:scorecard) { create(:scorecard, local_ngo_id: lngo.id) }
+      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+
+      it "accept access" do
+        expect(subject).to permit(user, scorecard)
+      end
+    end
+
+    context "user is staff" do
+      let(:scorecard) { create(:scorecard) }
+      let(:user) { User.new(role: :staff, program_id: scorecard.program_id) }
+
+      it "accept access" do
+        expect(subject).to permit(user, scorecard)
+      end
+    end
+
+    context "user is program_admin" do
+      let(:scorecard) { create(:scorecard) }
+      let(:user) { User.new(role: :program_admin, program_id: scorecard.program_id) }
+
+      it "accept access" do
+        expect(subject).to permit(user, scorecard)
+      end
+    end
+  end
 end

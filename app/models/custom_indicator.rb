@@ -21,5 +21,7 @@ class CustomIndicator < ApplicationRecord
 
   belongs_to :scorecard, foreign_key: :scorecard_uuid
 
+  validates :name, presence: true
+
   before_create :secure_uuid
 end

@@ -15,5 +15,7 @@
 #
 FactoryBot.define do
   factory :custom_indicator do
+    name { FFaker::Name.name }
+    scorecard
   end
 end

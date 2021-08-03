@@ -40,5 +40,17 @@ RSpec.describe "Api::V1::CustomIndicatorsController", type: :request do
         expect(JSON.parse(response.body)["errors"][0]["code"]).to eq(404)
       end
     end
+
+    context "params tag no name" do
+      let(:params_no_tag) { { name: "Staff behaviour", tag_attributes: { name: "" }, audio: "" } }
+
+      before {
+        post "/api/v1/scorecards/#{scorecard.uuid}/custom_indicators", params: { custom_indicator: params_no_tag.to_json }, headers: headers
+      }
+
+      it { expect(response.content_type).to eq("application/json; charset=utf-8") }
+      it { expect(response).to have_http_status(:created) }
+      it { expect(scorecard.custom_indicators.length).to eq(1) }
+    end
   end
 end
