@@ -1,45 +1,53 @@
 CW.ScorecardsIndex = (() => {
   function init() {
-    CW.DatepickerPopup.init()
+    CW.DatepickerPopup.init();
     CW.ScorecardsShow.onClickBtnCopy();
 
     handleDisplayCollapseContent();
     onShowCollapse();
     onHideCollapse();
+    onAddFilter();
+  }
+
+  function onAddFilter() {
+    $("#add-filter__link").click(function (e) {
+      e.preventDefault();
+      $("#add-filter__modal").toggle();
+    });
   }
 
   function handleDisplayCollapseContent() {
-    if (window.localStorage.getItem('show_collapse') == "true") {
-      $('.collapse').addClass('show');
+    if (window.localStorage.getItem("show_collapse") == "true") {
+      $(".collapse").addClass("show");
       hideArrowDown();
     }
   }
 
   function onShowCollapse() {
-    $('.collapse').on('show.bs.collapse', function () {
-      window.localStorage.setItem('show_collapse', true);
+    $(".collapse").on("show.bs.collapse", function () {
+      window.localStorage.setItem("show_collapse", true);
       hideArrowDown();
-    })
+    });
   }
 
   function onHideCollapse() {
-    $('.collapse').on('hide.bs.collapse', function () {
-      window.localStorage.setItem('show_collapse', false);
+    $(".collapse").on("hide.bs.collapse", function () {
+      window.localStorage.setItem("show_collapse", false);
       showArrowDown();
-    })
+    });
   }
 
   function showArrowDown() {
-    $('.advance-search i').removeClass('fa-angle-up');
-    $('.advance-search i').addClass('fa-angle-down');
+    $(".advance-search i").removeClass("fa-angle-up");
+    $(".advance-search i").addClass("fa-angle-down");
   }
 
   function hideArrowDown() {
-    $('.advance-search i').removeClass('fa-angle-down');
-    $('.advance-search i').addClass('fa-angle-up');
+    $(".advance-search i").removeClass("fa-angle-down");
+    $(".advance-search i").addClass("fa-angle-up");
   }
 
   return {
-    init
-  }
+    init,
+  };
 })();

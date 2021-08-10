@@ -15,6 +15,34 @@
         = t('scorecard.advance_search')
         %i.fas.fa-angle-down
 
+  #add-filter{ style: "position: relative;" }
+    = link_to "+ Add filter", "#", id: "add-filter__link"
+    #add-filter__modal{ style: "display: none; position: absolute; z-index: 1; min-width: 768px;" }
+      .card
+        %h5.card-header Edit filter
+        .card-body
+          
+          .d-flex
+            .form-group.w-75.mr-3
+              %label{ for: "field" } Field
+              %select.form-control
+                %option 1
+
+            .form-group.flex-grow-1
+              %label{ for: "field" } Operator
+              %select.form-control
+                %option 1
+          
+          .form-group
+            %label{ for: "field" } Value
+            %select.form-control
+              %option 1
+
+
+          .d-flex.justify-content-end
+            %a.btn.btn-outline-secondary.mr-3{:href => "#"} cancel
+            %a.btn.btn-primary{:href => "#"} save
+
   #collapseExample.collapse
     .d-flex.mb-2
       = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_province")
