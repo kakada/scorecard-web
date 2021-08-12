@@ -9,6 +9,19 @@ CW.ScorecardsIndex = (() => {
     onAddFilter();
     onSaveFilter();
     onCancelFilter();
+    onFilterChange();
+  }
+
+  function onFilterChange() {
+    $("#add-filter__field").change(function () {
+      let field = $(this).val();
+      $(
+        "#add-filter__modal .form-group:not(#add-filter__field)[data-field_attribute]"
+      ).hide();
+      $(
+        `#add-filter__modal .form-group:not(#add-filter__field)[data-field_attribute="${field}"`
+      ).show();
+    });
   }
 
   function onCancelFilter() {

@@ -26,18 +26,30 @@
           .d-flex
             .form-group.w-75.mr-3
               %label{ for: "field" } Field
-              %select.form-control
-                %option 1
+              %select.form-control#add-filter__field
+                %option{ value: '' } please select
+                %option{ value: 'code' } Code
+                %option{ value: 'conducted_at' } Conducted Date
+                %option{ value: 'province_id' } Province
 
-            .form-group.flex-grow-1
+            .form-group.flex-grow-1{ style: "display: none", "data-field_attribute": "code" }
               %label{ for: "field" } Operator
               %select.form-control
-                %option 1
+                %option is
           
-          .form-group
+          .form-group{ style: "display: none", "data-field_attribute": "code" }
             %label{ for: "field" } Value
             %select.form-control
               %option 1
+
+          .form-group{ style: "display: none", "data-field_attribute": "conducted_at" }
+            %label{ for: "field" } Value
+            %input.form-control{ type: "date" }
+          
+          .form-group{ style: "display: none", "data-field_attribute": "province_id" }
+            %label{ for: "field" } Value
+            %select.form-control
+              %option Battambang
 
 
           .d-flex.justify-content-end
