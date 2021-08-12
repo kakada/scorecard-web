@@ -7,6 +7,27 @@ CW.ScorecardsIndex = (() => {
     onShowCollapse();
     onHideCollapse();
     onAddFilter();
+    onSaveFilter();
+    onCancelFilter();
+  }
+
+  function onCancelFilter() {
+    $(".add-filter__cancel").click(function (e) {
+      e.preventDefault();
+      $("#add-filter__modal").hide();
+    });
+  }
+
+  function onSaveFilter() {
+    $(".add-filter__save").click(function (e) {
+      e.preventDefault();
+      let $container = $(".add-filter__saved_items_container");
+      let $item = $("<div></div>");
+      $item.text("hello world");
+      $item.addClass("d-inline-block p-1 mr-3");
+      $item.css({ border: "1px solid #ccc" });
+      $container.append($item);
+    });
   }
 
   function onAddFilter() {

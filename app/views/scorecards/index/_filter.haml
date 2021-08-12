@@ -16,6 +16,7 @@
         %i.fas.fa-angle-down
 
   #add-filter{ style: "position: relative;" }
+    .add-filter__saved_items_container.d-inline-block.mb-3
     = link_to "+ Add filter", "#", id: "add-filter__link"
     #add-filter__modal{ style: "display: none; position: absolute; z-index: 1; min-width: 768px;" }
       .card
@@ -40,8 +41,8 @@
 
 
           .d-flex.justify-content-end
-            %a.btn.btn-outline-secondary.mr-3{:href => "#"} cancel
-            %a.btn.btn-primary{:href => "#"} save
+            %a.btn.btn-outline-secondary.add-filter__cancel.mr-3{:href => "#"} cancel
+            %a.btn.btn-primary.add-filter__save{:href => "#"} save
 
   #collapseExample.collapse
     .d-flex.mb-2

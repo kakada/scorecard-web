@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_083144) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "datetime_format", default: "DD-MM-YYYY"
+    t.string "datetime_format", default: "YYYY-MM-DD"
     t.boolean "enable_email_notification", default: false
     t.string "shortcut_name"
   end
@@ -297,6 +297,13 @@ ActiveRecord::Schema.define(version: 2021_08_20_083144) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "scorecard_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "scorecards", force: :cascade do |t|
     t.string "uuid"
     t.integer "unit_type_id"
@@ -335,6 +342,13 @@ ActiveRecord::Schema.define(version: 2021_08_20_083144) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
+  end
+
+  create_table "scorecards_cafs", force: :cascade do |t|
+    t.integer "caf_id"
+    t.integer "scorecard_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "suggested_actions", force: :cascade do |t|
