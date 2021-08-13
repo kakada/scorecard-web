@@ -18,9 +18,7 @@ CW.ScorecardsIndex = (() => {
       $(
         "#add-filter__modal .form-group:not(#add-filter__field)[data-field_attribute]"
       ).hide();
-      $(
-        `#add-filter__modal .form-group:not(#add-filter__field)[data-field_attribute="${field}"`
-      ).show();
+      $(`[data-field_attribute="${field}"`).show();
     });
   }
 
@@ -37,8 +35,8 @@ CW.ScorecardsIndex = (() => {
       let $container = $(".add-filter__saved_items_container");
       let $item = $("<div></div>");
       let field = $("#add-filter__field").val();
-      // let value =
-      $item.text(`${field}:xxx`);
+      let value = $(`[data-field_attribute="${field}"] .field-value`).val();
+      $item.text(`${field}:${value}`);
       $item.addClass("d-inline-block p-1 mr-3");
       $item.css({ border: "1px solid #ccc" });
       $container.append($item);
