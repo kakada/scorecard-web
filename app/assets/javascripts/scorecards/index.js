@@ -36,11 +36,20 @@ CW.ScorecardsIndex = (() => {
       e.preventDefault();
       let $container = $(".add-filter__saved_items_container");
       let $item = $("<div></div>");
-      $item.text("hello world");
+      let field = $("#add-filter__field").val();
+      // let value =
+      $item.text(`${field}:xxx`);
       $item.addClass("d-inline-block p-1 mr-3");
       $item.css({ border: "1px solid #ccc" });
       $container.append($item);
+      resetFilter();
     });
+  }
+
+  function resetFilter() {
+    $("#add-filter__field").val("");
+    $("#add-filter__field").trigger("change");
+    $("#add-filter__modal").hide();
   }
 
   function onAddFilter() {
