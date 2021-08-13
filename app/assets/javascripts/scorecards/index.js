@@ -10,6 +10,7 @@ CW.ScorecardsIndex = (() => {
     onSaveFilter();
     onCancelFilter();
     onFilterChange();
+    onDeleteFilterItem();
   }
 
   function onFilterChange() {
@@ -33,14 +34,23 @@ CW.ScorecardsIndex = (() => {
     $(".add-filter__save").click(function (e) {
       e.preventDefault();
       let $container = $(".add-filter__saved_items_container");
-      let $item = $("<div></div>");
+      let $item = $('<div class="add-filter__item"></div>');
       let field = $("#add-filter__field").val();
       let value = $(`[data-field_attribute="${field}"] .field-value`).val();
-      $item.text(`${field}:${value}`);
+      let deleteButton = '<a href="#" class="add-filter__delete_item">x</span>';
+
+      $item.html(`${field}:${value} ${deleteButton}`);
       $item.addClass("d-inline-block p-1 mr-3");
       $item.css({ border: "1px solid #ccc" });
       $container.append($item);
       resetFilter();
+    });
+  }
+
+  function onDeleteFilterItem() {
+    $(document).on("click", ".add-filter__delete_item", function (e) {
+      e.preventDefault();
+      $(this).closest(".add-filter__item").remove();
     });
   }
 
