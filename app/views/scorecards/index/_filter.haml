@@ -2,21 +2,15 @@
   = hidden_field_tag :filter, params[:filter]
 
   .d-flex.my-2
-    = text_field_tag(:uuid, params[:uuid], class: 'form-control filter-input', placeholder: t('scorecard.code'), id: 'scorecard_code')
-
-    = render 'scorecards/index/filter_date'
-
-    %div.mr-2
-      %button.btn.btn-light{type: :submit}
-        %i.fas.fa-search
-        = t('shared.search')
-    %div
-      %a.btn.advance-search{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample", :role => "button"}
-        = t('scorecard.advance_search')
-        %i.fas.fa-angle-down
+    -# %div.mr-2
+    -# %div.d-none
+    -#   %a.btn.advance-search{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample", :role => "button"}
+    -#     = t('scorecard.advance_search')
+    -#     %i.fas.fa-angle-down
 
   #add-filter{ style: "position: relative;" }
     .add-filter__saved_items_container.d-inline-block.mb-3
+      -# build search stimulus?
     = link_to "+ Add filter", "#", id: "add-filter__link"
     #add-filter__modal{ style: "display: none; position: absolute; z-index: 1; min-width: 768px;" }
       .card
@@ -28,40 +22,42 @@
               %label{ for: "field" } Field
               %select.form-control#add-filter__field
                 %option{ value: '' } please select
-                %option{ value: 'code' } Code
-                %option{ value: 'conducted_at' } Conducted Date
+                %option{ value: 'uuid' } uuid
+                %option{ value: 'start_date' } Conducted Date
                 %option{ value: 'province_id' } Province
 
-            .form-group.flex-grow-1{ style: "display: none", "data-field_attribute": "code" }
+            .form-group.flex-grow-1{ style: "display: none", "data-field_attribute": "uuid" }
               %label{ for: "field" } Operator
               %select.form-control
                 %option is
           
-          .form-group{ style: "display: none", "data-field_attribute": "code" }
+          .form-group{ style: "display: none", "data-field_attribute": "uuid" }
             %label{ for: "field" } Value
-            %input.field-value.form-control{ type: "text" }
+            = text_field_tag(nil, params[:uuid], class: 'form-control field-value', placeholder: t('scorecard.code'), id: 'scorecard_code')
 
-          .form-group{ style: "display: none", "data-field_attribute": "conducted_at" }
+          .form-group{ style: "display: none", "data-field_attribute": "start_date" }
             %label{ for: "field" } Value
             %input.field-value.form-control{ type: "date" }
           
           .form-group{ style: "display: none", "data-field_attribute": "province_id" }
             %label{ for: "field" } Value
-            %select.field-value.form-control
-              %option Battambang
-
+            = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select field-value', prompt: t("scorecard.any_province")
 
           .d-flex.justify-content-end
             %a.btn.btn-outline-secondary.add-filter__cancel.mr-3{:href => "#"} cancel
             %a.btn.btn-primary.add-filter__save{:href => "#"} save
 
-  #collapseExample.collapse
-    .d-flex.mb-2
-      = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_province")
+    %button.btn.btn-light.m-3{type: :submit}
+      %i.fas.fa-search
+      = t('shared.search')
 
-      - if current_program.present?
-        = select_tag :year, options_for_select(current_program.scorecards.pluck(:year).uniq, params[:year]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_year")
+  -# #collapseExample.collapse
+  -#   .d-flex.mb-2
+  -#     = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_province")
 
-        = select_tag :facility_id, options_for_select(current_program.facilities.leaves.pluck("name_#{I18n.locale}", :id), params[:facility_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_facility")
+  -#     - if current_program.present?
+  -#       = select_tag :year, options_for_select(current_program.scorecards.pluck(:year).uniq, params[:year]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_year")
 
-        = select_tag :local_ngo_id, options_for_select(current_program.local_ngos.pluck(:name, :id), params[:local_ngo_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_local_ngo")
+  -#       = select_tag :facility_id, options_for_select(current_program.facilities.leaves.pluck("name_#{I18n.locale}", :id), params[:facility_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_facility")
+
+  -#       = select_tag :local_ngo_id, options_for_select(current_program.local_ngos.pluck(:name, :id), params[:local_ngo_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_local_ngo")
