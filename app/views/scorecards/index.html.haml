@@ -60,7 +60,7 @@
                     = timeago(scorecard.conducted_date).html_safe
                   - else
                     = "_"
-                %td.text-right{style: 'min-width: 90px'}
+                %td.text-right.action-buttons
 
                   - if scorecard.access_locked?
                     %span{data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.completed')}}

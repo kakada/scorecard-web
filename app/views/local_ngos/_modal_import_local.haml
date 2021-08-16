@@ -13,6 +13,10 @@
             .form-control.file-control-wrapper
               = f.file_field :file, accept: ".xls,.xlsx"
 
+          %a.btn.btn-link.pl-0{ href: '/local_ngo_and_caf.xlsx', target: "_blank" }
+            %i.fas.fa-cloud-download-alt.fa-sm
+            = t("shared.download_sample_form")
+
         .modal-footer
           %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
           %button.btn.btn-primary{:type => "submit"}= t('shared.done')
