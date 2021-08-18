@@ -46,7 +46,7 @@
                   = render 'scorecard_copy', scorecard: scorecard
                 %td= scorecard.year
                 %td= scorecard.facility.name
-                %td= scorecard.local_ngo.name
+                %td= scorecard.local_ngo_name
                 %td= scorecard_location(scorecard)
                 %th= status_html(scorecard).html_safe
                 %td= timeago(scorecard.created_at).html_safe

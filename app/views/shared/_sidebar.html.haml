@@ -14,10 +14,11 @@
   / Wrapper scroll
   .sidebar-list-wrapper
     / Nav Item - Dashboard
-    / %li.nav-item{ class: css_nested_active_class('dashboard') }
-    /   %a.nav-link{:href => root_path}
-    /     %i.fas.fa-fw.fa-tachometer-alt
-    /     %span= t("sidebar.dashboard")
+    - if current_user.program_admin? || current_user.system_admin?
+      %li.nav-item
+        %a.nav-link{:href => ENV['DASHBOARD_URL'], target: '_blank'}
+          %i.fas.fa-fw.fa-tachometer-alt
+          %span= t("sidebar.dashboard")
 
     - if policy(Program).create?
       %li.nav-item{ class: css_active_class('programs') }

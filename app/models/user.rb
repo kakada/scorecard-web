@@ -52,6 +52,16 @@ class User < ApplicationRecord
   belongs_to :local_ngo, optional: true
   has_many   :mobile_notifications, foreign_key: :creator_id
 
+  has_many :access_grants,
+           class_name: 'Doorkeeper::AccessGrant',
+           foreign_key: :resource_owner_id,
+           dependent: :delete_all # or :destroy if you need callbacks
+
+  has_many :access_tokens,
+           class_name: 'Doorkeeper::AccessToken',
+           foreign_key: :resource_owner_id,
+           dependent: :delete_all # or :destroy if you need callbacks
+
   # Validation
   validates :role, presence: true
   validates :program_id, presence: true, unless: -> { system_admin? }
