@@ -24,6 +24,8 @@ class Caf < ApplicationRecord
   validates :name, presence: true
   validates :sex, inclusion: { in: GENDERS }, allow_blank: true
 
+  scope :actives, -> { where(actived: true) }
+
   def self.filter(params)
     scope = all
     scope = scope.where("LOWER(name) LIKE ? OR tel LIKE ?", "%#{params[:keyword].downcase}%", "%#{params[:keyword].downcase}%") if params[:keyword].present?

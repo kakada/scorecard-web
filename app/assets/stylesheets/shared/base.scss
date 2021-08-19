@@ -114,3 +114,8 @@ body {
 .action-buttons {
   min-width: 90px;
 }
+
+.disabled-bg {
+  background-color: rgba(0,0,0,0.1);
+  opacity: .65;
+}
