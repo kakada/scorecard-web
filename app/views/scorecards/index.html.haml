@@ -1,12 +1,12 @@
-- if policy(Scorecard).create?
-  .d-sm-flex.align-items-center.justify-content-between.mb-4
-    %h1.h3.mb-0.text-gray-800= t("scorecard.scorecards")
-    %div
-      - setting_url = current_user.staff? ? facilities_path : languages_path
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t("scorecard.scorecards")
+  %div
+    - if policy(Scorecard).setting?
       %a.btn.btn-secondary.btn-sm.shadow-sm{ href: setting_url }
         %i.fas.fa-wrench.fa-sm.text-white-50
         = t("sidebar.settings")
 
+    - if policy(Scorecard).create?
       %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_scorecard_path }
         %i.fas.fa-plus.fa-sm.text-white-50
         = t("scorecard.add_new")

@@ -6,11 +6,12 @@
       .flex-grow-1
         = render 'filter'
 
-      %div
-        = render "more_option"
-        %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
-          %i.fas.fa-plus.fa-sm.text-white-50
-          = t("local_ngo.add_new")
+      - if policy(LocalNgo).create?
+        %div
+          = render "more_option"
+          %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
+            %i.fas.fa-plus.fa-sm.text-white-50
+            = t("local_ngo.add_new")
 
     = render partial: "shared/no_data", locals: { items: @local_ngos, url: new_local_ngo_path, label: t("local_ngo.add_new") }
 
@@ -37,7 +38,7 @@
               %td= local_ngo.target_provinces
               %td= timeago(local_ngo.created_at).html_safe
               %td.text-right
-                - if policy(local_ngo).update?
+                - if policy(local_ngo).manage_caf?
                   = link_to local_ngo_cafs_path(local_ngo), class: "btn btn-circle btn-sm btn-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('local_ngo.manage_caf') } do
                     %i.fas.fa-pencil-ruler
 

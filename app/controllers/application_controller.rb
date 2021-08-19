@@ -33,4 +33,8 @@ class ApplicationController < ActionController::Base
     def set_locale
       I18n.locale = current_user.try(:language_code) || I18n.default_locale
     end
+
+    def sort_param
+      sort_column + " " + sort_direction
+    end
 end

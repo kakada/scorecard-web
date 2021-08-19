@@ -2,11 +2,11 @@
 
 class CafPolicy < ApplicationPolicy
   def index?
-    user.program_admin? || user.staff?
+    user.program_admin? || user.staff? || user.lngo?
   end
 
   def create?
-    user.program_admin? || user.staff?
+    user.program_admin? || user.staff? || user.lngo?
   end
 
   def update?

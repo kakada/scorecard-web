@@ -32,6 +32,10 @@ class ScorecardPolicy < ApplicationPolicy
     update?
   end
 
+  def setting?
+    user.program_admin? || user.staff? || user.lngo?
+  end
+
   class Scope < Scope
     def resolve
       return scope.all if user.system_admin?

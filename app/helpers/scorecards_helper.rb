@@ -60,4 +60,10 @@ module ScorecardsHelper
 
     "<span><i class='fas fa-calendar-alt mr-1'></i>#{date_format(date)}</span>"
   end
+
+  def setting_url
+    return local_ngos_path if current_user.lngo?
+
+    current_user.staff? ? facilities_path : languages_path
+  end
 end

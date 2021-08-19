@@ -24,7 +24,7 @@
         %i.fas.fa-fw.fa-bookmark
         %span= t("sidebar.indicator_template")
 
-  - if policy(LocalNgo).create?
+  - if policy(LocalNgo).index?
     %li.nav-item{ class: css_nested_active_class('local_ngos') }
       %a.nav-link{:href => local_ngos_path}
         %i.fas.fa-fw.fa-users

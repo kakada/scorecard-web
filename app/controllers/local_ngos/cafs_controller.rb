@@ -45,7 +45,7 @@ module LocalNgos
 
     private
       def set_local_ngo
-        @local_ngo = ::LocalNgo.find(params[:local_ngo_id])
+        @local_ngo = authorize ::LocalNgo.find(params[:local_ngo_id]), :manage_caf?
       end
 
       def caf_params
