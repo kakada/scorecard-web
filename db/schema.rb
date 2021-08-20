@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_20_032713) do
+ActiveRecord::Schema.define(version: 2021_08_20_083144) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "cafs", force: :cascade do |t|
@@ -25,6 +26,8 @@ ActiveRecord::Schema.define(version: 2021_08_20_032713) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "actived", default: true
+    t.string "educational_background_id"
+    t.string "scorecard_knowledge_id"
   end
 
   create_table "chat_groups", force: :cascade do |t|
@@ -62,6 +65,13 @@ ActiveRecord::Schema.define(version: 2021_08_20_032713) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tag_id"
     t.string "uuid"
+  end
+
+  create_table "educational_backgrounds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "facilitators", force: :cascade do |t|
@@ -261,6 +271,13 @@ ActiveRecord::Schema.define(version: 2021_08_20_032713) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "voting_indicator_uuid"
     t.string "participant_uuid"
+  end
+
+  create_table "scorecard_knowledges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "scorecard_progresses", force: :cascade do |t|
