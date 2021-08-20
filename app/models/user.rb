@@ -95,9 +95,14 @@ class User < ApplicationRecord
 
   def status
     return "locked" if access_locked?
-    return "actived" if confirmed?
+    return "actived" if confirmed? && actived?
+    return "deactivated" unless actived?
 
     "pending"
+  end
+
+  def active_for_authentication?
+    super and self.actived?
   end
 
   private

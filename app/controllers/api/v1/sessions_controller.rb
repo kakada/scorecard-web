@@ -9,7 +9,7 @@ module Api
         user = User.find_by(email: user_params[:email])
 
         if user&.valid_password?(user_params[:password])
-          if user.confirmed?
+          if user.confirmed? && user.actived?
             user.regenerate_authentication_token!
 
             render json: user, status: :ok
