@@ -2,11 +2,11 @@
 
 class UserPolicy < ApplicationPolicy
   def index?
-    user.system_admin? || user.program_admin?
+    user.system_admin? || user.program_admin? || user.staff?
   end
 
   def create?
-    user.system_admin? || user.program_admin?
+    user.system_admin? || user.program_admin? || user.staff?
   end
 
   def update?
@@ -15,7 +15,7 @@ class UserPolicy < ApplicationPolicy
 
   def destroy?
     return false if record.id == user.id
-    return true if user.system_admin? || (user.program_admin? && !record.system_admin?)
+    return true if user.system_admin? || (user.program_admin? && !record.system_admin?) || (user.staff? && record.lngo?)
     false
   end
 
@@ -24,20 +24,18 @@ class UserPolicy < ApplicationPolicy
   end
 
   def roles
-    if user.system_admin?
-      User::ROLES
-    else
-      User::ROLES[1..-1]
-    end
+    return User::ROLES if user.system_admin?
+    return [["Lngo", "lngo"]] if user.staff?
+
+    User::ROLES[1..-1]
   end
 
   class Scope < Scope
     def resolve
-      if user.system_admin?
-        scope.all
-      else
-        scope.where(program_id: user.program_id)
-      end
+      return scope.all if user.system_admin?
+      return scope.where(role: :lngo).where(program_id: user.program_id) if user.staff?
+
+      scope.where(program_id: user.program_id)
     end
   end
 end
