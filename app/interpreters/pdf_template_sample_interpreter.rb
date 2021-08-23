@@ -1,16 +1,15 @@
 # frozen_string_literal: true
 
-class PdfTemplateInterpreter
+class PdfTemplateSampleInterpreter
   attr_reader :scorecard, :message, :pdf_template
 
-  def initialize(scorecard_uuid)
-    @scorecard = ::Scorecard.find_by uuid: scorecard_uuid
-    @pdf_template = @scorecard.program.pdf_templates.find_by(language_code: I18n.locale) || @scorecard.program.pdf_templates.first
+  def initialize(pdf_template_id)
+    @pdf_template = ::PdfTemplate.find_by id: pdf_template_id
     @message = @pdf_template.try(:content)
   end
 
   def interpreted_message
-    return "" if scorecard.nil? || message.blank?
+    return "" if pdf_template.nil? || message.blank?
 
     sms = message
     embeded_fields.each do |embeded_field|
@@ -24,7 +23,7 @@ class PdfTemplateInterpreter
       model = embeded_field.split(".")[0]
       field = embeded_field.split(".")[1]
 
-      "PdfTemplates::#{model.camelcase}Interpreter".constantize.new(scorecard).load(field)
+      "PdfTemplates::#{model.camelcase}SampleInterpreter".constantize.new.load(field)
       rescue
         Rails.logger.warn "Model #{model} and field #{field} is unknwon"
         ""

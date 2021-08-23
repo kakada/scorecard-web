@@ -23,6 +23,13 @@ class PdfTemplatesController < ApplicationController
     end
   end
 
+  def preview
+    @pdf_template = authorize PdfTemplate.find(params[:pdf_template_id]), :index?
+
+    render pdf: "pdf_template_#{@pdf_template.name}",
+           inline: PdfTemplateSampleInterpreter.new(@pdf_template.id).interpreted_message
+  end
+
   def update
     @pdf_template = authorize PdfTemplate.find(params[:id])
 

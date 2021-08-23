@@ -12,7 +12,15 @@
       .d-block.invalid-feedback
         = f.object.errors[:language_code].join(';')
 
-    = f.input :content, label: t('pdf_template.content')
+    .form-group
+      %label.d-flex
+        .flex-grow-1= t('pdf_template.content')
+
+        %a.btn{href: (pdf_template_preview_path(@pdf_template) unless @pdf_template.new_record?), target: '_blank'}
+          %span{"data-placement" => "top", "data-toggle" => "tooltip", :title => t('pdf_template.make_sure_you_save_it_before_preview')}
+            %i.fas{class: (@pdf_template.new_record? ? "fa-eye-slash" : "fa-eye") }
+
+      = f.input :content, label: false
 
     %div
       - Templates::PdfTemplateField.all.each do |field|

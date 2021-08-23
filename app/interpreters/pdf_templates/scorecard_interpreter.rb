@@ -19,5 +19,11 @@ module PdfTemplates
 
       I18n.l(@scorecard.conducted_date)
     end
+
+    def facilitators
+      html = @scorecard.cafs.map {|caf| "<li>#{caf.name}</li>"}.join("")
+
+      "<ol>#{html}</ol>"
+    end
   end
 end
