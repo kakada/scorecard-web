@@ -21,6 +21,19 @@
             = link_to "x", "#", class: "add-filter__delete_item"
             %input{ type: "hidden", name: "uuid[]", value: uuid }
 
+      - if params[:start_date].present?
+        .add-filter__item.d-inline-block.p-1.mr-3{ style: "border: 1px solid #ccc;" }
+          = "start_date: #{params[:start_date]}"
+          = link_to "x", "#", class: "add-filter__delete_item"
+          %input{ type: "hidden", name: "start_date", value: params[:start_date] }
+
+      - if @provinces.present?
+        - @provinces.each do |province|
+          .add-filter__item.d-inline-block.p-1.mr-3{ style: "border: 1px solid #ccc;" }
+            = "province: #{province.name_latin}"
+            = link_to "x", "#", class: "add-filter__delete_item"
+            %input{ type: "hidden", name: "province_id[]", value: province.id }
+
     = link_to "+ Add filter", "#", id: "add-filter__link"
     #add-filter__modal{ style: "display: none; position: absolute; z-index: 1; min-width: 768px;" }
       .card
@@ -51,7 +64,7 @@
           
           .form-group{ style: "display: none", "data-field_attribute": "province_id", "data-field_value": "field-value" }
             %label{ for: "field" } Value
-            = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select field-value', prompt: t("scorecard.any_province")
+            = select_tag :provinceid, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select field-value', prompt: t("scorecard.any_province")
 
           .d-flex.justify-content-end
             %a.btn.btn-outline-secondary.add-filter__cancel.mr-3{:href => "#"} cancel

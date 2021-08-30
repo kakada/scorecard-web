@@ -2,6 +2,7 @@
 
 class ScorecardsController < ApplicationController
   before_action :set_scorecard, only: [:show, :edit, :update, :destroy]
+  before_action :set_provinces, only: :index
 
   def index
     @pagy, @scorecards = pagy(policy_scope(Scorecard.filter(filter_params).order(sort_column + " " + sort_direction).includes(:facility, :local_ngo)))
@@ -75,7 +76,13 @@ class ScorecardsController < ApplicationController
     def filter_params
       params.permit(
         :start_date, :facility_id, :filter,
-        :year, :province_id, :local_ngo_id, uuid: []
+        :year, :local_ngo_id, province_id: [], uuid: []
       ).merge(program_id: current_user.program_id)
+    end
+
+    def set_provinces
+      @provinces = params[:province_id].to_a.map do |province_id|
+        Pumi::Province.find_by_id(province_id)
+      end
     end
 end
