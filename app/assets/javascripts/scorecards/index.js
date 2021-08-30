@@ -45,11 +45,13 @@ CW.ScorecardsIndex = (() => {
       if (field == "province_id") {
         displayText = $dataField.find(`.${fieldValue} option:selected`).text();
       }
-      let deleteBtn = '<a href="#" class="add-filter__delete_item">x</span>';
+      let delSign = '<i class="fa fa-times"></i>';
+      let $delBtn = $('<a href="#" class="add-filter__delete_item"></span>');
+      $delBtn.append(delSign);
       let $hidden = $('<input type="hidden" />');
       $hidden.attr({ name: `${field}[]`, value: value });
 
-      let view = `${field}: ${displayText} ${deleteBtn}`;
+      let view = `${field}: ${displayText} ${$delBtn.html()}`;
       $item.append($hidden);
       $item.append(view);
       $container.append($item);

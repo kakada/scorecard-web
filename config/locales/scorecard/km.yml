@@ -86,3 +86,9 @@ km:
     submitted_date: កាលបរិច្ឆេទទទួលបានសំណើរ
     participant_info: ព័ត៌មានរបស់អ្នកចូលរួម
     fill_in: បំពេញ
+    uuid: កូដ
+    filter:
+      edit: កែប្រែ filter
+      add: បន្ថែម filter
+    field: Field
+    value: Value
