@@ -35,3 +35,11 @@ en:
     view_detail: View Detail
     created_at: Created at
     updated_at: Updated at
+    province: Province
+    district: District
+    commune: Commune
+    village: Village
+    any_province: Any province
+    any_district: Any district
+    any_commune: Any commune
+    any_village: Any village

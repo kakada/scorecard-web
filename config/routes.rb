@@ -73,7 +73,9 @@ Rails.application.routes.draw do
 
   resource :about, only: [:show]
 
-  resources :primary_schools, only: [:index]
+  resources :primary_schools do
+    post :import, on: :collection
+  end
 
   resources :mobile_notifications, only: [:index, :new, :create]
 
@@ -83,6 +85,8 @@ Rails.application.routes.draw do
         resources :languages, only: [:index]
         resources :rating_scales, only: [:index]
       end
+
+      resources :primary_schools, only: [:index]
 
       resources :contacts, only: [:index]
       resource  :mobile_tokens, only: [:update]

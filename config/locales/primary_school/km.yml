@@ -1,0 +1,10 @@
+km:
+  primary_school:
+    primary_schools: បឋមសិក្សា
+    code_or_name: លេខកូដ ឬឈ្មោះ
+    code: លេខកូដ
+    name_en: ឈ្មោះជាភាសាអង់គ្លេស
+    name_km: ឈ្មោះជាភាសាខ្មែរ
+    address: ទីតាំង
+    new_primary_school: បង្កើតបឋមសិក្សាថ្មី
+    edit_primary_school: កែតម្រូវបឋមសិក្សា
