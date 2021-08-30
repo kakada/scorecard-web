@@ -41,6 +41,9 @@ CW.ScorecardsIndex = (() => {
       let $dataField = $(`[data-field_attribute="${field}"]`);
       let fieldValue = $dataField.data("field_value");
       let value = $dataField.find(`.${fieldValue}`).val();
+      if (field == "province_id") {
+        value = $dataField.find(`.${fieldValue} option:selected`).text();
+      }
       let deleteBtn = '<a href="#" class="add-filter__delete_item">x</span>';
       let $hidden = $('<input type="hidden" />');
       $hidden.attr({ name: `${field}[]`, value: value });
