@@ -74,7 +74,7 @@ CW.ScorecardsIndex = (() => {
   function onAddFilter() {
     $("#add-filter__link").click(function (e) {
       e.preventDefault();
-      $("#add-filter__modal").toggle();
+      $("#add-filter__modal").fadeToggle();
     });
   }
 

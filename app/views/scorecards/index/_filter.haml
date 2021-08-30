@@ -36,12 +36,12 @@
 
     = link_to "+ Add filter", "#", id: "add-filter__link"
     #add-filter__modal{ style: "display: none; position: absolute; z-index: 1; min-width: 768px;" }
-      .card
+      .card.shadow-lg
         %h5.card-header Edit filter
         .card-body
           
           .d-flex
-            .form-group.w-75.mr-3
+            .form-group.w-100
               %label{ for: "field" } Field
               %select.form-control#add-filter__field
                 %option{ value: '' } please select
@@ -49,10 +49,10 @@
                 %option{ value: 'start_date' } Conducted Date
                 %option{ value: 'province_id' } Province
 
-            .form-group.flex-grow-1{ style: "display: none", "data-field_attribute": "uuid", "data-field_value": "field-value" }
-              %label{ for: "field" } Operator
-              %select.form-control
-                %option is
+            -# .form-group.flex-grow-1{ style: "display: none", "data-field_attribute": "uuid", "data-field_value": "field-value" }
+            -#   %label{ for: "field" } Operator
+            -#   %select.form-control
+            -#     %option is
           
           .form-group{ style: "display: none", "data-field_attribute": "uuid", "data-field_value": "field-value" }
             %label{ for: "field" } Value
