@@ -15,6 +15,7 @@
 #  updated_at          :datetime         not null
 #  code                :string
 #  target_province_ids :string
+#  target_provinces    :string
 #
 FactoryBot.define do
   factory :local_ngo do

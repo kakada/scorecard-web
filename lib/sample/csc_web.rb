@@ -17,6 +17,9 @@ module Sample
       ::Sample::Caf.load
       ::ScorecardCriteria::RatingScale.load
       ::Sample::Scorecard.load
+
+      ::Sample::EducationalBackground.load
+      ::Sample::ScorecardKnowledge.load
     end
 
     def self.export(filetype = "json")

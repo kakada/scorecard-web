@@ -3,6 +3,7 @@
 Dir["/app/lib/builders/*.rb"].each { |file| require file }
 Dir["/app/lib/exporters/*.rb"].each { |file| require file }
 
+require_relative "base"
 require_relative "user"
 require_relative "program"
 require_relative "pdf_template"
@@ -15,5 +16,7 @@ require_relative "voting_indicator"
 require_relative "rating"
 require_relative "raised_indicator"
 require_relative "scorecard"
+require_relative "educational_background"
+require_relative "scorecard_knowledge"
 
 require "scorecard_criteria/scorecard_criteria"

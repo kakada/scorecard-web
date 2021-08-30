@@ -5,7 +5,7 @@ module LocalNgos
     before_action :set_local_ngo
 
     def index
-      @pagy, @cafs = pagy(authorize Caf.filter(params.merge(local_ngo_id: @local_ngo.id)).order(sort_column + " " + sort_direction))
+      @pagy, @cafs = pagy(authorize Caf.filter(filter_params).order(sort_param).includes(:educational_background, :scorecard_knowledge))
     end
 
     def new
@@ -49,7 +49,14 @@ module LocalNgos
       end
 
       def caf_params
-        params.require(:caf).permit(:name, :sex, :date_of_birth, :tel, :address, :actived)
+        params.require(:caf).permit(
+          :name, :sex, :date_of_birth, :tel, :address, :actived
+          :educational_background_id, :scorecard_knowledge_id
+        )
+      end
+
+      def filter_params
+        params.permit(:keyword).merge(local_ngo_id: @local_ngo.id)
       end
   end
 end
