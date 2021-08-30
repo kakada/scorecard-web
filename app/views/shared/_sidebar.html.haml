@@ -25,7 +25,7 @@
           %i.far.fa-fw.fa-clipboard
           %span= t("sidebar.program")
 
-    - if policy(User).update?
+    - if policy(User).create?
       %li.nav-item{ class: css_active_class('users') }
         = link_to users_path, class: 'nav-link' do
           %i.fas.fa-fw.fa-user

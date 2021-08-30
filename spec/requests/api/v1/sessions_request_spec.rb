@@ -33,6 +33,20 @@ RSpec.describe "Api::V1::SessionsController", type: :request do
       end
     end
 
+    context "account is not actived" do
+      before(:each) do
+        user.update(actived: false)
+
+        post "/api/v1/sign_in", params: { user: { email: user.email, password: "password" } }
+      end
+
+      it { expect(response.status).to eq(422) }
+
+      it "responses error with message 'Your account is unprocessable'" do
+        expect(json_response["error"]).to eq("Your account is unprocessable!")
+      end
+    end
+
     context "invalid password" do
       before(:each) do
         post "/api/v1/sign_in", params: { user: { email: user.email, password: "invalid_password" } }
