@@ -6,7 +6,7 @@ module Api
       def index
         local_ngo = LocalNgo.find(params[:local_ngo_id])
 
-        render json: local_ngo.cafs
+        render json: local_ngo.cafs.actives
       end
     end
   end

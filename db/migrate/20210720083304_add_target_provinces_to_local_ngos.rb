@@ -8,6 +8,6 @@ class AddTargetProvincesToLocalNgos < ActiveRecord::Migration[6.0]
   end
 
   def down
-    remove_column :local_ngos
+    remove_column :local_ngos, :target_provinces
   end
 end
