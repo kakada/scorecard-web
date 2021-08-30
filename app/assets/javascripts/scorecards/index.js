@@ -34,16 +34,16 @@ CW.ScorecardsIndex = (() => {
     $(".add-filter__save").click(function (e) {
       e.preventDefault();
       let $container = $(".add-filter__saved_items_container");
-      let $item = $('<div class="add-filter__item"></div>');
-      $item.addClass("d-inline-block p-1 mr-3");
+      let template = $(".add-filter__saved_item_template").html();
+      let $item = $(template);
       $item.css({ border: "1px solid #ccc" });
       let field = $("#add-filter__field").val();
       let value = $(`[data-field_attribute="${field}"] .field-value`).val();
-      let deleteButton = '<a href="#" class="add-filter__delete_item">x</span>';
+      let deleteBtn = '<a href="#" class="add-filter__delete_item">x</span>';
       let $hidden = $('<input type="hidden" />');
-      $hidden.attr({ name: field, value: value });
+      $hidden.attr({ name: `${field}[]`, value: value });
 
-      let view = `${field}:${value} ${deleteButton}`;
+      let view = `${field}:${value} ${deleteBtn}`;
       $item.append($hidden);
       $item.append(view);
       $container.append($item);
@@ -59,6 +59,7 @@ CW.ScorecardsIndex = (() => {
   }
 
   function resetFilter() {
+    $(".field-value").val("");
     $("#add-filter__field").val("");
     $("#add-filter__field").trigger("change");
     $("#add-filter__modal").hide();

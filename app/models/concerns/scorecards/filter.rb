@@ -6,7 +6,7 @@ module Scorecards::Filter
   included do
     def self.filter(params = {})
       scope = all
-      scope = scope.where("uuid LIKE ?", "%#{params[:uuid].downcase}%") if params[:uuid].present?
+      scope = scope.where(uuid: params[:uuid]) if params[:uuid].present?
       scope = scope.where("conducted_date >= ?", params[:start_date]) if params[:start_date].present?
       scope = scope.where(facility_id: params[:facility_id]) if params[:facility_id].present?
       scope = scope.where(local_ngo_id: params[:local_ngo_id]) if params[:local_ngo_id].present?

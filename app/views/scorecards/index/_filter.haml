@@ -10,7 +10,17 @@
 
   #add-filter{ style: "position: relative;" }
     .add-filter__saved_items_container.d-inline-block.mb-3
+      .add-filter__saved_item_template
+        .add-filter__item.d-inline-block.p-1.mr-3
+        
       -# build search stimulus?
+      - if params[:uuid].present?
+        - params[:uuid].each do |uuid|
+          .add-filter__item.d-inline-block.p-1.mr-3{ style: "border: 1px solid #ccc;" }
+            = "uuid: #{uuid}"
+            = link_to "x", "#", class: "add-filter__delete_item"
+            %input{ type: "hidden", name: "uuid[]", value: uuid }
+
     = link_to "+ Add filter", "#", id: "add-filter__link"
     #add-filter__modal{ style: "display: none; position: absolute; z-index: 1; min-width: 768px;" }
       .card
