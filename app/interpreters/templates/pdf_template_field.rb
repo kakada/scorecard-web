@@ -9,7 +9,9 @@ module Templates
         { name: "commune", code: "scorecard.commune" },
         { name: "result_table", code: "swot.result_table" },
         { name: "facility", code: "scorecard.facility_name" },
-        { name: "conducted_date", code: "scorecard.conducted_date" },
+        { name: "facilitators", code: "scorecard.facilitators" },
+        { name: "local_ngo", code: "scorecard.local_ngo_name" },
+        { name: "conducted_date", code: "scorecard.conducted_date" }
       ]
     end
   end

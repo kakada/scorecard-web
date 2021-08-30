@@ -19,7 +19,7 @@ class ScorecardsController < ApplicationController
 
       format.pdf do
         render pdf: "scorecard_#{@scorecard.uuid}",
-               inline: PdfTemplateInterpreter.new(@scorecard.id).interpreted_message
+               inline: PdfTemplateInterpreter.new(@scorecard.uuid).interpreted_message
       end
     end
   end

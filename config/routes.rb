@@ -43,7 +43,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pdf_templates
+  resources :pdf_templates do
+    get :preview
+  end
   resources :messages
 
   resources :languages, path: "/scorecards/settings/languages"
