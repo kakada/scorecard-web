@@ -2,82 +2,11 @@ CW.ScorecardsIndex = (() => {
   function init() {
     CW.DatepickerPopup.init();
     CW.ScorecardsShow.onClickBtnCopy();
+    CW.FilterOptions.init();
 
     handleDisplayCollapseContent();
     onShowCollapse();
     onHideCollapse();
-    onAddFilter();
-    onSaveFilter();
-    onCancelFilter();
-    onFilterChange();
-    onDeleteFilterItem();
-  }
-
-  function onFilterChange() {
-    $("#add-filter__field").change(function () {
-      let field = $(this).val();
-      $(
-        "#add-filter__modal .form-group:not(#add-filter__field)[data-field_attribute]"
-      ).hide();
-      $(`[data-field_attribute="${field}"`).show();
-    });
-  }
-
-  function onCancelFilter() {
-    $(".add-filter__cancel").click(function (e) {
-      e.preventDefault();
-      $("#add-filter__modal").hide();
-    });
-  }
-
-  function onSaveFilter() {
-    $(".add-filter__save").click(function (e) {
-      e.preventDefault();
-      let $container = $(".add-filter__saved_items_container");
-      let template = $(".add-filter__saved_item_template").html();
-      let $item = $(template);
-      $item.css({ border: "1px solid #ccc" });
-      let field = $("#add-filter__field").val();
-      let $dataField = $(`[data-field_attribute="${field}"]`);
-      let fieldValue = $dataField.data("field_value");
-      let value = $dataField.find(`.${fieldValue}`).val();
-      let displayText = value;
-      if (field == "province_id") {
-        displayText = $dataField.find(`.${fieldValue} option:selected`).text();
-      }
-      let delSign = '<i class="fa fa-times"></i>';
-      let $delBtn = $('<a href="#" class="add-filter__delete_item"></span>');
-      $delBtn.append(delSign);
-      let $hidden = $('<input type="hidden" />');
-      $hidden.attr({ name: `${field}[]`, value: value });
-
-      let view = `${field}: ${displayText} ${$delBtn.html()}`;
-      $item.append($hidden);
-      $item.append(view);
-      $container.append($item);
-      resetFilter();
-    });
-  }
-
-  function onDeleteFilterItem() {
-    $(document).on("click", ".add-filter__delete_item", function (e) {
-      e.preventDefault();
-      $(this).closest(".add-filter__item").remove();
-    });
-  }
-
-  function resetFilter() {
-    $(".field-value").val("");
-    $("#add-filter__field").val("");
-    $("#add-filter__field").trigger("change");
-    $("#add-filter__modal").hide();
-  }
-
-  function onAddFilter() {
-    $("#add-filter__link").click(function (e) {
-      e.preventDefault();
-      $("#add-filter__modal").fadeToggle();
-    });
   }
 
   function handleDisplayCollapseContent() {

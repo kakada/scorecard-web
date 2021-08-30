@@ -28,6 +28,7 @@
 //= require templates
 //= require indicators
 //= require scorecards/datepicker_popup
+//= require scorecards/filter_options
 //= require scorecards/index
 //= require scorecards/show
 //= require scorecards/new
