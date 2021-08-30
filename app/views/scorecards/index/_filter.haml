@@ -1,4 +1,4 @@
-%form{ action: '/scorecards', method: 'get' }
+%form.explicitForm{ action: '/scorecards', method: 'get' }
   = hidden_field_tag :filter, params[:filter]
 
   .d-flex.my-2
@@ -36,20 +36,20 @@
                 %option{ value: 'start_date' } Conducted Date
                 %option{ value: 'province_id' } Province
 
-            .form-group.flex-grow-1{ style: "display: none", "data-field_attribute": "uuid" }
+            .form-group.flex-grow-1{ style: "display: none", "data-field_attribute": "uuid", "data-field_value": "field-value" }
               %label{ for: "field" } Operator
               %select.form-control
                 %option is
           
-          .form-group{ style: "display: none", "data-field_attribute": "uuid" }
+          .form-group{ style: "display: none", "data-field_attribute": "uuid", "data-field_value": "field-value" }
             %label{ for: "field" } Value
             = text_field_tag(nil, params[:uuid], class: 'form-control field-value', placeholder: t('scorecard.code'), id: 'scorecard_code')
 
-          .form-group{ style: "display: none", "data-field_attribute": "start_date" }
+          .form-group{ style: "display: none", "data-field_attribute": "start_date", "data-field_value": "start-date-input-backup" }
             %label{ for: "field" } Value
-            %input.field-value.form-control{ type: "date" }
+            = render "scorecards/index/filter_date"
           
-          .form-group{ style: "display: none", "data-field_attribute": "province_id" }
+          .form-group{ style: "display: none", "data-field_attribute": "province_id", "data-field_value": "field-value" }
             %label{ for: "field" } Value
             = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select field-value', prompt: t("scorecard.any_province")
 

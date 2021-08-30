@@ -80,7 +80,7 @@ CW.DatepickerPopup = do ->
       submitForm()
 
   submitForm = ->
-    $('[type="submit"]').parents('form').submit()
+    $('[type="submit"]').parents('form:not(.explicitForm)').submit()
 
   assignValueToForm = ->
     num = $('.number-input').val()

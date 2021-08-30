@@ -38,7 +38,9 @@ CW.ScorecardsIndex = (() => {
       let $item = $(template);
       $item.css({ border: "1px solid #ccc" });
       let field = $("#add-filter__field").val();
-      let value = $(`[data-field_attribute="${field}"] .field-value`).val();
+      let $dataField = $(`[data-field_attribute="${field}"]`);
+      let fieldValue = $dataField.data("field_value");
+      let value = $dataField.find(`.${fieldValue}`).val();
       let deleteBtn = '<a href="#" class="add-filter__delete_item">x</span>';
       let $hidden = $('<input type="hidden" />');
       $hidden.attr({ name: `${field}[]`, value: value });
