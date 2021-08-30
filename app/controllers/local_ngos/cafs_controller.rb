@@ -50,7 +50,7 @@ module LocalNgos
 
       def caf_params
         params.require(:caf).permit(
-          :name, :sex, :date_of_birth, :tel, :address, :actived
+          :name, :sex, :date_of_birth, :tel, :address, :actived,
           :educational_background_id, :scorecard_knowledge_id
         )
       end
