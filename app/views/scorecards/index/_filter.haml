@@ -1,4 +1,4 @@
-%form.explicitForm{ action: '/scorecards', method: 'get' }
+%form#form.explicitForm{ action: '/scorecards', method: 'get', "data-remote": true }
   = hidden_field_tag :filter, params[:filter]
 
   .d-flex.my-2

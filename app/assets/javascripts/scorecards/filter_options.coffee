@@ -19,7 +19,7 @@ CW.FilterOptions = do ->
       formSubmit()
 
   formSubmit = ->
-    $("form").submit()
+    Rails.fire($("#form")[0], "submit")
 
   appendFilterItem = ->
     container = $('.add-filter__saved_items_container')
@@ -56,7 +56,7 @@ CW.FilterOptions = do ->
   newItem = ->
     $item = getStyledItem()
     $data = dataItem()
-    # $item.append "#{$data.field}: #{$data.displayText} "
+    $item.append "#{$data.field}: #{$data.displayText} "
     $item.append hiddenInput($data.field, $data.value)
     $item.append delBtn()
     return $item

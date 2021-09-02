@@ -14,64 +14,6 @@
 = render 'scorecards/index/nav_tabs'
 = render 'scorecards/index/filter'
 
-.card.shadow.mb-4
+#scorecards.card.shadow.mb-4
   .card-body
-    = render partial: "no_data", locals: { items: @scorecards }
-
-    - if @scorecards.present?
-      = render "shared/pagination_title", objects: @scorecards
-
-      .table-responsive
-        %table.table.table-hover.pretty
-          %thead
-            %tr
-              %th #
-              %th= t('scorecard.code')
-              %th= sortable "year", t('scorecard.year')
-              %th= sortable "facility_id", t('scorecard.facility')
-              %th= t('scorecard.implementer')
-              %th= t('scorecard.location')
-              %th= t('scorecard.status')
-              %th= sortable "created_at", t('shared.created_at')
-              %th= sortable "locked_at", t('scorecard.submitted_at')
-              %th= sortable "conducted_date", t('scorecard.conducted_at')
-              %th
-
-          %tbody
-            - @scorecards.each_with_index do |scorecard, index|
-              %tr
-                %td= @pagy.from + index
-                %td{style: 'min-width: 106px'}
-                  = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'btn btn-link p-0'
-                  = render 'scorecard_copy', scorecard: scorecard
-                %td= scorecard.year
-                %td= scorecard.facility.name
-                %td= scorecard.local_ngo.name
-                %td= scorecard_location(scorecard)
-                %td= status_html(scorecard)
-                %td= timeago(scorecard.created_at).html_safe
-                %td
-                  - if scorecard.locked_at.present?
-                    = timeago(scorecard.locked_at).html_safe
-                  - else
-                    = "_"
-                %td
-                  - if scorecard.conducted_date.present?
-                    = timeago(scorecard.conducted_date).html_safe
-                  - else
-                    = "_"
-                %td.text-right.action-buttons
-
-                  - if scorecard.access_locked?
-                    %span{data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.completed')}}
-                      %i.fas.fa-lock
-
-                  - if scorecard.access_locked? && scorecard.program.try(:pdf_templates).present?
-                    = link_to scorecard_path(scorecard.uuid, format: 'pdf'), class: "  btn-sm mr-1 text-danger", data: { toggle: 'tooltip', placement: 'top', title: "Download as PDF"}, target: '_blank', download: true do
-                      %i.fas.fa-file-pdf
-
-                  = render 'shared/action_buttons', edit_url: edit_scorecard_path(scorecard.uuid), delete_url: scorecard_path(scorecard.uuid), object: scorecard
-
-    - if @pagy.pages > 1
-      .pagy-wrapper
-        != pagy_bootstrap_nav(@pagy)
+    = render "scorecards"

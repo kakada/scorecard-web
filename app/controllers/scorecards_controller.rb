@@ -6,6 +6,11 @@ class ScorecardsController < ApplicationController
 
   def index
     @pagy, @scorecards = pagy(policy_scope(Scorecard.filter(filter_params).order(sort_column + " " + sort_direction).includes(:facility, :local_ngo)))
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
