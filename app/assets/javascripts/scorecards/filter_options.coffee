@@ -95,7 +95,7 @@ CW.FilterOptions = do ->
   getStyledItem = ->
     templateHtml = $('.add-filter__saved_item_template').html()
     template = $(templateHtml)
-    template.css border: '1px solid #ccc'
+    template.addClass 'badge badge-dark'
     return template
 
   { init: init }
