@@ -14,9 +14,13 @@ CW.FilterOptions = do ->
   onSaveFilter = ->
     $('.add-filter__save').click (e)->
       e.preventDefault()
-      appendFilterItem()
-      resetFilter()
-      formSubmit()
+      if isValid()
+        appendFilterItem()
+        resetFilter()
+        formSubmit()
+
+  isValid = ->
+    return dataItem().value != ""
 
   formSubmit = ->
     Rails.fire($("#form")[0], "submit")
