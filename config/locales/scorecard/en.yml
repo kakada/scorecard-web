@@ -86,6 +86,7 @@ en:
     submitted_date: Submitted date
     participant_info: Participant Information
     uuid: UUID
+    province_id: Province
     filter:
       edit: Edit filter
       add: Add filter

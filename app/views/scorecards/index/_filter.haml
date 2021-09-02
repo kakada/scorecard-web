@@ -16,7 +16,7 @@
       -# build search stimulus?
       = render partial: "scorecards/index/filter_item", collection: params[:uuid], as: :item, locals: { field: 'uuid' }
       = render partial: "scorecards/index/filter_item", collection: [params[:start_date].presence].compact, as: :item, locals: { field: 'start_date' }
-      = render partial: "scorecards/index/filter_province", collection: @provinces, as: :item, locals: { field: 'province' }
+      = render partial: "scorecards/index/filter_province", collection: @provinces, as: :item, locals: { field: 'province_id' }
 
     = link_to "#", id: "add-filter__link" do
       +
@@ -34,15 +34,15 @@
                 %option{ value: 'start_date' }= t("scorecard.conducted_at")
                 %option{ value: 'province_id' }= t("scorecard.province")
           
-          .form-group{ style: "display: none", "data-field_attribute": "uuid", "data-field_value": "field-value" }
+          .form-group{ style: "display: none", "data-field_attribute": "uuid", "data-dom": "field-value" }
             %label{ for: "field" }= t("scorecard.value")
             = text_field_tag(nil, params[:uuid], class: 'form-control field-value', placeholder: t('scorecard.code'), id: 'scorecard_code')
 
-          .form-group{ style: "display: none", "data-field_attribute": "start_date", "data-field_value": "start-date-input-backup" }
+          .form-group{ style: "display: none", "data-field_attribute": "start_date", "data-dom": "start-date-input-backup" }
             %label{ for: "field" }= t("scorecard.value")
             = render "scorecards/index/filter_date"
           
-          .form-group{ style: "display: none", "data-field_attribute": "province_id", "data-field_value": "field-value" }
+          .form-group{ style: "display: none", "data-field_attribute": "province_id", "data-dom": "field-value" }
             %label{ for: "field" }= t("scorecard.value")
             = select_tag :provinceid, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select field-value', prompt: t("scorecard.any_province")
 

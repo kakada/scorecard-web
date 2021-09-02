@@ -14,9 +14,16 @@ CW.FilterOptions = do ->
   onSaveFilter = ->
     $('.add-filter__save').click (e)->
       e.preventDefault()
-      container = $('.add-filter__saved_items_container')
-      container.append buildTemplate()
+      appendFilterItem()
       resetFilter()
+
+  appendFilterItem = ->
+    container = $('.add-filter__saved_items_container')
+    container.append newItem()
+
+  resetDate = ->
+    $('.start_date, .start-date-input-backup').val ''
+    return
 
   resetFilter = ->
     $('.field-value').val ''
@@ -27,6 +34,8 @@ CW.FilterOptions = do ->
   onDeleteFilterItem = ->
     $(document).on 'click', '.add-filter__delete_item', (e)->
       e.preventDefault()
+      resetDate()
+      resetFilter()
       $(this).closest('.add-filter__item').remove()
       return
     return
@@ -46,42 +55,47 @@ CW.FilterOptions = do ->
       return
     return
 
-  buildTemplate = ->
-    $template = formatTemplate()
-    $view     = buildView()
-    $delBtn   = buildDelButton()
-    $input    = buildValue($view.field, $view.value)
-    display   = "#{$view.field}: #{$view.displayText} "
+  newItem = ->
+    $item = getStyledItem()
+    $data = dataItem()
 
-    $template.append display
-    $template.append $input
-    $template.append $delBtn
-    return $template
+    $item.append "#{$data.field}: #{$data.displayText} "
+    $item.append hiddenInput($data.field, $data.value)
+    $item.append delBtn()
+    return $item
 
-  buildView = ->
-    field = $('#add-filter__field').val()
-    $dataField = $("[data-field_attribute='#{field}']")
-    fieldValue = $dataField.data('field_value')
-    value = $dataField.find(".#{fieldValue}").val()
-    displayText = value
-    if field == 'province_id'
-      displayText = $dataField.find(".#{fieldValue} option:selected").text()
-    return { field: field, value: value, displayText: displayText }
+  dataItem = ->
+    displayText = getFilterValue()
+    if getFilterField() == 'province_id'
+      displayText = getDataField().find(".#{getDom()} option:selected").text()
+    return { field: getFilterField(), value: getFilterValue(), displayText: displayText }
 
-  buildValue = (field, value)->
+  getFilterValue = ->
+    return getDataField().find(".#{getDom()}").val()
+
+  getFilterField = ->
+    return $('#add-filter__field').val()
+
+  getDom = ->
+    return getDataField().data('dom')
+
+  getDataField = ->
+    return $("[data-field_attribute='#{getFilterField()}']")
+
+  hiddenInput = (field, value)->
     $input = $('<input type="hidden" />')
     $input.attr
       name: "#{field}[]"
       value: value
     return $input
 
-  buildDelButton = ->
+  delBtn = ->
     delSign = '<i class="fa fa-times"></i>'
     $delBtn = $('<a href="#" class="add-filter__delete_item"></span>')
     $delBtn.append delSign
     return $delBtn
 
-  formatTemplate = ->
+  getStyledItem = ->
     templateHtml = $('.add-filter__saved_item_template').html()
     template = $(templateHtml)
     template.css border: '1px solid #ccc'
