@@ -11,15 +11,15 @@
             %option{ value: 'start_date' }= t("scorecard.conducted_at")
             %option{ value: 'province_id' }= t("scorecard.province")
       
-      .form-group{ style: "display: none", "data-field_attribute": "uuid", "data-dom": "field-value" }
+      .form-group{ style: "display: none", "data-field_attribute": "uuid", "data-display_field": t("scorecard.uuid"), "data-dom": "field-value" }
         %label{ for: "field" }= t("scorecard.value")
         = text_field_tag(nil, params[:uuid], class: 'form-control field-value', placeholder: t('scorecard.code'), id: 'scorecard_code')
 
-      .form-group{ style: "display: none", "data-field_attribute": "start_date", "data-dom": "start-date-input-backup" }
+      .form-group{ style: "display: none", "data-field_attribute": "start_date", "data-display_field": t("scorecard.start_date"), "data-dom": "start-date-input-backup" }
         %label{ for: "field" }= t("scorecard.value")
         = render "scorecards/index/filter_date"
       
-      .form-group{ style: "display: none", "data-field_attribute": "province_id", "data-dom": "field-value" }
+      .form-group{ style: "display: none", "data-field_attribute": "province_id", "data-display_field": t("scorecard.province_id"), "data-dom": "field-value" }
         %label{ for: "field" }= t("scorecard.value")
         = select_tag :provinceid, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select field-value', prompt: t("scorecard.any_province")
 

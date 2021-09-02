@@ -60,16 +60,19 @@ CW.FilterOptions = do ->
   newItem = ->
     $item = getStyledItem()
     $data = dataItem()
-    $item.append "#{$data.field}: #{$data.displayText} "
+    $item.append "#{$data.displayField}: #{$data.displayValue} "
     $item.append hiddenInput($data.field, $data.value)
     $item.append delBtn()
     return $item
 
   dataItem = ->
-    displayText = getFilterValue()
+    displayValue = getFilterValue()
     if getFilterField() == 'province_id'
-      displayText = getDataField().find(".#{getDom()} option:selected").text()
-    return { field: getFilterField(), value: getFilterValue(), displayText: displayText }
+      displayValue = getDataField().find(".#{getDom()} option:selected").text()
+    return { field: getFilterField(), value: getFilterValue(), displayField: getDisplayField(), displayValue: displayValue }
+
+  getDisplayField = ->
+    return getDataField().data("display_field")
 
   getFilterValue = ->
     return getDataField().find(".#{getDom()}").val()
