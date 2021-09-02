@@ -16,6 +16,10 @@ CW.FilterOptions = do ->
       e.preventDefault()
       appendFilterItem()
       resetFilter()
+      formSubmit()
+
+  formSubmit = ->
+    $("form").submit()
 
   appendFilterItem = ->
     container = $('.add-filter__saved_items_container')
@@ -23,7 +27,6 @@ CW.FilterOptions = do ->
 
   resetDate = ->
     $('.start_date, .start-date-input-backup').val ''
-    return
 
   resetFilter = ->
     $('.field-value').val ''
@@ -37,29 +40,23 @@ CW.FilterOptions = do ->
       resetDate()
       resetFilter()
       $(this).closest('.add-filter__item').remove()
-      return
-    return
+      formSubmit()
 
   onCancelFilter = ->
     $('.add-filter__cancel').click (e)->
       e.preventDefault()
       $('#add-filter__modal').hide()
-      return
-    return
 
   onFilterChange = ->
     $('#add-filter__field').change ->
       field = $(this).val()
       $('#add-filter__modal .form-group:not(#add-filter__field)[data-field_attribute]').hide()
       $("[data-field_attribute='#{field}'").show()
-      return
-    return
 
   newItem = ->
     $item = getStyledItem()
     $data = dataItem()
-
-    $item.append "#{$data.field}: #{$data.displayText} "
+    # $item.append "#{$data.field}: #{$data.displayText} "
     $item.append hiddenInput($data.field, $data.value)
     $item.append delBtn()
     return $item
@@ -99,7 +96,6 @@ CW.FilterOptions = do ->
     templateHtml = $('.add-filter__saved_item_template').html()
     template = $(templateHtml)
     template.css border: '1px solid #ccc'
-
     return template
 
   { init: init }

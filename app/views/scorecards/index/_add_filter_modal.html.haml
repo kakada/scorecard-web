@@ -1,0 +1,30 @@
+#add-filter__modal
+  .card.shadow-lg
+    %h5.card-header= t("scorecard.filter.edit")
+    .card-body
+      .d-flex
+        .form-group.w-100
+          %label{ for: "field" }= t("scorecard.field")
+          %select.form-control#add-filter__field
+            %option{ value: '' }= t("shared.please_select")
+            %option{ value: 'uuid' }= t("scorecard.uuid")
+            %option{ value: 'start_date' }= t("scorecard.conducted_at")
+            %option{ value: 'province_id' }= t("scorecard.province")
+      
+      .form-group{ style: "display: none", "data-field_attribute": "uuid", "data-dom": "field-value" }
+        %label{ for: "field" }= t("scorecard.value")
+        = text_field_tag(nil, params[:uuid], class: 'form-control field-value', placeholder: t('scorecard.code'), id: 'scorecard_code')
+
+      .form-group{ style: "display: none", "data-field_attribute": "start_date", "data-dom": "start-date-input-backup" }
+        %label{ for: "field" }= t("scorecard.value")
+        = render "scorecards/index/filter_date"
+      
+      .form-group{ style: "display: none", "data-field_attribute": "province_id", "data-dom": "field-value" }
+        %label{ for: "field" }= t("scorecard.value")
+        = select_tag :provinceid, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select field-value', prompt: t("scorecard.any_province")
+
+      .d-flex.justify-content-end
+        = link_to "#", class: "btn btn-outline-secondary add-filter__cancel mr-3" do
+          = t("shared.cancel")
+        = link_to "#", class: "btn btn-primary add-filter__save" do
+          = t("shared.save")
