@@ -29,7 +29,7 @@ CW.FilterOptions = do ->
         formSubmit()
 
   isValid = ->
-    return dataItem().value != ""
+    return dataItem().value not in ["", null, undefined]
 
   formSubmit = ->
     Rails.fire($("#form")[0], "submit")
