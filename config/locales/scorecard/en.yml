@@ -89,6 +89,6 @@ en:
     province_id: Province
     filter:
       edit: Edit filter
-      add: Add filter
+      add: + Add filter
     field: Field
     value: Value

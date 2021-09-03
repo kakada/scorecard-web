@@ -90,6 +90,6 @@ km:
     province_id: ខេត្ត
     filter:
       edit: កែប្រែ filter
-      add: បន្ថែម filter
+      add: + បន្ថែម filter
     field: Field
     value: Value

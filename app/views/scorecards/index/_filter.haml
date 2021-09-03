@@ -1,15 +1,8 @@
 %form#form.explicitForm{ action: '/scorecards', method: 'get', "data-remote": true }
   = hidden_field_tag :filter, params[:filter]
 
-  .d-flex.my-2
-    -# %div.mr-2
-    -# %div.d-none
-    -#   %a.btn.advance-search{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample", :role => "button"}
-    -#     = t('scorecard.advance_search')
-    -#     %i.fas.fa-angle-down
-
   #add-filter.position-relative
-    .mb-3
+    .my-3
       .add-filter__saved_items_container.d-inline-block
         .add-filter__saved_item_template.d-none
           .add-filter__item.d-inline-block.p-1.mr-3
@@ -19,18 +12,6 @@
         = render partial: "scorecards/index/filter_province", collection: @provinces, as: :item, locals: { field: 'province_id' }
 
       = link_to "#", id: "add-filter__link" do
-        +
         = t("scorecard.filter.add")
 
     = render "scorecards/index/add_filter_modal"
-
-  -# #collapseExample.collapse
-  -#   .d-flex.mb-2
-  -#     = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_province")
-
-  -#     - if current_program.present?
-  -#       = select_tag :year, options_for_select(current_program.scorecards.pluck(:year).uniq, params[:year]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_year")
-
-  -#       = select_tag :facility_id, options_for_select(current_program.facilities.leaves.pluck("name_#{I18n.locale}", :id), params[:facility_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_facility")
-
-  -#       = select_tag :local_ngo_id, options_for_select(current_program.local_ngos.pluck(:name, :id), params[:local_ngo_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_local_ngo")

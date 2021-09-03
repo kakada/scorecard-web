@@ -67,9 +67,12 @@ CW.FilterOptions = do ->
 
   dataItem = ->
     displayValue = getFilterValue()
-    if getFilterField() == 'province_id'
-      displayValue = getDataField().find(".#{getDom()} option:selected").text()
+    if selectedDom().is("select")
+      displayValue = selectedDom().find("option:selected").text()
     return { field: getFilterField(), value: getFilterValue(), displayField: getDisplayField(), displayValue: displayValue }
+
+  selectedDom = ->
+    return getDataField().find(".#{getDom()}")
 
   getDisplayField = ->
     return getDataField().data("display_field")

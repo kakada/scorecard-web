@@ -11,7 +11,7 @@ module Scorecards::Filter
       scope = scope.where(facility_id: params[:facility_id]) if params[:facility_id].present?
       scope = scope.where(local_ngo_id: params[:local_ngo_id]) if params[:local_ngo_id].present?
       scope = scope.where(province_id: params[:province_id]) if params[:province_id].present?
-      scope = scope.where(year: params[:year].to_i) if params[:year].present?
+      scope = scope.where(year: params[:year]) if params[:year].present?
       scope = scope.where(locked_at: nil) if params[:filter] == "planned"
       scope = scope.where.not(locked_at: nil) if params[:filter] == "locked"
       scope
