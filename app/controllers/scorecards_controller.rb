@@ -5,7 +5,7 @@ class ScorecardsController < ApplicationController
   before_action :set_provinces, only: :index
 
   def index
-    @pagy, @scorecards = pagy(policy_scope(Scorecard.filter(filter_params).order(sort_column + " " + sort_direction).includes(:facility, :local_ngo)))
+    @pagy, @scorecards = pagy(policy_scope(Scorecard.filter(filter_params).order(sort_column + " " + sort_direction).includes(:facility, :local_ngo)), link_extra: 'data-remote="true"')
     
     respond_to do |format|
       format.html
