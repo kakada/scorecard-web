@@ -138,7 +138,7 @@ CW.FilterOptions = do ->
     return $input
 
   delBtn = ->
-    delSign = "<i class=\"fa fa-times\"></i>"
+    delSign = "<i class=\"fa fa-times text-danger\"></i>"
     $delBtn = $("<a href=\"#\" class=\"add-filter__delete_item\"></span>")
     $delBtn.append delSign
     return $delBtn
@@ -146,7 +146,7 @@ CW.FilterOptions = do ->
   getStyledItem = ->
     templateHtml = $(".add-filter__saved_item_template").html()
     template = $(templateHtml)
-    template.addClass "badge badge-dark"
+    template.addClass "badge badge-pill badge-light border"
     template.attr("data-field", getFilterField())
     return template
 
