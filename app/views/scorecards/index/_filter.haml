@@ -1,13 +1,11 @@
 %form#form.explicitForm{ action: '/scorecards', method: 'get', "data-remote": true }
   = hidden_field_tag :filter, params[:filter] || 'all'
-
   #add-filter.position-relative
     .my-3
       .add-filter__saved_items_container.d-inline-block
         .add-filter__saved_item_template.d-none
           .add-filter__item.d-inline-block.mr-1
-
-      = link_to "#", id: "add-filter__link" do
-        = t("scorecard.filter.add")
-
-    = render "scorecards/index/add_filter_modal"
+      .position-relative.d-inline-block
+        = link_to "#", id: "add-filter__link" do
+          = t("scorecard.filter.add")
+        = render "scorecards/index/add_filter_modal"

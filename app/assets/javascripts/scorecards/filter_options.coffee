@@ -5,6 +5,7 @@ CW.FilterOptions = do ->
     onSaveFilter();
     onCancelFilter();
     onDeleteFilterItem();
+    onBackdropClick();
 
   getAddedItems = ->
     return $(".add-filter__saved_items_container").children(".add-filter__item")
@@ -12,7 +13,12 @@ CW.FilterOptions = do ->
   onOpenFilter = ->
     $("#add-filter__link").click (e)->
       e.preventDefault()
+      $("<div class=\"filter-backdrop\"></div>").appendTo("body")
       $("#add-filter__modal").fadeToggle()
+
+  onBackdropClick = ->
+    $("body").on "click", ".filter-backdrop", ->
+      resetFilter()
 
   onSaveFilter = ->
     $(".add-filter__save").click (e)->
@@ -59,6 +65,7 @@ CW.FilterOptions = do ->
     $("#add-filter__field").val ""
     $("#add-filter__field").trigger "change"
     $("#add-filter__modal").hide()
+    $(".filter-backdrop").remove()
 
   onDeleteFilterItem = ->
     $(document).on "click", ".add-filter__delete_item", (e)->
@@ -71,11 +78,12 @@ CW.FilterOptions = do ->
   onCancelFilter = ->
     $(".add-filter__cancel").click (e)->
       e.preventDefault()
-      $("#add-filter__modal").hide()
+      resetFilter()
 
   onFilterChange = ->
     $("#add-filter__field").change ->
       field = $(this).val()
+      $(".btn-reset").trigger "click"
       $("#add-filter__modal .form-group:not(#add-filter__field)[data-field_attribute]").hide()
       $("[data-field_attribute=\"#{field}\"").show()
 
