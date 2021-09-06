@@ -40,7 +40,7 @@ RSpec.describe ScorecardProgress, type: :model do
       let!(:scorecard) { create(:scorecard, progress: :running) }
       let!(:scorecard_progress) { create(:scorecard_progress, status: :renewed, scorecard: scorecard) }
 
-      it "set scorecard progress to downloaded" do
+      it "sets scorecard progress to renewed" do
         expect(scorecard.reload.progress).to eq("renewed")
       end
     end

@@ -6,9 +6,7 @@ module ScorecardsStatusesHelper
   end
 
   def status_planned_html(status)
-    content_tag :span, class: "badge badge-warning" do
-      status
-    end
+    content_tag :span, status, class: "badge badge-warning"
   end
 
   def status_planned_running_html(status)
