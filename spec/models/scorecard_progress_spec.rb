@@ -36,6 +36,15 @@ RSpec.describe ScorecardProgress, type: :model do
       end
     end
 
+    context "#renewed" do
+      let!(:scorecard) { create(:scorecard, progress: :running) }
+      let!(:scorecard_progress) { create(:scorecard_progress, status: :renewed, scorecard: scorecard) }
+
+      it "set scorecard progress to downloaded" do
+        expect(scorecard.reload.progress).to eq("renewed")
+      end
+    end
+
     context "scorecard is locked" do
       let!(:scorecard) { create(:scorecard, progress: :running) }
       let(:scorecard_progress) { build(:scorecard_progress, status: :submitted, scorecard: scorecard) }

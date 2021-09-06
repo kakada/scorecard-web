@@ -117,6 +117,10 @@ class Scorecard < ApplicationRecord
     access_locked?
   end
 
+  def renewed?
+    progress == 'renewed'
+  end
+
   private
     def secure_uuid
       self.uuid ||= six_digit_rand

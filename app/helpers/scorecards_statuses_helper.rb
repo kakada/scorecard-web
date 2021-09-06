@@ -22,4 +22,10 @@ module ScorecardsStatusesHelper
       "#{status} (#{t('scorecard.submitted')})"
     end
   end
+
+  def status_planned_downloaded_html(status)
+    content_tag :span, class: "badge badge-warning" do
+      "#{status} (#{t('scorecard.downloaded')})"
+    end
+  end
 end
