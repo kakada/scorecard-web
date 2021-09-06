@@ -49,6 +49,7 @@ FactoryBot.define do
     program
     creator
     local_ngo
+    status       { 'planned' }
     scorecard_type { Scorecard::SCORECARD_TYPES.sample.last }
     commune_id   { Pumi::Commune.all.sample.id }
     district_id  { Pumi::Commune.find_by_id(commune_id).try(:district_id) }

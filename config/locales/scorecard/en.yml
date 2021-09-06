@@ -80,6 +80,7 @@ en:
     downloaded: downloaded
     running: running
     submitted: submitted
+    renewed: renewed
     references: References
     implemented_date: Implemented date
     submitted_date: Submitted date
