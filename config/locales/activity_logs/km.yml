@@ -8,3 +8,5 @@ km:
     path: Path
     http_status: Status
     payload: Payload
+    start_date: ថ្ងៃចាប់ផ្ដើម
+    end_date: ថ្ងៃបញ្ចប់
