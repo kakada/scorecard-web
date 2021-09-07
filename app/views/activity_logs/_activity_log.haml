@@ -3,7 +3,8 @@
   %td= activity_log.action_name
   %td= activity_log.format
   %td= activity_log.http_method
-  %td= activity_log.path
+  %td{ style: 'max-width: 300px' }
+    = activity_log.path
   %td= activity_log.http_status
   %td{ style: 'max-width: 400px' }
     .text-wrap

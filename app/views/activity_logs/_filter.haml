@@ -1,0 +1,6 @@
+= simple_form_for :q, method: :get, html: { class: "form-inline mb-3" } do |f|
+  = f.input :http_format, label: false, collection: [['Format', ''], ['HTML','html'], ['JSON','json']], selected: params[:http_format], input_html: { name: "http_format" }, wrapper_html: { class: "mr-2" }
+  = f.input :http_method, label: false, collection: [['Method', ''], ['GET', 'GET'], ['POST', 'POST'], ['PUT', 'PUT'], ['DELETE', 'DELETE']], selected: params[:http_method], input_html: { name: "http_method" }, wrapper_html: { class: "mr-2" }
+  = f.input :start_date, as: :date, html5: true, label: "Start date", wrapper_html: { class: "mr-3" }
+  = f.input :end_date, as: :date, html5: true, label: "End date", wrapper_html: { class: "mr-3" }
+  = f.submit "search", class: "btn btn-primary"
