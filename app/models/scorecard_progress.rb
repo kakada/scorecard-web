@@ -17,7 +17,8 @@ class ScorecardProgress < ApplicationRecord
   enum status: {
     downloaded: 1,
     running: 2,
-    submitted: 3
+    submitted: 3,
+    renewed: 4
   }
 
   after_save :set_scorecard_progress
@@ -32,7 +33,7 @@ class ScorecardProgress < ApplicationRecord
     end
 
     def set_scorecard_progress
-      return if self.class.statuses[scorecard.progress].to_i >= self.class.statuses[status]
+      return if !scorecard.renewed? && self.class.statuses[scorecard.progress].to_i >= self.class.statuses[status].to_i
 
       scorecard.progress = status
       scorecard.save(validate: false)
