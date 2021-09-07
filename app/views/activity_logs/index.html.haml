@@ -2,6 +2,8 @@
 
 .card.shadow.mb-4
   .card-body
+    = render "shared/pagination_title", objects: @activity_logs
+
     %table.table.table-hover.table-responsive.w-100
       %thead
         %tr
@@ -16,4 +18,6 @@
       %tbody
         = render @activity_logs.presence || "no_data"
 
-    != pagy_bootstrap_nav @pagy
+    - if @pagy.pages > 1
+      .pagy-wrapper
+        != pagy_bootstrap_nav @pagy
