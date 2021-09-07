@@ -19,13 +19,15 @@ ActiveRecord::Schema.define(version: 2021_09_09_065628) do
   create_table "activity_logs", force: :cascade do |t|
     t.string "controller_name"
     t.string "action_name"
-    t.string "format"
+    t.string "http_format"
     t.string "http_method"
     t.string "path"
     t.integer "http_status"
     t.json "payload", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["http_format"], name: "index_activity_logs_on_http_format"
+    t.index ["http_method"], name: "index_activity_logs_on_http_method"
   end
 
   create_table "cafs", force: :cascade do |t|
