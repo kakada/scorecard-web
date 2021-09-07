@@ -1,0 +1,11 @@
+%tr
+  %td= activity_log.controller_name
+  %td= activity_log.action_name
+  %td= activity_log.format
+  %td= activity_log.http_method
+  %td= activity_log.path
+  %td= activity_log.http_status
+  %td
+    .text-wrap
+      = activity_log.payload
+  %td= activity_log.created_at

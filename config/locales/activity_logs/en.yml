@@ -1,0 +1,10 @@
+en:
+  activity_logs:
+    title: Activity Logs
+    controller_name: Controller
+    action_name: Action
+    format: Format
+    http_method: Method
+    path: Path
+    http_status: Status
+    payload: Payload

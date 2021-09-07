@@ -1,0 +1,19 @@
+= render "shared/page_title", title: t("activity_logs.title")
+
+.card.shadow.mb-4
+  .card-body
+    %table.table.table-hover
+      %thead
+        %tr
+          %th= t('activity_logs.controller_name')
+          %th= t('activity_logs.action_name')
+          %th= t('activity_logs.format')
+          %th= t('activity_logs.http_method')
+          %th= t('activity_logs.path')
+          %th= t('activity_logs.http_status')
+          %th= t('activity_logs.payload')
+          %th= t('shared.created_at')
+      %tbody
+        = render @activity_logs.presence || "no_data"
+
+    != pagy_bootstrap_nav @pagy

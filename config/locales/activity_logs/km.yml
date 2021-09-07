@@ -1,0 +1,10 @@
+km:
+  activity_logs:
+    title: កំណត់ហេតុសកម្មភាព
+    controller_name: Controller
+    action_name: Action
+    format: Format
+    http_method: Method
+    path: Path
+    http_status: Status
+    payload: Payload

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     match "/confirmation" => "confirmations#update", via: :put, as: :update_user_confirmation
   end
 
+  resources :activity_logs, only: :index
   resources :scorecards do
     scope module: "scorecards" do
       resources :medians

@@ -72,6 +72,11 @@
         %i.fas.fa-fw.fa-exclamation-circle
         %span= t('sidebar.about')
 
+    %li.nav-item{ class: css_active_class('activity_logs') }
+      %a.nav-link{:href => activity_logs_path}
+        %i.fas.fa-fw.fa-shoe-prints
+        %span= t('sidebar.activity_logs')
+
     / Divider
     %hr.sidebar-divider.d-none.d-md-block/
 
