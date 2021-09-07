@@ -1,7 +1,7 @@
 class ActivityLogsWorker
   include Sidekiq::Worker
 
-  def perform(args)
+  def perform(args = {})
     ActivityLog.create do |log|
       log.controller_name = args["controller"]
       log.action_name     = args["action"]
