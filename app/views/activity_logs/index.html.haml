@@ -1,8 +1,9 @@
 = render "shared/page_title", title: t("activity_logs.title")
 
+= render "filter"
+
 .card.shadow.mb-4
   .card-body
-    = render "filter"
     = render "shared/pagination_title", objects: @activity_logs
 
     %table.table.table-hover.table-responsive.w-100
