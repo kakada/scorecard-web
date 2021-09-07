@@ -3,10 +3,7 @@ CW.Activity_logsIndex = do ->
     initDatepicker()
 
   initDatepicker = ->
-    $("#start_date").datetimepicker({
-      format: 'L'
-    })
-    $("#end_date").datetimepicker({
+    $(".dateinput").datetimepicker({
       format: 'L'
     })
 
