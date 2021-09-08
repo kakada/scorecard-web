@@ -67,15 +67,15 @@
           %i.fas.fa-fw.fa-school
           %span= t('sidebar.primary_schools')
 
-    %li.nav-item{ class: css_active_class('about') }
-      %a.nav-link{:href => about_path}
-        %i.fas.fa-fw.fa-exclamation-circle
-        %span= t('sidebar.about')
-
     %li.nav-item{ class: css_active_class('activity_logs') }
       %a.nav-link{:href => activity_logs_path}
         %i.fas.fa-fw.fa-shoe-prints
         %span= t('sidebar.activity_logs')
+
+    %li.nav-item{ class: css_active_class('about') }
+      %a.nav-link{:href => about_path}
+        %i.fas.fa-fw.fa-exclamation-circle
+        %span= t('sidebar.about')
 
     / Divider
     %hr.sidebar-divider.d-none.d-md-block/
