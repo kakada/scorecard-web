@@ -3,6 +3,17 @@ CW.Activity_logsIndex = do ->
     initDatepicker()
     onDatepickerApply()
     onDatepickerCancel()
+    onReadMe()
+
+  onReadMe = ->
+    $(".readme").click (e) ->
+      e.preventDefault()
+      $content = $(this).prevAll('.content')
+      $parent = $(this).parent()
+      oldContent = $content.text()
+      $content.text($parent.attr("data-content"))
+      $parent.attr("data-content", oldContent)
+      $parent.find(".readme").toggle()
 
   initDatepicker = ->
     $(".daterange").daterangepicker {

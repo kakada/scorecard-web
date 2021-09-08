@@ -1,11 +1,11 @@
 %tr
   %td.fixed-gap
-    = activity_log.path
+    = read_more activity_log.path
   %td= activity_log.http_method
   %td= activity_log.http_format
   %td
     = activity_log.http_status
   %td.fixed-gap
-    = activity_log.payload
+    = read_more activity_log.payload.to_s
   %td.w-100
     = l activity_log.created_at, format: :long

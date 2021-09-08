@@ -11,3 +11,5 @@ en:
     duration: Duration
     start_date: Start date
     end_date: End date
+    more_html: "more &raquo;"
+    less_html: "&laquo; less"

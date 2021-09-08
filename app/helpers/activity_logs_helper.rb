@@ -22,4 +22,15 @@ module ActivityLogsHelper
   def form_methods_collection
     [[t('shared.all'), ''], ['GET', 'GET'], ['POST', 'POST'], ['PUT', 'PUT'], ['DELETE', 'DELETE']]
   end
+
+  def read_more text, length = 100
+    return text if text.length < length
+
+    content_tag :div, data: { content: text } do
+      new_content  = content_tag(:span, truncate(text, length: length), class: "content")
+      new_content += "  "
+      new_content += link_to t("activity_logs.more_html"), "#", class: "readme more"
+      new_content += link_to t("activity_logs.less_html"), "#", class: "readme less", style: "display: none;"
+    end
+  end
 end
