@@ -8,5 +8,6 @@ en:
     path: Path
     http_status: Status
     payload: Payload
+    duration: Duration
     start_date: Start date
     end_date: End date
