@@ -1,16 +1,13 @@
 = simple_form_for :q, method: :get, html: { class: "form-inline mb-3" } do |f|
-  = f.input :http_format, label: false, collection: form_formats_collection, selected: params[:http_format], input_html: { name: "http_format" }, wrapper_html: { class: "mr-2" }
-  = f.input :http_method, label: false, collection: form_methods_collection, selected: params[:http_method], input_html: { name: "http_method" }, wrapper_html: { class: "mr-2" }
+  = f.input :http_format, label: format_label, required: false, collection: form_formats_collection, selected: params[:http_format], input_html: { name: "http_format" }, wrapper_html: { class: "mr-2" }
+  = f.input :http_method, label: method_label, required: false, collection: form_methods_collection, selected: params[:http_method], input_html: { name: "http_method" }, wrapper_html: { class: "mr-2" }
 
-  #start_date.input-group.dateinput.mr-2.date{ "data-target-input" => "nearest" }
-    %input.form-control.datetimepicker-input{ data: { target: "#start_date", toggle: "datetimepicker" }, type: "text", placeholder: t("activity_logs.start_date"), name: "start_date", value: params[:start_date], autocomplete: "off"}
-    .input-group-append{ data: { target: "#start_date", toggle: "datetimepicker" } }
-      .input-group-text
-        %i.fa.fa-calendar
-
-  #end_date.input-group.dateinput.mr-2.date{ "data-target-input" => "nearest" }
-    %input.form-control.datetimepicker-input{ data: { target: "#end_date", toggle: "datetimepicker" }, type: "text", placeholder: t("activity_logs.end_date"), name: "end_date", value: params[:end_date], autocomplete: "off"}
-    .input-group-append{ data: { target: "#end_date", toggle: "datetimepicker" } }
+  = f.input :start_date, as: :hidden, input_html: { name: "start_date", value: params[:start_date] }
+  = f.input :end_date, as: :hidden, input_html: { name: "end_date", value: params[:end_date] }
+  = f.label :duration, duration_label
+  .input-group.mr-2
+    %input.form-control.daterange{ type: "text", value: params[:duration], autocomplete: "off", value: @duration }
+    .input-group-append
       .input-group-text
         %i.fa.fa-calendar
 

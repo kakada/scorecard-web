@@ -17,6 +17,7 @@
 //= require typeahead
 //= require bloodhound.min
 //= require jquery.richtext
+//= require daterangepicker
 
 //= require application/namespace
 //= require application/util
