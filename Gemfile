@@ -75,6 +75,7 @@ gem "paranoia", "~> 2.4.3"
 
 gem "recaptcha", "~> 5.7.0"
 gem "fcm", "~> 1.0.3"
+gem "bootstrap-daterangepicker-rails", "~> 3.0.4"
 
 gem "doorkeeper", "~> 5.5.2"
 gem "validate_url", "~> 1.0.13"
