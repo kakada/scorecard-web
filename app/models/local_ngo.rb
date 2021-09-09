@@ -23,6 +23,10 @@ class LocalNgo < ApplicationRecord
   has_many :scorecards
 
   validates :name, presence: true, uniqueness: { scope: :program_id }
+  validates :website_url, url: {  allow_blank: true,
+                                  no_local: true,
+                                  public_suffix: true,
+                                  message: I18n.t("local_ngo.website_url.invalid") }
 
   before_save :set_target_provinces, if: :will_save_change_to_target_province_ids?
 
