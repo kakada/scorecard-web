@@ -2,8 +2,8 @@
 
 module Samples
   class PdfTemplate
-    def self.load
-      program = ::Program.find_by name: "CARE"
+    def self.load(program_name="CARE")
+      program = ::Program.find_by name: program_name
 
       program.pdf_templates.create(
         name: "SWOT result",

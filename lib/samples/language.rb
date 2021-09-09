@@ -2,8 +2,9 @@
 
 module Samples
   class Language < Base
-    def self.load
-      program = ::Program.find_by name: "CARE"
+    def self.load(program_name="CARE")
+      program = ::Program.find_by name: program_name
+
       return if program.nil?
 
       csv = CSV.read(file_path("language.csv"))

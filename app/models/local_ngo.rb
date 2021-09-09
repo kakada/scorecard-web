@@ -22,6 +22,7 @@ class LocalNgo < ApplicationRecord
   belongs_to :program
   has_many :cafs, dependent: :destroy
   has_many :scorecards
+  has_many :users
 
   validates :name, presence: true, uniqueness: { scope: :program_id }
   validates :website_url, url: {  allow_blank: true,

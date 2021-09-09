@@ -4,8 +4,8 @@ require "rails_helper"
 
 RSpec.describe PdfTemplateInterpreter do
   describe "#pdf_template" do
-    let!(:pdf_template_km) { create(:pdf_template) }
-    let!(:program) { pdf_template_km.program }
+    let!(:program) { create(:program) }
+    let!(:pdf_template_km) { create(:pdf_template, program: program) }
     let!(:scorecard) { create(:scorecard, program: program) }
     let(:interpretor) { PdfTemplateInterpreter.new(scorecard.uuid) }
 

@@ -12,7 +12,7 @@ namespace :program do
   task :migrate_dashboard, [:program_id] => :environment do |task, args|
     program = Program.find(args[:program_id])
 
-    add_dashboard_and_uses(program)
+    add_dashboard_and_users(program)
   rescue
     abort "Unable to find the program: #{args[:program_id]}"
   end
@@ -20,8 +20,17 @@ namespace :program do
   desc "migrate dashboard for each programs"
   task migrate_each_dashboard: :environment do
     Program.find_each do |program|
-      add_dashboard_and_uses(program)
+      add_dashboard_and_users(program)
     end
+  end
+
+  desc "create new program and clone dependency"
+  task :migrate_world_vision, [:program_name, :program_shortcut_name] => :environment do
+    program = Program.find_or_create_by(name: args[:program_name], shortcut_name: args[:program_shortcut_name])
+
+    ProgramService.new(program.id).clone_from_sample
+    LocalNgoService.new(program.id).migrate_self_and_dependency
+    UserService.new(program.id).migrate_program
   end
 
   desc "remove program and its dependency"
@@ -82,7 +91,7 @@ namespace :program do
   end
 
   private
-    def add_dashboard_and_uses(program)
+    def add_dashboard_and_users(program)
       program.create_dashboard
 
       users = User.where(actived: true, program_id: program.id)

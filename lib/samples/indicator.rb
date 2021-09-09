@@ -2,12 +2,14 @@
 
 module Samples
   class Indicator < Base
-    def self.load
+    def self.load(program_name="CARE")
+      program = Program.find_by name: program_name
+
       xlsx = Roo::Spreadsheet.open(file_path("indicator.xlsx"))
       xlsx.each_with_pagename do |page_name, sheet|
         rows = sheet.parse(headers: true)
         facility_code = page_name[/\((.*?)\)/, 1]
-        facility = ::Facility.find_by(code: facility_code)
+        facility = program.facilities.find_by(code: facility_code)
 
         upsert_indicators(rows, facility)
       end
