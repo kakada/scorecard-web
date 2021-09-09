@@ -27,6 +27,8 @@
       %label= t('local_ngo.target_provinces')
       %input{ name: 'tags', placeholder: t("shared.please_select"), "data-collection" => Pumi::Province.all.to_json }
 
+    = f.input :website_url
+
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), local_ngos_path, class: 'btn btn-secondary'
