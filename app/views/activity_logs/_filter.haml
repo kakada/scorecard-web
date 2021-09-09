@@ -6,7 +6,7 @@
   = f.input :end_date, as: :hidden, input_html: { name: "end_date", value: params[:end_date] }
   = f.label :duration, duration_label
   .input-group.mr-2
-    %input.form-control.daterange{ type: "text", value: params[:duration], autocomplete: "off", value: @duration }
+    %input.form-control.daterange{ type: "text", autocomplete: "off", value: @duration }
     .input-group-append
       .input-group-text
         %i.fa.fa-calendar
