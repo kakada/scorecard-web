@@ -2,13 +2,21 @@ class ActivityLogsController < ApplicationController
   before_action :set_duration
 
   def index
-    @pagy, @activity_logs = pagy(ActivityLog.filter(activity_log_params).order(created_at: :desc))
+    @pagy, @activity_logs = pagy(ActivityLog.filter(filter_params).includes(:user, :program))
   end
 
   private
 
+  def filter_params
+    activity_log_params.merge(current_user_params)
+  end
+
   def activity_log_params
     params.permit(:http_format, :http_method, :start_date, :end_date)
+  end
+
+  def current_user_params
+    { role: current_user.role, user_id: current_user.id, program_id: current_user.program_id }
   end
 
   def set_duration

@@ -7,6 +7,8 @@ class CreateActivityLogs < ActiveRecord::Migration[6.0]
       t.string :http_method, index: true
       t.string :path
       t.integer :http_status
+      t.belongs_to :user
+      t.belongs_to :program
       t.json :payload, default: {}
 
       t.timestamps

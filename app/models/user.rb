@@ -51,6 +51,7 @@ class User < ApplicationRecord
   belongs_to :program, optional: true
   belongs_to :local_ngo, optional: true
   has_many   :mobile_notifications, foreign_key: :creator_id
+  has_many   :activity_logs
 
   has_many :access_grants,
            class_name: 'Doorkeeper::AccessGrant',

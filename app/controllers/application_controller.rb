@@ -20,6 +20,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_program
 
+  def append_info_to_payload payload
+    super
+    payload[:current_user_id] = current_user.id
+  end
+
   private
     def set_layout
       devise_controller? ? "layouts/minimal" : "layouts/application"

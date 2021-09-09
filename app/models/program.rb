@@ -29,6 +29,7 @@ class Program < ApplicationRecord
   has_many :messages
   has_many :mobile_tokens
   has_one  :telegram_bot, dependent: :destroy
+  has_many :activity_logs
 
   validates :name, presence: true, uniqueness: true
   validates :shortcut_name, presence: true, uniqueness: true
