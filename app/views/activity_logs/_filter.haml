@@ -1,14 +1,15 @@
-= simple_form_for :q, method: :get, html: { class: "form-inline mb-3" } do |f|
-  = f.input :http_format, label: http_format_label, required: false, collection: form_formats_collection, selected: params[:http_format], input_html: { name: "http_format" }, wrapper_html: { class: "mr-2" }
-  = f.input :http_method, label: http_method_label, required: false, collection: form_methods_collection, selected: params[:http_method], input_html: { name: "http_method" }, wrapper_html: { class: "mr-2" }
+.d-flex.justify-content-end
+  = simple_form_for :q, method: :get, html: { class: "form-inline mb-3" } do |f|
+    = f.input :http_format, label: http_format_label, required: false, collection: form_formats_collection, selected: params[:http_format], input_html: { name: "http_format" }, wrapper_html: { class: "mr-2" }
+    = f.input :http_method, label: http_method_label, required: false, collection: form_methods_collection, selected: params[:http_method], input_html: { name: "http_method" }, wrapper_html: { class: "mr-2" }
 
-  = f.input :start_date, as: :hidden, input_html: { name: "start_date", value: params[:start_date] }
-  = f.input :end_date, as: :hidden, input_html: { name: "end_date", value: params[:end_date] }
-  = f.label :duration, duration_label
-  .input-group.mr-2
-    %input.form-control.daterange{ type: "text", autocomplete: "off", value: @duration }
-    .input-group-append
-      .input-group-text
-        %i.fa.fa-calendar
+    = f.input :start_date, as: :hidden, input_html: { name: "start_date", value: params[:start_date] }
+    = f.input :end_date, as: :hidden, input_html: { name: "end_date", value: params[:end_date] }
+    = f.label :duration, duration_label
+    .input-group.mr-2
+      %input.form-control.daterange{ type: "text", autocomplete: "off", value: @duration }
+      .input-group-append
+        .input-group-text
+          %i.fa.fa-calendar
 
-  = f.submit t("shared.search"), class: "btn btn-primary"
+    = f.submit t("shared.search"), class: "btn btn-primary"
