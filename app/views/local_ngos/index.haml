@@ -40,7 +40,7 @@
               %td.text-right
                 - if policy(local_ngo).manage_caf?
                   = link_to local_ngo_cafs_path(local_ngo), class: "btn btn-circle btn-sm btn-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('local_ngo.manage_caf') } do
-                    %i.fas.fa-pencil-ruler
+                    %i.fas.fa-fw.fa-users
 
                 = render 'shared/action_buttons', edit_url: edit_local_ngo_path(local_ngo), delete_url: local_ngo_path(local_ngo), object: local_ngo
 
