@@ -61,13 +61,12 @@
                   - else
                     = "_"
                 %td.text-right.action-buttons
-
                   - if scorecard.access_locked?
                     %span{data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.completed')}}
                       %i.fas.fa-lock
 
                   - if scorecard.access_locked? && scorecard.program.try(:pdf_templates).present?
-                    = link_to scorecard_path(scorecard.uuid, format: 'pdf'), class: "  btn-sm mr-1 text-danger", data: { toggle: 'tooltip', placement: 'top', title: "Download as PDF"}, target: '_blank', download: true do
+                    = link_to scorecard_path(scorecard.uuid, format: 'pdf'), class: " mx-1 text-danger", data: { toggle: 'tooltip', placement: 'top', title: "Download as PDF"}, target: '_blank', download: true do
                       %i.fas.fa-file-pdf
 
                   = render 'shared/action_buttons', edit_url: edit_scorecard_path(scorecard.uuid), delete_url: scorecard_path(scorecard.uuid), object: scorecard
