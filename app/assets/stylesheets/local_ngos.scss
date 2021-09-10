@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .tagify {
-  @extend .form-control;
+  @extend .form-control !optional;
   width: 100%;
   background: rgba(white, 0.8);
 }
