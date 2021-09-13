@@ -12,6 +12,8 @@ services:
       - 'db:/var/lib/postgresql/data'
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - '5432:5432'
 
   web: &rails
     build:
