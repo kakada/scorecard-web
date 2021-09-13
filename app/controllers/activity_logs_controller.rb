@@ -2,6 +2,7 @@ class ActivityLogsController < ApplicationController
   before_action :set_duration
 
   def index
+    authorize ActivityLog
     @pagy, @activity_logs = pagy(ActivityLog.filter(filter_params).includes(:user, :program))
   end
 
