@@ -5,11 +5,11 @@ class LocalNgoService
     @program = Program.find(program_id)
   end
 
-  def migrate_self_and_dependency
+  def migrate_from_program(source_program)
     csv = CSV.read(file_path("migrating_local_ngo.csv"))
     csv.shift
     csv.each do |row|
-      local_ngo = LocalNgo.find_by name: row[0]
+      local_ngo = LocalNgo.find_by(name: row[0], program_id: source_program.id)
       next if local_ngo.nil? || program.name != row[1]
 
       local_ngo.update(program_id: program.id)
@@ -30,7 +30,7 @@ class LocalNgoService
       local_ngo.scorecards.each do |scorecard|
         update_scorecard(scorecard, program)
         migrate_voting_indicators(scorecard)
-        migrate_voting_indicators(scorecard)
+        migrate_raised_indicators(scorecard)
       end
     end
 

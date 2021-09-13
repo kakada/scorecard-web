@@ -17,6 +17,22 @@ namespace :program do
     abort "Unable to find the program: #{args[:program_id]}"
   end
 
+  # rake program:migrate_program['CARE','World Vision']
+  desc "migrate world vision"
+  task :migrate_program, [:source_program_name, :target_program_name] => :environment do |task, args|
+    raise "Please assign source program name and target program name" if args[:source_program_name].blank? || args[:target_program_name].blank?
+
+    source_program = Program.find_by name: args[:source_program_name]
+    raise "Source Program '#{args[:source_program_name]}' is not exist, please create it." unless source_program.present?
+
+    target_program = Program.find_by(name: args[:target_program_name])
+    raise "Target Program '#{args[:target_program_name]}' is not exist, please create it." unless target_program.present?
+
+    ProgramService.new(target_program.id).clone_from_program(source_program)
+    LocalNgoService.new(target_program.id).migrate_from_program(source_program)
+    UserService.new(target_program.id).migrate_program
+  end
+
   desc "migrate dashboard for each programs"
   task migrate_each_dashboard: :environment do
     Program.find_each do |program|

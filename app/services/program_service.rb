@@ -15,31 +15,30 @@ class ProgramService
     ::ScorecardCriteria::RatingScale.load(program.name)
   end
 
-  def clone_from_program(from_program)
-    clone_languages(from_program)
-    clone_pdf_template(from_program)
-    clone_facilities(from_program)
-    clone_indicators(from_program)
-    clone_rating_scales(from_program)
+  def clone_from_program(source_program)
+    clone_languages(source_program)
+    clone_pdf_template(source_program)
+    clone_facilities(source_program)
+    clone_indicators(source_program)
+    clone_rating_scales(source_program)
   end
 
-  private
-    def clone_languages(from_program)
-      from_program.languages.each do |language|
+    def clone_languages(source_program)
+      source_program.languages.each do |language|
         new_language = program.languages.find_or_initialize_by(code: language.code)
         new_language.update(name_en: language.name_en, name_km: language.name_km)
       end
     end
 
-    def clone_pdf_template(from_program)
-      from_program.pdf_templates.each do |pdf_template|
+    def clone_pdf_template(source_program)
+      source_program.pdf_templates.each do |pdf_template|
         new_template = program.pdf_templates.find_or_initialize_by(language_code: pdf_template.language_code)
         new_template.update(name: pdf_template.name, content: pdf_template.content)
       end
     end
 
-    def clone_facilities(from_program)
-      from_program.facilities.each do |facility|
+    def clone_facilities(source_program)
+      source_program.facilities.each do |facility|
         new_facility = program.facilities.find_or_initialize_by(code: facility.code)
         new_parent_id = nil
 
@@ -53,8 +52,8 @@ class ProgramService
       end
     end
 
-    def clone_indicators(from_program)
-      from_program.facilities.each do |facility|
+    def clone_indicators(source_program)
+      source_program.facilities.where.not(parent_id: nil).each do |facility|
         new_facility = program.facilities.find_by(code: facility.code)
 
         facility.indicators.each do |indicator|
@@ -75,8 +74,8 @@ class ProgramService
       end
     end
 
-    def clone_rating_scales(from_program)
-      from_program.rating_scales.each do |rating_scale|
+    def clone_rating_scales(source_program)
+      source_program.rating_scales.each do |rating_scale|
         new_rating_scale = program.rating_scales.find_or_initialize_by(code: rating_scale.code)
         new_rating_scale.update(name: rating_scale.name, value: rating_scale.value)
 
