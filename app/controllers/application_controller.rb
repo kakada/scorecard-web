@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   include Pagy::Backend
   include SortOrder
+  rescue_from ::Pundit::NotAuthorizedError, with: :render_no_permission
 
   helper_method :sort_column, :sort_direction
 
@@ -26,6 +27,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+    def render_no_permission
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to(request.referrer || root_path)
+    end
+
     def set_layout
       devise_controller? ? "layouts/minimal" : "layouts/application"
     end
