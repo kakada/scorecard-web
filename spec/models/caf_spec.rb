@@ -22,4 +22,23 @@ RSpec.describe Caf, type: :model do
   it { is_expected.to belong_to(:local_ngo) }
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_inclusion_of(:sex).in_array(%w(female male other)).allow_nil }
+
+  describe "soft delete" do
+    let(:scorecard) { create(:scorecard) }
+    let(:caf) { create(:caf, scorecards: [scorecard]) }
+
+    context "with no scorecards" do
+      it "is real delete" do
+        caf.scorecards = []
+        expect { caf.destroy }.to change { Caf.count }.by -1
+      end
+    end
+
+    context "with scorecards" do
+      it "is soft delete" do
+        expect { caf.destroy }.to change { Caf.only_deleted.count }.by 1
+        expect(caf).to be_deleted
+      end
+    end
+  end
 end
