@@ -35,7 +35,5 @@ FactoryBot.define do
       contact_type { :tel }
       value { "012333444" }
     end
-
-    factory :system_contact, traits: [:no_program, :system_email, :system_tel]
   end
 end

@@ -1,22 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe ContactService do
-  
-
   context "with program" do
+    subject { described_class.new(program) }
+
     let(:program) { create(:program) }
-    let!(:contact_with_program) { create(:contact, program: program) }
+    let(:contact) { create(:contact, program: program) }
 
     it "#as_json" do
-      expect(described_class.new(program).as_json).to eq [contact_with_program]
+      expect(subject.as_json).to eq [contact]
     end
   end
 
   context "without program" do
-    let!(:contact_without_program) { create(:contact, program: nil) }
+    subject { described_class.new(nil) }
+
+    let(:contact) { create(:contact, program: nil) }
 
     it "#as_json" do
-      expect(described_class.new(nil).as_json).to eq [contact_without_program]
+      expect(subject.as_json).to eq [contact]
     end
   end
 end
