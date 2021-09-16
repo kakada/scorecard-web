@@ -4,8 +4,7 @@ module Api
   module V1
     class ContactsController < ApiController
       def index
-        @contact = ContactService.new(program)
-        render json: @contact.as_json
+        render json: ContactService.new(program).as_json
       end
 
       private
