@@ -51,6 +51,10 @@ Rails.application.routes.draw do
   end
   resources :messages
 
+  scope :system do
+    resources :contacts, as: :system_contacts
+  end
+
   resources :languages, path: "/scorecards/settings/languages"
 
   resources :facilities, path: "/scorecards/settings/facilities", only: [:index, :new, :create, :destroy] do

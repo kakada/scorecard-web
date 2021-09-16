@@ -41,6 +41,11 @@
             = image_tag 'default_profile.png', alt: 'profile', class: 'img-thumbnail rounded-circle'
           = current_user.email
 
+        - if policy(Contact).index?
+          = link_to system_contacts_path, class: "dropdown-item d-flex align-items-center border-bottom mb-2" do
+            %i.fa.fa-cog.fa-sm.fa-fw.mr-2.text-gray-600
+            = t 'contact.system_contact'
+
         %a.dropdown-item{"data-target" => "#logoutModal", "data-toggle" => "modal", :href => "#"}
           %i.fas.fa-sign-out-alt.fa-sm.fa-fw.mr-2.text-gray-600
           = t("sidebar.logout")
