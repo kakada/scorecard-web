@@ -19,6 +19,7 @@ class Spreadsheets::LocalNgoSpreadsheet
     lngo = program.local_ngos.find_or_initialize_by(code: row["code"])
     lngo.update({
       name: row["name"],
+      website_url: row["website_url"],
       province_id: row["province_id"],
       district_id: row["district_id"],
       commune_id: row["commune_id"],

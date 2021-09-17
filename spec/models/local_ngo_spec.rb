@@ -33,4 +33,15 @@ RSpec.describe LocalNgo, type: :model do
 
     it { expect(ngo.target_provinces).to eq("#{province1.name_km}, #{province2.name_km}") }
   end
+
+  describe "#website_url" do
+    subject { build(:local_ngo, website_url: 'htp://invalidurl') }
+
+    it "validates website_url" do
+      subject.valid?
+
+      expect(subject).not_to be_valid
+      expect(subject.errors[:website_url]).to eq ["is invalid"]
+    end
+  end
 end

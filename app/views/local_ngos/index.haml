@@ -33,7 +33,8 @@
           - @local_ngos.each_with_index do |local_ngo, index|
             %tr
               %td= @pagy.from + index
-              %td= local_ngo.name
+              %td
+                = link_to_if local_ngo.website_url.present?, local_ngo.name, local_ngo.website_url, target: "_blank"
               %td= local_ngo.address
               %td= local_ngo.target_provinces
               %td= timeago(local_ngo.created_at).html_safe

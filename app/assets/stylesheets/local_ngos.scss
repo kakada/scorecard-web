@@ -3,9 +3,9 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .tagify {
+  @extend .form-control !optional;
   width: 100%;
-  max-width: 700px;
-  background: rgba(white, .8);
+  background: rgba(white, 0.8);
 }
 
 /* Suggestions items */
@@ -13,16 +13,16 @@
   font-size: 14px;
 
   .tagify__dropdown__item {
-    padding: .5em .7em;
+    padding: 0.5em 0.7em;
   }
 
-  strong{
+  strong {
     width: 100%;
     font-weight: 500;
   }
 }
 
 /* Tags items */
-.tagify__tag{
+.tagify__tag {
   white-space: nowrap;
 }

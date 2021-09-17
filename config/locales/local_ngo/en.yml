@@ -11,3 +11,5 @@ en:
     manage_caf: Manage caf
     add_new: Add new local ngo
     search: Search by name or province
+    website_url:
+      invalid: is invalid

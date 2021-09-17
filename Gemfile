@@ -77,6 +77,7 @@ gem "recaptcha", "~> 5.7.0"
 gem "fcm", "~> 1.0.3"
 
 gem "doorkeeper", "~> 5.5.2"
+gem "validate_url", "~> 1.0.13"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
