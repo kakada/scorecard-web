@@ -20,7 +20,7 @@ module ScorecardJson
         voting_indicators.map do |vi|
           {
             name: vi.indicatorable.name,
-            tag: vi.indicatorable.tag.name,
+            tag: vi.indicatorable.tag_name,
             median: VotingIndicator.medians[vi.median],
             participants: build_participants(vi)
           }

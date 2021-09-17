@@ -24,7 +24,7 @@ module ScorecardJson
         indicatorables.map do |indi|
           criteria = {}
           criteria["name"] = indi.name
-          criteria["tag"] = indi.tag.name
+          criteria["tag"] = indi.tag_name
           criteria["count"] = group_indicators[[indi.id, indi.class.name]]
           criteria["participants"] = build_participant(indi)
           criteria

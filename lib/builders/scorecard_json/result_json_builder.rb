@@ -22,7 +22,7 @@ module ScorecardJson
         scorecard.voting_indicators.map do |vi|
           {
             name: vi.indicatorable.name,
-            tag: vi.indicatorable.tag.name,
+            tag: vi.indicatorable.tag_name,
             count: vi.suggested_action.length,
             selected_actions: vi.suggested_action.map { |action| return { description: action } }
           }
