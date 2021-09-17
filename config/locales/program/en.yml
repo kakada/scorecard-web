@@ -13,3 +13,7 @@ en:
     reindex_successfully: Reindex document successfully
     shortcut_name: Shortcut name
     used_for_com: used for communication
+    dashboard_accessibility: Dashboard accessibility
+    allow_roles_to_access_dashboard: Allow user with the following roles to access dashboard
+    allow_emails_to_access_dashboard: Allow user with the following emails to access dashboard
+    or: OR

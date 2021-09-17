@@ -41,6 +41,10 @@ Rails.application.routes.draw do
       put :upsert, on: :collection
     end
 
+    resources :dashboard_accessibilities, only: [:index] do
+      put :upsert, on: :collection
+    end
+
     resource :telegram_bot, only: [:show] do
       put :upsert, on: :collection
       get :help, on: :collection

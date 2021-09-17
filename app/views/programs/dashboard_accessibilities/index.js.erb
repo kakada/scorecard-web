@@ -1,0 +1,7 @@
+$('#dashboardModal .modal-bodys').html('<%= j render("form") %>');
+
+CW.DashboardAccessibility.initTagEmails();
+CW.DashboardAccessibility.onSubmitForm();
+
+$("#dashboardModal").modal("show");
+

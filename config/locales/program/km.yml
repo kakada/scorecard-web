@@ -13,3 +13,7 @@ km:
     reindex_successfully: Reindex document ដោយជោគជ័យ
     shortcut_name: ឈ្មោះកាត់
     used_for_com: ប្រើសម្រាប់ការទំនាក់ទំនង
+    dashboard_accessibility: សិទ្ធិលើផ្ទាំងគ្រប់គ្រង
+    allow_roles_to_access_dashboard: អនុញ្ញាតឱ្យអ្នកប្រើប្រាស់ដែលមានតួនាទីដូចខាងក្រោមចូលប្រើផ្ទាំងគ្រប់គ្រង
+    allow_emails_to_access_dashboard: អនុញ្ញាតឱ្យអ្នកប្រើប្រាស់ដែលមានអ៊ីមែលខាងក្រោមចូលប្រើផ្ទាំងគ្រប់គ្រង
+    or: ឬ
