@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   include Pagy::Backend
   include SortOrder
-  rescue_from ::Pundit::NotAuthorizedError, with: :render_no_permission
+  rescue_from ::Pundit::NotAuthorizedError, with: :render_unauthorized
 
   helper_method :sort_column, :sort_direction
 
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def render_no_permission
+    def render_unauthorized
       flash[:alert] = "You are not authorized to perform this action."
       redirect_to(request.referrer || root_path)
     end
