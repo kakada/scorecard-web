@@ -18,7 +18,7 @@ module ScorecardJson
     private
       def build_indicators
         voting_indicators.map do |vi|
-          { name: vi.indicatorable.name, tag: vi.indicatorable.tag.name }
+          { name: vi.indicatorable.name, tag: vi.indicatorable.tag_name }
         end
       end
 
