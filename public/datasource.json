@@ -1,5 +1,5 @@
 {
-  "name": "Scorecard Datasource",
+  "name": "Scorecard Datasource1",
   "type": "postgres",
   "url": "192.168.0.107:5432",
   "database": "csc_web_development",
