@@ -25,6 +25,8 @@
 #  locked_at              :datetime
 #  failed_attempts        :integer          default(0)
 #  local_ngo_id           :integer
+#  actived                :boolean          default(TRUE)
+#  gf_user_id             :integer
 #
 require "rails_helper"
 

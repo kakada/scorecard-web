@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_17_041743) do
+ActiveRecord::Schema.define(version: 2021_09_22_022513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -119,6 +119,17 @@ ActiveRecord::Schema.define(version: 2021_09_17_041743) do
     t.index ["lft"], name: "index_facilities_on_lft"
     t.index ["parent_id"], name: "index_facilities_on_parent_id"
     t.index ["rgt"], name: "index_facilities_on_rgt"
+  end
+
+  create_table "gf_dashboards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "dashboard_id"
+    t.string "dashboard_uid"
+    t.string "dashboard_url"
+    t.integer "org_id"
+    t.string "org_token"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "indicators", force: :cascade do |t|
@@ -457,6 +468,7 @@ ActiveRecord::Schema.define(version: 2021_09_17_041743) do
     t.integer "failed_attempts", default: 0
     t.integer "local_ngo_id"
     t.boolean "actived", default: true
+    t.integer "gf_user_id"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

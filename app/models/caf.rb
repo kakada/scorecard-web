@@ -13,6 +13,7 @@
 #  local_ngo_id              :integer
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
+#  actived                   :boolean          default(TRUE)
 #  educational_background_id :string
 #  scorecard_knowledge_id    :string
 #

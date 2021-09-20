@@ -25,6 +25,8 @@
 #  locked_at              :datetime
 #  failed_attempts        :integer          default(0)
 #  local_ngo_id           :integer
+#  actived                :boolean          default(TRUE)
+#  gf_user_id             :integer
 #
 FactoryBot.define do
   factory :user, aliases: [:creator] do
@@ -33,6 +35,11 @@ FactoryBot.define do
     role          { "program_admin" }
     confirmed_at  { DateTime.now }
     program
+    skip_callback { true }
+
+    trait :allow_callback do
+      skip_callback { false }
+    end
 
     trait :system_admin do
       role { "system_admin" }

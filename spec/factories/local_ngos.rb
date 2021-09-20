@@ -16,6 +16,7 @@
 #  code                :string
 #  target_province_ids :string
 #  target_provinces    :string
+#  website_url         :string
 #
 FactoryBot.define do
   factory :local_ngo do

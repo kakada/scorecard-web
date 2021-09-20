@@ -21,7 +21,7 @@ module PdfTemplates
     end
 
     def facilitators
-      html = @scorecard.cafs.map {|caf| "<li>#{caf.name}</li>"}.join("")
+      html = @scorecard.cafs.map { |caf| "<li>#{caf.name}</li>" }.join("")
 
       "<ol>#{html}</ol>"
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScorecardsStatusesHelper
   def status_planned_renewed_html(status)
     content_tag :span, class: "badge badge-danger" do

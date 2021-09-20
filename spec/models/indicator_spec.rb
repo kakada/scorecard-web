@@ -26,7 +26,7 @@ RSpec.describe Indicator, type: :model do
 
   it "should touch the categorizable" do
     indicator = build(:indicator)
-    indicator.categorizable.should_receive(:touch)
+    expect(indicator.categorizable).to receive(:touch)
     indicator.save!
   end
 end
