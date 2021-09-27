@@ -87,4 +87,20 @@ RSpec.describe User, type: :model do
       it { expect(user.reload.authentication_token).to eq("a1b2c3d4") }
     end
   end
+
+  describe "#validate, validate_archived_email" do
+    let!(:user) { create(:user, email: 'oren@email.com') }
+    let(:new_user) { user.dup }
+
+    before {
+      user.destroy
+      new_user.valid?
+    }
+
+    it { expect(new_user.valid?).to be_falsey }
+
+    it "renders error that email is being archived" do
+      expect(new_user.errors.first.last).to eq(I18n.t('user.is_being_archived'))
+    end
+  end
 end

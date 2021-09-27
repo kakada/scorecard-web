@@ -1,0 +1,48 @@
+- if user.deleted?
+  / Restore
+  = link_to restore_user_path(user), class: "btn btn-circle btn-sm btn-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.restore') }, method: :put do
+    %i.fas.fa-trash-restore
+
+  / Really destroy
+  - if policy(user).destroy?
+    %span{data: {toggle: 'tooltip', placement: 'top', title: t('shared.delete')}}
+      = link_to "#", class: "btn btn-circle btn-sm btn-danger", data: { target: "#confirmModal#{user.id}", toggle: 'modal' } do
+        %i.fas.fa-trash-alt
+
+      = render "shared/modal_confirm", delete_url: user_path(user), object: user
+  - else
+    %button.disabled{data: {toggle: 'tooltip', placement: 'top', title: t('user.cannnot_be_deleted')}, class: 'btn btn-circle btn-sm btn-danger'}
+      %i.fas.fa-trash-alt
+
+- else
+  - if policy(user).archive?
+    - unless user.confirmed?
+      / Resend confirmation
+      = link_to resend_confirmation_user_path(user), :method => :post, class: "btn btn-circle btn-sm btn-success mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('user.resend_confirmation') } do
+        %i.fas.fa-share-square
+
+      / Copy confirm link
+      %input.confirm-link{ value: confirmation_url(user, confirmation_token: user.confirmation_token) }
+
+      = link_to '#', class: "btn btn-circle btn-sm btn-secondary mr-1 btn-copy", data: { toggle: 'tooltip', placement: 'top', title: t('user.copy_confirm_link') } do
+        %i.far.fa-copy
+
+    / Deactivate / Activate
+    - if policy(user).update? && user.confirmed?
+      - title = user.actived? ? t("shared.deactivate") : t("shared.activate")
+      = link_to user_path(user, user: {actived: !user.actived}), class: "btn btn-circle btn-sm btn-info mr-1", data: { toggle: 'tooltip', placement: 'top', title: title }, method: :put do
+        %i.fas{class: (user.actived? ? "fa-eye" : "fa-eye-slash")}
+
+    / Unlock
+    - if user.access_locked?
+      = link_to unlock_access_user_path(user), class: "btn btn-circle btn-sm btn-success mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.unlock') }, method: :put do
+        %i.fas.fa-unlock
+
+    / Edit
+    - if policy(user).update?
+      = link_to edit_user_path(user), class: "btn btn-circle btn-sm btn-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+        %i.fas.fa-pen
+
+    / Archive
+    = link_to archive_user_path(user), class: "btn btn-circle btn-sm btn-danger", data: {toggle: 'tooltip', placement: 'top', title: t('shared.archive')}, method: :put do
+      %i.fas.fa-user-times

@@ -20,3 +20,9 @@ km:
     resend_confirmation_successfully: ផ្ញើតំណភ្ជាប់ម្តងទៀតដោយជោគជ័យ!
     local_ngo: អង្គការក្នុងស្រុក
     set_active: កំណត់អ្នកប្រើប្រាស់ឲ្យសកម្ម
+    all: ទាំងអស់
+    archived: Archived
+    cannnot_be_deleted: មិនអាចលុបបានទេ វាកំពុងត្រូវបានប្រើប្រាស់
+    is_being_archived: ត្រូវបាន archived
+    archive_successfully: "អ្នកប្រើប្រាស់ %{email} ត្រូវបាន archived ដោយជោគជ័យ!"
+    restore_successfully: "អ្នកប្រើប្រាស់ %{email} ត្រូវបានស្តារដោយជោគជ័យ!"

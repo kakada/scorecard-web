@@ -31,6 +31,8 @@
 class User < ApplicationRecord
   attr_accessor :skip_callback
 
+  acts_as_paranoid if column_names.include? "deleted_at"
+
   include Users::Confirmable
   include Users::CallbackDashboard
 
@@ -58,6 +60,7 @@ class User < ApplicationRecord
   belongs_to :local_ngo, optional: true
   has_many   :mobile_notifications, foreign_key: :creator_id
   has_many   :activity_logs
+  has_many   :scorecards, foreign_key: :creator_id
 
   has_many :access_grants,
            class_name: "Doorkeeper::AccessGrant",
@@ -73,6 +76,13 @@ class User < ApplicationRecord
   validates :role, presence: true
   validates :program_id, presence: true, unless: -> { system_admin? }
   validates :local_ngo_id, presence: true, if: -> { lngo? }
+  validate  :validate_archived_email
+
+  def validate_archived_email
+    if self.class.only_deleted.where(email: email).length > 0
+      errors.add :email, :uniqueness, message: I18n.t("user.is_being_archived")
+    end
+  end
 
   # Callback
   before_create :generate_authentication_token
@@ -85,6 +95,7 @@ class User < ApplicationRecord
   def self.filter(params)
     scope = all
     scope = scope.where("email LIKE ?", "%#{params[:email]}%") if params[:email].present?
+    scope = scope.only_deleted if params[:archived] == "true"
     scope
   end
 
@@ -111,6 +122,7 @@ class User < ApplicationRecord
   end
 
   def status
+    return "archived" if deleted?
     return "locked" if access_locked?
     return "actived" if confirmed? && actived?
     return "deactivated" unless actived?

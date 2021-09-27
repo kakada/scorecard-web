@@ -83,6 +83,8 @@ Rails.application.routes.draw do
     put :unlock_access, on: :member
     post :update_locale, on: :collection
     post :resend_confirmation, on: :member
+    put :archive, on: :member
+    put :restore, on: :member
   end
 
   resource :about, only: [:show]

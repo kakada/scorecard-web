@@ -49,3 +49,5 @@ en:
     fill_in: Fill in
     all: All
     unauthorized_alert_message: You are not authorized to perform this action.
+    archive: Archive
+    restore: Restore
