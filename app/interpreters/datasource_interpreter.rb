@@ -9,10 +9,11 @@ class DatasourceInterpreter < Dashboards::BaseInterpreter
 
   def interpreted_message
     data = load_json_data("datasource.json")
-    data["url"] = ENV["GF_DATASOURCE_PG_URL"]
-    data["database"] = ENV["GF_DATASOURCE_PG_DATABASE"]
-    data["user"] = ENV["GF_DATASOURCE_PG_USER"]
-    data["secureJsonData"]["password"] = ENV["GF_DATASOURCE_PG_PASSWORD"]
+    data["type"]     = ENV["GF_DATASOURCE_TYPE"]
+    data["url"]      = ENV["GF_DATASOURCE_URL"]
+    data["database"] = ENV["GF_DATASOURCE_DATABASE"]
+    data["user"]     = ENV["GF_DATASOURCE_USER"]
+    data["secureJsonData"]["password"] = ENV["GF_DATASOURCE_PASSWORD"]
     data
   end
 end
