@@ -6,7 +6,7 @@ RSpec.describe "Api::V1::ContactsController", type: :request do
   describe "GET #index" do
     let!(:program) { create(:program) }
     let!(:user) { create(:user, program: program) }
-    let!(:contact) { create(:contact, program_id: program.id) }
+    let!(:contact) { create(:contact, program: program) }
     let(:json_response) { JSON.parse(response.body) }
 
     before {

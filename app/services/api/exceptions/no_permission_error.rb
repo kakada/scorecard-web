@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module V1
+module Api
   module Exceptions
     class NoPermissionError < Error
       def initialize(action)
@@ -10,7 +10,7 @@ module V1
 
       def errors
         [
-          V1::Error.new(
+          Api::Error.new(
             code: status,
             status: :forbidden,
             title: "No Permission Error",

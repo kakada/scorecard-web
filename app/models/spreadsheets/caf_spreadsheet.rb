@@ -3,8 +3,8 @@
 class Spreadsheets::CafSpreadsheet
   attr_reader :program
 
-  def initialize(program_id)
-    @program = Program.find(program_id)
+  def initialize(program_uuid)
+    @program = Program.find_by(uuid: program_uuid)
   end
 
   def import(sheet)

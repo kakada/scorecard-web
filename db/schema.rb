@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "activity_logs", force: :cascade do |t|
     t.string "controller_name"
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.json "payload", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
     t.index ["http_format"], name: "index_activity_logs_on_http_format"
     t.index ["http_method"], name: "index_activity_logs_on_http_method"
     t.index ["program_id"], name: "index_activity_logs_on_program_id"
@@ -60,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.string "chat_type", default: "group"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "chat_groups_notifications", force: :cascade do |t|
@@ -75,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "custom_indicators", force: :cascade do |t|
@@ -117,6 +121,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.string "dataset"
     t.boolean "default", default: false
     t.string "name_km"
+    t.string "program_uuid"
     t.index ["lft"], name: "index_facilities_on_lft"
     t.index ["parent_id"], name: "index_facilities_on_parent_id"
     t.index ["rgt"], name: "index_facilities_on_rgt"
@@ -131,6 +136,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "indicators", force: :cascade do |t|
@@ -162,6 +168,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name_km"
+    t.string "program_uuid"
   end
 
   create_table "languages_indicators", force: :cascade do |t|
@@ -188,6 +195,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.string "target_province_ids"
     t.string "target_provinces"
     t.string "website_url"
+    t.string "program_uuid"
   end
 
   create_table "locations", primary_key: "code", id: :string, force: :cascade do |t|
@@ -208,6 +216,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.boolean "actived", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "mobile_notifications", force: :cascade do |t|
@@ -219,6 +228,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "mobile_tokens", force: :cascade do |t|
@@ -226,6 +236,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -235,6 +246,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -298,6 +310,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "primary_schools", force: :cascade do |t|
@@ -320,6 +333,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.string "shortcut_name"
     t.text "dashboard_user_emails", default: [], array: true
     t.string "dashboard_user_roles", default: [], array: true
+    t.uuid "uuid", default: -> { "uuid_generate_v4()" }
   end
 
   create_table "raised_indicators", force: :cascade do |t|
@@ -339,6 +353,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "ratings", primary_key: "uuid", id: :string, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -411,6 +426,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.datetime "finished_date"
     t.datetime "running_date"
     t.datetime "deleted_at"
+    t.string "program_uuid"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end
@@ -439,6 +455,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "templates", force: :cascade do |t|
@@ -446,6 +463,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program_uuid"
   end
 
   create_table "users", force: :cascade do |t|
@@ -472,6 +490,7 @@ ActiveRecord::Schema.define(version: 2021_10_01_042446) do
     t.boolean "actived", default: true
     t.integer "gf_user_id"
     t.datetime "deleted_at"
+    t.string "program_uuid"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"

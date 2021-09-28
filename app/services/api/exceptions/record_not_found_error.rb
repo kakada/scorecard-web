@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module V1
+module Api
   module Exceptions
     class RecordNotFoundError < Error
       def initialize(message, params)
@@ -11,7 +11,7 @@ module V1
 
       def errors
         [
-          V1::Error.new(
+          Api::Error.new(
             code: 404,
             status: :not_found,
             title: "Record Not Found",

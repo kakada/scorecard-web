@@ -15,5 +15,5 @@
 #  updated_at    :datetime         not null
 #
 class GfDashboard < ApplicationRecord
-  belongs_to :program
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid
 end

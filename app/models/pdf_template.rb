@@ -13,9 +13,9 @@
 #  updated_at    :datetime         not null
 #
 class PdfTemplate < ApplicationRecord
-  belongs_to :program
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid
 
   validates :name, presence: true
   validates :language_code, presence: true
-  validates :language_code, uniqueness: { scope: :program_id }
+  validates :language_code, uniqueness: { scope: :program_uuid }
 end

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Api::V1::ScorecardsController", type: :request do
   describe "GET #show" do
     let!(:user) { create(:user) }
-    let!(:scorecard)  { create(:scorecard, program_id: user.program_id) }
+    let!(:scorecard)  { create(:scorecard, program: user.program) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
 
     before {
@@ -32,7 +32,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
     context "same local ngo" do
       let!(:user) { create(:user, :lngo) }
-      let!(:scorecard) { create(:scorecard, local_ngo_id: user.local_ngo_id, program_id: user.program_id) }
+      let!(:scorecard) { create(:scorecard, local_ngo_id: user.local_ngo_id, program: user.program) }
       let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
 
       before {
@@ -61,7 +61,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
   describe "PUT #update" do
     let!(:user)       { create(:user) }
-    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program_id: user.program_id) }
+    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program_uuid: user.program_uuid) }
     let(:json_response) { JSON.parse(response.body) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { number_of_caf: 3, number_of_participant: 15, number_of_female: 5 } }
@@ -148,8 +148,8 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { {
                           facilitators_attributes: [
-                            { caf_id: caf1.id, position: 'lead', scorecard_uuid: scorecard.uuid },
-                            { caf_id: caf2.id, position: 'other', scorecard_uuid: scorecard.uuid },
+                            { caf_id: caf1.id, position: "lead", scorecard_uuid: scorecard.uuid },
+                            { caf_id: caf2.id, position: "other", scorecard_uuid: scorecard.uuid },
                           ]
                         }
                       }

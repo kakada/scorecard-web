@@ -16,25 +16,30 @@ class Program < ApplicationRecord
   include Programs::Elasticsearch
   attr_accessor :skip_callback
 
-  has_many :users
-  has_many :languages
-  has_many :facilities
-  has_many :templates
-  has_many :local_ngos
-  has_many :scorecards
-  has_many :rating_scales
-  has_many :contacts
-  has_many :pdf_templates
-  has_many :chat_groups
-  has_many :messages
-  has_many :mobile_tokens
-  has_one  :telegram_bot, dependent: :destroy
-  has_many :activity_logs
-  has_one  :gf_dashboard
+  # self.primary_key = :uuid
+
+  has_one  :gf_dashboard, primary_key: :uuid, foreign_key: :program_uuid, dependent: :destroy
+  has_one  :telegram_bot, primary_key: :uuid, foreign_key: :program_uuid, dependent: :destroy
+  has_many :users, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :languages, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :facilities, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :templates, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :local_ngos, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :scorecards, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :rating_scales, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :contacts, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :pdf_templates, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :chat_groups, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :messages, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :mobile_notifications, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :mobile_tokens, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :notifications, primary_key: :uuid, foreign_key: :program_uuid
+  has_many :activity_logs, primary_key: :uuid, foreign_key: :program_uuid
 
   validates :name, presence: true, uniqueness: true
   validates :shortcut_name, presence: true, uniqueness: true
 
+  before_save  :secure_uuid
   after_create :create_default_language
   after_create :create_default_rating_scale, unless: :skip_callback
   after_create :create_dashboard_async, unless: :skip_callback

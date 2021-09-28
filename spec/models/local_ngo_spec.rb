@@ -25,7 +25,7 @@ RSpec.describe LocalNgo, type: :model do
   it { is_expected.to have_many(:cafs) }
   it { is_expected.to have_many(:scorecards) }
   it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_uniqueness_of(:name).scoped_to(:program_id) }
+  it { is_expected.to validate_uniqueness_of(:name).scoped_to(:program_uuid) }
 
   describe "before_save, set target_provinces" do
     let!(:ngo) { create(:local_ngo, target_province_ids: "01,02") }

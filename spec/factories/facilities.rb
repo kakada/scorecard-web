@@ -38,7 +38,7 @@ FactoryBot.define do
 
     trait :with_parent do
       after(:create) do |facility, evaluator|
-        facility.parent_id = create(:facility, program_id: facility.program_id).id
+        facility.parent_id = create(:facility, program_uuid: facility.program_uuid).id
       end
     end
 

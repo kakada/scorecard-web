@@ -34,7 +34,7 @@ FactoryBot.define do
     password      { FFaker::Internet.password }
     role          { "program_admin" }
     confirmed_at  { DateTime.now }
-    program
+    program       { create(:program) }
     skip_callback { true }
 
     trait :allow_callback do

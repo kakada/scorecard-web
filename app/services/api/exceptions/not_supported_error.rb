@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module V1
+module Api
   module Exceptions
     class NotSupportedError < Error
       attr_reader :name
@@ -12,7 +12,7 @@ module V1
 
       def errors
         [
-          V1::Error.new(
+          Api::Error.new(
             code: status,
             status: :upgrade_required,
             title: "Not Supported",

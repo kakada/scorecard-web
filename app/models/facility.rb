@@ -24,9 +24,9 @@ class Facility < ApplicationRecord
 
   attr_accessor :has_child
 
-  acts_as_nested_set scope: [:program_id]
+  acts_as_nested_set scope: [:program_uuid]
 
-  belongs_to :program
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid
   has_many :unit_scorecards, foreign_key: :unit_type_id, class_name: "Scorecard"
   has_many :scorecards, foreign_key: :facility_id
 

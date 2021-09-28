@@ -14,7 +14,7 @@
 #  name_km    :string
 #
 class Language < ApplicationRecord
-  belongs_to :program
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid
   has_many :languages_indicators
   has_many :indicators, through: :languages_indicators
 

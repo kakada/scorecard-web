@@ -18,7 +18,6 @@ class Notification < ApplicationRecord
   PROVIDERS = %w(Notifications::Telegram Notifications::Email).freeze
 
   belongs_to :message
-  has_one  :program, through: :message
   has_many :chat_groups_notifications
   has_many :chat_groups, through: :chat_groups_notifications
 
@@ -31,6 +30,10 @@ class Notification < ApplicationRecord
 
   def notify_groups
     raise "Abstract Method"
+  end
+
+  def program
+    message.program
   end
 
   # Class Methods

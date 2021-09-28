@@ -12,10 +12,10 @@
       = f.input :local_ngo_id, label: t('user.local_ngo'), collection: policy_scope(LocalNgo).pluck(:name, :id), input_html: { class: 'custom-select' }
 
     - if current_program.present?
-      = f.hidden_field :program_id, value: current_program.id
+      = f.hidden_field :program_uuid, value: current_program.uuid
     - else
       .program.d-none
-        = f.input :program_id, label: t('user.program'), collection: policy_scope(Program.all), input_html: {class: 'custom-select'}
+        = f.input :program_uuid, label: t('user.program'), collection: policy_scope(Program.all), input_html: {class: 'custom-select'}
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'

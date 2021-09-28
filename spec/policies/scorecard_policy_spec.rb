@@ -9,7 +9,7 @@ RSpec.describe ScorecardPolicy do
   permissions :show? do
     context "scorecard is under different local ngo" do
       let(:scorecard) { create(:scorecard) }
-      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program: scorecard.program) }
 
       it "denies access" do
         expect(subject).not_to permit(user, scorecard)
@@ -18,7 +18,7 @@ RSpec.describe ScorecardPolicy do
 
     context "scorecard is under the same local ngo" do
       let(:scorecard) { create(:scorecard, local_ngo_id: lngo.id) }
-      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program: scorecard.program) }
 
       it "accept access" do
         expect(subject).to permit(user, scorecard)
@@ -27,7 +27,7 @@ RSpec.describe ScorecardPolicy do
 
     context "user is staff" do
       let(:scorecard) { create(:scorecard) }
-      let(:user) { User.new(role: :staff, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :staff, program: scorecard.program) }
 
       it "accept access" do
         expect(subject).to permit(user, scorecard)
@@ -36,7 +36,7 @@ RSpec.describe ScorecardPolicy do
 
     context "user is program_admin" do
       let(:scorecard) { create(:scorecard) }
-      let(:user) { User.new(role: :program_admin, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :program_admin, program: scorecard.program) }
 
       it "accept access" do
         expect(subject).to permit(user, scorecard)
@@ -78,7 +78,7 @@ RSpec.describe ScorecardPolicy do
   end
 
   permissions :download? do
-    context "scorecard is under different program_id" do
+    context "scorecard is under different program" do
       let(:scorecard) { create(:scorecard) }
       let(:user) { User.new(role: :program_admin) }
 
@@ -89,7 +89,7 @@ RSpec.describe ScorecardPolicy do
 
     context "scorecard is under different local ngo" do
       let(:scorecard) { create(:scorecard) }
-      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program: scorecard.program) }
 
       it "denies access" do
         expect(subject).not_to permit(user, scorecard)
@@ -98,7 +98,7 @@ RSpec.describe ScorecardPolicy do
 
     context "scorecard is under the same local ngo" do
       let(:scorecard) { create(:scorecard, local_ngo_id: lngo.id) }
-      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program: scorecard.program) }
 
       it "accept access" do
         expect(subject).to permit(user, scorecard)
@@ -107,7 +107,7 @@ RSpec.describe ScorecardPolicy do
 
     context "user is staff" do
       let(:scorecard) { create(:scorecard) }
-      let(:user) { User.new(role: :staff, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :staff, program: scorecard.program) }
 
       it "accept access" do
         expect(subject).to permit(user, scorecard)
@@ -116,7 +116,7 @@ RSpec.describe ScorecardPolicy do
 
     context "user is program_admin" do
       let(:scorecard) { create(:scorecard) }
-      let(:user) { User.new(role: :program_admin, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :program_admin, program: scorecard.program) }
 
       it "accept access" do
         expect(subject).to permit(user, scorecard)
@@ -125,7 +125,7 @@ RSpec.describe ScorecardPolicy do
   end
 
   permissions :submit? do
-    context "scorecard is under different program_id" do
+    context "scorecard is under different program" do
       let(:scorecard) { create(:scorecard) }
       let(:user) { User.new(role: :program_admin) }
 
@@ -136,7 +136,7 @@ RSpec.describe ScorecardPolicy do
 
     context "scorecard is under different local ngo" do
       let(:scorecard) { create(:scorecard) }
-      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program: scorecard.program) }
 
       it "denies access" do
         expect(subject).not_to permit(user, scorecard)
@@ -145,7 +145,7 @@ RSpec.describe ScorecardPolicy do
 
     context "scorecard is locked" do
       let(:scorecard) { create(:scorecard) }
-      let(:user) { User.new(role: :staff, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :staff, program: scorecard.program) }
 
       before {
         scorecard.lock_access!
@@ -158,7 +158,7 @@ RSpec.describe ScorecardPolicy do
 
     context "scorecard is under the same local ngo" do
       let(:scorecard) { create(:scorecard, local_ngo_id: lngo.id) }
-      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program: scorecard.program) }
 
       it "accept access" do
         expect(subject).to permit(user, scorecard)
@@ -167,7 +167,7 @@ RSpec.describe ScorecardPolicy do
 
     context "user is staff" do
       let(:scorecard) { create(:scorecard) }
-      let(:user) { User.new(role: :staff, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :staff, program: scorecard.program) }
 
       it "accept access" do
         expect(subject).to permit(user, scorecard)
@@ -176,7 +176,7 @@ RSpec.describe ScorecardPolicy do
 
     context "user is program_admin" do
       let(:scorecard) { create(:scorecard) }
-      let(:user) { User.new(role: :program_admin, program_id: scorecard.program_id) }
+      let(:user) { User.new(role: :program_admin, program: scorecard.program) }
 
       it "accept access" do
         expect(subject).to permit(user, scorecard)

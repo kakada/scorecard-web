@@ -13,7 +13,7 @@
 class Template < ApplicationRecord
   include Categorizable
 
-  belongs_to :program
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid
 
   validates :name, presence: true, uniqueness: { scope: :program_id }
 end

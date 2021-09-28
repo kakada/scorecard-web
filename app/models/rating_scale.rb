@@ -13,7 +13,7 @@
 #  code       :string
 #
 class RatingScale < ApplicationRecord
-  belongs_to :program
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid
   has_many :language_rating_scales, dependent: :destroy
 
   accepts_nested_attributes_for :language_rating_scales, allow_destroy: true, reject_if: lambda { |attributes|

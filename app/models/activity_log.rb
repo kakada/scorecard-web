@@ -2,7 +2,7 @@ class ActivityLog < ApplicationRecord
   extend ActivityLog::RoledScope
 
   belongs_to :user
-  belongs_to :program, optional: true
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid, optional: true
 
   default_scope { order(created_at: :desc) }
   delegate :role, to: :user, prefix: true

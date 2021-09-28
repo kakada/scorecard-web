@@ -23,6 +23,10 @@ class MobileNotificationsController < ApplicationController
     def notification_params
       params.require(:mobile_notification).permit(
         :id, :title, :body, :success_count, :failure_count
-      ).merge(creator_id: current_user.id, program_id: current_user.program_id)
+      ).merge(
+        creator_id: current_user.id,
+        program_id: current_user.program_id,
+        program_uuid: current_user.program_uuid
+      )
     end
 end

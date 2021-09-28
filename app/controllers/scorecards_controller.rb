@@ -76,6 +76,9 @@ class ScorecardsController < ApplicationController
       params.permit(
         :start_date, :facility_id, :uuid, :filter,
         :year, :province_id, :local_ngo_id
-      ).merge(program_id: current_user.program_id)
+      ).merge(
+        program_id: current_user.program_id,
+        program_uuid: current_user.program_uuid
+      )
     end
 end

@@ -2,10 +2,10 @@
 
 require "rails_helper"
 
-class BaseController < Api::V1::ApiController; end
+class Api::V1::BaseController < Api::V1::ApiController; end
 
 RSpec.describe "Api::V1::ApiController", type: :controller do
-  controller(BaseController) do
+  controller(Api::V1::BaseController) do
     def index
       render json: {}, status: 200
     end

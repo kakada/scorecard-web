@@ -56,7 +56,7 @@ class User < ApplicationRecord
   ]
 
   # Association
-  belongs_to :program, optional: true
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid, optional: true
   belongs_to :local_ngo, optional: true
   has_many   :mobile_notifications, foreign_key: :creator_id
   has_many   :activity_logs
@@ -74,7 +74,7 @@ class User < ApplicationRecord
 
   # Validation
   validates :role, presence: true
-  validates :program_id, presence: true, unless: -> { system_admin? }
+  validates :program_uuid, presence: true, unless: -> { system_admin? }
   validates :local_ngo_id, presence: true, if: -> { lngo? }
   validate  :validate_archived_email
 

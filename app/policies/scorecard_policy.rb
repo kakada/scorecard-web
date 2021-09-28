@@ -13,7 +13,7 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def download?
-    (user.program_id == record.program_id) && (create? || user.local_ngo_id == record.local_ngo_id)
+    (user.program_uuid == record.program_uuid) && (create? || user.local_ngo_id == record.local_ngo_id)
   end
 
   def submit?

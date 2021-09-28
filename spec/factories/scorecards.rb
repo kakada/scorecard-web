@@ -44,11 +44,11 @@
 FactoryBot.define do
   factory :scorecard do
     year         { Date.today.year }
-    facility     { create(:facility, :with_parent) }
+    program      { create(:program) }
+    facility     { create(:facility, :with_parent, program: program) }
     unit_type_id { facility.parent_id }
-    program
-    creator
-    local_ngo
+    creator      { create(:creator, program: program) }
+    local_ngo    { create(:local_ngo, program: program) }
     status       { "planned" }
     scorecard_type { Scorecard::SCORECARD_TYPES.sample.last }
     commune_id   { Pumi::Commune.all.sample.id }

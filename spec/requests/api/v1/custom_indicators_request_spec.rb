@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "Api::V1::CustomIndicatorsController", type: :request do
   describe "POST #create" do
     let!(:user)       { create(:user) }
-    let!(:scorecard)  { create(:scorecard, program_id: user.program_id) }
+    let!(:scorecard)  { create(:scorecard, program: user.program) }
     let(:json_response) { JSON.parse(response.body) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { name: "Staff not commig on time", tag_attributes: { name: "timing" }, audio: "" } }

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module V1
+module Api
   module Exceptions
     class RecordInvalidError < Error
       def initialize(record)
@@ -21,7 +21,7 @@ module V1
 
       private
         def json_api_error(attr_key, message)
-          V1::Error.new(
+          Api::Error.new(
             code: status,
             status: :unprocessable_entity,
             title: message,

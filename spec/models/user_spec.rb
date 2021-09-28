@@ -42,15 +42,15 @@ RSpec.describe User, type: :model do
     it { expect(user.display_name).to eq("CARE.NARA") }
   end
 
-  describe "validate presence of program_id" do
+  describe "validate presence of program_uuid" do
     context "is system_admin" do
       before { allow(subject).to receive(:system_admin?).and_return(true) }
-      it { is_expected.not_to validate_presence_of(:program_id) }
+      it { is_expected.not_to validate_presence_of(:program_uuid) }
     end
 
     context "is not system_admin" do
       before { allow(subject).to receive(:system_admin?).and_return(false) }
-      it { is_expected.to validate_presence_of(:program_id) }
+      it { is_expected.to validate_presence_of(:program_uuid) }
     end
   end
 

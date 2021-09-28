@@ -41,7 +41,7 @@ class LocalNgosController < ApplicationController
   end
 
   def import
-    ProgramSpreadsheet.new(current_program.id).import(params[:file])
+    ProgramSpreadsheet.new(current_program).import(params[:file])
 
     redirect_to local_ngos_url
   end
@@ -52,6 +52,6 @@ class LocalNgosController < ApplicationController
     end
 
     def filter_params
-      params.permit(:keyword).merge(program_id: current_program.id)
+      params.permit(:keyword).merge(program_uuid: current_user.program_uuid)
     end
 end

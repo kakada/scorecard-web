@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module V1
+module Api
   module Exceptions
     class Error < RuntimeError
       attr_reader :status

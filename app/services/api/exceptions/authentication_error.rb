@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module V1
+module Api
   module Exceptions
     class AuthenticationError < Error
       def initialize
@@ -9,7 +9,7 @@ module V1
 
       def errors
         [
-          V1::Error.new(
+          Api::Error.new(
             code: status,
             status: :unauthorized,
             title: "Authentication Error",

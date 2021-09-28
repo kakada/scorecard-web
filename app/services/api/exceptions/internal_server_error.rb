@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module V1
+module Api
   module Exceptions
     class InternalServerError < Error
       attr_reader :exception
@@ -25,7 +25,7 @@ module V1
         end
 
         [
-          V1::Error.new(hash)
+          Api::Error.new(hash)
         ]
       end
     end

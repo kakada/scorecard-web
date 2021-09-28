@@ -16,14 +16,14 @@ module Api
       rescue_from ::Pundit::NotAuthorizedError, with: :render_no_permission
 
       def routing_error
-        raise ::V1::Exceptions::RoutingError.new(request.method, params[:path])
+        raise ::Api::Exceptions::RoutingError.new(request.method, params[:path])
       end
 
       private
         def restrict_access
           @current_user = User.from_authentication_token(auth_token)
 
-          raise ::V1::Exceptions::AuthenticationError.new, "authentication error" if @current_user.nil? || @current_user.access_locked?
+          raise ::Api::Exceptions::AuthenticationError.new, "authentication error" if @current_user.nil? || @current_user.access_locked?
         end
 
         def auth_token
@@ -33,31 +33,31 @@ module Api
         end
 
         def handling_exceptions(e)
-          exception = if e.is_a?(::V1::Exceptions::Error)
+          exception = if e.is_a?(::Api::Exceptions::Error)
             e
           else
             Rails.logger.error { "Internal Server Error: #{e.message} #{e.backtrace.join("\n")}" }
 
-            ::V1::Exceptions::InternalServerError.new(e)
+            ::Api::Exceptions::InternalServerError.new(e)
           end
 
           render_errors(exception)
         end
 
         def render_parameter_missing(e)
-          render_errors ::V1::Exceptions::ParameterMissingError.new(e.param)
+          render_errors ::Api::Exceptions::ParameterMissingError.new(e.param)
         end
 
         def render_record_not_found(e)
-          render_errors ::V1::Exceptions::RecordNotFoundError.new(e.message, params)
+          render_errors ::Api::Exceptions::RecordNotFoundError.new(e.message, params)
         end
 
         def render_record_invalid(e)
-          render_errors ::V1::Exceptions::RecordInvalidError.new(e.record)
+          render_errors ::Api::Exceptions::RecordInvalidError.new(e.record)
         end
 
         def render_no_permission(e)
-          render_errors ::V1::Exceptions::NoPermissionError.new(e.query.to_s.delete("?"))
+          render_errors ::Api::Exceptions::NoPermissionError.new(e.query.to_s.delete("?"))
         end
 
         def render_errors(e)

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class ProgramSpreadsheet
-  attr_reader :program_id
+  attr_reader :program
 
-  def initialize(program_id)
-    @program_id = program_id
+  def initialize(program)
+    @program = program
   end
 
   def import(file_path)
@@ -17,7 +17,7 @@ class ProgramSpreadsheet
 
   private
     def get(sheet_name)
-      "Spreadsheets::#{sheet_name.camelcase}Spreadsheet".constantize.new(program_id)
+      "Spreadsheets::#{sheet_name.camelcase}Spreadsheet".constantize.new(program.uuid)
     end
 
     def spreadsheet(file_path)

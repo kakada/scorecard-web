@@ -62,7 +62,7 @@ class Scorecard < ApplicationRecord
   belongs_to :unit_type, class_name: "Facility"
   belongs_to :facility
   belongs_to :local_ngo, optional: true
-  belongs_to :program
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid
   belongs_to :location, foreign_key: :location_code, optional: true
   belongs_to :creator, class_name: "User"
   belongs_to :primary_school, foreign_key: :primary_school_code, optional: true

@@ -24,6 +24,33 @@ namespace :program do
     end
   end
 
+  desc "migrate uuid for references"
+  task migrate_program_uuid_for_references: :environment do
+    klasses = [
+      "ChatGroup",
+      "Contact",
+      "Facility",
+      "Language",
+      "LocalNgo",
+      "Message",
+      "MobileNotification",
+      "MobileToken",
+      "Notification",
+      "PdfTemplate",
+      "RatingScale",
+      "Scorecard",
+      "TelegramBot",
+      "Template",
+      "User",
+      "ActivityLog",
+      "GfDashboard"
+    ]
+
+    klasses.each do |klass|
+      update_program_uuid(klass)
+    end
+  end
+
   private
     def add_dashboard_and_uses(program)
       program.create_dashboard
@@ -31,6 +58,13 @@ namespace :program do
       users = User.where(actived: true, program_id: program.id)
       users.each do |user|
         user.send(:add_to_dashboard_async) if user.active_for_authentication?
+      end
+    end
+
+    def update_program_uuid(klass)
+      Program.all.each do |program|
+        collection = klass.constantize.where(program_id: program.id)
+        collection.update_all(program_uuid: program.uuid)
       end
     end
 end

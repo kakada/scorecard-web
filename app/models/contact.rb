@@ -19,7 +19,7 @@ class Contact < ApplicationRecord
 
   CONTACT_TYPES = contact_types.keys.map { |key| [I18n.t("contact.#{key}"), key] }
 
-  belongs_to :program, optional: true
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid, optional: true
 
   scope :no_program, -> { where(program: nil) }
 

@@ -13,7 +13,7 @@
 #  updated_at :datetime         not null
 #
 class Message < ApplicationRecord
-  belongs_to :program
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid
   has_many :notifications
   has_one :telegram_notification, class_name: "Notifications::Telegram", dependent: :destroy
   has_one :email_notification, class_name: "Notifications::Email", dependent: :destroy

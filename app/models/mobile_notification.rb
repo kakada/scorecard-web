@@ -15,8 +15,10 @@
 #  updated_at    :datetime         not null
 #
 class MobileNotification < ApplicationRecord
-  validates :body, presence: true
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid, optional: true
   belongs_to :creator, foreign_key: :creator_id, class_name: "User"
+
+  validates :body, presence: true
 
   after_commit :push_notification_async, on: [:create]
 

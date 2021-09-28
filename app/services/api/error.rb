@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module V1
+module Api
   class Error
     attr_accessor :title, :detail, :id, :href, :code, :source, :links, :status, :meta
 

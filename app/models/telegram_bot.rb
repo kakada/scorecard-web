@@ -14,7 +14,7 @@
 #  updated_at :datetime         not null
 #
 class TelegramBot < ApplicationRecord
-  belongs_to :program
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid
 
   validates :token, :username, presence: true, if: :enabled?
 

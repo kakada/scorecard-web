@@ -81,7 +81,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :role, :program_id, :local_ngo_id, :actived)
+      params.require(:user).permit(:email, :role, :program_id, :program_uuid, :local_ngo_id, :actived)
     end
 
     def locale_params

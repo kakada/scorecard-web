@@ -19,11 +19,11 @@
 #  website_url         :string
 #
 class LocalNgo < ApplicationRecord
-  belongs_to :program
+  belongs_to :program, foreign_key: :program_uuid, primary_key: :uuid
   has_many :cafs
   has_many :scorecards
 
-  validates :name, presence: true, uniqueness: { scope: :program_id }
+  validates :name, presence: true, uniqueness: { scope: :program_uuid }
   validates :website_url, url: {  allow_blank: true,
                                   no_local: true,
                                   public_suffix: true,
@@ -42,7 +42,7 @@ class LocalNgo < ApplicationRecord
     def filter(params)
       scope = all
       scope = by_keyword(params[:keyword], scope) if params[:keyword].present?
-      scope = scope.where(program_id: params[:program_id]) if params[:program_id].present?
+      scope = scope.where(program_uuid: params[:program_uuid]) if params[:program_uuid].present?
       scope
     end
 
