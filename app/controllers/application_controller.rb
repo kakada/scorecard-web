@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
   private
     def render_unauthorized
-      flash[:alert] = "You are not authorized to perform this action."
+      flash[:alert] = I18n.t("shared.unauthorized_alert_message")
       redirect_to(request.referrer || root_path)
     end
 
