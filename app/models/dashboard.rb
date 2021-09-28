@@ -8,7 +8,7 @@ require "openssl"
 
 class Dashboard
   include HTTParty
-  base_uri ENV["GF_BASE_URL"]
+  base_uri ENV["GF_DASHBOARD_BASE_URL"]
 
   attr_reader :program, :gf_dashboard
 
@@ -40,7 +40,7 @@ class Dashboard
   end
 
   def create_org_token
-    option = { basic_auth: auth, body: { name: "csc_apikey", role: "Admin" } }
+    option = { basic_auth: auth, body: { name: "#{program.name}_apikey", role: "Admin" } }
 
     result = self.class.post("/api/auth/keys", option)
     gf_dashboard.update(org_token: result.parsed_response["key"]) if result.response.is_a?(Net::HTTPSuccess)
@@ -92,11 +92,11 @@ class Dashboard
 
   private
     def auth
-      { username: ENV["GF_ADMIN_USERNAME"], password: ENV["GF_ADMIN_PASSWORD"] }
+      { username: ENV["GF_DASHBOARD_ADMIN_USERNAME"], password: ENV["GF_DASHBOARD_ADMIN_PASSWORD"] }
     end
 
     def upsert_with_token(endpoint, params, action='post')
-      uri = URI.parse("#{ENV['GF_BASE_URL']}#{endpoint}")
+      uri = URI.parse("#{ENV['GF_DASHBOARD_BASE_URL']}#{endpoint}")
       req_options = { use_ssl: uri.scheme == "https", verify_mode: OpenSSL::SSL::VERIFY_NONE }
 
       request = action == 'post' ? Net::HTTP::Post.new(uri) : Net::HTTP::Put.new(uri)

@@ -19,7 +19,7 @@ module Dashboards
         (panel["links"] || []).each do |link|
           dashboard_url = "/d/#{@data['uid']}/#{@data['title'].downcase.split(' ').join('-')}"
 
-          link["url"] = "#{ENV['GF_BASE_URL']}#{dashboard_url}?orgId=#{@program.gf_dashboard.org_id}&viewPanel=#{panel['id']}"
+          link["url"] = "#{ENV['GF_DASHBOARD_BASE_URL']}#{dashboard_url}?orgId=#{@program.gf_dashboard.org_id}&viewPanel=#{panel['id']}"
         end
       end
 

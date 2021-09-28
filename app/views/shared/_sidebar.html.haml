@@ -16,7 +16,7 @@
     / Nav Item - Dashboard
     - if policy(:dashboard).index?
       %li.nav-item
-        %a.nav-link{:href => ENV['DASHBOARD_URL'], target: '_blank'}
+        %a.nav-link{:href => ENV['GF_DASHBOARD_URL'], target: '_blank'}
           %i.fas.fa-fw.fa-tachometer-alt
           %span= t("sidebar.dashboard")
 
