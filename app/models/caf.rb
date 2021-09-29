@@ -18,10 +18,12 @@
 #
 class Caf < ApplicationRecord
   belongs_to :local_ngo
-  has_many :scorecards_caf
-  has_many :scorecards, through: :scorecards_caf
+  has_many :facilitators
+  has_many :scorecards, through: :facilitators
   belongs_to :educational_background, optional: true
   belongs_to :scorecard_knowledge, optional: true
+
+  acts_as_paranoid if column_names.include? "deleted_at"
 
   delegate :name, to: :educational_background, prefix: :educational_background, allow_nil: true
   delegate :name, to: :scorecard_knowledge, prefix: :scorecard_knowledge, allow_nil: true
@@ -32,6 +34,8 @@ class Caf < ApplicationRecord
   validates :sex, inclusion: { in: GENDERS }, allow_blank: true
 
   scope :actives, -> { where(actived: true) }
+
+  after_destroy :really_delete, if: -> { scorecards.empty? }
 
   def self.filter(params)
     scope = all

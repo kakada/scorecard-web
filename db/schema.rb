@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 2021_09_15_021601) do
     t.boolean "actived", default: true
     t.string "educational_background_id"
     t.string "scorecard_knowledge_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_cafs_on_deleted_at"
   end
 
   create_table "chat_groups", force: :cascade do |t|
