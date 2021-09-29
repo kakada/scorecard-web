@@ -7,21 +7,7 @@ RSpec.describe Spreadsheets::PrimarySchoolSpreadsheet do
     let!(:ps_spreadsheet) { Spreadsheets::PrimarySchoolSpreadsheet.new }
 
     context "row with full info" do
-      let(:row) {{ "Province" => "Koh Kong", "District" => "Botum Sakor", "Commune" => "Andoung Tuek", "commune_code" => "090101", "school_code" => "090101_1", "school_name_en" => "Andaung Teuk", "school_name_km" => "អណ្តូងទឹក" }}
-
-      it "creates a new valid record" do
-        expect { ps_spreadsheet.process(row) }.to change { PrimarySchool.count }.from(0).to(1)
-      end
-
-      it "create a record with name_en is Andaung Teuk" do
-        ps_spreadsheet.process(row)
-
-        expect(PrimarySchool.last.name_en).to eq("Andaung Teuk")
-      end
-    end
-
-    context "row with blank Province, District, Commune but has commune_code" do
-      let(:row) {{ "Province" => "", "District" => "", "Commune" => "", "commune_code" => "090101", "school_code" => "090101_1", "school_name_en" => "Andaung Teuk", "school_name_km" => "អណ្តូងទឹក" }}
+      let(:row) {{ "commune_code" => "090101", "school_code" => "090101_1", "school_name_en" => "Andaung Teuk", "school_name_km" => "អណ្តូងទឹក" }}
 
       it "creates a new valid record" do
         expect { ps_spreadsheet.process(row) }.to change { PrimarySchool.count }.from(0).to(1)

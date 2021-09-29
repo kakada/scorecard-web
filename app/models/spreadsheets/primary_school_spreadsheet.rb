@@ -18,8 +18,6 @@ class Spreadsheets::PrimarySchoolSpreadsheet
 
   def process(row)
     commune = get_commune(row)
-    return if commune.nil?
-
     school = ::PrimarySchool.find_or_initialize_by(code: row["school_code"].to_s.strip)
     school.code = school.code.presence || build_school_code(commune)
     school.name_km = row["school_name_km"]
@@ -28,6 +26,8 @@ class Spreadsheets::PrimarySchoolSpreadsheet
     school.district_id ||= commune.district_id
     school.province_id ||= commune.province_id
     school.save
+  rescue
+    Rails.logger.warn "unknown handler for primary school================: #{row}"
   end
 
   private
