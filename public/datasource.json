@@ -1,0 +1,21 @@
+{
+  "name": "Scorecard Datasource",
+  "type": "postgres",
+  "url": "192.168.0.107:5432",
+  "database": "csc_web_development",
+  "isDefault": true,
+  "user": "postgres",
+  "secureJsonData": {
+    "password": ""
+  },
+  "jsonData": {
+    "sslmode": "disable",
+    "maxOpenConns": 0,
+    "maxIdleConns": 2,
+    "connMaxLifetime": 14400,
+    "postgresVersion": 903,
+    "timescaledb": false
+  },
+  "access": "proxy",
+  "basicAuth": false
+}

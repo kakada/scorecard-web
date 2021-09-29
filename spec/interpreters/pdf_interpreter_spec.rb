@@ -7,7 +7,7 @@ RSpec.describe PdfTemplateInterpreter do
     let!(:pdf_template_km) { create(:pdf_template) }
     let!(:program) { pdf_template_km.program }
     let!(:scorecard) { create(:scorecard, program: program) }
-    let(:interpretor) { PdfTemplateInterpreter.new(scorecard) }
+    let(:interpretor) { PdfTemplateInterpreter.new(scorecard.uuid) }
 
     context "program pdf_template en exist" do
       let!(:pdf_template_en) { create(:pdf_template, language_code: "en", program: program) }
@@ -27,7 +27,7 @@ RSpec.describe PdfTemplateInterpreter do
   describe "#message" do
     let!(:program) { create(:program) }
     let!(:scorecard) { create(:scorecard, program: program) }
-    let(:interpretor) { PdfTemplateInterpreter.new(scorecard) }
+    let(:interpretor) { PdfTemplateInterpreter.new(scorecard.uuid) }
 
     context "no program pdf_template" do
       it { expect(interpretor.pdf_template).to eq(nil) }

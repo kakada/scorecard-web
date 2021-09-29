@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Confirmable
+module Users::Confirmable
   extend ActiveSupport::Concern
 
   included do

@@ -4,7 +4,7 @@ require "sidekiq/web"
 
 Rails.application.routes.draw do
   use_doorkeeper do
-    controllers :token_info => 'token_info'
+    controllers token_info: "token_info"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "scorecards#index"

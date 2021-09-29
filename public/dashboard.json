@@ -1,0 +1,909 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "iteration": 1631090693874,
+  "links": [],
+  "panels": [
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 11,
+        "w": 10,
+        "x": 0,
+        "y": 0
+      },
+      "id": 17,
+      "links": [
+        {
+          "targetBlank": false,
+          "title": "View full screen",
+          "url": "http://localhost:8000/d/9kzY3zI7k/scorecard-dashboard-copy?orgId=1&viewPanel=17"
+        }
+      ],
+      "options": {
+        "ant": {
+          "color": "rgb(0, 100, 255)",
+          "delay": 400,
+          "paused": false,
+          "pulseColor": "rgb(0, 0, 0)",
+          "reverse": false,
+          "weight": 5
+        },
+        "coordinates": {
+          "customLatitudeColumnName": "",
+          "customLongitudeColumnName": ""
+        },
+        "discardZeroOrNull": true,
+        "heat": {
+          "fitBoundsOnLoad": false,
+          "fitBoundsOnUpdate": false
+        },
+        "hex": {
+          "colorRangeFrom": "#f7fbff",
+          "colorRangeTo": "#ff0000",
+          "opacity": 0.6,
+          "radiusRangeFrom": 5,
+          "radiusRangeTo": 12
+        },
+        "map": {
+          "centerLatitude": 12.564,
+          "centerLongitude": 104.991,
+          "tileUrlSchema": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          "useBoundsInQuery": false,
+          "useCenterFromFirstPos": false,
+          "useCenterFromLastPos": false,
+          "zoom": 7,
+          "zoomToDataBounds": false
+        },
+        "marker": {
+          "alwaysShowTooltips": true,
+          "showOnlyLastMarker": false,
+          "size": 25,
+          "sizeLast": 25,
+          "useSecondaryIconForAllMarkers": false,
+          "useSecondaryIconForLastMarker": false
+        },
+        "viewType": "marker"
+      },
+      "repeat": null,
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  CONCAT(\n    'អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ (', locations.name_km, ')', \n    '<ol>',\n    ARRAY_TO_STRING(array_agg(DISTINCT CONCAT('<li><a href=\"#\" target=\"_blank\">', local_ngos.name, '</a></li>')),''),\n    '</ol>'\n  ) as popup,\n  locations.latitude, \n  locations.longitude,\n  CONCAT(\n    COUNT(CASE WHEN scorecards.locked_at IS NOT null THEN 1 END), \n    '/', \n    count(*)\n  ) as tooltip\nFROM scorecards \nINNER join locations ON scorecards.province_id = locations.code\nINNER join local_ngos ON scorecards.local_ngo_id = local_ngos.id\nWHERE \n  scorecards.program_id=1\n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY \n  locations.name_km, locations.latitude, locations.longitude;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Scorecard Implemented Map",
+      "type": "alexandra-trackmap-panel"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "community_scorecard"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#f29522",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "self_assessment"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#31c0c7",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 10,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "barWidth": 0.96,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "orientation": "horizontal",
+        "showValue": "never",
+        "stacking": "none",
+        "text": {},
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "select \n  facilities.name_en as name, \n  COUNT(CASE WHEN scorecards.scorecard_type = 1 THEN 1 END) as self_assessment,\n  COUNT(CASE WHEN scorecards.scorecard_type = 2 THEN 2 END) as community_scorecard\nFROM scorecards INNER JOIN facilities ON scorecards.facility_id = facilities.id\nWHERE \n scorecards.program_id=1  \n AND scorecards.scorecard_type in ($scorecard_type) \n AND scorecards.year in ($year) \n AND scorecards.facility_id in ($facility_id)\n AND scorecards.province_id in ($province_id)\nGROUP BY facilities.name_en;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Total Scorecard Conducted",
+      "type": "barchart"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "female"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#26c0c7",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "male"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5151d3",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "other"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#e68618",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 16,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "displayLabels": [
+          "name",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "values": []
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  gender AS \"gender\",\n  count(*)\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = 1\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\nGROUP BY gender\nORDER BY 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "By Gender",
+      "type": "piechart"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ID Poor"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#26c0c7",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Disability"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5151d3",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Minority"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#e34850",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Youth"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#e68618",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 20,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "displayLabels": [
+          "name",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  count(*) AS \"ID Poor\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = 1\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.poor_card is true\nORDER BY 1\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "table",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  count(*) AS \"Disability\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = 1\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.disability is true\nORDER BY 1",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "table",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  count(*) AS \"Minority\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = 1\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.minority is true\nORDER BY 1",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "table",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  count(*) AS \"Youth\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = 1\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.youth is true\nORDER BY 1",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "By Citizen Profile",
+      "type": "piechart"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "fillOpacity": 80,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_raised"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#edcc00",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 14,
+        "x": 10,
+        "y": 7
+      },
+      "id": 15,
+      "options": {
+        "barWidth": 0.62,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "orientation": "horizontal",
+        "showValue": "never",
+        "stacking": "none",
+        "text": {},
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "(SELECT\n  indicators.name,\n  count(*) as total_raised\nFROM raised_indicators\n  INNER JOIN scorecards ON\n    raised_indicators.scorecard_uuid::INTEGER = scorecards.id\n  JOIN indicators ON \n    raised_indicators.indicatorable_id = indicators.id\n    AND raised_indicators.indicatorable_type = 'Indicator'\nWHERE \n  scorecards.program_id=1  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY indicators.name)\n\nUNION\n\n(SELECT\n  custom_indicators.name,\n  count(*) as total_raised\nFROM raised_indicators\n  INNER JOIN scorecards ON\n    raised_indicators.scorecard_uuid::INTEGER = scorecards.id\n  JOIN custom_indicators ON \n    raised_indicators.indicatorable_id = custom_indicators.id\n    AND raised_indicators.indicatorable_type = 'CustomIndicator'\nWHERE \n  scorecards.program_id=1  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY custom_indicators.name)\nORDER BY total_raised DESC\nLIMIT 5;\n",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Top 5 indicator",
+      "type": "barchart"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 5,
+        "w": 10,
+        "x": 0,
+        "y": 11
+      },
+      "id": 11,
+      "options": {
+        "content": "<div style=\"display: flex\">\n<div style=\"text-align: center; margin-right: 20px\">\n<h5 style=\"font-size: 14px;\">គាំទ្រមូលនិធិដោយ/Funded by</h5>\n<img src=\"https://digital-csc.org/assets/eu-3902d24e7e972494ede15c7dc533bc20589ef6e80aca3335518cea5944984c09.png\"  width=\"70\"/>\n</div>\n\n<div style=\"text-align: center\">\n<h5 style=\"font-size: 14px;\">អនុវត្តដោយ/Implemented by</h5>\n<div style=\"display: flex; align-items: center; justify-content: center; margin-top: 30px;\">\n<img src=\"https://digital-csc.org/assets/care_logo-30bc7807ccb532ee750d35b55a3e94c40e688a88a18d0497c4e244bc56f4017d.png\" width=\"110\" height=\"35px\" />\n<img src=\"https://digital-csc.org/assets/api-a84a9246854e6e9c471aa6982fb90ed27377b050f69318966fe0c3923d371886.png\"  width=\"40\" height: \"30px\" style=\"margin: 0 10px;\"/>\n<img src=\"https://digital-csc.org/assets/instedd-ilabsea-252db350ccbce84ff56c4057db2f6a5761873c8d7b4c9c5ee9c31049ba7d3792.png\"  width=\"180\"/>\n</div>\n</div>\n</div>\n\n<div style=\"text-align:center; margin-top: 20px;\">\n<a href=\"https://digital-csc.org/\" target=\"_blank\" >About Us</a>\n</div>\n  ",
+        "mode": "markdown"
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  created_at AS \"time\",\n  latitude\nFROM locations\nWHERE\n  $__timeFilter(created_at)\nORDER BY 1",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 30,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": null,
+        "definition": "select name_km AS __text, code AS __value  from locations where parent_id is null;",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Province",
+        "multi": false,
+        "name": "province_id",
+        "options": [],
+        "query": "select name_km AS __text, code AS __value  from locations where parent_id is null;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": null,
+        "definition": "select distinct(year) from scorecards where program_id=1",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Year",
+        "multi": false,
+        "name": "year",
+        "options": [],
+        "query": "select distinct(year) from scorecards where program_id=1",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": null,
+        "definition": "select name_en AS __text, id AS __value  from facilities where parent_id is not null AND program_id=1;",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Sector",
+        "multi": false,
+        "name": "facility_id",
+        "options": [],
+        "query": "select name_en AS __text, id AS __value  from facilities where parent_id is not null AND program_id=1;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Scorecard Type",
+        "multi": false,
+        "name": "scorecard_type",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "Self-Assessment",
+            "value": "1"
+          },
+          {
+            "selected": false,
+            "text": "Community Scorecard",
+            "value": "2"
+          }
+        ],
+        "query": "Self-Assessment : 1,Community Scorecard : 2 ",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": false,
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ],
+    "type": "timepicker"
+  },
+  "timezone": "browser",
+  "title": "Scorecard Dashboard",
+  "uid": "",
+  "version": 2
+}

@@ -27,4 +27,12 @@ RSpec.describe Program, type: :model do
 
     it { expect(program.languages.length).to eq(1) }
   end
+
+  describe "#after_create, create_dashboard_async" do
+    it "adds a job to DashboardWorker" do
+      expect {
+        create(:program, :allow_callback)
+      }.to change(DashboardWorker.jobs, :count)
+    end
+  end
 end

@@ -25,9 +25,15 @@
 #  locked_at              :datetime
 #  failed_attempts        :integer          default(0)
 #  local_ngo_id           :integer
+#  actived                :boolean          default(TRUE)
+#  gf_user_id             :integer
 #
 class User < ApplicationRecord
-  include Confirmable
+  attr_accessor :skip_callback
+
+  include Users::Confirmable
+  include Users::CallbackDashboard
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable, :lockable,
@@ -54,12 +60,12 @@ class User < ApplicationRecord
   has_many   :activity_logs
 
   has_many :access_grants,
-           class_name: 'Doorkeeper::AccessGrant',
+           class_name: "Doorkeeper::AccessGrant",
            foreign_key: :resource_owner_id,
            dependent: :delete_all # or :destroy if you need callbacks
 
   has_many :access_tokens,
-           class_name: 'Doorkeeper::AccessToken',
+           class_name: "Doorkeeper::AccessToken",
            foreign_key: :resource_owner_id,
            dependent: :delete_all # or :destroy if you need callbacks
 

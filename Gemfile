@@ -80,6 +80,8 @@ gem "bootstrap-daterangepicker-rails", "~> 3.0.4"
 gem "doorkeeper", "~> 5.5.2"
 gem "validate_url", "~> 1.0.13"
 
+gem "httparty", "~> 0.19.0"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]

@@ -11,7 +11,7 @@ module PdfTemplates
     end
 
     def facilitators
-      html = [1, 2].map {|caf| "<li>#{fill_in_value}</li>"}.join("")
+      html = [1, 2].map { |caf| "<li>#{fill_in_value}</li>" }.join("")
 
       "<ol>#{html}</ol>"
     end

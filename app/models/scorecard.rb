@@ -118,7 +118,7 @@ class Scorecard < ApplicationRecord
   end
 
   def renewed?
-    progress == 'renewed'
+    progress == "renewed"
   end
 
   private

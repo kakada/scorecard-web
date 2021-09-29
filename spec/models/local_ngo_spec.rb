@@ -16,6 +16,7 @@
 #  code                :string
 #  target_province_ids :string
 #  target_provinces    :string
+#  website_url         :string
 #
 require "rails_helper"
 
@@ -35,7 +36,7 @@ RSpec.describe LocalNgo, type: :model do
   end
 
   describe "#website_url" do
-    subject { build(:local_ngo, website_url: 'htp://invalidurl') }
+    subject { build(:local_ngo, website_url: "htp://invalidurl") }
 
     it "validates website_url" do
       subject.valid?

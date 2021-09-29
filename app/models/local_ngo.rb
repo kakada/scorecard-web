@@ -16,6 +16,7 @@
 #  code                :string
 #  target_province_ids :string
 #  target_provinces    :string
+#  website_url         :string
 #
 class LocalNgo < ApplicationRecord
   belongs_to :program

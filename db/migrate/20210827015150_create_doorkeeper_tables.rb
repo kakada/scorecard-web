@@ -11,7 +11,7 @@ class CreateDoorkeeperTables < ActiveRecord::Migration[6.0]
       # that doesn't require redirect URI to be used during authorization
       # like Client Credentials flow or Resource Owner Password.
       t.text    :redirect_uri, null: false
-      t.string  :scopes,       null: false, default: ''
+      t.string  :scopes,       null: false, default: ""
       t.boolean :confidential, null: false, default: true
       t.timestamps             null: false
     end
@@ -26,7 +26,7 @@ class CreateDoorkeeperTables < ActiveRecord::Migration[6.0]
       t.text     :redirect_uri,      null: false
       t.datetime :created_at,        null: false
       t.datetime :revoked_at
-      t.string   :scopes,            null: false, default: ''
+      t.string   :scopes,            null: false, default: ""
     end
 
     add_index :oauth_access_grants, :token, unique: true
