@@ -4,9 +4,17 @@ module Api
   module V1
     class ContactsController < ApiController
       def index
-        program = current_user.program
+        render json: ContactService.new(program).as_json
+      end
 
-        render json: program.try(:contacts) || []
+      private
+
+      def program
+        current_user && current_user.program
+      end
+
+      def restrict_access
+        super rescue nil
       end
     end
   end

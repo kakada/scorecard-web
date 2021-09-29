@@ -21,5 +21,19 @@ FactoryBot.define do
       contact_type { :email }
       value        { FFaker::Internet.email }
     end
+
+    trait :no_program do
+      program { nil }
+    end
+
+    trait :system_email do
+      contact_type { :email }
+      value { "email@system.com" }
+    end
+
+    trait :system_tel do
+      contact_type { :tel }
+      value { "012333444" }
+    end
   end
 end

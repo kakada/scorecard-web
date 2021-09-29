@@ -19,7 +19,9 @@ class Contact < ApplicationRecord
 
   CONTACT_TYPES = contact_types.keys.map { |key| [I18n.t("contact.#{key}"), key] }
 
-  belongs_to :program
+  belongs_to :program, optional: true
+
+  scope :no_program, -> { where(program: nil) }
 
   validates :contact_type, presence: true
   validates :value, presence: true

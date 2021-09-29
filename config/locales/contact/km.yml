@@ -1,8 +1,9 @@
-en:
+km:
   contact:
     contact_type: ប្រភេទទំនាក់ទំនង
     tel: លេខទូរស័ព្ទ
     email: អ៊ីមែល
     value: តម្លៃ
-    tel_placeholder: '023111222'
+    tel_placeholder: "023111222"
     email_placeholder: abc@exmple.com
+    system_contact: ទំនាក់ទំនងប្រព័ន្ធ
