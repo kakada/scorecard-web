@@ -10,11 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_09_065628) do
+ActiveRecord::Schema.define(version: 2021_09_15_021601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "activity_logs", force: :cascade do |t|
+    t.string "controller_name"
+    t.string "action_name"
+    t.string "http_format"
+    t.string "http_method"
+    t.string "path"
+    t.integer "http_status"
+    t.bigint "user_id"
+    t.bigint "program_id"
+    t.json "payload", default: {}
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["http_format"], name: "index_activity_logs_on_http_format"
+    t.index ["http_method"], name: "index_activity_logs_on_http_method"
+    t.index ["program_id"], name: "index_activity_logs_on_program_id"
+    t.index ["user_id"], name: "index_activity_logs_on_user_id"
+  end
 
   create_table "cafs", force: :cascade do |t|
     t.string "name"

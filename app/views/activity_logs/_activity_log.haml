@@ -1,0 +1,16 @@
+%tr
+  %td.fixed-gap
+    = read_more activity_log.path
+  %td= activity_log.http_method
+  %td= activity_log.user.display_name
+  %td
+    %span.badge.badge-role{ class: "badge-#{activity_log.user_role}"}
+      = activity_log.user_role
+  %td= activity_log.program_name
+  %td= activity_log.http_format
+  %td
+    = activity_log.http_status
+  %td.fixed-gap
+    = read_more activity_log.payload.to_s
+  %td.w-100
+    = l activity_log.created_at, format: :long

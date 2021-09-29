@@ -19,6 +19,7 @@
 @import "tempusdominus-bootstrap-4";
 @import "tagify.min";
 @import "richtext";
+@import "daterangepicker";
 
 @import "shared/base";
 @import "shared/sidebar";
@@ -29,6 +30,7 @@
 @import "shared/switchbox";
 @import "shared/date_filter";
 @import "shared/stepper";
+@import "shared/roled_badge";
 
 @import "devise";
 @import "dashboard";
@@ -44,3 +46,4 @@
 @import "messages";
 @import "mobile_notifications";
 @import "primary_schools";
+@import "activity_logs";

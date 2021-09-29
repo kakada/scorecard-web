@@ -1,0 +1,15 @@
+en:
+  activity_logs:
+    title: Activity Logs
+    controller_name: Controller
+    action_name: Action
+    http_format: Format
+    http_method: Method
+    path: Path
+    http_status: Status
+    payload: Payload
+    duration: Duration
+    start_date: Start date
+    end_date: End date
+    more_html: "more &raquo;"
+    less_html: "&laquo; less"

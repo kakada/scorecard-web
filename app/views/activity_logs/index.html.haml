@@ -1,0 +1,9 @@
+= render "shared/page_title", title: t("activity_logs.title")
+
+= render "filter"
+
+.card.shadow.mb-4
+  .card-body
+    = render "shared/pagination_title", objects: @activity_logs
+    = render @activity_logs.any? ? 'activity_logs_table' : 'no_data'
+ 

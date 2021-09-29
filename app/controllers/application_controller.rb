@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   include Pagy::Backend
   include SortOrder
+  rescue_from ::Pundit::NotAuthorizedError, with: :render_unauthorized
 
   helper_method :sort_column, :sort_direction
 
@@ -20,7 +21,17 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_program
 
+  def append_info_to_payload payload
+    super
+    payload[:current_user_id] = current_user.id
+  end
+
   private
+    def render_unauthorized
+      flash[:alert] = I18n.t("shared.unauthorized_alert_message")
+      redirect_to(request.referrer || root_path)
+    end
+
     def set_layout
       devise_controller? ? "layouts/minimal" : "layouts/application"
     end

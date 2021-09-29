@@ -1,0 +1,15 @@
+km:
+  activity_logs:
+    title: កំណត់ហេតុសកម្មភាព
+    controller_name: Controller
+    action_name: Action
+    http_format: Format
+    http_method: Method
+    path: Path
+    http_status: Status
+    payload: Payload
+    duration: កំឡុងពេល
+    start_date: ថ្ងៃចាប់ផ្ដើម
+    end_date: ថ្ងៃបញ្ចប់
+    read_more: មើលបន្ថែម
+    read_less: បម្រួញ

@@ -75,6 +75,7 @@ gem "paranoia", "~> 2.4.3"
 
 gem "recaptcha", "~> 5.7.0"
 gem "fcm", "~> 1.0.3"
+gem "bootstrap-daterangepicker-rails", "~> 3.0.4"
 
 gem "doorkeeper", "~> 5.5.2"
 gem "validate_url", "~> 1.0.13"
@@ -108,6 +109,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem "shoulda-matchers", "~> 4.0"
   gem "webdrivers"
+  gem 'rspec-sidekiq', "~> 3.1.0"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
