@@ -1,0 +1,6 @@
+.dotted-line.d-flex
+  %label.flex-grow-1= t('program.dashboard_accessibility')
+  %div
+    %a.pointer.badge.badge-info.text-white{href: dashboard_accessibilities_path, 'data-remote' => true}= t('shared.setup')
+
+    = render 'programs/dashboard_accessibilities/modal'

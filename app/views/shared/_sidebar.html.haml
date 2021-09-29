@@ -14,7 +14,7 @@
   / Wrapper scroll
   .sidebar-list-wrapper
     / Nav Item - Dashboard
-    - if current_user.program_admin? || current_user.system_admin?
+    - if policy(:dashboard).index?
       %li.nav-item
         %a.nav-link{:href => ENV['DASHBOARD_URL'], target: '_blank'}
           %i.fas.fa-fw.fa-tachometer-alt

@@ -1,0 +1,24 @@
+= simple_form_for @program, url: '/dashboard_accessibilities/upsert', method: :put, html: {class: 'dashboard-form'} do |f|
+  .modal-body
+    %div
+      %label= t('program.allow_roles_to_access_dashboard')
+      %input#userRoles{type: :hidden, name: "program[dashboard_user_roles]"}
+
+      - [["Staff/Officer", "staff"], ["Lngo", "lngo"]].each do |row|
+        .d-flex
+          .control.role{'data-role' => row[1]}
+            = form_check_toggle({id: row[1], checked: @program.dashboard_user_roles.include?(row[1])}).html_safe
+          %label= row[0]
+
+    .d-flex.flex-row.align-items-center
+      .line.flex-grow-1
+      .or-label= t('program.or')
+      .line.flex-grow-1
+
+    .form-group
+      %label= t('program.allow_emails_to_access_dashboard')
+      %input#userEmails{:name => "program[dashboard_user_emails]", 'data-emails' => @emails.as_json, value: @program.dashboard_user_emails.join(', ')}
+
+  .modal-footer
+    %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')
+    = f.submit t('shared.save'), class: 'btn btn-primary'

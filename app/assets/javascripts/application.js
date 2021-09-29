@@ -39,6 +39,7 @@
 //= require scorecards_settings/contact
 //= require pdf_templates
 //= require program_settings/show
+//= require program_settings/dashboard_accessibility
 //= require telegram_bots/show
 //= require messages/index
 //= require messages/new

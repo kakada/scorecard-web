@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_15_021601) do
+ActiveRecord::Schema.define(version: 2021_09_17_041743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -306,6 +306,8 @@ ActiveRecord::Schema.define(version: 2021_09_15_021601) do
     t.string "datetime_format", default: "DD-MM-YYYY"
     t.boolean "enable_email_notification", default: false
     t.string "shortcut_name"
+    t.text "dashboard_user_emails", default: [], array: true
+    t.string "dashboard_user_roles", default: [], array: true
   end
 
   create_table "raised_indicators", force: :cascade do |t|
