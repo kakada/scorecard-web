@@ -20,3 +20,9 @@ en:
     resend_confirmation_successfully: Resend the confirmation successfully!
     local_ngo: Local NGO
     set_active: Set as actived user
+    all: All
+    archived: Archived
+    cannnot_be_deleted: Can't be deleted, it is being used.
+    is_being_archived: is being archived
+    archive_successfully: "User %{email} is archived successfully!"
+    restore_successfully: "User %{email} is restored successfully!"

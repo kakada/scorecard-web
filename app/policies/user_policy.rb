@@ -13,10 +13,19 @@ class UserPolicy < ApplicationPolicy
     create?
   end
 
-  def destroy?
+  def archive?
     return false if record.id == user.id
     return true if user.system_admin? || (user.program_admin? && !record.system_admin?) || (user.staff? && record.lngo?)
     false
+  end
+
+  def restore?
+    record.deleted?
+  end
+
+  def destroy?
+    archive? && record.deleted? &&
+    record.mobile_notifications.length.zero? && record.scorecards.length.zero?
   end
 
   def unlock_access?

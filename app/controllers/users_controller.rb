@@ -35,11 +35,25 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def archive
     @user = authorize User.find(params[:id])
     @user.destroy
 
-    redirect_to users_url
+    redirect_to users_url, notice: I18n.t("user.archive_successfully", email: @user.email)
+  end
+
+  def restore
+    @user = authorize User.only_deleted.find(params[:id])
+    @user.restore
+
+    redirect_to users_url, notice: I18n.t("user.restore_successfully", email: @user.email)
+  end
+
+  def destroy
+    @user = authorize User.only_deleted.find(params[:id])
+    @user.really_destroy!
+
+    redirect_to users_url(archived: true)
   end
 
   def update_locale

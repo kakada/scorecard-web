@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_22_022513) do
+ActiveRecord::Schema.define(version: 2021_09_27_032640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -469,8 +469,10 @@ ActiveRecord::Schema.define(version: 2021_09_22_022513) do
     t.integer "local_ngo_id"
     t.boolean "actived", default: true
     t.integer "gf_user_id"
+    t.datetime "deleted_at"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

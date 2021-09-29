@@ -1,5 +1,16 @@
 = render "shared/page_title", title: t('user.users'), url: new_user_path, label: t('user.add_new')
 
+%ul.nav.nav-tabs.nav-justified{style: 'width: 300px;'}
+  %li.nav-item{ class: ('active' if params[:archived].blank?) }
+    %a.nav-link{href: users_path }
+      %i.fas.fa-users
+      = t("user.all")
+
+  %li.nav-item{ class:  ('active' if params[:archived].present?) }
+    %a.nav-link{ href: users_path(archived: true) }
+      %i.fas.fa-user-times
+      = t("user.archived")
+
 .card.shadow.mb-4
   .card-body
     = render 'filter'
@@ -35,27 +46,8 @@
                 = t("user.#{user.status}")
               %td= timeago(user.created_at).html_safe
               %td= timeago(user.updated_at).html_safe
-              %td.text-right
-                - if policy(user).destroy?
-                  - unless user.confirmed?
-                    = link_to resend_confirmation_user_path(user), :method => :post, class: "btn btn-circle btn-sm btn-success mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('user.resend_confirmation') } do
-                      %i.fas.fa-share-square
-
-                    %input.confirm-link{ value: confirmation_url(user, confirmation_token: user.confirmation_token) }
-
-                    = link_to '#', class: "btn btn-circle btn-sm btn-secondary mr-2 btn-copy", data: { toggle: 'tooltip', placement: 'top', title: t('user.copy_confirm_link') } do
-                      %i.far.fa-copy
-
-                  - if policy(user).update? && user.confirmed?
-                    - title = user.actived? ? t("shared.deactivate") : t("shared.activate")
-                    = link_to user_path(user, user: {actived: !user.actived}), class: "btn btn-circle btn-sm btn-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: title }, method: :put do
-                      %i.fas{class: (user.actived? ? "fa-eye" : "fa-eye-slash")}
-
-                  - if user.access_locked?
-                    = link_to unlock_access_user_path(user), class: "btn btn-circle btn-sm btn-success mr-2 btn-copy", data: { toggle: 'tooltip', placement: 'top', title: t('shared.unlock') }, method: :put do
-                      %i.fas.fa-unlock
-
-                  = render 'shared/action_buttons', edit_url: edit_user_path(user), delete_url: user_path(user), object: user
+              %td.text-right{style: 'min-width: 168px;'}
+                = render 'action_buttons', user: user
 
       - if @pagy.pages > 1
         .pagy-wrapper
