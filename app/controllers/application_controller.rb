@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def append_info_to_payload payload
     super
-    payload[:current_user_id] = current_user.id
+    payload[:current_user_id] = current_user.try(:id)
   end
 
   private
