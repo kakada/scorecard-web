@@ -137,4 +137,30 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(voting_indicators.first.suggested_actions.selecteds.length).to eq(1) }
     end
   end
+
+  describe "PUT #update, facilitators_attributes with soft delete caf" do
+    let!(:user)       { create(:user) }
+    let!(:local_ngo)  { create(:local_ngo, program: user.program) }
+    let!(:caf1)        { create(:caf, local_ngo: local_ngo) }
+    let!(:caf2)        { create(:caf, local_ngo: local_ngo) }
+    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, local_ngo: local_ngo) }
+    let(:json_response) { JSON.parse(response.body) }
+    let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+    let(:params)      { {
+                          facilitators_attributes: [
+                            { caf_id: caf1.id, position: 'lead', scorecard_uuid: scorecard.uuid },
+                            { caf_id: caf2.id, position: 'other', scorecard_uuid: scorecard.uuid },
+                          ]
+                        }
+                      }
+    context "success" do
+      before {
+        caf2.destroy
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
+      }
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(scorecard.facilitators.length).to eq(2) }
+    end
+  end
 end

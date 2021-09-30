@@ -13,5 +13,5 @@
 #
 class Facilitator < ApplicationRecord
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
-  belongs_to :caf
+  belongs_to :caf, -> { with_deleted }
 end

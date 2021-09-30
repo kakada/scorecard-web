@@ -36,8 +36,6 @@ class Caf < ApplicationRecord
 
   scope :actives, -> { where(actived: true) }
 
-  after_destroy :really_delete, if: -> { scorecards.empty? }
-
   def self.filter(params)
     scope = all
     scope = scope.where("LOWER(name) LIKE ? OR tel LIKE ?", "%#{params[:keyword].downcase}%", "%#{params[:keyword].downcase}%") if params[:keyword].present?
