@@ -9,7 +9,10 @@ module Users::CallbackDashboard
     after_update :remove_from_dashboard_async, if: -> { was_deactivated? && !skip_callback }
 
     # For soft delete
-    after_restore :add_to_dashboard_async, if: -> { confirmed? && !skip_callback }
+    unless ARGV.include? "assets:precompile"
+      after_restore :add_to_dashboard_async, if: -> { confirmed? && !skip_callback }
+    end
+
     after_destroy :remove_from_dashboard_async, unless: :skip_callback
 
     def add_to_dashboard

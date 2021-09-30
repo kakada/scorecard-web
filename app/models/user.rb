@@ -31,7 +31,10 @@
 class User < ApplicationRecord
   attr_accessor :skip_callback
 
-  acts_as_paranoid if column_names.include? "deleted_at"
+  # condition here is preventing connect db if assets:precompile
+  unless ARGV.include? "assets:precompile"
+    acts_as_paranoid if column_names.include? "deleted_at"
+  end
 
   include Users::Confirmable
   include Users::CallbackDashboard
