@@ -7,7 +7,7 @@ module Api
       before_action :assign_scorecard
 
       def create
-        authorize @scorecard, :update?
+        authorize @scorecard, :submit?
 
         scorecard_reference = @scorecard.scorecard_references.find_or_initialize_by(uuid: reference_params[:uuid])
 
