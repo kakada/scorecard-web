@@ -11,6 +11,24 @@ RSpec.describe ActivityLog, type: :model do
   it { is_expected.to belong_to(:user) }
   it { is_expected.to belong_to(:program).optional }
 
+  describe "Delegate" do
+    let(:activity_log) { create(:activity_log, user: build(:user)) }
+
+    context "without program" do
+      before { activity_log.program = nil }
+
+      specify { expect(activity_log.program_name).to be_blank }
+    end
+
+    context "with program" do
+      let(:program) { build(:program, name: "my program") }
+
+      before { activity_log.program = program }
+
+      specify { expect(activity_log.program_name).to eq("my program") }
+    end
+  end
+
   describe "ActivityLog::RoledScope" do
     let(:program1) { create(:program) }
     let(:program2) { create(:program) }
