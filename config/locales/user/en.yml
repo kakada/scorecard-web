@@ -9,6 +9,7 @@ en:
     copied: Copied!
     new_users: New Users
     actived: Actived
+    deactivated: Deactivated
     pending: Pending
     locked: Locked
     number: 'No'
