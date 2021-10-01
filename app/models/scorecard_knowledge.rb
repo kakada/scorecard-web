@@ -14,5 +14,6 @@ class ScorecardKnowledge < ApplicationRecord
   has_many :cafs
 
   validates :code, presence: true
-  validates :name, presence: true
+  validates :name_en, presence: true
+  validates :name_km, presence: true
 end

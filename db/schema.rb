@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_27_032640) do
+ActiveRecord::Schema.define(version: 2021_10_01_042446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -89,9 +89,10 @@ ActiveRecord::Schema.define(version: 2021_09_27_032640) do
 
   create_table "educational_backgrounds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
-    t.string "name"
+    t.string "name_en"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_km"
   end
 
   create_table "facilitators", force: :cascade do |t|
@@ -351,9 +352,10 @@ ActiveRecord::Schema.define(version: 2021_09_27_032640) do
 
   create_table "scorecard_knowledges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
-    t.string "name"
+    t.string "name_en"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_km"
   end
 
   create_table "scorecard_progresses", force: :cascade do |t|

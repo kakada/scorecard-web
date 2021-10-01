@@ -18,8 +18,8 @@
     = render "shared/date_field", f: f, field: :date_of_birth, label: t('caf.date_of_birth')
     = f.input :tel, label: t('caf.tel')
     = f.input :address, label: t('caf.address')
-    = f.input :educational_background_id, collection: EducationalBackground.pluck(:name, :id)
-    = f.input :scorecard_knowledge_id, collection: ScorecardKnowledge.pluck(:name, :id)
+    = f.input :educational_background_id, collection: EducationalBackground.pluck(:"name_#{I18n.locale}", :id)
+    = f.input :scorecard_knowledge_id, collection: ScorecardKnowledge.pluck(:"name_#{I18n.locale}", :id)
 
     .actions
       = f.submit t('shared.save'), class: 'btn btn-primary'
