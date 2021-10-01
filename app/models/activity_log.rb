@@ -6,7 +6,7 @@ class ActivityLog < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
   delegate :role, to: :user, prefix: true
-  delegate :name, to: :program, prefix: true
+  delegate :name, to: :program, prefix: true, allow_nil: true
 
   def self.filter(params = {})
     scope = send(params[:role], params.slice(:user_id, :program_id))
