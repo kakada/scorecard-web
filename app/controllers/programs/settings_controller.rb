@@ -2,7 +2,9 @@
 
 module Programs
   class SettingsController < ::ApplicationController
-    def show; end
+    def show
+      authorize current_program, :update?
+    end
 
     def update
       @program = authorize current_program

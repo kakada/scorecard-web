@@ -2,7 +2,7 @@
 
 class PdfTemplatesController < ApplicationController
   def index
-    @pagy, @pdf_templates = pagy(current_program.pdf_templates.order(sort_column + " " + sort_direction))
+    @pagy, @pdf_templates = pagy(authorize current_program.pdf_templates.order(sort_column + " " + sort_direction))
   end
 
   def new

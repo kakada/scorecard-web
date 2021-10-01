@@ -3,7 +3,7 @@
 module Programs
   class DashboardAccessibilitiesController < ::ApplicationController
     def index
-      @program = current_program
+      @program = authorize current_program, :update?
       @emails = @program.users.where(role: [:staff, :lngo]).pluck(:email)
 
       respond_to do |format|
@@ -12,7 +12,7 @@ module Programs
     end
 
     def upsert
-      @program = current_program
+      @program = authorize current_program, :update?
 
       if @program.update(program_params)
         redirect_to setting_path

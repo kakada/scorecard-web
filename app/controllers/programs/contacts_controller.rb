@@ -3,7 +3,7 @@
 module Programs
   class ContactsController < ::ApplicationController
     def index
-      @program = current_program
+      @program = authorize current_program, :update?
 
       respond_to do |format|
         format.js
@@ -11,7 +11,7 @@ module Programs
     end
 
     def upsert
-      @program = current_program
+      @program = authorize current_program, :update?
       if @program.update(program_params)
         redirect_to setting_path
       else
