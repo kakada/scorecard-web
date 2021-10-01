@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   before_action :set_chat_group
 
   def index
-    @messages = current_program.messages
+    @messages = authorize current_program.messages
   end
 
   def new

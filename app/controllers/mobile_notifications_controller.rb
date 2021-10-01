@@ -2,7 +2,7 @@
 
 class MobileNotificationsController < ApplicationController
   def index
-    @pagy, @notifications = pagy(policy_scope(MobileNotification.order("updated_at DESC")))
+    @pagy, @notifications = pagy(authorize policy_scope(MobileNotification.order("updated_at DESC")))
   end
 
   def new

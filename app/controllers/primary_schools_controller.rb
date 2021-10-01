@@ -2,7 +2,7 @@
 
 class PrimarySchoolsController < ApplicationController
   def index
-    @pagy, @primary_schools = pagy(PrimarySchool.filter(params).order("#{sort_column} #{sort_direction}"))
+    @pagy, @primary_schools = pagy(authorize PrimarySchool.filter(params).order("#{sort_column} #{sort_direction}"))
   end
 
   def new
