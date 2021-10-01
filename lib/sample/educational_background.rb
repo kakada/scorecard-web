@@ -9,8 +9,8 @@ module Sample
         rows[1..-1].each_with_index do |row, index|
           next unless row["code"].present?
 
-          ed = ::EducationalBackground.find_or_initialize_by(code: row["code"])
-          ed.update(name: row["name"])
+          edu = ::EducationalBackground.find_or_initialize_by(code: row["code"])
+          edu.update(name_en: row["name_en"], name_km: row["name_km"])
         end
       end
     end
