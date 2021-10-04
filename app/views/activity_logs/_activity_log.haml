@@ -2,7 +2,7 @@
   %td.fixed-gap
     = read_more activity_log.path
   %td= activity_log.http_method
-  %td= activity_log.user.display_name
+  %td= activity_log.user.email
   %td
     %span.badge.badge-role{ class: "badge-#{activity_log.user_role}"}
       = activity_log.user_role
