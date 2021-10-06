@@ -66,7 +66,7 @@ gem "wkhtmltopdf-binary",         "~> 0.12.6.5"
 gem "telegram-bot", "~> 0.15.3"
 
 gem "mimemagic", "~> 0.3.6"
-gem "sidekiq", "~> 6.2.0"
+gem "sidekiq", "~> 6.2.1"
 
 gem "elasticsearch-model", "~> 7.1.1"
 gem "elasticsearch-rails", "~> 7.1.1"
