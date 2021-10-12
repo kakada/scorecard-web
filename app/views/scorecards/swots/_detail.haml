@@ -10,18 +10,19 @@
   %tbody
     - @voting_indicators.each do |indicator|
       %tr
-        %td= indicator.indicatorable.name
+        %td.text-break= indicator.indicatorable.name
         %td.text-center= VotingIndicator.medians[indicator.median]
         %td
-          %ul
+          %ul.text-break
             - indicator.strength.each do |str|
               %li= str
+
         %td
-          %ul
+          %ul.text-break
             - indicator.weakness.each do |str|
               %li= str
         %td
-          %ul
+          %ul.text-break
             - indicator.suggested_actions.each do |action|
               %li
                 = action.content
