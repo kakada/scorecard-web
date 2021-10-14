@@ -47,10 +47,16 @@ module ApplicationHelper
     end.compact.join(", ")
   end
 
+  def display_date(date)
+    return "" unless date.present?
+
+    I18n.l(date)
+  end
+
   def timeago(date)
     return "" unless date.present?
 
-    str = "<span class='timeago' data-date='#{l(date)}'>"
+    str = "<span class='timeago' data-date='#{display_date(date)}'>"
     str += time_ago_in_words(date)
     str += "</span>"
     str
