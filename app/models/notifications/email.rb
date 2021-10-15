@@ -21,6 +21,8 @@ module Notifications
     end
 
     def notify_groups(display_message)
+      return unless emails.present?
+
       NotificationMailer.notify(emails.join(","), display_message).deliver_now
     end
   end
