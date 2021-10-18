@@ -24,6 +24,6 @@ class DashboardInterpreter < Dashboards::BaseInterpreter
   private
     def assign_uid(data)
       data["id"] = nil
-      data["uid"] = SecureRandom.uuid[1..9]
+      data["uid"] = gf_dashboard.try(:dashboard_uid) || SecureRandom.uuid[1..9]
     end
 end

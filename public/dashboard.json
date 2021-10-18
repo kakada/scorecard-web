@@ -22,14 +22,14 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1631090693874,
+  "iteration": 1634531814648,
   "links": [],
   "panels": [
     {
       "datasource": null,
       "gridPos": {
-        "h": 11,
-        "w": 10,
+        "h": 15,
+        "w": 9,
         "x": 0,
         "y": 0
       },
@@ -93,7 +93,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT \n  CONCAT(\n    'អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ (', locations.name_km, ')', \n    '<ol>',\n    ARRAY_TO_STRING(array_agg(DISTINCT CONCAT('<li><a href=\"#\" target=\"_blank\">', local_ngos.name, '</a></li>')),''),\n    '</ol>'\n  ) as popup,\n  locations.latitude, \n  locations.longitude,\n  CONCAT(\n    COUNT(CASE WHEN scorecards.locked_at IS NOT null THEN 1 END), \n    '/', \n    count(*)\n  ) as tooltip\nFROM scorecards \nINNER join locations ON scorecards.province_id = locations.code\nINNER join local_ngos ON scorecards.local_ngo_id = local_ngos.id\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY \n  locations.name_km, locations.latitude, locations.longitude;",
+          "rawSql": "SELECT \n  CONCAT(\n    'អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ (', locations.name_km, ')', \n    '<ol>',\n    ARRAY_TO_STRING(array_agg(DISTINCT CONCAT('<li><a href=\"', local_ngos.website_url ,'\" target=\"_blank\">', local_ngos.name, '</a></li>')),''),\n    '</ol>'\n  ) as popup,\n  locations.latitude, \n  locations.longitude,\n  CONCAT(\n    (\n      SELECT \n        COUNT(*)\n      FROM\n      (\n        SELECT\n          s.id  \n        FROM \n        (\n          SELECT * \n          FROM (\n            SELECT\n              p.*,\n              concat_ws (\n                ', ',\n                (CASE WHEN p.disability = true THEN 'Disability' END),\n                (CASE WHEN p.minority = true THEN 'Minority' END),\n                (CASE WHEN p.youth = true THEN 'Youth' END),\n                (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n                (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n              ) as profile\n            FROM participants AS p\n          ) as pa\n          WHERE \n            pa.gender in ($gender)\n            AND pa.age BETWEEN ${age:raw}\n            AND string_to_array(pa.profile, ', ') && array[$profile]\n        ) as par\n        JOIN scorecards as s on par.scorecard_uuid = s.id::varchar\n        WHERE s.program_id=${program_id}\n              AND s.scorecard_type in ($scorecard_type) \n              AND s.year in ($year) \n              AND s.facility_id in ($facility_id)\n              AND s.province_id = '02'\n        GROUP BY s.id\n      ) as rows\n    ), \n    '/', \n    count(*)\n  ) as tooltip\nFROM scorecards \nINNER join locations ON scorecards.province_id = locations.code\nINNER join local_ngos ON scorecards.local_ngo_id = local_ngos.id\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY \n  locations.name_km, locations.code, locations.latitude, locations.longitude;",
           "refId": "A",
           "select": [
             [
@@ -119,130 +119,6 @@
       ],
       "title": "Scorecard Implemented Map",
       "type": "alexandra-trackmap-panel"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "axisSoftMin": 0,
-            "fillOpacity": 80,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineWidth": 1
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "community_scorecard"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#f29522",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "self_assessment"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#31c0c7",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 6,
-        "x": 10,
-        "y": 0
-      },
-      "id": 9,
-      "options": {
-        "barWidth": 0.96,
-        "groupWidth": 0.7,
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "orientation": "horizontal",
-        "showValue": "never",
-        "stacking": "none",
-        "text": {},
-        "tooltip": {
-          "mode": "single"
-        }
-      },
-      "targets": [
-        {
-          "format": "table",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "select \n  facilities.name_en as name, \n  COUNT(CASE WHEN scorecards.scorecard_type = 1 THEN 1 END) as self_assessment,\n  COUNT(CASE WHEN scorecards.scorecard_type = 2 THEN 2 END) as community_scorecard\nFROM scorecards INNER JOIN facilities ON scorecards.facility_id = facilities.id\nWHERE \n scorecards.program_id=${program_id}  \n AND scorecards.scorecard_type in ($scorecard_type) \n AND scorecards.year in ($year) \n AND scorecards.facility_id in ($facility_id)\n AND scorecards.province_id in ($province_id)\nGROUP BY facilities.name_en;\n",
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "latitude"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "locations",
-          "timeColumn": "created_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "title": "Total Scorecard Conducted",
-      "type": "barchart"
     },
     {
       "datasource": null,
@@ -309,9 +185,9 @@
         ]
       },
       "gridPos": {
-        "h": 7,
-        "w": 4,
-        "x": 16,
+        "h": 8,
+        "w": 7,
+        "x": 9,
         "y": 0
       },
       "id": 5,
@@ -343,7 +219,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  gender AS \"gender\",\n  count(*)\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\nGROUP BY gender\nORDER BY 1",
+          "rawSql": "SELECT\n  gender AS \"gender\",\n  count(*)\nFROM \n  (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n  ) as pa\ninner join scorecards on pa.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = ${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND pa.gender in ($gender)\n  AND pa.age BETWEEN ${age:raw}\n  AND string_to_array(pa.profile, ', ') && array[$profile]\nGROUP BY gender\nORDER BY 1",
           "refId": "A",
           "select": [
             [
@@ -450,12 +326,12 @@
         ]
       },
       "gridPos": {
-        "h": 7,
-        "w": 4,
-        "x": 20,
+        "h": 8,
+        "w": 8,
+        "x": 16,
         "y": 0
       },
-      "id": 7,
+      "id": 18,
       "options": {
         "displayLabels": [
           "name",
@@ -483,95 +359,8 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  count(*) AS \"ID Poor\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.poor_card is true\nORDER BY 1\n",
+          "rawSql": "SELECT * From\n  ((\n    SELECT\n      'ID Poor' as profile,\n      count(*)\n    FROM participants\n    inner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\n    WHERE \n      scorecards.program_id = ${program_id}\n      AND scorecards.facility_id in ($facility_id)\n      AND scorecards.year in ($year)\n      AND scorecards.scorecard_type in ($scorecard_type)\n      AND scorecards.province_id in ($province_id)\n      AND participants.gender in ($gender)\n      AND participants.poor_card is true\n      AND participants.age BETWEEN ${age:raw}\n  )\n  UNION\n  (\n    SELECT\n      'Disability' as profile,\n      count(*)\n    FROM participants\n    inner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\n    WHERE \n      scorecards.program_id = ${program_id}\n      AND scorecards.facility_id in ($facility_id)\n      AND scorecards.year in ($year)\n      AND scorecards.scorecard_type in ($scorecard_type)\n      AND scorecards.province_id in ($province_id)\n      AND participants.gender in ($gender)\n      AND participants.disability is true\n      AND participants.age BETWEEN ${age:raw}\n  )\n  UNION\n  (\n    SELECT\n      'Minority' as profile,\n      count(*)\n    FROM participants\n    inner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\n    WHERE \n      scorecards.program_id = ${program_id}\n      AND scorecards.facility_id in ($facility_id)\n      AND scorecards.year in ($year)\n      AND scorecards.scorecard_type in ($scorecard_type)\n      AND scorecards.province_id in ($province_id)\n      AND participants.gender in ($gender)\n      AND participants.minority is true\n      AND participants.age BETWEEN ${age:raw}\n  )\n  UNION\n  (\n    SELECT\n      'Youth' as profile,\n      count(*)\n    FROM participants\n    inner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\n    WHERE \n      scorecards.program_id = ${program_id}\n      AND scorecards.facility_id in ($facility_id)\n      AND scorecards.year in ($year)\n      AND scorecards.scorecard_type in ($scorecard_type)\n      AND scorecards.province_id in ($province_id)\n      AND participants.gender in ($gender)\n      AND participants.youth is true\n      AND participants.age BETWEEN ${age:raw}\n  )) as p\nWHERE p.profile in ($profile)\n\n",
           "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "latitude"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "locations",
-          "timeColumn": "created_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        },
-        {
-          "format": "table",
-          "group": [],
-          "hide": false,
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  count(*) AS \"Disability\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.disability is true\nORDER BY 1",
-          "refId": "B",
-          "select": [
-            [
-              {
-                "params": [
-                  "latitude"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "locations",
-          "timeColumn": "created_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        },
-        {
-          "format": "table",
-          "group": [],
-          "hide": false,
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  count(*) AS \"Minority\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.minority is true\nORDER BY 1",
-          "refId": "C",
-          "select": [
-            [
-              {
-                "params": [
-                  "latitude"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "table": "locations",
-          "timeColumn": "created_at",
-          "timeColumnType": "timestamp",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        },
-        {
-          "format": "table",
-          "group": [],
-          "hide": false,
-          "metricColumn": "none",
-          "rawQuery": true,
-          "rawSql": "SELECT\n  count(*) AS \"Youth\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.youth is true\nORDER BY 1",
-          "refId": "D",
           "select": [
             [
               {
@@ -596,6 +385,130 @@
       ],
       "title": "By Citizen Profile",
       "type": "piechart"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "community_scorecard"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#f29522",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "self_assessment"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#31c0c7",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 7,
+        "x": 9,
+        "y": 8
+      },
+      "id": 9,
+      "options": {
+        "barWidth": 0.96,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "orientation": "horizontal",
+        "showValue": "never",
+        "stacking": "none",
+        "text": {},
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT \n  facilities.name_en as name, \n  COUNT(CASE WHEN t.scorecard_type = 1 THEN 1 END) as self_assessment,\n  COUNT(CASE WHEN t.scorecard_type = 2 THEN 2 END) as community_scorecard\nFROM (\n  select * \n  from \n    (\n      select \n        s.*,\n        concat_ws (\n          ', ',\n          (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n          (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n          (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n          (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n          (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n        ) as profile\n      from scorecards as s\n      inner join participants on s.id::varchar(20) = participants.scorecard_uuid\n      where \n        s.program_id=${program_id}\n        AND s.scorecard_type in ($scorecard_type) \n        AND s.year in ($year) \n        AND s.facility_id in ($facility_id)\n        AND s.province_id in ($province_id)\n        AND s.locked_at is not null\n        AND participants.age BETWEEN ${age:raw}\n        AND participants.gender in ($gender)\n      group by s.id\n    ) as sc\n  where string_to_array(sc.profile, ', ') && array[$profile]\n\n) as t\nINNER JOIN facilities ON t.facility_id = facilities.id\nGROUP BY facilities.name_en;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Total Scorecard Conducted",
+      "type": "barchart"
     },
     {
       "datasource": null,
@@ -651,10 +564,10 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 14,
-        "x": 10,
-        "y": 7
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 8
       },
       "id": 15,
       "options": {
@@ -680,7 +593,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "(SELECT\n  indicators.name,\n  count(*) as total_raised\nFROM raised_indicators\n  INNER JOIN scorecards ON\n    raised_indicators.scorecard_uuid::INTEGER = scorecards.id\n  JOIN indicators ON \n    raised_indicators.indicatorable_id = indicators.id\n    AND raised_indicators.indicatorable_type = 'Indicator'\nWHERE \n  scorecards.program_id=${program_id}  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY indicators.name)\n\nUNION\n\n(SELECT\n  custom_indicators.name,\n  count(*) as total_raised\nFROM raised_indicators\n  INNER JOIN scorecards ON\n    raised_indicators.scorecard_uuid::INTEGER = scorecards.id\n  JOIN custom_indicators ON \n    raised_indicators.indicatorable_id = custom_indicators.id\n    AND raised_indicators.indicatorable_type = 'CustomIndicator'\nWHERE \n  scorecards.program_id=${program_id}  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY custom_indicators.name)\nORDER BY total_raised DESC\nLIMIT 5;\n",
+          "rawSql": "(\n  SELECT\n    indicators.name,\n    count(*) as total_raised\n  FROM\n    (\n      SELECT\n        pa.*,\n        raised_indicators.id,\n        raised_indicators.indicatorable_id,\n        raised_indicators.indicatorable_type,\n        raised_indicators.tag_id,\n        raised_indicators.participant_uuid\n      FROM\n        (\n        SELECT\n          p.*,\n          concat_ws (\n            ', ',\n            (CASE WHEN p.disability = true THEN 'Disability' END),\n            (CASE WHEN p.minority = true THEN 'Minority' END),\n            (CASE WHEN p.youth = true THEN 'Youth' END),\n            (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n            (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n          ) as profile\n        FROM participants AS p\n        ) as pa\n      INNER JOIN raised_indicators ON pa.uuid = raised_indicators.participant_uuid\n      WHERE\n        string_to_array(pa.profile, ', ') && array[$profile]\n        AND pa.gender in ($gender)\n        AND pa.age BETWEEN ${age:raw}\n    ) AS raised\n  INNER JOIN scorecards ON\n    raised.scorecard_uuid::INTEGER = scorecards.id\n  INNER JOIN indicators ON \n    raised.indicatorable_id = indicators.id\n    AND raised.indicatorable_type = 'Indicator'\n  WHERE \n    scorecards.program_id=${program_id}  \n    AND scorecards.scorecard_type in ($scorecard_type) \n    AND scorecards.year in ($year) \n    AND scorecards.facility_id in ($facility_id)\n    AND scorecards.province_id in ($province_id)\n  GROUP BY indicators.name\n)\nUNION\n(\n  SELECT\n    custom_indicators.name,\n    count(*) as total_raised\n  FROM\n    (\n      SELECT\n        pa.*,\n        raised_indicators.id,\n        raised_indicators.indicatorable_id,\n        raised_indicators.indicatorable_type,\n        raised_indicators.tag_id,\n        raised_indicators.participant_uuid\n      FROM\n        (\n        SELECT\n          p.*,\n          concat_ws (\n            ', ',\n            (CASE WHEN p.disability = true THEN 'Disability' END),\n            (CASE WHEN p.minority = true THEN 'Minority' END),\n            (CASE WHEN p.youth = true THEN 'Youth' END),\n            (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n            (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n          ) as profile\n        FROM participants AS p\n        ) as pa\n      INNER JOIN raised_indicators ON pa.uuid = raised_indicators.participant_uuid\n      WHERE\n        string_to_array(pa.profile, ', ') && array[$profile]\n        AND pa.gender in ($gender)\n        AND pa.age BETWEEN ${age:raw}\n    ) AS raised\n  INNER JOIN scorecards ON\n    raised.scorecard_uuid::INTEGER = scorecards.id\n  INNER JOIN custom_indicators ON \n    raised.indicatorable_id = custom_indicators.id\n    AND raised.indicatorable_type = 'CustomIndicator'\n  WHERE \n    scorecards.program_id=${program_id}  \n    AND scorecards.scorecard_type in ($scorecard_type) \n    AND scorecards.year in ($year) \n    AND scorecards.facility_id in ($facility_id)\n    AND scorecards.province_id in ($province_id)\n  GROUP BY custom_indicators.name\n)\nORDER BY total_raised DESC\nLIMIT 5;",
           "refId": "A",
           "select": [
             [
@@ -710,15 +623,15 @@
     {
       "datasource": null,
       "gridPos": {
-        "h": 5,
-        "w": 10,
-        "x": 0,
-        "y": 11
+        "h": 4,
+        "w": 23,
+        "x": 1,
+        "y": 15
       },
       "id": 11,
       "options": {
-        "content": "<div style=\"display: flex\">\n<div style=\"text-align: center; margin-right: 20px\">\n<h5 style=\"font-size: 14px;\">គាំទ្រមូលនិធិដោយ/Funded by</h5>\n<img src=\"https://digital-csc.org/assets/eu-3902d24e7e972494ede15c7dc533bc20589ef6e80aca3335518cea5944984c09.png\"  width=\"70\"/>\n</div>\n\n<div style=\"text-align: center\">\n<h5 style=\"font-size: 14px;\">អនុវត្តដោយ/Implemented by</h5>\n<div style=\"display: flex; align-items: center; justify-content: center; margin-top: 30px;\">\n<img src=\"https://digital-csc.org/assets/care_logo-30bc7807ccb532ee750d35b55a3e94c40e688a88a18d0497c4e244bc56f4017d.png\" width=\"110\" height=\"35px\" />\n<img src=\"https://digital-csc.org/assets/api-a84a9246854e6e9c471aa6982fb90ed27377b050f69318966fe0c3923d371886.png\"  width=\"40\" height: \"30px\" style=\"margin: 0 10px;\"/>\n<img src=\"https://digital-csc.org/assets/instedd-ilabsea-252db350ccbce84ff56c4057db2f6a5761873c8d7b4c9c5ee9c31049ba7d3792.png\"  width=\"180\"/>\n</div>\n</div>\n</div>\n\n<div style=\"text-align:center; margin-top: 20px;\">\n<a href=\"https://digital-csc.org/\" target=\"_blank\" >About Us</a>\n</div>\n  ",
-        "mode": "markdown"
+        "content": "<div style=\"display: flex;\">\n<div style=\"display: flex;margin: 0 auto;\">\n<div style=\"text-align: center; margin-right: 20px\">\n<h5 style=\"font-size: 14px;\">គាំទ្រមូលនិធិដោយ/Funded by</h5>\n<img src=\"https://digital-csc.org/assets/eu-3902d24e7e972494ede15c7dc533bc20589ef6e80aca3335518cea5944984c09.png\"  width=\"70\"/>\n</div>\n\n<div style=\"text-align: center\">\n<h5 style=\"font-size: 14px;\">អនុវត្តដោយ/Implemented by</h5>\n<div style=\"display: flex; align-items: center; justify-content: center; margin-top: 30px;\">\n<img src=\"https://digital-csc.org/assets/care_logo-30bc7807ccb532ee750d35b55a3e94c40e688a88a18d0497c4e244bc56f4017d.png\" width=\"110\" height=\"35px\" />\n<img src=\"https://digital-csc.org/assets/api-a84a9246854e6e9c471aa6982fb90ed27377b050f69318966fe0c3923d371886.png\"  width=\"40\" height: \"30px\" style=\"margin: 0 10px;\"/>\n<img src=\"https://digital-csc.org/assets/instedd-ilabsea-252db350ccbce84ff56c4057db2f6a5761873c8d7b4c9c5ee9c31049ba7d3792.png\"  width=\"180\"/>\n</div>\n</div>\n\n<a href=\"https://digital-csc.org/\" target=\"_blank\" >About Us</a>\n</div>\n</div>\n  ",
+        "mode": "html"
       },
       "pluginVersion": "8.1.2",
       "targets": [
@@ -865,6 +778,147 @@
           }
         ],
         "query": "Self-Assessment : 1,Community Scorecard : 2 ",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": "0 AND 99",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Age",
+        "multi": false,
+        "name": "age",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "< 15",
+            "value": "0 AND 14"
+          },
+          {
+            "selected": false,
+            "text": "15 - 30",
+            "value": "15 AND 30"
+          },
+          {
+            "selected": false,
+            "text": "31 - 45",
+            "value": "31 AND 45"
+          },
+          {
+            "selected": false,
+            "text": "> 45",
+            "value": "46 AND 99"
+          }
+        ],
+        "query": "< 15 : 0 AND 14, 15 - 30 : 15 AND 30, 31 - 45 : 31 AND 45,  > 45 : 46 AND 99",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Gender",
+        "multi": true,
+        "name": "gender",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "Male",
+            "value": "male"
+          },
+          {
+            "selected": false,
+            "text": "Female",
+            "value": "female"
+          },
+          {
+            "selected": false,
+            "text": "Other",
+            "value": "other"
+          }
+        ],
+        "query": "Male : male, Female : female, Other : other",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": "'Disability', 'Minority', 'ID Poor', 'Youth', 'N/A'",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Profile",
+        "multi": true,
+        "name": "profile",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "Disability",
+            "value": "Disability"
+          },
+          {
+            "selected": false,
+            "text": "Minority",
+            "value": "Minority"
+          },
+          {
+            "selected": false,
+            "text": "ID Poor",
+            "value": "ID Poor"
+          },
+          {
+            "selected": false,
+            "text": "Youth",
+            "value": "Youth"
+          }
+        ],
+        "query": "Disability, Minority, ID Poor, Youth",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"

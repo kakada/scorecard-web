@@ -54,6 +54,10 @@ class Program < ApplicationRecord
     ::Dashboard.new(self).create
   end
 
+  def update_dashboard
+    ::Dashboard.new(self).update
+  end
+
   private
     def create_default_language
       languages.create(code: "km", name_en: "Khmer", name_km: "ខ្មែរ")
