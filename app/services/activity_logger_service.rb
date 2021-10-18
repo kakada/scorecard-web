@@ -8,13 +8,10 @@ class ActivityLoggerService
   end
 
   private
-    def self.loggable?(current_controller)
-      whitelist_controllers.any? do |controller|
-        current_controller.downcase.include?(controller)
-      end
-    end
 
-    def self.whitelist_controllers
-      ENV["ACTIVITY_LOGS_CONTROLLERS"].to_s.split(",")
+  def self.loggable?(current_controller)
+    ActivityLog.whitelist_controllers.any? do |controller| 
+      current_controller.downcase.include?(controller)
     end
+  end
 end
