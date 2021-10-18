@@ -5,8 +5,7 @@ module Dashboards
     def gsub_program_id(program, str)
       return str unless str.present?
 
-      str = str.gsub(/program_id=1/, "program_id=#{program.id}")
-      str.gsub(/program_id = 1/, "program_id=#{program.id}")
+      str.gsub(/\$\{program_id\}/, "#{program.id}")
     end
 
     def load_json_data(filename)

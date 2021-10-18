@@ -93,7 +93,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT \n  CONCAT(\n    'អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ (', locations.name_km, ')', \n    '<ol>',\n    ARRAY_TO_STRING(array_agg(DISTINCT CONCAT('<li><a href=\"#\" target=\"_blank\">', local_ngos.name, '</a></li>')),''),\n    '</ol>'\n  ) as popup,\n  locations.latitude, \n  locations.longitude,\n  CONCAT(\n    COUNT(CASE WHEN scorecards.locked_at IS NOT null THEN 1 END), \n    '/', \n    count(*)\n  ) as tooltip\nFROM scorecards \nINNER join locations ON scorecards.province_id = locations.code\nINNER join local_ngos ON scorecards.local_ngo_id = local_ngos.id\nWHERE \n  scorecards.program_id=1\n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY \n  locations.name_km, locations.latitude, locations.longitude;",
+          "rawSql": "SELECT \n  CONCAT(\n    'អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ (', locations.name_km, ')', \n    '<ol>',\n    ARRAY_TO_STRING(array_agg(DISTINCT CONCAT('<li><a href=\"#\" target=\"_blank\">', local_ngos.name, '</a></li>')),''),\n    '</ol>'\n  ) as popup,\n  locations.latitude, \n  locations.longitude,\n  CONCAT(\n    COUNT(CASE WHEN scorecards.locked_at IS NOT null THEN 1 END), \n    '/', \n    count(*)\n  ) as tooltip\nFROM scorecards \nINNER join locations ON scorecards.province_id = locations.code\nINNER join local_ngos ON scorecards.local_ngo_id = local_ngos.id\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY \n  locations.name_km, locations.latitude, locations.longitude;",
           "refId": "A",
           "select": [
             [
@@ -217,7 +217,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "select \n  facilities.name_en as name, \n  COUNT(CASE WHEN scorecards.scorecard_type = 1 THEN 1 END) as self_assessment,\n  COUNT(CASE WHEN scorecards.scorecard_type = 2 THEN 2 END) as community_scorecard\nFROM scorecards INNER JOIN facilities ON scorecards.facility_id = facilities.id\nWHERE \n scorecards.program_id=1  \n AND scorecards.scorecard_type in ($scorecard_type) \n AND scorecards.year in ($year) \n AND scorecards.facility_id in ($facility_id)\n AND scorecards.province_id in ($province_id)\nGROUP BY facilities.name_en;\n",
+          "rawSql": "select \n  facilities.name_en as name, \n  COUNT(CASE WHEN scorecards.scorecard_type = 1 THEN 1 END) as self_assessment,\n  COUNT(CASE WHEN scorecards.scorecard_type = 2 THEN 2 END) as community_scorecard\nFROM scorecards INNER JOIN facilities ON scorecards.facility_id = facilities.id\nWHERE \n scorecards.program_id=${program_id}  \n AND scorecards.scorecard_type in ($scorecard_type) \n AND scorecards.year in ($year) \n AND scorecards.facility_id in ($facility_id)\n AND scorecards.province_id in ($province_id)\nGROUP BY facilities.name_en;\n",
           "refId": "A",
           "select": [
             [
@@ -343,7 +343,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  gender AS \"gender\",\n  count(*)\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = 1\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\nGROUP BY gender\nORDER BY 1",
+          "rawSql": "SELECT\n  gender AS \"gender\",\n  count(*)\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\nGROUP BY gender\nORDER BY 1",
           "refId": "A",
           "select": [
             [
@@ -483,7 +483,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  count(*) AS \"ID Poor\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = 1\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.poor_card is true\nORDER BY 1\n",
+          "rawSql": "SELECT\n  count(*) AS \"ID Poor\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.poor_card is true\nORDER BY 1\n",
           "refId": "A",
           "select": [
             [
@@ -512,7 +512,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  count(*) AS \"Disability\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = 1\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.disability is true\nORDER BY 1",
+          "rawSql": "SELECT\n  count(*) AS \"Disability\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.disability is true\nORDER BY 1",
           "refId": "B",
           "select": [
             [
@@ -541,7 +541,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  count(*) AS \"Minority\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = 1\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.minority is true\nORDER BY 1",
+          "rawSql": "SELECT\n  count(*) AS \"Minority\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.minority is true\nORDER BY 1",
           "refId": "C",
           "select": [
             [
@@ -570,7 +570,7 @@
           "hide": false,
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  count(*) AS \"Youth\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id = 1\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.youth is true\nORDER BY 1",
+          "rawSql": "SELECT\n  count(*) AS \"Youth\"\nFROM participants\ninner join scorecards on participants.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id=${program_id}\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND participants.youth is true\nORDER BY 1",
           "refId": "D",
           "select": [
             [
@@ -680,7 +680,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "(SELECT\n  indicators.name,\n  count(*) as total_raised\nFROM raised_indicators\n  INNER JOIN scorecards ON\n    raised_indicators.scorecard_uuid::INTEGER = scorecards.id\n  JOIN indicators ON \n    raised_indicators.indicatorable_id = indicators.id\n    AND raised_indicators.indicatorable_type = 'Indicator'\nWHERE \n  scorecards.program_id=1  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY indicators.name)\n\nUNION\n\n(SELECT\n  custom_indicators.name,\n  count(*) as total_raised\nFROM raised_indicators\n  INNER JOIN scorecards ON\n    raised_indicators.scorecard_uuid::INTEGER = scorecards.id\n  JOIN custom_indicators ON \n    raised_indicators.indicatorable_id = custom_indicators.id\n    AND raised_indicators.indicatorable_type = 'CustomIndicator'\nWHERE \n  scorecards.program_id=1  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY custom_indicators.name)\nORDER BY total_raised DESC\nLIMIT 5;\n",
+          "rawSql": "(SELECT\n  indicators.name,\n  count(*) as total_raised\nFROM raised_indicators\n  INNER JOIN scorecards ON\n    raised_indicators.scorecard_uuid::INTEGER = scorecards.id\n  JOIN indicators ON \n    raised_indicators.indicatorable_id = indicators.id\n    AND raised_indicators.indicatorable_type = 'Indicator'\nWHERE \n  scorecards.program_id=${program_id}  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY indicators.name)\n\nUNION\n\n(SELECT\n  custom_indicators.name,\n  count(*) as total_raised\nFROM raised_indicators\n  INNER JOIN scorecards ON\n    raised_indicators.scorecard_uuid::INTEGER = scorecards.id\n  JOIN custom_indicators ON \n    raised_indicators.indicatorable_id = custom_indicators.id\n    AND raised_indicators.indicatorable_type = 'CustomIndicator'\nWHERE \n  scorecards.program_id=${program_id}  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY custom_indicators.name)\nORDER BY total_raised DESC\nLIMIT 5;\n",
           "refId": "A",
           "select": [
             [
@@ -793,7 +793,7 @@
           "value": "$__all"
         },
         "datasource": null,
-        "definition": "select distinct(year) from scorecards where program_id=1",
+        "definition": "select distinct(year) from scorecards where program_id=${program_id}",
         "description": null,
         "error": null,
         "hide": 0,
@@ -802,7 +802,7 @@
         "multi": false,
         "name": "year",
         "options": [],
-        "query": "select distinct(year) from scorecards where program_id=1",
+        "query": "select distinct(year) from scorecards where program_id=${program_id}",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -817,7 +817,7 @@
           "value": "$__all"
         },
         "datasource": null,
-        "definition": "select name_en AS __text, id AS __value  from facilities where parent_id is not null AND program_id=1;",
+        "definition": "select name_en AS __text, id AS __value  from facilities where parent_id is not null AND program_id=${program_id};",
         "description": null,
         "error": null,
         "hide": 0,
@@ -826,7 +826,7 @@
         "multi": false,
         "name": "facility_id",
         "options": [],
-        "query": "select name_en AS __text, id AS __value  from facilities where parent_id is not null AND program_id=1;",
+        "query": "select name_en AS __text, id AS __value  from facilities where parent_id is not null AND program_id=${program_id};",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
