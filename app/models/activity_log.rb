@@ -46,7 +46,7 @@ class ActivityLog < ApplicationRecord
   private
 
   def ensure_unique_get_request_within_time_range
-    errors.add(:base, I18n.to('activity_logs.request_not_unique')) if http_method.downcase == 'get' && last_activity.http_method.downcase == 'get' && last_activity.path.to_s.downcase == path.to_s.downcase && last_activity.created_at > loggable_period
+    errors.add(:base, I18n.t('activity_logs.request_not_unique')) if http_method.downcase == 'get' && last_activity.http_method.downcase == 'get' && last_activity.path.to_s.downcase == path.to_s.downcase && last_activity.created_at > loggable_period
   end
 
   def loggable_period

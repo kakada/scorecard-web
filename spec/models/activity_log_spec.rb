@@ -113,7 +113,15 @@ RSpec.describe ActivityLog, type: :model do
 
     context "with non-GET request" do
       let(:new_activity_log) { build(:activity_log, http_method: 'post', path: '/scorecards', user: user) }
+
       specify { expect(new_activity_log).to be_valid }
+
+      it "creates more than one" do
+        expect {
+          ActivityLog.create(new_activity_log.attributes)
+          ActivityLog.create(new_activity_log.attributes)
+        }.to change { ActivityLog.count }.by 2
+      end
     end
   end
 end
