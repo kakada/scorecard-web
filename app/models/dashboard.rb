@@ -26,6 +26,15 @@ class Dashboard
     set_default_dashboard
   end
 
+  def update
+    return unless gf_dashboard.present?
+
+    params = { dashboard: DashboardInterpreter.new(program).interpreted_message, overwrite: true }
+    params[:dashboard][:id] = gf_dashboard.dashboard_id
+
+    upsert_with_token("/api/dashboards/db", JSON.dump(params))
+  end
+
   def create_org
     option = { basic_auth: auth, body: { name: program.name } }
 
