@@ -19,6 +19,7 @@
 #
 class ActivityLog < ApplicationRecord
   extend ActivityLog::RoledScope
+  include ActivityLog::Duplication
 
   belongs_to :user
   belongs_to :program, optional: true
@@ -46,18 +47,6 @@ class ActivityLog < ApplicationRecord
   private
 
   def ensure_unique_get_request_within_time_range
-    errors.add(:base, I18n.t('activity_logs.request_not_unique')) if http_method.downcase == 'get' && last_activity.http_method.downcase == 'get' && last_activity.path.to_s.downcase == path.to_s.downcase && last_activity.created_at > loggable_period
-  end
-
-  def loggable_period
-    (ENV['ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE'] || default_loggable_period).to_i.minutes.ago
-  end
-
-  def default_loggable_period
-    5
-  end
-
-  def last_activity
-    self.class.find_by(user: user)
+    errors.add(:base, I18n.t('activity_logs.request_duplicate')) if duplicate?
   end
 end

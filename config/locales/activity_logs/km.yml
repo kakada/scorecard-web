@@ -13,4 +13,4 @@ km:
     end_date: ថ្ងៃបញ្ចប់
     read_more: មើលបន្ថែម
     read_less: បម្រួញ
-    request_not_unique: Request មិនមានតែមួយទេ
+    request_duplicate: Request មានរួចហើយ

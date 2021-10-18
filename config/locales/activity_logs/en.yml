@@ -13,4 +13,4 @@ en:
     end_date: End date
     more_html: "more &raquo;"
     less_html: "&laquo; less"
-    request_not_unique: Request not unique
+    request_duplicate: Request duplicate

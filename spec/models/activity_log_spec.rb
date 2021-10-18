@@ -97,7 +97,7 @@ RSpec.describe ActivityLog, type: :model do
       it "raises exception" do
         expect {
           new_activity_log.save!
-        }.to raise_error(ActiveRecord::RecordInvalid, /Request not unique/)
+        }.to raise_error(ActiveRecord::RecordInvalid, /Request duplicate/)
       end
 
       context "when last activity older than current activity" do
