@@ -35,4 +35,8 @@ class ActivityLog < ApplicationRecord
     scope = scope.where("DATE(created_at) <= ?", params[:end_date])   if params[:end_date].present?
     scope
   end
+
+  def self.whitelist_controllers
+    ENV['ACTIVITY_LOGS_CONTROLLERS'].to_s.split(",")
+  end
 end

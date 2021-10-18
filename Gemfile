@@ -81,6 +81,7 @@ gem "doorkeeper", "~> 5.5.2"
 gem "validate_url", "~> 1.0.13"
 
 gem "httparty", "~> 0.19.0"
+gem "ahoy_matey", "~> 4.0.1"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
