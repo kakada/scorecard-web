@@ -57,7 +57,7 @@ module ScorecardsHelper
   def date_html(date)
     return "" unless date.present?
 
-    "<span><i class='fas fa-calendar-alt mr-1'></i>#{date_format(date)}</span>"
+    "<span><i class='fas fa-calendar-alt mr-1'></i>#{display_date(date)}</span>"
   end
 
   def setting_url
