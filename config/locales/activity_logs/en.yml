@@ -14,3 +14,4 @@ en:
     more_html: "more &raquo;"
     less_html: "&laquo; less"
     request_duplicate: Request duplicate
+    remote_ip: Remote IP
