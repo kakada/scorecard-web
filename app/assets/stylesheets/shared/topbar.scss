@@ -1,6 +1,7 @@
 .topbar .dropdown-list {
-
-  width: 160px !important;
+  &--sm {
+    width: 160px !important;
+  }
 
   .dropdown-item {
     height: 46px;
@@ -17,7 +18,6 @@
       width: $size;
     }
   }
-
 }
 
 .img-profile {
