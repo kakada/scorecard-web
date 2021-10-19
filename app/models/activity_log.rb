@@ -19,7 +19,6 @@
 #
 class ActivityLog < ApplicationRecord
   extend ActivityLog::RoledScope
-  include ActivityLog::Duplication
 
   belongs_to :user
   belongs_to :program, optional: true
@@ -52,5 +51,16 @@ class ActivityLog < ApplicationRecord
 
   def get?
     http_method&.upcase == 'GET'
+  end
+
+  def log_exists?
+    self.class\
+      .where(path: path, remote_ip: remote_ip, user: user)
+      .where('created_at > ?', loggable_period)
+      .exists?
+  end
+
+  def loggable_period
+    ENV['ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE'].to_i.minutes.ago
   end
 end
