@@ -27,7 +27,7 @@ class ActivityLog < ApplicationRecord
   delegate :role, to: :user, prefix: true
   delegate :name, to: :program, prefix: true, allow_nil: true
 
-  validate :ensure_unique_get_request_within_time_range,  on: :create
+  validate :ensure_unique_get_request_within_time_range, on: :create
 
   def self.filter(params = {})
     scope = send(params[:role], params.slice(:user_id, :program_id))
@@ -46,14 +46,17 @@ class ActivityLog < ApplicationRecord
   private
 
   def ensure_unique_get_request_within_time_range
-    errors.add(:base, I18n.t('activity_logs.request_duplicate')) if get? && log_exists?
+    if get? && activity_exists?
+      errors.add(:base, I18n.t('activity_logs.request_duplicate'))
+      Rails.logger.info "request #{path} from #{remote_ip} by user_id: #{user.id} is already existed"
+    end
   end
 
   def get?
     http_method&.upcase == 'GET'
   end
 
-  def log_exists?
+  def activity_exists?
     self.class\
       .where(path: path, remote_ip: remote_ip, user: user)
       .where('created_at > ?', loggable_period)
