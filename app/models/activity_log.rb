@@ -28,8 +28,7 @@ class ActivityLog < ApplicationRecord
   delegate :role, to: :user, prefix: true
   delegate :name, to: :program, prefix: true, allow_nil: true
 
-  validate :ensure_unique_get_request_within_time_range,  on: :create,
-                                                          if: -> { last_activity.present? }
+  validate :ensure_unique_get_request_within_time_range,  on: :create
 
   def self.filter(params = {})
     scope = send(params[:role], params.slice(:user_id, :program_id))
