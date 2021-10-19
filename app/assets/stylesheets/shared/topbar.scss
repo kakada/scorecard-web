@@ -1,8 +1,4 @@
 .topbar .dropdown-list {
-  &--sm {
-    width: 160px !important;
-  }
-
   .dropdown-item {
     height: 46px;
   }
@@ -12,6 +8,8 @@
 
     height: $size;
     width: $size;
+    background-color: #e1e1e1;
+    border-radius: 50%;
 
     img {
       height: $size;
@@ -20,7 +18,7 @@
   }
 }
 
-.img-profile {
-  height: 2rem;
-  width: 2rem;
+.topbar .nav-item .nav-link .img-profile {
+  height: 24px;
+  width: 24px;
 }
