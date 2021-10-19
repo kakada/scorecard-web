@@ -47,6 +47,10 @@ class ActivityLog < ApplicationRecord
   private
 
   def ensure_unique_get_request_within_time_range
-    errors.add(:base, I18n.t('activity_logs.request_duplicate')) if duplicate?
+    errors.add(:base, I18n.t('activity_logs.request_duplicate')) if get? && log_exists?
+  end
+
+  def get?
+    http_method&.upcase == 'GET'
   end
 end
