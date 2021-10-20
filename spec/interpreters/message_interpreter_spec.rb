@@ -32,7 +32,7 @@ RSpec.describe MessageInterpreter do
         let(:invalid_message_content) { "Scorecard {{scorecard.test_field}}" }
 
         it "returns nil for wrong field" do
-          expect(interpreter.interpreted_message).to eq("Scorecard ")
+          expect(interpreter.interpreted_message).to eq("Scorecard <b></b>")
         end
       end
     end
