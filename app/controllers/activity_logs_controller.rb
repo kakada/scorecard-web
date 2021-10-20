@@ -14,7 +14,7 @@ class ActivityLogsController < ApplicationController
     end
 
     def activity_log_params
-      params.permit(:http_format, :http_method, :start_date, :end_date, :path)
+      params.permit(:http_format, :http_method, :start_date, :end_date, :query)
     end
 
     def current_user_params

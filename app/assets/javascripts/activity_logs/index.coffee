@@ -50,6 +50,6 @@ CW.Activity_logsIndex = do ->
 
   onClearPath = ->
     $(".ico-clear").click ->
-      $("#q_path").val("").focus()
+      $("#q_query").val("").focus()
 
   { init: init }
