@@ -15,4 +15,4 @@ km:
     read_less: បម្រួញ
     request_duplicate: Request មានរួចហើយ
     remote_ip: IP អ្នកប្រើ
-    query: ស្វែងរកតាមរយៈ path, user's email, remote ip
+    query: ស្វែងរកតាមរយៈ path, email អ្នកប្រើប្រាស់, ឈ្មោះ program, ip អ្នកប្រើប្រាស់

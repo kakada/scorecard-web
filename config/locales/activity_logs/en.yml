@@ -15,4 +15,4 @@ en:
     less_html: "&laquo; less"
     request_duplicate: Request duplicate
     remote_ip: Remote IP
-    query: search by path, user's email, remote ip
+    query: search by path, user's email, program's name, remote ip
