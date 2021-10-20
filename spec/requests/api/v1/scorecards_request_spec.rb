@@ -163,4 +163,30 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(scorecard.facilitators.length).to eq(2) }
     end
   end
+
+  describe "GET #show, pdf" do
+    let!(:user)      { create(:user) }
+    let!(:scorecard) { create(:scorecard, program: user.program) }
+    let(:headers)    { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+    let!(:pdf_template) { create(:pdf_template, program: scorecard.program) }
+
+    context "scorecard is finished" do
+      before {
+        scorecard.lock_access!
+        get "/api/v1/scorecards/#{scorecard.uuid}.pdf", headers: headers
+      }
+
+      it { expect(response.code).to eq("200") }
+      it { expect(response.headers["Content-Type"]).to eq("application/pdf") }
+      it { expect(response.headers["Content-Disposition"]).to eq("attachment; filename=\"scorecard_#{scorecard.uuid}.pdf\"; filename*=UTF-8''scorecard_#{scorecard.uuid}.pdf") }
+    end
+
+    context "scorecard is not finished" do
+      before {
+        get "/api/v1/scorecards/#{scorecard.uuid}.pdf", headers: headers
+      }
+
+      it { expect(response.code).to eq("403") }
+    end
+  end
 end
