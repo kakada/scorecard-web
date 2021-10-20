@@ -6,9 +6,22 @@ module Api
       before_action :assign_scorecard
 
       def show
-        authorize @scorecard, :download?
+        respond_to do |format|
+          format.json do
+            authorize @scorecard, :download?
 
-        render json: @scorecard
+            render json: @scorecard
+          end
+
+          format.pdf do
+            authorize @scorecard, :download_pdf?
+
+            pdf_html = ActionController::Base.new.render_to_string(inline: PdfTemplateInterpreter.new(@scorecard.uuid).interpreted_message, layout: 'pdf')
+            pdf = WickedPdf.new.pdf_from_string(pdf_html)
+
+            send_data pdf, filename: "scorecard_#{@scorecard.uuid}.pdf"
+          end
+        end
       end
 
       def update
