@@ -24,9 +24,8 @@ class ActivityLog < ApplicationRecord
   belongs_to :program, optional: true
 
   default_scope { order(created_at: :desc) }
-  scope :query, -> (query) { where( " path ILIKE :query OR
-                                      remote_ip LIKE :query OR
-                                      users.email ILIKE :query", query: "%#{query}%") }
+  scope :query, -> (query) { where( " path ILIKE :query OR remote_ip ILIKE :query OR
+                                      users.email ILIKE :query OR programs.name ILIKE :query", query: "%#{query}%") }
 
   delegate :role, to: :user, prefix: true
   delegate :name, to: :program, prefix: true, allow_nil: true
@@ -35,7 +34,7 @@ class ActivityLog < ApplicationRecord
 
   def self.filter(params = {})
     scope = send(params[:role], params.slice(:user_id, :program_id))
-    scope = scope.joins(:user)
+    scope = scope.joins(:user, :program)
     scope = scope.query(params[:query])                     if params[:query].present?
     scope = scope.where(http_format: params[:http_format])  if params[:http_format].present?
     scope = scope.where(http_method: params[:http_method])  if params[:http_method].present?
