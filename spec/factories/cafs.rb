@@ -16,6 +16,7 @@
 #  actived                   :boolean          default(TRUE)
 #  educational_background_id :string
 #  scorecard_knowledge_id    :string
+#  deleted_at                :datetime
 #
 
 FactoryBot.define do

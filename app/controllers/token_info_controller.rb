@@ -15,7 +15,7 @@ class TokenInfoController < Doorkeeper::ApplicationMetalController
     def doorkeeper_token_to_json
       user = User.find(doorkeeper_token.resource_owner_id)
       obj = doorkeeper_token.as_json
-      obj[:email] = DashboardPolicy.new(user, :dashboard).index? ? user.email : 'unauthorized_user@scorecard.org'
+      obj[:email] = DashboardPolicy.new(user, :dashboard).index? ? user.email : "unauthorized_user@scorecard.org"
       obj
     end
 

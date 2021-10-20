@@ -16,6 +16,7 @@
 #  actived                   :boolean          default(TRUE)
 #  educational_background_id :string
 #  scorecard_knowledge_id    :string
+#  deleted_at                :datetime
 #
 class Caf < ApplicationRecord
   belongs_to :local_ngo

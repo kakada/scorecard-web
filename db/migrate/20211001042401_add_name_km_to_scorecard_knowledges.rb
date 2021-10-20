@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddNameKmToScorecardKnowledges < ActiveRecord::Migration[6.0]
   def change
     rename_column :scorecard_knowledges, :name, :name_en

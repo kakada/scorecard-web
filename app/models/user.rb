@@ -27,6 +27,7 @@
 #  local_ngo_id           :integer
 #  actived                :boolean          default(TRUE)
 #  gf_user_id             :integer
+#  deleted_at             :datetime
 #
 class User < ApplicationRecord
   attr_accessor :skip_callback
