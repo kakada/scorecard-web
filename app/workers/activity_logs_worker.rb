@@ -14,8 +14,9 @@ class ActivityLogsWorker
       log.path            = args["path"]
       log.http_status     = args["status"]
       log.payload         = args["payload"]
+      log.remote_ip       = args["remote_ip"]
       log.user            = current_user
-      log.program         = current_user.program
+      log.program         = current_user&.program
     end
   end
 end

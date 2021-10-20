@@ -9,6 +9,10 @@ module ActivityLogsHelper
     content_tag :span, "#{t('activity_logs.http_method')}: ", class: "mr-2"
   end
 
+  def path_label
+    content_tag :span, "#{t('activity_logs.path')}: ", class: "mr-2"
+  end
+
   def duration_label
     content_tag :span, "#{t('activity_logs.duration')}: ", class: "mr-2"
   end

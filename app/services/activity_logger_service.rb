@@ -2,19 +2,16 @@
 
 class ActivityLoggerService
   def self.log(logger)
-    return unless loggable?(logger[:controller])
+    return unless loggable?(logger[:path])
 
     ActivityLogsWorker.perform_async(logger)
   end
 
   private
-    def self.loggable?(current_controller)
-      whitelist_controllers.any? do |controller|
-        current_controller.downcase.include?(controller)
-      end
-    end
 
-    def self.whitelist_controllers
-      ENV["ACTIVITY_LOGS_CONTROLLERS"].to_s.split(",")
+  def self.loggable?(path)
+    ActivityLog.whitelist_controllers.any? do |controller_name|
+      path.downcase.include?(controller_name)
     end
+  end
 end

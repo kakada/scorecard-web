@@ -17,7 +17,7 @@ class RequestLogParser
       end
 
       def whitelist_attribute
-        %i[controller action format method path status current_user_id]
+        %i[controller action format method path status current_user_id remote_ip]
       end
   end
 end

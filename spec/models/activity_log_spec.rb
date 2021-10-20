@@ -81,4 +81,47 @@ RSpec.describe ActivityLog, type: :model do
       end
     end
   end
+
+  describe "Unique request within loggable period" do
+    let(:user) { create(:user) }
+    let!(:activity_log) { create(:activity_log, http_method: 'GET', path: '/scorecards', user: user) }
+
+    before {
+      stub_const('ENV', {'ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE' => '5' })
+    }
+
+    context "with GET request" do
+      let(:new_activity_log) { build(:activity_log, http_method: 'GET', path: '/scorecards', user: user) }
+
+      specify { expect(new_activity_log).to be_invalid }
+      it "raises exception" do
+        expect {
+          new_activity_log.save!
+        }.to raise_error(ActiveRecord::RecordInvalid, /Request duplicate/)
+      end
+
+      context "when last activity older than current activity" do
+        before { activity_log.update(created_at: 10.minutes.ago) }
+        specify { expect(new_activity_log).to be_valid }
+      end
+
+      context "with different path" do
+        before { new_activity_log.update(path: '/new-path') }
+        specify { expect(new_activity_log).to be_valid }
+      end
+    end
+
+    context "with non-GET request" do
+      let(:new_activity_log) { build(:activity_log, http_method: 'POST', path: '/scorecards', user: user) }
+
+      specify { expect(new_activity_log).to be_valid }
+
+      it "creates more than one" do
+        expect {
+          ActivityLog.create(new_activity_log.attributes)
+          ActivityLog.create(new_activity_log.attributes)
+        }.to change { ActivityLog.count }.by 2
+      end
+    end
+  end
 end

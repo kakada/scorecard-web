@@ -13,3 +13,6 @@ en:
     end_date: End date
     more_html: "more &raquo;"
     less_html: "&laquo; less"
+    request_duplicate: Request duplicate
+    remote_ip: Remote IP
+    query: search by path, user's email, program's name, remote ip

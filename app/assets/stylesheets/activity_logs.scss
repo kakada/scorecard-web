@@ -12,4 +12,20 @@
       content: "\a0";
     }
   }
+
+  .ico-clear {
+    top: 11px;
+    right: 18px;
+    cursor: pointer;
+    color: #ddd;
+    transition: all ease-in-out 0.2s;
+
+    &:hover {
+      color: #333;
+    }
+  }
+
+  .q_query {
+    min-width: 400px;
+  }
 }
