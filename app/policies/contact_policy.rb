@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ContactPolicy < ApplicationPolicy
   def index?
     user.system_admin?
@@ -12,7 +14,7 @@ class ContactPolicy < ApplicationPolicy
   end
 
   def update?
-    index?  
+    index?
   end
 
   def destroy?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ContactService
   def initialize(program)
     @program = program
@@ -8,8 +10,7 @@ class ContactService
   end
 
   private
-
-  def program
-    @program || NoProgram.new
-  end
+    def program
+      @program || NoProgram.new
+    end
 end

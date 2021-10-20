@@ -8,14 +8,13 @@ module Api
       end
 
       private
+        def program
+          current_user && current_user.program
+        end
 
-      def program
-        current_user && current_user.program
-      end
-
-      def restrict_access
-        super rescue nil
-      end
+        def restrict_access
+          super rescue nil
+        end
     end
   end
 end

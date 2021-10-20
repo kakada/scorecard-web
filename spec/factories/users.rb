@@ -27,6 +27,7 @@
 #  local_ngo_id           :integer
 #  actived                :boolean          default(TRUE)
 #  gf_user_id             :integer
+#  deleted_at             :datetime
 #
 FactoryBot.define do
   factory :user, aliases: [:creator] do

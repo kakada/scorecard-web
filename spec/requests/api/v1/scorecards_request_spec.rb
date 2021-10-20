@@ -148,8 +148,8 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { {
                           facilitators_attributes: [
-                            { caf_id: caf1.id, position: 'lead', scorecard_uuid: scorecard.uuid },
-                            { caf_id: caf2.id, position: 'other', scorecard_uuid: scorecard.uuid },
+                            { caf_id: caf1.id, position: "lead", scorecard_uuid: scorecard.uuid },
+                            { caf_id: caf2.id, position: "other", scorecard_uuid: scorecard.uuid },
                           ]
                         }
                       }

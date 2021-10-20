@@ -73,7 +73,7 @@ class Dashboard
   def set_default_dashboard
     params = JSON.dump({ theme: "light", homeDashboardId: gf_dashboard.dashboard_id })
 
-    upsert_with_token('/api/org/preferences', params, 'put')
+    upsert_with_token("/api/org/preferences", params, "put")
   end
 
   def add_user(user)
@@ -104,11 +104,11 @@ class Dashboard
       { username: ENV["GF_DASHBOARD_ADMIN_USERNAME"], password: ENV["GF_DASHBOARD_ADMIN_PASSWORD"] }
     end
 
-    def upsert_with_token(endpoint, params, action='post')
+    def upsert_with_token(endpoint, params, action = "post")
       uri = URI.parse("#{ENV['GF_DASHBOARD_BASE_URL']}#{endpoint}")
       req_options = { use_ssl: uri.scheme == "https", verify_mode: OpenSSL::SSL::VERIFY_NONE }
 
-      request = action == 'post' ? Net::HTTP::Post.new(uri) : Net::HTTP::Put.new(uri)
+      request = action == "post" ? Net::HTTP::Post.new(uri) : Net::HTTP::Put.new(uri)
       request.content_type = "application/json"
       request["Authorization"] = "Bearer #{gf_dashboard.org_token}"
       request.body = params

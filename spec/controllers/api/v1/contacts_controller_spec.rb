@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Api::V1::ContactsController, type: :controller do
@@ -8,7 +10,7 @@ RSpec.describe Api::V1::ContactsController, type: :controller do
       it "responses system email as json" do
         get :index
 
-        expect(response.body).to include 'email@system.com'
+        expect(response.body).to include "email@system.com"
       end
     end
 
@@ -18,7 +20,7 @@ RSpec.describe Api::V1::ContactsController, type: :controller do
       it "responses system tel as json" do
         get :index
 
-        expect(response.body).to include '012333444'
+        expect(response.body).to include "012333444"
       end
     end
   end
@@ -29,7 +31,7 @@ RSpec.describe Api::V1::ContactsController, type: :controller do
     let!(:user) { create(:user, program: program) }
 
     before do
-      request.headers['Authorization'] = "Token #{user.authentication_token}"
+      request.headers["Authorization"] = "Token #{user.authentication_token}"
     end
 
     it "returns program contact" do

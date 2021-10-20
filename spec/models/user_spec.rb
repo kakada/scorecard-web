@@ -27,6 +27,7 @@
 #  local_ngo_id           :integer
 #  actived                :boolean          default(TRUE)
 #  gf_user_id             :integer
+#  deleted_at             :datetime
 #
 require "rails_helper"
 
@@ -89,7 +90,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "#validate, validate_archived_email" do
-    let!(:user) { create(:user, email: 'oren@email.com') }
+    let!(:user) { create(:user, email: "oren@email.com") }
     let(:new_user) { user.dup }
 
     before {
@@ -100,7 +101,7 @@ RSpec.describe User, type: :model do
     it { expect(new_user.valid?).to be_falsey }
 
     it "renders error that email is being archived" do
-      expect(new_user.errors.first.last).to eq(I18n.t('user.is_being_archived'))
+      expect(new_user.errors.first.last).to eq(I18n.t("user.is_being_archived"))
     end
   end
 end

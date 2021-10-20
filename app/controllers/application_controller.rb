@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_program
 
-  def append_info_to_payload payload
+  def append_info_to_payload(payload)
     super
     payload[:current_user_id] = current_user.try(:id)
   end

@@ -11,6 +11,8 @@
 #  datetime_format           :string           default("DD-MM-YYYY")
 #  enable_email_notification :boolean          default(FALSE)
 #  shortcut_name             :string
+#  dashboard_user_emails     :text             default([]), is an Array
+#  dashboard_user_roles      :string           default([]), is an Array
 #
 class Program < ApplicationRecord
   include Programs::Elasticsearch
