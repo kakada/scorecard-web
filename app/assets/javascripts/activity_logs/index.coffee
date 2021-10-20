@@ -4,7 +4,7 @@ CW.Activity_logsIndex = do ->
     initDatepicker()
     onDatepickerApply()
     onDatepickerCancel()
-    onClearPath()
+    onClearQuery()
 
   initDatepicker = ->
     $(".daterange").daterangepicker {
@@ -48,7 +48,7 @@ CW.Activity_logsIndex = do ->
       $parent.attr "data-content", oldContent
       $parent.find(".readme").toggle()
 
-  onClearPath = ->
+  onClearQuery = ->
     $(".ico-clear").click ->
       $("#q_query").val("").focus()
 
