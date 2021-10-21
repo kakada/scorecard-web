@@ -24,7 +24,7 @@ class ActivityLog < ApplicationRecord
   belongs_to :program, optional: true
 
   default_scope { order(created_at: :desc) }
-  scope :query, -> (query) { where( " path ILIKE :query OR remote_ip ILIKE :query OR
+  scope :query, -> (query) { where(" path ILIKE :query OR remote_ip ILIKE :query OR
                                       users.email ILIKE :query OR programs.name ILIKE :query", query: "%#{query}%") }
 
   delegate :role, to: :user, prefix: true
@@ -44,30 +44,29 @@ class ActivityLog < ApplicationRecord
   end
 
   def self.whitelist_controllers
-    ENV['ACTIVITY_LOGS_CONTROLLERS'].to_s.split(",")
+    ENV["ACTIVITY_LOGS_CONTROLLERS"].to_s.split(",")
   end
 
   private
-
-  def ensure_unique_get_request_within_time_range
-    if get? && activity_exists?
-      errors.add(:base, I18n.t('activity_logs.request_duplicate'))
-      Rails.logger.info "request #{path} from #{remote_ip} by user_id: #{user.id} is already existed"
+    def ensure_unique_get_request_within_time_range
+      if get? && activity_exists?
+        errors.add(:base, I18n.t("activity_logs.request_duplicate"))
+        Rails.logger.info "request #{path} from #{remote_ip} by user_id: #{user.id} is already existed"
+      end
     end
-  end
 
-  def get?
-    http_method&.upcase == 'GET'
-  end
+    def get?
+      http_method&.upcase == "GET"
+    end
 
-  def activity_exists?
-    self.class\
-      .where(path: path, remote_ip: remote_ip, user: user)
-      .where('created_at > ?', loggable_period)
-      .exists?
-  end
+    def activity_exists?
+      self.class\
+        .where(path: path, remote_ip: remote_ip, user: user)
+        .where("created_at > ?", loggable_period)
+        .exists?
+    end
 
-  def loggable_period
-    ENV['ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE'].to_i.minutes.ago
-  end
+    def loggable_period
+      ENV["ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE"].to_i.minutes.ago
+    end
 end
