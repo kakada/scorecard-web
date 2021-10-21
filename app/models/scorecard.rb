@@ -100,8 +100,8 @@ class Scorecard < ApplicationRecord
   before_create :set_name
   before_save   :clear_primary_school_code, unless: -> { facility.try(:dataset).present? }
 
-  after_commit  :index_document_async, on: [:create, :update]
-  after_destroy :delete_document_async
+  after_commit  :index_document_async, on: [:create, :update], if: -> { ENV['ELASTICSEARCH_ENABLED'] == "true" }
+  after_destroy :delete_document_async, if: -> { ENV['ELASTICSEARCH_ENABLED'] == "true" }
 
   accepts_nested_attributes_for :facilitators, allow_destroy: true
   accepts_nested_attributes_for :participants, allow_destroy: true
