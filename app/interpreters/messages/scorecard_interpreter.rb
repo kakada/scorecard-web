@@ -12,16 +12,11 @@ module Messages
       if self.respond_to?(field.to_sym)
         self.send(field.to_sym)
       else
+        return nil unless scorecard.respond_to?(field.to_sym)
+        return render_date(field) if Scorecard.columns_hash[field].try(:type) == :datetime
+
         scorecard.send(field.to_sym)
       end
-    end
-
-    def planned_start_date
-      I18n.l(scorecard.planned_start_date)
-    end
-
-    def planned_end_date
-      I18n.l(scorecard.planned_end_date)
     end
 
     def code
@@ -40,5 +35,12 @@ module Messages
     def scorecard_type
       I18n.t("scorecard.#{scorecard.scorecard_type}")
     end
+
+    private
+      def render_date(field)
+        date = scorecard.send(field.to_sym)
+
+        date.present? ? I18n.l(date) : nil
+      end
   end
 end
