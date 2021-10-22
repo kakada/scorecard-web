@@ -84,14 +84,14 @@ RSpec.describe ActivityLog, type: :model do
 
   describe "Unique request within loggable period" do
     let(:user) { create(:user) }
-    let!(:activity_log) { create(:activity_log, http_method: 'GET', path: '/scorecards', user: user) }
+    let!(:activity_log) { create(:activity_log, http_method: "GET", path: "/scorecards", user: user) }
 
     before {
-      stub_const('ENV', {'ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE' => '5' })
+      stub_const("ENV", { "ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE" => "5" })
     }
 
     context "with GET request" do
-      let(:new_activity_log) { build(:activity_log, http_method: 'GET', path: '/scorecards', user: user) }
+      let(:new_activity_log) { build(:activity_log, http_method: "GET", path: "/scorecards", user: user) }
 
       specify { expect(new_activity_log).to be_invalid }
       it "raises exception" do
@@ -106,13 +106,13 @@ RSpec.describe ActivityLog, type: :model do
       end
 
       context "with different path" do
-        before { new_activity_log.update(path: '/new-path') }
+        before { new_activity_log.update(path: "/new-path") }
         specify { expect(new_activity_log).to be_valid }
       end
     end
 
     context "with non-GET request" do
-      let(:new_activity_log) { build(:activity_log, http_method: 'POST', path: '/scorecards', user: user) }
+      let(:new_activity_log) { build(:activity_log, http_method: "POST", path: "/scorecards", user: user) }
 
       specify { expect(new_activity_log).to be_valid }
 

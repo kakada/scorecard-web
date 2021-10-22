@@ -16,7 +16,7 @@ module Api
           format.pdf do
             authorize @scorecard, :download_pdf?
 
-            pdf_html = ActionController::Base.new.render_to_string(inline: PdfTemplateInterpreter.new(@scorecard.uuid).interpreted_message, layout: 'pdf')
+            pdf_html = ActionController::Base.new.render_to_string(inline: PdfTemplateInterpreter.new(@scorecard.uuid).interpreted_message, layout: "pdf")
             pdf = WickedPdf.new.pdf_from_string(pdf_html)
 
             send_data pdf, filename: "scorecard_#{@scorecard.uuid}.pdf"

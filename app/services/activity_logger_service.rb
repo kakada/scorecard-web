@@ -8,10 +8,9 @@ class ActivityLoggerService
   end
 
   private
-
-  def self.loggable?(path)
-    ActivityLog.whitelist_controllers.any? do |controller_name|
-      path.downcase.include?(controller_name)
+    def self.loggable?(path)
+      ActivityLog.whitelist_controllers.any? do |controller_name|
+        path.downcase.include?(controller_name)
+      end
     end
-  end
 end

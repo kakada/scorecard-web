@@ -4,9 +4,11 @@ module Programs::Elasticsearch
   extend ActiveSupport::Concern
 
   included do
-    after_create { ProgramWorker.perform_async(id) }
+    after_create { ProgramWorker.perform_async(id) if ENV["ELASTICSEARCH_ENABLED"] == "true" }
 
     def reindex_documents
+      return unless ENV["ELASTICSEARCH_ENABLED"] == "true"
+
       delete_index
       create_index
       index_documents
