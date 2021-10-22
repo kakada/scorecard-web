@@ -34,7 +34,7 @@ class ActivityLog < ApplicationRecord
 
   def self.filter(params = {})
     scope = send(params[:role], params.slice(:user_id, :program_id))
-    scope = scope.joins(:user, :program)
+    scope = scope.joins(:user).left_joins(:program)
     scope = scope.query(params[:query])                     if params[:query].present?
     scope = scope.where(http_format: params[:http_format])  if params[:http_format].present?
     scope = scope.where(http_method: params[:http_method])  if params[:http_method].present?
