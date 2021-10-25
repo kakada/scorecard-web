@@ -57,7 +57,7 @@ module ScorecardJson
       end
 
       def voting_indicators
-        @voting_indicators ||= scorecard.voting_indicators.includes(:indicatorable, ratings: :participant).order(median: :desc)
+        @voting_indicators ||= scorecard.voting_indicators.includes(:indicatorable, ratings: :participant).order(:display_order)
       end
   end
 end

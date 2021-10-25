@@ -109,6 +109,8 @@ class Scorecard < ApplicationRecord
   accepts_nested_attributes_for :voting_indicators, allow_destroy: true
   accepts_nested_attributes_for :ratings, allow_destroy: true
 
+  scope :completed, -> { where.not(locked_at: nil) }
+
   def status
     completed? ? "completed" : "planned"
   end

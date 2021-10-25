@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 namespace :scorecard do
   desc "migrate milestone"
   task migrate_milestone: :environment do

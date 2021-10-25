@@ -116,7 +116,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let(:json_response) { JSON.parse(response.body) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { voting_indicators_attributes: [ {
-                          uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid,
+                          uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
                           suggested_actions_attributes: [
                             { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action1", selected: true },
                             { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action2", selected: false },
@@ -135,6 +135,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(voting_indicators.length).to eq(1) }
       it { expect(voting_indicators.first.suggested_actions.length).to eq(2) }
       it { expect(voting_indicators.first.suggested_actions.selecteds.length).to eq(1) }
+      it { expect(voting_indicators.first.display_order).to eq(1) }
     end
   end
 

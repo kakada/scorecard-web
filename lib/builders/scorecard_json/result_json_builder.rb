@@ -19,7 +19,7 @@ module ScorecardJson
 
     private
       def build_indicators
-        scorecard.voting_indicators.map do |vi|
+        scorecard.voting_indicators.order(:display_order).map do |vi|
           {
             name: vi.indicatorable.name,
             tag: vi.indicatorable.tag_name,
