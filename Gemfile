@@ -64,6 +64,7 @@ gem "database_cleaner-active_record", "~> 1.8.0"
 gem "wicked_pdf",                 "~> 2.1.0"
 gem "wkhtmltopdf-binary",         "~> 0.12.6.5"
 gem "telegram-bot", "~> 0.15.3"
+gem "pdf-reader", "~> 2.5.0"
 
 gem "mimemagic", "~> 0.3.6"
 gem "sidekiq", "~> 6.2.1"
