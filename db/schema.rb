@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_22_080650) do
+ActiveRecord::Schema.define(version: 2021_10_26_033714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -365,6 +365,7 @@ ActiveRecord::Schema.define(version: 2021_10_22_080650) do
     t.string "device_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
   end
 
   create_table "scorecard_references", force: :cascade do |t|

@@ -15,5 +15,6 @@ RSpec.describe "Api::V1::ScorecardProgressesController", type: :request do
 
     it { expect(response.status).to eq(200) }
     it { expect(scorecard.scorecard_progresses.length).to eq(1) }
+    it { expect(scorecard.scorecard_progresses.first.user_id).to eq(user.id) }
   end
 end

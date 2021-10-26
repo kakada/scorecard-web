@@ -14,5 +14,6 @@
 FactoryBot.define do
   factory :scorecard_progress do
     scorecard
+    user
   end
 end

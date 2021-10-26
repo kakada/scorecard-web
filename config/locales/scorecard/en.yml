@@ -80,6 +80,7 @@ en:
     downloaded: downloaded
     running: running
     submitted: submitted
+    completed: completed
     renewed: renewed
     references: References
     implemented_date: Implemented date
@@ -87,3 +88,6 @@ en:
     participant_info: Participant Information
     fill_in: Fill in
     view_as_pdf: View as PDF
+    cannot_delete_running_scorecard: Running scorecard cannot be deleted
+    scorecard_being_downloaded: This scorecard is being downloaded (%{count} times).
+    number_of_downloaded: "# of downloads"
