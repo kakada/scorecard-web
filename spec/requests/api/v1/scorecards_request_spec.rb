@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "stringio"
 
 RSpec.describe "Api::V1::ScorecardsController", type: :request do
   describe "GET #show" do
@@ -168,8 +169,9 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
   describe "GET #show, pdf" do
     let!(:user)      { create(:user) }
     let!(:scorecard) { create(:scorecard, program: user.program) }
+    let!(:province)  { Pumi::Province.find_by_id(scorecard.province_id) }
     let(:headers)    { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
-    let!(:pdf_template) { create(:pdf_template, program: scorecard.program) }
+    let!(:pdf_template) { create(:pdf_template, program: scorecard.program, content: "{{scorecard.province}}") }
 
     context "scorecard is finished" do
       before {
@@ -188,6 +190,28 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       }
 
       it { expect(response.code).to eq("403") }
+    end
+
+    context "pass params locale" do
+      let(:reader) { PDF::Reader.new(StringIO.new(response.body)) }
+
+      before { scorecard.lock_access! }
+
+      context 'locale is :en' do
+        before {
+          get "/api/v1/scorecards/#{scorecard.uuid}.pdf?locale=en", headers: headers
+        }
+
+        it { expect(reader.page(1).text).to eq(province.name_en) }
+      end
+
+      context 'locale is :km' do
+        before {
+          get "/api/v1/scorecards/#{scorecard.uuid}.pdf?locale=km", headers: headers
+        }
+
+        it { expect(reader.page(1).text).not_to eq(province.name_en) }
+      end
     end
   end
 end

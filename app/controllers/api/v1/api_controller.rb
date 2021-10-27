@@ -7,6 +7,7 @@ module Api
       protect_from_forgery with: :null_session
 
       before_action :restrict_access, except: [:routing_error]
+      before_action :set_locale
       attr_reader :current_user
 
       rescue_from Exception, with: :handling_exceptions
@@ -62,6 +63,12 @@ module Api
 
         def render_errors(e)
           render json: e, status: e.status and return
+        end
+
+        def set_locale
+          I18n.locale = params[:locale]
+        rescue
+          I18n.locale = I18n.default_locale
         end
     end
   end
