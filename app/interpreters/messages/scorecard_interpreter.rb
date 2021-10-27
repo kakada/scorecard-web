@@ -19,6 +19,10 @@ module Messages
       end
     end
 
+    def finished_date
+      I18n.l(scorecard.finished_date, format: :nice)
+    end
+
     def code
       scorecard.uuid
     end
