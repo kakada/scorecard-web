@@ -1,0 +1,14 @@
+.modal-body.text-left
+  - if @scorecard.downloaded?
+    %div= t('scorecard.scorecard_being_downloaded', count: @scorecard.scorecard_progresses.downloadeds.length)
+    %ol
+      - @scorecard.scorecard_progresses.downloadeds.each do |progress|
+        - if user = progress.user.presence
+          %li
+            = user.local_ngo_name.present? ? "#{user.email} (#{user.local_ngo_name})" : user.email
+
+  %div= t("shared.are_you_sure_to_delete")
+
+.modal-footer
+  %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
+  = link_to t("shared.delete"), scorecard_path(@scorecard.uuid), method: :delete, class: "btn btn-primary"

@@ -62,6 +62,7 @@ class User < ApplicationRecord
   has_many   :mobile_notifications, foreign_key: :creator_id
   has_many   :activity_logs
   has_many   :scorecards, foreign_key: :creator_id
+  has_many   :scorecard_progresses
 
   has_many :access_grants,
            class_name: "Doorkeeper::AccessGrant",

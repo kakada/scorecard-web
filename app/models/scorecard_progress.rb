@@ -13,6 +13,7 @@
 #
 class ScorecardProgress < ApplicationRecord
   belongs_to :scorecard, primary_key: "uuid", foreign_key: "scorecard_uuid"
+  belongs_to :user
 
   enum status: {
     downloaded: 1,

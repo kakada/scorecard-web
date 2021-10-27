@@ -33,7 +33,7 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def destroy?
-    update?
+    update? && !%w(running submitted).include?(record.progress)
   end
 
   def setting?
