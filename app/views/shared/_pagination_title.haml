@@ -9,7 +9,7 @@
     .pagy-wrapper
       .d-flex.flex-grow-1
         .flex-1.d-flex.align-items-center.mb-2
-          %span= t('shared.pagination_title', from: @pagy.from, to: @pagy.to, total: @pagy.count).html_safe
+          %span= t('shared.pagination_title', from: @pagy.from, to: @pagy.to, total: number_with_delimiter(@pagy.count)).html_safe
 
   .flex-grow-1
 
