@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_18_112357) do
+ActiveRecord::Schema.define(version: 2021_10_22_080650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -490,6 +490,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_112357) do
     t.text "suggested_action"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "display_order"
   end
 
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"

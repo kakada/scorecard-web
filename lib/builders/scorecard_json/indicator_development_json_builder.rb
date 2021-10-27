@@ -23,7 +23,7 @@ module ScorecardJson
       end
 
       def voting_indicators
-        @voting_indicators ||= scorecard.voting_indicators.includes(:indicatorable)
+        @voting_indicators ||= scorecard.voting_indicators.order(:display_order).includes(:indicatorable)
       end
   end
 end

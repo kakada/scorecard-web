@@ -9,7 +9,7 @@ module Scorecards
     end
 
     def criterias
-      scorecard.voting_indicators.includes(:indicatorable, ratings: :participant).order(median: :desc).map do |indicator|
+      scorecard.voting_indicators.includes(:indicatorable, ratings: :participant).order(:display_order).map do |indicator|
         criteria = indicator.as_json
         criteria = assign_rating_info(criteria, indicator)
         criteria = assign_participant_info(criteria, indicator)
