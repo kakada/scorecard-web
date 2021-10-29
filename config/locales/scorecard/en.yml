@@ -91,3 +91,4 @@ en:
     cannot_delete_running_scorecard: Running scorecard cannot be deleted
     scorecard_being_downloaded: This scorecard is being downloaded (%{count} times).
     number_of_downloaded: "# of downloads"
+    share_to: Share to

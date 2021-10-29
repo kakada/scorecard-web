@@ -62,7 +62,10 @@
                     = timeago(scorecard.locked_at).html_safe
                   - else
                     = "_"
-                %td.text-right.action-buttons
+                %td.text-right{style: 'min-width: 130px;'}
+                  %a.btn.btn-sm.btn-circle.btn-info.btn-share.mr-1{"data-content" => share_buttons_html(scorecard), "data-toggle" => "popover", "data-html" => "true", "data-trigger" => "focus", :tabindex => "0", :title => t("scorecard.share_to"), 'data-url' => scorecard_url(scorecard.uuid)}
+                    %i.fas.fa-share-square.text-white
+
                   - if scorecard.access_locked?
                     %span{ class: 'btn btn-circle btn-sm btn-outline-dark mr-1', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.completed')}, style: 'cursor: auto'}
                       %i.fas.fa-lock

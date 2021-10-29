@@ -18,6 +18,7 @@
 //= require bloodhound.min
 //= require jquery.richtext
 //= require daterangepicker
+//= require social-share-button
 
 //= require application/namespace
 //= require application/util

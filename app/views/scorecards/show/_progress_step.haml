@@ -1,10 +1,14 @@
 - disabled ||= false
 - sub_title = sub_title.presence || '_'
+- showBtnSocialShare ||= false
 
 .card
   .card-header
     .d-flex
       .flex-grow-1= label
+
+      - if showBtnSocialShare
+        = social_share_button_tag("", url: scorecard_url(@scorecard.uuid))
 
   .card-body
     .d-flex
