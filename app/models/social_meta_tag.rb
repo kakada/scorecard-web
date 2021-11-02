@@ -4,22 +4,19 @@ class SocialMetaTag
   def self.to_meta_tags
     {
       og: {
-        title:  I18n.t("meta_tags.title").html_safe,
+        title:  I18n.t("meta_tags.title"),
+        site_name: I18n.t("meta_tags.site"),
         type: "website",
-        # url:  "#{ENV['ENDPOINT_URL']}#{I18n.locale}",
-        image: helper.image_url("csc_logo.png"),
-        # image: "https://isaf.digital-csc.org/assets/csc_logo-fc2a7ed1727c64ac73fe09be55fa841d1089f3fc08bd6998b274948cade123b7.png",
-        description: I18n.t("meta_tags.description").html_safe,
-        site_name: I18n.t("meta_tags.site").html_safe
+        description: I18n.t("meta_tags.description"),
+        image: helper.image_url("csc_logo.png")
       },
       twitter: {
+        title: I18n.t("meta_tags.title"),
+        creator: I18n.t("meta_tags.site"),
+        site: I18n.t("meta_tags.twitter.site"),
         card: "summary",
-        site: I18n.t("meta_tags.twitter.site").html_safe,
-        title: I18n.t("meta_tags.title").html_safe,
-        description: I18n.t("meta_tags.description").html_safe,
-        creator: I18n.t("meta_tags.site").html_safe,
+        description: I18n.t("meta_tags.description"),
         image: helper.image_url("csc_logo.png")
-        # image: "https://isaf.digital-csc.org/assets/csc_logo-fc2a7ed1727c64ac73fe09be55fa841d1089f3fc08bd6998b274948cade123b7.png",
       },
     }
   end

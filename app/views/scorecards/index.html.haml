@@ -63,7 +63,7 @@
                   - else
                     = "_"
                 %td.text-right{style: 'min-width: 130px;'}
-                  %a.btn.btn-sm.btn-circle.btn-info.btn-share.mr-1{"data-content" => share_buttons_html(scorecard), "data-toggle" => "popover", "data-html" => "true", "data-trigger" => "focus", :tabindex => "0", :title => t("scorecard.share_to"), 'data-url' => scorecard_url(scorecard.uuid)}
+                  %a.btn.btn-sm.btn-circle.btn-info.btn-share.mr-1{"data-content" => "#{social_share_button_tag('Community Scorecard')}", "data-toggle" => "popover", "data-html" => "true", "data-trigger" => "focus", :tabindex => "0", :title => t("scorecard.share_to"), 'data-url' => scorecard_url(scorecard.uuid)}
                     %i.fas.fa-share-square.text-white
 
                   - if scorecard.access_locked?

@@ -65,8 +65,4 @@ module ScorecardsHelper
 
     current_user.staff? ? facilities_path : languages_path
   end
-
-  def share_buttons_html(scorecard)
-    "" + social_share_button_tag("Community Scorecard", url: "https://isaf-stg.ilabsea.org/scorecards/#{scorecard.uuid}")
-  end
 end
