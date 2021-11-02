@@ -515,7 +515,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jquery-rails (~> 4.4.0)
   listen (~> 3.2)
-  meta-tags
+  meta-tags (~> 2.16.0)
   mimemagic (~> 0.3.6)
   ndjson (~> 1.0.0)
   omniauth-google-oauth2 (~> 1.0.0)
