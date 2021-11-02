@@ -22,6 +22,7 @@
 //= require application/namespace
 //= require application/util
 //= require common/topbar
+//= require common/sidebar
 //= require common/datetime_picker
 //= require common/timeago
 
@@ -49,6 +50,7 @@
 
 document.addEventListener("turbolinks:load", function () {
   CW.Common.Topbar.init();
+  CW.Common.Sidebar.init();
   CW.Common.DatetimePicker.init();
   CW.Common.Timeago.init();
   $("[role='tooltip']").remove();
