@@ -5,6 +5,7 @@
     %meta{:charset => "utf-8"}
     %title= ENV['APP_NAME']
 
+    = display_meta_tags SocialMetaTag.to_meta_tags
     = wicked_pdf_stylesheet_link_tag "pdf"
 
   %body#pdf
