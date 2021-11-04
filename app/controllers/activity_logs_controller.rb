@@ -5,7 +5,7 @@ class ActivityLogsController < ApplicationController
 
   def index
     authorize ActivityLog
-    @pagy, @activity_logs = pagy(ActivityLog.filter(filter_params).includes(:user, :program))
+    @pagy, @activity_logs = pagy(ActivityLog.filter(filter_params).includes(:user, :program), size: [1,2,2,1])
   end
 
   private
