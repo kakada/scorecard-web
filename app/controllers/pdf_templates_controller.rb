@@ -9,6 +9,14 @@ class PdfTemplatesController < ApplicationController
     @pdf_template = current_program.pdf_templates.new
   end
 
+  def show
+    @pdf_template = authorize PdfTemplate.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def edit
     @pdf_template = PdfTemplate.find(params[:id])
   end

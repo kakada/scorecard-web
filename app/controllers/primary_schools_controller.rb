@@ -5,6 +5,14 @@ class PrimarySchoolsController < ApplicationController
     @pagy, @primary_schools = pagy(authorize PrimarySchool.filter(params).order("#{sort_column} #{sort_direction}"))
   end
 
+  def show
+    @primary_school = authorize PrimarySchool.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def new
     @primary_school = authorize PrimarySchool.new
   end

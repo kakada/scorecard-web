@@ -1,4 +1,6 @@
 = simple_form_for [:system, @contact] do |f|
   = f.input :contact_type, collection: Contact::CONTACT_TYPES, include_blank: false
   = f.input :value
+
   = f.submit t('shared.save'), class: "btn btn-primary"
+  = link_to t('shared.cancel'), system_contacts_path, class: 'btn btn-secondary'

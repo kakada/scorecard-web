@@ -1,12 +1,12 @@
 - remote ||= false
 
 - if policy(object).update?
-  = link_to edit_url, remote: remote, class: "btn btn-circle btn-sm btn-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+  = link_to edit_url, remote: remote, class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
     %i.fas.fa-pen
 
 - if policy(object).destroy?
   %span{data: {toggle: 'tooltip', placement: 'top', title: t('shared.delete')}}
-    = link_to "#", class: "btn btn-circle btn-sm btn-danger", data: { target: "#confirmModal#{object.id}", toggle: 'modal' } do
+    = link_to delete_url, class: "btn btn-circle btn-sm btn-outline-danger", remote: true do
       %i.fas.fa-trash-alt
 
-= render "shared/modal_confirm", delete_url: delete_url, object: object
+/ = render "shared/modal_confirm", delete_url: delete_url, object: object

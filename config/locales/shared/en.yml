@@ -51,3 +51,4 @@ en:
     unauthorized_alert_message: You are not authorized to perform this action.
     archive: Archive
     restore: Restore
+    _yes: "Yes"

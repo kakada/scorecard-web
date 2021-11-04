@@ -96,3 +96,4 @@ km:
     criteria_count:
       one: "1 លក្ខណៈវិនិច្ឆ័យ"
       other: "%{count} លក្ខណៈវិនិច្ឆ័យ"
+    are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបប័ណ្ណដាក់ពិន្ទុ <b>%{code}</b> នេះមែនទេ?

@@ -1,0 +1,4 @@
+$('#confirmModal .title').html("<%= t('facility.facilities') %>");
+$('#confirmModal .modal-body').html("<%= t('facility.are_you_sure_to_delete', name: @facility.name).html_safe %>");
+$("#confirmModal .btn-yes").attr('href', "<%= facility_path(@facility) %>");
+$("#confirmModal").modal("show");

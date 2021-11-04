@@ -8,6 +8,14 @@ module LocalNgos
       @pagy, @cafs = pagy(authorize Caf.filter(filter_params).order(sort_param).includes(:educational_background, :scorecard_knowledge))
     end
 
+    def show
+      @caf = authorize Caf.find(params[:id])
+
+      respond_to do |format|
+        format.js
+      end
+    end
+
     def new
       @caf = authorize Caf.new
     end

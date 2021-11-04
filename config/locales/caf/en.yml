@@ -14,3 +14,4 @@ en:
     other: Other
     search: Search by name or tel
     set_active: Set as actived Cafs
+    are_you_sure_to_delete: Are you sure to delete the CAFs <b>%{name}</b>?

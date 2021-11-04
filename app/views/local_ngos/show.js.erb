@@ -1,0 +1,4 @@
+$('#confirmModal .title').html("<%= t('local_ngo.local_ngos') %>");
+$('#confirmModal .modal-body').html("<%= t('local_ngo.are_you_sure_to_delete', name: @local_ngo.name).html_safe %>");
+$("#confirmModal .btn-yes").attr('href', "<%= local_ngo_path(@local_ngo) %>");
+$("#confirmModal").modal("show");

@@ -7,3 +7,4 @@ en:
     tel_placeholder: "023111222"
     email_placeholder: abc@exmple.com
     system_contact: System contact
+    are_you_sure_to_delete: Are you sure to delete the contact <b>%{value}</b>?

@@ -5,10 +5,12 @@ class TemplatesController < ApplicationController
     @pagy, @templates = pagy(current_program.templates.order(sort_column + " " + sort_direction).includes(:indicators))
   end
 
-  def children
-    @template = ::Template.find(params[:id])
+  def show
+    @template = authorize ::Template.find(params[:id])
 
-    render json: @template.children
+    respond_to do |format|
+      format.js
+    end
   end
 
   def new

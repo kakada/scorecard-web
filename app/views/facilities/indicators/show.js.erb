@@ -1,0 +1,4 @@
+$('#confirmModal .title').html("<%= t('indicator.indicators') %>");
+$('#confirmModal .modal-body').html("<%= t('indicator.are_you_sure_to_delete', name: @indicator.name).html_safe %>");
+$("#confirmModal .btn-yes").attr('href', "<%= facility_indicator_path(@facility, @indicator) %>");
+$("#confirmModal").modal("show");

@@ -5,6 +5,14 @@ class ProgramsController < ApplicationController
     @pagy, @programs = pagy(authorize Program.all)
   end
 
+  def show
+    @program = authorize Program.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def new
     @program = authorize Program.new
   end

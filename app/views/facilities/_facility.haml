@@ -10,11 +10,11 @@
     = timeago(facility.created_at).html_safe
 
   - if !facility.root? && policy(Indicator).create?
-    = link_to facility_indicators_path(facility), class: "btn btn-circle btn-sm btn-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('facility.manage_indicator') } do
+    = link_to facility_indicators_path(facility), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('facility.manage_indicator') } do
       %i.fas.fa-pencil-ruler
 
   - if policy(facility).destroy?
     - title = facility.locked? ? t('facility.already_in_used') : t('shared.delete')
     %span{ data: { toggle: 'tooltip', placement: 'top', title: title }}
-      = link_to facility_path(facility), method: :delete, class: ["btn btn-circle btn-sm btn-danger", ("disabled" if facility.locked?)], 'data-confirm' => t('shared.are_you_sure_to_delete') do
+      = link_to facility_path(facility), remote: true, class: ["btn btn-circle btn-sm btn-outline-danger", ("disabled" if facility.locked?)] do
         %i.fas.fa-trash-alt
