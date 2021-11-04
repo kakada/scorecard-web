@@ -7,6 +7,12 @@
   .modal-dialog {
     max-width: 580px;
   }
+
+  @media (max-width: 576px) {
+    .view-center {
+      width: 100% !important;
+    }
+  }
 }
 
 .line {
