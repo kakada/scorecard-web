@@ -2,7 +2,7 @@
 = form_for "", url: '/primary_schools', method: 'get' do |f|
   = hidden_field_tag :filter, params[:filter]
 
-  .d-flex.my-2
+  .d-md-flex.my-2
     = text_field_tag(:keyword, params[:keyword], class: 'form-control filter-input', placeholder: t('primary_school.code_or_name'), id: 'scorecard_code')
 
     .filter-input
@@ -15,7 +15,7 @@
       = f.hidden_field(:commune_id, value: params[:commune_id])
       = f.select(:commune_id, [], {:include_blank => t("shared.any_commune")}, {:data => {:pumi_select_id => "commune", :pumi_select_target => "village", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_#{I18n.locale}", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control custom-select'})
 
-    %div.mr-2
+    .btn-search-wrapper.mr-2
       %button.btn.btn-light{type: :submit}
         %i.fas.fa-search
         = t('shared.search')
