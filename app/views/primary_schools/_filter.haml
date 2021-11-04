@@ -16,7 +16,7 @@
       = f.select(:commune_id, [], {:include_blank => t("shared.any_commune")}, {:data => {:pumi_select_id => "commune", :pumi_select_target => "village", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_#{I18n.locale}", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control custom-select'})
 
     .btn-search-wrapper.mr-2
-      %button.btn.btn-light{type: :submit}
+      %button.btn.btn-primary{type: :submit}
         %i.fas.fa-search
         = t('shared.search')
 
