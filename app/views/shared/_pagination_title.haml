@@ -14,7 +14,8 @@
   .flex-grow-1
 
   - if !hide_pagy && @pagy.pages > 1
-    != pagy_bootstrap_nav(@pagy)
+    .d-md-block.d-none
+      != pagy_bootstrap_nav(@pagy)
 
 
   - if url.present? && policy(objects.class.to_s.split("::").first.constantize).create?

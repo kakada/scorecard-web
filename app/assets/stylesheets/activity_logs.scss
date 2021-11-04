@@ -25,7 +25,14 @@
     }
   }
 
-  .q_query {
-    min-width: 400px;
+  @media (max-width: 576px) {
+    .form-query {
+      display: block;
+    }
+
+    .btn-search-wrapper {
+      padding-top: 15px;
+      text-align: right;
+    }
   }
 }
