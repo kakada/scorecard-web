@@ -1,8 +1,10 @@
-= render "shared/page_title", title: t('contact.system_contact'), url: new_system_contact_path, label: t('shared.add_new')
+%section.header
+  = render "shared/page_title", title: t('contact.system_contact'), url: new_system_contact_path, label: t('shared.add_new')
 
+.clearfix
 .card
   .card-body
-    %table.table.table-hover.pretty
+    %table.table.table-hover.table-responsive.pretty
       %thead
         %tr
           %th= t('shared.contact_type')
