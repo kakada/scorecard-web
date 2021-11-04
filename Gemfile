@@ -42,7 +42,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 
 gem "omniauth-google-oauth2", "~>1.0.0"
 gem "sentry-raven", "~> 3.0.4"
-gem "pagy", "~> 3.5"
+gem "pagy", "~> 5.1.3"
 gem "pumi", require: "pumi/rails"
 gem "carrierwave", "~> 2.1"
 gem "pundit", "~> 2.1.0"
