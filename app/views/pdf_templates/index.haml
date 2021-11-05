@@ -7,24 +7,26 @@
     - if @pdf_templates.present?
       = render "shared/pagination_title", objects: @pdf_templates
 
-      %table.table.table-hover
-        %thead
-          %tr
-            %th= t('pdf_template.name')
-            %th= t('pdf_template.language_code')
-            %th= t('shared.created_at')
-            %th
-        %tbody
-          - @pdf_templates.each do |pdf_template|
+      .table-responsive
+        %table.table.table-hover
+          %thead
             %tr
-              %td= pdf_template.name
-              %td= t("language.#{pdf_template.language_code}")
-              %td= timeago(pdf_template.created_at).html_safe
-              %td.text-right
-                = link_to pdf_template_preview_url(pdf_template), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('shared.preview')}, target: '_blank' do
-                  %i.fas.fa-eye
+              %th= t('pdf_template.name')
+              %th= t('pdf_template.language_code')
+              %th= t('shared.created_at')
+              %th
+          %tbody
+            - @pdf_templates.each do |pdf_template|
+              %tr
+                %td= pdf_template.name
+                %td= t("language.#{pdf_template.language_code}")
+                %td= timeago(pdf_template.created_at).html_safe
+                %td.text-right
+                  .d-flex.d-md-block.flex-row
+                    = link_to pdf_template_preview_url(pdf_template), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('shared.preview')}, target: '_blank' do
+                      %i.fas.fa-eye
 
-                = render 'shared/action_buttons', edit_url: edit_pdf_template_path(pdf_template), delete_url: pdf_template_path(pdf_template), object: pdf_template
+                    = render 'shared/action_buttons', edit_url: edit_pdf_template_path(pdf_template), delete_url: pdf_template_path(pdf_template), object: pdf_template
 
     - if @pagy.pages > 1
       .pagy-wrapper.justify-content-md-end.justify-content-center
