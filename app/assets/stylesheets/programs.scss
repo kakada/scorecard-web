@@ -1,5 +1,5 @@
 #programs-new {
-  @include media-breakpoint-down(sm) {
+  @media (max-width: 576px) {
     .view-center {
       width: 100% !important;
     }

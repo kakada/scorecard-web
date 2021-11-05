@@ -7,24 +7,26 @@
     - if @templates.present?
       = render "shared/pagination_title", objects: @templates, url: new_template_path, label: t('template.add_new'), hide_pagy: true
 
-      %table.table.table-hover.pretty
-        %thead
-          %tr
-            %th #
-            %th= sortable "name", t("shared.name")
-            %th= sortable "created_at", t("shared.created_at")
-            %th= sortable "updated_at", t("shared.updated_at")
-            %th
-
-        %tbody
-          - @templates.each_with_index do |template, index|
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
             %tr
-              %td= @pagy.from + index
-              %td= link_to "#{template.name} (#{template.indicators.length})", edit_template_path(template), class: "btn btn-link p-0"
-              %td= timeago(template.created_at).html_safe
-              %td= timeago(template.updated_at).html_safe
-              %td.text-right
-                = render 'shared/action_buttons', edit_url: edit_template_path(template), delete_url: template_path(template), object: template
+              %th #
+              %th= sortable "name", t("shared.name")
+              %th= sortable "created_at", t("shared.created_at")
+              %th= sortable "updated_at", t("shared.updated_at")
+              %th
+
+          %tbody
+            - @templates.each_with_index do |template, index|
+              %tr
+                %td= @pagy.from + index
+                %td= link_to "#{template.name} (#{template.indicators.length})", edit_template_path(template), class: "btn btn-link p-0"
+                %td= timeago(template.created_at).html_safe
+                %td= timeago(template.updated_at).html_safe
+                %td.text-right
+                  .d-flex.d-md-block.flex-row
+                    = render 'shared/action_buttons', edit_url: edit_template_path(template), delete_url: template_path(template), object: template
 
     - if @pagy.pages > 1
       .pagy-wrapper.justify-content-md-end.justify-content-center

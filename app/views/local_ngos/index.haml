@@ -2,7 +2,7 @@
 
 .card.shadow.mb-4
   .card-body
-    .d-flex
+    .d-md-flex
       .flex-grow-1
         = render 'filter'
 
@@ -19,34 +19,36 @@
       .d-sm-flex
         = render "shared/pagination_title", objects: @local_ngos
 
-      %table.table.table-hover.pretty
-        %thead
-          %tr
-            %th #
-            %th= sortable "name", t("shared.name")
-            %th= t('local_ngo.address')
-            %th= sortable "target_provinces", t('local_ngo.target_provinces')
-            %th= sortable "created_at", t("shared.created_at")
-            %th
-
-        %tbody
-          - @local_ngos.each_with_index do |local_ngo, index|
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
             %tr
-              %td= @pagy.from + index
-              %td
-                = link_to_if local_ngo.website_url.present?, local_ngo.name, local_ngo.website_url, target: "_blank"
-              %td= local_ngo.address
-              %td= local_ngo.target_provinces
-              %td= timeago(local_ngo.created_at).html_safe
-              %td.text-right
-                - if policy(local_ngo).manage_caf?
-                  = link_to local_ngo_cafs_path(local_ngo), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('local_ngo.manage_caf') } do
-                    %i.fas.fa-fw.fa-users
+              %th #
+              %th= sortable "name", t("shared.name")
+              %th= t('local_ngo.address')
+              %th= sortable "target_provinces", t('local_ngo.target_provinces')
+              %th= sortable "created_at", t("shared.created_at")
+              %th
 
-                = render 'shared/action_buttons', edit_url: edit_local_ngo_path(local_ngo), delete_url: local_ngo_path(local_ngo), object: local_ngo
+          %tbody
+            - @local_ngos.each_with_index do |local_ngo, index|
+              %tr
+                %td= @pagy.from + index
+                %td
+                  = link_to_if local_ngo.website_url.present?, local_ngo.name, local_ngo.website_url, target: "_blank"
+                %td= local_ngo.address
+                %td= local_ngo.target_provinces
+                %td= timeago(local_ngo.created_at).html_safe
+                %td.text-right
+                  .d-flex.d-md-block.flex-row
+                    - if policy(local_ngo).manage_caf?
+                      = link_to local_ngo_cafs_path(local_ngo), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('local_ngo.manage_caf') } do
+                        %i.fas.fa-fw.fa-users
+
+                    = render 'shared/action_buttons', edit_url: edit_local_ngo_path(local_ngo), delete_url: local_ngo_path(local_ngo), object: local_ngo
 
     - if @pagy.pages > 1
       .pagy-wrapper.justify-content-md-end.justify-content-center
-        != pagy_bootstrap_nav(@pagy)
+        != pagy_bootstrap_compact_nav(@pagy)
 
 = render "shared/modal_confirm"
