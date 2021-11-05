@@ -1,15 +1,15 @@
 = render "shared/page_title", title: t('user.users'), url: new_user_path, label: t('user.add_new')
 
-%ul.nav.nav-tabs.nav-justified{style: 'width: 300px;'}
+%ul.nav.nav-tabs.nav-justified
   %li.nav-item{ class: ('active' if params[:archived].blank?) }
     %a.nav-link{href: users_path }
       %i.fas.fa-users
-      = t("user.all")
+      %span.d-none.d-md-inline= t("user.all")
 
   %li.nav-item{ class:  ('active' if params[:archived].present?) }
     %a.nav-link{ href: users_path(archived: true) }
       %i.fas.fa-user-times
-      = t("user.archived")
+      %span.d-none.d-md-inline= t("user.archived")
 
 .card.shadow.mb-4
   .card-body
@@ -19,7 +19,7 @@
     = render "shared/pagination_title", objects: @users
 
     - if @users.present?
-      %table.table.table-hover.pretty
+      %table.table.table-hover.pretty.table-responsive
         %thead
           %tr
             %th #
@@ -50,7 +50,7 @@
                 = render 'action_buttons', user: user
 
       - if @pagy.pages > 1
-        .pagy-wrapper
+        .pagy-wrapper.justify-content-md-end.justify-content-center
           != pagy_bootstrap_nav(@pagy)
 
 = render "shared/modal_confirm"

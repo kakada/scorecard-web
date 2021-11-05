@@ -32,4 +32,15 @@
   .search-email {
     width: 300px;
   }
+
+  .nav-justified {
+    width: 300px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .search-email,
+    .nav-justified {
+      width: auto;
+    }
+  }
 }
