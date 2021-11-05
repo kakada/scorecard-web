@@ -51,7 +51,7 @@
 
       - if @pagy.pages > 1
         .pagy-wrapper.justify-content-md-end.justify-content-center
-          != pagy_bootstrap_nav(@pagy)
+          != pagy_bootstrap_compact_nav(@pagy)
 
 = render "shared/modal_confirm"
 = render "shared/toast_copy"

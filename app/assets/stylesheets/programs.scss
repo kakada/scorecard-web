@@ -1,0 +1,7 @@
+#programs-new {
+  @include media-breakpoint-down(sm) {
+    .view-center {
+      width: 100% !important;
+    }
+  }
+}
