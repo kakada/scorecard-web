@@ -3,4 +3,10 @@
     max-width: 600px;
     margin: 20px 0;
   }
+
+  @media (max-width: 576px) {
+    .image {
+      max-width: 100%;
+    }
+  }
 }
