@@ -9,25 +9,26 @@
     - if @primary_schools.present?
       = render "shared/pagination_title", objects: @primary_schools
 
-      %table.table.table-hover.table-responsive.pretty
-        %thead
-          %tr
-            %th= sortable "code", t('primary_school.code')
-            %th= sortable "name_en", t('primary_school.name_en')
-            %th= sortable "name_km", t('primary_school.name_km')
-            %th= t('primary_school.address')
-            %th= sortable "created_at", t('shared.created_at')
-            %th
-        %tbody
-          - @primary_schools.each do |school|
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
             %tr
-              %td= school.code
-              %td= school.name_en
-              %td= school.name_km
-              %td= school.address
-              %td= timeago(school.created_at).html_safe
-              %td.text-right.action-buttons
-                = render 'shared/action_buttons', edit_url: edit_primary_school_path(school), delete_url: primary_school_path(school), object: school
+              %th= sortable "code", t('primary_school.code')
+              %th= sortable "name_en", t('primary_school.name_en')
+              %th= sortable "name_km", t('primary_school.name_km')
+              %th= t('primary_school.address')
+              %th= sortable "created_at", t('shared.created_at')
+              %th
+          %tbody
+            - @primary_schools.each do |school|
+              %tr
+                %td= school.code
+                %td= school.name_en
+                %td= school.name_km
+                %td= school.address
+                %td= timeago(school.created_at).html_safe
+                %td.text-right.action-buttons
+                  = render 'shared/action_buttons', edit_url: edit_primary_school_path(school), delete_url: primary_school_path(school), object: school
 
     - if @pagy.pages > 1
       .pagy-wrapper.justify-content-md-end.justify-content-center

@@ -19,35 +19,36 @@
     = render "shared/pagination_title", objects: @users
 
     - if @users.present?
-      %table.table.table-hover.pretty.table-responsive
-        %thead
-          %tr
-            %th #
-            %th= sortable "email", t("user.email")
-            %th= sortable "role", t("user.role")
-            %th= t('user.local_ngo')
-            - if current_user.system_admin?
-              %th= t('user.program')
-            %th= t('user.status')
-            %th= t('shared.created_at')
-            %th= t('shared.updated_at')
-            %th
-
-        %tbody
-          - @users.each_with_index do |user, index|
-            %tr{class: ("disabled-bg" unless user.actived?)}
-              %td= @pagy.from + index
-              %td= user.email
-              %td= user.role.titlecase
-              %td= user.local_ngo_name
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
+            %tr
+              %th #
+              %th= sortable "email", t("user.email")
+              %th= sortable "role", t("user.role")
+              %th= t('user.local_ngo')
               - if current_user.system_admin?
-                %td= user.program_name
-              %td.status{ class: user.status }
-                = t("user.#{user.status}")
-              %td= timeago(user.created_at).html_safe
-              %td= timeago(user.updated_at).html_safe
-              %td.text-right{style: 'min-width: 168px;'}
-                = render 'action_buttons', user: user
+                %th= t('user.program')
+              %th= t('user.status')
+              %th= t('shared.created_at')
+              %th= t('shared.updated_at')
+              %th
+
+          %tbody
+            - @users.each_with_index do |user, index|
+              %tr{class: ("disabled-bg" unless user.actived?)}
+                %td= @pagy.from + index
+                %td= user.email
+                %td= user.role.titlecase
+                %td= user.local_ngo_name
+                - if current_user.system_admin?
+                  %td= user.program_name
+                %td.status{ class: user.status }
+                  = t("user.#{user.status}")
+                %td= timeago(user.created_at).html_safe
+                %td= timeago(user.updated_at).html_safe
+                %td.text-right{style: 'min-width: 168px;'}
+                  = render 'action_buttons', user: user
 
       - if @pagy.pages > 1
         .pagy-wrapper.justify-content-md-end.justify-content-center

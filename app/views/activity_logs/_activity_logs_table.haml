@@ -1,18 +1,19 @@
-%table.table.table-responsive.w-100
-  %thead
-    %tr
-      %th= t('activity_logs.path')
-      %th= t('activity_logs.http_method')
-      %th= t('activity_logs.email')
-      %th= t('activity_logs.role')
-      %th= t('activity_logs.program')
-      %th= t('activity_logs.http_format')
-      %th= t('activity_logs.http_status')
-      %th= t('activity_logs.payload')
-      %th= t('activity_logs.remote_ip')
-      %th= t('shared.created_at')
-  %tbody
-    = render @activity_logs
+.table-responsive
+  %table.table.w-100
+    %thead
+      %tr
+        %th= t('activity_logs.path')
+        %th= t('activity_logs.http_method')
+        %th= t('activity_logs.email')
+        %th= t('activity_logs.role')
+        %th= t('activity_logs.program')
+        %th= t('activity_logs.http_format')
+        %th= t('activity_logs.http_status')
+        %th= t('activity_logs.payload')
+        %th= t('activity_logs.remote_ip')
+        %th= t('shared.created_at')
+    %tbody
+      = render @activity_logs
 
 - if @pagy.pages > 1
   .pagy-wrapper.justify-content-md-end.justify-content-center
