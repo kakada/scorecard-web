@@ -37,7 +37,8 @@
     width: 300px;
   }
 
-  @include media-breakpoint-down(sm) {
+  // Small devices (landscape phones, less than 768px)
+  @media (max-width: 767.98px) {
     .search-email,
     .nav-justified {
       width: auto;
