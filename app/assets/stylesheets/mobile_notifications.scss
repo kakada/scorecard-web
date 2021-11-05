@@ -5,7 +5,7 @@
     display: flex;
     margin: 4px;
     padding: 60px 20px 4px;
-    background-image: url(image_path('mobile.png'));
+    background-image: url(image_path("mobile.png"));
     width: 370px;
   }
 
@@ -29,5 +29,11 @@
   .text-wrapper {
     overflow: hidden;
     word-break: break-all;
+  }
+
+  @media (max-width: 576px) {
+    .preview-background {
+      width: 100%;
+    }
   }
 }
