@@ -3,5 +3,5 @@
   %td= contact.value
   %td= l contact.created_at, format: :long
   %td.text-right
-    .d-flex.d-md-block.flex-column
+    .d-flex.d-md-block.flex-row
       = render 'shared/action_buttons', edit_url: edit_system_contact_path(contact), delete_url: system_contact_path(contact), object: contact
