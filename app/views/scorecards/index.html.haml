@@ -87,7 +87,8 @@
                         %i.fas.fa-trash-alt
 
     - if @pagy.pages > 1
-      .pagy-wrapper
-        != pagy_bootstrap_nav(@pagy)
+      .mt-3
+        .pagy-wrapper.justify-content-md-end.justify-content-center
+          != pagy_bootstrap_compact_nav(@pagy)
 
 = render "scorecards/index/confirm_modal"

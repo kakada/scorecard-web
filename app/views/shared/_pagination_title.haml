@@ -6,7 +6,7 @@
 
 .d-flex.mb-3.flex-grow-1
   - if objects.present?
-    .pagy-wrapper
+    .pagy-wrapper.justify-content-md-end.justify-content-center
       .d-flex.flex-grow-1
         .flex-1.d-flex.align-items-center.mb-2
           %span= t('shared.pagination_title', from: @pagy.from, to: @pagy.to, total: number_with_delimiter(@pagy.count)).html_safe

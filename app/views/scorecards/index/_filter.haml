@@ -1,22 +1,23 @@
 %form{ action: '/scorecards', method: 'get' }
   = hidden_field_tag :filter, params[:filter]
 
-  .d-flex.my-2
+  .d-md-flex.my-2.text-right
     = text_field_tag(:uuid, params[:uuid], class: 'form-control filter-input', placeholder: t('scorecard.code'), id: 'scorecard_code')
 
     = render 'scorecards/index/filter_date'
 
-    %div.mr-2
-      %button.btn.btn-light{type: :submit}
+    .btn-search-wrapper
+      %button.btn.btn-primary{type: :submit}
         %i.fas.fa-search
         = t('shared.search')
-    %div
-      %a.btn.advance-search{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample", :role => "button"}
+    
+    .btn-advance-search-wrapper
+      %a.btn.btn-outline-secondary.advance-search{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample", :role => "button"}
         = t('scorecard.advance_search')
         %i.fas.fa-angle-down
 
   #collapseExample.collapse
-    .d-flex.mb-2
+    .d-md-flex.mb-2
       = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_province")
 
       - if current_program.present?

@@ -19,7 +19,7 @@
           = render 'facility', facility: child
 
     - if @pagy.pages > 1
-      .pagy-wrapper
+      .pagy-wrapper.justify-content-md-end.justify-content-center
         != pagy_bootstrap_nav(@pagy)
 
 = render "shared/modal_confirm"
