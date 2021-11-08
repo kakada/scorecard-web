@@ -2,8 +2,6 @@
 
 class ActivityLoggerService
   def self.log(logger)
-    Rails.logger.info "*" * 100
-    Rails.logger.info "logger: #{logger}"
     return unless loggable?(logger[:path])
 
     ActivityLogsWorker.perform_async(logger)
