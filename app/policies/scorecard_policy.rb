@@ -25,7 +25,7 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def create?
-    user.program_admin? || user.staff?
+    true || user.program_admin? || user.staff?
   end
 
   def update?
