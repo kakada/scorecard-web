@@ -4,12 +4,12 @@
   %li.nav-item{ class: ('active' if params[:archived].blank?) }
     %a.nav-link{href: users_path }
       %i.fas.fa-users
-      %span.d-none.d-md-inline= t("user.all")
+      %span.d-none.d-lg-inline= t("user.all")
 
   %li.nav-item{ class:  ('active' if params[:archived].present?) }
     %a.nav-link{ href: users_path(archived: true) }
       %i.fas.fa-user-times
-      %span.d-none.d-md-inline= t("user.archived")
+      %span.d-none.d-lg-inline= t("user.archived")
 
 .card.shadow.mb-4
   .card-body
@@ -51,7 +51,7 @@
                   = render 'action_buttons', user: user
 
       - if @pagy.pages > 1
-        .pagy-wrapper.justify-content-md-end.justify-content-center
+        .pagy-wrapper.justify-content-lg-end.justify-content-center
           != pagy_bootstrap_compact_nav(@pagy)
 
 = render "shared/modal_confirm"

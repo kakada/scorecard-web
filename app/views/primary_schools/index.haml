@@ -31,7 +31,7 @@
                   = render 'shared/action_buttons', edit_url: edit_primary_school_path(school), delete_url: primary_school_path(school), object: school
 
     - if @pagy.pages > 1
-      .pagy-wrapper.justify-content-md-end.justify-content-center
+      .pagy-wrapper.justify-content-lg-end.justify-content-center
         != pagy_bootstrap_compact_nav(@pagy)
 
 = render "shared/modal_confirm"

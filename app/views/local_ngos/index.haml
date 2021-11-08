@@ -9,7 +9,7 @@
       - if policy(LocalNgo).create?
         .text-right
           = render "more_option"
-          %a.my-2.mt-md-0.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
+          %a.my-2.my-md-0.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
             %i.fas.fa-plus.fa-sm.text-white-50
             = t("local_ngo.add_new")
 
@@ -40,7 +40,7 @@
                 %td= local_ngo.target_provinces
                 %td= timeago(local_ngo.created_at).html_safe
                 %td.text-right
-                  .d-flex.d-md-block.flex-row
+                  .d-flex.flex-row
                     - if policy(local_ngo).manage_caf?
                       = link_to local_ngo_cafs_path(local_ngo), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('local_ngo.manage_caf') } do
                         %i.fas.fa-fw.fa-users
@@ -48,7 +48,7 @@
                     = render 'shared/action_buttons', edit_url: edit_local_ngo_path(local_ngo), delete_url: local_ngo_path(local_ngo), object: local_ngo
 
     - if @pagy.pages > 1
-      .pagy-wrapper.justify-content-md-end.justify-content-center
+      .pagy-wrapper.justify-content-lg-end.justify-content-center
         != pagy_bootstrap_compact_nav(@pagy)
 
 = render "shared/modal_confirm"

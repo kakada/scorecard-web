@@ -6,18 +6,17 @@
 
     = render 'scorecards/index/filter_date'
 
-    .btn-search-wrapper
-      %button.btn.btn-primary{type: :submit}
+    .btn-search-wrapper.d-block.d-md-flex
+      %button.btn.btn-primary.mr-md-2{type: :submit}
         %i.fas.fa-search
-        = t('shared.search')
+        %span.d-none.d-lg-inline= t('shared.search')
     
-    .btn-advance-search-wrapper
       %a.btn.btn-outline-secondary.advance-search{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample", :role => "button"}
-        = t('scorecard.advance_search')
+        %span.d-none.d-lg-inline= t('scorecard.advance_search')
         %i.fas.fa-angle-down
 
   #collapseExample.collapse
-    .d-md-flex.mb-2
+    .d-lg-flex.mb-2
       = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_province")
 
       - if current_program.present?
