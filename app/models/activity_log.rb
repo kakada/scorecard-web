@@ -50,11 +50,6 @@ class ActivityLog < ApplicationRecord
 
   private
     def ensure_unique_get_request_within_time_range
-      # Rails.logger.info "*" * 100
-      # Rails.logger.info "get?: #{get?} - #{http_method}"
-      # Rails.logger.info "activity_exists?: #{activity_exists?} - #{path} #{remote_ip} #{user_id}}"
-      # Rails.logger.info "whitelist?: #{whitelist?} - #{path_name} #{ActivityLog.whitelist_controllers}"
-
       if get? && activity_exists? && whitelist?
         errors.add(:base, I18n.t("activity_logs.request_duplicate"))
         Rails.logger.info "request #{path} from #{remote_ip} by user_id: #{user.id} is already existed"
