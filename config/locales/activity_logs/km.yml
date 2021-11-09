@@ -16,3 +16,4 @@ km:
     request_duplicate: Request មានរួចហើយ
     remote_ip: IP អ្នកប្រើ
     query: ស្វែងរកតាមរយៈ path, email អ្នកប្រើប្រាស់, ឈ្មោះ program, ip អ្នកប្រើប្រាស់
+    whitelist_path: អនុញ្ញាតតែ whitelisted path តែប៉ុណ្ណោះ

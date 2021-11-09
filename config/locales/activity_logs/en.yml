@@ -16,3 +16,4 @@ en:
     request_duplicate: Request duplicate
     remote_ip: Remote IP
     query: search by path, user's email, program's name, remote ip
+    whitelist_path: allow only whitelist path

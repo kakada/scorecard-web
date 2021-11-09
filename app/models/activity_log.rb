@@ -30,7 +30,8 @@ class ActivityLog < ApplicationRecord
   delegate :role, to: :user, prefix: true
   delegate :name, to: :program, prefix: true, allow_nil: true
 
-  validate :ensure_unique_get_request_within_time_range, on: :create
+  validate  :ensure_whitelist,
+            :ensure_unique_get_request_within_time_range, on: :create
 
   def self.filter(params = {})
     scope = send(params[:role], params.slice(:user_id, :program_id))
@@ -49,10 +50,31 @@ class ActivityLog < ApplicationRecord
 
   private
     def ensure_unique_get_request_within_time_range
-      if get? && activity_exists?
+      # Rails.logger.info "*" * 100
+      # Rails.logger.info "get?: #{get?} - #{http_method}"
+      # Rails.logger.info "activity_exists?: #{activity_exists?} - #{path} #{remote_ip} #{user_id}}"
+      # Rails.logger.info "whitelist?: #{whitelist?} - #{path_name} #{ActivityLog.whitelist_controllers}"
+
+      if get? && activity_exists? && whitelist?
         errors.add(:base, I18n.t("activity_logs.request_duplicate"))
         Rails.logger.info "request #{path} from #{remote_ip} by user_id: #{user.id} is already existed"
       end
+    end
+
+    def ensure_whitelist
+      unless whitelist?
+        errors.add(:path, I18n.t("activity_logs.whitelist_path"))
+      end
+    end
+
+    def whitelist?
+      return true unless ENV["ACTIVITY_LOGS_CONTROLLERS"]
+
+      ActivityLog.whitelist_controllers.include?(path_name)
+    end
+
+    def path_name
+      path && path[1..-1]
     end
 
     def get?
@@ -67,6 +89,14 @@ class ActivityLog < ApplicationRecord
     end
 
     def loggable_period
-      ENV["ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE"].to_i.minutes.ago
+      period.nil? ? default_loggable_period : period.to_i.minutes.ago
+    end
+
+    def period
+      ENV["ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE"]
+    end
+
+    def default_loggable_period
+      1.hour.ago
     end
 end
