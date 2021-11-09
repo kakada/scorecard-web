@@ -130,47 +130,13 @@ RSpec.describe ActivityLog, type: :model do
     end
 
     context "when ACTIVITY_LOGS_CONTROLLERS is present" do
+      let(:new_activity_log) { build(:activity_log, http_method: "GET", path: "/new-path", user: user) }
+      
       before {
-        stub_const("ENV", { 
-          "ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE" => "5",
-          "ACTIVITY_LOGS_CONTROLLERS" => "scorecards" })
+        stub_const("ENV", { "ACTIVITY_LOGS_CONTROLLERS" => "scorecards" })
       }
 
-      context "with GET request" do
-        let(:new_activity_log) { build(:activity_log, http_method: "GET", path: "/scorecards", user: user) }
-
-        specify { expect(new_activity_log).to be_invalid }
-        it "raises exception" do
-          I18n.with_locale(:en) do
-            expect {
-              new_activity_log.save!
-            }.to raise_error(ActiveRecord::RecordInvalid, /Request duplicate/)
-          end
-        end
-
-        context "when last activity older than current activity" do
-          before { activity_log.update!(created_at: 10.minutes.ago) }
-          specify { expect(new_activity_log).to be_valid }
-        end
-
-        context "with different path" do
-          before { new_activity_log.update(path: "/new-path") }
-          specify { expect(new_activity_log).to be_invalid }
-        end
-      end
-
-      context "with non-GET request" do
-        let(:new_activity_log) { build(:activity_log, http_method: "POST", path: "/scorecards", user: user) }
-
-        specify { expect(new_activity_log).to be_valid }
-
-        it "creates more than one" do
-          expect {
-            ActivityLog.create(new_activity_log.attributes)
-            ActivityLog.create(new_activity_log.attributes)
-          }.to change { ActivityLog.count }.by 2
-        end
-      end
+      specify { expect(new_activity_log).to be_invalid }
     end
   end
 end
