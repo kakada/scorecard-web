@@ -91,7 +91,7 @@ RSpec.describe ActivityLog, type: :model do
       stub_const("ENV", { "ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE" => "5" })
     }
 
-    context "when ACTIVITY_LOGS_CONTROLLERS is empty" do
+    context "when ACTIVITY_LOG_PATHS is empty" do
       context "with GET request" do
         let(:new_activity_log) { build(:activity_log, http_method: "GET", path: "/scorecards", user: user) }
 
@@ -129,11 +129,11 @@ RSpec.describe ActivityLog, type: :model do
       end
     end
 
-    context "when ACTIVITY_LOGS_CONTROLLERS is present" do
+    context "when ACTIVITY_LOG_PATHS is present" do
       let(:new_activity_log) { build(:activity_log, http_method: "GET", path: "/new-path", user: user) }
-      
+
       before {
-        stub_const("ENV", { "ACTIVITY_LOGS_CONTROLLERS" => "scorecards" })
+        stub_const("ENV", { "ACTIVITY_LOG_PATHS" => "scorecards" })
       }
 
       specify { expect(new_activity_log).to be_invalid }

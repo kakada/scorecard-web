@@ -30,7 +30,7 @@ class ActivityLog < ApplicationRecord
   delegate :role, to: :user, prefix: true
   delegate :name, to: :program, prefix: true, allow_nil: true
 
-  validate  :ensure_whitelist,
+  validate  :ensure_path_included_in_whitelist,
             :ensure_unique_get_request_within_time_range, on: :create
 
   def self.filter(params = {})
@@ -45,7 +45,7 @@ class ActivityLog < ApplicationRecord
   end
 
   def self.whitelist_controllers
-    ENV["ACTIVITY_LOGS_CONTROLLERS"].to_s.split(",")
+    ENV["ACTIVITY_LOG_PATHS"].to_s.split(",")
   end
 
   private
@@ -56,14 +56,14 @@ class ActivityLog < ApplicationRecord
       end
     end
 
-    def ensure_whitelist
+    def ensure_path_included_in_whitelist
       unless whitelist?
         errors.add(:path, I18n.t("activity_logs.whitelist_path"))
       end
     end
 
     def whitelist?
-      return true unless ENV["ACTIVITY_LOGS_CONTROLLERS"]
+      return true unless ENV["ACTIVITY_LOG_PATHS"]
 
       ActivityLog.whitelist_controllers.include?(path_name)
     end
