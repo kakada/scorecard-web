@@ -7,3 +7,4 @@ require "rack/attack"
 use Rack::Attack
 
 run Rails.application
+Rails.application.load_server
