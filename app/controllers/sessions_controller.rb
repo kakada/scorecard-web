@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class SessionsController < Devise::SessionsController
-  prepend_before_action :log_signout, only: :destroy
+  prepend_before_action :register_signout_activity, only: :destroy
   prepend_before_action :check_captcha, only: [:create] # Change this to be any actions you want to protect.
 
   private
 
-    def log_signout
-      ActiveSupport::Notifications.instrument "devise_action.action_signout", signout_params
+    def register_signout_activity
+      ActiveSupport::Notifications.instrument ActivityLog.signout_activity, signout_params
     end
 
     def signout_params
