@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.2"
+ruby "3.0.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", '~> 6.1.4', '>= 6.1.4.1'
@@ -47,7 +47,11 @@ gem "pumi", require: "pumi/rails"
 gem "carrierwave", "~> 2.1"
 gem "pundit", "~> 2.1.0"
 gem "simple_form", "~> 5.0.3"
-gem "awesome_nested_set", "~> 3.2.1"
+
+# awesome_nested_set master/lower than 3.4.0 branch has an issue with Ruby 3.x
+# gem "awesome_nested_set", "~> 3.2.1"
+gem 'awesome_nested_set', git: 'https://github.com/collectiveidea/awesome_nested_set.git', tag: 'v3.4.0'
+
 gem "roo", "~> 2.8.3"
 gem "active_model_serializers", "~> 0.10.10"
 

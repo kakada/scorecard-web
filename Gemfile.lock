@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/collectiveidea/awesome_nested_set.git
+  revision: ba2b7006c147ef34851abf156fb9eb3d3bbd0974
+  tag: v3.4.0
+  specs:
+    awesome_nested_set (3.4.0)
+      activerecord (>= 4.0.0, < 7.0)
+
+GIT
   remote: https://github.com/heartcombo/devise.git
   revision: e16d60d0fedc5f5e6f541b2b9e901a2d53f8ceda
   branch: ca-omniauth-2
@@ -87,8 +95,6 @@ GEM
     ast (2.4.1)
     autoprefixer-rails (9.8.6.3)
       execjs
-    awesome_nested_set (3.2.1)
-      activerecord (>= 4.0.0, < 7.0)
     bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.4.8)
@@ -489,7 +495,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.10)
   annotate (~> 3.1.1)
-  awesome_nested_set (~> 3.2.1)
+  awesome_nested_set!
   bootsnap (>= 1.4.4)
   bootstrap (~> 4.5.2)
   bootstrap-daterangepicker-rails (~> 3.0.4)
@@ -555,7 +561,7 @@ DEPENDENCIES
   wkhtmltopdf-binary (~> 0.12.6.5)
 
 RUBY VERSION
-   ruby 2.7.2
+   ruby 3.0.2p107
 
 BUNDLED WITH
-   2.1.4
+   2.2.22
