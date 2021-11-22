@@ -19,6 +19,14 @@ class FacilitiesController < ApplicationController
     render json: @facility.children
   end
 
+  def show
+    @facility = authorize Facility.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def new
     @facility = authorize Facility.new
   end

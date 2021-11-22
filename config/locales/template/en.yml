@@ -7,3 +7,4 @@ en:
     edit_template: Edit template
     new_template: New template
     add_new: Add new template
+    are_you_sure_to_delete: Are you sure to delete the template <b>%{name}</b>?

@@ -7,8 +7,8 @@
           %li
             = user.local_ngo_name.present? ? "#{user.email} (#{user.local_ngo_name})" : user.email
 
-  %div= t("shared.are_you_sure_to_delete")
+  %div= t("scorecard.are_you_sure_to_delete", code: @scorecard.uuid).html_safe
 
 .modal-footer
   %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
-  = link_to t("shared.delete"), scorecard_path(@scorecard.uuid), method: :delete, class: "btn btn-primary"
+  = link_to t("shared._yes"), scorecard_path(@scorecard.uuid), method: :delete, class: "btn btn-primary"

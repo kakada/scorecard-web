@@ -50,7 +50,8 @@
                 %td= scorecard.local_ngo_name
                 %td= scorecard_location(scorecard)
                 %td= status_html(scorecard)
-                %td.text-center= scorecard.downloaded_count
+                %td.text-center
+                  = scorecard.downloaded_count unless scorecard.downloaded_count.zero?
                 %td= timeago(scorecard.created_at).html_safe
                 %td
                   - if scorecard.conducted_date.present?
@@ -72,17 +73,17 @@
                       %i.fas.fa-file-pdf
 
                   - if policy(scorecard).update?
-                    = link_to edit_scorecard_path(scorecard.uuid), class: "btn btn-circle btn-sm btn-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+                    = link_to edit_scorecard_path(scorecard.uuid), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
                       %i.fas.fa-pen
 
-                  - if scorecard.running?
+                  - if policy(scorecard).update? && scorecard.running?
                     %span{data: {toggle: 'tooltip', placement: 'top', title: t('scorecard.cannot_delete_running_scorecard')}}
-                      %a.disabled{class: "btn btn-circle btn-sm btn-danger"}
+                      %a.disabled{class: "btn btn-circle btn-sm btn-outline-danger"}
                         %i.fas.fa-trash-alt
 
                   - if policy(scorecard).destroy?
                     %span{data: {toggle: 'tooltip', placement: 'top', title: t('shared.delete')}}
-                      = link_to scorecard_path(scorecard.uuid, associate_info: true), class: "btn btn-circle btn-sm btn-danger", remote: true do
+                      = link_to scorecard_path(scorecard.uuid, associate_info: true), class: "btn btn-circle btn-sm btn-outline-danger", remote: true do
                         %i.fas.fa-trash-alt
 
     - if @pagy.pages > 1

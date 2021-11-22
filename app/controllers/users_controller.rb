@@ -9,6 +9,14 @@ class UsersController < ApplicationController
     @user = authorize User.new
   end
 
+  def show
+    @user = authorize User.with_deleted.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
     @user = authorize User.new(user_params)
 

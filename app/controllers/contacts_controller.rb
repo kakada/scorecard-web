@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
 class ContactsController < ApplicationController
-  before_action :set_contact, only: [:edit, :update, :destroy]
+  before_action :set_contact, only: [:edit, :update, :destroy, :show]
 
   def index
     @contacts = authorize Contact.no_program
+  end
+
+  def show
+    respond_to do |format|
+      format.js
+    end
   end
 
   def new

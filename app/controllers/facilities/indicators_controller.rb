@@ -11,6 +11,10 @@ module Facilities
 
     def show
       @indicator = @facility.indicators.find(params[:id])
+
+      respond_to do |format|
+        format.js
+      end
     end
 
     def new

@@ -1,0 +1,4 @@
+$('#confirmModal .title').html("<%= t('contact.system_contact') %>");
+$('#confirmModal .modal-body').html("<%= t('contact.are_you_sure_to_delete', value: @contact.value).html_safe %>");
+$("#confirmModal .btn-yes").attr('href', "<%= system_contact_path(@contact) %>");
+$("#confirmModal").modal("show");

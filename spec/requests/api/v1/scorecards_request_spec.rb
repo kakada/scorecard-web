@@ -197,7 +197,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
       before { scorecard.lock_access! }
 
-      context 'locale is :en' do
+      context "locale is :en" do
         before {
           get "/api/v1/scorecards/#{scorecard.uuid}.pdf?locale=en", headers: headers
         }
@@ -205,7 +205,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
         it { expect(reader.page(1).text).to eq(province.name_en) }
       end
 
-      context 'locale is :km' do
+      context "locale is :km" do
         before {
           get "/api/v1/scorecards/#{scorecard.uuid}.pdf?locale=km", headers: headers
         }

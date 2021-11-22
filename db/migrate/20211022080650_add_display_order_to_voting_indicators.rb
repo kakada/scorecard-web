@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddDisplayOrderToVotingIndicators < ActiveRecord::Migration[6.0]
   def up
     add_column :voting_indicators, :display_order, :integer

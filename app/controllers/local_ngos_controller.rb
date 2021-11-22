@@ -2,7 +2,15 @@
 
 class LocalNgosController < ApplicationController
   def index
-    @pagy, @local_ngos = pagy(policy_scope(LocalNgo.filter(filter_params).order(sort_param)))
+    @pagy, @local_ngos = pagy(policy_scope(authorize LocalNgo.filter(filter_params).order(sort_param)))
+  end
+
+  def show
+    @local_ngo = authorize LocalNgo.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def new
@@ -52,6 +60,6 @@ class LocalNgosController < ApplicationController
     end
 
     def filter_params
-      params.permit(:keyword).merge(program_id: current_program.id)
+      params.permit(:keyword).merge(program_id: current_program.try(:id))
     end
 end

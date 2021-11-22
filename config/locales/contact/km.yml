@@ -7,3 +7,4 @@ km:
     tel_placeholder: "023111222"
     email_placeholder: abc@exmple.com
     system_contact: ទំនាក់ទំនងប្រព័ន្ធ
+    are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបទំនាក់ទំនងប្រព័ន្ធ <b>%{value}</b> នេះមែនទេ?

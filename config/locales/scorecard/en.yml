@@ -97,3 +97,4 @@ en:
     criteria_count:
       one: "1 criteria"
       other: "%{count} criterias"
+    are_you_sure_to_delete: Are you sure to delete the scorecard <b>%{code}</b>?

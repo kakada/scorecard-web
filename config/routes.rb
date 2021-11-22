@@ -62,7 +62,7 @@ Rails.application.routes.draw do
 
   resources :languages, path: "/scorecards/settings/languages"
 
-  resources :facilities, path: "/scorecards/settings/facilities", only: [:index, :new, :create, :destroy] do
+  resources :facilities, path: "/scorecards/settings/facilities" do
     get :children, on: :member
     resources :indicators, module: "facilities" do
       post :clone_from_template, on: :collection

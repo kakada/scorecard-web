@@ -13,3 +13,4 @@ en:
     search: Search by name or province
     website_url:
       invalid: is invalid
+    are_you_sure_to_delete: Are you sure to delete the local NGOs <b>%{name}</b>?

@@ -17,3 +17,4 @@ en:
     allow_roles_to_access_dashboard: Allow user with the following roles to access dashboard
     allow_emails_to_access_dashboard: Allow user with the following emails to access dashboard
     or: OR
+    are_you_sure_to_delete: Are you sure to delete the program <b>%{name}</b>?

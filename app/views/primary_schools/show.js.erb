@@ -1,0 +1,4 @@
+$('#confirmModal .title').html("<%= t('primary_school.primary_schools') %>");
+$('#confirmModal .modal-body').html("<%= t('primary_school.are_you_sure_to_delete', name: @primary_school.name).html_safe %>");
+$("#confirmModal .btn-yes").attr('href', "<%= primary_school_path(@primary_school) %>");
+$("#confirmModal").modal("show");

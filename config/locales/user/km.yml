@@ -27,3 +27,4 @@ km:
     is_being_archived: ត្រូវបាន archived
     archive_successfully: "អ្នកប្រើប្រាស់ %{email} ត្រូវបាន archived ដោយជោគជ័យ!"
     restore_successfully: "អ្នកប្រើប្រាស់ %{email} ត្រូវបានស្តារដោយជោគជ័យ!"
+    are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបគណនី <b>%{email}</b> នេះមែនទេ?
