@@ -21,6 +21,8 @@ module Sample
         if data[5].present? && data[6].present?
           loc.latitude = data[5]
           loc.longitude = data[6]
+          loc.osm_latitude = data[7]
+          loc.osm_longitude = data[8]
         end
 
         loc.save
