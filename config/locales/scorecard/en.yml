@@ -91,3 +91,9 @@ en:
     cannot_delete_running_scorecard: Running scorecard cannot be deleted
     scorecard_being_downloaded: This scorecard is being downloaded (%{count} times).
     number_of_downloaded: "# of downloads"
+    suggested_action_count:
+      one: "1 suggested action"
+      other: "%{count} suggested actions"
+    criteria_count:
+      one: "1 criteria"
+      other: "%{count} criterias"
