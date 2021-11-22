@@ -30,7 +30,8 @@ class ActivityLog < ApplicationRecord
   delegate :role, to: :user, prefix: true
   delegate :name, to: :program, prefix: true, allow_nil: true
 
-  validate :ensure_unique_get_request_within_time_range, on: :create
+  validate  :ensure_path_included_in_whitelist,
+            :ensure_unique_get_request_within_time_range, on: :create
 
   def self.filter(params = {})
     scope = send(params[:role], params.slice(:user_id, :program_id))
@@ -44,7 +45,7 @@ class ActivityLog < ApplicationRecord
   end
 
   def self.whitelist_controllers
-    ENV["ACTIVITY_LOGS_CONTROLLERS"].to_s.split(",")
+    ENV["ACTIVITY_LOG_PATHS"].to_s.split(",")
   end
 
   def self.signout_activity
@@ -59,6 +60,22 @@ class ActivityLog < ApplicationRecord
       end
     end
 
+    def ensure_path_included_in_whitelist
+      unless whitelist?
+        errors.add(:path, I18n.t("activity_logs.whitelist_path"))
+      end
+    end
+
+    def whitelist?
+      return true unless ENV["ACTIVITY_LOG_PATHS"]
+
+      ActivityLog.whitelist_controllers.include?(path_name)
+    end
+
+    def path_name
+      path && path[1..-1]
+    end
+
     def get?
       http_method&.upcase == "GET"
     end
@@ -71,6 +88,14 @@ class ActivityLog < ApplicationRecord
     end
 
     def loggable_period
-      ENV["ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE"].to_i.minutes.ago
+      period.nil? ? default_loggable_period : period.to_i.minutes.ago
+    end
+
+    def period
+      ENV["ACTIVITY_LOGGABLE_PERIODIC_IN_MINUTE"]
+    end
+
+    def default_loggable_period
+      1.hour.ago
     end
 end
