@@ -18,5 +18,7 @@ class ActivityLogsWorker
       log.user            = current_user
       log.program         = current_user&.program
     end
+  rescue ActiveRecord::RecordNotFound => e
+    Rails.logger.error "#{e.message} : #{args.inspect}"
   end
 end

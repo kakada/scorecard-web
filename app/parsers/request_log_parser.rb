@@ -4,7 +4,7 @@ class RequestLogParser
   class << self
     def parse(data)
       @data = data
-      data_params.merge(payload_params)
+      data_params.merge({ "payload" => payload_params })
     end
 
     private
@@ -13,7 +13,7 @@ class RequestLogParser
       end
 
       def payload_params
-        @data[:params].to_h.except(:action, :controller)
+        @data[:params].to_h.except("action", "controller", "authenticity_token")
       end
 
       def whitelist_attribute

@@ -47,6 +47,10 @@ class ActivityLog < ApplicationRecord
     ENV["ACTIVITY_LOGS_CONTROLLERS"].to_s.split(",")
   end
 
+  def self.signout_activity
+    "devise_action.action_signout"
+  end
+
   private
     def ensure_unique_get_request_within_time_range
       if get? && activity_exists?
