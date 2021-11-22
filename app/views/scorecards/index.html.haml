@@ -1,6 +1,6 @@
 .d-sm-flex.align-items-center.justify-content-between.mb-4
   %h1.h3.mb-0.text-gray-800= t("scorecard.scorecards")
-  %div
+  .mt-3.mt-md-0.text-right
     - if policy(Scorecard).setting?
       %a.btn.btn-secondary.btn-sm.shadow-sm{ href: setting_url }
         %i.fas.fa-wrench.fa-sm.text-white-50
@@ -64,30 +64,32 @@
                   - else
                     = "_"
                 %td.text-right.action-buttons
-                  - if scorecard.access_locked?
-                    %span{ class: 'btn btn-circle btn-sm btn-outline-dark mr-1', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.completed')}, style: 'cursor: auto'}
-                      %i.fas.fa-lock
+                  .d-flex.d-md-block.flex-row
+                    - if scorecard.access_locked?
+                      %span{ class: 'btn btn-circle btn-sm btn-outline-dark mr-1', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.completed')}, style: 'cursor: auto'}
+                        %i.fas.fa-lock
 
-                  - if scorecard.access_locked? && scorecard.program.try(:pdf_templates).present?
-                    = link_to scorecard_path(scorecard.uuid, format: 'pdf'), class: "btn btn-circle btn-sm btn-outline-danger", data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.view_as_pdf')}, target: '_blank' do
-                      %i.fas.fa-file-pdf
+                    - if scorecard.access_locked? && scorecard.program.try(:pdf_templates).present?
+                      = link_to scorecard_path(scorecard.uuid, format: 'pdf'), class: "btn btn-circle btn-sm btn-outline-danger", data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.view_as_pdf')}, target: '_blank' do
+                        %i.fas.fa-file-pdf
 
-                  - if policy(scorecard).update?
-                    = link_to edit_scorecard_path(scorecard.uuid), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
-                      %i.fas.fa-pen
+                    - if policy(scorecard).update?
+                      = link_to edit_scorecard_path(scorecard.uuid), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+                        %i.fas.fa-pen
 
-                  - if policy(scorecard).update? && scorecard.running?
-                    %span{data: {toggle: 'tooltip', placement: 'top', title: t('scorecard.cannot_delete_running_scorecard')}}
-                      %a.disabled{class: "btn btn-circle btn-sm btn-outline-danger"}
-                        %i.fas.fa-trash-alt
+                    - if policy(scorecard).update? && scorecard.running?
+                      %span{data: {toggle: 'tooltip', placement: 'top', title: t('scorecard.cannot_delete_running_scorecard')}}
+                        %a.disabled{class: "btn btn-circle btn-sm btn-outline-danger"}
+                          %i.fas.fa-trash-alt
 
-                  - if policy(scorecard).destroy?
-                    %span{data: {toggle: 'tooltip', placement: 'top', title: t('shared.delete')}}
-                      = link_to scorecard_path(scorecard.uuid, associate_info: true), class: "btn btn-circle btn-sm btn-outline-danger", remote: true do
-                        %i.fas.fa-trash-alt
+                    - if policy(scorecard).destroy?
+                      %span{data: {toggle: 'tooltip', placement: 'top', title: t('shared.delete')}}
+                        = link_to scorecard_path(scorecard.uuid, associate_info: true), class: "btn btn-circle btn-sm btn-outline-danger", remote: true do
+                          %i.fas.fa-trash-alt
 
     - if @pagy.pages > 1
-      .pagy-wrapper
-        != pagy_bootstrap_nav(@pagy)
+      .mt-3
+        .pagy-wrapper.justify-content-lg-end.justify-content-center
+          != pagy_bootstrap_compact_nav(@pagy)
 
 = render "scorecards/index/confirm_modal"

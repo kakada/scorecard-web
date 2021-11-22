@@ -2,4 +2,17 @@
   .filter-input {
     width: 250px;
   }
+
+  @media (max-width: 576px) {
+    .btn-search-wrapper {
+      text-align: right;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .filter-input {
+    width: 100% !important;
+    margin: 5px 0;
+  }
 }

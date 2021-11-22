@@ -1,15 +1,15 @@
 = render "shared/page_title", title: t('user.users'), url: new_user_path, label: t('user.add_new')
 
-%ul.nav.nav-tabs.nav-justified{style: 'width: 300px;'}
+%ul.nav.nav-tabs.nav-justified
   %li.nav-item{ class: ('active' if params[:archived].blank?) }
     %a.nav-link{href: users_path }
       %i.fas.fa-users
-      = t("user.all")
+      %span.d-none.d-lg-inline= t("user.all")
 
   %li.nav-item{ class:  ('active' if params[:archived].present?) }
     %a.nav-link{ href: users_path(archived: true) }
       %i.fas.fa-user-times
-      = t("user.archived")
+      %span.d-none.d-lg-inline= t("user.archived")
 
 .card.shadow.mb-4
   .card-body
@@ -19,39 +19,40 @@
     = render "shared/pagination_title", objects: @users
 
     - if @users.present?
-      %table.table.table-hover.pretty
-        %thead
-          %tr
-            %th #
-            %th= sortable "email", t("user.email")
-            %th= sortable "role", t("user.role")
-            %th= t('user.local_ngo')
-            - if current_user.system_admin?
-              %th= t('user.program')
-            %th= t('user.status')
-            %th= t('shared.created_at')
-            %th= t('shared.updated_at')
-            %th
-
-        %tbody
-          - @users.each_with_index do |user, index|
-            %tr{class: ("disabled-bg" unless user.actived?)}
-              %td= @pagy.from + index
-              %td= user.email
-              %td= user.role.titlecase
-              %td= user.local_ngo_name
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
+            %tr
+              %th #
+              %th= sortable "email", t("user.email")
+              %th= sortable "role", t("user.role")
+              %th= t('user.local_ngo')
               - if current_user.system_admin?
-                %td= user.program_name
-              %td.status{ class: user.status }
-                = t("user.#{user.status}")
-              %td= timeago(user.created_at).html_safe
-              %td= timeago(user.updated_at).html_safe
-              %td.text-right{style: 'min-width: 168px;'}
-                = render 'action_buttons', user: user
+                %th= t('user.program')
+              %th= t('user.status')
+              %th= t('shared.created_at')
+              %th= t('shared.updated_at')
+              %th
+
+          %tbody
+            - @users.each_with_index do |user, index|
+              %tr{class: ("disabled-bg" unless user.actived?)}
+                %td= @pagy.from + index
+                %td= user.email
+                %td= user.role.titlecase
+                %td= user.local_ngo_name
+                - if current_user.system_admin?
+                  %td= user.program_name
+                %td.status{ class: user.status }
+                  = t("user.#{user.status}")
+                %td= timeago(user.created_at).html_safe
+                %td= timeago(user.updated_at).html_safe
+                %td.text-right{style: 'min-width: 168px;'}
+                  = render 'action_buttons', user: user
 
       - if @pagy.pages > 1
-        .pagy-wrapper
-          != pagy_bootstrap_nav(@pagy)
+        .pagy-wrapper.justify-content-lg-end.justify-content-center
+          != pagy_bootstrap_compact_nav(@pagy)
 
 = render "shared/modal_confirm"
 = render "shared/toast_copy"

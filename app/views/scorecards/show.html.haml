@@ -1,11 +1,13 @@
 = render 'scorecards/show/page_title'
 
-#contents
-  .d-flex
-    %div.mr-5
+#contents.mt-5.mt-md-0
+  .d-md-flex
+    = render 'scorecards/show/scorecard_progress_mobile'
+
+    %div.mr-5.d-none.d-md-block
       = render 'scorecards/show/scorecard_progress'
 
-    %div.flex-1
+    %div.flex-1.mt-3.mt-md-0
       = render 'scorecards/show/progress_step', label: "1. #{t('scorecard.setup')}", url: scorecard_path(@scorecard.uuid), sub_title: scorecard_setup_sub_title
 
       - disabled_button = @scorecard.raised_indicators.blank?

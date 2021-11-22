@@ -57,3 +57,43 @@
     position: relative;
   }
 }
+
+.disabled {
+  pointer-events: none;
+  color: #858796;
+}
+
+@media (max-width: 768px) {
+  .circles-horizontal {
+    border-top: 1px solid #00c4cc;
+
+    .item {
+      flex-basis: 5em;
+      margin-top: -10px;
+    }
+  }
+
+  .milestone-title {
+    line-height: 1em;
+    margin: 15px 0 5px 0;
+  }
+
+  .circle {
+    font-weight: 600;
+    font-size: 1em;
+    width: 2.25em;
+    height: 2.25em;
+    border: 2px solid #00c4cc;
+    border-radius: 50%;
+    background-color: #ebeced;
+    display: inline-block;
+    margin-top: -20px;
+
+    span {
+      font-size: 30px;
+      display: inline-block;
+      line-height: 32px;
+      color: #00c4cc;
+    }
+  }
+}

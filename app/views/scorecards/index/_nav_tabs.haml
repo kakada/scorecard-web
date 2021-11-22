@@ -1,7 +1,10 @@
 %ul.nav.nav-tabs
   %li.nav-item{class: css_active_tab(params[:filter].blank? || params[:filter] == 'all')}
-    %a.nav-link{href: scorecards_path(filter: 'all')}= t('scorecard.all')
+    %a.nav-link{href: scorecards_path(filter: 'all')}
+      = t('scorecard.all').titleize
   %li.nav-item{class: css_active_tab(params[:filter]=='planned')}
-    %a.nav-link{href: scorecards_path(filter: 'planned')}= t('scorecard.planned')
+    %a.nav-link{href: scorecards_path(filter: 'planned')}
+      = t('scorecard.planned').titleize
   %li.nav-item{class: css_active_tab(params[:filter]=='locked')}
-    %a.nav-link{href: scorecards_path(filter: 'locked')}= t('scorecard.completed')
+    %a.nav-link{href: scorecards_path(filter: 'locked')}
+      = t('scorecard.completed').titleize

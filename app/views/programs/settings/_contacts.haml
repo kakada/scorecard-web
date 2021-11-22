@@ -1,7 +1,8 @@
-.dotted-line.d-flex
+.dotted-line.d-flex.align-items-center
   %label.flex-grow-1= t('program.contacts')
-  %div
+  %span.text-right.pr-2
     = current_program.contacts.take(2).map(&:value).join('; ')
+  %div
     %a.pointer.badge.badge-info.text-white{href: contacts_path, 'data-remote' => true}= t('shared.setup')
 
     = render 'programs/contacts/modal'

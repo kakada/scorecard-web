@@ -1,5 +1,5 @@
-.d-flex.justify-content-end
-  = simple_form_for :q, method: :get, html: { class: "form-inline mb-3" } do |f|
+.d-md-flex.justify-content-end
+  = simple_form_for :q, method: :get, html: { class: "form-inline mb-3 form-query" } do |f|
     .path.position-relative
       = f.input :query, label: false, required: false, placeholder: t("activity_logs.query"), input_html: { name: "query", value: params[:query], class: "q_query" }, wrapper_html: { class: "mr-2" }
       .fa.fa-times.position-absolute.ico-clear
@@ -14,4 +14,5 @@
         .input-group-text
           %i.fa.fa-calendar
 
-    = f.submit t("shared.search"), class: "btn btn-primary"
+    .btn-search-wrapper
+      = f.submit t("shared.search"), class: "btn btn-primary"

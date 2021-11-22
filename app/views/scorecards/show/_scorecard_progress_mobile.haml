@@ -1,0 +1,21 @@
+.circles-horizontal.d-flex.justify-content-between.d-md-none
+  .item.text-center.flex-grow-0.flex-shrink-0{class: ('disabled' unless @scorecard.planned_start_date.present?)}
+    .circle
+      %span &middot;
+    .content
+      %p.milestone-title= t("scorecard.planned_start_date")
+      %small= l(@scorecard.planned_start_date)
+
+  .item.text-center.flex-grow-0.flex-shrink-0{class: ('disabled' unless @scorecard.conducted_date.present?)}
+    .circle
+      %span &middot;
+    .content
+      %p.milestone-title= t("scorecard.implemented_date")
+      %small= @scorecard.conducted_date ? l(@scorecard.conducted_date) : '-'
+
+  .item.text-center.flex-grow-0.flex-shrink-0{class: ('disabled' unless @scorecard.finished_date.present?)}
+    .circle
+      %span &middot;
+    .content
+      %p.milestone-title= t("scorecard.submitted_date")
+      %small= @scorecard.finished_date ? l(@scorecard.finished_date) : '-'

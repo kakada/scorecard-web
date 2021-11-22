@@ -6,7 +6,7 @@
 
 .d-flex.mb-3.flex-grow-1
   - if objects.present?
-    .pagy-wrapper
+    .pagy-wrapper.justify-content-lg-end.justify-content-center
       .d-flex.flex-grow-1
         .flex-1.d-flex.align-items-center.mb-2
           %span= t('shared.pagination_title', from: @pagy.from, to: @pagy.to, total: number_with_delimiter(@pagy.count)).html_safe
@@ -14,11 +14,12 @@
   .flex-grow-1
 
   - if !hide_pagy && @pagy.pages > 1
-    != pagy_bootstrap_nav(@pagy)
+    .d-lg-block.d-none
+      != pagy_bootstrap_nav(@pagy)
 
 
   - if url.present? && policy(objects.class.to_s.split("::").first.constantize).create?
     %div
       = link_to url, remote: remote, class: "btn btn-primary btn-sm shadow-sm" do
         %i.fas.fa-plus.fa-sm.text-white-50
-        = label
+        %span.d-none.d-md-inline= label

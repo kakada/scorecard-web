@@ -1,4 +1,4 @@
-.stackholders.d-flex.justify-content-between{ class: local_assigns[:wrapper_class] }
+.stackholders.d-md-flex.justify-content-between{ class: local_assigns[:wrapper_class] }
   .funded-by.text-center.flex-shrink-0
     %p.font-weight-normal.text-center.text-funded
       គាំទ្រមូលនិធិដោយ / Funded by
@@ -6,15 +6,15 @@
     = link_to 'https://eeas.europa.eu/delegations/cambodia_en', target: '_blank' do
       = image_tag 'eu.png', class: 'img-funded', alt: 'EU Cambodia'
 
-  .implemented-by
+  .implemented-by.mt-5.mt-md-0
     %p.font-weight-normal.text-center.text-implemented
       អនុវត្តដោយ / Implemented by
     .d-flex.align-items-center.justify-content-center.flex-wrap.img-implemented-wrapper
       = link_to 'https://www.care-cambodia.org/', target: '_blank' do
-        = image_tag 'care_logo.png', class: 'img-implemented', alt: 'Care'
+        = image_tag 'care_logo.png', class: 'img-implemented img-fluid', alt: 'Care'
 
-      = link_to 'https://apiinstitute.org/', target: '_blank' do
-        = image_tag 'api.png', class: 'img-implemented', alt: 'API'
+      = link_to 'https://apiinstitute.org/', class: "my-3 my-md-0", target: '_blank' do
+        = image_tag 'api.png', class: 'img-implemented img-fluid', alt: 'API'
 
       = link_to 'http://ilabsoutheastasia.org', target: '_blank' do
-        = image_tag 'instedd-ilabsea.png', class: 'img-implemented', alt: 'InSTEDD iLabSEA'
+        = image_tag 'instedd-ilabsea.png', class: 'img-implemented img-fluid', alt: 'InSTEDD iLabSEA'

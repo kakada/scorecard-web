@@ -6,6 +6,7 @@
       %label
         = t('program.shortcut_name')
         %abbr{:title => "required"} *
+        %br
         %span.text-gray-600.small= "(#{t('program.used_for_com')})"
       = f.input :shortcut_name, label: false, input_html: { maxlength: 10, class: 'short-name' }
       .text-right.small{style: 'margin-top: -12px'}
