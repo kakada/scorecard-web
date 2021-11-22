@@ -101,7 +101,7 @@ RSpec.describe User, type: :model do
     it { expect(new_user.valid?).to be_falsey }
 
     it "renders error that email is being archived" do
-      expect(new_user.errors.first.last).to eq(I18n.t("user.is_being_archived"))
+      expect(new_user.errors.first.options[:message]).to eq(I18n.t("user.is_being_archived"))
     end
   end
 end
