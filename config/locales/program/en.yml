@@ -18,3 +18,14 @@ en:
     allow_emails_to_access_dashboard: Allow user with the following emails to access dashboard
     or: OR
     are_you_sure_to_delete: Are you sure to delete the program <b>%{name}</b>?
+    program_data_publication: Program data publication
+    data_is_published: Data has been published
+    data_is_not_published: Data is not published
+    stop_publish_data: Stop publishing scorecards data from today
+    publish_all: I agree to publish all implemented scorecards data
+    publish_from_today: I agree to publish implemented scorecards data from today
+    publish_scorecards_from: Publish implemented scorecards from %{date}
+    publish_all_scorecards: Publish all implemented scorecards
+    stop_publish_scorecards_from: Stop publishing scorecards from %{date}
+    in_order_to_publish_data: In order to publish the scorecard data to public, you must read and agree with all these conditions
+    publish_data_cannot_rollback: Data that has been published cannot be rollbacked

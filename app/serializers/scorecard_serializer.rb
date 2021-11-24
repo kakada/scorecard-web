@@ -40,6 +40,7 @@
 #  finished_date             :datetime
 #  running_date              :datetime
 #  deleted_at                :datetime
+#  published                 :boolean          default(FALSE)
 #
 class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :facility_id, :scorecard_type,

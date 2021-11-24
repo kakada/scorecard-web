@@ -30,8 +30,10 @@ class Program < ApplicationRecord
   has_many :chat_groups
   has_many :messages
   has_many :mobile_tokens
-  has_one  :telegram_bot, dependent: :destroy
   has_many :activity_logs
+  has_one  :data_publication, dependent: :destroy
+  has_many :data_publication_logs, dependent: :destroy
+  has_one  :telegram_bot, dependent: :destroy
   has_one  :gf_dashboard
 
   validates :name, presence: true, uniqueness: true
@@ -49,6 +51,7 @@ class Program < ApplicationRecord
   accepts_nested_attributes_for :rating_scales, allow_destroy: true
   accepts_nested_attributes_for :contacts, allow_destroy: true
   accepts_nested_attributes_for :telegram_bot, allow_destroy: true
+  accepts_nested_attributes_for :data_publication, allow_destroy: true
 
   delegate :enabled, to: :telegram_bot, prefix: :telegram_bot, allow_nil: true
 

@@ -16,6 +16,7 @@
 #  payload         :json
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  remote_ip       :string
 #
 FactoryBot.define do
   factory :activity_log do

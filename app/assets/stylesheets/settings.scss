@@ -24,3 +24,9 @@
 .or-label {
   padding: 16px 8px;
 }
+
+.radio-buttons {
+  .form-check-input.is-valid ~ .form-check-label {
+    color: #111;
+  }
+}

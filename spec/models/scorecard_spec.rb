@@ -40,6 +40,7 @@
 #  finished_date             :datetime
 #  running_date              :datetime
 #  deleted_at                :datetime
+#  published                 :boolean          default(FALSE)
 #
 require "rails_helper"
 
@@ -145,6 +146,44 @@ RSpec.describe Scorecard, type: :model do
         scorecard.valid?
         expect(scorecard.errors.include? :planned_end_date)
       end
+    end
+  end
+
+  describe "#before_save, set published_column" do
+    let!(:program)    { create(:program) }
+    let!(:scorecard1) { create(:scorecard, program: program, published: false, created_at: Date.yesterday) }
+    let(:scorecard2) { create(:scorecard, program: program, published: false, created_at: Date.today) }
+
+    context "program no data_published_option" do
+      it { expect(scorecard1.published).to be_falsey }
+      it { expect(scorecard2.published).to be_falsey }
+    end
+
+    context "program data_published_option is stop_publish_data" do
+      before {
+        create(:data_publication, published_option: :stop_publish_data, program: program)
+      }
+
+      it { expect(scorecard1.published).to be_falsey }
+      it { expect(scorecard2.published).to be_falsey }
+    end
+
+    context "program data_published_option is publish_all" do
+      before {
+        create(:data_publication, published_option: :publish_all, program: program)
+      }
+
+      it { expect(scorecard1.published).to be_falsey }
+      it { expect(scorecard2.published).to be_truthy }
+    end
+
+    context "program data_published_option is publish_from_today" do
+      before {
+        create(:data_publication, published_option: :publish_from_today, program: program)
+      }
+
+      it { expect(scorecard1.reload.published).to be_falsey }
+      it { expect(scorecard2.reload.published).to be_truthy }
     end
   end
 end

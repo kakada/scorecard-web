@@ -40,6 +40,7 @@
 #  finished_date             :datetime
 #  running_date              :datetime
 #  deleted_at                :datetime
+#  published                 :boolean          default(FALSE)
 #
 class Scorecard < ApplicationRecord
   include Scorecards::Lockable
@@ -99,6 +100,7 @@ class Scorecard < ApplicationRecord
 
   before_create :secure_uuid
   before_create :set_name
+  before_create :set_published
   before_save   :clear_primary_school_code, unless: -> { facility.try(:dataset).present? }
 
   after_commit  :index_document_async, on: [:create, :update], if: -> { ENV["ELASTICSEARCH_ENABLED"] == "true" }
@@ -140,6 +142,10 @@ class Scorecard < ApplicationRecord
 
     def set_name
       self.name = "#{location_code}-#{year}"
+    end
+
+    def set_published
+      self.published = program.data_publication.present? && !program.data_publication.stop_publish_data?
     end
 
     def clear_primary_school_code
