@@ -34,7 +34,7 @@ class LocalNgosController < ApplicationController
   def update
     @local_ngo = authorize LocalNgo.find(params[:id])
 
-    if @local_ngo.update_attributes(local_ngo_params)
+    if @local_ngo.update(local_ngo_params)
       redirect_to local_ngos_url
     else
       render :edit

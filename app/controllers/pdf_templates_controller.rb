@@ -41,7 +41,7 @@ class PdfTemplatesController < ApplicationController
   def update
     @pdf_template = authorize PdfTemplate.find(params[:id])
 
-    if @pdf_template.update_attributes(pdf_template_params)
+    if @pdf_template.update(pdf_template_params)
       redirect_to pdf_templates_url
     else
       render :edit

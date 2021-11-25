@@ -34,7 +34,7 @@ class ProgramsController < ApplicationController
   def update
     @program = authorize Program.find(params[:id])
 
-    if @program.update_attributes(program_params)
+    if @program.update(program_params)
       redirect_to programs_url
     else
       render :edit

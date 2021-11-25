@@ -34,7 +34,7 @@ class TemplatesController < ApplicationController
   def update
     @template = authorize ::Template.find(params[:id])
 
-    if @template.update_attributes(template_params)
+    if @template.update(template_params)
       redirect_to templates_url
     else
       render :edit
