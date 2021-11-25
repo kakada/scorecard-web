@@ -24,7 +24,7 @@ module Notifications
       chat_groups.actives.each do |group|
         bot.send_message(chat_id: group.chat_id, text: display_message, parse_mode: :HTML)
       rescue ::Telegram::Bot::Forbidden => e
-        group.update_attributes(actived: false, reason: e)
+        group.update(actived: false, reason: e)
       end
     end
 

@@ -37,7 +37,7 @@ module LocalNgos
     def update
       @caf = authorize Caf.find(params[:id])
 
-      if @caf.update_attributes(caf_params)
+      if @caf.update(caf_params)
         redirect_to local_ngo_cafs_url(@local_ngo)
       else
         render :edit

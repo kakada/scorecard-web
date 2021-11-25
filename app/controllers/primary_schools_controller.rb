@@ -34,7 +34,7 @@ class PrimarySchoolsController < ApplicationController
   def update
     @primary_school = authorize PrimarySchool.find(params[:id])
 
-    if @primary_school.update_attributes(primary_school_params)
+    if @primary_school.update(primary_school_params)
       redirect_to primary_schools_url
     else
       render :edit

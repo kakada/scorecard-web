@@ -46,7 +46,7 @@ class ScorecardsController < ApplicationController
   def update
     authorize @scorecard
 
-    if @scorecard.update_attributes(scorecard_params)
+    if @scorecard.update(scorecard_params)
       redirect_to scorecards_url
     else
       render :edit
