@@ -7,6 +7,8 @@ CW.ScorecardsShow = (() => {
   function init() {
     showScorecardModal();
     onClickBtnCopy();
+
+    CW.ScorecardsIndex.initAddSuggestionTooltip();
   }
 
   function onClickBtnCopy() {

@@ -1,0 +1,9 @@
+.d-flex.align-items-center.mb-4
+  %h1.h3.mb-0.text-gray-800= title
+
+  - if @request_change.approved?
+    .badge.badge-success
+      = t('scorecard.approved')
+  - elsif @request_change.rejected?
+    .badge.badge-danger
+      = t('scorecard.rejected')

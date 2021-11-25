@@ -5,7 +5,6 @@ class SessionsController < Devise::SessionsController
   prepend_before_action :check_captcha, only: [:create] # Change this to be any actions you want to protect.
 
   private
-
     def register_signout_activity
       ActiveSupport::Notifications.instrument ActivityLog.signout_activity, signout_params
     end

@@ -88,6 +88,20 @@ ActiveRecord::Schema.define(version: 2021_11_29_102332) do
     t.string "uuid"
   end
 
+  create_table "data_publication_logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "program_id"
+    t.integer "published_option"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "data_publications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "program_id"
+    t.integer "published_option"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "educational_backgrounds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
@@ -353,6 +367,24 @@ ActiveRecord::Schema.define(version: 2021_11_29_102332) do
     t.string "participant_uuid"
   end
 
+  create_table "request_changes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "scorecard_uuid"
+    t.integer "proposer_id"
+    t.integer "reviewer_id"
+    t.string "year"
+    t.integer "scorecard_type"
+    t.string "province_id"
+    t.string "district_id"
+    t.string "commune_id"
+    t.string "primary_school_code"
+    t.text "changed_reason"
+    t.text "rejected_reason"
+    t.integer "status"
+    t.datetime "resolved_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "scorecard_knowledges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
@@ -415,6 +447,7 @@ ActiveRecord::Schema.define(version: 2021_11_29_102332) do
     t.datetime "finished_date"
     t.datetime "running_date"
     t.datetime "deleted_at"
+    t.boolean "published", default: false
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end

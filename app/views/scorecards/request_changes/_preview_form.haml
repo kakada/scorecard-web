@@ -1,0 +1,9 @@
+.w-25.view-center
+  = simple_form_for @request_change, url: '#' do |f|
+    .disabled
+      = render 'form', f: f
+
+      - if @request_change.rejected?
+        = f.input :rejected_reason
+
+    = link_to t('shared.leave'), scorecards_path, class: 'btn btn-secondary'

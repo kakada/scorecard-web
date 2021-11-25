@@ -27,8 +27,7 @@
                 %td= language.name_km
                 %td= timeago(language.created_at).html_safe
                 %td.text-right
-                  .d-flex.d-md-block.flex-row
-                    = render 'shared/action_buttons', edit_url: edit_language_path(language), delete_url: language_path(language), object: language, remote: true
+                  = render 'shared/action_buttons', edit_url: edit_language_path(language), delete_url: language_path(language), object: language, remote: true
 
     - if @pagy.pages > 1
       .pagy-wrapper.justify-content-lg-end.justify-content-center

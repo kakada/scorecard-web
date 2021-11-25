@@ -20,8 +20,8 @@
               %tr
                 %td= program.name
                 %td= program.shortcut_name
-                %td.text-right
-                  .d-flex.d-md-block.flex-row
+                %td
+                  .d-flex.justify-content-end
                     = link_to es_reindex_program_path(program), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('program.es_reindex'), confirm: t('program.are_you_sure_to_reindex_elasticsearch_document')} do
                       %i.fas.fa-recycle
                     = render 'shared/action_buttons', edit_url: edit_program_path(program), delete_url: program_path(program), object: program

@@ -8,5 +8,3 @@
   %span{data: {toggle: 'tooltip', placement: 'top', title: t('shared.delete')}}
     = link_to delete_url, class: "btn btn-circle btn-sm btn-outline-danger", remote: true do
       %i.fas.fa-trash-alt
-
-/ = render "shared/modal_confirm", delete_url: delete_url, object: object

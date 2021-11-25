@@ -4,7 +4,14 @@ class ScorecardsController < ApplicationController
   before_action :set_scorecard, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pagy, @scorecards = pagy(policy_scope(Scorecard.filter(filter_params).order(sort_column + " " + sort_direction).includes(:facility, :local_ngo)))
+    @pagy, @scorecards = pagy(
+      policy_scope(Scorecard.filter(filter_params)
+        .order("#{sort_column} #{sort_direction}")
+        .includes(
+          :facility, :local_ngo, :request_changes, :primary_school
+        )
+      )
+    )
   end
 
   def show
@@ -62,7 +69,7 @@ class ScorecardsController < ApplicationController
 
   private
     def set_scorecard
-      @scorecard = Scorecard.find_by uuid: params[:id]
+      @scorecard = Scorecard.find_by uuid: params[:uuid]
     end
 
     def scorecard_params

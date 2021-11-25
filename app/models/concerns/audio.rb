@@ -11,7 +11,7 @@ module Audio
 
     private
       def audio_size_validation
-        errors[:audio] << I18n.t("indicator.must_be_less_than_2mb") if audio.size > 2.megabytes
+        errors.add(:audio, I18n.t("indicator.must_be_less_than_2mb")) if audio.size > 2.megabytes
       end
   end
 end

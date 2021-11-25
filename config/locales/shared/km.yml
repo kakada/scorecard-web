@@ -52,3 +52,9 @@ km:
     archive: Archive
     restore: ស្តារឡើងវិញ
     _yes: បាទ/ចាស
+    approve: យល់ព្រម
+    request: ដាក់ស្នើរ
+    reject: បដិសេធ
+    i_confirm_reject: ខ្ញុំបញ្ជាក់បដិសេធ
+    review: ចូលពិនិត្យ
+    leave: ចាកចេញ

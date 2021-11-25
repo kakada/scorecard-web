@@ -1,0 +1,45 @@
+.w-50
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.status")
+    %label.col-sm-8.col-form-label= " : #{status_html(@scorecard)}".html_safe
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.id")
+    %label.col-sm-8.col-form-label
+      = " : #{@scorecard.uuid}"
+  .row
+    %label.col-sm-4.col-form-label= t("shared.name")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.name}"
+
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.year")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.year}"
+
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.scorecard_type")
+    %label.col-sm-8.col-form-label= " : " + t("scorecard.#{@scorecard.scorecard_type}")
+
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.location")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.location_name}"
+
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.facility")
+    %label.col-sm-8.col-form-label
+      = " : #{@scorecard.unit_type.name} → #{@scorecard.facility_name}"
+      = " → #{@scorecard.primary_school_name}" if @scorecard.primary_school.present?
+
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.conducted_at")
+    %label.col-sm-8.col-form-label= " : #{date_html(@scorecard.conducted_date)}".html_safe
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.planned_start_date")
+    %label.col-sm-8.col-form-label= " : #{date_html(@scorecard.planned_start_date)}".html_safe
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.planned_end_date")
+    %label.col-sm-8.col-form-label= " : #{date_html(@scorecard.planned_end_date)}".html_safe
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.local_ngo")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.local_ngo_name}"
+  .row
+    %label.col-sm-4.col-form-label= t("scorecard.description")
+    %label.col-sm-8.col-form-label= " : #{@scorecard.description}"

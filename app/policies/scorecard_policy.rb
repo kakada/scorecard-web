@@ -40,6 +40,10 @@ class ScorecardPolicy < ApplicationPolicy
     user.program_admin? || user.staff? || user.lngo?
   end
 
+  def request_change?
+    user.lngo? || (create? && record.request_changes.length > 0)
+  end
+
   class Scope < Scope
     def resolve
       return scope.all if user.system_admin?
