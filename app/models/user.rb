@@ -20,7 +20,7 @@
 #  program_id             :integer
 #  authentication_token   :string           default("")
 #  token_expired_date     :datetime
-#  language_code          :string           default("en")
+#  language_code          :string           default("km")
 #  unlock_token           :string
 #  locked_at              :datetime
 #  failed_attempts        :integer          default(0)
