@@ -97,3 +97,13 @@ km:
       one: "1 លក្ខណៈវិនិច្ឆ័យ"
       other: "%{count} លក្ខណៈវិនិច្ឆ័យ"
     are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបប័ណ្ណដាក់ពិន្ទុ <b>%{code}</b> នេះមែនទេ?
+    request_change: ការស្នើរធ្វើការផ្លាស់ប្តូរព័ត៌មានប័ណ្ណដាក់ពិន្ទុ
+    change_to: ស្នើសុំផ្លាស់ប្តូរទៅជា
+    suggestion_approved: សំណើត្រូវបានបានទទួលយក
+    suggestion_rejected: សំណើត្រូវបានបដិសេធ
+    reason: មូលហេតុ
+    reject_confirmation: បញ្ជាក់ការបដិសេធ
+    rejected_reason: មូលហេតុនៃការបដិសេធ
+    approved: ត្រូវបានទទួលយក
+    rejected: ត្រូវបានបដិសេធ
+    add_suggestion: បន្ថែមសំណើ

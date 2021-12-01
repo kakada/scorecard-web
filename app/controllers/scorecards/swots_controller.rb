@@ -3,7 +3,7 @@
 module Scorecards
   class SwotsController < ApplicationController
     def index
-      @scorecard = Scorecard.find_by(uuid: params[:scorecard_id])
+      @scorecard = Scorecard.find_by(uuid: params[:scorecard_uuid])
       @voting_indicators = @scorecard.voting_indicators.includes(:indicatorable, :suggested_actions).order(:display_order)
 
       respond_to do |format|

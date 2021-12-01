@@ -39,8 +39,8 @@
                 %td= local_ngo.address
                 %td= local_ngo.target_provinces
                 %td= timeago(local_ngo.created_at).html_safe
-                %td.text-right
-                  .d-flex.flex-row
+                %td
+                  .d-flex.justify-content-end
                     - if policy(local_ngo).manage_caf?
                       = link_to local_ngo_cafs_path(local_ngo), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('local_ngo.manage_caf') } do
                         %i.fas.fa-fw.fa-users

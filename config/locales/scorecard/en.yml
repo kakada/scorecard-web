@@ -98,3 +98,13 @@ en:
       one: "1 criteria"
       other: "%{count} criterias"
     are_you_sure_to_delete: Are you sure to delete the scorecard <b>%{code}</b>?
+    request_change: Request change the scorecard information
+    change_to: Suggest change to
+    suggestion_approved: Suggestion accepted
+    suggestion_rejected: Suggestion rejected
+    reason: Reason
+    reject_confirmation: Reject Confirmation
+    rejected_reason: Reject reason
+    approved: Accepted
+    rejected: Rejected
+    add_suggestion: Add suggestion

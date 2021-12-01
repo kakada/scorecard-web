@@ -1,0 +1,18 @@
+= render "page_title", title: "#{t('scorecard.request_change')}: #{@scorecard.uuid}"
+
+.card.shadow.mb-4
+  .card-body.d-flex
+    = render 'detail'
+
+    %div.d-flex.align-items-center
+      %i.fas.fa-exchange-alt.mr-2
+      = t('scorecard.change_to')
+
+    - if policy(@request_change).update?
+      = render 'request_form', form_url: scorecard_request_change_path(@scorecard.uuid, @request_change), submit_label: t('shared.save'), form_method: :put
+
+    - elsif policy(@request_change).review?
+      = render 'review_form'
+
+    - else
+      = render 'preview_form'

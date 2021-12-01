@@ -37,6 +37,56 @@
   }
 }
 
+#scorecards-index,
+#scorecards-show {
+  .popover {
+    max-width: 400px;
+  }
+
+  .pop-header {
+    margin: -0.5rem -0.75rem 0.5rem;
+    color: #212529;
+  }
+
+  .popover-body {
+    color: #111;
+  }
+
+  .popup-body {
+    max-height: 400px;
+    overflow-y: auto;
+    margin: -0.5rem -0.75rem;
+    padding: 0.5rem 0.75rem;
+    background-color: #f8f9fc;
+  }
+
+  .full-stop {
+    width: 6px;
+    height: 6px;
+    background-color: red;
+    display: block;
+    right: 6px;
+    top: 0px;
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .flag {
+    right: 0;
+    top: 0;
+    padding: 2px 6px;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 0 3px;
+    position: absolute;
+    font-size: 0.7rem;
+  }
+
+  .flag.rejected {
+    background-color: #dc3545;
+  }
+}
+
 .veticial-line {
   height: 30px;
   margin-left: 20px;

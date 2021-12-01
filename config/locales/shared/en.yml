@@ -52,3 +52,9 @@ en:
     archive: Archive
     restore: Restore
     _yes: "Yes"
+    approve: Approve
+    request: Request
+    reject: Reject
+    i_confirm_reject: I confirm reject
+    review: Review
+    leave: Leave

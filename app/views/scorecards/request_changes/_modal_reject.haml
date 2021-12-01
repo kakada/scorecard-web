@@ -1,0 +1,15 @@
+#rejectModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title= t('scorecard.reject_confirmation')
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+
+      = simple_form_for @request_change, url: reject_scorecard_request_change_path(@scorecard.uuid, @request_change), method: :put do |f|
+        .modal-body.text-left
+          = f.input :rejected_reason, label: t('scorecard.rejected_reason'), required: true
+
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
+          = f.submit t('shared.i_confirm_reject'), class: 'btn btn-primary'

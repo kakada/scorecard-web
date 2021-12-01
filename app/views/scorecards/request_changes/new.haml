@@ -1,0 +1,11 @@
+= render "page_title", title: "#{t('scorecard.request_change')}: #{@scorecard.uuid}"
+
+.card.shadow.mb-4
+  .card-body.d-flex
+    = render 'detail'
+
+    %div.d-flex.align-items-center
+      %i.fas.fa-exchange-alt.mr-2
+      = t('scorecard.change_to')
+
+    = render 'request_form', form_url: scorecard_request_changes_path(@scorecard.uuid), submit_label: t('shared.request'), form_method: :post

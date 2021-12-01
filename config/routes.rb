@@ -17,11 +17,15 @@ Rails.application.routes.draw do
   end
 
   resources :activity_logs, only: :index
-  resources :scorecards do
+  resources :scorecards, param: :uuid do
     scope module: "scorecards" do
       resources :medians
       resources :swots
       resources :indicators
+      resources :request_changes do
+        put :approve, on: :member
+        put :reject, on: :member
+      end
     end
   end
 

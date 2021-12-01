@@ -10,6 +10,8 @@
       = scorecard_descriptions.html_safe
 
   %div
+    = render 'button_request_change', scorecard: @scorecard
+
     %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }
       %i.fas.fa-arrow-left.fa-sm.text-white-50
       = t("shared.back")

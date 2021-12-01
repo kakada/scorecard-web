@@ -1,5 +1,5 @@
 - field_name = (field_name || "district_id").to_sym
-- errors = @scorecard.errors[field_name]
+- errors = f.object.errors[field_name]
 - select_id ||= "district"
 - select_target ||= ""
 - select_collection_url ||= pumi.districts_path(:province_id => "FILTER")

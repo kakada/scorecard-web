@@ -1,0 +1,18 @@
+/ Form
+.w-25.view-center
+  - url = approve_scorecard_request_change_path(@scorecard.uuid, @request_change)
+
+  = simple_form_for @request_change, url: url, method: :put do |f|
+    .disabled
+      = render 'form', f: f
+
+  .actions
+    = link_to t('shared.approve'), url, method: :put, class: 'btn btn-primary'
+
+    %button.btn.btn-danger{"data-target" => "#rejectModal", "data-toggle" => "modal", :type => "button"}
+      = t('shared.reject')
+
+    = link_to t('shared.cancel'), scorecards_path, class: 'btn btn-secondary'
+
+/ Modal
+= render 'modal_reject'

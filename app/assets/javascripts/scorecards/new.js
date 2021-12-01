@@ -1,6 +1,7 @@
 CW.ScorecardsNew = (() => {
   return {
-    init
+    init,
+    handleDisplaySubset
   }
 
   function init() {

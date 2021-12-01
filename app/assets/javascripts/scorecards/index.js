@@ -6,6 +6,7 @@ CW.ScorecardsIndex = (() => {
     handleDisplayCollapseContent();
     onShowCollapse();
     onHideCollapse();
+    initAddSuggestionTooltip();
   }
 
   function handleDisplayCollapseContent() {
@@ -39,7 +40,17 @@ CW.ScorecardsIndex = (() => {
     $('.advance-search i').addClass('fa-angle-up');
   }
 
+  function initAddSuggestionTooltip() {
+    $('[data-toggle="popover"]').on('shown.bs.popover', function () {
+      $('.tip').tooltip({
+        trigger: "hover",
+        title: $('.tip-title').html()
+      });
+    })
+  }
+
   return {
-    init
+    init,
+    initAddSuggestionTooltip
   }
 })();

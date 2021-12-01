@@ -1,0 +1,73 @@
+%h3.popover-header.pop-header.d-flex
+  .flex-grow-1.d-flex.align-items-center
+    = t('scorecard.request_change')
+
+  / Button Add new
+  - if !scorecard.access_locked? && policy(RequestChange).create?
+    %a.tip.btn.btn-circle.btn-outline-primary.ml-4{ href: new_scorecard_request_change_path(scorecard.uuid), data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.request_change')} }
+      %i.fas.fa-comment-medical.fa-lg
+      .tip-title.d-none= t('scorecard.add_suggestion')
+
+%div.popup-body
+  - scorecard.request_changes.each do |rc|
+    .card.mb-2
+      .card-body
+        / Flag approved or rejected
+        - unless rc.submitted?
+          .flag{class: rc.status}= t("scorecard.#{rc.status}")
+
+        / Proposer section
+        %div
+          .d-flex
+            .text-capitalize.btn.btn-circle.border.mr-2
+              = rc.proposer.email[0]
+
+            .flex-grow-1
+              %h6.mb-0= rc.proposer.email
+              %small.text-muted= timeago(rc.updated_at).html_safe
+
+            - if policy(rc).review?
+              %a.text-primary{href: edit_scorecard_request_change_path(scorecard.uuid, rc)}
+                = t('shared.review')
+
+            - if policy(rc).update?
+              %a.btn.btn-link.p-1{href: edit_scorecard_request_change_path(scorecard.uuid, rc)}
+                %i.fas.fa-pen
+
+          / What to change
+          .mt-2
+            %ul
+              - if rc.year.present?
+                %li= "#{t('scorecard.year')}: #{rc.year}"
+
+              - if rc.scorecard_type.present?
+                %li= "#{t('scorecard.scorecard_type')}: " + t("scorecard.#{rc.scorecard_type}")
+
+              - if rc.province_id.present?
+                %li= "#{t("scorecard.location")}: #{rc.location_name}"
+
+              - if rc.primary_school_code.present?
+                %li= "#{t('scorecard.primary_school')}: #{rc.primary_school.name}"
+
+            .mb-2
+              %strong= t('scorecard.reason')
+              %span= ": #{rc.changed_reason}"
+
+        / Reviewer section
+        - if rc.reviewer_id.present?
+          %div.pt-3.border-top
+            .d-flex
+              .text-capitalize.btn.btn-circle.border.mr-2
+                = rc.reviewer.email[0]
+
+              %div.flex-grow-1
+                %h6.mb-0= rc.reviewer.email
+                %small.text-muted= timeago(rc.resolved_date).html_safe
+
+            .mt-2.text-muted
+              = t("scorecard.suggestion_#{rc.status}")
+
+              - if rc.rejected_reason.present?
+                .mb-2
+                  %strong= t('scorecard.reason')
+                  %span= ": #{rc.rejected_reason}"

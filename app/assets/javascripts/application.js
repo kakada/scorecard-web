@@ -47,6 +47,7 @@
 //= require programs/new
 //= require mobile_notifications
 //= require activity_logs
+//= require request_changes/new
 
 document.addEventListener("turbolinks:load", function () {
   CW.Common.Topbar.init();
@@ -54,7 +55,7 @@ document.addEventListener("turbolinks:load", function () {
   CW.Common.DatetimePicker.init();
   CW.Common.Timeago.init();
   $("[role='tooltip']").remove();
-  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
   $('[data-toggle="popover"]').popover();
 
   let currentPage = CW.Util.getCurrentPage();
