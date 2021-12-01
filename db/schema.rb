@@ -509,6 +509,11 @@ ActiveRecord::Schema.define(version: 2021_11_29_102332) do
     t.boolean "actived", default: true
     t.integer "gf_user_id"
     t.datetime "deleted_at"
+    t.integer "sign_in_count", default: 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"

@@ -32,6 +32,7 @@
               %th= t('user.status')
               %th= t('shared.created_at')
               %th= t('shared.updated_at')
+              %th= t('user.last_sign_in_at')
               %th
 
           %tbody
@@ -47,6 +48,7 @@
                   = t("user.#{user.status}")
                 %td= timeago(user.created_at).html_safe
                 %td= timeago(user.updated_at).html_safe
+                %td= timeago(user.last_sign_in_at).html_safe
                 %td.text-right{style: 'min-width: 168px;'}
                   = render 'action_buttons', user: user
 

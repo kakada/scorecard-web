@@ -20,7 +20,7 @@ class SessionsController < Devise::SessionsController
         "remote_ip"   => request.remote_ip,
         "current_user_id" => current_user&.id
       }.with_indifferent_access
-  end
+    end
 
     def check_captcha
       return if Rails.env.development? || verify_recaptcha # verify_recaptcha(action: 'login') for v3

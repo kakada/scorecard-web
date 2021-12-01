@@ -28,6 +28,11 @@
 #  actived                :boolean          default(TRUE)
 #  gf_user_id             :integer
 #  deleted_at             :datetime
+#  sign_in_count          :integer          default(0)
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :inet
+#  last_sign_in_ip        :inet
 #
 class User < ApplicationRecord
   attr_accessor :skip_callback
@@ -39,7 +44,7 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable, :lockable,
+  devise :database_authenticatable, :registerable, :confirmable, :lockable, :trackable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   enum role: {
