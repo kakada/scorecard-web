@@ -1,7 +1,7 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th.align-middle.text-center{:scope => "col"}= t("scorecard.criteria")
+      %th.align-middle.text-center{:scope => "col"}= t("scorecard.indicator")
       %th.align-middle.text-center{:scope => "col"}= t("scorecard.median")
       %th.align-middle.text-center{:scope => "col"}= t("scorecard.strength")
       %th.align-middle.text-center{:scope => "col"}= t("scorecard.weakness")
@@ -25,8 +25,9 @@
           %ul.text-break
             - indicator.suggested_actions.each do |action|
               %li
+                - if action.selected
+                  %span.badge.badge-info= t('scorecard.selected')
                 = action.content
-                = "(selected)" if action.selected
 
 - if references = @scorecard.scorecard_references.presence
   .mb-2

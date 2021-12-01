@@ -12,7 +12,6 @@ en:
     display_name: Display name
     audio_format_and_size_hint: (format .mp3, not exceed 2 MB)
     must_be_less_than_2mb: must be less than 2MB
-    criterias: Criterias
     add_indicator: + Add Indicator
     tag: Tag
     add_new: Add new indicator
@@ -20,7 +19,7 @@ en:
     recommended_image: Recommended image is
     up_to_1mb: Up to 1 MB
     other_not_perfect: Other may affect the pefect rendering
-    edit_indicator: Edit Criteria
-    new_indicator: New Criteria
+    edit_indicator: Edit Indicator
+    new_indicator: New Indicator
     must_be_less_than_1mb: must be less than 1MB
     are_you_sure_to_delete: Are you sure to delete the indicator <b>%{name}</b>?

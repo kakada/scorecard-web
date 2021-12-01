@@ -11,7 +11,7 @@ en:
     number_of_female: Number of female
     number_of_caf: Number of caf
     scorecard_info: Scorecard Information
-    swot_table: Priority actions based on criteria
+    swot_table: Priority actions based on indicator
     content: Content
     tag: Tag
     year: Year
@@ -21,14 +21,14 @@ en:
     number_of_ethnic_minority: Number of ethnic minority
     number_of_youth: Number of youth
     number_of_id_poor: Number of id poor
-    proposed_criteria: Proposed Criteria
+    proposed_indicator: Proposed Indicator
     median: Median
     average_score: Average Score
     strength: Strength
     weakness: Weakness (reflection)
     desired_change: Desired change (demand)
     suggested_action: Suggested actions (solution)
-    criteria: Criteria
+    indicator: Indicator
     implementer: Implementer(Local NGO)
     scorecard_settings: Scorecard Settings
     self_assessment: Self assessment
@@ -46,18 +46,17 @@ en:
     scorecard_detail: Scorecard detail
     add_new: Add new scorecard
     setup: Setup
-    which_criteria_raised: Which criterias have been raised?
     raised_times: Raised times
-    proposed_criterias: Proposed criterias
-    number_of_proposed_criteria: Number of proposed criterias
-    number_of_selected_criteria: Number of selected criterias
+    proposed_indicators: Proposed indicators
+    number_of_proposed_indicator: Number of proposed indicators
+    number_of_selected_indicator: Number of selected indicators
     participant: Participant
     poor_card: Poor card
     minority: Minority
     youth: Youth
     disability: Disability
     female: Female
-    selected_criterias: Selected criterias
+    selected_indicators: Selected indicators
     completed: Completed
     planned: Planned
     all: All
@@ -94,9 +93,12 @@ en:
     suggested_action_count:
       one: "1 suggested action"
       other: "%{count} suggested actions"
-    criteria_count:
-      one: "1 criteria"
-      other: "%{count} criterias"
+    selected_action_count:
+      one: "1 selected action"
+      other: "%{count} selected actions"
+    indicator_count:
+      one: "1 indicator"
+      other: "%{count} indicators"
     are_you_sure_to_delete: Are you sure to delete the scorecard <b>%{code}</b>?
     request_change: Request change the scorecard information
     change_to: Suggest change to
@@ -108,3 +110,4 @@ en:
     approved: Accepted
     rejected: Rejected
     add_suggestion: Add suggestion
+    selected: Selected

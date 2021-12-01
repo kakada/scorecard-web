@@ -21,14 +21,14 @@ km:
     number_of_ethnic_minority: ចំនួនជនជាតិភាគតិច
     number_of_youth: ចំនួនយុវជន
     number_of_id_poor: ចំនួនអ្នកមានបណ្ណក្រីក្រ
-    proposed_criteria: លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
+    proposed_indicator: លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
     median: មេដ្យាន
     average_score: ពិន្ទុមធ្យម
     strength: ចំនុចខ្លាំង
     weakness: ចំនុចខ្សោយ (បញ្ហា)
     desired_change: ការផ្លាស់ប្តូរដែលចង់បាន (តម្រូវការ)
     suggested_action: សកម្មភាពដែលស្នើឡើង (ដំណោះស្រាយ)
-    criteria: លក្ខណៈវិនិច្ឆ័យ
+    indicator: លក្ខណៈវិនិច្ឆ័យ
     implementer: អ្នកអនុវត្ត(Local NGO)
     scorecard_settings: ការកំណត់ប័ណ្ណដាក់ពិន្ទុ
     self_assessment: ការវាយតម្លៃខ្លួនឯង
@@ -46,18 +46,17 @@ km:
     scorecard_detail: សេចក្តីលម្អិតប័ណ្ណដាក់ពិន្ទុ
     add_new: បន្ថែមប័ណ្ណដាក់ពិន្ទុថ្មី
     setup: ការកំណត់ប័ណ្ណដាក់ពិន្ទុ
-    which_criteria_raised: តើលក្ខណៈវិនិច្ឆ័យណាខ្លះត្រូវបានលើកឡើង?
     raised_times: ចំនួនដង
-    proposed_criterias: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
-    number_of_proposed_criteria: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានស្នើ"
-    number_of_selected_criteria: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស"
+    proposed_indicators: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
+    number_of_proposed_indicator: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានស្នើ"
+    number_of_selected_indicator: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស"
     participant: អ្នកចូលរួម
     poor_card: មានប័ណ្ណក្រីក្រ
     minority: ជនជាតិភាគតិច
     youth: យុវជន
     disability: ពិការភាព
     female: ស្រី
-    selected_criterias: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
+    selected_indicators: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
     completed: អនុវត្តរួចរាល់
     planned: នឹងត្រូវអនុវត្ត
     all: ទាំងអស់
@@ -91,9 +90,12 @@ km:
     scorecard_being_downloaded: ប័ណ្ណដាក់ពិន្ទុនេះកំពុងត្រូវបានទាញយក (%{count}ដង).
     number_of_downloaded: "ចំនួនទាញយក"
     suggested_action_count:
-      one: "1 សក្ម្ភាពស្នើឡើង"
-      other: "%{count} សក្ម្ភាពស្នើឡើង"
-    criteria_count:
+      one: "1 សកម្មភាពស្នើឡើង"
+      other: "%{count} សកម្មភាពស្នើឡើង"
+    selected_action_count:
+      one: "1 សកម្មភាពត្រូវបានជ្រើសរើស"
+      other: "%{count} សកម្មភាពត្រូវបានជ្រើសរើស"
+    indicator_count:
       one: "1 លក្ខណៈវិនិច្ឆ័យ"
       other: "%{count} លក្ខណៈវិនិច្ឆ័យ"
     are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបប័ណ្ណដាក់ពិន្ទុ <b>%{code}</b> នេះមែនទេ?
@@ -107,3 +109,4 @@ km:
     approved: ត្រូវបានទទួលយក
     rejected: ត្រូវបានបដិសេធ
     add_suggestion: បន្ថែមសំណើ
+    selected: ត្រូវបានជ្រើសរើស

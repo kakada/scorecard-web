@@ -12,19 +12,19 @@
 
       - disabled_button = @scorecard.raised_indicators.blank?
 
-      - num_proposed_criteria = @scorecard.raised_indicators.pluck(:indicatorable_id, :indicatorable_type).uniq.length
+      - num_proposed_indicator = @scorecard.raised_indicators.pluck(:indicatorable_id, :indicatorable_type).uniq.length
 
       .veticial-line
 
-      = render 'scorecards/show/progress_step', label: "2. #{t('scorecard.proposed_criteria')}", url: scorecard_indicators_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_proposed_criteria')}: #{num_proposed_criteria}"
+      = render 'scorecards/show/progress_step', label: "2. #{t('scorecard.proposed_indicator')}", url: scorecard_indicators_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_proposed_indicator')}: #{num_proposed_indicator}"
 
       .veticial-line
 
-      = render 'scorecards/show/progress_step', label: "3. #{t('scorecard.indicator_development')}", url: scorecard_medians_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_selected_criteria')}: #{@scorecard.voting_indicators.length}"
+      = render 'scorecards/show/progress_step', label: "3. #{t('scorecard.indicator_development')}", url: scorecard_medians_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_selected_indicator')}: #{@scorecard.voting_indicators.length}"
 
       .veticial-line
 
-      = render 'scorecards/show/progress_step', label: "4. #{t('scorecard.swot_table')}", url: scorecard_swots_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.criteria_count', count: @scorecard.voting_indicators.length)}, #{t('scorecard.suggested_action_count', count: @scorecard.suggested_actions.length)}"
+      = render 'scorecards/show/progress_step', label: "4. #{t('scorecard.swot_table')}", url: scorecard_swots_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.indicator_count', count: @scorecard.voting_indicators.length)}, #{t('scorecard.suggested_action_count', count: @scorecard.suggested_actions.length)}, #{t('scorecard.selected_action_count', count: @scorecard.suggested_actions.selecteds.count)}"
 
 = render "scorecards/show/main_modal"
 = render "scorecards/show/modal_scorecard_uuid"
