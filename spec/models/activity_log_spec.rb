@@ -16,6 +16,7 @@
 #  payload         :json
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  remote_ip       :string
 #
 require "rails_helper"
 

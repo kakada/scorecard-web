@@ -28,6 +28,11 @@
 #  actived                :boolean          default(TRUE)
 #  gf_user_id             :integer
 #  deleted_at             :datetime
+#  sign_in_count          :integer          default(0)
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :inet
+#  last_sign_in_ip        :inet
 #
 require "rails_helper"
 
