@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Scorecards::ProposedCriteria, type: :model do
+RSpec.describe Scorecards::VotingCriteria, type: :model do
   describe "#criterias" do
     let!(:scorecard) { create(:scorecard) }
 
