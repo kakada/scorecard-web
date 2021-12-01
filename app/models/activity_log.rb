@@ -16,6 +16,7 @@
 #  payload         :json
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  remote_ip       :string
 #
 class ActivityLog < ApplicationRecord
   extend ActivityLog::RoledScope

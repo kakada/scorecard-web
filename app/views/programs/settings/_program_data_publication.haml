@@ -1,0 +1,22 @@
+- data_publication = current_program.data_publication
+.dotted-line.d-flex.align-items-center
+  %label.flex-grow-1
+    = t('program.program_data_publication')
+    - if data_publication.nil? || data_publication.stop_publish_data?
+      %i.far.fa-times-circle.text-danger{'data-toggle'=> 'tooltip', title: t('program.data_is_not_published')}
+    - else
+      %i.far.fa-check-circle.text-success{'data-toggle'=> 'tooltip', title: t('program.data_is_published')}
+
+  %span.text-right.pr-2
+    - if data_publication.present?
+      - if data_publication.stop_publish_data?
+        = "(#{t('program.stop_publish_scorecards_from', date: l(data_publication.updated_at))})"
+      - elsif data_publication.publish_from_today?
+        = "(#{t('program.publish_scorecards_from', date: l(data_publication.updated_at))})"
+      - else
+        = "(#{t('program.publish_all_scorecards')})"
+
+  %div
+    %a.pointer.badge.badge-info.text-white{href: data_publication_path, 'data-remote' => true}= t('shared.setup')
+
+    = render 'programs/data_publications/modal'

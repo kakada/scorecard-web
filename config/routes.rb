@@ -53,6 +53,10 @@ Rails.application.routes.draw do
       put :upsert, on: :collection
       get :help, on: :collection
     end
+
+    resource :data_publication, only: [:show] do
+      put :upsert, on: :collection
+    end
   end
 
   resources :pdf_templates do

@@ -2,7 +2,7 @@
 
 .card.shadow.mb-4
   .card-body
-    .w-50.view-center
+    .w-75.view-center
       = simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
         = render "datetime_format", f: f
         = render 'email_notification', f: f
@@ -10,3 +10,4 @@
       = render "telegram_bot"
       = render "contacts"
       = render "dashboard_accessibility"
+      = render "program_data_publication"

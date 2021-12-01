@@ -40,6 +40,7 @@
 #  finished_date             :datetime
 #  running_date              :datetime
 #  deleted_at                :datetime
+#  published                 :boolean          default(FALSE)
 #
 FactoryBot.define do
   factory :scorecard do

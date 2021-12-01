@@ -1,0 +1,15 @@
+= simple_form_for @program, url: upsert_data_publication_path, method: :put, html: {class: 'data-publish-form'} do |f|
+  .modal-body
+    = f.fields_for :data_publication, @data_publication do |ff|
+      .term-and-condition
+        %p= t('program.in_order_to_publish_data')
+
+        %ul
+          %li= t('program.publish_data_cannot_rollback')
+
+      .pl-3.radio-buttons
+        = ff.input :published_option, as: :radio_buttons, collection: DataPublication.options, label: ''
+
+  .modal-footer
+    %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')
+    = f.submit t('shared.agree'), class: 'btn btn-primary disabled'
