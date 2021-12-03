@@ -81,6 +81,7 @@ km:
     running: កំពុងដំណើរការ
     submitted: បានដាក់ស្នើ
     renewed: ស្នើឡើងវិញ
+    in_review: កំពុងត្រួតពិនិត្យ
     references: ឯកសារយោង
     implemented_date: កាលបរិច្ឆេទអនុវត្ត
     submitted_date: កាលបរិច្ឆេទទទួលបានសំណើរ
@@ -110,4 +111,7 @@ km:
     approved: ត្រូវបានទទួលយក
     rejected: ត្រូវបានបដិសេធ
     add_suggestion: បន្ថែមសំណើ
-    selected: ត្រូវបានជ្រើសរើស
+    selected_action: សកម្មភាពដែលត្រូវបានជ្រើសរើស
+    in_review_date: កាលបរិច្ឆេទដាក់ត្រួតពិនិត្យ
+    completed_date: កាលបរិច្ឆេទបញ្ចប់
+    mark_as_completed: សម្គាល់ថាបានបញ្ចប់

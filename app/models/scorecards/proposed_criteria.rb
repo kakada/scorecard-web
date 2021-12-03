@@ -25,6 +25,7 @@ module Scorecards
 
       _criterias.map do |indi|
         criteria = indi.as_json
+        criteria["indicator"] = indi
         criteria = assign_participant_info(criteria, indi)
         criteria["count"] = group_indicators[[indi.id, indi.class.name]]
         criteria

@@ -16,7 +16,7 @@ require "rails_helper"
 
 RSpec.describe ScorecardProgress, type: :model do
   it { is_expected.to belong_to(:scorecard).with_foreign_key(:scorecard_uuid) }
-  it { is_expected.to define_enum_for(:status).with_values({ downloaded: 1, running: 2, submitted: 3, renewed: 4 }) }
+  it { is_expected.to define_enum_for(:status).with_values({ downloaded: 1, running: 2, renewed: 4, in_review: 3, completed: 5 }) }
 
   describe "#after_save: set_scorecard_progress" do
     context "scorecard progress is smaller than scorecard_progress status" do
@@ -48,15 +48,15 @@ RSpec.describe ScorecardProgress, type: :model do
 
     context "scorecard is locked" do
       let!(:scorecard) { create(:scorecard, progress: :running) }
-      let(:scorecard_progress) { build(:scorecard_progress, status: :submitted, scorecard: scorecard) }
+      let(:scorecard_progress) { build(:scorecard_progress, status: :completed, scorecard: scorecard) }
 
       before {
         scorecard.lock_access!
         scorecard_progress.save
       }
 
-      it "set scorecard progress to submitted" do
-        expect(scorecard.reload.progress).to eq("submitted")
+      it "set scorecard progress to completed" do
+        expect(scorecard.reload.progress).to eq("completed")
       end
     end
   end

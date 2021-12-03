@@ -39,7 +39,7 @@ RSpec.describe MessageInterpreter do
 
     context "valid template code" do
       let(:display_message) {
-        "Scorecard <b>#{scorecard.uuid}</b>(<b>#{scorecard.facility_name}</b>) in <b>#{scorecard.location_name}</b> is being downloaded by <b>#{scorecard.local_ngo_name}</b> on <b>#{I18n.l(scorecard.planned_end_date)}</b>"
+        "Scorecard <b>#{scorecard.uuid}</b>(<b>#{scorecard.facility_name}</b>) in <b>#{scorecard.location_name}</b> is being downloaded by <b>#{scorecard.local_ngo_name}</b> on <b>#{I18n.l(scorecard.planned_end_date, format: :nice)}</b>"
       }
       let(:interpreter) { MessageInterpreter.new(scorecard, message_content) }
 

@@ -82,6 +82,7 @@ en:
     submitted: submitted
     completed: completed
     renewed: renewed
+    in_review: in review
     references: References
     implemented_date: Implemented date
     submitted_date: Submitted date
@@ -111,4 +112,7 @@ en:
     approved: Accepted
     rejected: Rejected
     add_suggestion: Add suggestion
-    selected: Selected
+    selected_action: Selected action
+    in_review_date: In review date
+    completed_date: Completed date
+    mark_as_completed: Mark as completed

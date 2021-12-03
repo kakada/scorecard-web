@@ -148,7 +148,7 @@ RSpec.describe ScorecardPolicy do
       let(:user) { User.new(role: :staff, program_id: scorecard.program_id) }
 
       before {
-        scorecard.lock_access!
+        scorecard.lock_submit!
       }
 
       it "denies access" do

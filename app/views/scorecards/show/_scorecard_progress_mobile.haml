@@ -1,21 +1,32 @@
 .circles-horizontal.d-flex.justify-content-between.d-md-none
+  / Start date (Planned started date)
   .item.text-center.flex-grow-0.flex-shrink-0{class: ('disabled' unless @scorecard.planned_start_date.present?)}
     .circle
       %span &middot;
     .content
       %p.milestone-title= t("scorecard.planned_start_date")
-      %small= l(@scorecard.planned_start_date)
+      %small= l(@scorecard.planned_start_date, format: :nice)
 
+  / Implemented date (conducted_date)
   .item.text-center.flex-grow-0.flex-shrink-0{class: ('disabled' unless @scorecard.conducted_date.present?)}
     .circle
       %span &middot;
     .content
       %p.milestone-title= t("scorecard.implemented_date")
-      %small= @scorecard.conducted_date ? l(@scorecard.conducted_date) : '-'
+      %small= @scorecard.conducted_date ? l(@scorecard.conducted_date, format: :nice) : '-'
 
-  .item.text-center.flex-grow-0.flex-shrink-0{class: ('disabled' unless @scorecard.finished_date.present?)}
+  / In review date (submitted_date)
+  .item.text-center.flex-grow-0.flex-shrink-0{class: ('disabled' unless @scorecard.submitted_at.present?)}
     .circle
       %span &middot;
     .content
-      %p.milestone-title= t("scorecard.submitted_date")
-      %small= @scorecard.finished_date ? l(@scorecard.finished_date) : '-'
+      %p.milestone-title= t("scorecard.in_review_date")
+      %small= @scorecard.submitted_at ? l(@scorecard.submitted_at, format: :nice) : '-'
+
+  / Completed date (completed_date)
+  .item.text-center.flex-grow-0.flex-shrink-0{class: ('disabled' unless @scorecard.completed_at.present?)}
+    .circle
+      %span &middot;
+    .content
+      %p.milestone-title= t("scorecard.completed_date")
+      %small= @scorecard.completed_at ? l(@scorecard.completed_at, format: :nice) : '-'

@@ -13,8 +13,8 @@ module Scorecards::Filter
       scope = scope.where(province_id: params[:province_id]) if params[:province_id].present?
       scope = scope.where(year: params[:year].to_i) if params[:year].present?
       scope = scope.where(scorecard_type: params[:scorecard_type]) if params[:scorecard_type].present?
-      scope = scope.where(locked_at: nil) if params[:filter] == "planned"
-      scope = scope.where.not(locked_at: nil) if params[:filter] == "locked"
+      scope = scope.where(progress: nil) if params[:filter] == "planned"
+      scope = scope.where(progress: params[:filter]) if params[:filter].present? && params[:filter] != "planned"
       scope
     end
   end

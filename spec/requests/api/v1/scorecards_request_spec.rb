@@ -78,7 +78,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
     context "is locked" do
       before {
-        scorecard.lock_access!
+        scorecard.lock_submit!
         put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
       }
 
@@ -102,8 +102,8 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
         put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
       }
 
-      it "lock_access" do
-        expect(scorecard.reload.access_locked?).to be_truthy
+      it "lock_submit" do
+        expect(scorecard.reload.submit_locked?).to be_truthy
       end
     end
   end

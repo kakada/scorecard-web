@@ -84,6 +84,7 @@ gem "validate_url", "~> 1.0.13"
 gem "httparty", "~> 0.19.0"
 gem "meta-tags", "~> 2.16.0"
 gem "rack-cors", "~> 1.1.1"
+gem "best_in_place", git: "https://github.com/mmotherwell/best_in_place"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -10,5 +10,17 @@ module Scorecards
         format.js
       end
     end
+
+    def update
+      @indicator = CustomIndicator.find(params[:id])
+      @indicator.update(custom_indicator_params)
+
+      respond_with_bip(@indicator)
+    end
+
+    private
+      def custom_indicator_params
+        params.require(:custom_indicator).permit(:name)
+      end
   end
 end

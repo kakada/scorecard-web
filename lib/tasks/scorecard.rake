@@ -7,4 +7,15 @@ namespace :scorecard do
       scorecard.update_column(:progress, scorecard.milestone)
     end
   end
+
+  desc "migrate progress in_review to completed"
+  task migrate_to_include_submitted_and_completed_info: :environment do
+    Scorecard.where.not(locked_at: nil).find_each do |scorecard|
+      scorecard.update_columns(
+        progress: 'completed',
+        submitted_at: scorecard.locked_at,
+        completed_at: scorecard.locked_at
+      )
+    end
+  end
 end

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   resources :activity_logs, only: :index
   resources :scorecards, param: :uuid do
+    put :complete, on: :member
+
     scope module: "scorecards" do
       resources :medians
       resources :swots
@@ -33,6 +35,8 @@ Rails.application.routes.draw do
     namespace :settings do
       resources :ratings, only: [:index, :create]
     end
+
+    resources :indicator_activities, only: [:update]
   end
 
   resources :programs do

@@ -9,8 +9,12 @@
     .my-2.card-subtitle.text-muted
       = scorecard_descriptions.html_safe
 
-  %div
+  .w-25.text-right
     = render 'button_request_change', scorecard: @scorecard
+
+    - if policy(@scorecard).in_review?
+      = link_to complete_scorecard_path(@scorecard.uuid), class: 'btn btn-primary btn-sm shadow-sm mr-2', method: :put do
+        = t("scorecard.mark_as_completed")
 
     %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }
       %i.fas.fa-arrow-left.fa-sm.text-white-50

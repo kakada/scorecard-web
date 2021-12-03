@@ -10,6 +10,14 @@ GIT
       responders
       warden (~> 1.2.3)
 
+GIT
+  remote: https://github.com/mmotherwell/best_in_place
+  revision: 88eb3052623a9a6cd346864d2aca05021c2f80d0
+  specs:
+    best_in_place (3.1.1)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -492,6 +500,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.10)
   annotate (~> 3.1.1)
   awesome_nested_set (~> 3.2.1)
+  best_in_place!
   bootsnap (>= 1.4.4)
   bootstrap (~> 4.5.2)
   bootstrap-daterangepicker-rails (~> 3.0.4)
