@@ -57,7 +57,7 @@ module Api
               :median, strength: [], weakness: [], suggested_action: [],
               suggested_actions_attributes: [ :voting_indicator_uuid, :scorecard_uuid, :content, :selected ]
             ],
-            ratings_attributes: [ :id, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ],
+            ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ]
           )
         end
     end
