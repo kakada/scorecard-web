@@ -69,6 +69,7 @@ en:
     any_year: Any year
     any_facility: Any facility
     any_local_ngo: Any local NGO
+    any_scorecard_type: Any scorecard type
     absolute: Absolute
     relative: Relative
     start_date: Start date
