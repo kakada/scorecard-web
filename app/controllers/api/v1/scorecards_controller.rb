@@ -5,6 +5,12 @@ module Api
     class ScorecardsController < ApiController
       before_action :assign_scorecard
 
+      def progress
+        authorize @scorecard, :download?
+
+        render json: { uuid: @scorecard.uuid, progress: @scorecard.progress }
+      end
+
       def show
         respond_to do |format|
           format.json do

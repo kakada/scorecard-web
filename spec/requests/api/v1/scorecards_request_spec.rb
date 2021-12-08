@@ -214,4 +214,33 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       end
     end
   end
+
+  describe "#progress" do
+    context "same local ngo" do
+      let!(:user)      { create(:user, :lngo) }
+      let!(:scorecard) { create(:scorecard, local_ngo_id: user.local_ngo_id, program_id: user.program_id, progress: :running) }
+      let(:headers)    { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+
+      before {
+        get "/api/v1/scorecards/#{scorecard.uuid}/progress", headers: headers
+      }
+
+      it { expect(response.status).to eq(200) }
+      it { expect(JSON.parse(response.body)["progress"]).to eq("running") }
+    end
+
+    context "different local ngo" do
+      let!(:user)      { create(:user, :lngo) }
+      let!(:scorecard) { create(:scorecard) }
+      let(:headers)    { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+
+      before {
+        get "/api/v1/scorecards/#{scorecard.uuid}/progress", headers: headers
+      }
+
+      it "return 403" do
+        expect(JSON.parse(response.body)["errors"][0]["code"]).to eq(403)
+      end
+    end
+  end
 end

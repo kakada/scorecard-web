@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data_publication_logs
@@ -10,6 +12,5 @@
 #
 FactoryBot.define do
   factory :data_publication_log do
-    
   end
 end

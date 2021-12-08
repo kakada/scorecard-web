@@ -122,6 +122,8 @@ Rails.application.routes.draw do
       resources :scorecards, only: [:show, :update] do
         resources :custom_indicators, only: [:create]
         resources :scorecard_references, only: [:create]
+
+        get :progress, on: :member
       end
 
       resources :scorecard_progresses, only: [:create]
