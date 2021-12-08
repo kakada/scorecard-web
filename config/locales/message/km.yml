@@ -17,5 +17,6 @@ km:
     email_notification_inactived: ការជូនដំណឹងតាមអ៊ីមែលគឺអសកម្ម
     no_email_selected: គ្មានអ៊ីមែលត្រូវបានជ្រើសរើសទេ
     set_message_active: កំណត់សារឱ្យសកម្ម
-    show_more: 'បង្ហាញថែម'
-    show_less: 'បង្ហាញតិច'
+    show_more: បង្ហាញថែម
+    show_less: បង្ហាញតិច
+    scorecard_implementation: សេចក្តីជូនដំណឹងតាមដំណើរការប័ណ្ណដាក់ពិន្ទុ

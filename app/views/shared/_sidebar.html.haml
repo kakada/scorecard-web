@@ -37,17 +37,11 @@
         %i.far.fa-fw.fa-clipboard
         %span= t("sidebar.scorecard")
 
-    - if policy(Message).index?
-      %li.nav-item{ class: [css_active_class('messages'), css_nested_active_class('messages')] }
+    - if policy(Message).index? || policy(MobileNotification).index?
+      %li.nav-item{ class: [css_active_class('messages'), css_nested_active_class('messages'), css_active_class('mobile_notifications')] }
         %a.nav-link{ :href => messages_path }
           %i.far.fa-fw.fa-bell
           %span= t("sidebar.notification")
-
-    - if policy(MobileNotification).index?
-      %li.nav-item{ class: [css_active_class('mobile_notifications')] }
-        %a.nav-link{ :href => mobile_notifications_path }
-          %i.fab.fa-fw.fa-android
-          %span= t("sidebar.mobile_notification")
 
     - if current_program.present? && policy(Program).update?
       %li.nav-item{ class: css_nested_active_class('programs/settings') }
