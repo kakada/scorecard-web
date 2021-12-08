@@ -1,16 +1,12 @@
-.d-sm-flex.align-items-center.justify-content-between.mb-4
-  %h1.h3.mb-0.text-gray-800= t("mobile_notification.notification")
-  - if @notifications.present?
-    = link_to new_mobile_notification_path, class: "btn btn-primary btn-sm shadow-sm" do
-      %i.fas.fa-plus.fa-sm.text-white-50
-      = t('shared.add_new')
+= render "shared/page_title", title: t("sidebar.notification")
+= render "messages/nav_tabs"
 
 .card.shadow.mb-4
   .card-body
     = render partial: "shared/no_data", locals: { items: @notifications, url: new_mobile_notification_path, label: t('shared.add_new') }
 
     - if @notifications.present?
-      = render "shared/pagination_title", objects: @notifications
+      = render "shared/pagination_title", objects: @notifications, url: new_mobile_notification_path, label: t('shared.add_new'), hide_pagy: true
 
       %table.table.table-hover
         %thead

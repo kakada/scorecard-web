@@ -1,9 +1,11 @@
 = render "shared/page_title", title: t("sidebar.notification")
+= render "messages/nav_tabs"
 
-#contents
-  - milestones = ScorecardProgress.statuses.keys
-  - milestones.each_with_index do |milestone, index|
-    = render 'message', milestone: milestone
+.card.shadow
+  .card-body
+    - milestones = ScorecardProgress.statuses.keys
+    - milestones.each_with_index do |milestone, index|
+      = render 'message', milestone: milestone
 
-    - if index < milestones.length - 1
-      .veticial-line
+      - if index < milestones.length - 1
+        .veticial-line
