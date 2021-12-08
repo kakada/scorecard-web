@@ -59,7 +59,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pdf_templates do
+  resources :pdf_templates, path: "/scorecards/settings/pdf_templates" do
     get :preview
   end
   resources :messages
