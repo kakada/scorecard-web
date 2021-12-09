@@ -29,7 +29,6 @@
 //= require facilities
 //= require templates
 //= require indicators
-//= require scorecards/datepicker_popup
 //= require scorecards/daterange_picker
 //= require scorecards/index
 //= require scorecards/show

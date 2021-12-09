@@ -7,7 +7,7 @@ module Scorecards::Filter
     def self.filter(params = {})
       scope = all
       scope = scope.where("uuid LIKE ?", "%#{params[:uuid].downcase}%") if params[:uuid].present?
-      scope = scope.where("conducted_date BETWEEN ? AND ?", params[:start_date], params[:end_date]) if params[:start_date].present? && params[:end_date].present?
+      scope = scope.where("planned_start_date BETWEEN ? AND ?", params[:start_date], params[:end_date]) if params[:start_date].present? && params[:end_date].present?
       scope = scope.where(facility_id: params[:facility_id]) if params[:facility_id].present?
       scope = scope.where(local_ngo_id: params[:local_ngo_id]) if params[:local_ngo_id].present?
       scope = scope.where(province_id: params[:province_id]) if params[:province_id].present?
