@@ -126,6 +126,11 @@ class Scorecard < ApplicationRecord
     progress == "renewed"
   end
 
+  # Class method
+  def self.t_scorecard_types
+    self.scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
+  end
+
   private
     def secure_uuid
       self.uuid ||= six_digit_rand

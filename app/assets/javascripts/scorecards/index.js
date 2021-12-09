@@ -1,6 +1,6 @@
 CW.ScorecardsIndex = (() => {
   function init() {
-    CW.DatepickerPopup.init()
+    CW.DaterangPicker.init()
     CW.ScorecardsShow.onClickBtnCopy();
 
     handleDisplayCollapseContent();

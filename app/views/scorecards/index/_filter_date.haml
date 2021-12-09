@@ -1,14 +1,8 @@
-#datepicker-popup.filter-input
-  #filter-date.input-group
-    %input.form-control.display-date.pointer{type: 'text', readonly: true, placeholder: t('scorecard.filter_by_date')}
+.mr-3{style: 'min-width: 280px;'}
+  #reportrange.form-control.pointer.d-flex.align-items-center
+    %span{'data-placeholder' => t('scorecard.filter_by_date')}= t('scorecard.filter_by_date')
+    .flex-grow-1
+    %i.fa.fa-calendar.ml-2
 
-    %a.input-group-append.pointer
-      .input-group-text
-        %i.far.fa-calendar
-
-  .hidden-input.d-none
-    %input.start-date-input-backup{ type: 'text', name: 'start_date', value: params[:start_date] }
-    %input.number-input-backup{ type: 'number', name: 'number', value: params[:number] }
-    %input.date-type-input-backup{ type: 'text', name: 'date_type', value: params[:date_type] }
-
-    = filter_date_popover
+  %input.start-date{ type: 'hidden', name: 'start_date', value: params[:start_date] }
+  %input.end-date{ type: 'hidden', name: 'end_date', value: params[:end_date] }

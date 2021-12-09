@@ -49,11 +49,6 @@ module ScorecardsHelper
     ]
   end
 
-  def filter_date_popover
-    dom = render("scorecards/index/filter_date_popover_content")
-    content_tag(:div, "", class: "hidden filter-date", data: { html: dom.gsub("\n", "") })
-  end
-
   def date_html(date)
     return "" unless date.present?
 
