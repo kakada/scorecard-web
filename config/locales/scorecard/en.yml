@@ -57,7 +57,6 @@ en:
     disability: Disability
     female: Female
     selected_indicators: Selected indicators
-    completed: Completed
     planned: Planned
     all: All
     record_is_locked: The recored is locked!
@@ -80,9 +79,9 @@ en:
     downloaded: downloaded
     running: running
     submitted: submitted
-    completed: completed
     renewed: renewed
     in_review: in review
+    completed: completed
     references: References
     implemented_date: Implemented date
     submitted_date: Submitted date
@@ -116,3 +115,24 @@ en:
     in_review_date: In review date
     completed_date: Completed date
     mark_as_completed: Mark as completed
+    selected: Selected
+    file_size_is_too_big: The file size is too big, please filter it!
+    download_excel: Download as Excel(.xlsx)
+    scorecard_id: Scorecard ID
+    proposed_indicator_id: Proposed Indicator ID
+    score: Score
+    type: Type
+    number_of_male: Number of male
+    number_of_other: Number of other
+    number_of_proposed_indicator: Number of proposed indicator
+    number_of_indicator_development: Number of indicator development
+    number_of_proposed_suggested_actions: Number of proposed suggested actions
+    number_of_suggested_actions: Number of suggested actions
+    participant_id: Participant ID
+    name: Name
+    gender: Gender
+    age: Age
+    youth: Youth
+    disability: Disability
+    id_poor: ID Poor
+    minority: Minority

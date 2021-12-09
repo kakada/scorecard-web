@@ -45,6 +45,7 @@
 #  submitted_at              :datetime
 #  completed_at              :datetime
 #
+
 class Scorecard < ApplicationRecord
   include Scorecards::Lockable
   include Scorecards::Location
