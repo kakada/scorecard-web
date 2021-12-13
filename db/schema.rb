@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_102332) do
+ActiveRecord::Schema.define(version: 2021_12_13_063029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -448,6 +448,7 @@ ActiveRecord::Schema.define(version: 2021_11_29_102332) do
     t.datetime "running_date"
     t.datetime "deleted_at"
     t.boolean "published", default: false
+    t.string "device_type"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end
