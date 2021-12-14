@@ -22,8 +22,8 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1635151497278,
+  "id": 1,
+  "iteration": 1639389784147,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -47,7 +47,9 @@
       "options": {
         "ant": {
           "color": "rgb(0, 100, 255)",
+          "colorOverridesByLabel": [],
           "delay": 400,
+          "labelName": "",
           "paused": false,
           "pulseColor": "rgb(0, 0, 0)",
           "reverse": false,
@@ -58,6 +60,9 @@
           "customLongitudeColumnName": ""
         },
         "discardZeroOrNull": true,
+        "geospatial": {
+          "geoJsonUrl": "http://192.168.0.105:3000/provinces.json"
+        },
         "heat": {
           "fitBoundsOnLoad": false,
           "fitBoundsOnUpdate": false
@@ -72,6 +77,7 @@
         "map": {
           "centerLatitude": 12.564,
           "centerLongitude": 104.991,
+          "tileAttribution": "&copy <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors",
           "tileUrlSchema": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
           "useBoundsInQuery": false,
           "useCenterFromFirstPos": false,
@@ -81,13 +87,20 @@
         },
         "marker": {
           "alwaysShowTooltips": true,
+          "defaultHtml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"25px\" height=\"25px\" viewBox=\"0 0 25 25\" version=\"1.1\"><g id=\"surface1\"><path style=\" stroke:none;fill-rule:nonzero;fill:rgb(100%,50%,50%);fill-opacity:0.8;\" d=\"M 12.515625 0 L 12.480469 0 C 8.164062 0 4.652344 3.511719 4.652344 7.828125 C 4.652344 10.65625 5.941406 14.386719 8.480469 18.921875 C 10.363281 22.285156 12.273438 24.859375 12.292969 24.882812 C 12.347656 24.957031 12.429688 24.996094 12.519531 24.996094 C 12.523438 24.996094 12.523438 24.996094 12.527344 24.996094 C 12.617188 24.996094 12.703125 24.949219 12.753906 24.871094 C 12.773438 24.84375 14.667969 21.980469 16.539062 18.476562 C 19.066406 13.75 20.347656 10.164062 20.347656 7.828125 C 20.347656 3.511719 16.832031 0 12.515625 0 Z M 16.128906 8.019531 C 16.128906 10.019531 14.5 11.648438 12.5 11.648438 C 10.496094 11.648438 8.867188 10.019531 8.867188 8.019531 C 8.867188 6.015625 10.496094 4.386719 12.5 4.386719 C 14.5 4.386719 16.128906 6.015625 16.128906 8.019531 Z M 16.128906 8.019531 \"/></g></svg>",
+          "iconOffset": "",
+          "labelName": "",
+          "markerHtmlByLabel": [],
+          "popupOffset": "",
           "showOnlyLastMarker": false,
           "size": 25,
           "sizeLast": 25,
+          "tooltipOffset": "",
+          "useHTMLForMarkers": false,
           "useSecondaryIconForAllMarkers": false,
           "useSecondaryIconForLastMarker": false
         },
-        "viewType": "marker"
+        "viewType": "geospatial"
       },
       "repeat": null,
       "targets": [
@@ -96,7 +109,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH _conducted_scorecards AS (\n  SELECT *\n  FROM\n    (\n      SELECT\n        s.*,\n        concat_ws (\n          ', ',\n          (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n          (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n          (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n          (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n          (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n        ) as profile\n      FROM scorecards as s\n      INNER JOIN participants as p on s.id::varchar(20) = p.scorecard_uuid\n      WHERE \n        s.program_id in (${program_id})\n        AND $__timeFilter(s.conducted_date)\n        AND s.scorecard_type in ($scorecard_type)\n        AND s.year in ($year)\n        AND s.facility_id in ($facility_id)\n        AND s.locked_at is not null\n        AND p.age BETWEEN ${age:raw}\n        AND p.gender in ($gender)\n      group by s.id\n    ) as sc\n  WHERE string_to_array(sc.profile, ', ') && array[$profile]\n)\n\nSELECT \n  CONCAT(\n    'អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ (', locations.name_km, ')', \n    '<ol>',\n    ARRAY_TO_STRING(array_agg(DISTINCT CONCAT('<li><a href=\"', local_ngos.website_url ,'\" target=\"_blank\">', local_ngos.name, '</a></li>')),''),\n    '</ol>'\n  ) as popup,\n\n  locations.latitude, \n  locations.longitude,\n\n  CONCAT_WS('/', (SELECT COUNT(*) FROM _conducted_scorecards WHERE province_id = locations.code), COUNT(*)) as tooltip\n\nFROM scorecards \nINNER JOIN locations ON scorecards.province_id = locations.code\nINNER JOIN local_ngos ON scorecards.local_ngo_id = local_ngos.id\nWHERE \n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.created_at)\n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY \n  locations.name_km, locations.code, locations.latitude, locations.longitude;",
+          "rawSql": "WITH _conducted_scorecards AS (\n  SELECT *\n  FROM\n    (\n      SELECT\n        s.*,\n        concat_ws (\n          ', ',\n          (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n          (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n          (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n          (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n          (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n        ) as profile\n      FROM scorecards as s\n      INNER JOIN participants as p on s.id::varchar(20) = p.scorecard_uuid\n      WHERE \n        s.program_id in (${program_id})\n        AND $__timeFilter(s.conducted_date)\n        AND s.scorecard_type in ($scorecard_type)\n        AND s.year in ($year)\n        AND s.facility_id in ($facility_id)\n        AND s.locked_at is not null\n        AND p.age BETWEEN ${age:raw}\n        AND p.gender in ($gender)\n      group by s.id\n    ) as sc\n  WHERE string_to_array(sc.profile, ', ') && array[$profile]\n)\n\nSELECT \n  CONCAT(\n    'អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ (', locations.name_km, ')', \n    '<ol>',\n    ARRAY_TO_STRING(array_agg(DISTINCT CONCAT('<li><a href=\"', local_ngos.website_url ,'\" target=\"_blank\">', local_ngos.name, '</a></li>')),''),\n    '</ol>',\n    '<p>',\n    'ប័ណ្ណដាក់ពិន្ទុ(បានអនុវត្ត:<b>',\n    (SELECT COUNT(*) FROM _conducted_scorecards WHERE province_id = locations.code),\n    '</b> / បានគ្រោងទុក:<b>', COUNT(*), '</b>)',\n    '</p>'\n  ) as popup,\n\n  locations.osm_latitude as latitude, \n  locations.osm_longitude as longitude,\n\n  CONCAT_WS('/', (SELECT COUNT(*) FROM _conducted_scorecards WHERE province_id = locations.code), COUNT(*)) as tooltip\n\nFROM scorecards \nINNER JOIN locations ON scorecards.province_id = locations.code\nINNER JOIN local_ngos ON scorecards.local_ngo_id = local_ngos.id\nWHERE \n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.created_at)\n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\n  AND scorecards.local_ngo_id in ($local_ngo_id)\nGROUP BY \n  locations.name_km, locations.code, locations.latitude, locations.longitude;",
           "refId": "A",
           "select": [
             [
@@ -254,7 +267,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH _scorecards AS (\n  SELECT \n    s.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n      (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n      (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n      (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n      (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n    ) as profile\n  FROM scorecards as s\n  INNER JOIN participants as p on s.id::varchar(20) = p.scorecard_uuid\n  WHERE \n    s.program_id in (${program_id})\n    AND $__timeFilter(s.conducted_date)\n    AND s.scorecard_type in ($scorecard_type) \n    AND s.year in ($year) \n    AND s.facility_id in ($facility_id)\n    AND s.province_id in ($province_id)\n    AND s.locked_at is not null\n    AND p.age BETWEEN ${age:raw}\n    AND p.gender in ($gender)\n  GROUP BY s.id\n),\ntotal_conducted AS (\n  SELECT count(*) as \"Total Conducted\"\n  from _scorecards as sc\n  where string_to_array(sc.profile, ', ') && array[$profile]\n),\ntotal_planned AS (\n  SELECT\n    count(*) as \"Total Planned\"\n  FROM scorecards AS s\n  WHERE\n    s.program_id in (${program_id})\n    AND $__timeFilter(s.created_at)\n    AND s.scorecard_type in ($scorecard_type) \n    AND s.year in ($year) \n    AND s.facility_id in ($facility_id)\n    AND s.province_id in ($province_id)\n    AND s.deleted_at is null\n)\n\nSELECT \n  concat_ws (\n    ' / ',\n    (select * from total_conducted),\n    (select * from total_planned)  \n  )",
+          "rawSql": "WITH _scorecards AS (\n  SELECT \n    s.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n      (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n      (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n      (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n      (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n    ) as profile\n  FROM scorecards as s\n  INNER JOIN participants as p on s.id::varchar(20) = p.scorecard_uuid\n  WHERE \n    s.program_id in (${program_id})\n    AND $__timeFilter(s.conducted_date)\n    AND s.scorecard_type in ($scorecard_type) \n    AND s.year in ($year) \n    AND s.facility_id in ($facility_id)\n    AND s.province_id in ($province_id)\n    AND s.local_ngo_id in ($local_ngo_id)\n    AND s.locked_at is not null\n    AND p.age BETWEEN ${age:raw}\n    AND p.gender in ($gender)\n  GROUP BY s.id\n),\ntotal_conducted AS (\n  SELECT count(*) as \"Total Conducted\"\n  from _scorecards as sc\n  where string_to_array(sc.profile, ', ') && array[$profile]\n),\ntotal_planned AS (\n  SELECT\n    count(*) as \"Total Planned\"\n  FROM scorecards AS s\n  WHERE\n    s.program_id in (${program_id})\n    AND $__timeFilter(s.created_at)\n    AND s.scorecard_type in ($scorecard_type) \n    AND s.year in ($year) \n    AND s.facility_id in ($facility_id)\n    AND s.province_id in ($province_id)\n    AND s.local_ngo_id in ($local_ngo_id)\n    AND s.deleted_at is null\n)\n\nSELECT \n  concat_ws (\n    ' / ',\n    (select * from total_conducted),\n    (select * from total_planned)  \n  )",
           "refId": "A",
           "select": [
             [
@@ -278,7 +291,7 @@
           ]
         }
       ],
-      "title": "ប័ណ្ណដាក់ពិន្ទុសរុប (បានអនុវត្ត/បានគ្រោងទុក)",
+      "title": "ប័ណ្ណដាក់ពិន្ទុសរុប (អនុវត្តរួចរាល់/គ្រោងទុក)",
       "type": "stat"
     },
     {
@@ -336,7 +349,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH _scorecards AS (\n  SELECT \n    s.*,\n    EXTRACT(epoch FROM (s.locked_at - s.conducted_date))/86400 as implemented_time,\n    concat_ws (\n      ', ',\n      (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n      (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n      (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n      (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n      (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n    ) as profile\n  FROM scorecards as s\n  INNER JOIN participants as p on s.id::varchar(20) = p.scorecard_uuid\n  WHERE \n    s.program_id in (${program_id})\n    AND $__timeFilter(s.conducted_date)\n    AND s.scorecard_type in ($scorecard_type) \n    AND s.year in ($year) \n    AND s.facility_id in ($facility_id)\n    AND s.province_id in ($province_id)\n    AND s.locked_at is not null\n    AND p.age BETWEEN ${age:raw}\n    AND p.gender in ($gender)\n  group by s.id\n),\nfiltered_scorecards AS (\n  SELECT \n  (\n    CASE WHEN implemented_time <= (ceil(implemented_time) - 0.5) THEN ceil(implemented_time) - 0.5\n         ELSE ceil(implemented_time)\n    END\n  ) as duration\n  FROM _scorecards\n  WHERE string_to_array(profile, ', ') && array[$profile]\n)\n\nSELECT\n  min(duration)::integer AS \"អប្បបរមា (ថ្ងៃ)\",\n  avg(duration)::integer AS \"មធ្យម (ថ្ងៃ)\",\n  max(duration)::integer AS \"អតិបរមា (ថ្ងៃ)\"\nFROM filtered_scorecards;",
+          "rawSql": "WITH _scorecards AS (\n  SELECT \n    s.*,\n    EXTRACT(epoch FROM (s.locked_at - s.conducted_date))/86400 as implemented_time,\n    concat_ws (\n      ', ',\n      (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n      (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n      (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n      (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n      (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n    ) as profile\n  FROM scorecards as s\n  INNER JOIN participants as p on s.id::varchar(20) = p.scorecard_uuid\n  WHERE \n    s.program_id in (${program_id})\n    AND $__timeFilter(s.conducted_date)\n    AND s.scorecard_type in ($scorecard_type) \n    AND s.year in ($year) \n    AND s.facility_id in ($facility_id)\n    AND s.province_id in ($province_id)\n    AND s.local_ngo_id in ($local_ngo_id)\n    AND s.locked_at is not null\n    AND p.age BETWEEN ${age:raw}\n    AND p.gender in ($gender)\n  group by s.id\n),\nfiltered_scorecards AS (\n  SELECT \n  (\n    CASE WHEN implemented_time <= (ceil(implemented_time) - 0.5) THEN ceil(implemented_time) - 0.5\n         ELSE ceil(implemented_time)\n    END\n  ) as duration\n  FROM _scorecards\n  WHERE string_to_array(profile, ', ') && array[$profile]\n)\n\nSELECT\n  min(duration)::integer AS \"អប្បបរមា (ថ្ងៃ)\",\n  avg(duration)::integer AS \"មធ្យម (ថ្ងៃ)\",\n  max(duration)::integer AS \"អតិបរមា (ថ្ងៃ)\"\nFROM filtered_scorecards;",
           "refId": "A",
           "select": [
             [
@@ -360,7 +373,7 @@
           ]
         }
       ],
-      "title": "ប័ណ្ណដាក់ពិន្ទុដែលបានដំណើរការ (កាលបរិច្ឆេទចាប់ផ្តើមរហូតដល់បញ្ចប់)",
+      "title": "រយៈពេលអនុវត្តប័ណ្ណដាក់ពិន្ទុ (កាលបរិច្ឆេទចាប់ផ្តើមដល់បញ្ចប់)",
       "type": "stat"
     },
     {
@@ -462,7 +475,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH _scorecards AS (\n  SELECT \n    s.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n      (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n      (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n      (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n      (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n    ) as profile\n  FROM scorecards as s\n  INNER JOIN participants as p on s.id::varchar(20) = p.scorecard_uuid\n  WHERE \n    s.program_id in (${program_id})\n    AND $__timeFilter(s.conducted_date)\n    AND s.scorecard_type in ($scorecard_type) \n    AND s.year in ($year) \n    AND s.facility_id in ($facility_id)\n    AND s.province_id in ($province_id)\n    AND s.locked_at is not null\n    AND p.age BETWEEN ${age:raw}\n    AND p.gender in ($gender)\n  GROUP BY s.id\n)\n\nSELECT \n  facilities.name_km as name, \n  COUNT(CASE WHEN t.scorecard_type = 1 THEN 1 END) as \"វាយតម្លៃខ្លួនឯង\",\n  COUNT(CASE WHEN t.scorecard_type = 2 THEN 2 END) as \"ប័ណ្ណដាក់ពិន្ទុសហគមន៍\"\nFROM (\n  SELECT * \n  FROM _scorecards as sc\n  WHERE string_to_array(sc.profile, ', ') && array[$profile]\n) as t\nINNER JOIN facilities ON t.facility_id = facilities.id\nGROUP BY facilities.name_km;",
+          "rawSql": "WITH _scorecards AS (\n  SELECT \n    s.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n      (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n      (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n      (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n      (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n    ) as profile\n  FROM scorecards as s\n  INNER JOIN participants as p on s.id::varchar(20) = p.scorecard_uuid\n  WHERE \n    s.program_id in (${program_id})\n    AND $__timeFilter(s.conducted_date)\n    AND s.scorecard_type in ($scorecard_type) \n    AND s.year in ($year) \n    AND s.facility_id in ($facility_id)\n    AND s.province_id in ($province_id)\n    AND s.local_ngo_id in ($local_ngo_id)\n    AND s.locked_at is not null\n    AND p.age BETWEEN ${age:raw}\n    AND p.gender in ($gender)\n  GROUP BY s.id\n)\n\nSELECT \n  facilities.name_km as name, \n  COUNT(CASE WHEN t.scorecard_type = 1 THEN 1 END) as \"វាយតម្លៃខ្លួនឯង\",\n  COUNT(CASE WHEN t.scorecard_type = 2 THEN 2 END) as \"ប័ណ្ណដាក់ពិន្ទុសហគមន៍\"\nFROM (\n  SELECT * \n  FROM _scorecards as sc\n  WHERE string_to_array(sc.profile, ', ') && array[$profile]\n) as t\nINNER JOIN facilities ON t.facility_id = facilities.id\nGROUP BY facilities.name_km;",
           "refId": "A",
           "select": [
             [
@@ -486,7 +499,7 @@
           ]
         }
       ],
-      "title": "ប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តតាមសេវា",
+      "title": "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់តាមសេវា",
       "type": "barchart"
     },
     {
@@ -632,7 +645,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH _scorecards AS (\n  SELECT \n    s.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n      (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n      (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n      (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n      (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n    ) as profile\n  FROM scorecards as s\n  INNER JOIN participants as p on s.id::varchar(20) = p.scorecard_uuid\n  WHERE \n    s.program_id in (${program_id})\n    AND $__timeFilter(s.conducted_date)\n    AND s.scorecard_type in ($scorecard_type) \n    AND s.year in ($year) \n    AND s.facility_id in ($facility_id)\n    AND s.province_id in ($province_id)\n    AND s.locked_at is not null\n    AND p.age BETWEEN ${age:raw}\n    AND p.gender in ($gender)\n  GROUP BY s.id\n)\n\nSELECT \n  facilities.name_km as name, \n  COUNT(*)\nFROM (\n  SELECT * \n  FROM _scorecards\n  WHERE string_to_array(_scorecards.profile, ', ') && array[$profile]\n) as t\nINNER JOIN facilities ON t.facility_id = facilities.id\nGROUP BY facilities.name_km;",
+          "rawSql": "WITH _scorecards AS (\n  SELECT \n    s.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n      (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n      (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n      (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n      (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n    ) as profile\n  FROM scorecards as s\n  INNER JOIN participants as p on s.id::varchar(20) = p.scorecard_uuid\n  WHERE \n    s.program_id in (${program_id})\n    AND $__timeFilter(s.conducted_date)\n    AND s.scorecard_type in ($scorecard_type) \n    AND s.year in ($year) \n    AND s.facility_id in ($facility_id)\n    AND s.province_id in ($province_id)\n    AND s.local_ngo_id in ($local_ngo_id)\n    AND s.locked_at is not null\n    AND p.age BETWEEN ${age:raw}\n    AND p.gender in ($gender)\n  GROUP BY s.id\n)\n\nSELECT \n  facilities.name_km as name, \n  COUNT(*)\nFROM (\n  SELECT * \n  FROM _scorecards\n  WHERE string_to_array(_scorecards.profile, ', ') && array[$profile]\n) as t\nINNER JOIN facilities ON t.facility_id = facilities.id\nGROUP BY facilities.name_km;",
           "refId": "A",
           "select": [
             [
@@ -656,7 +669,7 @@
           ]
         }
       ],
-      "title": "ប័ណ្ណដាក់ពិន្ទុសរុបដែលធ្វើឡើងតាមប្រភេទវិស័យ",
+      "title": "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់សរុបធ្វើឡើងតាមប្រភេទវិស័យ",
       "type": "piechart"
     },
     {
@@ -758,7 +771,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    (\n      CASE \n        WHEN gender = 'male' THEN 'ប្រុស'\n        WHEN gender = 'female' THEN 'ស្រី'\n        ELSE 'ផ្សេងៗ'\n      END\n    ) as gender_km,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n)\n\nSELECT\n  gender_km,\n  count(*)\nFROM pa\nINNER JOIN scorecards ON \n  pa.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND pa.gender in ($gender)\n  AND pa.age BETWEEN ${age:raw}\n  AND string_to_array(pa.profile, ', ') && array[$profile]\nGROUP BY gender_km\nORDER BY 1",
+          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    (\n      CASE \n        WHEN gender = 'male' THEN 'ប្រុស'\n        WHEN gender = 'female' THEN 'ស្រី'\n        ELSE 'ផ្សេងៗ'\n      END\n    ) as gender_km,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n)\n\nSELECT\n  gender_km,\n  count(*)\nFROM pa\nINNER JOIN scorecards ON \n  pa.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND scorecards.local_ngo_id in ($local_ngo_id)\n  AND pa.gender in ($gender)\n  AND pa.age BETWEEN ${age:raw}\n  AND string_to_array(pa.profile, ', ') && array[$profile]\nGROUP BY gender_km\nORDER BY 1",
           "refId": "A",
           "select": [
             [
@@ -898,7 +911,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH par AS (\n  (\n    SELECT participants.*, 'ID Poor' as profile, 'ប័ណ្ណក្រីក្រ' as profile_km\n    FROM participants WHERE participants.poor_card is true\n  )\n  UNION ALL\n  (\n    SELECT participants.*, 'Disability' as profile, 'ពិការភាព' as profile_km\n    FROM participants WHERE participants.disability is true\n  )\n  UNION ALL\n  (\n    SELECT participants.*, 'Minority' as profile, 'ជនជាតិភាគតិច' as profile_km\n    FROM participants WHERE participants.minority is true\n  )\n  UNION ALL\n  (\n    SELECT participants.*, 'Youth' as profile, 'យុវជន' as profile_km\n    FROM participants WHERE participants.youth is true\n  )\n)\n\nSELECT \n  par.profile_km, count(*)\nFROM par\nINNER JOIN scorecards ON par.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND par.gender in ($gender)\n  AND par.age BETWEEN ${age:raw}\n  AND par.profile in ($profile)\nGROUP BY par.profile_km",
+          "rawSql": "WITH par AS (\n  (\n    SELECT participants.*, 'ID Poor' as profile, 'ប័ណ្ណក្រីក្រ' as profile_km\n    FROM participants WHERE participants.poor_card is true\n  )\n  UNION ALL\n  (\n    SELECT participants.*, 'Disability' as profile, 'ពិការភាព' as profile_km\n    FROM participants WHERE participants.disability is true\n  )\n  UNION ALL\n  (\n    SELECT participants.*, 'Minority' as profile, 'ជនជាតិភាគតិច' as profile_km\n    FROM participants WHERE participants.minority is true\n  )\n  UNION ALL\n  (\n    SELECT participants.*, 'Youth' as profile, 'យុវជន' as profile_km\n    FROM participants WHERE participants.youth is true\n  )\n)\n\nSELECT \n  par.profile_km, count(*)\nFROM par\nINNER JOIN scorecards ON par.scorecard_uuid = scorecards.id::varchar(255)\nWHERE \n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.year in ($year)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.province_id in ($province_id)\n  AND scorecards.local_ngo_id in ($local_ngo_id)\n  AND par.gender in ($gender)\n  AND par.age BETWEEN ${age:raw}\n  AND par.profile in ($profile)\nGROUP BY par.profile_km",
           "refId": "A",
           "select": [
             [
@@ -1024,7 +1037,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH filtered_scorecards AS (\n  SELECT *\n  FROM\n    (\n      SELECT\n        s.*,\n        concat_ws (\n          ', ',\n          (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n          (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n          (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n          (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n          (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n        ) as profile\n      FROM scorecards as s\n      INNER JOIN participants on s.id::varchar(20) = participants.scorecard_uuid\n      WHERE \n        s.program_id in (${program_id})\n        AND $__timeFilter(s.conducted_date)\n        AND s.scorecard_type in ($scorecard_type)\n        AND s.year in ($year)\n        AND s.facility_id in ($facility_id)\n        AND s.province_id in ($province_id)\n        AND participants.age BETWEEN ${age:raw}\n        AND participants.gender in ($gender)\n      group by s.id\n    ) as sc\n  WHERE string_to_array(sc.profile, ', ') && array[$profile]\n)\n\nSELECT\n  tm.name,\n  sum(tm.total_planned) as \"ចំនួនគ្រោងទុក\",\n  sum(tm.total_conducted) as \"ចំនួនបានអនុវត្ត\"\nFROM (\n  SELECT\n    facilities.name_km as name,\n    \n    (\n      SELECT count(*)\n      FROM scorecards as s1\n      WHERE\n        s1.program_id in (${program_id})\n        AND $__timeFilter(s1.created_at)\n        AND s1.scorecard_type in ($scorecard_type)\n        AND s1.year in ($year)\n        AND s1.facility_id = facilities.id\n        AND s1.province_id in ($province_id)\n    ) AS \"total_planned\",\n\n    COUNT(CASE WHEN filtered_scorecards.locked_at is not null THEN 1 END) as \"total_conducted\"\n  FROM filtered_scorecards\n  INNER JOIN facilities ON filtered_scorecards.facility_id = facilities.id\n  GROUP BY facilities.name_km, facilities.id\n) AS tm\nGROUP BY tm.name;",
+          "rawSql": "WITH filtered_scorecards AS (\n  SELECT *\n  FROM\n    (\n      SELECT\n        s.*,\n        concat_ws (\n          ', ',\n          (CASE WHEN s.number_of_disability > 0 THEN 'Disability' END),\n          (CASE WHEN s.number_of_ethnic_minority > 0 THEN 'Minority' END),\n          (CASE WHEN s.number_of_youth > 0 THEN 'Youth' END),\n          (CASE WHEN s.number_of_id_poor > 0 THEN 'ID Poor' END),\n          (CASE WHEN (s.number_of_disability = 0 AND s.number_of_ethnic_minority = 0 AND s.number_of_youth = 0 AND s.number_of_id_poor = 0) THEN 'N/A' END)\n        ) as profile\n      FROM scorecards as s\n      INNER JOIN participants on s.id::varchar(20) = participants.scorecard_uuid\n      WHERE \n        s.program_id in (${program_id})\n        AND $__timeFilter(s.conducted_date)\n        AND s.scorecard_type in ($scorecard_type)\n        AND s.year in ($year)\n        AND s.facility_id in ($facility_id)\n        AND s.province_id in ($province_id)\n        AND s.local_ngo_id in ($local_ngo_id)\n        AND participants.age BETWEEN ${age:raw}\n        AND participants.gender in ($gender)\n      group by s.id\n    ) as sc\n  WHERE string_to_array(sc.profile, ', ') && array[$profile]\n)\n\nSELECT\n  tm.name,\n  sum(tm.total_planned) as \"ចំនួនគ្រោងទុក\",\n  sum(tm.total_conducted) as \"ចំនួនបានអនុវត្ត\"\nFROM (\n  SELECT\n    facilities.name_km as name,\n    \n    (\n      SELECT count(*)\n      FROM scorecards as s1\n      WHERE\n        s1.program_id in (${program_id})\n        AND $__timeFilter(s1.created_at)\n        AND s1.scorecard_type in ($scorecard_type)\n        AND s1.year in ($year)\n        AND s1.facility_id = facilities.id\n        AND s1.province_id in ($province_id)\n        AND s1.local_ngo_id in ($local_ngo_id)\n    ) AS \"total_planned\",\n\n    COUNT(CASE WHEN filtered_scorecards.locked_at is not null THEN 1 END) as \"total_conducted\"\n  FROM filtered_scorecards\n  INNER JOIN facilities ON filtered_scorecards.facility_id = facilities.id\n  GROUP BY facilities.name_km, facilities.id\n) AS tm\nGROUP BY tm.name;",
           "refId": "A",
           "select": [
             [
@@ -1048,7 +1061,7 @@
           ]
         }
       ],
-      "title": "ប័ណ្ណដាក់ពិន្ទុសរុប (បានអនុវត្ត vs បានគ្រោងទុក) តាមវិស័យ",
+      "title": "ប័ណ្ណដាក់ពិន្ទុសរុប (អនុវត្តរួចរាល់ vs គ្រោងទុក) តាមវិស័យ",
       "type": "barchart"
     },
     {
@@ -1136,7 +1149,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nraised AS (\n  SELECT\n    pa.*,\n    raised_indicators.id,\n    raised_indicators.indicatorable_id,\n    raised_indicators.indicatorable_type\n  FROM pa\n  INNER JOIN raised_indicators ON pa.uuid = raised_indicators.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(*) as \"ចំនួនស្នើឡើង\"\nFROM raised\nINNER JOIN scorecards ON\n  raised.scorecard_uuid::INTEGER = scorecards.id\nINNER JOIN indi ON\n  raised.indicatorable_id = indi.id\n  AND raised.indicatorable_type = indi.type\nWHERE \n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.year in ($year)\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY indi.name\nORDER BY \"ចំនួនស្នើឡើង\" DESC\nLIMIT 5;",
+          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nraised AS (\n  SELECT\n    pa.*,\n    raised_indicators.id,\n    raised_indicators.indicatorable_id,\n    raised_indicators.indicatorable_type\n  FROM pa\n  INNER JOIN raised_indicators ON pa.uuid = raised_indicators.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(*) as \"ចំនួនស្នើឡើង\"\nFROM raised\nINNER JOIN scorecards ON\n  raised.scorecard_uuid::INTEGER = scorecards.id\nINNER JOIN indi ON\n  raised.indicatorable_id = indi.id\n  AND raised.indicatorable_type = indi.type\nWHERE \n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.year in ($year)\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\n  AND scorecards.local_ngo_id in ($local_ngo_id)\nGROUP BY indi.name\nORDER BY \"ចំនួនស្នើឡើង\" DESC\nLIMIT 5;",
           "refId": "A",
           "select": [
             [
@@ -1160,7 +1173,7 @@
           ]
         }
       ],
-      "title": "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (ស្នើឡើង)",
+      "title": "លក្ខណៈវិនិច្ឆ័យដែលស្នើឡើងច្រើនជាងគេទាំង៥",
       "type": "barchart"
     },
     {
@@ -1248,7 +1261,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nrate AS (\n  SELECT\n    pa.*,\n    ratings.score,\n    ratings.voting_indicator_uuid,\n    ratings.participant_uuid\n  FROM pa\n  INNER JOIN ratings ON pa.uuid = ratings.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n    AND ratings.score > 3\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(*) as \"ចំនួនបោះឆ្នោត\"\nFROM rate\nINNER JOIN voting_indicators\n  ON voting_indicators.uuid = rate.voting_indicator_uuid\nINNER JOIN indi\n  ON voting_indicators.indicatorable_id = indi.id\n  AND voting_indicators.indicatorable_type = indi.type\nINNER JOIN scorecards ON\n  voting_indicators.scorecard_uuid::INTEGER = scorecards.id\nWHERE\n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY indi.name\nORDER BY \"ចំនួនបោះឆ្នោត\" DESC\nLIMIT 5;\n",
+          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nrate AS (\n  SELECT\n    pa.*,\n    ratings.score,\n    ratings.voting_indicator_uuid,\n    ratings.participant_uuid\n  FROM pa\n  INNER JOIN ratings ON pa.uuid = ratings.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n    AND ratings.score > 3\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(*) as \"ចំនួនបោះឆ្នោត\"\nFROM rate\nINNER JOIN voting_indicators\n  ON voting_indicators.uuid = rate.voting_indicator_uuid\nINNER JOIN indi\n  ON voting_indicators.indicatorable_id = indi.id\n  AND voting_indicators.indicatorable_type = indi.type\nINNER JOIN scorecards ON\n  voting_indicators.scorecard_uuid::INTEGER = scorecards.id\nWHERE\n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\n  AND scorecards.local_ngo_id in ($local_ngo_id)\nGROUP BY indi.name\nORDER BY \"ចំនួនបោះឆ្នោត\" DESC\nLIMIT 5;\n",
           "refId": "A",
           "select": [
             [
@@ -1360,7 +1373,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nrate AS (\n  SELECT\n    pa.*,\n    ratings.score,\n    ratings.voting_indicator_uuid,\n    ratings.participant_uuid\n  FROM pa\n  INNER JOIN ratings ON pa.uuid = ratings.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n    AND ratings.score = 3\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(*) as \"ចំនួនបោះឆ្នោត\"\nFROM rate\nINNER JOIN voting_indicators\n  ON voting_indicators.uuid = rate.voting_indicator_uuid\nINNER JOIN indi\n  ON voting_indicators.indicatorable_id = indi.id\n  AND voting_indicators.indicatorable_type = indi.type\nINNER JOIN scorecards ON\n  voting_indicators.scorecard_uuid::INTEGER = scorecards.id\nWHERE\n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY indi.name\nORDER BY \"ចំនួនបោះឆ្នោត\" DESC\nLIMIT 5;\n",
+          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nrate AS (\n  SELECT\n    pa.*,\n    ratings.score,\n    ratings.voting_indicator_uuid,\n    ratings.participant_uuid\n  FROM pa\n  INNER JOIN ratings ON pa.uuid = ratings.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n    AND ratings.score = 3\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(*) as \"ចំនួនបោះឆ្នោត\"\nFROM rate\nINNER JOIN voting_indicators\n  ON voting_indicators.uuid = rate.voting_indicator_uuid\nINNER JOIN indi\n  ON voting_indicators.indicatorable_id = indi.id\n  AND voting_indicators.indicatorable_type = indi.type\nINNER JOIN scorecards ON\n  voting_indicators.scorecard_uuid::INTEGER = scorecards.id\nWHERE\n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\n  AND scorecards.local_ngo_id in ($local_ngo_id)\nGROUP BY indi.name\nORDER BY \"ចំនួនបោះឆ្នោត\" DESC\nLIMIT 5;\n",
           "refId": "A",
           "select": [
             [
@@ -1472,7 +1485,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nrate AS (\n  SELECT\n    pa.*,\n    ratings.score,\n    ratings.voting_indicator_uuid,\n    ratings.participant_uuid\n  FROM pa\n  INNER JOIN ratings ON pa.uuid = ratings.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n    AND ratings.score < 3\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(*) as \"ចំនួនបោះឆ្នោត\"\nFROM rate\nINNER JOIN voting_indicators\n  ON voting_indicators.uuid = rate.voting_indicator_uuid\nINNER JOIN indi\n  ON voting_indicators.indicatorable_id = indi.id\n  AND voting_indicators.indicatorable_type = indi.type\nINNER JOIN scorecards ON\n  voting_indicators.scorecard_uuid::INTEGER = scorecards.id\nWHERE\n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\nGROUP BY indi.name\nORDER BY \"ចំនួនបោះឆ្នោត\" DESC\nLIMIT 5;\n",
+          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nrate AS (\n  SELECT\n    pa.*,\n    ratings.score,\n    ratings.voting_indicator_uuid,\n    ratings.participant_uuid\n  FROM pa\n  INNER JOIN ratings ON pa.uuid = ratings.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n    AND ratings.score < 3\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(*) as \"ចំនួនបោះឆ្នោត\"\nFROM rate\nINNER JOIN voting_indicators\n  ON voting_indicators.uuid = rate.voting_indicator_uuid\nINNER JOIN indi\n  ON voting_indicators.indicatorable_id = indi.id\n  AND voting_indicators.indicatorable_type = indi.type\nINNER JOIN scorecards ON\n  voting_indicators.scorecard_uuid::INTEGER = scorecards.id\nWHERE\n  scorecards.program_id in (${program_id})\n  AND $__timeFilter(scorecards.conducted_date)  \n  AND scorecards.scorecard_type in ($scorecard_type) \n  AND scorecards.year in ($year) \n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\n  AND scorecards.local_ngo_id in ($local_ngo_id)\nGROUP BY indi.name\nORDER BY \"ចំនួនបោះឆ្នោត\" DESC\nLIMIT 5;\n",
           "refId": "A",
           "select": [
             [
@@ -1502,14 +1515,14 @@
     {
       "datasource": null,
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 23,
         "x": 1,
         "y": 41
       },
       "id": 11,
       "options": {
-        "content": "<div style=\"display: flex;\">\n<div style=\"display: flex;margin: 0 auto;\">\n<div style=\"text-align: center; margin-right: 20px\">\n<h5 style=\"font-size: 14px;\">គាំទ្រមូលនិធិដោយ/Funded by</h5>\n<img src=\"https://digital-csc.org/assets/eu-3902d24e7e972494ede15c7dc533bc20589ef6e80aca3335518cea5944984c09.png\"  width=\"70\"/>\n</div>\n\n<div style=\"text-align: center\">\n<h5 style=\"font-size: 14px;\">អនុវត្តដោយ/Implemented by</h5>\n<div style=\"display: flex; align-items: center; justify-content: center; margin-top: 30px;\">\n<img src=\"https://digital-csc.org/assets/care_logo-30bc7807ccb532ee750d35b55a3e94c40e688a88a18d0497c4e244bc56f4017d.png\" width=\"110\" height=\"35px\" />\n<img src=\"https://digital-csc.org/assets/api-a84a9246854e6e9c471aa6982fb90ed27377b050f69318966fe0c3923d371886.png\"  width=\"40\" height: \"30px\" style=\"margin: 0 10px;\"/>\n<img src=\"https://digital-csc.org/assets/instedd-ilabsea-252db350ccbce84ff56c4057db2f6a5761873c8d7b4c9c5ee9c31049ba7d3792.png\"  width=\"180\"/>\n</div>\n</div>\n\n<a href=\"https://digital-csc.org/\" target=\"_blank\" >About Us</a>\n</div>\n</div>\n  ",
+        "content": "<div style=\"display: flex;\">\n<div style=\"display: flex;margin: 0 auto;\">\n<div style=\"text-align: center; margin-right: 20px\">\n<h5 style=\"font-size: 14px;\">គាំទ្រមូលនិធិដោយ/Funded by</h5>\n<img src=\"https://digital-csc.org/assets/eu-3902d24e7e972494ede15c7dc533bc20589ef6e80aca3335518cea5944984c09.png\"  width=\"70\"/>\n</div>\n\n<div style=\"text-align: center\">\n<h5 style=\"font-size: 14px;\">អនុវត្តដោយ/Implemented by</h5>\n<div style=\"display: flex; align-items: center; justify-content: center; margin-top: 30px;\">\n<img src=\"https://digital-csc.org/assets/care_logo-30bc7807ccb532ee750d35b55a3e94c40e688a88a18d0497c4e244bc56f4017d.png\" width=\"130\" height=\"40\" />\n<img src=\"https://digital-csc.org/assets/api-a84a9246854e6e9c471aa6982fb90ed27377b050f69318966fe0c3923d371886.png\"  width=\"55\" style=\"margin: 0 20px;\"/>\n<img src=\"https://digital-csc.org/assets/instedd-ilabsea-252db350ccbce84ff56c4057db2f6a5761873c8d7b4c9c5ee9c31049ba7d3792.png\"  width=\"180\"/>\n</div>\n</div>\n\n</div>\n</div>\n  \n<div style=\"text-align: center; padding-top: 20px; padding-bottom: 20px;\">\n  <a href=\"https://digital-csc.org/\" target=\"_blank\" >អំពីយើង/About Us</a>\n</div>\n  ",
         "mode": "html"
       },
       "pluginVersion": "8.2.1",
@@ -1668,7 +1681,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": [
             "All"
           ],
@@ -1708,7 +1721,7 @@
       {
         "allValue": "0 AND 99",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -1754,7 +1767,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": [
             "All"
           ],
@@ -1799,7 +1812,7 @@
       {
         "allValue": "'Disability', 'Minority', 'ID Poor', 'Youth', 'N/A'",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": [
             "All"
           ],
@@ -1873,6 +1886,62 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": null,
+        "definition": "select name from local_ngos where program_id in (${program_id});",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Local NGO",
+        "multi": true,
+        "name": "local_ngo_name",
+        "options": [],
+        "query": "select name from local_ngos where program_id in (${program_id});",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": null,
+        "definition": "select id AS __value  from local_ngos where name in ($local_ngo_name) AND program_id in (${program_id});",
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": true,
+        "label": "Local NGO",
+        "multi": true,
+        "name": "local_ngo_id",
+        "options": [],
+        "query": "select id AS __value  from local_ngos where name in ($local_ngo_name) AND program_id in (${program_id});",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -1910,5 +1979,5 @@
   "timezone": "browser",
   "title": "Scorecard Dashboard",
   "uid": "hqZGKcnnk",
-  "version": 3
+  "version": 4
 }

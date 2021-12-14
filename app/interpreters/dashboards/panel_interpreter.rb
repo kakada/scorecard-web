@@ -10,6 +10,7 @@ module Dashboards
     def interpret
       @data["panels"].each do |panel|
         interpret_panel_links(panel)
+        interpret_panel_geospatial_map(panel)
         interpret_panel_sql_queries(panel)
       end
     end
@@ -21,6 +22,12 @@ module Dashboards
 
           link["url"] = "#{ENV['GF_DASHBOARD_BASE_URL']}#{dashboard_url}?orgId=#{@program.gf_dashboard.org_id}&viewPanel=#{panel['id']}"
         end
+      end
+
+      def interpret_panel_geospatial_map(panel)
+        return unless panel["options"].present? && panel["viewType"] == 'geospatial'
+
+        panel["options"]["geospatial"]["geoJsonUrl"] = ENV["GEO_JSON_URL"]
       end
 
       def interpret_panel_sql_queries(panel)
