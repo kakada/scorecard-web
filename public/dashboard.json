@@ -23,7 +23,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1639467196357,
+  "iteration": 1639647145140,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -61,7 +61,7 @@
         },
         "discardZeroOrNull": true,
         "geospatial": {
-          "geoJsonUrl": "http://192.168.0.105:3000/provinces.json"
+          "geoJsonUrl": "http://192.168.0.104:3000/provinces.json"
         },
         "heat": {
           "fitBoundsOnLoad": false,
@@ -201,7 +201,7 @@
             },
             {
               "props": {
-                "text": ".css-1ejir9x {\n  line-height: 28px;  \n}\n.css-nx8q14 {\n  letter-spacing: 0;\n}\n.css-nx8q14 svg {\n  overflow: inherit\n}"
+                "text": ".css-1ejir9x {\n  line-height: 28px;  \n}\n.css-nx8q14 {\n  letter-spacing: 0;\n}\n.css-nx8q14 svg {\n  overflow: inherit\n}\n.scrollbar-view {\n  margin-top: 12px;\n}"
               },
               "type": "style"
             }
@@ -621,6 +621,7 @@
       "options": {
         "displayLabels": [
           "name",
+          "value",
           "percent"
         ],
         "legend": {
@@ -746,7 +747,8 @@
       "options": {
         "displayLabels": [
           "name",
-          "value"
+          "value",
+          "percent"
         ],
         "legend": {
           "displayMode": "list",
@@ -887,7 +889,8 @@
       "options": {
         "displayLabels": [
           "name",
-          "value"
+          "value",
+          "percent"
         ],
         "legend": {
           "displayMode": "list",
@@ -1119,7 +1122,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 24,
+        "w": 12,
         "x": 0,
         "y": 25
       },
@@ -1174,6 +1177,118 @@
         }
       ],
       "title": "លក្ខណៈវិនិច្ឆ័យដែលស្នើឡើងច្រើនជាងគេទាំង៥",
+      "type": "barchart"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "fillOpacity": 80,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ចំនួនជ្រើសរើស"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#edcc00",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "id": 33,
+      "options": {
+        "barWidth": 0.62,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "text": {
+          "valueSize": 24
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.1.2",
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nraised AS (\n  SELECT\n    pa.*,\n    raised_indicators.id,\n    raised_indicators.indicatorable_id,\n    raised_indicators.indicatorable_type\n  FROM pa\n  INNER JOIN raised_indicators ON pa.uuid = raised_indicators.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n    AND raised_indicators.selected is true\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(distinct(raised.scorecard_uuid)) as \"ចំនួនជ្រើសរើស\"\nFROM raised\nINNER JOIN scorecards ON\n  raised.scorecard_uuid::INTEGER = scorecards.id\nINNER JOIN indi ON\n  raised.indicatorable_id = indi.id\n  AND raised.indicatorable_type = indi.type\nWHERE \n  scorecards.program_id in ($program_id)\n  AND $__timeFilter(scorecards.conducted_date)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.year in ($year)\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\n  AND scorecards.local_ngo_id in ($local_ngo_id)\n  AND scorecards.deleted_at is null\nGROUP BY indi.name\nORDER BY \"ចំនួនជ្រើសរើស\" DESC\nLIMIT 5;",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "latitude"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "locations",
+          "timeColumn": "created_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "លក្ខណៈវិនិច្ឆ័យដែលបានអនុវត្តច្រើនជាងគេទាំង៥",
       "type": "barchart"
     },
     {
@@ -1569,7 +1684,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": [
             "All"
           ],
@@ -1767,7 +1882,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": [
             "All"
           ],
@@ -1979,5 +2094,5 @@
   "timezone": "browser",
   "title": "Scorecard Dashboard",
   "uid": "hqZGKcnnk",
-  "version": 3
+  "version": 4
 }

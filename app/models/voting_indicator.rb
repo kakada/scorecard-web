@@ -21,6 +21,7 @@ class VotingIndicator < ApplicationRecord
   belongs_to :indicatorable, polymorphic: true
   has_many :ratings, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many :suggested_actions, foreign_key: :voting_indicator_uuid, dependent: :destroy
+  has_many :raised_indicators, foreign_key: :voting_indicator_uuid
 
   accepts_nested_attributes_for :suggested_actions, allow_destroy: true
 
