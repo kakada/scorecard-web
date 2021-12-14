@@ -13,16 +13,18 @@ module Users::CallbackDashboard
     after_destroy :remove_from_dashboard_async, unless: :skip_callback
 
     def add_to_dashboard
-      Dashboard.new(self.program).add_user(self)
+      Dashboard.new(program).add_user(self)
     end
 
     def remove_from_dashboard
-      Dashboard.new(self.program).remove_user(self)
+      Dashboard.new(program).remove_user(self)
+
+      update_column(:gf_user_id, nil)
     end
 
     private
       def add_to_dashboard_async
-        UserWorker.perform_async(:add_to_dashboard, id) unless gf_user_id.present?
+        UserWorker.perform_async(:add_to_dashboard, id) if gf_user_id.nil?
       end
 
       def remove_from_dashboard_async
@@ -30,11 +32,11 @@ module Users::CallbackDashboard
       end
 
       def was_activated?
-        saved_change_to_actived? && self.actived
+        saved_change_to_actived? && actived?
       end
 
       def was_deactivated?
-        saved_change_to_actived? && !self.actived
+        saved_change_to_actived? && !actived?
       end
 
       def was_confirmed?
