@@ -19,9 +19,8 @@ RSpec.describe RequestLogParser do
     end
 
     context "with payload" do
-      let(:data) { { params: { controller: "TestController", action: "test", start_date: "01/02/2021" } } }
+      let(:data) { { params: { controller: "TestController", action: "test" } } }
 
-      specify { expect(parser).to have_key(:start_date) }
       specify { expect(parser).not_to have_key(:controller) }
       specify { expect(parser).not_to have_key(:action) }
     end

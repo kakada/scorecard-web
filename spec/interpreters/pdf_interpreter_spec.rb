@@ -38,7 +38,7 @@ RSpec.describe PdfTemplateInterpreter do
       let!(:pdf_template_km) { create(:pdf_template, content: "<div>{{swot.result_table}}</div>", program: program) }
       let!(:voting_indicator) { create(:voting_indicator, scorecard: scorecard, median: 1) }
       let(:t_head) {
-        str = %w(criteria average_score strength weakness suggested_action).map { |col|
+        str = %w(indicator average_score strength weakness suggested_action).map { |col|
           "<th class='text-center'>" + I18n.t("scorecard.#{col}") + "</th>"
         }.join("")
 

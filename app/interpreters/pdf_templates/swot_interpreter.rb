@@ -19,7 +19,7 @@ module PdfTemplates
 
     private
       def build_result_header
-        columns = %w(criteria average_score strength weakness suggested_action)
+        columns = %w(indicator average_score strength weakness suggested_action)
 
         headers = columns.map { |col|
           "<th class='text-center'>" + I18n.t("scorecard.#{col}") + "</th>"
