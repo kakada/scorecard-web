@@ -1,10 +1,21 @@
 CW.DaterangPicker = (() => {
+  var tr = {};
+
   function init() {
+    setDefaultLocale();
     handleDisplayDate();
     initDateRangePicker();
 
     onApplyDateRange();
     onCancelDateRange();
+  }
+
+  function setDefaultLocale() {
+    let locale = $('[data-language-code]').data('languageCode') || 'en';
+    tr = CW.ScorecardLocale[locale];
+    tr.locale = locale;
+
+    moment.locale(tr.locale);
   }
 
   function handleDisplayDate() {
@@ -18,18 +29,13 @@ CW.DaterangPicker = (() => {
 
   function initDateRangePicker() {
     let options = {
-      ranges: {
-         'Today': [moment(), moment()],
-         'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-         'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-         'This Month': [moment().startOf('month'), moment().endOf('month')],
-         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      },
+      ranges: customRange(),
       locale: {
-        cancelLabel: 'Clear'
+        cancelLabel: tr.clear,
+        applyLabel: tr.apply,
+        customRangeLabel: tr.customRange
       },
-      alwaysShowCalendars: true
+      alwaysShowCalendars: true,
     }
 
     let start = $('.start-date').val();
@@ -40,35 +46,47 @@ CW.DaterangPicker = (() => {
       options.endDate = moment(end);
     }
 
-    $('#reportrange').daterangepicker(options, displayDate);
+    $('#daterange').daterangepicker(options, displayDate);
+  }
+
+  function customRange() {
+    let ranges = {};
+    ranges[tr.today] = [moment(), moment()];
+    ranges[tr.yesterday] = [moment().subtract(1, 'days'), moment().subtract(1, 'days')];
+    ranges[tr.last_7_day] = [moment().subtract(6, 'days'), moment()];
+    ranges[tr.last_30_day] = [moment().subtract(29, 'days'), moment()];
+    ranges[tr.this_month] = [moment().startOf('month'), moment().endOf('month')];
+    ranges[tr.last_month] = [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
+
+    return ranges;
   }
 
   function onApplyDateRange() {
-    $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-      displayDate(picker.startDate, picker.endDate);
+    $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+      $('.start-date').val(picker.startDate.locale('en').format('YYYY-MM-DD'));
+      $('.end-date').val(picker.endDate.locale('en').format('YYYY-MM-DD'));
 
-      $('.start-date').val(picker.startDate.format('YYYY-MM-DD'));
-      $('.end-date').val(picker.endDate.format('YYYY-MM-DD'));
+      displayDate(picker.startDate, picker.endDate);
     });
   }
 
   function onCancelDateRange() {
-    $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
-      displayDate('', '');
-
+    $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
       $('.start-date').val('');
       $('.end-date').val('');
+
+      displayDate('', '');
     });
   }
 
   function displayDate(start, end) {
-    let display = $('#reportrange span').data('placeholder');
+    let display = $('#daterange span').data('placeholder');
 
     if (!!start && !!end) {
-      display = start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY');
+      display = start.locale(tr.locale).format(tr.format) + ' - ' + end.locale(tr.locale).format(tr.format);
     }
 
-    $('#reportrange span').html(display);
+    $('#daterange span').html(display);
   }
 
   return {
