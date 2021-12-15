@@ -10,6 +10,7 @@
 
 // *** Datetime picker
 //= require moment
+//= require moment-with-locales
 //= require tempusdominus-bootstrap-4.js
 //= require pumi
 //= require tagify.min
@@ -29,6 +30,7 @@
 //= require facilities
 //= require templates
 //= require indicators
+//= require scorecards/locale
 //= require scorecards/daterange_picker
 //= require scorecards/index
 //= require scorecards/show
