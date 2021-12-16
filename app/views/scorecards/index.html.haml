@@ -68,14 +68,9 @@
                     / Request change icon
                     = render 'button_request_change', scorecard: scorecard
 
-                    / Locked icon
-                    - if scorecard.access_locked?
-                      %span{ class: 'btn btn-circle btn-sm btn-outline-dark mr-1', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.completed')}, style: 'cursor: auto'}
-                        %i.fas.fa-lock
-
                     / Pdf icon
                     - if scorecard.access_locked? && scorecard.program.try(:pdf_templates).present?
-                      = link_to scorecard_path(scorecard.uuid, format: 'pdf'), class: "btn btn-circle btn-sm btn-outline-danger", data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.view_as_pdf')}, target: '_blank' do
+                      = link_to scorecard_path(scorecard.uuid, format: 'pdf'), class: "btn btn-circle btn-sm btn-outline-dark mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.view_as_pdf')}, target: '_blank' do
                         %i.fas.fa-file-pdf
 
                     / Edit icon
@@ -83,7 +78,7 @@
                       = link_to edit_scorecard_path(scorecard.uuid), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
                         %i.fas.fa-pen
 
-                    - if policy(scorecard).update? && scorecard.running?
+                    - if policy(scorecard).update? && (scorecard.running? || scorecard.downloaded?)
                       %span{data: {toggle: 'tooltip', placement: 'top', title: t('scorecard.cannot_delete_running_scorecard')}}
                         %a.disabled{class: "btn btn-circle btn-sm btn-outline-danger"}
                           %i.fas.fa-trash-alt

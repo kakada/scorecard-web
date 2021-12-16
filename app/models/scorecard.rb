@@ -69,17 +69,17 @@ class Scorecard < ApplicationRecord
   belongs_to :creator, class_name: "User"
   belongs_to :primary_school, foreign_key: :primary_school_code, optional: true
 
-  has_many   :facilitators, foreign_key: :scorecard_uuid, dependent: :destroy
+  has_many   :facilitators, foreign_key: :scorecard_uuid
   has_many   :cafs, through: :facilitators
-  has_many   :participants, foreign_key: :scorecard_uuid, dependent: :destroy
-  has_many   :custom_indicators, foreign_key: :scorecard_uuid, dependent: :destroy
-  has_many   :raised_indicators, foreign_key: :scorecard_uuid, dependent: :destroy
-  has_many   :voting_indicators, foreign_key: :scorecard_uuid, dependent: :destroy
-  has_many   :ratings, foreign_key: :scorecard_uuid, dependent: :destroy
-  has_many   :scorecard_progresses, foreign_key: :scorecard_uuid, primary_key: :uuid, dependent: :destroy
-  has_many   :suggested_actions, foreign_key: :scorecard_uuid, primary_key: :uuid, dependent: :destroy
-  has_many   :scorecard_references, foreign_key: :scorecard_uuid, primary_key: :uuid, dependent: :destroy
-  has_many   :request_changes, foreign_key: :scorecard_uuid, primary_key: :uuid, dependent: :destroy
+  has_many   :participants, foreign_key: :scorecard_uuid
+  has_many   :custom_indicators, foreign_key: :scorecard_uuid
+  has_many   :raised_indicators, foreign_key: :scorecard_uuid
+  has_many   :voting_indicators, foreign_key: :scorecard_uuid
+  has_many   :ratings, foreign_key: :scorecard_uuid
+  has_many   :scorecard_progresses, foreign_key: :scorecard_uuid, primary_key: :uuid
+  has_many   :suggested_actions, foreign_key: :scorecard_uuid, primary_key: :uuid
+  has_many   :scorecard_references, foreign_key: :scorecard_uuid, primary_key: :uuid
+  has_many   :request_changes, foreign_key: :scorecard_uuid, primary_key: :uuid
 
   delegate  :name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
   delegate  :name_en, :name_km, to: :primary_school, prefix: :primary_school, allow_nil: true
