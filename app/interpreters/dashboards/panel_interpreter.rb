@@ -25,7 +25,7 @@ module Dashboards
       end
 
       def interpret_panel_geospatial_map(panel)
-        return unless panel["options"].present? && panel["viewType"] == 'geospatial'
+        return unless panel["options"].present? && panel["viewType"] == "geospatial"
 
         panel["options"]["geospatial"]["geoJsonUrl"] = ENV["GEO_JSON_URL"]
       end
