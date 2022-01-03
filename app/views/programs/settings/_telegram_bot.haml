@@ -10,6 +10,7 @@
       %i.far.fa-times-circle.text-danger{'data-toggle'=> 'tooltip', title: t('telegram_bot.invalid_bot')}
 
   %div
+    = bot.username if bot.try(:enabled?)
     %a.pointer.badge.badge-info.text-white{href: telegram_bot_path, 'data-remote' => true}= t('shared.setup')
 
 = render 'programs/telegram_bots/modal'

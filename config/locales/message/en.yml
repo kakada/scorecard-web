@@ -10,6 +10,7 @@ en:
     milestone: Milestone
     scorecard_downloaded: Scorecard is downloaded
     scorecard_running: Scorecard is running
+    scorecard_renewed: Scorecard is renewed
     scorecard_submitted: Scorecard is submitted
     notify_to: Notify to
     telegram_notification_inactive: Telegram notification is inactive

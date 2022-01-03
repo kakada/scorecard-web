@@ -10,6 +10,7 @@ km:
     milestone: ដំណាក់កាល
     scorecard_downloaded: ប័ណ្ណដាក់ពិន្ទុត្រូវបានទាញយក
     scorecard_running: ប័ណ្ណដាក់ពិន្ទុកំពុងដំណើរការ
+    scorecard_renewed: ប័ណ្ណដាក់ពិន្ទុត្រូវបានដាក់ស្នើឡើងវិញ
     scorecard_submitted: ប័ណ្ណដាក់ពិន្ទុត្រូវបានដាក់ស្នើ
     notify_to: ការជូនដំណឹងទៅកាន់
     telegram_notification_inactive: ការជូនដំណឹងតាម Telegram គឺអសកម្ម
