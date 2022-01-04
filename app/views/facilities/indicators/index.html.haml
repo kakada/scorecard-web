@@ -2,7 +2,7 @@
   %h1.h3.mb-0.text-gray-800= "#{@facility.name}: #{t('indicator.indicators')}"
   %div
     = link_to facilities_path, class: 'btn btn-secondary mr-2 btn-sm shadow-sm' do
-      %i.fas.fa-chevron-left
+      %i.fas.fa-arrow-left.fa-sm.text-white-50
       = t('shared.back')
 
     %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_facility_indicator_path(@facility) }
