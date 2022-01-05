@@ -23,5 +23,5 @@
             .invalid-feedback.d-block= dataset_error.join(';')
 
     .actions
-      = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), facilities_path, class: 'btn btn-secondary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'

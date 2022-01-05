@@ -26,8 +26,8 @@ en:
     add_new: Add New
     pagination_title: "Displaying items <b>%{from}</b> - <b>%{to}</b> of <b>%{total}</b> in total"
     number: "No"
-    import_from_file: Import from file
-    download_sample_form: Download sample form
+    import_from_file: Import from Excel(.xlsx)
+    download_sample_form: Download sample Excel(.xlsx)
     are_you_sure_to_delete: Are you sure to delete it?
     confirm_logout: Are you sure you want to logout?
     name: Name
@@ -59,3 +59,7 @@ en:
     review: Review
     leave: Leave
     agree: Agree
+    excel_file: Excel file
+    import_from_zip_file: Import from compress(.zip) file
+    zip_file: Zip file
+    download_sample_zip: Download sample(.zip)

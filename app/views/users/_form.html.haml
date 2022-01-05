@@ -18,5 +18,5 @@
         = f.input :program_id, label: t('user.program'), collection: policy_scope(Program.all), input_html: {class: 'custom-select'}
 
     .actions
-      = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), users_path, class: 'btn btn-secondary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'

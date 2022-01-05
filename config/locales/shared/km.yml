@@ -26,8 +26,8 @@ km:
     add_new: បង្កើតថ្មី
     pagination_title: "បង្ហាញទិន្ន័យ <b>%{from}</b> - <b>%{to}</b> នៃចំនួនសរុប <b>%{total}</b>"
     number: លេខរៀង
-    import_from_file: បញ្ចូលទិន្នន័យពី File
-    download_sample_form: ទាញយកទម្រង់គំរូ
+    import_from_file: បញ្ចូលទិន្នន័យពី Excel(.xlsx)
+    download_sample_form: ទាញយកគំរូ Excel(.xlsx)
     are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបវាឬ?
     confirm_logout: តើអ្នកពិតជាចង់ចាកចេញឬទេ?
     name: ឈ្មោះ
@@ -59,3 +59,7 @@ km:
     review: ចូលពិនិត្យ
     leave: ចាកចេញ
     agree: យល់ព្រម
+    excel_file: ឯកសារ Excel
+    import_from_zip_file: បញ្ចូលទិន្នន័យពី Zip(.zip)
+    zip_file: ឯកសារ Zip
+    download_sample_zip: ទាញយកគំរូ (.zip)

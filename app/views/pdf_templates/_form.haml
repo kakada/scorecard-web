@@ -27,5 +27,5 @@
         %a.btn.btn-link.template-field{"data-code" => field[:code]}= field[:name]
 
     .actions
-      = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), pdf_templates_path, class: 'btn btn-secondary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'

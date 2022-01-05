@@ -33,5 +33,5 @@
         = render 'language_indicator_field', f: builder, language: lang
 
     .actions
-      = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), facility_indicators_path(@facility), class: 'btn btn-secondary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'

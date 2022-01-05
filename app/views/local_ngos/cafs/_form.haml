@@ -22,5 +22,5 @@
     = f.input :scorecard_knowledge_id, collection: ScorecardKnowledge.pluck(:"name_#{I18n.locale}", :id)
 
     .actions
-      = f.submit t('shared.save'), class: 'btn btn-primary'
       = link_to t('shared.cancel'), local_ngo_cafs_path(@local_ngo), class: 'btn btn-secondary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'

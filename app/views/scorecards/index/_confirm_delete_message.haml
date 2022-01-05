@@ -11,4 +11,4 @@
 
 .modal-footer
   %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
-  = link_to t("shared._yes"), scorecard_path(@scorecard.uuid), method: :delete, class: "btn btn-primary"
+  = link_to t("shared._yes"), scorecard_path(@scorecard.uuid), method: :delete, class: "btn btn-danger"
