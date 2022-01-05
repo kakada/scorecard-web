@@ -2,7 +2,7 @@
   .modal-dialog{:role => "document"}
     .modal-content
       .modal-header
-        %h5#templateModalLabel.modal-title= t("shared.import_from_file")
+        %h5#templateModalLabel.modal-title= t("shared.import_from_zip_file")
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
 
@@ -10,11 +10,11 @@
         .modal-body
           .form-group
             .d-flex
-              %label.flex-1 Excel file
+              %label.flex-1= t("shared.zip_file")
               %div
                 = link_to "/indicators.zip", target: "_blank" do
                   %i.fas.fa-cloud-download-alt.drop-menu-icon
-                  = t("shared.download_sample_form")
+                  = t("shared.download_sample_zip")
             .form-control.file-control-wrapper
               = f.file_field :file, accept: ".zip,.rar,.7zip"
 
