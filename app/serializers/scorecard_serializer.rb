@@ -44,6 +44,7 @@
 #  device_type               :string
 #  submitted_at              :datetime
 #  completed_at              :datetime
+#  device_token              :string
 #
 class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :facility_id, :scorecard_type,

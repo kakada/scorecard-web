@@ -44,6 +44,7 @@
 #  device_type               :string
 #  submitted_at              :datetime
 #  completed_at              :datetime
+#  device_token              :string
 #
 FactoryBot.define do
   factory :scorecard do

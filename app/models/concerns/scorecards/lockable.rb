@@ -22,6 +22,8 @@ module Scorecards::Lockable
 
     def mark_as_completed!
       lock_access!
+
+      push_notification_to_submitter_async
     end
 
     def unlock_access!
@@ -37,6 +39,29 @@ module Scorecards::Lockable
 
     def submit_locked?
       submitted_at.present?
+    end
+
+    def push_notification_to_submitter_async
+      return unless device_token.present?
+
+      ScorecardPushNotificationWorker.perform_async(uuid)
+    end
+
+    def completed_scorecard_notification_message
+      {
+        data: {
+          payload: {
+            scorecard: {
+              uuid: uuid,
+              status: progress
+            }
+          }.to_json
+        },
+        notification: {
+          title: I18n.t("scorecard.completed_scorecard"),
+          body: I18n.t("scorecard.scorecard_is_checked", uuid: uuid)
+        }
+      }
     end
 
     private
