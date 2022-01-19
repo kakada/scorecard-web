@@ -23,7 +23,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1639647145140,
+  "iteration": 1641367304311,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -61,7 +61,7 @@
         },
         "discardZeroOrNull": true,
         "geospatial": {
-          "geoJsonUrl": "http://192.168.0.104:3000/provinces.json"
+          "geoJsonUrl": "http://192.168.0.105:3000/provinces.json"
         },
         "heat": {
           "fitBoundsOnLoad": false,
@@ -820,22 +820,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Disability"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "purple",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Youth"
+              "options": "យុវជន"
             },
             "properties": [
               {
@@ -850,7 +835,22 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "ID Poor"
+              "options": "ពិការភាព"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#a352cc",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ប័ណ្ណក្រីក្រ"
             },
             "properties": [
               {
@@ -865,7 +865,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Minority"
+              "options": "ជនជាតិភាគតិច"
             },
             "properties": [
               {
@@ -1181,6 +1181,7 @@
     },
     {
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1218,13 +1219,13 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "ចំនួនជ្រើសរើស"
+              "options": "ចំនួនបានអនុវត្ត"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#edcc00",
+                  "fixedColor": "green",
                   "mode": "fixed"
                 }
               }
@@ -1264,7 +1265,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nraised AS (\n  SELECT\n    pa.*,\n    raised_indicators.id,\n    raised_indicators.indicatorable_id,\n    raised_indicators.indicatorable_type\n  FROM pa\n  INNER JOIN raised_indicators ON pa.uuid = raised_indicators.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n    AND raised_indicators.selected is true\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(distinct(raised.scorecard_uuid)) as \"ចំនួនជ្រើសរើស\"\nFROM raised\nINNER JOIN scorecards ON\n  raised.scorecard_uuid::INTEGER = scorecards.id\nINNER JOIN indi ON\n  raised.indicatorable_id = indi.id\n  AND raised.indicatorable_type = indi.type\nWHERE \n  scorecards.program_id in ($program_id)\n  AND $__timeFilter(scorecards.conducted_date)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.year in ($year)\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\n  AND scorecards.local_ngo_id in ($local_ngo_id)\n  AND scorecards.deleted_at is null\nGROUP BY indi.name\nORDER BY \"ចំនួនជ្រើសរើស\" DESC\nLIMIT 5;",
+          "rawSql": "WITH pa AS (\n  SELECT\n    p.*,\n    concat_ws (\n      ', ',\n      (CASE WHEN p.disability = true THEN 'Disability' END),\n      (CASE WHEN p.minority = true THEN 'Minority' END),\n      (CASE WHEN p.youth = true THEN 'Youth' END),\n      (CASE WHEN p.poor_card = true THEN 'ID Poor' END),\n      (CASE WHEN (p.disability = false AND p.minority = false AND p.youth = false AND p.poor_card = false) THEN 'N/A' END)\n    ) as profile\n  FROM participants AS p\n),\nraised AS (\n  SELECT\n    pa.*,\n    raised_indicators.id,\n    raised_indicators.indicatorable_id,\n    raised_indicators.indicatorable_type\n  FROM pa\n  INNER JOIN raised_indicators ON pa.uuid = raised_indicators.participant_uuid\n  WHERE\n    string_to_array(pa.profile, ', ') && array[$profile]\n    AND pa.gender in ($gender)\n    AND pa.age BETWEEN ${age:raw}\n    AND raised_indicators.selected is true\n),\nindi AS (\n  SELECT id, name, 'Indicator' as type FROM indicators\n  UNION ALL\n  SELECT id, name, 'CustomIndicator' as type FROM custom_indicators\n)\n\nSELECT\n  indi.name,\n  count(distinct(raised.scorecard_uuid)) as \"ចំនួនបានអនុវត្ត\"\nFROM raised\nINNER JOIN scorecards ON\n  raised.scorecard_uuid::INTEGER = scorecards.id\nINNER JOIN indi ON\n  raised.indicatorable_id = indi.id\n  AND raised.indicatorable_type = indi.type\nWHERE \n  scorecards.program_id in ($program_id)\n  AND $__timeFilter(scorecards.conducted_date)\n  AND scorecards.scorecard_type in ($scorecard_type)\n  AND scorecards.year in ($year)\n  AND scorecards.facility_id in ($facility_id)\n  AND scorecards.province_id in ($province_id)\n  AND scorecards.local_ngo_id in ($local_ngo_id)\n  AND scorecards.deleted_at is null\nGROUP BY indi.name\nORDER BY \"ចំនួនបានអនុវត្ត\" DESC\nLIMIT 5;",
           "refId": "A",
           "select": [
             [
@@ -1336,7 +1337,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#edcc00",
+                  "fixedColor": "green",
                   "mode": "fixed"
                 }
               }
@@ -1400,7 +1401,7 @@
           ]
         }
       ],
-      "title": "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (ពេញចិត្ត)",
+      "title": "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (😁 ពេញចិត្ត)",
       "type": "barchart"
     },
     {
@@ -1448,7 +1449,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#edcc00",
+                  "fixedColor": "orange",
                   "mode": "fixed"
                 }
               }
@@ -1512,7 +1513,7 @@
           ]
         }
       ],
-      "title": "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (ទទួលយកបាន)",
+      "title": "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (🙂 ទទួលយកបាន)",
       "type": "barchart"
     },
     {
@@ -1560,7 +1561,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#edcc00",
+                  "fixedColor": "red",
                   "mode": "fixed"
                 }
               }
@@ -1624,7 +1625,7 @@
           ]
         }
       ],
-      "title": "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (មិនពេញចិត្ត)",
+      "title": "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (😡 មិនពេញចិត្ត)",
       "type": "barchart"
     },
     {
@@ -1882,7 +1883,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": [
             "All"
           ],

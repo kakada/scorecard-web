@@ -18,9 +18,9 @@
     %li
       %a.btn.btn-link.pl-0.text-left{class: ('disabled' unless @scorecard.submitted_at.present?)}= t("scorecard.in_review_date")
 
-      - if @scorecard.finished_date.present?
-        %span.badge.badge-light.duration= distance_of_time_in_words(@scorecard.conducted_date, @scorecard.finished_date)
-        .at= l(@scorecard.finished_date, format: :nice)
+      - if @scorecard.submitted_at.present?
+        %span.badge.badge-light.duration= distance_of_time_in_words(@scorecard.conducted_date, @scorecard.submitted_at)
+        .at= l(@scorecard.submitted_at, format: :nice)
 
     / Completed date (completed_date)
     %li

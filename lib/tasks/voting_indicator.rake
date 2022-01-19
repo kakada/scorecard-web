@@ -63,4 +63,3 @@ namespace :voting_indicator do
       end
     end
 end
-
