@@ -4,14 +4,29 @@ class ScorecardsController < ApplicationController
   before_action :set_scorecard, only: [:show, :edit, :update, :destroy, :complete]
 
   def index
-    @pagy, @scorecards = pagy(
-      policy_scope(Scorecard.filter(filter_params)
-        .order("#{sort_column} #{sort_direction}")
-        .includes(
-          :facility, :local_ngo, :request_changes, :primary_school
+    respond_to do |format|
+      format.html {
+        @pagy, @scorecards = pagy(
+          policy_scope(Scorecard.filter(filter_params)
+            .order("#{sort_column} #{sort_direction}")
+            .includes(
+              :facility, :local_ngo, :request_changes, :primary_school
+            )
+          )
         )
-      )
-    )
+      }
+
+      format.xlsx {
+        @scorecards = policy_scope(Scorecard.filter(filter_params).order("#{sort_column} #{sort_direction}").includes(:participants, :raised_indicators, :voting_indicators))
+
+        if @scorecards.length > Settings.max_download_scorecard_record
+          flash[:alert] = t("scorecard.file_size_is_too_big")
+          redirect_to scorecards_url
+        else
+          render xlsx: "index", filename: "scorecards_#{Time.new.strftime('%Y%m%d_%H_%M_%S')}.xlsx"
+        end
+      }
+    end
   end
 
   def show

@@ -8,3 +8,5 @@ smtp:
   password: <%= ENV['SETTINGS__SMTP__PASSWORD'] %>
   authentication: <%= ENV['SETTINGS__SMTP__AUTHENTICATION'] %>
   enable_starttls_auto: <%= ENV['SETTINGS__SMTP__ENABLE_STARTTLS_AUTO'] %>
+
+max_download_scorecard_record: <%= ENV.fetch('MAX_DOWNLOAD_SCORECARD_RECORD') { 1000 }.to_i %>

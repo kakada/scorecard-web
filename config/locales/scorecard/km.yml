@@ -57,7 +57,6 @@ km:
     disability: ពិការភាព
     female: ស្រី
     selected_indicators: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
-    completed: អនុវត្តរួចរាល់
     planned: នឹងត្រូវអនុវត្ត
     all: ទាំងអស់
     record_is_locked: ប័ណ្ណដាក់ពិន្ទុនេះត្រូវបានចាក់សោ!
@@ -82,6 +81,7 @@ km:
     submitted: បានដាក់ស្នើ
     renewed: ស្នើឡើងវិញ
     in_review: កំពុងត្រួតពិនិត្យ
+    completed: អនុវត្តរួចរាល់
     references: ឯកសារយោង
     implemented_date: កាលបរិច្ឆេទអនុវត្ត
     submitted_date: កាលបរិច្ឆេទទទួលបានសំណើរ
@@ -115,3 +115,24 @@ km:
     in_review_date: កាលបរិច្ឆេទដាក់ត្រួតពិនិត្យ
     completed_date: កាលបរិច្ឆេទបញ្ចប់
     mark_as_completed: សម្គាល់ថាបានបញ្ចប់
+    selected: ត្រូវបានជ្រើសរើស
+    file_size_is_too_big: ទំហំឯកសារធំពេកសូមច្រោះវា!
+    download_excel: ទាញយកជា Excel(.xlsx)
+    scorecard_id: លេខសម្គាល់ប័ណ្ណដាក់ពិន្ទុ
+    proposed_indicator_id: លេខសម្គាល់លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
+    score: ពិន្ទុ
+    type: ប្រភេទ
+    number_of_male: ចំនួនអ្នកចូលរួមប្រុស
+    number_of_other: ចំនួនអ្នកចូលរួមផ្សេងៗ
+    number_of_proposed_indicator: ចំនួនលក្ខណៈវិនិច្ឆ័យដែលស្នើឡើង
+    number_of_indicator_development: ចំនួននៃការអភិវឌ្ឍន៍លក្ខណៈវិនិច្ឆ័យ
+    number_of_proposed_suggested_actions: ចំនួននៃសកម្មភាពដែលបានស្នើឡើង
+    number_of_suggested_actions: ចំនួនសកម្មភាពដែលបានជ្រើសរើស
+    participant_id: លេខសម្គាល់អ្នកចូលរួម
+    name: ឈ្មោះ
+    gender: ភេទ
+    age: អាយុ
+    youth: យុវជន
+    disability: ពិការភាព
+    id_poor: ប័ណ្ណក្រីក្រ
+    minority: ជនជាតិភាគតិច

@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+require "builders/scorecard_excel_builder"
+
+ScorecardExcelBuilder.new(xlsx_package.workbook, @scorecards).build

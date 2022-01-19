@@ -1,16 +1,4 @@
-.d-sm-flex.align-items-center.justify-content-between.mb-4
-  %h1.h3.mb-0.text-gray-800= t("scorecard.scorecards")
-  .mt-3.mt-md-0.text-right
-    - if policy(Scorecard).setting?
-      %a.btn.btn-secondary.btn-sm.shadow-sm{ href: setting_url }
-        %i.fas.fa-wrench.fa-sm.text-white-50
-        = t("sidebar.settings")
-
-    - if policy(Scorecard).create?
-      %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_scorecard_path }
-        %i.fas.fa-plus.fa-sm.text-white-50
-        = t("scorecard.add_new")
-
+= render 'scorecards/index/page_title'
 = render 'scorecards/index/nav_tabs'
 = render 'scorecards/index/filter'
 

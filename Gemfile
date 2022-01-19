@@ -51,6 +51,10 @@ gem "awesome_nested_set", "~> 3.2.1"
 gem "roo", "~> 2.8.3"
 gem "active_model_serializers", "~> 0.10.10"
 
+# Write excel
+gem "caxlsx"
+gem "caxlsx_rails"
+
 gem "bootstrap4-datetime-picker-rails", "~> 0.3.1"
 
 gem "strip_attributes", "~> 1.11.0"
