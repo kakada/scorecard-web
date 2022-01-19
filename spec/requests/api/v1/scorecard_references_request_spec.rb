@@ -22,7 +22,7 @@ RSpec.describe "Api::V1::ScorecardReferencesController", type: :request do
 
     context "scorecard is locked!" do
       before {
-        scorecard.lock_access!
+        scorecard.lock_submit!
         post "/api/v1/scorecards/#{scorecard.uuid}/scorecard_references", params: { scorecard_reference: params.to_json }, headers: headers
       }
 

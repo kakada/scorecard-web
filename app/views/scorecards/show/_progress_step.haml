@@ -1,5 +1,7 @@
 - disabled ||= false
 - sub_title = sub_title.presence || '_'
+- in_review ||= false
+- label_button = in_review ? t("shared.review") : t("shared.view_detail")
 
 .card
   .card-header
@@ -10,6 +12,7 @@
     .d-flex
       .flex-1= disabled ? '_' : sub_title
 
-      %div
-        - unless disabled
-          = link_to t("shared.view_detail"), url, remote: true, class: "btn btn-primary"
+      - unless disabled
+        %div
+          = link_to label_button, url, remote: true, class: "btn btn-primary"
+

@@ -8,26 +8,23 @@
       %th.align-middle.text-center{:scope => "col"}= t("scorecard.suggested_action")
 
   %tbody
-    - @voting_indicators.each do |indicator|
+    - @voting_indicators.each_with_index do |indicator, index|
       %tr
-        %td.text-break= indicator.indicatorable.name
+        %td.text-break= "#{index + 1}) #{indicator.indicatorable.name}"
         %td.text-center= VotingIndicator.medians[indicator.median]
-        %td
-          %ul.text-break
-            - indicator.strength.each do |str|
-              %li= str
 
-        %td
-          %ul.text-break
-            - indicator.weakness.each do |str|
-              %li= str
-        %td
-          %ul.text-break
-            - indicator.suggested_actions.each do |action|
-              %li
-                - if action.selected
-                  %span.badge.badge-info= t('scorecard.selected')
-                = action.content
+        - ['strength', 'weakness', 'suggested'].each do |action|
+          %td
+            %ul.text-break
+              - indicator.send("#{action}_indicator_activities").each do |activity|
+                %li
+                  - if policy(@scorecard).in_review?
+                    .d-flex.align-items-start
+                      = best_in_place activity, :content, url: scorecards_indicator_activity_path(activity), as: :input, class: [('text-info action-selected' if activity.selected?), 'inline-edit'], param: 'indicator_activity', activator: "##{activity.id}"
+                      %i.fas.fa-pen.btn-sm.text-warning.edit-icon{id: activity.id}
+                  - else
+                    %span{class: ('text-info action-selected' if activity.selected?)}
+                      = activity.content
 
 - if references = @scorecard.scorecard_references.presence
   .mb-2

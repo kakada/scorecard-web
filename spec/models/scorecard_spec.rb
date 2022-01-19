@@ -42,6 +42,8 @@
 #  deleted_at                :datetime
 #  published                 :boolean          default(FALSE)
 #  device_type               :string
+#  submitted_at              :datetime
+#  completed_at              :datetime
 #
 require "rails_helper"
 
@@ -84,7 +86,7 @@ RSpec.describe Scorecard, type: :model do
   end
 
   describe "validate #locked_scorecard" do
-    let!(:scorecard) { create(:scorecard, locked_at: DateTime.now) }
+    let!(:scorecard) { create(:scorecard, completed_at: DateTime.now) }
 
     it { expect(scorecard.update(name: "test")).to be_falsey }
 
@@ -98,26 +100,26 @@ RSpec.describe Scorecard, type: :model do
     let!(:scorecard) { create(:scorecard) }
     before { scorecard.lock_access! }
 
-    it { expect(scorecard.locked_at).not_to be_nil }
+    it { expect(scorecard.completed_at).not_to be_nil }
   end
 
   describe "#unlock_access!" do
-    let!(:scorecard) { create(:scorecard, locked_at: Time.now.utc) }
+    let!(:scorecard) { create(:scorecard, completed_at: Time.now.utc) }
     before { scorecard.unlock_access! }
 
-    it { expect(scorecard.locked_at).to be_nil }
+    it { expect(scorecard.completed_at).to be_nil }
     it { expect(scorecard.update(name: "test")).to be_truthy }
   end
 
   describe "#access_locked?" do
     context "true" do
-      let!(:scorecard) { create(:scorecard, locked_at: Time.now.utc) }
+      let!(:scorecard) { create(:scorecard, completed_at: Time.now.utc) }
 
       it { expect(scorecard.access_locked?).to be_truthy }
     end
 
     context "false" do
-      let!(:scorecard) { create(:scorecard, locked_at: nil) }
+      let!(:scorecard) { create(:scorecard, completed_at: nil) }
 
       it { expect(scorecard.access_locked?).to be_falsey }
     end

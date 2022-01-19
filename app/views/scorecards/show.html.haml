@@ -8,6 +8,7 @@
       = render 'scorecards/show/scorecard_progress'
 
     %div.flex-1.mt-3.mt-md-0
+      / Scorecard detail
       = render 'scorecards/show/progress_step', label: "1. #{t('scorecard.setup')}", url: scorecard_path(@scorecard.uuid), sub_title: scorecard_setup_sub_title
 
       - disabled_button = @scorecard.raised_indicators.blank?
@@ -16,15 +17,18 @@
 
       .veticial-line
 
-      = render 'scorecards/show/progress_step', label: "2. #{t('scorecard.proposed_indicator')}", url: scorecard_indicators_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_proposed_indicator')}: #{num_proposed_indicator}"
+      / Indicator Development
+      = render 'scorecards/show/progress_step', label: "2. #{t('scorecard.proposed_indicator')}", url: scorecard_indicators_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_proposed_indicator')}: #{num_proposed_indicator}", in_review: policy(@scorecard).in_review?
 
       .veticial-line
 
+      / Voting Indicator
       = render 'scorecards/show/progress_step', label: "3. #{t('scorecard.indicator_development')}", url: scorecard_medians_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.number_of_selected_indicator')}: #{@scorecard.voting_indicators.length}"
 
       .veticial-line
 
-      = render 'scorecards/show/progress_step', label: "4. #{t('scorecard.swot_table')}", url: scorecard_swots_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.indicator_count', count: @scorecard.voting_indicators.length)}, #{t('scorecard.suggested_action_count', count: @scorecard.suggested_actions.length)}, #{t('scorecard.selected_action_count', count: @scorecard.suggested_actions.selecteds.count)}"
+      / SWOT
+      = render 'scorecards/show/progress_step', label: "4. #{t('scorecard.swot_table')}", url: scorecard_swots_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.indicator_count', count: @scorecard.voting_indicators.length)}, #{t('scorecard.suggested_action_count', count: @scorecard.suggested_indicator_activities.length)}, #{t('scorecard.selected_action_count', count: @scorecard.suggested_indicator_activities.selecteds.count)}", in_review: policy(@scorecard).in_review?
 
 = render "scorecards/show/main_modal"
 = render "scorecards/show/modal_scorecard_uuid"

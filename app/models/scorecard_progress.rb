@@ -19,8 +19,9 @@ class ScorecardProgress < ApplicationRecord
   enum status: {
     downloaded: 1,
     running: 2,
-    submitted: 3,
-    renewed: 4
+    renewed: 4,
+    in_review: 3,
+    completed: 5
   }
 
   after_save :set_scorecard_progress

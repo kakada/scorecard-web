@@ -21,7 +21,7 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def submit?
-    download? && !record.access_locked?
+    download? && !record.submit_locked?
   end
 
   def create?
@@ -42,6 +42,10 @@ class ScorecardPolicy < ApplicationPolicy
 
   def request_change?
     user.lngo? || (create? && record.request_changes.length > 0)
+  end
+
+  def in_review?
+    user.lngo? && record.in_review?
   end
 
   class Scope < Scope

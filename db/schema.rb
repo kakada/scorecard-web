@@ -148,6 +148,16 @@ ActiveRecord::Schema.define(version: 2021_12_14_092141) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "indicator_activities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "voting_indicator_uuid"
+    t.string "scorecard_uuid"
+    t.text "content"
+    t.boolean "selected"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "indicators", force: :cascade do |t|
     t.integer "categorizable_id"
     t.string "categorizable_type"
@@ -451,6 +461,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_092141) do
     t.datetime "deleted_at"
     t.boolean "published", default: false
     t.string "device_type"
+    t.datetime "submitted_at"
+    t.datetime "completed_at"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end

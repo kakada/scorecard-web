@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ScorecardsController < ApplicationController
-  before_action :set_scorecard, only: [:show, :edit, :update, :destroy]
+  before_action :set_scorecard, only: [:show, :edit, :update, :destroy, :complete]
 
   def index
     @pagy, @scorecards = pagy(
@@ -65,6 +65,13 @@ class ScorecardsController < ApplicationController
     @scorecard.destroy
 
     redirect_to scorecards_url
+  end
+
+  def complete
+    authorize @scorecard, :in_review?
+    @scorecard.mark_as_completed!
+
+    redirect_to scorecard_url(@scorecard.uuid)
   end
 
   private

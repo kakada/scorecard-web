@@ -36,7 +36,7 @@ module ScorecardsHelper
   end
 
   def status_html(scorecard)
-    status_type = ["status", scorecard.status, scorecard.progress, "html"].compact.join("_")
+    status_type = ["status", scorecard.status, "html"].compact.join("_")
     send(status_type, scorecard.status) rescue scorecard.status
   end
 

@@ -16,7 +16,7 @@ module Sample
       ::ScorecardCriteria::Indicator.load
       ::Sample::Caf.load
       ::ScorecardCriteria::RatingScale.load
-      ::Sample::Scorecard.load
+      # ::Sample::Scorecard.load
 
       ::Sample::EducationalBackground.load
       ::Sample::ScorecardKnowledge.load

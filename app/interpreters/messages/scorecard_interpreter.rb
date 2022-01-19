@@ -19,10 +19,6 @@ module Messages
       end
     end
 
-    def finished_date
-      I18n.l(scorecard.finished_date, format: :nice)
-    end
-
     def code
       scorecard.uuid
     end
@@ -44,7 +40,7 @@ module Messages
       def render_date(field)
         date = scorecard.send(field.to_sym)
 
-        date.present? ? I18n.l(date) : nil
+        date.present? ? I18n.l(date, format: :nice) : nil
       end
   end
 end

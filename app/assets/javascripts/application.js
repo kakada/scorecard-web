@@ -19,6 +19,7 @@
 //= require bloodhound.min
 //= require jquery.richtext
 //= require daterangepicker
+//= require best_in_place
 
 //= require application/namespace
 //= require application/util

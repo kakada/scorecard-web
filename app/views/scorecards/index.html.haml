@@ -43,7 +43,7 @@
               %tr
                 %td= @pagy.from + index
                 %td{style: 'min-width: 106px'}
-                  = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'btn btn-link p-0'
+                  = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'text-primary'
                   = render 'scorecard_copy', scorecard: scorecard
                 %td= scorecard.year
                 %td= scorecard.facility.name

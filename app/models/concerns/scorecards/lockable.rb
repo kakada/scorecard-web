@@ -7,17 +7,36 @@ module Scorecards::Lockable
     validate :locked_scorecard, on: :update
 
     def lock_access!
-      self.locked_at = Time.now.utc
+      self.completed_at = Time.now.utc
+      self.progress = Scorecard::STATUS_COMPLETED
+
       save(validate: false)
     end
 
+    def lock_submit!
+      self.submitted_at = Time.now.utc
+      self.progress = Scorecard::STATUS_IN_REVIEW
+
+      save(validate: false)
+    end
+
+    def mark_as_completed!
+      lock_access!
+    end
+
     def unlock_access!
-      self.locked_at = nil
+      self.completed_at = nil
+      self.progress = Scorecard::STATUS_IN_REVIEW
+
       save(validate: false)
     end
 
     def access_locked?
-      !!locked_at
+      completed_at.present?
+    end
+
+    def submit_locked?
+      submitted_at.present?
     end
 
     private

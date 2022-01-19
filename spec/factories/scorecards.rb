@@ -42,6 +42,8 @@
 #  deleted_at                :datetime
 #  published                 :boolean          default(FALSE)
 #  device_type               :string
+#  submitted_at              :datetime
+#  completed_at              :datetime
 #
 FactoryBot.define do
   factory :scorecard do

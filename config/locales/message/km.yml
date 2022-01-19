@@ -11,7 +11,8 @@ km:
     scorecard_downloaded: ប័ណ្ណដាក់ពិន្ទុត្រូវបានទាញយក
     scorecard_running: ប័ណ្ណដាក់ពិន្ទុកំពុងដំណើរការ
     scorecard_renewed: ប័ណ្ណដាក់ពិន្ទុត្រូវបានដាក់ស្នើឡើងវិញ
-    scorecard_submitted: ប័ណ្ណដាក់ពិន្ទុត្រូវបានដាក់ស្នើ
+    scorecard_in_review: ប័ណ្ណដាក់ពិន្ទុត្រូវបានដាក់ស្នើត្រួតពិនិត្យ
+    scorecard_completed: ប័ណ្ណដាក់ពិន្ទុត្រូវបានបញ្ចប់
     notify_to: ការជូនដំណឹងទៅកាន់
     telegram_notification_inactive: ការជូនដំណឹងតាម Telegram គឺអសកម្ម
     no_chat_group_selected: គ្មានក្រុមជជែកត្រូវបានជ្រើសរើសទេ

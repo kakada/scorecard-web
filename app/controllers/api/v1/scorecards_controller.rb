@@ -28,7 +28,7 @@ module Api
         authorize @scorecard, :submit?
 
         if @scorecard.update(scorecard_params)
-          @scorecard.lock_access!
+          @scorecard.lock_submit!
           render json: @scorecard, status: :ok
         else
           render json: { errors: @scorecard.errors }, status: :unprocessable_entity
@@ -54,8 +54,10 @@ module Api
             ],
             voting_indicators_attributes: [
               :uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :scorecard_uuid, :display_order,
-              :median, strength: [], weakness: [], suggested_action: [],
-              suggested_actions_attributes: [ :voting_indicator_uuid, :scorecard_uuid, :content, :selected ]
+              :median,
+              strength: [], weakness: [], suggested_action: [],
+              suggested_actions_attributes: [ :voting_indicator_uuid, :scorecard_uuid, :content, :selected ],
+              indicator_activities_attributes: [ :uuid, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]
             ],
             ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ]
           )

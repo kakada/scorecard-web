@@ -11,7 +11,8 @@ en:
     scorecard_downloaded: Scorecard is downloaded
     scorecard_running: Scorecard is running
     scorecard_renewed: Scorecard is renewed
-    scorecard_submitted: Scorecard is submitted
+    scorecard_in_review: Scorecard is in review
+    scorecard_completed: Scorecard is completed
     notify_to: Notify to
     telegram_notification_inactive: Telegram notification is inactive
     no_chat_group_selected: No chat group is selected

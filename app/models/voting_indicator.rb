@@ -23,7 +23,13 @@ class VotingIndicator < ApplicationRecord
   has_many :suggested_actions, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many :raised_indicators, foreign_key: :voting_indicator_uuid
 
+  has_many   :indicator_activities, foreign_key: :voting_indicator_uuid, dependent: :destroy
+  has_many   :strength_indicator_activities, foreign_key: :voting_indicator_uuid, dependent: :destroy
+  has_many   :weakness_indicator_activities, foreign_key: :voting_indicator_uuid, dependent: :destroy
+  has_many   :suggested_indicator_activities, foreign_key: :voting_indicator_uuid, dependent: :destroy
+
   accepts_nested_attributes_for :suggested_actions, allow_destroy: true
+  accepts_nested_attributes_for :indicator_activities, allow_destroy: true
 
   enum median: {
     very_bad: 1,

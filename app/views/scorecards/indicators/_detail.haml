@@ -8,7 +8,14 @@
     - @criterias.each do |criteria|
       %tr
         %td
-          .mb-2= criteria["name"]
+          .mb-2
+            - if criteria['indicator'].class.to_s == 'CustomIndicator' && policy(@scorecard).in_review?
+              .d-flex.align-items-start
+                %i.fas.fa-pen.btn-sm.text-warning
+
+                = best_in_place criteria['indicator'], :name, url: scorecard_indicator_path(@scorecard.uuid, criteria['indicator'].id), as: :input
+            - else
+              = criteria["name"]
 
           .text-muted.card-subtitle.text-sm
             = participant_information(criteria, 'count').html_safe
