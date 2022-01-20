@@ -12,7 +12,7 @@ namespace :scorecard do
   task migrate_to_include_submitted_and_completed_info: :environment do
     Scorecard.where.not(locked_at: nil).find_each do |scorecard|
       scorecard.update_columns(
-        progress: 'completed',
+        progress: "completed",
         submitted_at: scorecard.locked_at,
         completed_at: scorecard.locked_at
       )

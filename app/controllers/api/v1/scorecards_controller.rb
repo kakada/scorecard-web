@@ -46,7 +46,7 @@ module Api
           params.require(:scorecard).permit(
             :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,
             :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
-            :finished_date, :language_conducted_code, :running_date, :device_type,
+            :finished_date, :language_conducted_code, :running_date, :device_type, :device_token,
             facilitators_attributes: [ :id, :caf_id, :position, :scorecard_uuid ],
             participants_attributes: [ :uuid, :age, :gender, :disability, :minority, :youth, :poor_card, :scorecard_uuid ],
             raised_indicators_attributes: [

@@ -136,3 +136,5 @@ en:
     disability: Disability
     id_poor: ID Poor
     minority: Minority
+    scorecard_is_checked: "The scorecard %{uuid} is checked, so you can download and share it now!"
+    completed_scorecard: Completed Scorecard
