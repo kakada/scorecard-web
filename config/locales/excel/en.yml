@@ -1,0 +1,48 @@
+en:
+  excel:
+    # Scorecard Summary
+    scorecard_id: Scorecard ID
+    location: Location
+    planned_start_date: Planned Start Date
+    planned_end_date: Planned End Date
+    submitted_date: Submitted Date
+    completed_date: Completed Date
+    status: Status
+    scorecard_type: Scorecard Type
+    implementer: Implementer
+    total_participant: Total Participant
+    number_of_participant_as_female: Number of Female Participant
+    number_of_participant_as_male: Number of Male Participant
+    number_of_participant_as_other: Number of Gender Other Participant
+    number_of_youth: Number of Youth
+    number_of_minority: Number of Minority
+    number_of_disability: Number of Disability
+    number_of_id_poor: Number of ID Poor
+    number_of_raised_indicator: Number of Raised Indicator
+    number_of_selected_for_voting: Number of Selected for Voting
+    total_suggested_action: Total Suggested Action
+    total_selected_suggested_action: Total Selected Suggested Action
+    # Participant
+    participant_id: Participant ID
+    age: Age
+    gender: Gender
+    youth: Youth
+    disability: Disability
+    id_poor: ID Poor
+    minority: Minority
+    # Indicator
+    indicator_id: Indicator ID
+    indicator_name: Indicator Name
+    indicator_tag: Indicator Tag
+    is_custom_indicator: Is Customed Indicator
+    facility_name: Facility Name
+    # Proposed Indicator
+    seleted_for_implementation: Selected for Implementation
+    # Voting Summary
+    average_score: Average Score
+    # Voting Detail
+    score: Score
+    # Scorecard Result
+    weakness: Weakness
+    strength: Strength
+    suggested_action: Suggested Action

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module ScorecardExcel
-  class VotingExcelBuilder
+module ExcelBuilders
+  class VotingSummaryExcelBuilder
     attr_accessor :sheet
 
     def initialize(sheet)
@@ -10,10 +10,9 @@ module ScorecardExcel
 
     def build_header
       sheet.add_row [
-        I18n.t("scorecard.id"),
-        I18n.t("scorecard.scorecard_id"),
-        I18n.t("scorecard.proposed_indicator_id"),
-        I18n.t("scorecard.score")
+        I18n.t("excel.scorecard_id"),
+        I18n.t("excel.indicator_id"),
+        I18n.t("excel.average_score")
       ]
     end
 
@@ -27,19 +26,10 @@ module ScorecardExcel
     private
       def generate_row(voting_indicator, scorecard)
         [
-          voting_indicator.id,
           voting_indicator.scorecard.uuid,
-          raised_indicator_id(voting_indicator),
+          voting_indicator.indicator_uuid,
           VotingIndicator.medians[voting_indicator.median]
         ]
-      end
-
-      def raised_indicator_id(voting_indicator)
-        raised_indicators.select { |ri| ri.indicatorable == voting_indicator.indicatorable }.first.try(:id)
-      end
-
-      def raised_indicators
-        @raised_indicators ||= @scorecard.raised_indicators
       end
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Dir["/app/lib/builders/scorecard_excel/*.rb"].each { |file| require file }
+Dir["/app/lib/builders/excel_builders/*.rb"].each { |file| require file }
 
 class ScorecardExcelBuilder
   def initialize(workbook, scorecards)
@@ -9,14 +9,15 @@ class ScorecardExcelBuilder
   end
 
   def build
-    %w(ScorecardSummary Participant ProposedIndicator Voting ScorecardResult).each do |sheet_name|
-      add_worksheet(sheet_name)
+    %w(ScorecardSummary Participant Indicator ProposedIndicator VotingSummary VotingDetail ScorecardResult).each do |klass_name|
+      add_worksheet(klass_name)
     end
   end
 
   private
-    def add_worksheet(sheet_name)
-      model = "ScorecardExcel::#{sheet_name}ExcelBuilder".constantize
+    def add_worksheet(klass_name)
+      model = "ExcelBuilders::#{klass_name}ExcelBuilder".constantize
+      sheet_name = klass_name.split(/(?=[A-Z])/).join('_').downcase
 
       @workbook.add_worksheet(name: sheet_name) do |sheet|
         builder = model.new(sheet)
