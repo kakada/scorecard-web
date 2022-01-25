@@ -9,11 +9,11 @@ module Scorecards
     end
 
     def criterias
-      scorecard.voting_indicators.includes(:indicatorable, ratings: :participant).order(:display_order).map do |indicator|
-        criteria = indicator.as_json
-        criteria = assign_rating_info(criteria, indicator)
-        criteria = assign_participant_info(criteria, indicator)
-        criteria["name"] = indicator.indicatorable.name
+      scorecard.voting_indicators.includes(:indicator, ratings: :participant).order(:display_order).map do |vi|
+        criteria = vi.as_json
+        criteria = assign_rating_info(criteria, vi)
+        criteria = assign_participant_info(criteria, vi)
+        criteria["name"] = vi.indicator.name
         criteria
       end
     end

@@ -219,7 +219,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { raised_indicators_attributes: [{ indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "123", selected: true }],
-                          voting_indicators_attributes: [{ uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1 }]
+                          voting_indicators_attributes: [{ uuid: "123", indicator_uuid: indicator.uuid, indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1 }]
                         }
                       }
     let(:voting_indicators) { scorecard.reload.voting_indicators }

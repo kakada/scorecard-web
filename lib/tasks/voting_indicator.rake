@@ -28,6 +28,13 @@ namespace :voting_indicator do
     end
   end
 
+  desc "migrate indicator_uuid"
+  task migrate_indicator_uuid: :environment do
+    VotingIndicator.includes(:indicatorable).find_each do |ri|
+      ri.update(indicator_uuid: ri.indicatorable.uuid)
+    end
+  end
+
   private
     def migrate_suggested_action(voting_indicator)
       voting_indicator.suggested_actions.each do |suggested|

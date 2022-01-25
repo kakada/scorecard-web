@@ -15,10 +15,12 @@
 #  updated_at         :datetime         not null
 #  uuid               :string           default("uuid_generate_v4()"), not null, primary key
 #  display_order      :integer
+#  indicator_uuid     :string
 #
 class VotingIndicator < ApplicationRecord
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
   belongs_to :indicatorable, polymorphic: true
+  belongs_to :indicator, foreign_key: :indicator_uuid, primary_key: :uuid, optional: true
   has_many :ratings, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many :suggested_actions, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many :raised_indicators, foreign_key: :voting_indicator_uuid
@@ -44,4 +46,10 @@ class VotingIndicator < ApplicationRecord
   serialize :suggested_action, Array
 
   before_create :secure_uuid
+  after_validation :set_indicator_uuid
+
+  private
+    def set_indicator_uuid
+      self.indicator_uuid ||= indicatorable.try(:uuid)
+    end
 end

@@ -17,7 +17,7 @@ RSpec.describe "Api::V1::CustomIndicatorsController", type: :request do
 
       it { expect(response.content_type).to eq("application/json; charset=utf-8") }
       it { expect(response).to have_http_status(:created) }
-      it { expect(scorecard.custom_indicators.length).to eq(1) }
+      it { expect(scorecard.facility.indicators.customeds.length).to eq(1) }
     end
 
     context "scorecard is locked!" do
@@ -50,7 +50,7 @@ RSpec.describe "Api::V1::CustomIndicatorsController", type: :request do
 
       it { expect(response.content_type).to eq("application/json; charset=utf-8") }
       it { expect(response).to have_http_status(:created) }
-      it { expect(scorecard.custom_indicators.length).to eq(1) }
+      it { expect(scorecard.facility.indicators.customeds.length).to eq(1) }
     end
   end
 end

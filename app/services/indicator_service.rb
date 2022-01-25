@@ -83,7 +83,7 @@ class IndicatorService
     end
 
     def clone_indicator(from_obj, to_obj)
-      from_obj.indicators.each do |old_indicator|
+      from_obj.indicators.predefineds.each do |old_indicator|
         new_indicator = to_obj.indicators.new(clean_attributes(old_indicator))
 
         old_indicator.languages_indicators.each do |lang_indi|

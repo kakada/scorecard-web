@@ -13,6 +13,9 @@
 #  tag_id             :integer
 #  display_order      :integer
 #  image              :string
+#  uuid               :string
+#  audio              :string
+#  type               :string           default("PredefinedIndicator")
 #
 require "rails_helper"
 

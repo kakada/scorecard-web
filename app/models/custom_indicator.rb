@@ -14,7 +14,6 @@
 #  uuid           :string
 #
 class CustomIndicator < ApplicationRecord
-  include Indicatorable
   include Tagable
 
   mount_uploader :audio, AudioUploader

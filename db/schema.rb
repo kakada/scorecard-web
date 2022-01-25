@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_093319) do
+ActiveRecord::Schema.define(version: 2022_01_24_032000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -167,6 +167,9 @@ ActiveRecord::Schema.define(version: 2022_01_05_093319) do
     t.integer "tag_id"
     t.integer "display_order"
     t.string "image"
+    t.string "uuid"
+    t.string "audio"
+    t.string "type", default: "PredefinedIndicator"
   end
 
   create_table "language_rating_scales", force: :cascade do |t|
@@ -359,6 +362,7 @@ ActiveRecord::Schema.define(version: 2022_01_05_093319) do
     t.string "participant_uuid"
     t.boolean "selected", default: false
     t.string "voting_indicator_uuid"
+    t.string "indicator_uuid"
   end
 
   create_table "rating_scales", force: :cascade do |t|
@@ -460,9 +464,9 @@ ActiveRecord::Schema.define(version: 2022_01_05_093319) do
     t.datetime "running_date"
     t.datetime "deleted_at"
     t.boolean "published", default: false
-    t.string "device_type"
     t.datetime "submitted_at"
     t.datetime "completed_at"
+    t.string "device_type"
     t.string "device_token"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
@@ -548,6 +552,7 @@ ActiveRecord::Schema.define(version: 2022_01_05_093319) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "display_order"
+    t.string "indicator_uuid"
   end
 
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"

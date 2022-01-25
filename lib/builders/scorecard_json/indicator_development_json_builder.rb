@@ -18,12 +18,12 @@ module ScorecardJson
     private
       def build_indicators
         voting_indicators.map do |vi|
-          { name: vi.indicatorable.name, tag: vi.indicatorable.tag_name }
+          { name: vi.indicator.name, tag: vi.indicator.tag_name }
         end
       end
 
       def voting_indicators
-        @voting_indicators ||= scorecard.voting_indicators.order(:display_order).includes(:indicatorable)
+        @voting_indicators ||= scorecard.voting_indicators.order(:display_order).includes(:indicator)
       end
   end
 end

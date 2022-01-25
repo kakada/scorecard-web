@@ -14,6 +14,7 @@
 #  participant_uuid      :string
 #  selected              :boolean          default(FALSE)
 #  voting_indicator_uuid :string
+#  indicator_uuid        :string
 #
 FactoryBot.define do
   factory :raised_indicator do
