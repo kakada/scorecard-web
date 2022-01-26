@@ -13,6 +13,7 @@
 #  tag_id         :integer
 #  uuid           :string
 #
+# Todo: refactoring, use only in version 1
 class CustomIndicator < ApplicationRecord
   include Tagable
 

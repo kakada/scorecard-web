@@ -9,7 +9,7 @@
       %tr
         %td
           .mb-2
-            - if criteria['indicator'].class.to_s == 'CustomedIndicator' && policy(@scorecard).in_review?
+            - if criteria['indicator'].class.name.split('::').last == 'CustomIndicator' && policy(@scorecard).in_review?
               .d-flex.align-items-start
                 %i.fas.fa-pen.btn-sm.text-warning
 

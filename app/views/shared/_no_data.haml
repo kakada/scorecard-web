@@ -6,7 +6,7 @@
   .text-center.no-data
     %h2= t('shared.no_data_found')
 
-    - if policy(items.class.to_s.split("::").first.constantize).create? && !request.query_string.present?
+    - if policy(items.class.to_s.split("::")[0..-2].join('::').constantize).create? && !request.query_string.present?
       %p= t('shared.use_plus_to_add_item')
 
       - if url.present?

@@ -15,11 +15,15 @@
 #  image              :string
 #  uuid               :string
 #  audio              :string
-#  type               :string           default("PredefinedIndicator")
+#  type               :string           default("Indicators::PredefineIndicator")
 #
 class Indicator < ApplicationRecord
   include Tagable
 
+  # Constant
+  TYPES = %w(Indicators::PredefineIndicator Indicators::CustomIndicator)
+
+  # Association
   belongs_to :categorizable, polymorphic: true, touch: true
   has_many :languages_indicators, dependent: :destroy
   has_many :languages, through: :languages_indicators
@@ -27,15 +31,18 @@ class Indicator < ApplicationRecord
   has_many :raised_indicators, foreign_key: :indicator_uuid, primary_key: :uuid
   has_many :voting_indicators, foreign_key: :indicator_uuid, primary_key: :uuid
 
+  # Validation
   validates :name, presence: true, uniqueness: { scope: [:categorizable_id, :categorizable_type] }
   validate :image_size_validation
 
+  # Callback
   before_create :set_display_order
   before_create :secure_uuid
 
+  # Scope
   default_scope { order(display_order: :asc) }
-  scope :customeds, -> { where(type: "CustomedIndicator") }
-  scope :predefineds, -> { where(type: "PredefinedIndicator") }
+  scope :customs, -> { where(type: "Indicators::CustomIndicator") }
+  scope :predefines, -> { where(type: "Indicators::PredefineIndicator") }
 
   # Nested Attributes
   accepts_nested_attributes_for :languages_indicators, allow_destroy: true, reject_if: lambda { |attributes|
@@ -69,6 +76,11 @@ class Indicator < ApplicationRecord
       end
     end
     super
+  end
+
+  # Class Methods
+  def self.types
+    TYPES
   end
 
   private

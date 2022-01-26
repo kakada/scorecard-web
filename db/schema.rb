@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 2022_01_24_032000) do
     t.string "image"
     t.string "uuid"
     t.string "audio"
-    t.string "type", default: "PredefinedIndicator"
+    t.string "type", default: "Indicators::PredefineIndicator"
   end
 
   create_table "language_rating_scales", force: :cascade do |t|

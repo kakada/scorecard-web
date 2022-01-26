@@ -19,7 +19,7 @@ namespace :indicator do
         name: ci.name,
         tag_id: ci.tag_id,
         audio: ci.audio,
-        type: "CustomedIndicator"
+        type: "Indicators::CustomIndicator"
       )
     end
   end

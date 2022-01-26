@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Todo: change name to Aggregate Proposed Indicator
 module Scorecards
   class ProposedCriteria
     attr_reader :scorecard

@@ -5,7 +5,7 @@ module Facilities
     before_action :set_facility
 
     def index
-      @pagy, @indicators = pagy(PredefinedIndicator.filter(filter_params).order(sort_column + " " + sort_direction))
+      @pagy, @indicators = pagy(Indicators::PredefineIndicator.filter(filter_params).order(sort_column + " " + sort_direction))
       @templates = current_program.templates.includes(:indicators)
     end
 

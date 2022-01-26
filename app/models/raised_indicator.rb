@@ -16,6 +16,7 @@
 #  voting_indicator_uuid :string
 #  indicator_uuid        :string
 #
+# Todo: consider change name to ProposedIndicator
 class RaisedIndicator < ApplicationRecord
   include Tagable
 

@@ -9,7 +9,7 @@ module Api
       def create
         authorize @scorecard, :submit?
 
-        custom_indicator = CustomedIndicator.find_or_initialize_by(uuid: indicator_params[:uuid])
+        custom_indicator = Indicators::CustomIndicator.find_or_initialize_by(uuid: indicator_params[:uuid])
 
         if custom_indicator.update(indicator_params)
           render json: custom_indicator, status: :created

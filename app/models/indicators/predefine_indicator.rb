@@ -15,7 +15,9 @@
 #  image              :string
 #  uuid               :string
 #  audio              :string
-#  type               :string           default("PredefinedIndicator")
+#  type               :string           default("Indicators::PredefineIndicator")
 #
-class CustomedIndicator < Indicator
+module Indicators
+  class PredefineIndicator < ::Indicator
+  end
 end
