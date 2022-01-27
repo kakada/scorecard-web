@@ -71,7 +71,7 @@ gem "telegram-bot", "~> 0.15.3"
 gem "pdf-reader", "~> 2.5.0"
 
 gem "mimemagic", "~> 0.3.6"
-gem "sidekiq", "~> 6.2.1"
+gem "sidekiq", "~> 6.4.0"
 
 gem "elasticsearch-model", "~> 7.1.1"
 gem "elasticsearch-rails", "~> 7.1.1"
