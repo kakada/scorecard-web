@@ -1,6 +1,6 @@
 .card.shadow.mb-4
   .card-body
-    = simple_form_for current_program, url: scorecards_settings_ratings_path, method: 'post' do |f|
+    = simple_form_for current_program, url: rating_scales_path, method: 'post' do |f|
 
       %div{style: 'overflow-x: scroll;'}
         %table.table.table-bordered
