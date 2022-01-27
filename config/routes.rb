@@ -31,11 +31,9 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :scorecards do
-    namespace :settings do
-      resources :ratings, only: [:index, :create]
-    end
+  resources :rating_scales, only: [:index, :create]
 
+  namespace :scorecards do
     resources :indicator_activities, only: [:update]
   end
 
@@ -63,7 +61,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pdf_templates, path: "/scorecards/settings/pdf_templates" do
+  resources :pdf_templates do
     get :preview
   end
   resources :messages
@@ -72,9 +70,9 @@ Rails.application.routes.draw do
     resources :contacts, as: :system_contacts
   end
 
-  resources :languages, path: "/scorecards/settings/languages"
+  resources :languages
 
-  resources :facilities, path: "/scorecards/settings/facilities" do
+  resources :facilities do
     get :children, on: :member
     resources :indicators, module: "facilities" do
       post :clone_from_template, on: :collection
@@ -83,9 +81,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :templates, path: "/scorecards/settings/templates"
+  resources :templates
 
-  resources :local_ngos, path: "/scorecards/settings/local_ngos" do
+  resources :local_ngos do
     resources :cafs, module: "local_ngos"
     post :import, on: :collection
   end

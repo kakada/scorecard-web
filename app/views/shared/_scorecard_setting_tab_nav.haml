@@ -31,8 +31,8 @@
         %span.d-none.d-md-inline= t("sidebar.local_ngo")
 
   - if policy(RatingScale).create?
-    %li.nav-item{ class: css_nested_active_class('scorecards/settings/ratings') }
-      %a.nav-link{:href => scorecards_settings_ratings_path}
+    %li.nav-item{ class: css_nested_active_class('rating_scales') }
+      %a.nav-link{:href => rating_scales_path}
         %i.fas.fa-fw.fa-star
         %span.d-none.d-md-inline= t("sidebar.rating")
 
