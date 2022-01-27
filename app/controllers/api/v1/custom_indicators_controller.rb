@@ -9,7 +9,7 @@ module Api
       def create
         authorize @scorecard, :submit?
 
-        custom_indicator = @scorecard.custom_indicators.find_or_initialize_by(uuid: indicator_params[:uuid])
+        custom_indicator = Indicators::CustomIndicator.find_or_initialize_by(uuid: indicator_params[:uuid])
 
         if custom_indicator.update(indicator_params)
           render json: custom_indicator, status: :created
@@ -30,7 +30,12 @@ module Api
         end
 
         def indicator_params
-          params.require(:custom_indicator).permit(:uuid, :name, tag_attributes: [:id, :name]).merge(audio: params[:audio])
+          params.require(:custom_indicator).permit(:uuid, :name, tag_attributes: [:id, :name])
+                .merge(
+                  audio: params[:audio],
+                  categorizable_id: @scorecard.facility_id,
+                  categorizable_type: @scorecard.facility.class.name
+                )
         end
     end
   end

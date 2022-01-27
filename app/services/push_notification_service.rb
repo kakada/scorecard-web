@@ -12,7 +12,7 @@
 class PushNotificationService
   @@fcm = FCM.new(ENV["FIREBASE_SERVER_KEY"])
 
-  def self.notify(tokens=[], message={})
+  def self.notify(tokens = [], message = {})
     @@fcm.send(tokens, message)
   end
 end

@@ -32,14 +32,14 @@ module ScorecardExcel
           raised_indicator.id,
           raised_indicator.scorecard.uuid,
           raised_indicator.participant_uuid,
-          raised_indicator.indicatorable.name,
-          raised_indicator.indicatorable.tag.try(:name),
+          raised_indicator.indicator.name,
+          raised_indicator.indicator.tag.try(:name),
           is_selected?(raised_indicator),
         ]
       end
 
       def is_selected?(raised_indicator)
-        voting_indicators.select { |vi| vi.indicatorable == raised_indicator.indicatorable }.present?
+        voting_indicators.select { |vi| vi.indicator_uuid == raised_indicator.indicator_uuid }.present?
       end
 
       def voting_indicators

@@ -12,7 +12,7 @@ module Scorecards
     end
 
     def update
-      @indicator = CustomIndicator.find(params[:id])
+      @indicator = Indicator.find(params[:id])
       @indicator.update(custom_indicator_params)
 
       respond_with_bip(@indicator)
@@ -20,7 +20,7 @@ module Scorecards
 
     private
       def custom_indicator_params
-        params.require(:custom_indicator).permit(:name)
+        params.require(:indicator).permit(:name)
       end
   end
 end

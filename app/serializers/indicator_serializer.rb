@@ -13,6 +13,9 @@
 #  tag_id             :integer
 #  display_order      :integer
 #  image              :string
+#  uuid               :string
+#  audio              :string
+#  type               :string           default("Indicators::PredefineIndicator")
 #
 class IndicatorSerializer < ActiveModel::Serializer
   attributes :id, :name, :tag_id, :tag_name, :image

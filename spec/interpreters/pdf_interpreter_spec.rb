@@ -47,7 +47,7 @@ RSpec.describe PdfTemplateInterpreter do
 
       let(:t_body) {
         str = "<tr>"
-        str += "<td>#{voting_indicator.indicatorable.name}</td>"
+        str += "<td>#{voting_indicator.indicator.name}</td>"
         str += "<td class='text-center'>មិនពេញចិត្តខ្លាំង (1)</td>"
         str += "<td><ul><li>strength1</li></ul></td>"
         str += "<td><ul><li>weakness1</li></ul></td>"

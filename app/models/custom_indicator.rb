@@ -13,8 +13,8 @@
 #  tag_id         :integer
 #  uuid           :string
 #
+# Todo: refactoring, use only in version 1
 class CustomIndicator < ApplicationRecord
-  include Indicatorable
   include Tagable
 
   mount_uploader :audio, AudioUploader

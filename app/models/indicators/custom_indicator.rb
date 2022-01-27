@@ -17,20 +17,7 @@
 #  audio              :string
 #  type               :string           default("Indicators::PredefineIndicator")
 #
-FactoryBot.define do
-  factory :indicator do
-    categorizable   { create(:facility) }
-    tag
-    name            { FFaker::Name.name }
-
-    trait :with_languages_indicators do
-      transient do
-        count { 1 }
-      end
-
-      after(:create) do |indicator, evaluator|
-        create_list(:languages_indicator, evaluator.count, indicator: indicator)
-      end
-    end
+module Indicators
+  class CustomIndicator < ::Indicator
   end
 end

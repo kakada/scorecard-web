@@ -8,15 +8,15 @@
       %th.align-middle.text-center{:scope => "col"}= t("scorecard.suggested_action")
 
   %tbody
-    - @voting_indicators.each_with_index do |indicator, index|
+    - @voting_indicators.each_with_index do |vi, index|
       %tr
-        %td.text-break= "#{index + 1}) #{indicator.indicatorable.name}"
-        %td.text-center= VotingIndicator.medians[indicator.median]
+        %td.text-break= "#{index + 1}) #{vi.indicator.name}"
+        %td.text-center= VotingIndicator.medians[vi.median]
 
         - ['strength', 'weakness', 'suggested'].each do |action|
           %td
             %ul.text-break
-              - indicator.send("#{action}_indicator_activities").each do |activity|
+              - vi.send("#{action}_indicator_activities").each do |activity|
                 %li
                   - if policy(@scorecard).in_review?
                     .d-flex.align-items-start

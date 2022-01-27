@@ -19,8 +19,8 @@ module ScorecardJson
       def build_indicators
         voting_indicators.map do |vi|
           {
-            name: vi.indicatorable.name,
-            tag: vi.indicatorable.tag_name,
+            name: vi.indicator.name,
+            tag: vi.indicator.tag_name,
             median: VotingIndicator.medians[vi.median],
             participants: build_participants(vi)
           }
@@ -57,7 +57,7 @@ module ScorecardJson
       end
 
       def voting_indicators
-        @voting_indicators ||= scorecard.voting_indicators.includes(:indicatorable, ratings: :participant).order(:display_order)
+        @voting_indicators ||= scorecard.voting_indicators.includes(:indicator, ratings: :participant).order(:display_order)
       end
   end
 end
