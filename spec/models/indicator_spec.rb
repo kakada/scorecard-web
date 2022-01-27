@@ -23,13 +23,32 @@ RSpec.describe Indicator, type: :model do
   it { is_expected.to belong_to(:categorizable).touch(true) }
   it { is_expected.to have_many(:languages_indicators).dependent(:destroy) }
   it { is_expected.to have_many(:languages).through(:languages_indicators) }
-
   it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_uniqueness_of(:name).scoped_to([:categorizable_id, :categorizable_type]) }
 
   it "should touch the categorizable" do
     indicator = build(:indicator)
     expect(indicator.categorizable).to receive(:touch)
     indicator.save!
+  end
+
+  describe "Validate uniq name" do
+    context "Predefine indicator" do
+      let!(:indicator1) { create(:indicator, name: 'work on time') }
+      let!(:indicator2) { build(:indicator, name: 'work on time', categorizable: indicator1.categorizable) }
+
+      it { expect(indicator2.save).to be_falsey }
+
+      it "has uniq name error" do
+        indicator2.save
+        expect(indicator2.errors.full_messages).to eq ["Name ត្រូវបានគេយកទៅហើយ"]
+      end
+    end
+
+    context "Custom indicator" do
+      let!(:indicator1) { create(:indicator, name: 'work on time', type: 'Indicators::CustomIndicator') }
+      let!(:indicator2) { build(:indicator, name: 'work on time', type: 'Indicators::CustomIndicator', categorizable: indicator1.categorizable) }
+
+      it { expect(indicator2.save).to be_truthy }
+    end
   end
 end

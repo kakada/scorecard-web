@@ -14,8 +14,8 @@ namespace :indicator do
     CustomIndicator.find_each do |ci|
       next if ci.scorecard.nil?
 
-      ci.scorecard.facility.indicators.create(
-        uuid: ci.uuid,
+      indi = ci.scorecard.facility.indicators.find_or_initialize_by(uuid: ci.uuid)
+      indi.update(
         name: ci.name,
         tag_id: ci.tag_id,
         audio: ci.audio,
