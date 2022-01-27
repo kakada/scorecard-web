@@ -20,7 +20,8 @@ module Scorecards::Lockable
       save(validate: false)
     end
 
-    def mark_as_completed!
+    def completed_by(user)
+      self.completor_id = user.id
       lock_access!
 
       push_notification_to_submitter_async

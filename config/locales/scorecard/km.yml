@@ -18,7 +18,7 @@ km:
     indicator_development: ការអភិវឌ្ឍន៍លក្ខណៈវិនិច្ឆ័យ
     create_successfully: បង្កើតបានជោគជ័យ
     number_of_disability: ចំនួនជនពិការ
-    number_of_ethnic_minority: ចំនួនជនជាតិភាគតិច
+    number_of_ethnic_minority: ចំនួនជនជាតិដើម
     number_of_youth: ចំនួនយុវជន
     number_of_id_poor: ចំនួនអ្នកមានបណ្ណក្រីក្រ
     proposed_indicator: លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
@@ -52,7 +52,7 @@ km:
     number_of_selected_indicator: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស"
     participant: អ្នកចូលរួម
     poor_card: មានប័ណ្ណក្រីក្រ
-    minority: ជនជាតិភាគតិច
+    minority: ជនជាតិដើម
     youth: យុវជន
     disability: ពិការភាព
     female: ស្រី
@@ -135,6 +135,6 @@ km:
     youth: យុវជន
     disability: ពិការភាព
     id_poor: ប័ណ្ណក្រីក្រ
-    minority: ជនជាតិភាគតិច
+    minority: ជនជាតិដើម
     scorecard_is_checked: "ប័ណ្ណដាក់ពិន្ទុ %{uuid} នេះត្រួវបានត្រួតពិនិត្យរួចរាល់ហើយ ដូចនេះអ្នកអាចទាញយកនិងចែករំលែកបាន!"
     completed_scorecard: ប័ណ្ណពិន្ទុត្រូវបានត្រួតពិនិត្យរួចរាល់

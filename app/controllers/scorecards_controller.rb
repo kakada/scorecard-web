@@ -84,7 +84,7 @@ class ScorecardsController < ApplicationController
 
   def complete
     authorize @scorecard, :in_review?
-    @scorecard.mark_as_completed!
+    @scorecard.completed_by(current_user)
 
     redirect_to scorecard_url(@scorecard.uuid)
   end
