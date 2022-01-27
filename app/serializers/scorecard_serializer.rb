@@ -41,10 +41,11 @@
 #  running_date              :datetime
 #  deleted_at                :datetime
 #  published                 :boolean          default(FALSE)
-#  device_type               :string
 #  submitted_at              :datetime
 #  completed_at              :datetime
+#  device_type               :string
 #  device_token              :string
+#  completor_id              :integer
 #
 class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :facility_id, :scorecard_type,

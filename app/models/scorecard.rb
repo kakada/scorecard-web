@@ -41,10 +41,11 @@
 #  running_date              :datetime
 #  deleted_at                :datetime
 #  published                 :boolean          default(FALSE)
-#  device_type               :string
 #  submitted_at              :datetime
 #  completed_at              :datetime
+#  device_type               :string
 #  device_token              :string
+#  completor_id              :integer
 #
 
 class Scorecard < ApplicationRecord
@@ -73,6 +74,7 @@ class Scorecard < ApplicationRecord
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
   belongs_to :creator, class_name: "User"
+  belongs_to :completor, class_name: "User", optional: true
   belongs_to :primary_school, foreign_key: :primary_school_code, optional: true
 
   has_many   :facilitators, foreign_key: :scorecard_uuid
