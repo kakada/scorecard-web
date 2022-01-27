@@ -1,0 +1,48 @@
+km:
+  excel:
+    # Scorecard Summary
+    scorecard_id: លេខសម្គាល់ប័ណ្ណដាក់ពិន្ទុ
+    location: ទីតាំង
+    planned_start_date: កាលបរិច្ឆេទដែលបានគ្រោងទុកចាប់ផ្តើម
+    planned_end_date: កាលបរិច្ឆេទដែលបានគ្រោងទុកបញ្ចប់
+    submitted_date: កាលបរិច្ឆេទដាក់ស្នើត្រួតពិនិត្យ
+    completed_date: កាលបរិច្ឆេទអនុវត្តរួចរាល់
+    status: ស្ថានភាព
+    scorecard_type: ប្រភេទប័ណ្ណដាក់ពិន្ទុ
+    implementer: អ្នកអនុវត្ត
+    total_participant: ចំនួនអ្នកចូលរួមសរុប
+    number_of_participant_as_female: ចំនួនអ្នកចូលរួមជាស្ត្រី
+    number_of_participant_as_male: ចំនួនអ្នកចូលរួមជាបុរស
+    number_of_participant_as_other: ចំនួនអ្នកចូលរួមដែលមានភេទផ្សេងៗ
+    number_of_youth: ចំនួនយុវជន
+    number_of_minority: ចំនួនជនជាតិដើម
+    number_of_disability: ចំនួនជនពិការភាព
+    number_of_id_poor: ចំនួនអ្នកមានប័ណ្ណក្រីក្រ
+    number_of_raised_indicator: ចំនួនលក្ខណៈវិនិច្ឆ័យដែលស្នើឡើង
+    number_of_selected_for_voting: ចំនួនលក្ខណៈវិនិច្ឆ័យដែលជ្រើសរើសទៅអនុវត្ត
+    total_suggested_action: ចំនួននៃសកម្មភាពដែលបានស្នើឡើងសរុប
+    total_selected_suggested_action: ចំនួនសកម្មភាពដែលបានជ្រើសរើសទៅអនុវត្ត
+    # Participant
+    participant_id: លេខសម្គាល់អ្នកចូលរួម
+    age: អាយុ
+    gender: ភេទ
+    youth: យុវជន
+    disability: ពិការភាព
+    id_poor: ប័ណ្ណក្រីក្រ
+    minority: ជនជាតិដើម
+    # Indicator
+    indicator_id: លេខសម្គាល់លក្ខណៈវិនិច្ឆ័យ
+    indicator_name: ឈ្មោះលក្ខណៈវិនិច្ឆ័យ
+    indicator_tag: ស្លាក/ក្រុម លក្ខណៈវិនិច្ឆ័យ
+    is_custom_indicator: ប្រភេទលក្ខណៈវិនិច្ឆ័យផ្សេងៗ
+    facility_name: ប្រភេទសេវា
+    # Proposed Indicator
+    seleted_for_implementation: ត្រូវបានជ្រើសរើសយកទៅអនុវត្ត?
+    # Voting Summary
+    average_score: ពិន្ទុមធ្យម
+    # Voting Detail
+    score: ពិន្ទុ
+    # Scorecard Result
+    weakness: ចំនុចគួរកែលម្អ (ចំនុចខ្សោយ/បញ្ហា)
+    strength: ចំនុចខ្លាំង
+    suggested_action: សកម្មភាពដែលស្នើឡើង (ដំណោះស្រាយ)

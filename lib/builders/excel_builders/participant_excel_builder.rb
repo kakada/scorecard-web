@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ScorecardExcel
+module ExcelBuilders
   class ParticipantExcelBuilder
     attr_accessor :sheet
 
@@ -10,14 +10,14 @@ module ScorecardExcel
 
     def build_header
       sheet.add_row [
-        I18n.t("scorecard.id"),
-        I18n.t("scorecard.scorecard_id"),
-        I18n.t("scorecard.gender"),
-        I18n.t("scorecard.age"),
-        I18n.t("scorecard.youth"),
-        I18n.t("scorecard.disability"),
-        I18n.t("scorecard.id_poor"),
-        I18n.t("scorecard.minority")
+        I18n.t("excel.participant_id"),
+        I18n.t("excel.scorecard_id"),
+        I18n.t("excel.age"),
+        I18n.t("excel.gender"),
+        I18n.t("excel.youth"),
+        I18n.t("excel.disability"),
+        I18n.t("excel.id_poor"),
+        I18n.t("excel.minority")
       ]
     end
 
@@ -31,9 +31,9 @@ module ScorecardExcel
       def generate_row(participant, scorecard)
         [
           participant.uuid,
-          participant.scorecard.uuid,
-          participant.gender,
+          participant.scorecard_uuid,
           participant.age,
+          participant.gender,
           participant.youth?,
           participant.disability?,
           participant.poor_card?,
