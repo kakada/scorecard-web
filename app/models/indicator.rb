@@ -32,7 +32,8 @@ class Indicator < ApplicationRecord
   has_many :voting_indicators, foreign_key: :indicator_uuid, primary_key: :uuid
 
   # Validation
-  validates :name, presence: true, uniqueness: { scope: [:categorizable_id, :categorizable_type] }
+  validates :name, presence: true
+  validates :name, uniqueness: { scope: [:categorizable_id, :categorizable_type] }, unless: -> { type == 'Indicators::CustomIndicator' }
   validate :image_size_validation
 
   # Callback
