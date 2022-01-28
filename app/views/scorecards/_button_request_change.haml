@@ -1,8 +1,14 @@
 - if policy(scorecard).request_change?
-  %a.d-inline-block.position-relative{ data: { toggle: 'popover', trigger: 'focus', html: 'true', content: sanitize(render(template: 'scorecards/request_changes/popup', locals: {scorecard: scorecard}))}, role: 'button', tabindex: '0'}
+  - if scorecard.access_locked? && scorecard.request_changes.length.zero?
+    %span.mr-1{ data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.no_request_change')}}
+      %a.btn.btn-circle.btn-sm.btn-outline-info.disabled
+        %i.fas.fa-comment-dots
 
-    %span{ class: 'btn btn-circle btn-sm btn-outline-info mr-1', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.request_change')}}
-      %i.fas.fa-comment-dots
+  - else
+    %a.d-inline-block.position-relative{ data: { toggle: 'popover', trigger: 'focus', html: 'true', content: sanitize(render(template: 'scorecards/request_changes/popup', locals: {scorecard: scorecard}))}, role: 'button', tabindex: '0'}
 
-    - if scorecard.request_changes.submitteds.size > 0
-      %span.full-stop
+      %span{ class: 'btn btn-circle btn-sm btn-outline-info mr-1', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.request_change')}}
+        %i.fas.fa-comment-dots
+
+      - if scorecard.request_changes.submitteds.size > 0
+        %span.full-stop
