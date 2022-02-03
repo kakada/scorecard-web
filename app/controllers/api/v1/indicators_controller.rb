@@ -6,7 +6,7 @@ module Api
       def index
         facility = Facility.find(params[:facility_id])
 
-        render json: facility.indicators
+        render json: facility.indicators.predefines
       end
     end
   end
