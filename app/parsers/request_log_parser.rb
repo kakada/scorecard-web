@@ -13,7 +13,7 @@ class RequestLogParser
       end
 
       def payload_params
-        @data[:params].to_h.except("action", "controller", "authenticity_token")
+        @data["params"].to_h.except("action", "controller", "authenticity_token")
       end
 
       def whitelist_attribute
