@@ -3,7 +3,7 @@
   %td= indicator.name
   %td
     %span.badge.badge-pill.badge-secondary= indicator.tag_name
-  %td= l(indicator.created_at, format: :long)
+  %td= timeago(indicator.created_at).html_safe
   %td
     .d-flex.justify-content-end
       = render 'shared/action_buttons', edit_url: edit_facility_indicator_path(@facility, indicator), delete_url: facility_indicator_path(@facility, indicator), object: indicator

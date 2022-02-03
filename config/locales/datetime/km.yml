@@ -34,6 +34,8 @@ km:
       default: "%d %B %Y"
       long: ថ្ងៃ%A ទី%e ខែ%B ឆ្នាំ%Y
       short: "%d %b"
+      dd_mm_yyyy: "%d %b %Y"
+      yyyy_mm_dd: "%Y %b %d"
     month_names:
       -
       - មករា
@@ -57,6 +59,8 @@ km:
       default: "%d %b %Y"
       long: "%d %B %Y %H:%M"
       nice: "%d %b %Y, %I:%M %P"
+      dd_mm_yyyy: "%d %b %Y"
+      yyyy_mm_dd: "%Y %b %d"
     am: ព្រឹក
     pm: "ល្ងាច"
   datetime:

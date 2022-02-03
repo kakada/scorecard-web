@@ -33,7 +33,7 @@ class Indicator < ApplicationRecord
 
   # Validation
   validates :name, presence: true
-  validates :name, uniqueness: { scope: [:categorizable_id, :categorizable_type] }, unless: -> { type == 'Indicators::CustomIndicator' }
+  validates :name, uniqueness: { scope: [:categorizable_id, :categorizable_type] }, unless: -> { type == "Indicators::CustomIndicator" }
   validate :image_size_validation
 
   # Callback

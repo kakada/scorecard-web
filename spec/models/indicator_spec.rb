@@ -33,8 +33,8 @@ RSpec.describe Indicator, type: :model do
 
   describe "Validate uniq name" do
     context "Predefine indicator" do
-      let!(:indicator1) { create(:indicator, name: 'work on time') }
-      let!(:indicator2) { build(:indicator, name: 'work on time', categorizable: indicator1.categorizable) }
+      let!(:indicator1) { create(:indicator, name: "work on time") }
+      let!(:indicator2) { build(:indicator, name: "work on time", categorizable: indicator1.categorizable) }
 
       it { expect(indicator2.save).to be_falsey }
 
@@ -45,8 +45,8 @@ RSpec.describe Indicator, type: :model do
     end
 
     context "Custom indicator" do
-      let!(:indicator1) { create(:indicator, name: 'work on time', type: 'Indicators::CustomIndicator') }
-      let!(:indicator2) { build(:indicator, name: 'work on time', type: 'Indicators::CustomIndicator', categorizable: indicator1.categorizable) }
+      let!(:indicator1) { create(:indicator, name: "work on time", type: "Indicators::CustomIndicator") }
+      let!(:indicator2) { build(:indicator, name: "work on time", type: "Indicators::CustomIndicator", categorizable: indicator1.categorizable) }
 
       it { expect(indicator2.save).to be_truthy }
     end

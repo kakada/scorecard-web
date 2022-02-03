@@ -50,7 +50,10 @@ module ApplicationHelper
   def display_date(date)
     return "" unless date.present?
 
-    I18n.l(date)
+    format = current_program.try(:datetime_format) || Program::DATETIME_FORMATS.keys[0]
+    format = format.downcase.split("-").join("_")
+
+    I18n.l(date, format: :"#{format}")
   end
 
   def timeago(date)
