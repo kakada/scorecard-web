@@ -1,10 +1,12 @@
 %ul.nav.nav-tabs
-  %li.nav-item{class: css_active_class('messages')}
-    %a.nav-link{href: messages_path}
-      %i.far.fa-fw.fa-clipboard
-      %span= t('message.scorecard_implementation')
+  - if policy(Message).index?
+    %li.nav-item{class: css_active_class('messages')}
+      %a.nav-link{href: messages_path}
+        %i.far.fa-fw.fa-clipboard
+        %span= t('message.scorecard_implementation')
 
-  %li.nav-item{class: css_active_class('mobile_notifications')}
-    %a.nav-link{href: mobile_notifications_path}
-      %i.fab.fa-fw.fa-android
-      %span= t("mobile_notification.notification")
+  - if policy(MobileNotification).index?
+    %li.nav-item{class: css_active_class('mobile_notifications')}
+      %a.nav-link{href: mobile_notifications_path}
+        %i.fab.fa-fw.fa-android
+        %span= t("mobile_notification.notification")
