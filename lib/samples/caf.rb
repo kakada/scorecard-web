@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Sample
+module Samples
   class Caf
     def self.load
       cafs = ["Nary", "Sokra", "Mealea", "Thavy", "Marady", "Nita", "Orenida"]

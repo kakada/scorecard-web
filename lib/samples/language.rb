@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "scorecard_criteria"
-
-module ScorecardCriteria
-  class Language < ::ScorecardCriteria::Base
+module Samples
+  class Language < Base
     def self.load
       program = ::Program.find_by name: "CARE"
       return if program.nil?

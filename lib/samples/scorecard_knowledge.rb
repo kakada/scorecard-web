@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Sample
-  class ScorecardKnowledge < ::Sample::Base
+module Samples
+  class ScorecardKnowledge < Base
     def self.load
       xlsx = Roo::Spreadsheet.open(file_path("scorecard_knowledges.xlsx"))
       xlsx.each_with_pagename do |page_name, sheet|

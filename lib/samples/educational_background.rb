@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Sample
-  class EducationalBackground < ::Sample::Base
+module Samples
+  class EducationalBackground < Base
     def self.load
       xlsx = Roo::Spreadsheet.open(file_path("educational_backgrounds.xlsx"))
       xlsx.each_with_pagename do |page_name, sheet|

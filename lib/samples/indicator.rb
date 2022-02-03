@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "scorecard_criteria"
-
-module ScorecardCriteria
-  class Indicator < ::ScorecardCriteria::Base
+module Samples
+  class Indicator < Base
     def self.load
       xlsx = Roo::Spreadsheet.open(file_path("indicator.xlsx"))
       xlsx.each_with_pagename do |page_name, sheet|

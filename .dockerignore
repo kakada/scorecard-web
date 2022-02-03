@@ -36,7 +36,7 @@ coverage/
 spec/
 test/
 vendor/bundle
-lib/scorecard_criteria/assets/audios/*
+lib/samples/assets/audios/*
 
 .bundle
 

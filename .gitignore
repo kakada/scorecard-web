@@ -70,7 +70,7 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 
-/lib/sample/assets/csv/locations.csv
-/lib/sample/assets/csv/primary_schools.csv
-/lib/scorecard_criteria/assets/audios/*
+/lib/samples/assets/csv/locations.csv
+/lib/samples/assets/csv/primary_schools.csv
+/lib/samples/assets/audios/*
 elastic

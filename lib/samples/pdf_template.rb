@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Sample
+module Samples
   class PdfTemplate
     def self.load
       program = ::Program.find_by name: "CARE"

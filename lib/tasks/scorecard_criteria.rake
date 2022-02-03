@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require "scorecard_criteria/scorecard_criteria"
+require "samples/sample"
 
 namespace :scorecard_criteria do
   desc "Loads sample data"
   task load: :environment do
-    ScorecardCriteria::Language.load
-    ScorecardCriteria::Facility.load
-    ScorecardCriteria::Indicator.load
-    ScorecardCriteria::RatingScale.load
+    Samples::Scorecards::Language.load
+    Samples::Scorecards::Facility.load
+    Samples::Scorecards::Indicator.load
+    Samples::Scorecards::RatingScale.load
   end
 end
