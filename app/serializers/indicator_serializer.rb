@@ -18,7 +18,7 @@
 #  type               :string           default("Indicators::PredefineIndicator")
 #
 class IndicatorSerializer < ActiveModel::Serializer
-  attributes :id, :name, :tag_id, :tag_name, :image
+  attributes :id, :name, :tag_id, :tag_name, :image, :uuid
 
   belongs_to :categorizable
   has_many :languages_indicators

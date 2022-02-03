@@ -17,7 +17,7 @@ class ScorecardExcelBuilder
   private
     def add_worksheet(klass_name)
       model = "ExcelBuilders::#{klass_name}ExcelBuilder".constantize
-      sheet_name = klass_name.split(/(?=[A-Z])/).join('_').downcase
+      sheet_name = klass_name.split(/(?=[A-Z])/).join("_").downcase
 
       @workbook.add_worksheet(name: sheet_name) do |sheet|
         builder = model.new(sheet)
