@@ -4,8 +4,17 @@ module ExcelBuilders
   class ScorecardSummaryExcelBuilder
     attr_accessor :sheet
 
-    def initialize(sheet)
+    def initialize(sheet, scorecards)
       @sheet = sheet
+      @scorecards = scorecards
+    end
+
+    def build
+      build_header
+
+      @scorecards.each do |scorecard|
+        build_row(scorecard)
+      end
     end
 
     def build_header

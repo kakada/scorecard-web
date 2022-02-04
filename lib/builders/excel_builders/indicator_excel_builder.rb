@@ -4,8 +4,14 @@ module ExcelBuilders
   class IndicatorExcelBuilder
     attr_accessor :sheet
 
-    def initialize(sheet)
+    def initialize(sheet, scorecards)
       @sheet = sheet
+      @scorecards = scorecards
+    end
+
+    def build
+      build_header
+      build_row(@scorecards)
     end
 
     def build_header
@@ -18,9 +24,10 @@ module ExcelBuilders
       ]
     end
 
-    def build_row(scorecard)
-      indicators = scorecard.raised_indicators.includes(:indicator).map(&:indicator).uniq
-      indicators.each do |indi|
+    def build_row(scorecards)
+      uuids = scorecards.includes(:raised_indicators).map { |s| s.raised_indicators.pluck(:indicator_uuid) }.flatten.uniq
+
+      Indicator.where(uuid: uuids).find_each do |indi|
         sheet.add_row generate_row(indi)
       end
     end
