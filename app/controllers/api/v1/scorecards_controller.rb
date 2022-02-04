@@ -55,8 +55,10 @@ module Api
             voting_indicators_attributes: [
               :uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid,
               :median, :scorecard_uuid, :display_order,
+              # Todo: after interim period of v1 and v2, they should be removed
               strength: [], weakness: [], suggested_action: [],
               suggested_actions_attributes: [ :voting_indicator_uuid, :scorecard_uuid, :content, :selected ],
+
               indicator_activities_attributes: [ :uuid, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]
             ],
             ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ]
