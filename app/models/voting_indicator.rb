@@ -48,8 +48,33 @@ class VotingIndicator < ApplicationRecord
   before_create :secure_uuid
   after_validation :set_indicator_uuid
 
+  # Todo: after interim period of v1 and v2, they should be removed
+  after_validation :set_strength_indicator_activities
+  after_validation :set_weakness_indicator_activities
+  after_validation :set_suggested_indicator_activities
+
   private
     def set_indicator_uuid
       self.indicator_uuid ||= indicatorable.try(:uuid)
+    end
+
+    def set_strength_indicator_activities
+      strength.each do |st|
+        strength_indicator_activities.find_or_initialize_by(content: st, scorecard_uuid: scorecard_uuid)
+      end
+    end
+
+    def set_weakness_indicator_activities
+      weakness.each do |st|
+        weakness_indicator_activities.find_or_initialize_by(content: st, scorecard_uuid: scorecard_uuid)
+      end
+    end
+
+    def set_suggested_indicator_activities
+      suggested_actions.each do |action|
+        activity = suggested_indicator_activities.find_or_initialize_by(content: action.content)
+        activity.scorecard_uuid = action.scorecard_uuid
+        activity.selected = action.selected
+      end
     end
 end
