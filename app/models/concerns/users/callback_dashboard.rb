@@ -24,11 +24,11 @@ module Users::CallbackDashboard
 
     private
       def add_to_dashboard_async
-        UserWorker.perform_async(:add_to_dashboard, id) if gf_user_id.nil?
+        UserWorker.perform_async("add_to_dashboard", id) if gf_user_id.nil?
       end
 
       def remove_from_dashboard_async
-        UserWorker.perform_async(:remove_from_dashboard, id) if gf_user_id.present?
+        UserWorker.perform_async("remove_from_dashboard", id) if gf_user_id.present?
       end
 
       def was_activated?
