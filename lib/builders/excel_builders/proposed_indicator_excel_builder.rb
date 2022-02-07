@@ -4,8 +4,17 @@ module ExcelBuilders
   class ProposedIndicatorExcelBuilder
     attr_accessor :sheet
 
-    def initialize(sheet)
+    def initialize(sheet, scorecards)
       @sheet = sheet
+      @scorecards = scorecards
+    end
+
+    def build
+      build_header
+
+      @scorecards.includes(:raised_indicators).each do |scorecard|
+        build_row(scorecard)
+      end
     end
 
     def build_header
@@ -18,7 +27,7 @@ module ExcelBuilders
     end
 
     def build_row(scorecard)
-      scorecard.raised_indicators.find_each do |raised_indicator|
+      scorecard.raised_indicators.order(:participant_uuid).find_each do |raised_indicator|
         sheet.add_row generate_row(raised_indicator)
       end
     end

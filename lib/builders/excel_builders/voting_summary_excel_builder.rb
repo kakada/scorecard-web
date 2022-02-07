@@ -4,8 +4,17 @@ module ExcelBuilders
   class VotingSummaryExcelBuilder
     attr_accessor :sheet
 
-    def initialize(sheet)
+    def initialize(sheet, scorecards)
       @sheet = sheet
+      @scorecards = scorecards
+    end
+
+    def build
+      build_header
+
+      @scorecards.includes(:voting_indicators).each do |scorecard|
+        build_row(scorecard)
+      end
     end
 
     def build_header
@@ -17,14 +26,13 @@ module ExcelBuilders
     end
 
     def build_row(scorecard)
-      @scorecard = scorecard
-      @scorecard.voting_indicators.find_each do |vi|
-        sheet.add_row generate_row(vi, scorecard)
+      scorecard.voting_indicators.find_each do |vi|
+        sheet.add_row generate_row(vi)
       end
     end
 
     private
-      def generate_row(voting_indicator, scorecard)
+      def generate_row(voting_indicator)
         [
           voting_indicator.scorecard.uuid,
           voting_indicator.indicator_uuid,

@@ -16,19 +16,14 @@ class ScorecardExcelBuilder
 
   private
     def add_worksheet(klass_name)
-      model = "ExcelBuilders::#{klass_name}ExcelBuilder".constantize
+      klass = "ExcelBuilders::#{klass_name}ExcelBuilder".constantize
       sheet_name = klass_name.split(/(?=[A-Z])/).join("_").downcase
 
       @workbook.add_worksheet(name: sheet_name) do |sheet|
-        builder = model.new(sheet)
-        builder.build_header
-
-        @scorecards.each do |scorecard|
-          builder.build_row(scorecard)
-        end
+        klass.new(sheet, @scorecards).build
       end
 
       rescue
-        Rails.logger.warn "Unknown ExcelBuilder model #{model}"
+        Rails.logger.warn "Unknown ExcelBuilder model #{klass}"
     end
 end
