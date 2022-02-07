@@ -23,3 +23,4 @@ en:
     new_indicator: New Indicator
     must_be_less_than_1mb: must be less than 1MB
     are_you_sure_to_delete: Are you sure to delete the indicator <b>%{name}</b>?
+    selected: Selected

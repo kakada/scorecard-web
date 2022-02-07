@@ -29,22 +29,17 @@ module PdfTemplates
       end
 
       def build_result_rows
-        voting_criterias = Scorecards::VotingCriteria.new(@scorecard).criterias
-        voting_criterias.map { |indicator|
-          "<tr>#{ build_result_columns(indicator) }</tr>"
+        @scorecard.voting_indicators.map { |vi|
+          "<tr>#{ build_result_columns(vi) }</tr>"
         }.join("")
       end
 
-      def build_result_columns(indicator)
-        columns = %w(name median strength weakness suggested_action)
-        columns.map do |field|
-          field_value = indicator[field]
-
-          next build_column_median(field_value) if field == "median"
-
-          value = field_value.kind_of?(Array) ? build_list(field_value) : field_value.to_s
-          "<td>#{value}</td>"
-        end.join("")
+      def build_result_columns(voting_indicator)
+        str = "<td>#{voting_indicator.indicator.name}</td>"
+        str += build_column_median(voting_indicator.median)
+        str += build_list(voting_indicator.strength_indicator_activities)
+        str += build_list(voting_indicator.weakness_indicator_activities)
+        str + build_list(voting_indicator.suggested_indicator_activities)
       end
 
       def build_column_median(median)
@@ -52,8 +47,14 @@ module PdfTemplates
         "<td class='text-center'>#{str}</td>"
       end
 
-      def build_list(list)
-        "<ul>" + list.map { |value| "<li>#{value}</li>" }.join("") + "</ul>"
+      def build_list(indicator_activities)
+        str = "<td><ul>"
+        str += indicator_activities.map { |indicator_activity|
+          selected = indicator_activity.selected? ? "(#{I18n.t('indicator.selected')})" : ""
+          "<li>#{indicator_activity.content} #{selected}</li>"
+        }.join("")
+
+        str + "</ul></td>"
       end
   end
 end

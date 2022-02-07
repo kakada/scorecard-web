@@ -16,4 +16,22 @@
 FactoryBot.define do
   factory :indicator_activity do
   end
+
+  factory :strength_indicator_activity do
+    content { FFaker::Name.name }
+    voting_indicator
+    scorecard
+  end
+
+  factory :weakness_indicator_activity do
+    content { FFaker::Name.name }
+    voting_indicator
+    scorecard
+  end
+
+  factory :suggested_indicator_activity do
+    content { FFaker::Name.name }
+    voting_indicator
+    scorecard
+  end
 end

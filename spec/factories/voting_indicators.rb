@@ -23,8 +23,5 @@ FactoryBot.define do
     indicatorable  { indicator }
     scorecard
     median         { rand(1..5) }
-    strength       { %w(strength1) }
-    weakness       { %w(weakness1) }
-    suggested_action { %w(solution1) }
   end
 end

@@ -37,6 +37,9 @@ RSpec.describe PdfTemplateInterpreter do
     context "template code 'swot.result_table' exist" do
       let!(:pdf_template_km) { create(:pdf_template, content: "<div>{{swot.result_table}}</div>", program: program) }
       let!(:voting_indicator) { create(:voting_indicator, scorecard: scorecard, median: 1) }
+      let!(:strength_indicator_activity) { create(:strength_indicator_activity, voting_indicator: voting_indicator, scorecard: voting_indicator.scorecard) }
+      let!(:weakness_indicator_activity) { create(:weakness_indicator_activity, voting_indicator: voting_indicator, scorecard: voting_indicator.scorecard) }
+      let!(:suggested_indicator_activity) { create(:suggested_indicator_activity, voting_indicator: voting_indicator, scorecard: voting_indicator.scorecard, selected: true) }
       let(:t_head) {
         str = %w(indicator average_score strength weakness suggested_action).map { |col|
           "<th class='text-center'>" + I18n.t("scorecard.#{col}") + "</th>"
@@ -49,9 +52,9 @@ RSpec.describe PdfTemplateInterpreter do
         str = "<tr>"
         str += "<td>#{voting_indicator.indicator.name}</td>"
         str += "<td class='text-center'>មិនពេញចិត្តខ្លាំង (1)</td>"
-        str += "<td><ul><li>strength1</li></ul></td>"
-        str += "<td><ul><li>weakness1</li></ul></td>"
-        str += "<td><ul><li>solution1</li></ul></td>"
+        str += "<td><ul><li>#{strength_indicator_activity.content} </li></ul></td>"
+        str += "<td><ul><li>#{weakness_indicator_activity.content} </li></ul></td>"
+        str += "<td><ul><li>#{suggested_indicator_activity.content} (#{I18n.t('indicator.selected')})</li></ul></td>"
         str + "</tr>"
       }
 
@@ -63,7 +66,6 @@ RSpec.describe PdfTemplateInterpreter do
       }
 
       before { I18n.locale = :km }
-
       it { expect(interpretor.interpreted_message).to eq(html) }
     end
   end
