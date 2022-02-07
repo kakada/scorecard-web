@@ -33,8 +33,8 @@ RSpec.describe VotingIndicator, type: :model do
       let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
       let(:params)      { { voting_indicators_attributes: [ {
                             uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
-                            strength: ['strength1'],
-                            weakness: ['weakness1'],
+                            strength: ["strength1"],
+                            weakness: ["weakness1"],
                             suggested_actions_attributes: [
                               { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action1", selected: true },
                               { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action2", selected: false },
@@ -60,8 +60,8 @@ RSpec.describe VotingIndicator, type: :model do
       let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
       let(:params)      { { voting_indicators_attributes: [ {
                             uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
-                            strength: ['strength1'],
-                            weakness: ['weakness1'],
+                            strength: ["strength1"],
+                            weakness: ["weakness1"],
                             suggested_actions_attributes: [
                               { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action1", selected: true },
                               { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action2", selected: false },
