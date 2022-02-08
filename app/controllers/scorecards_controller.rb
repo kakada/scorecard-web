@@ -17,7 +17,7 @@ class ScorecardsController < ApplicationController
       }
 
       format.xlsx {
-        @scorecards = policy_scope(Scorecard.filter(filter_params).order("#{sort_column} #{sort_direction}").includes(:participants, :raised_indicators, :voting_indicators))
+        @scorecards = policy_scope(Scorecard.filter(filter_params).order("#{sort_column} #{sort_direction}"))
 
         if @scorecards.length > Settings.max_download_scorecard_record
           flash[:alert] = t("scorecard.file_size_is_too_big")

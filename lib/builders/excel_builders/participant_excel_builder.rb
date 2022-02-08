@@ -31,16 +31,16 @@ module ExcelBuilders
     end
 
     def build_row(scorecard)
-      scorecard.participants.find_each do |participant|
-        sheet.add_row generate_row(participant)
+      scorecard.participants.each do |participant|
+        sheet.add_row generate_row(participant, scorecard)
       end
     end
 
     private
-      def generate_row(participant)
+      def generate_row(participant, scorecard)
         [
           participant.uuid,
-          participant.scorecard.uuid,
+          scorecard.uuid,
           participant.age,
           participant.gender,
           participant.youth?,

@@ -12,7 +12,7 @@ module ExcelBuilders
     def build
       build_header
 
-      @scorecards.includes(:voting_indicators).find_each do |scorecard|
+      @scorecards.includes(voting_indicators: [:weakness_indicator_activities, :strength_indicator_activities, :suggested_indicator_activities]).find_each do |scorecard|
         build_row(scorecard)
       end
     end
@@ -28,15 +28,15 @@ module ExcelBuilders
     end
 
     def build_row(scorecard)
-      scorecard.voting_indicators.find_each do |vi|
-        sheet.add_row generate_row(vi)
+      scorecard.voting_indicators.each do |vi|
+        sheet.add_row generate_row(vi, scorecard)
       end
     end
 
     private
-      def generate_row(voting_indicator)
+      def generate_row(voting_indicator, scorecard)
         [
-          voting_indicator.scorecard.uuid,
+          scorecard.uuid,
           voting_indicator.indicator_uuid,
           voting_indicator.weakness_indicator_activities.map(&:content).join(";"),
           voting_indicator.strength_indicator_activities.map(&:content).join(";"),
