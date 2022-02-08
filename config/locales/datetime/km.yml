@@ -61,6 +61,8 @@ km:
       nice: "%d %b %Y, %I:%M %P"
       dd_mm_yyyy: "%d %b %Y"
       yyyy_mm_dd: "%Y %b %d"
+      dd_mm_yyyy_time: "%d %b %Y, %I:%M %P"
+      yyyy_mm_dd_time: "%Y %b %d, %I:%M %P"
     am: ព្រឹក
     pm: "ល្ងាច"
   datetime:

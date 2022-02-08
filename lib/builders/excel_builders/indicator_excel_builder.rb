@@ -27,7 +27,7 @@ module ExcelBuilders
     def build_row(scorecards)
       uuids = scorecards.includes(:raised_indicators).map { |s| s.raised_indicators.pluck(:indicator_uuid) }.flatten.uniq
 
-      Indicator.where(uuid: uuids).find_each do |indi|
+      Indicator.where(uuid: uuids).includes(:tag, :categorizable).each do |indi|
         sheet.add_row generate_row(indi)
       end
     end

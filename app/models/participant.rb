@@ -21,6 +21,9 @@ class Participant < ApplicationRecord
   before_create :secure_uuid
 
   GENDERS=%w(female male other)
+  GENDER_MALE = "male"
+  GENDER_FEMALE = "female"
+  GENDER_OTHER = "other"
 
   scope :males, -> { where(gender: :male) }
   scope :others, -> { where(gender: :other) }

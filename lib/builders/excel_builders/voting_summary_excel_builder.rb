@@ -26,15 +26,15 @@ module ExcelBuilders
     end
 
     def build_row(scorecard)
-      scorecard.voting_indicators.find_each do |vi|
-        sheet.add_row generate_row(vi)
+      scorecard.voting_indicators.each do |vi|
+        sheet.add_row generate_row(vi, scorecard)
       end
     end
 
     private
-      def generate_row(voting_indicator)
+      def generate_row(voting_indicator, scorecard)
         [
-          voting_indicator.scorecard.uuid,
+          scorecard.uuid,
           voting_indicator.indicator_uuid,
           VotingIndicator.medians[voting_indicator.median]
         ]
