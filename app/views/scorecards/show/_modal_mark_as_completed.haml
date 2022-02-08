@@ -1,0 +1,20 @@
+/ Modal
+#confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5.modal-title
+          %i.fas.fa-exclamation-triangle.text-danger
+          / Replace
+          %span.title= t("scorecard.scorecards")
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+
+      .modal-body.text-left
+        = t("scorecard.are_you_sure_to_mark_as_completed", code: @scorecard.uuid).html_safe
+
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
+
+        = link_to complete_scorecard_path(@scorecard.uuid), class: 'btn btn-primary', method: :put do
+          = t("scorecard.mark_as_completed")
