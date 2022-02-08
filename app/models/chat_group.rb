@@ -17,7 +17,7 @@
 #
 class ChatGroup < ApplicationRecord
   belongs_to :program
-  has_many :chat_groups_notifications
+  has_many :chat_groups_notifications, dependent: :destroy
   has_many :notifications, through: :chat_groups_notifications
 
   scope :telegrams, -> { where(provider: "Telegram") }

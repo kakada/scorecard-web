@@ -23,6 +23,7 @@ class Program < ApplicationRecord
   has_many :facilities
   has_many :templates
   has_many :local_ngos
+  has_many :cafs, through: :local_ngos
   has_many :scorecards
   has_many :rating_scales
   has_many :contacts

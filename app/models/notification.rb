@@ -19,7 +19,7 @@ class Notification < ApplicationRecord
 
   belongs_to :message
   has_one  :program, through: :message
-  has_many :chat_groups_notifications
+  has_many :chat_groups_notifications, dependent: :destroy
   has_many :chat_groups, through: :chat_groups_notifications
 
   validates :provider, presence: true, inclusion: { in: PROVIDERS }

@@ -14,7 +14,7 @@
 #
 class Message < ApplicationRecord
   belongs_to :program
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
   has_one :telegram_notification, class_name: "Notifications::Telegram", dependent: :destroy
   has_one :email_notification, class_name: "Notifications::Email", dependent: :destroy
 
