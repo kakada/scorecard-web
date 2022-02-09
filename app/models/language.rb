@@ -15,7 +15,7 @@
 #
 class Language < ApplicationRecord
   belongs_to :program
-  has_many :languages_indicators
+  has_many :languages_indicators, dependent: :destroy
   has_many :indicators, through: :languages_indicators
 
   validates :code, presence: true

@@ -20,7 +20,7 @@
 #
 class LocalNgo < ApplicationRecord
   belongs_to :program
-  has_many :cafs
+  has_many :cafs, dependent: :destroy
   has_many :scorecards
 
   validates :name, presence: true, uniqueness: { scope: :program_id }
