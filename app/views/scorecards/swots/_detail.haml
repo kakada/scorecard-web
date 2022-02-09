@@ -19,12 +19,17 @@
               - vi.send("#{action}_indicator_activities").each do |activity|
                 %li
                   - if policy(@scorecard).in_review?
-                    .d-flex.align-items-start
-                      = best_in_place activity, :content, url: scorecards_indicator_activity_path(activity), as: :input, class: [('text-info action-selected' if activity.selected?), 'inline-edit'], param: 'indicator_activity', activator: "##{activity.id}"
-                      %i.fas.fa-pen.btn-sm.text-warning.edit-icon{id: activity.id}
+                    .d-flex
+                      - tooltip_title = activity.selected? ? t("scorecard.edit_selected_action") : t("shared.edit")
+                      .d-flex.align-items-start{data: { toggle: 'tooltip', placement: 'top', title: tooltip_title }}
+                        = best_in_place activity, :content, url: scorecards_indicator_activity_path(activity), as: :input, class: [('text-info' if activity.selected?), 'inline-edit'], param: 'indicator_activity'
+
+                        %span
+                          %i.fas.fa-pen.btn-sm.text-warning.edit-icon
                   - else
-                    %span{class: ('text-info action-selected' if activity.selected?)}
-                      = activity.content
+                    - data_attr = !activity.selected? ? {} : { class: 'text-info', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.selected_action') } }
+
+                    %span{data_attr}= activity.content
 
 - if references = @scorecard.scorecard_references.presence
   .mb-2

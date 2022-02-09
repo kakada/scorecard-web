@@ -60,4 +60,11 @@ module ScorecardsHelper
 
     current_user.staff? ? facilities_path : languages_path
   end
+
+  def swot_sub_title(scorecard)
+    str = "#{t('scorecard.indicator_count', count: scorecard.voting_indicators.length)}"
+    str += ", #{t('scorecard.suggested_action_count', count: scorecard.suggested_indicator_activities.length)}"
+    str += " <span class='badge badge-info'>#{t('scorecard.selected_action_count', count: scorecard.suggested_indicator_activities.selecteds.count)}</span>"
+    str.html_safe
+  end
 end

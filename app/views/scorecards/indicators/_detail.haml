@@ -10,12 +10,18 @@
         %td
           .mb-2
             - if criteria['indicator'].class.name.split('::').last == 'CustomIndicator' && policy(@scorecard).in_review?
-              .d-flex.align-items-start
-                %i.fas.fa-pen.btn-sm.text-warning
+              .d-flex
+                .d-flex.align-items-start{data: { toggle: 'tooltip', placement: 'top', title: t("shared.edit") }}
+                  = best_in_place criteria['indicator'], :name, url: scorecard_indicator_path(@scorecard.uuid, criteria['indicator'].id), as: :input
 
-                = best_in_place criteria['indicator'], :name, url: scorecard_indicator_path(@scorecard.uuid, criteria['indicator'].id), as: :input
+                  %span
+                    %i.fas.fa-pen.btn-sm.text-warning.mr-1
             - else
               = criteria["name"]
+
+              - if policy(@scorecard).in_review?
+                %span{data: { toggle: 'tooltip', placement: 'top', title: t("indicator.cannot_edit_predefine") }}
+                  %i.fas.fa-pen.btn-sm.disabled
 
           .text-muted.card-subtitle.text-sm
             = participant_information(criteria, 'count').html_safe

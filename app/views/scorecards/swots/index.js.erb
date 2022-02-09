@@ -2,6 +2,6 @@ $('#mainModal .modal-title').html("<%= t('scorecard.swot_table') %>");
 $('#mainModal .modal-body').html('<%= j render("detail") %>');
 $("#mainModal").modal("show");
 
-jQuery(".best_in_place").best_in_place();
+$('[data-toggle="tooltip"]').tooltip();
 
-$('.action-selected').tooltip({ trigger: "hover", title: "<%= t('scorecard.selected_action') %>" });
+jQuery(".best_in_place").best_in_place();

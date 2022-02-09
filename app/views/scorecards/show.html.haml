@@ -28,7 +28,7 @@
       .veticial-line
 
       / SWOT
-      = render 'scorecards/show/progress_step', label: "4. #{t('scorecard.swot_table')}", url: scorecard_swots_path(@scorecard.uuid), disabled: disabled_button, sub_title: "#{t('scorecard.indicator_count', count: @scorecard.voting_indicators.length)}, #{t('scorecard.suggested_action_count', count: @scorecard.suggested_indicator_activities.length)}, #{t('scorecard.selected_action_count', count: @scorecard.suggested_indicator_activities.selecteds.count)}", in_review: policy(@scorecard).in_review?
+      = render 'scorecards/show/progress_step', label: "4. #{t('scorecard.swot_table')}", url: scorecard_swots_path(@scorecard.uuid), disabled: disabled_button, sub_title: swot_sub_title(@scorecard), in_review: policy(@scorecard).in_review?
 
 = render "scorecards/show/main_modal"
 = render "scorecards/show/modal_scorecard_uuid"
