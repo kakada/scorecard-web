@@ -18,4 +18,10 @@ namespace :scorecard do
       )
     end
   end
+
+  desc "migrate device_type"
+  task migrate_device_type: :environment do
+    submitted_scorecards = Scorecard.where.not(submitted_at: nil).where(device_type: nil)
+    submitted_scorecards.update_all(device_type: "tablet")
+  end
 end
