@@ -112,6 +112,7 @@ en:
     rejected: Rejected
     add_suggestion: Add suggestion
     selected_action: Selected action
+    edit_selected_action: Edit (selected action)
     in_review_date: In review date
     completed_date: Completed date
     mark_as_completed: Mark as completed

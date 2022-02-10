@@ -112,6 +112,7 @@ km:
     rejected: ត្រូវបានបដិសេធ
     add_suggestion: បន្ថែមសំណើ
     selected_action: សកម្មភាពដែលត្រូវបានជ្រើសរើស
+    edit_selected_action: កែតម្រូវ (សកម្មភាពដែលត្រូវបានជ្រើសរើស)
     in_review_date: កាលបរិច្ឆេទដាក់ត្រួតពិនិត្យ
     completed_date: កាលបរិច្ឆេទបញ្ចប់
     mark_as_completed: សម្គាល់ថាបានបញ្ចប់
