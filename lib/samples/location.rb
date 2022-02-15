@@ -2,14 +2,10 @@
 
 require "csv"
 
-module Sample
-  class Location
+module Samples
+  class Location < Base
     def self.load
-      file_path = Rails.root.join("lib", "sample", "assets", "csv", "locations.csv").to_s
-
-      return puts "Fail to import data. could not find #{file_path}" unless File.file?(file_path)
-
-      csv = CSV.read(file_path)
+      csv = CSV.read(file_path('locations.csv'))
       csv.shift
       csv.each do |data|
         loc = ::Location.find_or_initialize_by(code: data[0])

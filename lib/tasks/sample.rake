@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "sample/csc_web"
+require "samples/csc_web"
 
 if ENV["ENABLE_RESET_DATA_SCHEDULE"] == "true" || Rails.env.development? || Rails.env.test?
   namespace :sample do
@@ -15,19 +15,19 @@ if ENV["ENABLE_RESET_DATA_SCHEDULE"] == "true" || Rails.env.development? || Rail
 
     desc "Loads sample data"
     task load: [:clean_db] do
-      Sample::CscWeb.load_samples
+      Samples::CscWeb.load_samples
     end
 
     desc "Loads sample data"
     task :export, [:json_type] => :environment do |task, args|
       filetype = args[:json_type] || "json"
-      Sample::CscWeb.export(filetype)
+      Samples::CscWeb.export(filetype)
     end
 
     desc "Simulate scorecard data"
     task :load_scorecard, [:count] => :environment do |task, args|
       count = (args[:count] || 1).to_i
-      ::Sample::Scorecard.load(count)
+      ::Samples::Scorecard.load(count)
     end
   end
 end

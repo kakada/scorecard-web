@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require_relative "scorecard_criteria"
 require "csv"
 
-module ScorecardCriteria
+module Samples
   class Base
     def self.file_path(file_name)
-      file_path = Rails.root.join("lib", "scorecard_criteria", "assets", "csv", file_name).to_s
+      file_path = Rails.root.join("lib", "samples", "assets", "csv", file_name).to_s
 
       return puts "Fail to import data. could not find #{file_path}" unless File.file?(file_path)
 
@@ -22,7 +21,7 @@ module ScorecardCriteria
     end
 
     def self.audios
-      @audios ||= Dir.glob(Rails.root.join("lib", "scorecard_criteria", "assets", "audios", "**", "**", "**", "**"))
+      @audios ||= Dir.glob(Rails.root.join("lib", "samples", "assets", "audios", "**", "**", "**", "**"))
     end
   end
 end

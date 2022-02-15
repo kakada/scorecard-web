@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Sample
+module Samples
   class User
     def self.load
       care = ::Program.find_by name: "CARE"

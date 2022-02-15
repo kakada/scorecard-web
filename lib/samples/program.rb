@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Sample
+module Samples
   class Program
     def self.load
       u = ::User.new(email: "admin@instedd.org", role: :system_admin, password: "123456", program_id: nil)

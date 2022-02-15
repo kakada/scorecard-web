@@ -1,22 +1,26 @@
 # frozen_string_literal: true
 
-require_relative "sample"
+require_relative "scorecards/participant"
+require_relative "scorecards/voting_indicator"
+require_relative "scorecards/rating"
+require_relative "scorecards/raised_indicator"
+require_relative "scorecards/scorecard_reference"
 
-module Sample
+module Samples
   class Scorecard
     def self.load(count = 1)
-      dependent_models = %w(Participant RaisedIndicator VotingIndicator Rating)
+      dependent_models = %w(Participant RaisedIndicator VotingIndicator Rating ScorecardReference)
 
       count.times do |i|
         scorecard = create_scorecard
 
         dependent_models.each do |model|
-          "::Sample::#{model.camelcase}".constantize.load(scorecard)
+          "::Samples::Scorecards::#{model.camelcase}".constantize.load(scorecard)
         rescue
           Rails.logger.warn "Model #{model} is unknwon"
         end
 
-        scorecard.lock_access!
+        scorecard.lock_submit!
       end
     end
 
