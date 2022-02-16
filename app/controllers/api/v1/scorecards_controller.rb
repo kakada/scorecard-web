@@ -43,7 +43,7 @@ module Api
         end
 
         def scorecard_params
-          params.require(:scorecard).permit(
+          param = params.require(:scorecard).permit(
             :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,
             :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
             :finished_date, :language_conducted_code, :running_date, :device_type, :device_token,
@@ -55,7 +55,7 @@ module Api
             voting_indicators_attributes: [
               :uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid,
               :median, :scorecard_uuid, :display_order,
-              # Todo: after interim period of v1 and v2, they should be removed
+              # Todo remove after device is no longer installed mobile app 1.4.2 (require report from play store)
               strength: [], weakness: [], suggested_action: [],
               suggested_actions_attributes: [ :voting_indicator_uuid, :scorecard_uuid, :content, :selected ],
 
@@ -63,6 +63,16 @@ module Api
             ],
             ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ]
           )
+
+          # Todo remove after device is no longer installed mobile app 1.4.2 (require report from play store)
+          (param[:raised_indicators_attributes] || []).each do |ri|
+            ri[:indicatorable_type] = 'Indicators::CustomIndicator' if ri[:indicatorable_type] == 'CustomIndicator'
+          end
+          (param[:voting_indicators_attributes] || []).each do |ri|
+            ri[:indicatorable_type] = 'Indicators::CustomIndicator' if ri[:indicatorable_type] == 'CustomIndicator'
+          end
+
+          param
         end
     end
   end
