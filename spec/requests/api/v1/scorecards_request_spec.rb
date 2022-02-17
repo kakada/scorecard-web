@@ -215,11 +215,21 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
   describe "PUT #update, raised_indicator and voting_indicators" do
     let!(:user)       { create(:user) }
     let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
+    let!(:custom_indicator) {create(:indicator, type: 'Indicators::CustomIndicator', categorizable: facility)}
+    let!(:custom_indicator2) {create(:indicator, type: 'Indicators::CustomIndicator', categorizable: facility)}
     let!(:indicator)   { facility.indicators.first }
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
-    let(:params)      { { raised_indicators_attributes: [{ indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "123", selected: true }],
-                          voting_indicators_attributes: [{ uuid: "123", indicator_uuid: indicator.uuid, indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1 }]
+    let(:params)      { { raised_indicators_attributes: [
+                            { indicatorable_id: indicator.id, indicatorable_type: 'Indicator', scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "123", selected: true },
+                            { indicatorable_id: custom_indicator.id, indicatorable_type: 'CustomIndicator', scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "124", selected: true },
+                            { indicatorable_id: custom_indicator2.id, indicatorable_type: 'Indicators::CustomIndicator', scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "125", selected: true },
+                          ],
+                          voting_indicators_attributes: [
+                            { uuid: "123", indicatorable_id: indicator.id, indicatorable_type: 'Indicator', scorecard_uuid: scorecard.uuid, display_order: 1 },
+                            { uuid: "124", indicatorable_id: custom_indicator.id, indicatorable_type: 'CustomIndicator', scorecard_uuid: scorecard.uuid, display_order: 2 },
+                            { uuid: "125", indicator_uuid: custom_indicator2.uuid, indicatorable_id: custom_indicator2.id, indicatorable_type: 'Indicators::CustomIndicator', scorecard_uuid: scorecard.uuid, display_order: 2 },
+                          ]
                         }
                       }
     let(:voting_indicators) { scorecard.reload.voting_indicators }
@@ -232,8 +242,8 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
       it { expect(response.content_type).to eq("application/json; charset=utf-8") }
       it { expect(response).to have_http_status(:ok) }
-      it { expect(voting_indicators.length).to eq(1) }
-      it { expect(raised_indicators.length).to eq(1) }
+      it { expect(voting_indicators.length).to eq(3) }
+      it { expect(raised_indicators.length).to eq(3) }
       it { expect(raised_indicators.first.selected).to be_truthy }
       it { expect(raised_indicators.first.voting_indicator_uuid).to eq("123") }
     end
