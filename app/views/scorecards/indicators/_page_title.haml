@@ -1,0 +1,15 @@
+.d-sm-flex.mb-4
+  .d-flex.flex-column.flex-grow-1
+    .d-flex.align-items-center
+      %h1.h3.mb-0.text-gray-800
+        = t("scorecard.scorecard_detail") + ": #{@scorecard.uuid}-(#{@scorecard.name})"
+      %div
+        = status_html(@scorecard).html_safe
+
+    .my-2.card-subtitle.text-muted
+      = scorecard_descriptions.html_safe
+
+  .w-25.text-right
+    %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecard_path(@scorecard.uuid) }
+      %i.fas.fa-arrow-left.fa-sm.text-white-50
+      = t("shared.done")

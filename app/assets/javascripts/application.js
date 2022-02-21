@@ -36,6 +36,8 @@
 //= require scorecards/index
 //= require scorecards/show
 //= require scorecards/new
+//= require scorecards/indicator
+//= require scorecards/swot
 //= require users/index
 //= require users/new
 //= require local_ngos

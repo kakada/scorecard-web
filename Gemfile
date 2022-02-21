@@ -34,13 +34,13 @@ gem "haml-rails", "~> 2.0"
 gem "jquery-rails",   "~> 4.4.0"
 gem "coffee-rails",   "~> 5.0.0"
 
-gem "devise", github: "heartcombo/devise", branch: "ca-omniauth-2"
+gem "devise", "~> 4.8.1"
 gem "omniauth-rails_csrf_protection", "~> 1.0.0"
+gem "omniauth-google-oauth2", "~> 1.0.0"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
 
-gem "omniauth-google-oauth2", "~>1.0.0"
 gem "sentry-raven", "~> 3.0.4"
 gem "pagy", "~> 5.1.3"
 gem "pumi", require: "pumi/rails"

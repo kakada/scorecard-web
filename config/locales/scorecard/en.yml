@@ -141,3 +141,4 @@ en:
     completed_scorecard: Completed Scorecard
     no_request_change: No scorecard request change
     are_you_sure_to_mark_as_completed: Are you sure to mark the scorecard <b>%{code}</b> as completed?
+    data_connot_be_rollback_after_approve: The data will no longer be editable after you've approved!
