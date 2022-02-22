@@ -14,5 +14,5 @@
 
       - unless disabled
         %div
-          = link_to label_button, url, remote: true, class: "btn btn-primary"
+          = link_to label_button, url, remote: !in_review, class: "btn btn-primary"
 

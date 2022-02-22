@@ -8,14 +8,19 @@
     - @criterias.each_with_index do |criteria, index|
       %tr
         %td
-          .mb-2
+          .mb-2.review-indicator
             - if criteria['indicator'].class.name.split('::').last == 'CustomIndicator' && policy(@scorecard).in_review?
               .d-flex
-                .d-flex.align-items-start{data: { toggle: 'tooltip', placement: 'top', title: t("shared.edit") }}
-                  = best_in_place criteria['indicator'], :name, url: scorecard_indicator_path(@scorecard.uuid, criteria['indicator'].id), as: :input
-
+                .d-flex.align-items-start.tip{data: { toggle: 'tooltip', placement: 'top', title: t("shared.edit") }}
+                  = best_in_place criteria['indicator'], :name, url: scorecard_indicator_path(@scorecard.uuid, criteria['indicator'].id), as: :textarea, class: 'add-space',inner_class: 'best-in-place-textarea', skip_blur: false
                   %span
                     %i.fas.fa-pen.btn-sm.text-warning.mr-1
+
+              .d-flex.justify-content-end.text-muted
+                %small.text-count.d-none
+                  %span.count 0
+                  %span.mx-1 /
+                  %span 255
             - else
               = criteria["name"]
 

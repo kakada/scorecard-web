@@ -7,6 +7,7 @@ module Scorecards
       @criterias = Scorecards::ProposedCriteria.new(@scorecard).criterias
 
       respond_to do |format|
+        format.html
         format.js
       end
     end

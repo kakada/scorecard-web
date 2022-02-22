@@ -7,6 +7,7 @@ module Scorecards
       @voting_indicators = @scorecard.voting_indicators.includes(:indicator, :suggested_actions).order(:display_order)
 
       respond_to do |format|
+        format.html
         format.js
       end
     end

@@ -14,7 +14,7 @@
 
     - if policy(@scorecard).in_review?
       %button.btn.btn-primary.btn-sm.shadow-sm.mr-2{type: 'button', "data-toggle" => "modal", "data-target" => "#confirmModal"}
-        = t("scorecard.mark_as_completed")
+        = t("shared.approve")
 
       = render "scorecards/show/modal_mark_as_completed"
 
