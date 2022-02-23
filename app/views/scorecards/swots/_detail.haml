@@ -1,11 +1,11 @@
-%table.table.table-bordered
+%table.table.table-bordered.col-12
   %thead
     %tr
-      %th.align-middle.text-center{:scope => "col"}= t("scorecard.indicator")
-      %th.align-middle.text-center{:scope => "col"}= t("scorecard.median")
-      %th.align-middle.text-center{:scope => "col"}= t("scorecard.strength")
-      %th.align-middle.text-center{:scope => "col"}= t("scorecard.weakness")
-      %th.align-middle.text-center{:scope => "col"}= t("scorecard.suggested_action")
+      %th.align-middle.text-center= t("scorecard.indicator")
+      %th.align-middle.text-center= t("scorecard.median")
+      %th.align-middle.text-center= t("scorecard.strength")
+      %th.align-middle.text-center= t("scorecard.weakness")
+      %th.align-middle.text-center= t("scorecard.suggested_action")
 
   %tbody
     - @voting_indicators.each_with_index do |vi, index|
@@ -14,7 +14,7 @@
         %td.text-center= VotingIndicator.medians[vi.median]
 
         - ['strength', 'weakness', 'suggested'].each do |action|
-          %td
+          %td.col-3
             .text-break
               - vi.send("#{action}_indicator_activities").each do |activity|
                 .d-flex
@@ -24,7 +24,7 @@
                     .d-flex.flex-grow-1
                       - tooltip_title = activity.selected? ? t("scorecard.edit_selected_action") : t("shared.edit")
                       .d-flex.align-items-start.tip{data: { toggle: 'tooltip', placement: 'top', title: tooltip_title }}
-                        = best_in_place activity, :content, url: scorecards_indicator_activity_path(activity), as: :textarea, class: ['add-space', ('text-info' if activity.selected?)], param: 'indicator_activity', inner_class: 'best-in-place-textarea', skip_blur: false
+                        = best_in_place activity, :content, url: scorecards_indicator_activity_path(activity), as: :textarea, class: ['add-space', ('text-info' if activity.selected?)], param: 'indicator_activity', inner_class: 'best-in-place-textarea', ok_button: t('shared.save'), cancel_button: t('shared.cancel'), ok_button_class: 'btn btn-primary btn-save', cancel_button_class: 'btn btn-secondary btn-cancel', skip_blur: true
                         %span
                           %i.fas.fa-pen.btn-sm.text-warning.edit-icon
                   - else
