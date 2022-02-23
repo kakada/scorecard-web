@@ -156,6 +156,7 @@
   }
 }
 
+// Review Indicator and Swot: Best in place
 .best_in_place {
   display: flex;
   flex-grow: 1;
@@ -169,11 +170,42 @@
   .form_in_place {
     display: flex;
     flex-grow: 1;
+    margin-bottom: 10px;
 
     .best-in-place-textarea {
       width: 100%;
       height: 74px;
       line-height: 28px;
+    }
+
+    input {
+      width: 73px;
+      float: right;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: #e4761e;
+      border-color: #e4761e;
+    }
+
+    .btn-primary:hover {
+      color: #fff;
+      background-color: #cc5c00;
+      border-color: #cc5c00;
+    }
+
+    .btn-secondary {
+      color: #fff;
+      background-color: #858796;
+      border-color: #858796;
+      margin-right: 4px;
+    }
+
+    .btn-secondary:hover {
+      color: #fff;
+      background-color: #717384;
+      border-color: #6b6d7d;
     }
   }
 }
