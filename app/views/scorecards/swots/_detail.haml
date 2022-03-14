@@ -1,4 +1,4 @@
-%table.table.table-bordered.col-12
+%table.table.table-bordered
   %thead
     %tr
       %th.align-middle.text-center= t("scorecard.indicator")
@@ -14,7 +14,7 @@
         %td.text-center= VotingIndicator.medians[vi.median]
 
         - ['strength', 'weakness', 'suggested'].each do |action|
-          %td.col-3
+          %td.w-25
             .text-break
               - vi.send("#{action}_indicator_activities").each do |activity|
                 .d-flex
