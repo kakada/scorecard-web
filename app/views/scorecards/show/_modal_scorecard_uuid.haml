@@ -3,15 +3,25 @@
     .modal-dialog{:role => "document"}
       .modal-content
         .modal-header
-          %h5.modal-title Scorecard
+          - if test_mode?
+            .ribbon-wrapper
+              .ribbon= t('shared.testing')
+
+          %div{class: ('ml-5' if test_mode?)}
+            %h5.modal-title= t('scorecard.scorecard')
+
+            - if test_mode?
+              %span.text-gray-600.small= "(#{t('shared.you_are_in_testing_mode')})"
+
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} ×
+
         .modal-body
           %p
             %span.text-primary
               = @scorecard.uuid
               = render 'scorecard_copy', scorecard: @scorecard
 
-            %sapn ប្រើលេខកូដនេះសម្រាប់ទាញយក Scorecard
+            %span= t('scorecard.use_this_code_to_download_scorecard')
         .modal-footer
           %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.close")

@@ -1,6 +1,7 @@
 en:
   scorecard:
     scorecards: Scorecards
+    scorecard: Scorecard
     conducted_at: Conducted at
     location: Location
     unit_type: Unit Type
@@ -142,3 +143,4 @@ en:
     no_request_change: No scorecard request change
     are_you_sure_to_mark_as_completed: Are you sure to mark the scorecard <b>%{code}</b> as completed?
     data_connot_be_rollback_after_approve: The data will no longer be editable after you've approved!
+    use_this_code_to_download_scorecard: Use this code to download the scorecard.

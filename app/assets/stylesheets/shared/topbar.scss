@@ -22,3 +22,13 @@
   height: 24px;
   width: 24px;
 }
+
+.test-mode-message {
+  position: absolute;
+  text-align: center;
+  top: 10px;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%);
+  width: 500px;
+}

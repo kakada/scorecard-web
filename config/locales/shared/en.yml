@@ -63,3 +63,7 @@ en:
     import_from_zip_file: Import from compress(.zip) file
     zip_file: Zip file
     download_sample_zip: Download sample(.zip)
+    copied: Copied!
+    copied_testing_code: Copied testing code!
+    you_are_in_testing_mode: You’re currently in testing mode
+    testing: Testing
