@@ -94,6 +94,10 @@ module ApplicationHelper
     str + "</div>"
   end
 
+  def test_mode?
+    !Rails.env.production?
+  end
+
   private
     def participant_tooltip(criteria, agg_function, field)
       value = criteria["#{field}_#{agg_function}"].to_i
