@@ -30,7 +30,7 @@ RUN bundle exec rake assets:precompile RAILS_ENV=production
 
 ENV RAILS_LOG_TO_STDOUT=true
 ENV RACK_ENV=production
-ENV RAILS_ENV=production
+ENV RAILS_ENV=staging
 EXPOSE 80
 
 COPY docker/database.yml /app/config/database.yml
