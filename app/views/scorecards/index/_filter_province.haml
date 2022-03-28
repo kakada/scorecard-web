@@ -1,0 +1,32 @@
+#province.filter-input{'data-toggle' => 'multiSelect'}
+  / Trigger
+  .tooltips{'data-toggle' => 'tooltip'}
+    / Require hidden-input class
+    %input.hidden-input{ name: 'province_ids', type: :hidden, value: params[:province_ids] }
+
+    / Require div for display
+    .form-control.text-truncate{'data-toggle' => 'modal', 'data-target' => '#provinceModal', 'data-placeholder' => t('scorecard.any_province'), 'data-display-text' => t('scorecard.n_province_selected')}
+
+  / Modal
+  #provinceModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %div
+            %h5#exampleModalLabel.modal-title= t('scorecard.province')
+            %small.text-muted.font-italic= "(#{t('scorecard.can_select_multiple_province')})"
+
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+
+        .modal-body
+          - list = Pumi::Province.all.map{|p| {value: p.id, name: p["name_#{I18n.locale}"]}}
+
+          / Require tagify-input class
+          %input.tagify-input{ placeholder: t('scorecard.input_province_name'), 'data-list' => list.to_json }
+
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
+
+          / Require btn-save class
+          %button.btn.btn-primary.btn-save{"data-dismiss" => "modal", :type => "button"}= t('shared.save')

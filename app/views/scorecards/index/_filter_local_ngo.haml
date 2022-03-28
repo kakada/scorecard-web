@@ -1,0 +1,32 @@
+#lngo.filter-input{'data-toggle' => 'multiSelect'}
+  / Trigger
+  .tooltips{'data-toggle' => 'tooltip'}
+    / Require hidden-input class
+    %input.hidden-input{ name: 'local_ngo_ids', type: :hidden, value: params[:local_ngo_ids] }
+
+    / Require div for display
+    .form-control.text-truncate{'data-toggle' => 'modal', 'data-target' => '#lngoModal', 'data-placeholder' => t('scorecard.any_local_ngo'), 'data-display-text' => t('scorecard.n_lngo_selected')}
+
+  / Modal
+  #lngoModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %div
+            %h5#exampleModalLabel.modal-title= t('scorecard.local_ngo')
+            %small.text-muted.font-italic= "(#{t('scorecard.can_select_multiple_lngo')})"
+
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+
+        .modal-body
+          - list = current_program.local_ngos.map{|l| {value: l.id, name: l.name}}
+
+          / Require tagify-input class
+          %input.tagify-input{ placeholder: t('scorecard.input_lngo_name'), 'data-list' => list.to_json }
+
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
+
+          / Require btn-save class
+          %button.btn.btn-primary.btn-save{"data-dismiss" => "modal", :type => "button"}= t('shared.save')

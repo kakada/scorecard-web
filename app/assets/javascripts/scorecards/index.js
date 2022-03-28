@@ -7,6 +7,16 @@ CW.ScorecardsIndex = (() => {
     onShowCollapse();
     onHideCollapse();
     initAddSuggestionTooltip();
+
+    initScorecardFilter();
+  }
+
+  function initScorecardFilter() {
+    let multiSelects = $('[data-toggle="multiSelect"]');
+
+    for(let i=0; i<multiSelects.length; i++) {
+      new MultiSelectTagify(multiSelects[i]).init();
+    }
   }
 
   function handleDisplayCollapseContent() {

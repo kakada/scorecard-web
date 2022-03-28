@@ -20,13 +20,11 @@
   / Advance filter
   #collapseExample.collapse
     .d-lg-flex.mb-2
-      = select_tag :province_id, options_from_collection_for_select(Pumi::Province.all, :id, "name_#{I18n.locale}", params[:province_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_province")
+      = render 'scorecards/index/filter_province'
 
       = select_tag :scorecard_type, options_for_select(Scorecard.t_scorecard_types, params[:scorecard_type]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_scorecard_type")
 
       - if current_program.present?
-        = select_tag :year, options_for_select(current_program.scorecards.pluck(:year).uniq, params[:year]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_year")
-
-        = select_tag :facility_id, options_for_select(current_program.facilities.leaves.pluck("name_#{I18n.locale}", :id), params[:facility_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_facility")
-
-        = select_tag :local_ngo_id, options_for_select(current_program.local_ngos.pluck(:name, :id), params[:local_ngo_id]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_local_ngo")
+        = render 'scorecards/index/filter_year'
+        = render 'scorecards/index/filter_facility'
+        = render 'scorecards/index/filter_local_ngo'

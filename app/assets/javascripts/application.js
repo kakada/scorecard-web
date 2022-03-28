@@ -27,6 +27,7 @@
 //= require common/sidebar
 //= require common/datetime_picker
 //= require common/timeago
+//= require common/multi_select_tagify
 
 //= require facilities
 //= require templates
