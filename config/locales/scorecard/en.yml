@@ -144,15 +144,7 @@ en:
     are_you_sure_to_mark_as_completed: Are you sure to mark the scorecard <b>%{code}</b> as completed?
     data_connot_be_rollback_after_approve: The data will no longer be editable after you've approved!
     use_this_code_to_download_scorecard: Use this code to download the scorecard.
-    input_province_name: Input province name
-    input_year: Input year
-    input_facility_name: Input facility name
-    input_lngo_name: Input local NGO name
-    n_province_selected: n provinces selected
-    n_year_selected: n years selected
-    n_facility_selected: n facilities selected
-    n_lngo_selected: n local NGO selected
-    can_select_multiple_province: You can select more than one provinces
-    can_select_multiple_year: You can select more than one years
-    can_select_multiple_facility: You can select more than one facilities
-    can_select_multiple_lngo: You can select more than one local NGOs
+    provinces_selected: provinces selected
+    years_selected: years selected
+    facilities_selected: facilities selected
+    lngos_selected: local NGOs selected

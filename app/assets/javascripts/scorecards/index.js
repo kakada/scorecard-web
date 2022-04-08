@@ -8,15 +8,26 @@ CW.ScorecardsIndex = (() => {
     onHideCollapse();
     initAddSuggestionTooltip();
 
-    initScorecardFilter();
+    initSelectPicker();
   }
 
-  function initScorecardFilter() {
-    let multiSelects = $('[data-toggle="multiSelect"]');
+  function initSelectPicker() {
+    $('.selectpicker').selectpicker();
 
-    for(let i=0; i<multiSelects.length; i++) {
-      new MultiSelectTagify(multiSelects[i]).init();
-    }
+    $('.selectpicker').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+      setTooltip(e);
+    });
+
+    $('.selectpicker').on('loaded.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+      setTooltip(e);
+    });
+  }
+
+  function setTooltip(e) {
+    let selectedOptions = $(e.target).parents('.tooltips').find('select :selected');
+    let title = selectedOptions.map((i, o) => $(o).html()).toArray().join(', ');
+
+    $(e.target).parents('.tooltips').attr('data-original-title', title);
   }
 
   function handleDisplayCollapseContent() {

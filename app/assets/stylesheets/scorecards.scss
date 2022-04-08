@@ -213,3 +213,26 @@
 .best_in_place + span {
   margin-left: -30px;
 }
+
+// Select picker
+.bootstrap-select > .dropdown-toggle.bs-placeholder {
+  color: #6e707e;
+}
+
+.bootstrap-select .dropdown-menu li a {
+  color: #6e707e;
+  font-size: 0.95rem;
+}
+
+.bootstrap-select.form-control {
+  border: 1px solid #d1d3e2 !important;
+}
+
+.bootstrap-select button {
+  color: #6e707e;
+  background-color: #fff;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: rgba(0,0,0,0.05);
+}

@@ -5,6 +5,7 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require bootstrap-select.min
 
 //= require sb-admin-2
 
@@ -27,7 +28,6 @@
 //= require common/sidebar
 //= require common/datetime_picker
 //= require common/timeago
-//= require common/multi_select_tagify
 
 //= require facilities
 //= require templates

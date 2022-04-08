@@ -144,15 +144,7 @@ km:
     are_you_sure_to_mark_as_completed: តើអ្នកយល់ព្រមសម្គាល់ប័ណ្ណដាក់ពិន្ទុ <b>%{code}</b> នេះថាបានបញ្ចប់មែនទេ?
     data_connot_be_rollback_after_approve: ទិន្នន័យនឹងមិនអាចកែបានទៀតទេ បន្ទាប់ពីអ្នកយល់ព្រមរួច!
     use_this_code_to_download_scorecard: ប្រើលេខកូដនេះសម្រាប់ទាញយកប័ណ្ណដាក់ពិន្ទុ
-    input_province_name: បញ្ចូលឈ្មោះខេត្ត
-    input_year: បញ្ចូលឆ្នាំ
-    input_facility_name: បញ្ចូលឈ្មោះទីតាំងសេវា
-    input_lngo_name: បញ្ចូលឈ្មោះអ្នកអនុវត្ត
-    n_province_selected: n ខេត្តត្រូវបានជ្រើសរើស
-    n_year_selected: n ឆ្នាំត្រូវបានជ្រើសរើស
-    n_facility_selected: n ទីតាំងសេវាត្រូវបានជ្រើសរើស
-    n_lngo_selected: n អ្នកអនុវត្តត្រូវបានជ្រើសរើស
-    can_select_multiple_province: អ្នកអាចជ្រើសរើសខេត្តច្រើនជាងមួយ
-    can_select_multiple_year: អ្នកអាចជ្រើសរើសឆ្នាំច្រើនជាងមួយ
-    can_select_multiple_facility: អ្នកអាចជ្រើសរើសទីតាំងសេវាច្រើនជាងមួយ
-    can_select_multiple_lngo: អ្នកអាចជ្រើសរើសអ្នកអនុវត្តច្រើនជាងមួយ
+    provinces_selected: ខេត្តត្រូវបានជ្រើសរើស
+    years_selected: ឆ្នាំត្រូវបានជ្រើសរើស
+    facilities_selected: ទីតាំងសេវាត្រូវបានជ្រើសរើស
+    lngos_selected: អ្នកអនុវត្តត្រូវបានជ្រើសរើស
