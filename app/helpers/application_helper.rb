@@ -39,6 +39,8 @@ module ApplicationHelper
     format = current_program.try(:datetime_format) || Program::DATETIME_FORMATS.keys[0]
     date = Time.parse(date) if date.is_a?(String)
     date.strftime(Program::DATETIME_FORMATS[format])
+  rescue
+    nil
   end
 
   def participant_information(criteria, agg_function)
