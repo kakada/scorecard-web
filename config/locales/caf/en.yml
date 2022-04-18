@@ -15,3 +15,4 @@ en:
     search: Search by name or tel
     set_active: Set as actived Cafs
     are_you_sure_to_delete: Are you sure to delete the CAFs <b>%{name}</b>?
+    dob_warning: Invalid date, please update it.
