@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ActivityLog::RoledScope
+module ActivityLogs::RoledScope
   def system_admin(args)
     all
   end
