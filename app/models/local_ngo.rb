@@ -58,6 +58,6 @@ class LocalNgo < ApplicationRecord
 
   private
     def set_target_provinces
-      self.target_provinces = Pumi::Province.all.select { |p| target_province_ids.split(",").include?(p.id) }.sort_by { |x| x.id }.map(&:name_km).join(", ")
+      self.target_provinces = Pumi::Province.all.select { |p| target_province_ids.to_s.split(",").include?(p.id) }.sort_by { |x| x.id }.map(&:name_km).join(", ")
     end
 end

@@ -144,3 +144,7 @@ en:
     are_you_sure_to_mark_as_completed: Are you sure to mark the scorecard <b>%{code}</b> as completed?
     data_connot_be_rollback_after_approve: The data will no longer be editable after you've approved!
     use_this_code_to_download_scorecard: Use this code to download the scorecard.
+    provinces_selected: provinces selected
+    years_selected: years selected
+    facilities_selected: facilities selected
+    lngos_selected: local NGOs selected

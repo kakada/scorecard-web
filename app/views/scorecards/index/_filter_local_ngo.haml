@@ -1,0 +1,2 @@
+.filter-input.tooltips{ 'data-toggle' => 'tooltip' }
+  = select_tag 'local_ngo_ids[]', options_for_select(current_program.local_ngos.map { |s| [s.name, s.id] }, params[:local_ngo_ids]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('scorecard.lngos_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("scorecard.any_local_ngo"), class: 'selectpicker form-control'

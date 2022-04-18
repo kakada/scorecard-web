@@ -7,6 +7,27 @@ CW.ScorecardsIndex = (() => {
     onShowCollapse();
     onHideCollapse();
     initAddSuggestionTooltip();
+
+    initSelectPicker();
+  }
+
+  function initSelectPicker() {
+    $('.selectpicker').selectpicker();
+
+    $('.selectpicker').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+      setTooltip(e);
+    });
+
+    $('.selectpicker').on('loaded.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+      setTooltip(e);
+    });
+  }
+
+  function setTooltip(e) {
+    let selectedOptions = $(e.target).parents('.tooltips').find('select :selected');
+    let title = selectedOptions.map((i, o) => $(o).html()).toArray().join(', ');
+
+    $(e.target).parents('.tooltips').attr('data-original-title', title);
   }
 
   function handleDisplayCollapseContent() {

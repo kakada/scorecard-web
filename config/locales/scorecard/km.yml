@@ -144,3 +144,7 @@ km:
     are_you_sure_to_mark_as_completed: តើអ្នកយល់ព្រមសម្គាល់ប័ណ្ណដាក់ពិន្ទុ <b>%{code}</b> នេះថាបានបញ្ចប់មែនទេ?
     data_connot_be_rollback_after_approve: ទិន្នន័យនឹងមិនអាចកែបានទៀតទេ បន្ទាប់ពីអ្នកយល់ព្រមរួច!
     use_this_code_to_download_scorecard: ប្រើលេខកូដនេះសម្រាប់ទាញយកប័ណ្ណដាក់ពិន្ទុ
+    provinces_selected: ខេត្តត្រូវបានជ្រើសរើស
+    years_selected: ឆ្នាំត្រូវបានជ្រើសរើស
+    facilities_selected: ទីតាំងសេវាត្រូវបានជ្រើសរើស
+    lngos_selected: អ្នកអនុវត្តត្រូវបានជ្រើសរើស
