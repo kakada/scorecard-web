@@ -19,7 +19,7 @@
 #  remote_ip       :string
 #
 class ActivityLog < ApplicationRecord
-  extend ActivityLog::RoledScope
+  extend ActivityLogs::RoledScope
 
   belongs_to :user
   belongs_to :program, optional: true

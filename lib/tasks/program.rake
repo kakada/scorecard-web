@@ -62,8 +62,7 @@ namespace :program do
       program.telegram_bot.try(:destroy)
       program.gf_dashboard.try(:destroy)
 
-      program.cafs.delete_all
-      program.local_ngos.delete_all
+      program.local_ngos.destroy_all
       program.rating_scales.destroy_all #:language_rating_scales
       program.facilities.destroy_all #:indicators, :languages_indicators
       program.templates.destroy_all #:indicators, :languages_indicators

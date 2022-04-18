@@ -50,7 +50,7 @@ RSpec.describe ActivityLog, type: :model do
     end
   end
 
-  describe "ActivityLog::RoledScope" do
+  describe "ActivityLogs::RoledScope" do
     let(:program1) { create(:program) }
     let(:program2) { create(:program) }
 
