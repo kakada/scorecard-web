@@ -24,4 +24,10 @@ namespace :scorecard do
     submitted_scorecards = Scorecard.where.not(submitted_at: nil).where(device_type: nil)
     submitted_scorecards.update_all(device_type: "tablet")
   end
+
+  desc "migrate missing local NGO caused by removed"
+  task migrate_missing_local_ngo: :environment do
+    scorecards = Scorecard.where.not(local_ngo_id: LocalNgo.pluck(:id))
+    scorecards.update_all(local_ngo_id: -1)
+  end
 end
