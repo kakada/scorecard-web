@@ -16,6 +16,7 @@
 #  uuid               :string
 #  audio              :string
 #  type               :string           default("Indicators::PredefineIndicator")
+#  deleted_at         :datetime
 #
 class IndicatorSerializer < ActiveModel::Serializer
   attributes :id, :name, :tag_id, :tag_name, :image, :uuid

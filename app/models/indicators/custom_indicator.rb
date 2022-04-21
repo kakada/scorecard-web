@@ -16,6 +16,7 @@
 #  uuid               :string
 #  audio              :string
 #  type               :string           default("Indicators::PredefineIndicator")
+#  deleted_at         :datetime
 #
 module Indicators
   class CustomIndicator < ::Indicator

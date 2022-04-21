@@ -16,9 +16,14 @@
 #  uuid               :string
 #  audio              :string
 #  type               :string           default("Indicators::PredefineIndicator")
+#  deleted_at         :datetime
 #
 class Indicator < ApplicationRecord
   include Tagable
+  include Indicators::Removing
+
+  # Soft delete
+  acts_as_paranoid if column_names.include? "deleted_at"
 
   # Constant
   TYPES = %w(Indicators::PredefineIndicator Indicators::CustomIndicator)

@@ -18,19 +18,29 @@
 #  type               :string           default("Indicators::PredefineIndicator")
 #  deleted_at         :datetime
 #
-FactoryBot.define do
-  factory :indicator do
-    categorizable   { create(:facility) }
-    tag
-    name            { FFaker::Name.name }
+require "rails_helper"
 
-    trait :with_languages_indicators do
-      transient do
-        count { 1 }
+RSpec.describe Indicator, type: :model do
+
+  describe "#removing" do
+    context "has raised indicator" do
+      let!(:raised_indicator) { create(:raised_indicator) }
+      let(:indicator) { raised_indicator.indicatorable }
+
+      it "doesn't do anything" do
+        indicator.remove!
+
+        expect(Indicator.find_by id: indicator.id).not_to be_nil
       end
+    end
 
-      after(:create) do |indicator, evaluator|
-        create_list(:languages_indicator, evaluator.count, indicator: indicator)
+    context "has no any raised indicator" do
+      let(:indicator) { create(:indicator) }
+
+      it "apply soft delete" do
+        indicator.remove!
+
+        expect(Indicator.only_deleted.find_by id: indicator.id).not_to be_nil
       end
     end
   end
