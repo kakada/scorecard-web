@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_20_092801) do
+ActiveRecord::Schema.define(version: 2022_04_21_090113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -170,6 +170,8 @@ ActiveRecord::Schema.define(version: 2022_04_20_092801) do
     t.string "uuid"
     t.string "audio"
     t.string "type", default: "Indicators::PredefineIndicator"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_indicators_on_deleted_at"
   end
 
   create_table "language_rating_scales", force: :cascade do |t|

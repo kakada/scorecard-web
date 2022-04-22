@@ -19,5 +19,6 @@
 FactoryBot.define do
   factory :raised_indicator do
     tag
+    indicatorable { create(:indicator) }
   end
 end

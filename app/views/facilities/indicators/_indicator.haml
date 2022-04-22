@@ -6,4 +6,12 @@
   %td= timeago(indicator.created_at).html_safe
   %td
     .d-flex.justify-content-end
-      = render 'shared/action_buttons', edit_url: edit_facility_indicator_path(@facility, indicator), delete_url: facility_indicator_path(@facility, indicator), object: indicator
+      - if policy(indicator).update?
+        = link_to edit_facility_indicator_path(@facility, indicator), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+          %i.fas.fa-pen
+
+      - if policy(indicator).destroy?
+        - title = indicator.locked? ? t('indicator.already_in_used') : t('shared.delete')
+        %span{ data: { toggle: 'tooltip', placement: 'top', title: title }}
+          = link_to facility_indicator_path(@facility, indicator), remote: true, class: ["btn btn-circle btn-sm btn-outline-danger", ("disabled" if indicator.locked?)] do
+            %i.fas.fa-trash-alt
