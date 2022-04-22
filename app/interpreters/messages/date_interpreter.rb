@@ -11,7 +11,7 @@ module Messages
     end
 
     def today
-      I18n.l(Date.today)
+      I18n.l(Time.zone.now, format: :nice)
     end
   end
 end
