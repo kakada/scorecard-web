@@ -43,7 +43,7 @@ class LocalNgosController < ApplicationController
 
   def destroy
     @local_ngo = authorize LocalNgo.find(params[:id])
-    @local_ngo.destroy
+    @local_ngo.remove!
 
     redirect_to local_ngos_url
   end

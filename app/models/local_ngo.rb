@@ -19,9 +19,14 @@
 #  website_url         :string
 #
 class LocalNgo < ApplicationRecord
+  include LocalNgos::Filter
+  include LocalNgos::Removing
+
   belongs_to :program
   has_many :cafs, dependent: :destroy
   has_many :scorecards
+
+  acts_as_paranoid if column_names.include? "deleted_at"
 
   validates :name, presence: true, uniqueness: { scope: :program_id }
   validates :website_url, url: {  allow_blank: true,
@@ -36,24 +41,6 @@ class LocalNgo < ApplicationRecord
     return if address_code.nil?
 
     "Pumi::#{Location.location_kind(address_code).titlecase}".constantize.find_by_id(address_code).try("#{address_local}".to_sym)
-  end
-
-  class << self
-    def filter(params)
-      scope = all
-      scope = by_keyword(params[:keyword], scope) if params[:keyword].present?
-      scope = scope.where(program_id: params[:program_id]) if params[:program_id].present?
-      scope
-    end
-
-    private
-      def by_keyword(keyword, scope)
-        return scope unless keyword.present?
-
-        province_ids = Pumi::Province.all.select { |p| p.name_km.downcase.include?(keyword.downcase) || p.name_en.downcase.include?(keyword.downcase) }.map(&:id)
-
-        scope.where("LOWER(name) LIKE ? OR LOWER(target_provinces) LIKE ? OR province_id IN (?)", "%#{keyword.downcase}%", "%#{keyword.downcase}%", province_ids)
-      end
   end
 
   private
