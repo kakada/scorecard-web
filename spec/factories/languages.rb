@@ -12,6 +12,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  name_km    :string
+#  deleted_at :datetime
 #
 FactoryBot.define do
   factory :language do
