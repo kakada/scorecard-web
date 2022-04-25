@@ -21,7 +21,6 @@
 require "rails_helper"
 
 RSpec.describe Indicator, type: :model do
-
   describe "#removing" do
     context "has raised indicator" do
       let!(:raised_indicator) { create(:raised_indicator) }
