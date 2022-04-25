@@ -5,7 +5,7 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
-//= require bootstrap-select.min
+//= require bootstrap-select
 
 //= require sb-admin-2
 
