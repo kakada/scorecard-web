@@ -76,6 +76,7 @@ class Scorecard < ApplicationRecord
   belongs_to :creator, class_name: "User"
   belongs_to :completor, class_name: "User", optional: true
   belongs_to :primary_school, foreign_key: :primary_school_code, optional: true
+  belongs_to :language, foreign_key: :language_conducted_code, primary_key: :code, optional: true
 
   has_many   :facilitators, foreign_key: :scorecard_uuid
   has_many   :cafs, through: :facilitators

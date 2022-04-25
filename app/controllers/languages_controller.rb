@@ -47,7 +47,7 @@ class LanguagesController < ApplicationController
 
   def destroy
     @language = authorize Language.find(params[:id])
-    @language.destroy
+    @language.remove!
 
     redirect_to languages_url
   end

@@ -17,6 +17,7 @@
 #  target_province_ids :string
 #  target_provinces    :string
 #  website_url         :string
+#  deleted_at          :datetime
 #
 FactoryBot.define do
   factory :local_ngo do
