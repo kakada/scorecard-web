@@ -19,7 +19,7 @@ module Scorecards::Filter
     end
 
     def self.planned_statuses
-      [nil, 'renewed', 'downloaded']
+      [nil, "renewed", "downloaded"]
     end
   end
 end

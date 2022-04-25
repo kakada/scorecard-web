@@ -215,20 +215,20 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
   describe "PUT #update, raised_indicator and voting_indicators" do
     let!(:user)       { create(:user) }
     let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
-    let!(:custom_indicator) {create(:indicator, type: 'Indicators::CustomIndicator', categorizable: facility)}
-    let!(:custom_indicator2) {create(:indicator, type: 'Indicators::CustomIndicator', categorizable: facility)}
+    let!(:custom_indicator) {create(:indicator, type: "Indicators::CustomIndicator", categorizable: facility)}
+    let!(:custom_indicator2) {create(:indicator, type: "Indicators::CustomIndicator", categorizable: facility)}
     let!(:indicator)   { facility.indicators.first }
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { raised_indicators_attributes: [
-                            { indicatorable_id: indicator.id, indicatorable_type: 'Indicator', scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "123", selected: true },
-                            { indicatorable_id: custom_indicator.id, indicatorable_type: 'CustomIndicator', scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "124", selected: true },
-                            { indicatorable_id: custom_indicator2.id, indicatorable_type: 'Indicators::CustomIndicator', scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "125", selected: true },
+                            { indicatorable_id: indicator.id, indicatorable_type: "Indicator", scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "123", selected: true },
+                            { indicatorable_id: custom_indicator.id, indicatorable_type: "CustomIndicator", scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "124", selected: true },
+                            { indicatorable_id: custom_indicator2.id, indicatorable_type: "Indicators::CustomIndicator", scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "125", selected: true },
                           ],
                           voting_indicators_attributes: [
-                            { uuid: "123", indicatorable_id: indicator.id, indicatorable_type: 'Indicator', scorecard_uuid: scorecard.uuid, display_order: 1 },
-                            { uuid: "124", indicatorable_id: custom_indicator.id, indicatorable_type: 'CustomIndicator', scorecard_uuid: scorecard.uuid, display_order: 2 },
-                            { uuid: "125", indicator_uuid: custom_indicator2.uuid, indicatorable_id: custom_indicator2.id, indicatorable_type: 'Indicators::CustomIndicator', scorecard_uuid: scorecard.uuid, display_order: 2 },
+                            { uuid: "123", indicatorable_id: indicator.id, indicatorable_type: "Indicator", scorecard_uuid: scorecard.uuid, display_order: 1 },
+                            { uuid: "124", indicatorable_id: custom_indicator.id, indicatorable_type: "CustomIndicator", scorecard_uuid: scorecard.uuid, display_order: 2 },
+                            { uuid: "125", indicator_uuid: custom_indicator2.uuid, indicatorable_id: custom_indicator2.id, indicatorable_type: "Indicators::CustomIndicator", scorecard_uuid: scorecard.uuid, display_order: 2 },
                           ]
                         }
                       }

@@ -25,7 +25,7 @@ RSpec.describe LocalNgo, type: :model do
     let!(:lngo) { create(:local_ngo, target_province_ids: "01,02") }
     let!(:scorecard) { create(:scorecard, local_ngo: lngo) }
 
-    context 'has scorecards' do
+    context "has scorecards" do
       before {
         lngo.remove!
       }
@@ -35,7 +35,7 @@ RSpec.describe LocalNgo, type: :model do
       end
     end
 
-    context 'has only soft delete scorecards' do
+    context "has only soft delete scorecards" do
       before {
         scorecard.destroy
         lngo.remove!
@@ -50,7 +50,7 @@ RSpec.describe LocalNgo, type: :model do
       end
     end
 
-    context 'no scorecards' do
+    context "no scorecards" do
       before {
         scorecard.really_destroy!
         lngo.remove!
