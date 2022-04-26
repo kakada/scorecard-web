@@ -67,6 +67,10 @@ class Indicator < ApplicationRecord
     raised_indicators.blank?
   end
 
+  def custom?
+    type == "Indicators::CustomIndicator"
+  end
+
   # Class methods
   def self.filter(params)
     scope = all
