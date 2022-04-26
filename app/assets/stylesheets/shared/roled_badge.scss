@@ -1,4 +1,6 @@
 .badge {
+  font-weight: 400;
+
   &-role {
     color: #fff;
   }
@@ -18,4 +20,8 @@
   &-system_admin {
     background-color: #a00404;
   }
+}
+
+.badge-warning {
+  background-color: #f4b619;
 }

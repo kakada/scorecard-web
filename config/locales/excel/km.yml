@@ -8,16 +8,16 @@ km:
     submitted_date: កាលបរិច្ឆេទដាក់ស្នើត្រួតពិនិត្យ
     completed_date: កាលបរិច្ឆេទអនុវត្តរួចរាល់
     status: ស្ថានភាព
-    scorecard_type: ប្រភេទប័ណ្ណដាក់ពិន្ទុ
+    scorecard_type: ប្រភេទប័ណ្ណដាក់ពិន្ទុ(1=ប្រជាពលរដ្ឋ, 2=អង្ភភាពផ្តល់សេវា)
     implementer: អ្នកអនុវត្ត
-    total_participant: ចំនួនអ្នកចូលរួមសរុប
-    number_of_participant_as_female: ចំនួនអ្នកចូលរួមជាស្ត្រី
-    number_of_participant_as_male: ចំនួនអ្នកចូលរួមជាបុរស
+    total_participant: អ្នកចូលរួមសរុប
+    number_of_participant_as_female: ស្រី
+    number_of_participant_as_male: ប្រុស
     number_of_participant_as_other: ចំនួនអ្នកចូលរួមដែលមានភេទផ្សេងៗ
-    number_of_youth: ចំនួនយុវជន
-    number_of_minority: ចំនួនជនជាតិដើម
-    number_of_disability: ចំនួនជនពិការភាព
-    number_of_id_poor: ចំនួនអ្នកមានប័ណ្ណក្រីក្រ
+    number_of_youth: យុវជន (15-30)
+    number_of_minority: ជនជាតិដើម
+    number_of_disability: ជនមានពិការភាព
+    number_of_id_poor: មានប័ណ្ណក្រីក្រ
     number_of_raised_indicator: ចំនួនលក្ខណៈវិនិច្ឆ័យដែលស្នើឡើង
     number_of_selected_for_voting: ចំនួនលក្ខណៈវិនិច្ឆ័យដែលជ្រើសរើសទៅអនុវត្ត
     total_suggested_action: ចំនួននៃសកម្មភាពដែលបានស្នើឡើងសរុប
@@ -35,7 +35,7 @@ km:
     indicator_name: ឈ្មោះលក្ខណៈវិនិច្ឆ័យ
     indicator_tag: ស្លាក/ក្រុម លក្ខណៈវិនិច្ឆ័យ
     is_custom_indicator: ប្រភេទលក្ខណៈវិនិច្ឆ័យផ្សេងៗ
-    facility_name: ប្រភេទសេវា
+    facility_name: វិស័យ
     # Proposed Indicator
     seleted_for_implementation: ត្រូវបានជ្រើសរើសយកទៅអនុវត្ត?
     # Voting Summary
@@ -43,6 +43,23 @@ km:
     # Voting Detail
     score: ពិន្ទុ
     # Scorecard Result
-    weakness: ចំនុចគួរកែលម្អ (ចំនុចខ្សោយ/បញ្ហា)
+    weakness: ចំណុចខ្សោយ/ចំណុចដែលត្រូវកែលម្អ
     strength: ចំនុចខ្លាំង
-    suggested_action: សកម្មភាពដែលស្នើឡើង (ដំណោះស្រាយ)
+    suggested_action: សកម្មភាពដែលស្នើឡើងទី %{number}
+
+    # Scorecard Report
+    number: ល.រ
+    district: ស្រុក
+    commune: ឃុំ
+    conducted_place: ឈ្មោះអង្គភាពផ្តល់សេវា
+    indicator_development: លក្នណៈវិនិច្ឆ័យអាទិភាព
+    custom_indicator: លក្នណៈវិនិច្ឆ័យអាទិភាព (ផ្សេងៗ)
+    very_bad: "1=ខ្សោយណាស់"
+    bad: "2=ខ្សោយ"
+    acceptable: "3=ទទូលយកបាន"
+    good: "4=ល្អ"
+    very_good: "5=ល្អណាស់"
+    meeting_date: កំណត់សំគាល់ (ខែ/ឆ្នាំកិច្ចប្រជុំ)
+    self_assessment: "1=ប្រជាពលរដ្ឋ"
+    community_scorecard: "2=អង្ភភាពផ្តល់សេវា"
+    other: ផ្សេងៗ

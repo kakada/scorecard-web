@@ -8,16 +8,16 @@ en:
     submitted_date: Submitted Date
     completed_date: Completed Date
     status: Status
-    scorecard_type: Scorecard Type
+    scorecard_type: Scorecard Type (1=Self Assessment, 2=Community Scorecard)
     implementer: Implementer
     total_participant: Total Participant
-    number_of_participant_as_female: Number of Female Participant
-    number_of_participant_as_male: Number of Male Participant
+    number_of_participant_as_female: Female
+    number_of_participant_as_male: Male
     number_of_participant_as_other: Number of Gender Other Participant
-    number_of_youth: Number of Youth
-    number_of_minority: Number of Minority
-    number_of_disability: Number of Disability
-    number_of_id_poor: Number of ID Poor
+    number_of_youth: Youth (15-30)
+    number_of_minority: Minority
+    number_of_disability: Disability
+    number_of_id_poor: Poor Card
     number_of_raised_indicator: Number of Raised Indicator
     number_of_selected_for_voting: Number of Selected for Voting
     total_suggested_action: Total Suggested Action
@@ -35,7 +35,7 @@ en:
     indicator_name: Indicator Name
     indicator_tag: Indicator Tag
     is_custom_indicator: Is Customed Indicator
-    facility_name: Facility Name
+    facility_name: Facility
     # Proposed Indicator
     seleted_for_implementation: Selected for Implementation
     # Voting Summary
@@ -43,6 +43,23 @@ en:
     # Voting Detail
     score: Score
     # Scorecard Result
-    weakness: Weakness
+    weakness: Weaknesses / points to improve
     strength: Strength
-    suggested_action: Suggested Action
+    suggested_action: Suggested action number %{number}
+
+    # Scorecard Report
+    number: "#"
+    district: District
+    commune: Commune
+    conducted_place: Name of service provider
+    indicator_development: Indicator Development
+    custom_indicator: Indicator Development (Other)
+    very_bad: "1=Very bad"
+    bad: "2=Bad"
+    acceptable: "3=Acceptable"
+    good: "4=Good"
+    very_good: "5=Very good"
+    meeting_date: Notes (Meeting Month / Year)
+    self_assessment: "1=Self Assessment"
+    community_scorecard: "2=Community Scorecard"
+    other: Other
