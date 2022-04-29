@@ -18,8 +18,8 @@
     = render "shared/date_field", f: f, field: :date_of_birth, label: t('caf.date_of_birth')
     = f.input :tel, label: t('caf.tel')
     = f.input :address, label: t('caf.address')
-    = f.input :educational_background_id, collection: EducationalBackground.pluck(:"name_#{I18n.locale}", :id)
-    = f.input :scorecard_knowledge_id, collection: ScorecardKnowledge.pluck(:"name_#{I18n.locale}", :id)
+    = f.input :educational_background_id, collection: EducationalBackground.pluck(:"name_#{I18n.locale}", :id), label: t('caf.educational_background')
+    = f.input :scorecard_knowledge_id, collection: ScorecardKnowledge.pluck(:"name_#{I18n.locale}", :id), label: t('caf.scorecard_knowledge')
 
     .actions
       = link_to t('shared.cancel'), local_ngo_cafs_path(@local_ngo), class: 'btn btn-secondary'
