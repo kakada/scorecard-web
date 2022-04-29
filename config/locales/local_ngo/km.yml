@@ -1,9 +1,11 @@
 km:
   local_ngo:
     local_ngos: អង្គការក្នុងស្រុក
+    edit_local_ngo: កែតម្រូវអង្គការក្នុងស្រុក
+    new_local_ngo: អង្គការក្នុងស្រុកថ្មី
     name: ឈ្មោះ
     province: ខេត្ត
-    disctrict: ស្រុក
+    district: ស្រុក
     commune: ឃុំ
     village: ភូមិ
     address: អាស័យដ្ឋាន
@@ -15,3 +17,4 @@ km:
       invalid: មិនត្រឹមត្រូវ
     are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបអង្គការក្នុងស្រុក <b>%{name}</b> នេះមែនទេ?
     already_in_used: មិនអាចលុបបានទេ មានប័ណ្ណដាក់ពិន្ទុដែលត្រូវ ឬបានអនុវត្ត
+    website_url: Url គេហទំព័រ

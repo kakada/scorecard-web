@@ -1,9 +1,11 @@
 en:
   local_ngo:
     local_ngos: Local NGOs
+    edit_local_ngo: Edit Local Ngo
+    new_local_ngo: New Local Ngo
     name: Name
     province: Province
-    disctrict: District
+    district: District
     commune: Commune
     village: Village
     address: Address
@@ -15,3 +17,4 @@ en:
       invalid: is invalid
     are_you_sure_to_delete: Are you sure to delete the local NGOs <b>%{name}</b>?
     already_in_used: Can't delete, there are scorecards belonging to
+    website_url: Website Url
