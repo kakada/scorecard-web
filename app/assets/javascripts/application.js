@@ -41,7 +41,8 @@
 //= require scorecards/swot
 //= require users/index
 //= require users/new
-//= require local_ngos
+//= require local_ngos/index
+//= require local_ngos/new
 //= require scorecards_settings/rating
 //= require scorecards_settings/contact
 //= require pdf_templates
