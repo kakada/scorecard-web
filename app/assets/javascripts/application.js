@@ -28,6 +28,7 @@
 //= require common/sidebar
 //= require common/datetime_picker
 //= require common/timeago
+//= require common/select_picker
 
 //= require facilities
 //= require templates
@@ -61,6 +62,8 @@ document.addEventListener("turbolinks:load", function () {
   CW.Common.Sidebar.init();
   CW.Common.DatetimePicker.init();
   CW.Common.Timeago.init();
+  CW.Common.SelectPicker.init();
+
   $("[role='tooltip']").remove();
   $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });
   $('[data-toggle="popover"]').popover();

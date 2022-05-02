@@ -28,7 +28,7 @@ module ExcelBuilders
 
     def build_row(scorecard)
       ratings = scorecard.ratings.uniq { |rating| [rating.participant_uuid, rating.voting_indicator_uuid] }
-      ratings.sort_by { |rating| rating.participant_uuid}.each do |rating|
+      ratings.sort_by { |rating| rating.participant_uuid }.each do |rating|
         sheet.add_row generate_row(rating, scorecard)
       end
     end

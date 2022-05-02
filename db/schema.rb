@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_25_023150) do
+ActiveRecord::Schema.define(version: 2022_05_02_063334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 2022_04_25_023150) do
     t.string "scorecard_knowledge_id"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_cafs_on_deleted_at"
+  end
+
+  create_table "cafs_scorecard_knowledges", force: :cascade do |t|
+    t.integer "caf_id"
+    t.uuid "scorecard_knowledge_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "chat_groups", force: :cascade do |t|

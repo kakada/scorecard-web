@@ -12,7 +12,8 @@
 #  name_km    :string
 #
 class ScorecardKnowledge < ApplicationRecord
-  has_many :cafs
+  has_many :cafs_scorecard_knowledges
+  has_many :cafs, through: :cafs_scorecard_knowledges
 
   validates :code, presence: true
   validates :name_en, presence: true

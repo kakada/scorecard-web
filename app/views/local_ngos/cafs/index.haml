@@ -40,7 +40,11 @@
               %td.text-nowrap= caf.tel
               %td.text-nowrap= dob(caf.date_of_birth).html_safe
               %td= caf.educational_background_name
-              %td= caf.scorecard_knowledge_name
+              %td
+                - names = caf.scorecard_knowledges.pluck(:"name_#{I18n.locale}")
+                %span{data: { toggle: 'tooltip', placement: 'top', title: names.join("; ") }}
+                  = names.map{|n| n[0..14]}.join("; ")
+
               %td= timeago(caf.created_at).html_safe
               %td.text-nowrap.text-right
                 - if policy(caf).update?
