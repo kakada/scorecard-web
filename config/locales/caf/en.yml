@@ -17,4 +17,5 @@ en:
     are_you_sure_to_delete: Are you sure to delete the CAFs <b>%{name}</b>?
     dob_warning: Invalid date, please update it.
     educational_background: Educational background
-    scorecard_knowledge: Scorecard knowledge
+    scorecard_knowledge: Social Accountability Knowledge
+    lessons_selected: lessons selected

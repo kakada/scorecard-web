@@ -18,8 +18,12 @@
     = render "shared/date_field", f: f, field: :date_of_birth, label: t('caf.date_of_birth')
     = f.input :tel, label: t('caf.tel')
     = f.input :address, label: t('caf.address')
-    = f.input :educational_background_id, collection: EducationalBackground.pluck(:"name_#{I18n.locale}", :id), label: t('caf.educational_background')
-    = f.input :scorecard_knowledge_id, collection: ScorecardKnowledge.pluck(:"name_#{I18n.locale}", :id), label: t('caf.scorecard_knowledge')
+    = f.input :educational_background_id, collection: EducationalBackground.pluck(:"name_#{I18n.locale}", :id), label: t('caf.educational_background'), prompt: t('shared.please_select')
+
+    .form-group
+      %label= t('caf.scorecard_knowledge')
+      .tooltips{ 'data-toggle' => 'tooltip', 'data-placement' => 'left' }
+        = select_tag 'caf[scorecard_knowledge_ids][]', options_for_select(ScorecardKnowledge.pluck(:"name_#{I18n.locale}", :id), f.object.scorecard_knowledge_ids), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('caf.lessons_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("shared.please_select"), class: 'selectpicker form-control'
 
     .actions
       = link_to t('shared.cancel'), local_ngo_cafs_path(@local_ngo), class: 'btn btn-secondary'

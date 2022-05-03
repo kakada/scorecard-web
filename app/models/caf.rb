@@ -20,10 +20,12 @@
 #
 class Caf < ApplicationRecord
   belongs_to :local_ngo
+  belongs_to :educational_background, optional: true
+
   has_many :facilitators
   has_many :scorecards, through: :facilitators
-  belongs_to :educational_background, optional: true
-  belongs_to :scorecard_knowledge, optional: true
+  has_many :cafs_scorecard_knowledges
+  has_many :scorecard_knowledges, through: :cafs_scorecard_knowledges
 
   acts_as_paranoid if column_names.include? "deleted_at"
 
