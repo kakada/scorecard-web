@@ -28,7 +28,7 @@
                 %td= timeago(language.created_at).html_safe
                 %td.text-right
                   - if policy(language).update?
-                    = link_to edit_language_path(language), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+                    = link_to edit_language_path(language), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')}, remote: true do
                       %i.fas.fa-pen
 
                   - if policy(language).destroy?
