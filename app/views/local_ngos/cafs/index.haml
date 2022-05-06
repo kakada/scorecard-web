@@ -41,9 +41,9 @@
               %td.text-nowrap= dob(caf.date_of_birth).html_safe
               %td= caf.educational_background_name
               %td
-                - names = caf.scorecard_knowledges.pluck(:"name_#{I18n.locale}")
-                %span{data: { toggle: 'tooltip', placement: 'top', title: names.join("; ") }}
-                  = names.map{|n| n[0..14]}.join("; ")
+                - title = caf.scorecard_knowledges.map{ |sk| "<div class='mb-2 text-left'>#{sk.name}</div>"}.join('')
+                %span{data: { toggle: 'tooltip', html: "true", placement: 'top', title: title }}
+                  = caf.scorecard_knowledges.pluck(:"shortcut_name_#{I18n.locale}").join("; ")
 
               %td= timeago(caf.created_at).html_safe
               %td.text-nowrap.text-right

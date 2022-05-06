@@ -10,7 +10,12 @@ module Samples
           next unless row["code"].present?
 
           sk = ::ScorecardKnowledge.find_or_create_by(code: row["code"])
-          sk.update(name_en: row["name_en"], name_km: row["name_km"])
+          sk.update(
+            name_en: row["name_en"],
+            name_km: row["name_km"],
+            shortcut_name_km: row["shortcut_name_km"],
+            shortcut_name_en: row["shortcut_name_en"]
+          )
         end
       end
     end

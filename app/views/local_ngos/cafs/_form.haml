@@ -22,7 +22,7 @@
 
     .form-group
       %label= t('caf.scorecard_knowledge')
-      .tooltips{ 'data-toggle' => 'tooltip', 'data-placement' => 'left' }
+      .tooltips{ 'data-toggle' => 'tooltip', 'data-placement' => 'left', 'data-separate-line' => 'true', 'data-html' => 'true'}
         = select_tag 'caf[scorecard_knowledge_ids][]', options_for_select(ScorecardKnowledge.pluck(:"name_#{I18n.locale}", :id), f.object.scorecard_knowledge_ids), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('caf.lessons_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("shared.please_select"), class: 'selectpicker form-control'
 
     .actions

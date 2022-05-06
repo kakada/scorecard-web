@@ -17,10 +17,16 @@ CW.Common.SelectPicker = do ->
 
   setTooltip = (e)->
     selectedOptions = $(e.target).parents('.tooltips').find('select :selected')
-    title = selectedOptions.map((i, o) => $(o).html()).toArray().join(', ')
     parentElement = $(e.target).parents('.tooltips')
 
     if(!!parentElement)
+      title = selectedOptions.map((i, o) => $(o).html()).toArray().join(', ')
+
+      if(parentElement.data('separateLine'))
+        title = selectedOptions.map((i, o) => $(o).html()).toArray().map( (c) =>
+          "<div class='mb-2 text-left'>" + c + "</div>"
+        ).join('')
+
       parentElement.attr('data-original-title', title)
 
   { init: init }
