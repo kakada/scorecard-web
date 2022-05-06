@@ -37,6 +37,8 @@ spec/
 test/
 vendor/bundle
 lib/samples/assets/audios/*
+Backup/.tmp
+Backup/data
 
 .bundle
 
