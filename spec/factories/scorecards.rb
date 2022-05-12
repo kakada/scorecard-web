@@ -46,6 +46,7 @@
 #  device_type               :string
 #  device_token              :string
 #  completor_id              :integer
+#  proposed_indicator_method :integer          default("participant_based")
 #
 FactoryBot.define do
   factory :scorecard do

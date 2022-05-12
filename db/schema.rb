@@ -482,6 +482,7 @@ ActiveRecord::Schema.define(version: 2022_05_02_063334) do
     t.datetime "completed_at"
     t.string "device_token"
     t.integer "completor_id"
+    t.integer "proposed_indicator_method", default: 1
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end

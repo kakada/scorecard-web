@@ -46,6 +46,7 @@
 #  device_type               :string
 #  device_token              :string
 #  completor_id              :integer
+#  proposed_indicator_method :integer          default("participant_based")
 #
 class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :facility_id, :scorecard_type,

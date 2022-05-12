@@ -46,6 +46,7 @@
 #  device_type               :string
 #  device_token              :string
 #  completor_id              :integer
+#  proposed_indicator_method :integer          default("participant_based")
 #
 
 class Scorecard < ApplicationRecord
@@ -63,6 +64,11 @@ class Scorecard < ApplicationRecord
   }
 
   enum progress: ScorecardProgress.statuses
+
+  enum proposed_indicator_method: {
+    participant_based: 1,
+    indicator_based: 2
+  }
 
   STATUS_COMPLETED = "completed"
   STATUS_IN_REVIEW = "in_review"

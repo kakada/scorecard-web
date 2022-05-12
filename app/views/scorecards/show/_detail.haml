@@ -29,6 +29,9 @@
 .row
   %label.col-sm-4.col-form-label= t("scorecard.description")
   %label.col-sm-8.col-form-label= " : #{@scorecard.description}"
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.proposed_indicator_method")
+  %label.col-sm-8.col-form-label= " : " + t("scorecard.#{@scorecard.proposed_indicator_method}") if @scorecard.submit_locked?
 
 %fieldset.section
   %legend.d-inline.px-2
