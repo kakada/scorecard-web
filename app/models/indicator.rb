@@ -22,6 +22,8 @@ class Indicator < ApplicationRecord
   include Tagable
   include Indicators::Removing
 
+  mount_uploader :audio, AudioUploader
+
   # Soft delete
   acts_as_paranoid if column_names.include? "deleted_at"
 
