@@ -37,7 +37,7 @@ RUN gem install bundler:2.1.4 && \
   bundle install --jobs 10
 
 # This gem should not be installed as a dependency of another application. If you put this gem in Gemfile, you won't see it production mode.
-RUN gem install backup:3.4.0
+RUN gem install backup -v5.0.0.beta.3
 
 # Install the application
 COPY . /app

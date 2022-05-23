@@ -17,7 +17,7 @@ pickle-email-*.html
 !/log/.keep
 !/tmp/.keep
 Backup/log
-Backup/data
+Backup/.data
 Backup/.tmp
 
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
