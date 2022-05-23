@@ -19,7 +19,7 @@
 #
 class VotingIndicator < ApplicationRecord
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
-  belongs_to :indicatorable, polymorphic: true
+  belongs_to :indicatorable, polymorphic: true, optional: true
   belongs_to :indicator, foreign_key: :indicator_uuid, primary_key: :uuid, optional: true
   has_many :ratings, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many :suggested_actions, foreign_key: :voting_indicator_uuid, dependent: :destroy
