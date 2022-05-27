@@ -13,6 +13,7 @@
 #  shortcut_name             :string
 #  dashboard_user_emails     :text             default([]), is an Array
 #  dashboard_user_roles      :string           default([]), is an Array
+#  uuid                      :string
 #
 FactoryBot.define do
   factory :program do

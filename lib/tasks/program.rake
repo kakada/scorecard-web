@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 namespace :program do
+  desc "migrate uuid"
+  task migrate_uuid: :environment do
+    Program.find_each do |program|
+      uuid = program.uuid || program.secure_uuid
+      program.update_column(:uuid, uuid)
+    end
+  end
+
   desc "migrate short name"
   task migrate_shortcut_name: :environment do
     Program.find_each do |program|

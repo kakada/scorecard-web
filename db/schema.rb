@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_02_063334) do
+ActiveRecord::Schema.define(version: 2022_05_27_065957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -194,7 +194,6 @@ ActiveRecord::Schema.define(version: 2022_05_02_063334) do
   create_table "languages", force: :cascade do |t|
     t.string "code"
     t.string "name_en"
-    t.string "json_file"
     t.integer "program_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -363,6 +362,7 @@ ActiveRecord::Schema.define(version: 2022_05_02_063334) do
     t.string "shortcut_name"
     t.text "dashboard_user_emails", default: [], array: true
     t.string "dashboard_user_roles", default: [], array: true
+    t.string "uuid"
   end
 
   create_table "raised_indicators", force: :cascade do |t|
@@ -420,6 +420,8 @@ ActiveRecord::Schema.define(version: 2022_05_02_063334) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name_km"
+    t.string "shortcut_name_en"
+    t.string "shortcut_name_km"
   end
 
   create_table "scorecard_progresses", force: :cascade do |t|
