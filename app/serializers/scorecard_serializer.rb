@@ -53,7 +53,7 @@ class ScorecardSerializer < ActiveModel::Serializer
              :name, :description, :location, :year, :conducted_date,
              :number_of_caf, :number_of_participant, :number_of_female,
              :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
-             :planned_start_date, :planned_end_date, :status,
+             :planned_start_date, :planned_end_date, :status, :program_uuid,
              :program_id, :local_ngo_id, :local_ngo_name, :province, :district, :commune, :progress
 
   belongs_to :facility
@@ -65,5 +65,9 @@ class ScorecardSerializer < ActiveModel::Serializer
 
   def local_ngo_name
     object.local_ngo.try(:name)
+  end
+
+  def program_uuid
+    object.program.uuid
   end
 end

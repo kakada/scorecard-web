@@ -13,6 +13,7 @@
 #  shortcut_name             :string
 #  dashboard_user_emails     :text             default([]), is an Array
 #  dashboard_user_roles      :string           default([]), is an Array
+#  uuid                      :string
 #
 class Program < ApplicationRecord
   include Programs::Elasticsearch
@@ -40,6 +41,7 @@ class Program < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :shortcut_name, presence: true, uniqueness: true
 
+  before_create :secure_uuid
   after_create :create_default_language
   after_create :create_default_rating_scale, unless: :skip_callback
   after_create :create_dashboard_async, unless: :skip_callback
@@ -62,6 +64,15 @@ class Program < ApplicationRecord
 
   def update_dashboard
     ::Dashboard.new(self).update
+  end
+
+  def secure_uuid
+    self.uuid ||= SecureRandom.uuid[0..7]
+
+    return uuid unless self.class.exists?(uuid: uuid)
+
+    self.uuid = SecureRandom.uuid[0..7]
+    secure_uuid
   end
 
   private
