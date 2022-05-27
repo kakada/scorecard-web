@@ -19,7 +19,7 @@ class CustomIndicator < ApplicationRecord
 
   mount_uploader :audio, AudioUploader
 
-  belongs_to :scorecard, foreign_key: :scorecard_uuid
+  belongs_to :scorecard, -> { with_deleted }, foreign_key: :scorecard_uuid
 
   validates :name, presence: true
 

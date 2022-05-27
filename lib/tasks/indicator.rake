@@ -23,4 +23,18 @@ namespace :indicator do
       )
     end
   end
+
+  desc "migrate missing custom_indicator"
+  task migrate_missing_custom_indicator: :environment do
+    miss_custom_indicators = CustomIndicator.where.not(uuid: Indicators::CustomIndicator.pluck(:uuid))
+    miss_custom_indicators.each do |ci|
+      indi = ci.scorecard.facility.indicators.find_or_initialize_by(uuid: ci.uuid)
+      indi.update(
+        name: ci.name,
+        tag_id: ci.tag_id,
+        audio: ci.audio,
+        type: "Indicators::CustomIndicator"
+      )
+    end
+  end
 end
