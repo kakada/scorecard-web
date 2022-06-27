@@ -18,7 +18,7 @@
 #  indicator_uuid     :string
 #
 class VotingIndicator < ApplicationRecord
-  belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
+  belongs_to :scorecard, -> { with_deleted }, foreign_key: :scorecard_uuid, optional: true
   belongs_to :indicatorable, polymorphic: true, optional: true
   belongs_to :indicator, foreign_key: :indicator_uuid, primary_key: :uuid, optional: true
   has_many :ratings, foreign_key: :voting_indicator_uuid, dependent: :destroy
@@ -30,8 +30,12 @@ class VotingIndicator < ApplicationRecord
   has_many   :weakness_indicator_activities, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many   :suggested_indicator_activities, foreign_key: :voting_indicator_uuid, dependent: :destroy
 
+  has_many   :proposed_indicator_actions, foreign_key: :voting_indicator_uuid, dependent: :destroy
+  has_many   :indicator_actions, through: :proposed_indicator_actions
+
   accepts_nested_attributes_for :suggested_actions, allow_destroy: true
   accepts_nested_attributes_for :indicator_activities, allow_destroy: true
+  accepts_nested_attributes_for :proposed_indicator_actions, allow_destroy: true
 
   enum median: {
     very_bad: 1,

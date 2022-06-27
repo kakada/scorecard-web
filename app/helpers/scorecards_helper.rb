@@ -62,9 +62,11 @@ module ScorecardsHelper
   end
 
   def swot_sub_title(scorecard)
+    proposed_actions = scorecard.proposed_indicator_actions.suggested_action
+
     str = "#{t('scorecard.indicator_count', count: scorecard.voting_indicators.length)}"
-    str += ", #{t('scorecard.suggested_action_count', count: scorecard.suggested_indicator_activities.length)}"
-    str += " <span class='badge badge-info'>#{t('scorecard.selected_action_count', count: scorecard.suggested_indicator_activities.selecteds.count)}</span>"
+    str += ", #{t('scorecard.suggested_action_count', count: proposed_actions.length)}"
+    str += " <span class='badge badge-info'>#{t('scorecard.selected_action_count', count: proposed_actions.selecteds.length)}</span>"
     str.html_safe
   end
 end

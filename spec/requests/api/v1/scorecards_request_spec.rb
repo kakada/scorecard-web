@@ -216,7 +216,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let!(:user)       { create(:user) }
     let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
     let!(:custom_indicator) { create(:indicator, type: "Indicators::CustomIndicator", categorizable: facility) }
-    let!(:custom_indicator2) { create(:indicator, type: "Indicators::CustomIndicator", categorizable: facility)}
+    let!(:custom_indicator2) { create(:indicator, type: "Indicators::CustomIndicator", categorizable: facility) }
     let!(:indicator)   { facility.indicators.first }
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
@@ -246,6 +246,102 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(raised_indicators.length).to eq(3) }
       it { expect(raised_indicators.first.selected).to be_truthy }
       it { expect(raised_indicators.first.voting_indicator_uuid).to eq("123") }
+    end
+  end
+
+  describe "PUT #update, proposed_indicator_actions" do
+    let!(:user)       { create(:user) }
+    let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
+    let!(:indicator)  { facility.indicators.first }
+    let!(:predefined_suggested_action) { create(:indicator_action, code: "1111", indicator: indicator) }
+    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
+    let!(:headers)    { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+
+    context "proposed_indicator_actions" do
+      let!(:params) {
+        {
+          voting_indicators_attributes: [
+            {
+              uuid: "123",
+              indicatorable_id: indicator.id,
+              indicatorable_type: "Indicator",
+              scorecard_uuid: scorecard.uuid,
+              display_order: 1,
+
+              proposed_indicator_actions_attributes: [
+                {
+                  voting_indicator_uuid: "123",
+                  indicator_action_id: predefined_suggested_action.id,
+                  selected: true,
+                  scorecard_uuid: scorecard.uuid
+                },
+                {
+                  voting_indicator_uuid: "123",
+                  selected: false,
+                  scorecard_uuid: scorecard.uuid,
+                  indicator_action_attributes: {
+                    name: "custom action",
+                    kind: "suggested_action",
+                    predefined: false,
+                    indicator_uuid: indicator.uuid
+                  }
+                }
+              ]
+            },
+          ]
+        }
+      }
+      let(:voting_indicators) { scorecard.reload.voting_indicators }
+
+      before {
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
+      }
+
+      it { expect(response.content_type).to eq("application/json; charset=utf-8") }
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(voting_indicators.length).to eq(1) }
+      it { expect(voting_indicators.first.proposed_indicator_actions.length).to eq(2) }
+      it { expect(indicator.indicator_actions.length).to eq(2) }
+      it { expect(indicator.indicator_actions.customs.length).to eq(1) }
+      it { expect(scorecard.proposed_indicator_actions.length).to eq(2) }
+    end
+
+    context "indicator activity" do
+      let!(:params) {
+        {
+          voting_indicators_attributes: [
+            {
+              uuid: "123",
+              indicatorable_id: indicator.id,
+              indicatorable_type: "Indicator",
+              display_order: 1,
+              indicator_activities_attributes: [
+                {
+                  voting_indicator_uuid: "123",
+                  content: "weakness action",
+                  selected: false,
+                  scorecard_uuid: scorecard.uuid,
+                  type: "WeaknessIndicatorActivity"
+                },
+                {
+                  voting_indicator_uuid: "123",
+                  content: "suggested_action",
+                  selected: true,
+                  scorecard_uuid: scorecard.uuid,
+                  type: "SuggestedIndicatorActivity"
+                }
+              ]
+            }
+          ]
+        }
+      }
+
+      before {
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
+      }
+
+      it { expect(scorecard.proposed_indicator_actions.suggested_action.length).to eq(1) }
+      it { expect(scorecard.proposed_indicator_actions.weakness.length).to eq(1) }
     end
   end
 end

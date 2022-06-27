@@ -13,24 +13,31 @@
         %td.text-break= "#{index + 1}) #{vi.indicator.name}"
         %td.text-center= VotingIndicator.medians[vi.median]
 
-        - ['strength', 'weakness', 'suggested'].each do |action|
+        - ['strength', 'weakness', 'suggested_action'].each do |action|
           %td.w-25
             .text-break
-              - vi.send("#{action}_indicator_activities").each do |activity|
+              - vi.proposed_indicator_actions.send(action).each do |proposed_action|
+                - activity = proposed_action.indicator_action
                 .d-flex
                   .d-flex.align-items-start
-                    .dice{style: 'width: 5px;height: 5px; background-color: black;margin-top: 10px; margin-right: 10px; border-radius: 50%'}
-                  - if policy(@scorecard).in_review?
+                    .dice
+
+                  - if policy(@scorecard).in_review? && !activity.predefined?
                     .d-flex.flex-grow-1
-                      - tooltip_title = activity.selected? ? t("scorecard.edit_selected_action") : t("shared.edit")
+                      - tooltip_title = proposed_action.selected? ? t("scorecard.edit_selected_action") : t("shared.edit")
+
                       .d-flex.align-items-start.tip{data: { toggle: 'tooltip', placement: 'top', title: tooltip_title }}
-                        = best_in_place activity, :content, url: scorecards_indicator_activity_path(activity), as: :textarea, class: ['add-space', ('text-info' if activity.selected?)], param: 'indicator_activity', inner_class: 'best-in-place-textarea', ok_button: t('shared.save'), cancel_button: t('shared.cancel'), ok_button_class: 'btn btn-primary btn-save', cancel_button_class: 'btn btn-secondary btn-cancel', skip_blur: true
+                        = best_in_place activity, :name, url: scorecards_indicator_action_path(activity), as: :textarea, class: ['add-space', ('text-info' if proposed_action.selected?)], param: 'indicator_action', inner_class: 'best-in-place-textarea', ok_button: t('shared.save'), cancel_button: t('shared.cancel'), ok_button_class: 'btn btn-primary btn-save', cancel_button_class: 'btn btn-secondary btn-cancel', skip_blur: true
                         %span
                           %i.fas.fa-pen.btn-sm.text-warning.edit-icon
                   - else
-                    - data_attr = !activity.selected? ? {} : { class: 'text-info', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.selected_action') } }
+                    - data_attr = !proposed_action.selected? ? {} : { class: 'text-info', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.selected_action') } }
 
-                    %span{data_attr}= activity.content
+                    %span{data_attr}= activity.name
+
+                    - if policy(@scorecard).in_review?
+                      %span{data: { toggle: 'tooltip', placement: 'top', title: t("indicator.cannot_edit_predefined_action") }}
+                        %i.fas.fa-pen.btn-sm.disabled
 
 - if references = @scorecard.scorecard_references.presence
   .mb-2

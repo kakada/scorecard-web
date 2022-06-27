@@ -5,8 +5,23 @@ module Facilities
     before_action :set_facility
 
     def index
-      @pagy, @indicators = pagy(Indicators::PredefineIndicator.filter(filter_params).includes(:tag, :raised_indicators, :voting_indicators).order(sort_column + " " + sort_direction))
-      @templates = current_program.templates.includes(:indicators)
+      respond_to do |format|
+        format.html {
+          @pagy, @indicators = pagy(Indicators::PredefineIndicator.filter(filter_params).includes(:tag, :raised_indicators, :voting_indicators).order(sort_column + " " + sort_direction))
+          @templates = current_program.templates.includes(:indicators)
+        }
+
+        format.xlsx {
+          @indicators = Indicators::PredefineIndicator.filter(filter_params).includes(:indicator_actions).order(sort_column + " " + sort_direction)
+
+          if @indicators.length > Settings.max_download_scorecard_record
+            flash[:alert] = t("scorecard.file_size_is_too_big")
+            redirect_to facility_indicators_url(@facility)
+          else
+            render xlsx: "index", filename: "indicators_in_#{@facility.name}_#{Time.new.strftime('%Y%m%d_%H_%M_%S')}.xlsx"
+          end
+        }
+      end
     end
 
     def show

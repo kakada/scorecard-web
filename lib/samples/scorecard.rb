@@ -37,10 +37,11 @@ module Samples
         number_of_participant = rand(10..15)
         number_of_female = rand(1...number_of_participant)
         conducted_date = Date.today
-        facility = ::Facility.where.not(parent_id: nil).sample
+        program = ::Program.first
+        facility = program.facilities.where.not(parent_id: nil).sample
         primary_school = ::PrimarySchool.all.sample if facility.dataset.present?
         commune = primary_school.present? ? ::Pumi::Commune.find_by_id(primary_school.commune_id) : ::Pumi::Commune.all.sample
-        local_ngo = ::LocalNgo.all.sample
+        local_ngo = program.local_ngos.sample
 
         ::Scorecard.create({
           conducted_date: conducted_date,
@@ -59,7 +60,7 @@ module Samples
           scorecard_type: ::Scorecard::SCORECARD_TYPES.sample.last,
           planned_start_date: conducted_date,
           planned_end_date: conducted_date,
-          creator_id: ::User.all.sample.try(:id)
+          creator_id: program.users.sample.try(:id)
         })
       end
   end

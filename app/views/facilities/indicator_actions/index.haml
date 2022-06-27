@@ -1,0 +1,38 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= "#{@indicator.name}: #{t('indicator.indicator_action')}"
+
+  .d-flex
+    = render "shared/back_button", path: facility_indicators_path(@indicator.categorizable)
+
+    = render "shared/add_new_button", path: new_indicator_indicator_action_path(@indicator), name: t('indicator.indicator_action')
+
+= render 'nav_tabs'
+
+.card.shadow.mb-4
+  .card-body
+    = render "filter"
+    = render "shared/no_data", items: @indicator_actions
+
+    - if @indicator_actions.present?
+      = render "shared/pagination_title", objects: @indicator_actions
+
+      %table.table.table-hover.pretty
+        %thead
+          %tr
+            %th= t('shared.number')
+            %th= t('shared.id')
+            %th= sortable "name", t('indicator.name')
+            %th= t('indicator_action.kind')
+            %th= sortable "updated_at", t("shared.updated_at")
+            %th= sortable "created_at", t("shared.created_at")
+            %th
+
+        %tbody
+          = render partial: 'indicator_action', collection: @indicator_actions
+
+    - if @pagy.pages > 1
+      .pagy-wrapper.justify-content-lg-end.justify-content-center
+        != pagy_bootstrap_nav(@pagy)
+
+= render "shared/modal_confirm"
+

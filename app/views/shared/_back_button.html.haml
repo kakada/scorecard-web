@@ -1,0 +1,6 @@
+- path ||= '#'
+- name ||= t('shared.back')
+
+= link_to path, class: 'btn btn-secondary mr-2 btn-sm shadow-sm' do
+  %i.fas.fa-arrow-left.fa-sm.text-white-50
+  = name

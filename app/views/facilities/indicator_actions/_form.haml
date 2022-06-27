@@ -1,0 +1,13 @@
+.w-75.view-center
+  = simple_form_for [@indicator, @indicator_action] do |f|
+    .form-group
+      %label= t('indicator.indicator')
+      .form-control= @indicator.name
+
+    = f.input :code, label: t('indicator_action.code_label').html_safe
+    = f.input :name, label: t('indicator_action.indicator_action')
+    = f.input :kind, label: t('indicator_action.kind'), collection: IndicatorAction.kinds.keys.map { |k| [k.titlecase, k] }, include_blank: false
+
+    .actions
+      = link_to t('shared.cancel'), indicator_indicator_actions_path(@indicator), class: 'btn btn-secondary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'

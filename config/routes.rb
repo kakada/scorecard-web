@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :rating_scales, only: [:index, :create]
 
   namespace :scorecards do
-    resources :indicator_activities, only: [:update]
+    resources :indicator_actions, only: [:update]
   end
 
   resources :programs do
@@ -79,6 +79,14 @@ Rails.application.routes.draw do
       post :clone_to_template, on: :collection
       post :import, on: :collection
     end
+
+    resources :indicator_actions, module: "facilities", only: [] do
+      post :import, on: :collection
+    end
+  end
+
+  resources :indicators, only: [] do
+    resources :indicator_actions, module: "facilities"
   end
 
   resources :templates

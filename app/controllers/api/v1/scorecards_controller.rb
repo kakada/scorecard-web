@@ -60,7 +60,11 @@ module Api
               strength: [], weakness: [], suggested_action: [],
               suggested_actions_attributes: [ :voting_indicator_uuid, :scorecard_uuid, :content, :selected ],
 
-              indicator_activities_attributes: [ :uuid, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]
+              indicator_activities_attributes: [ :uuid, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ],
+
+              proposed_indicator_actions_attributes: [ :voting_indicator_uuid, :indicator_action_id, :selected, :scorecard_uuid,
+                indicator_action_attributes: [:name, :kind, :predefined, :indicator_uuid]
+              ]
             ],
             ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ]
           )

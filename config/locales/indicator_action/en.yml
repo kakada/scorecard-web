@@ -1,0 +1,12 @@
+en:
+  indicator_action:
+    indicator_action: Indicator action
+    code_label: Code <abbr title="required">*</abbr>
+    are_you_sure_to_delete: Are you sure to delete the indicator action <b>%{name}</b>?
+    new_indicator_action: New indicator action
+    edit_indicator_action: Edit indicator action
+    kind: Type
+    all: All
+    suggested_action: Suggested Action
+    weakness: Weakness
+    strength: Strength

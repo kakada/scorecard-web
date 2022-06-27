@@ -59,7 +59,7 @@ km:
     review: ត្រួតពិនិត្យ
     leave: ចាកចេញ
     agree: យល់ព្រម
-    excel_file: ឯកសារ Excel
+    excel_file: ឯកសារ Excel (.xlsx)
     import_from_zip_file: បញ្ចូលទិន្នន័យពី Zip(.zip)
     zip_file: ឯកសារ Zip
     download_sample_zip: ទាញយកគំរូ (.zip)
@@ -67,3 +67,7 @@ km:
     copied_testing_code: បានចម្លងលេខកូដសាកល្បង!
     you_are_in_testing_mode: បច្ចុប្បន្នអ្នកស្ថិតនៅក្នុងមុខងារសាកល្បង
     testing: សាកល្បង
+    id: លេខសម្គាល់
+    search_by_name: ស្វែងរកតាមឈ្មោះ
+    add_new: បន្ថែម%{name}ថ្មី
+    search_by_name_or_code: ស្វែងរកតាមឈ្មោះ ឬលេខកូដ

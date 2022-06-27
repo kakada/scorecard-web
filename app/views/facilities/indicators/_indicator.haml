@@ -1,11 +1,19 @@
 %tr
   %td= @pagy.from + indicator_counter
+  %td= indicator.uuid
   %td= indicator.name
+  %td
+    - if actions = indicator.indicator_actions.predefineds.presence
+      = link_to actions.length, indicator_indicator_actions_path(indicator)
   %td
     %span.badge.badge-pill.badge-secondary= indicator.tag_name
   %td= timeago(indicator.created_at).html_safe
   %td
     .d-flex.justify-content-end
+      - if policy(IndicatorAction).index?
+        = link_to indicator_indicator_actions_path(indicator), class: "btn btn-circle btn-sm btn-outline-info mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('indicator.manage_indicator_action')} do
+          %i.fas.fa-pencil-ruler
+
       - if policy(indicator).update?
         = link_to edit_facility_indicator_path(@facility, indicator), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
           %i.fas.fa-pen

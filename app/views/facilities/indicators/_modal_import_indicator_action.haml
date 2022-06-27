@@ -1,0 +1,24 @@
+#importIndicatorActionModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "Import from file", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#templateModalLabel.modal-title= t("indicator.import_indicator_action")
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+
+      = form_for '', url: import_facility_indicator_actions_path(@facility), mothod: :post do |f|
+        .modal-body
+          .form-group
+            .d-flex
+              %label.flex-1= t("shared.excel_file")
+              %div
+                = link_to facility_indicators_path(@facility, format: 'xlsx'), target: "_blank" do
+                  %i.fas.fa-cloud-download-alt.drop-menu-icon
+                  = t("shared.download_sample_form")
+
+            .form-control.file-control-wrapper
+              = f.file_field :file, accept: ".xls,.xlsx"
+
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
+          %button.btn.btn-primary{:type => "submit"}= t('shared.done')

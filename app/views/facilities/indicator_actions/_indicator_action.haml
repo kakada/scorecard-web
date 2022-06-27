@@ -1,0 +1,17 @@
+%tr
+  %td= @pagy.from + indicator_action_counter
+  %td= indicator_action.code
+  %td= indicator_action.name
+  %td= indicator_action.kind.titlecase
+  %td= l(indicator_action.updated_at)
+  %td= l(indicator_action.created_at)
+  %td.d-flex
+    - if policy(indicator_action).update?
+      = link_to edit_indicator_indicator_action_path(@indicator, indicator_action), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+        %i.fas.fa-pen
+
+    - if policy(indicator_action).destroy?
+      - title = indicator_action.locked? ? t('indicator.already_in_used') : t('shared.delete')
+      %span{ data: { toggle: 'tooltip', placement: 'top', title: title }}
+        = link_to indicator_indicator_action_path(@indicator, indicator_action), remote: true, class: ["btn btn-circle btn-sm btn-outline-danger", ("disabled" if indicator_action.locked?)] do
+          %i.fas.fa-trash-alt

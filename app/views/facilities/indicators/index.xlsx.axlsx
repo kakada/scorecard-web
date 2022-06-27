@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+require "builders/indicator_excel_builder"
+
+IndicatorExcelBuilder.new(xlsx_package.workbook, @indicators).build

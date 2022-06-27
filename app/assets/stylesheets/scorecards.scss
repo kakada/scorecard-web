@@ -236,3 +236,12 @@
 .dropdown-item.active, .dropdown-item:active {
   background-color: rgba(0,0,0,0.05);
 }
+
+.dice {
+  width: 5px;
+  height: 5px;
+  background-color: black;
+  margin-top: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+}

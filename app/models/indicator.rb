@@ -37,6 +37,7 @@ class Indicator < ApplicationRecord
 
   has_many :raised_indicators, foreign_key: :indicator_uuid, primary_key: :uuid
   has_many :voting_indicators, foreign_key: :indicator_uuid, primary_key: :uuid
+  has_many :indicator_actions, foreign_key: :indicator_uuid, primary_key: :uuid
 
   # Validation
   validates :name, presence: true

@@ -24,6 +24,7 @@ RSpec.describe Indicator, type: :model do
   it { is_expected.to belong_to(:categorizable).touch(true) }
   it { is_expected.to have_many(:languages_indicators).dependent(:destroy) }
   it { is_expected.to have_many(:languages).through(:languages_indicators) }
+  it { is_expected.to have_many(:indicator_actions).with_foreign_key(:indicator_uuid).with_primary_key(:uuid) }
   it { is_expected.to validate_presence_of(:name) }
 
   it "should touch the categorizable" do

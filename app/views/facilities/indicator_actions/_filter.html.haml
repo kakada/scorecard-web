@@ -1,0 +1,10 @@
+%form{ action: indicator_indicator_actions_path(@indicator), method: 'get' }
+  = hidden_field_tag :kind, params[:kind]
+
+  .form-row
+    .form-group
+      .input-group
+        = text_field_tag(:name, params[:name], class: 'form-control search-input', placeholder: t('shared.search_by_name_or_code'), id: 'search-name')
+        .input-group-append
+          .input-group-text
+            %i.fas.fa-search

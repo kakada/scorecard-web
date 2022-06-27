@@ -1,0 +1,16 @@
+%ul.nav.nav-tabs
+  %li.nav-item{class: css_active_tab(params[:kind].blank?)}
+    %a.nav-link{href: indicator_action_filter_url}
+      = t('indicator_action.all').titleize
+
+  %li.nav-item{class: css_active_tab(params[:kind]=='suggested_action')}
+    %a.nav-link{href: indicator_action_filter_url('suggested_action')}
+      = t('indicator_action.suggested_action').titleize
+
+  %li.nav-item{class: css_active_tab(params[:kind]=='weakness')}
+    %a.nav-link{href: indicator_action_filter_url('weakness')}
+      = t('indicator_action.weakness').titleize
+
+  %li.nav-item{class: css_active_tab(params[:kind]=='strength')}
+    %a.nav-link{href: indicator_action_filter_url('strength')}
+      = t('indicator_action.strength').titleize

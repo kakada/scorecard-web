@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Spreadsheets::PrimarySchoolSpreadsheet
-  attr_reader :program
-
   def import(file_path)
     return if file_path.blank?
 

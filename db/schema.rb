@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_27_065957) do
+ActiveRecord::Schema.define(version: 2022_06_24_025719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -151,6 +151,16 @@ ActiveRecord::Schema.define(version: 2022_05_27_065957) do
     t.integer "org_id"
     t.string "org_token"
     t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "indicator_actions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.boolean "predefined", default: true
+    t.integer "kind"
+    t.string "indicator_uuid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -363,6 +373,16 @@ ActiveRecord::Schema.define(version: 2022_05_27_065957) do
     t.text "dashboard_user_emails", default: [], array: true
     t.string "dashboard_user_roles", default: [], array: true
     t.string "uuid"
+  end
+
+  create_table "proposed_indicator_actions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "voting_indicator_uuid"
+    t.uuid "indicator_action_id"
+    t.string "scorecard_uuid"
+    t.boolean "selected", default: false
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "raised_indicators", force: :cascade do |t|

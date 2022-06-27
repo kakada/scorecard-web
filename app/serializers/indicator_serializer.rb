@@ -23,6 +23,9 @@ class IndicatorSerializer < ActiveModel::Serializer
 
   belongs_to :categorizable
   has_many :languages_indicators
+  has_many :indicator_actions do
+    object.indicator_actions.predefineds
+  end
 
   def tag_name
     object.tag_name

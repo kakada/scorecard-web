@@ -59,7 +59,7 @@ en:
     review: Review
     leave: Leave
     agree: Agree
-    excel_file: Excel file
+    excel_file: Excel file (.xlsx)
     import_from_zip_file: Import from compress(.zip) file
     zip_file: Zip file
     download_sample_zip: Download sample(.zip)
@@ -67,3 +67,7 @@ en:
     copied_testing_code: Copied testing code!
     you_are_in_testing_mode: You’re currently in testing mode
     testing: Testing
+    id: ID
+    search_by_name: Search by name
+    add_new: Add new %{name}
+    search_by_name_or_code: Search by name or code

@@ -1,6 +1,7 @@
 en:
   indicator:
     indicators: Indicators
+    indicator: Indicator
     language: Language
     name: Name
     audio: Audio
@@ -26,3 +27,7 @@ en:
     selected: Selected
     cannot_edit_predefine: Can't edit predefine indicator
     already_in_used: Can't delete, there are proposing belonging to
+    indicator_action: Indicator action
+    cannot_edit_predefined_action: Can't edit predefined indicator action
+    import_indicator_action: Import indicator action
+    manage_indicator_action: Manage indicator action

@@ -1,6 +1,7 @@
 km:
   indicator:
     indicators: លក្ខណៈវិនិច្ឆ័យ
+    indicator: លក្ខណៈវិនិច្ឆ័យ
     language: ភាសា
     name: ឈ្មោះ
     audio: សំលេង
@@ -26,3 +27,7 @@ km:
     selected: ត្រូវបានជ្រើសរើស
     cannot_edit_predefine: មិនមានសិទ្ធិកែតម្រូវលក្ខណៈវិនិច្ឆ័យកំណត់ដោយគម្រោងបានទេ!
     already_in_used: មិនអាចលុបបានទេ មានកំពុងប្រើប្រាស់
+    indicator_action: សកម្មភាពស្នើឡើង
+    cannot_edit_predefined_action: មិនមានសិទ្ធិកែតម្រូវសកម្មភាពកំណត់ដោយគម្រោងបានទេ!
+    import_indicator_action: បញ្ចូលសកម្មភាពស្នើឡើង
+    manage_indicator_action: គ្រប់គ្រងសកម្មភាពស្នើឡើង

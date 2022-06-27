@@ -1,0 +1,12 @@
+km:
+  indicator_action:
+    indicator_action: សកម្មភាពស្នើឡើង
+    code_label: លេខកូដស្តង់ដារ <abbr title="required">*</abbr>
+    are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបសក្មមភាព <b>%{name}</b> នេះមែនទេ?
+    new_indicator_action: សកម្មភាពស្នើឡើងថ្មី
+    edit_indicator_action: កែតម្រូវសកម្មភាពស្នើឡើង
+    kind: ប្រភេទ
+    all: ទាំងអស់
+    suggested_action: សកម្មភាពស្នើឡើង
+    weakness: ចំនុចខ្សោយ
+    strength: ចំនុចខ្លាំង
