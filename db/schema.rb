@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_27_065957) do
+ActiveRecord::Schema.define(version: 2022_06_29_094747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 2022_05_27_065957) do
     t.string "audio"
     t.string "type", default: "Indicators::PredefineIndicator"
     t.datetime "deleted_at"
+    t.uuid "thematic_id"
     t.index ["deleted_at"], name: "index_indicators_on_deleted_at"
   end
 
@@ -518,6 +519,14 @@ ActiveRecord::Schema.define(version: 2022_05_27_065957) do
   create_table "templates", force: :cascade do |t|
     t.string "name"
     t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "thematics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

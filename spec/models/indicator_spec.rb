@@ -17,6 +17,7 @@
 #  audio              :string
 #  type               :string           default("Indicators::PredefineIndicator")
 #  deleted_at         :datetime
+#  thematic_id        :uuid
 #
 require "rails_helper"
 

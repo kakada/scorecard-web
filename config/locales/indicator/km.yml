@@ -26,3 +26,5 @@ km:
     selected: ត្រូវបានជ្រើសរើស
     cannot_edit_predefine: មិនមានសិទ្ធិកែតម្រូវលក្ខណៈវិនិច្ឆ័យកំណត់ដោយគម្រោងបានទេ!
     already_in_used: មិនអាចលុបបានទេ មានកំពុងប្រើប្រាស់
+    thematic: Thematic
+    assign_thematic: បញ្ចូល thematic

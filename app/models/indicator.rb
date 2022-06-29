@@ -17,6 +17,7 @@
 #  audio              :string
 #  type               :string           default("Indicators::PredefineIndicator")
 #  deleted_at         :datetime
+#  thematic_id        :uuid
 #
 class Indicator < ApplicationRecord
   include Tagable
@@ -32,6 +33,7 @@ class Indicator < ApplicationRecord
 
   # Association
   belongs_to :categorizable, polymorphic: true, touch: true
+  belongs_to :thematic, optional: true
   has_many :languages_indicators, dependent: :destroy
   has_many :languages, through: :languages_indicators
 
@@ -60,6 +62,9 @@ class Indicator < ApplicationRecord
 
   # Uploader
   mount_uploader :image, ImageUploader
+
+  # Delegation
+  delegate  :name, :code, to: :thematic, prefix: :thematic, allow_nil: true
 
   def image_or_default
     image_url || "default_image.png"

@@ -13,9 +13,13 @@
     %i.fas.fa-copy.drop-menu-icon
     %span= t("indicator.copy_from_template")
 
-
   %a.btn.dropdown-item{ "data-target" => "#importModalIndicator", "data-toggle" => "modal", href: '#' }
     %i.fas.fa-file-import.drop-menu-icon
     = t("shared.import_from_zip_file")
 
+  %a.btn.dropdown-item{ "data-target" => "#importModal", "data-toggle" => "modal", href: '#' }
+    %i.fa-solid.fa-layer-group.drop-menu-icon
+    = t("indicator.assign_thematic")
+
 = render "modal_import_indicator"
+= render "shared/modal_import_excel", form_url: import_facility_thematic_indicators_path(@facility), sample_url: facility_thematic_indicators_path(@facility, format: :xlsx)

@@ -1,5 +1,2 @@
-%a.btn.btn-secondary.btn-sm.shadow-sm{ "data-target" => "#importModal", "data-toggle" => "modal", href: '#' }
-  %i.fas.fa-file-import.fa-sm.text-white-50
-  = t("shared.import_from_file")
-
-= render "modal_import_local"
+= render "shared/import_file_button"
+= render "shared/modal_import_excel", form_url: import_local_ngos_path, sample_url: '/local_ngo_and_caf.xlsx'

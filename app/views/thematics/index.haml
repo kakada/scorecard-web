@@ -1,0 +1,34 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t('thematic.thematic')
+
+  %div.d-flex
+    = render "shared/import_file_button"
+    = render "shared/add_new_button", path: new_thematic_path, name: t('thematic.thematic')
+
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @thematics }
+
+    - if @thematics.present?
+      = render "shared/pagination_title", objects: @thematics
+
+      %table.table.table-hover.pretty
+        %thead
+          %tr
+            %th= t('shared.number')
+            %th= t('thematic.code')
+            %th= sortable "name", t('thematic.name')
+            %th= t('thematic.description')
+            %th= sortable "created_at", t('shared.created_at')
+            %th= sortable "updated_at", t('shared.updated_at')
+            %th
+
+        %tbody
+          = render partial: 'thematic', collection: @thematics
+
+    - if @pagy.pages > 1
+      .pagy-wrapper.justify-content-lg-end.justify-content-center
+        != pagy_bootstrap_nav(@pagy)
+
+= render "shared/modal_confirm"
+= render "shared/modal_import_excel", form_url: import_thematics_path, sample_url: '/indicator_thematic_sample.xlsx'

@@ -79,6 +79,10 @@ Rails.application.routes.draw do
       post :clone_to_template, on: :collection
       post :import, on: :collection
     end
+
+    resources :thematic_indicators, only: [:index], module: "facilities" do
+      post :import, on: :collection
+    end
   end
 
   resources :templates
@@ -100,6 +104,10 @@ Rails.application.routes.draw do
   resource :about, only: [:show]
 
   resources :primary_schools do
+    post :import, on: :collection
+  end
+
+  resources :thematics do
     post :import, on: :collection
   end
 

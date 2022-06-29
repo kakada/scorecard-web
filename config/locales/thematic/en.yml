@@ -1,0 +1,8 @@
+en:
+  thematic:
+    thematic: Thematic
+    code: code
+    name: Name
+    description: Description
+    new_thematic: New Thematic
+    edit_thematic: Edit Thematic

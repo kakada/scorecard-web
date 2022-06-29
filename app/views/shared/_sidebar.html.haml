@@ -56,6 +56,12 @@
           %i.fas.fa-fw.fa-school
           %span= t('sidebar.primary_schools')
 
+    - if policy(Thematic).index?
+      %li.nav-item{ class: css_active_class('thematics') }
+        %a.nav-link{:href => thematics_path}
+          %i.fa-solid.fa-fw.fa-layer-group
+          %span= t('sidebar.thematics')
+
     - if policy(ActivityLog).index?
       %li.nav-item{ class: css_active_class('activity_logs') }
         %a.nav-link{:href => activity_logs_path}

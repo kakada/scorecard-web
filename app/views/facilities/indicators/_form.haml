@@ -13,6 +13,7 @@
           = builder.input :name, label: false, input_html: { readonly: !@indicator.editable_tag?, class: 'typeahead' }
 
     = f.input :name, label: t('indicator.name')
+    = f.input :thematic_id, label: t('indicator.thematic'), collection: Thematic.pluck(:name, :id)
 
     .d-flex.mb-2
       %strong.w-25= t('indicator.language')

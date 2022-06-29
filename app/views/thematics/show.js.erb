@@ -1,0 +1,4 @@
+$('#confirmModal .title').html("<%= t('thematic.thematic') %>");
+$('#confirmModal .modal-body').html("<%= t('shared.are_you_sure_to_delete', type: t('thematic.thematic'), name: @thematic.name).html_safe %>");
+$("#confirmModal .btn-yes").attr('href', "<%= thematic_path(@thematic) %>");
+$("#confirmModal").modal("show");

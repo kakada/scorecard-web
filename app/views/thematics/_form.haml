@@ -1,0 +1,9 @@
+.w-75.view-center
+  = simple_form_for @thematic do |f|
+    = f.input :code, label: t('thematic.code')
+    = f.input :name, label: t('thematic.name')
+    = f.input :description, label: t('thematic.description')
+
+    .actions
+      = link_to t('shared.cancel'), thematics_path, class: 'btn btn-secondary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'

@@ -28,7 +28,7 @@ en:
     number: "No"
     import_from_file: Import from Excel(.xlsx)
     download_sample_form: Download sample Excel(.xlsx)
-    are_you_sure_to_delete: Are you sure to delete it?
+    are_you_sure_to_delete: Are you sure to delete the %{type} <b>%{name}</b>?
     confirm_logout: Are you sure you want to logout?
     name: Name
     close: Close
@@ -67,3 +67,4 @@ en:
     copied_testing_code: Copied testing code!
     you_are_in_testing_mode: You’re currently in testing mode
     testing: Testing
+    add_new: Add new %{name}

@@ -1,0 +1,29 @@
+# Indicator with thematic
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "indicator_with_thematic") do |sheet|
+  sheet.add_row %w(no indicator_id indicator_name thematic_code thematic_name)
+
+  @indicators.each_with_index do |indicator, index|
+    sheet.add_row([
+      index + 1,
+      indicator.uuid,
+      indicator.name,
+      indicator.thematic_code,
+      indicator.thematic_name
+    ])
+  end
+end
+
+# Thematic for references
+wb.add_worksheet(name: "Thematic (references only)") do |sheet|
+  sheet.add_row %w(no thematic_code thematic_name, description)
+
+  @thematics.each_with_index do |thematic, index|
+    sheet.add_row([
+      index + 1,
+      thematic.code,
+      thematic.name,
+      thematic.description
+    ])
+  end
+end

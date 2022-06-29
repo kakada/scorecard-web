@@ -1,0 +1,18 @@
+%tr
+  %td= @pagy.from + thematic_counter
+  %td= thematic.code
+  %td= thematic.name
+  %td= thematic.description
+  %td= timeago(thematic.created_at).html_safe
+  %td= timeago(thematic.updated_at).html_safe
+  %td
+    .d-flex.justify-content-end
+      - if policy(thematic).update?
+        = link_to edit_thematic_path(thematic), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+          %i.fas.fa-pen
+
+      - if policy(thematic).destroy?
+        - title = t('shared.delete')
+        %span{ data: { toggle: 'tooltip', placement: 'top', title: title }}
+          = link_to thematic_path(thematic), remote: true, class: ["btn btn-circle btn-sm btn-outline-danger"] do
+            %i.fas.fa-trash-alt

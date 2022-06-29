@@ -28,7 +28,7 @@ km:
     number: លេខរៀង
     import_from_file: បញ្ចូលទិន្នន័យពី Excel(.xlsx)
     download_sample_form: ទាញយកគំរូ Excel(.xlsx)
-    are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបវាឬ?
+    are_you_sure_to_delete: តើអ្នកប្រាកដជាលុប%{type} <b>%{name}</b> នេះមែនទេ?
     confirm_logout: តើអ្នកពិតជាចង់ចាកចេញឬទេ?
     name: ឈ្មោះ
     close: បិទ
@@ -67,3 +67,4 @@ km:
     copied_testing_code: បានចម្លងលេខកូដសាកល្បង!
     you_are_in_testing_mode: បច្ចុប្បន្នអ្នកស្ថិតនៅក្នុងមុខងារសាកល្បង
     testing: សាកល្បង
+    add_new: បន្ថែម%{name}ថ្មី
