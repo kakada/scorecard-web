@@ -7,13 +7,14 @@ module ExcelBuilders
     def initialize(sheet, scorecards)
       @sheet = sheet
       @scorecards = scorecards
+      @row_count = 0
     end
 
     def build
       build_header
 
-      @scorecards.includes(:facility, :participants, voting_indicators: [:indicatorable, :ratings, :weakness_indicator_activities, :strength_indicator_activities, :suggested_indicator_activities]).each_with_index do |scorecard, index|
-        build_row(scorecard, index+1)
+      @scorecards.includes(:facility, :participants, voting_indicators: [:indicatorable, :ratings, :weakness_indicator_activities, :strength_indicator_activities, :suggested_indicator_activities]).each do |scorecard|
+        build_row(scorecard)
       end
     end
 
@@ -23,11 +24,13 @@ module ExcelBuilders
       sheet.add_row headers, style: header
     end
 
-    def build_row(scorecard, count)
-      sheet.add_row main_row(scorecard, count), types: [:integer, :string]
+    def build_row(scorecard)
+      @row_count += 1
+      sheet.add_row main_row(scorecard, scorecard.voting_indicators.first), types: [:integer, :string]
 
       scorecard.voting_indicators.drop(1).each do |vi|
-        sheet.add_row scorecard_result(vi), offset: offset
+        @row_count += 1
+        sheet.add_row main_row(scorecard, vi), types: [:integer, :string]
       end
     end
 
@@ -66,9 +69,9 @@ module ExcelBuilders
         ]
       end
 
-      def main_row(scorecard, count)
+      def main_row(scorecard, voting_indicator)
         [
-          count,
+          @row_count,
           scorecard.uuid,
           I18n.t("scorecard.#{scorecard.status}"),
           scorecard.district,
@@ -84,7 +87,7 @@ module ExcelBuilders
           scorecard.facility_name,
           scorecard.conducted_place
         ]
-        .concat(scorecard_result(scorecard.voting_indicators.first))
+        .concat(scorecard_result(voting_indicator))
         .concat([format_date(scorecard.conducted_date)])
       end
 
@@ -123,10 +126,6 @@ module ExcelBuilders
         return nil unless date.present?
 
         I18n.l(date, format: :nice)
-      end
-
-      def offset
-        @offset ||= headers.find_index(I18n.t("excel.conducted_place")) + 1
       end
   end
 end

@@ -7,7 +7,7 @@
         = t("sidebar.settings")
 
     - if policy(Scorecard).index?
-      %a.btn.btn-warning.btn-sm.shadow-sm{ href: scorecards_path(params.permit(:start_date, :facility_id, :uuid, :filter,:year, :province_id, :local_ngo_id).merge(format: :xlsx)), target: '_blank' }
+      %a.btn.btn-warning.btn-sm.shadow-sm{ href: scorecards_path(params.permit(:start_date, :scorecard_type , :uuid, :filter, years: [], province_ids: [], local_ngo_ids: [], facility_ids: []).merge(format: :xlsx)), target: '_blank' }
         %i.fas.fa-download
         = t('scorecard.download_excel')
 

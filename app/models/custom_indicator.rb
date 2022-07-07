@@ -24,4 +24,8 @@ class CustomIndicator < ApplicationRecord
   validates :name, presence: true
 
   before_create :secure_uuid
+
+  def custom?
+    true
+  end
 end
