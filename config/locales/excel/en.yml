@@ -60,6 +60,6 @@ en:
     good: "4=Good"
     very_good: "5=Very good"
     meeting_date: Notes (Meeting Month / Year)
-    self_assessment: "1=Self Assessment"
-    community_scorecard: "2=Community Scorecard"
+    self_assessment: "2=Self Assessment"
+    community_scorecard: "1=Community Scorecard"
     other: Other
