@@ -15,8 +15,6 @@ module ScorecardsHelper
 
   def scorecard_descriptions
     descriptions = ["<span><i class='fas fa-calendar-alt mr-1'></i>#{@scorecard.year}</span>"]
-    descriptions.push(t("scorecard.#{@scorecard.scorecard_type}"))
-    descriptions.push(@scorecard.facility_name)
     descriptions.push("<span><i class='fas fa-map-marker-alt mr-1'></i>#{scorecard_location(@scorecard)}</span>")
     descriptions.join(", ")
   end

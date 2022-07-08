@@ -1,13 +1,18 @@
 .d-sm-flex.mb-4
   .d-flex.flex-column.flex-grow-1
+    / Title
     .d-flex.align-items-center
-      %h1.h3.mb-0.text-gray-800
-        = t("scorecard.scorecard_detail") + ": #{@scorecard.uuid}-(#{@scorecard.name})"
-      %div
-        = status_html(@scorecard).html_safe
+      %h1.h3.mb-0.text-gray-800.line-badge{ class: @scorecard.scorecard_type}
+        %span= "#{t('scorecard.scorecard_detail')}: "
+        %small.text-muted= "#{@scorecard.facility.code}: "
+        %span= "#{@scorecard.uuid}-"
+        %small.text-muted= "(#{@scorecard.name})"
 
-    .my-2.card-subtitle.text-muted
-      = scorecard_descriptions.html_safe
+      / Progress status
+      %div= status_html(@scorecard).html_safe
+
+    / Short description
+    .my-2.card-subtitle.text-muted= scorecard_descriptions.html_safe
 
   .w-25.text-right
     = render 'button_request_change', scorecard: @scorecard

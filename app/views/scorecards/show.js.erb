@@ -2,7 +2,7 @@
   $('#confirmModal .confirm-body').html('<%= j render("scorecards/index/confirm_delete_message") %>');
   $("#confirmModal").modal("show");
 <% else %>
-  $('#mainModal .modal-title').html("<%= t('scorecard.setup') %>");
+  $('#mainModal .modal-title').html('<%= j render("scorecards/show/scorecard_setup_header", name: t("scorecard.setup")) %>');
   $('#mainModal .card-subtitle').html("<%= scorecard_descriptions.html_safe %>");
   $('#mainModal .modal-body').html('<%= j render("scorecards/show/detail") %>');
   $("#mainModal").modal("show");

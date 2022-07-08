@@ -16,7 +16,6 @@
               %th #
               %th= t('scorecard.code')
               %th= sortable "year", t('scorecard.year')
-              %th= sortable "facility_id", t('scorecard.facility')
               %th= t('scorecard.implementer')
               %th= t('scorecard.location')
               %th= t('scorecard.status')
@@ -30,13 +29,17 @@
             - @scorecards.each_with_index do |scorecard, index|
               %tr
                 %td
-                  .line-badge{ class: scorecard.scorecard_type }
+                  .line-badge{ class: scorecard.scorecard_type, 'data-toggle' => 'tooltip', title: t("scorecard.#{scorecard.scorecard_type}") }
                     = @pagy.from + index
-                %td{style: 'min-width: 106px'}
-                  = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'text-primary'
-                  = render 'scorecard_copy', scorecard: scorecard
+
+                %td
+                  .d-flex.align-items-center
+                    %small.text-muted.mr-1{style: 'margin-top: 1px;', 'data-toggle' => 'tooltip', title: scorecard.facility_name}
+                      = "#{scorecard.facility.code}:"
+                    = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'text-primary mr-1'
+                    = render 'scorecard_copy', scorecard: scorecard
+
                 %td= scorecard.year
-                %td= scorecard.facility.name
                 %td= scorecard.local_ngo_name
                 %td= scorecard_location(scorecard)
                 %td= status_html(scorecard)

@@ -60,6 +60,10 @@ km:
     dont_receive_unlock_instruction: "តើអ្នកមិនបានទទួលការណែនាំអំពីការដោះសោទេឬ?"
     sign_in_with: "ចូលគណនីជាមួយ %{omniauth}"
     send_me_reset_pwd_instruction: 'សូមផ្ញើការណែនាំពាក្យសម្ងាត់ខ្ញុំឡើងវិញ'
+    change_your_password: ប្តូរលេខសម្ងាត់
+    new_password: លេខសម្ងាត់ថ្មី
+    confirm_new_password: បញ្ជាក់លេខសំងាត់ថ្មី
+    change_my_password: ផ្លាស់ប្តូរពាក្យសម្ងាត់របស់ខ្ញុំ
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"
