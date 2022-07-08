@@ -236,3 +236,16 @@
 .dropdown-item.active, .dropdown-item:active {
   background-color: rgba(0,0,0,0.05);
 }
+
+.line-badge {
+  padding-left: 5px;
+  border-left: 0.2rem solid #F29522;
+
+  &.self_assessment {
+    border-color: #31C0C7;
+  }
+
+  &.community_scorecard {
+    border-color: #F29522;
+  }
+}
