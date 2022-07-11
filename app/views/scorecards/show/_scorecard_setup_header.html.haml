@@ -1,0 +1,6 @@
+- name ||= t('scorecard.setup')
+
+%div.line-badge{ class: @scorecard.scorecard_type}
+  %span= "#{name}:"
+  %small.text-muted= "#{@scorecard.facility.code}: "
+  %span= "#{@scorecard.uuid}"

@@ -1,5 +1,5 @@
 .form-wrapper
-  %h2 Account Activation for
+  %h2.mb-4 Account Activation for
 
   = form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'put'}, :id => 'activation-form' do |f|
     = devise_error_messages!
