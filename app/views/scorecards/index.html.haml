@@ -35,7 +35,7 @@
                 %td
                   .d-flex.align-items-center
                     %small.text-muted.mr-1{style: 'margin-top: 1px;', 'data-toggle' => 'tooltip', title: scorecard.facility_name}
-                      = "#{scorecard.facility.code}:"
+                      = "#{scorecard.facility.code}"
                     = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'text-primary mr-1'
                     = render 'scorecard_copy', scorecard: scorecard
 
@@ -44,7 +44,12 @@
                 %td= scorecard_location(scorecard)
                 %td= status_html(scorecard)
                 %td.text-center
-                  = scorecard.downloaded_count unless scorecard.downloaded_count.zero?
+                  - if scorecard.downloaded_count.positive?
+                    - tooltip_title = sanitize(render('scorecards/index/scorecard_progress_tooltip_title', scorecard: scorecard))
+
+                    %span{'data-toggle': 'tooltip', title: "#{tooltip_title}", 'data-html': 'true' }
+                      = scorecard.downloaded_count
+
                 %td= timeago(scorecard.created_at).html_safe
                 %td
                   - if scorecard.conducted_date.present?

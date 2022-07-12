@@ -5,7 +5,7 @@ km:
     conducted_at: កាលបរិច្ឆេទអនុវត្ត
     location: ទីតាំង
     unit_type: ប្រភេទវិស័យ
-    facility: ទីតាំងសេវា
+    facility: ប្រភេទសេវា
     scorecard_type: ប្រភេទប័ណ្ណដាក់ពិន្ទុ
     sector: វិស័យ
     number_of_participant: ចំនួនអ្នកចូលរួម
@@ -146,8 +146,9 @@ km:
     use_this_code_to_download_scorecard: ប្រើលេខកូដនេះសម្រាប់ទាញយកប័ណ្ណដាក់ពិន្ទុ
     provinces_selected: ខេត្តត្រូវបានជ្រើសរើស
     years_selected: ឆ្នាំត្រូវបានជ្រើសរើស
-    facilities_selected: ទីតាំងសេវាត្រូវបានជ្រើសរើស
+    facilities_selected: ប្រភេទសេវាត្រូវបានជ្រើសរើស
     lngos_selected: អ្នកអនុវត្តត្រូវបានជ្រើសរើស
     proposed_indicator_method: វិធីសាស្រ្តស្នើលក្ខណៈវិនិច្ឆ័យ
     participant_based: ផ្អែកលើអ្នកចូលរួមជាគោល
     indicator_based: ផ្អែកលើលក្ខណៈវិនិច្ឆ័យជាគោល
+    device_id: ID ឧបករណ៍

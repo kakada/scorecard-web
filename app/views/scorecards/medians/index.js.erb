@@ -1,4 +1,5 @@
 $('#mainModal .modal-title').html('<%= j render("scorecards/show/scorecard_setup_header", name: t("scorecard.indicator_development")) %>');
+$('#mainModal .card-subtitle').html("<%= scorecard_descriptions.html_safe %>");
 $('#mainModal .modal-body').html('<%= j render("detail") %>');
 $("#mainModal").modal("show");
 $('[data-toggle="tooltip"]').tooltip();
