@@ -6,9 +6,6 @@
   %label.col-sm-8.col-form-label
     = " : #{@scorecard.uuid}"
     = render 'scorecard_copy', scorecard: @scorecard
-.row
-  %label.col-sm-4.col-form-label= t("shared.name")
-  %label.col-sm-8.col-form-label= " : #{@scorecard.name}"
 
 .row
   %label.col-sm-4.col-form-label= t("scorecard.scorecard_type")
@@ -18,7 +15,11 @@
   %label.col-sm-4.col-form-label= t("scorecard.facility")
   %label.col-sm-8.col-form-label
     = " : #{@scorecard.unit_type.name} → #{@scorecard.facility_name}"
-    = " → #{@scorecard.primary_school_name}" if @scorecard.primary_school.present?
+
+.row
+  %label.col-sm-4.col-form-label= t("scorecard.location")
+  %label.col-sm-8.col-form-label= " : #{scorecard_location(@scorecard)}"
+
 .row
   %label.col-sm-4.col-form-label= t("scorecard.conducted_at")
   %label.col-sm-8.col-form-label= " : #{date_html(@scorecard.conducted_date)}".html_safe

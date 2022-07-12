@@ -9,7 +9,8 @@
       %tr
         %td
           .mb-2.review-indicator
-            - if criteria['indicator'].class.name.split('::').last == 'CustomIndicator' && policy(@scorecard).in_review?
+            - is_custom = criteria['indicator'].class.name.split('::').last == 'CustomIndicator'
+            - if is_custom && policy(@scorecard).in_review?
               .d-flex
                 .d-flex.align-items-start.tip{data: { toggle: 'tooltip', placement: 'top', title: t("shared.edit") }}
                   = best_in_place criteria['indicator'], :name, url: scorecard_indicator_path(@scorecard.uuid, criteria['indicator'].id), as: :textarea, class: 'add-space', inner_class: 'best-in-place-textarea', ok_button: t('shared.save'), cancel_button: t('shared.cancel'), ok_button_class: 'btn btn-primary btn-save', cancel_button_class: 'btn btn-secondary btn-cancel', skip_blur: true
@@ -18,6 +19,8 @@
 
             - else
               = criteria["name"]
+              - if is_custom
+                %small.border.rounded.px-1= t('shared.new')
 
               - if policy(@scorecard).in_review?
                 %span{data: { toggle: 'tooltip', placement: 'top', title: t("indicator.cannot_edit_predefine") }}

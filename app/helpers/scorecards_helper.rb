@@ -20,11 +20,12 @@ module ScorecardsHelper
   end
 
   def scorecard_location(scorecard)
-    return scorecard.location_name unless scorecard.primary_school.present?
+    return "(#{scorecard.location_code}) #{scorecard.location_name}" unless scorecard.primary_school.present?
 
     label = t("scorecard.primary_school")
     school_name = scorecard.primary_school_name
-    primary_school = I18n.locale == :km ? "#{label}#{school_name}" : "#{school_name} #{label},"
+    school_code = scorecard.primary_school.try(:code)
+    primary_school = I18n.locale == :km ? "(#{school_code}) #{label}#{school_name}" : "(#{school_code}) #{school_name} #{label},"
 
     [primary_school, scorecard.location_name].join(" ")
   end

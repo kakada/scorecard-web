@@ -1,0 +1,11 @@
+- progresses = scorecard.scorecard_progresses.order(created_at: :desc)
+- statuses = progresses.pluck(:status).uniq.sort.reverse
+- statuses.each do |status|
+  .text-left.mt-1
+    %div= t("scorecard.#{status}") + ":"
+    %div
+      %ul
+        - progresses.select { |pr| pr.status == status }.each do |progress|
+          %li
+            %span= "#{t('scorecard.device_id')}: "
+            %span= "#{progress.device_id} (#{display_datetime(progress.created_at)})"
