@@ -1,4 +1,4 @@
-CW.Local_ngosIndex = (() => {
+CW.Common.ImportFile = (() => {
   return {
     init
   }

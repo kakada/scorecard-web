@@ -84,7 +84,10 @@ Rails.application.routes.draw do
   resources :templates
 
   resources :local_ngos do
-    resources :cafs, module: "local_ngos"
+    resources :cafs, module: "local_ngos" do
+      post :import, on: :collection
+    end
+
     post :import, on: :collection
   end
 

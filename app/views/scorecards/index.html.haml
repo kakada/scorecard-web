@@ -47,7 +47,7 @@
                   - if scorecard.downloaded_count.positive?
                     - tooltip_title = sanitize(render('scorecards/index/scorecard_progress_tooltip_title', scorecard: scorecard))
 
-                    %span{'data-toggle': 'tooltip', title: "#{tooltip_title}", 'data-html': 'true' }
+                    %span{'data-toggle': 'tooltip', title: "#{tooltip_title}", 'data-html': 'true', 'data-placement': 'right' }
                       = scorecard.downloaded_count
 
                 %td= timeago(scorecard.created_at).html_safe

@@ -14,12 +14,6 @@ RSpec.describe ProgramSpreadsheet do
       program_spreadsheet.import(file)
     end
 
-    it "receives import method for CafSpreadsheet" do
-      expect_any_instance_of(Spreadsheets::CafSpreadsheet).to receive(:import).with(instance_of(Roo::Excelx))
-
-      program_spreadsheet.import(file)
-    end
-
     context "no file" do
       it "returns nil" do
         expect(program_spreadsheet.import(nil)).to be_nil

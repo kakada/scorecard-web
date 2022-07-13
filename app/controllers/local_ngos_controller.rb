@@ -49,7 +49,7 @@ class LocalNgosController < ApplicationController
   end
 
   def import
-    ProgramSpreadsheet.new(current_program.id).import(params[:file])
+    Spreadsheets::LocalNgoSpreadsheet.new(current_program).import(params[:file])
 
     redirect_to local_ngos_url
   end

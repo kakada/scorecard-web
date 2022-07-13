@@ -5,6 +5,12 @@
       %i.fas.fa-arrow-left.fa-sm.text-white-50
       = t('shared.back')
 
+    %a.btn.btn-warning.btn-sm.shadow-sm{ "data-target" => "#importModal", "data-toggle" => "modal", href: '#' }
+      %i.fas.fa-file-import.fa-sm.text-white-50
+      = t("shared.import_from_file")
+
+    = render "shared/modals/modal_import_excel", form_url: import_local_ngo_cafs_path(@local_ngo), sample_url: '/caf_sample.xlsx'
+
     %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_caf_path(@local_ngo) }
       %i.fas.fa-plus.fa-sm.text-white-50
       = t("caf.add_new")

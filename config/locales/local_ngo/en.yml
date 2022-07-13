@@ -18,3 +18,4 @@ en:
     are_you_sure_to_delete: Are you sure to delete the local NGOs <b>%{name}</b>?
     already_in_used: Can't delete, there are scorecards belonging to
     website_url: Website Url
+    code: Code
