@@ -51,6 +51,12 @@ module LocalNgos
       redirect_to local_ngo_cafs_url(@local_ngo)
     end
 
+    def import
+      Spreadsheets::CafSpreadsheet.new(@local_ngo).import(params[:file])
+
+      redirect_to local_ngo_cafs_url(@local_ngo)
+    end
+
     private
       def set_local_ngo
         @local_ngo = authorize ::LocalNgo.find(params[:local_ngo_id]), :manage_caf?

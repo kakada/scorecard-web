@@ -13,4 +13,13 @@ class ApplicationRecord < ActiveRecord::Base
     self.uuid = SecureRandom.uuid
     secure_uuid
   end
+
+  def secure_code
+    self.code ||= SecureRandom.uuid[0..5]
+
+    return unless self.class.exists?(code: code)
+
+    self.code = SecureRandom.uuid[0..5]
+    secure_code
+  end
 end

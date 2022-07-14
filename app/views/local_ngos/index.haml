@@ -24,6 +24,7 @@
           %thead
             %tr
               %th #
+              %th= t("local_ngo.code")
               %th= sortable "name", t("shared.name")
               %th= t('local_ngo.address')
               %th= sortable "target_provinces", t('local_ngo.target_provinces')
@@ -34,6 +35,7 @@
             - @local_ngos.each_with_index do |local_ngo, index|
               %tr
                 %td= @pagy.from + index
+                %td= local_ngo.code
                 %td
                   = link_to_if local_ngo.website_url.present?, local_ngo.name, local_ngo.website_url, target: "_blank"
                 %td= local_ngo.address

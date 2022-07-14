@@ -29,6 +29,7 @@
 //= require common/datetime_picker
 //= require common/timeago
 //= require common/select_picker
+//= require common/import_file
 
 //= require facilities
 //= require templates
@@ -42,7 +43,6 @@
 //= require scorecards/swot
 //= require users/index
 //= require users/new
-//= require local_ngos/index
 //= require local_ngos/new
 //= require scorecards_settings/rating
 //= require scorecards_settings/contact
@@ -64,6 +64,7 @@ document.addEventListener("turbolinks:load", function () {
   CW.Common.DatetimePicker.init();
   CW.Common.Timeago.init();
   CW.Common.SelectPicker.init();
+  CW.Common.ImportFile.init();
 
   $("[role='tooltip']").remove();
   $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });

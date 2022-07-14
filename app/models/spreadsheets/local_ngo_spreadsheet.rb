@@ -1,23 +1,14 @@
 # frozen_string_literal: true
 
-class Spreadsheets::LocalNgoSpreadsheet
+class Spreadsheets::LocalNgoSpreadsheet < Spreadsheets::BaseSpreadsheet
   attr_reader :program
 
-  def initialize(program_id)
-    @program = Program.find(program_id)
-  end
-
-  def import(sheet)
-    rows = sheet.parse(headers: true)
-
-    rows[1..-1].each do |row|
-      process(row)
-    end
+  def initialize(program)
+    @program = program
   end
 
   def process(row)
-    lngo = program.local_ngos.find_or_initialize_by(code: row["code"])
-    lngo.update({
+    program.local_ngos.create(
       name: row["name"],
       website_url: row["website_url"],
       province_id: row["province_id"],
@@ -25,6 +16,6 @@ class Spreadsheets::LocalNgoSpreadsheet
       commune_id: row["commune_id"],
       village_id: row["village_id"],
       target_province_ids: row["target_province_ids"]
-    })
+    )
   end
 end

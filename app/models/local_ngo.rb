@@ -36,6 +36,7 @@ class LocalNgo < ApplicationRecord
                                   message: I18n.t("local_ngo.website_url.invalid") }
 
   before_save :set_target_provinces, if: :will_save_change_to_target_province_ids?
+  before_create :secure_code
 
   def address(address_local = "address_km")
     address_code = village_id.presence || commune_id.presence || district_id.presence || province_id.presence

@@ -7,4 +7,12 @@ namespace :local_ngo do
       ngo.update(target_provinces: Pumi::Province.all.select { |p| ngo.target_province_ids.split(",").include?(p.id) }.sort_by { |x| x.id }.map(&:name_km).join(", ")) if ngo.target_province_ids.present?
     end
   end
+
+  desc "migrate code"
+  task migrate_code: :environment do
+    LocalNgo.where(code: nil).find_each do |ngo|
+      ngo.secure_code
+      ngo.save
+    end
+  end
 end
