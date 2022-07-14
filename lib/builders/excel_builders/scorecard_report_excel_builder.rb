@@ -26,7 +26,7 @@ module ExcelBuilders
 
     def build_row(scorecard)
       @row_count += 1
-      sheet.add_row main_row(scorecard, scorecard.voting_indicators.first), types: [:integer, :string]
+      sheet.add_row main_row(scorecard, scorecard.voting_indicators.first, true), types: [:integer, :string]
 
       scorecard.voting_indicators.drop(1).each do |vi|
         @row_count += 1
@@ -69,20 +69,20 @@ module ExcelBuilders
         ]
       end
 
-      def main_row(scorecard, voting_indicator)
+      def main_row(scorecard, voting_indicator, is_first_row=false)
         [
           @row_count,
           scorecard.uuid,
           I18n.t("scorecard.#{scorecard.status}"),
           scorecard.district,
           scorecard.commune,
-          scorecard.number_of_participant,
-          scorecard.participants.blank? ? nil : scorecard.participants.select { |p| p.gender == Participant::GENDER_MALE }.length,
-          scorecard.number_of_female,
-          scorecard.number_of_youth,
-          scorecard.number_of_id_poor,
-          scorecard.number_of_ethnic_minority,
-          scorecard.number_of_disability,
+          (scorecard.number_of_participant if is_first_row),
+          (scorecard.participants.select { |p| p.gender == Participant::GENDER_MALE }.length if is_first_row && scorecard.participants.present?),
+          (scorecard.number_of_female if is_first_row),
+          (scorecard.number_of_youth if is_first_row),
+          (scorecard.number_of_id_poor if is_first_row),
+          (scorecard.number_of_ethnic_minority if is_first_row),
+          (scorecard.number_of_disability if is_first_row),
           I18n.t("excel.#{scorecard.scorecard_type}"),
           scorecard.facility_name,
           scorecard.conducted_place
