@@ -1,0 +1,3 @@
+# frozen_string_literal: true
+
+ScorecardBatchExcelSampleExporter.new(xlsx_package.workbook, current_program).build

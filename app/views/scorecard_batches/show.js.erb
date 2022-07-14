@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @scorecard_batch.user_id
+%p
+  %b Program:
+  = @scorecard_batch.program_id
+
+= link_to 'Edit', edit_scorecard_batch_path(@scorecard_batch)
+\|
+= link_to 'Back', scorecard_batches_path

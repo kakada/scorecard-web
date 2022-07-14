@@ -103,7 +103,7 @@ class ScorecardsController < ApplicationController
 
     def filter_params
       params.permit(
-        :start_date, :end_date, :uuid, :filter, :scorecard_type,
+        :start_date, :end_date, :uuid, :filter, :scorecard_type, :batch_code,
         years: [], province_ids: [], local_ngo_ids: [], facility_ids: []
       ).merge(program_id: current_user.program_id)
     end

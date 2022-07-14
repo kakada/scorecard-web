@@ -1,0 +1,59 @@
+%tr
+  %td
+    .line-badge{ class: scorecard.scorecard_type, 'data-toggle' => 'tooltip', title: t("scorecard.#{scorecard.scorecard_type}") }
+      = @pagy.from + index
+
+  %td
+    .d-flex.align-items-center
+      %small.text-muted.mr-1{style: 'margin-top: 1px;', 'data-toggle' => 'tooltip', title: scorecard.facility_name}
+        = "#{scorecard.facility.code}"
+      = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'text-primary mr-1'
+      = render 'scorecards/scorecard_copy', scorecard: scorecard
+
+  %td= scorecard.year
+  %td= scorecard.local_ngo_name
+  %td= scorecard_location(scorecard)
+  %td= status_html(scorecard)
+  %td.text-center
+    - if scorecard.downloaded_count.positive?
+      - tooltip_title = sanitize(render('scorecards/index/scorecard_progress_tooltip_title', scorecard: scorecard))
+
+      %span{'data-toggle': 'tooltip', title: "#{tooltip_title}", 'data-html': 'true', 'data-placement': 'right' }
+        = scorecard.downloaded_count
+
+  %td= timeago(scorecard.created_at).html_safe
+  %td
+    - if scorecard.conducted_date.present?
+      = timeago(scorecard.conducted_date).html_safe
+    - else
+      = "_"
+  %td
+    - if scorecard.locked_at.present?
+      = timeago(scorecard.locked_at).html_safe
+    - else
+      = "_"
+  %td
+    .d-flex.justify-content-end
+      / Request change icon
+      = render 'scorecards/button_request_change', scorecard: scorecard
+
+      / Pdf icon
+      - if scorecard.access_locked? && scorecard.program.try(:pdf_templates).present?
+        = link_to scorecard_path(scorecard.uuid, format: 'pdf'), class: "btn btn-circle btn-sm btn-outline-dark mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.view_as_pdf')}, target: '_blank' do
+          = image_tag 'pdf.png', size: 14
+
+      / Edit icon
+      - if policy(scorecard).update?
+        = link_to edit_scorecard_path(scorecard.uuid), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+          %i.fas.fa-pen
+
+      - if policy(scorecard).update? && (scorecard.running? || scorecard.downloaded?)
+        %span{data: {toggle: 'tooltip', placement: 'top', title: t('scorecard.cannot_delete_running_scorecard')}}
+          %a.disabled{class: "btn btn-circle btn-sm btn-outline-danger"}
+            %i.fas.fa-trash-alt
+
+      / Delete icon
+      - if policy(scorecard).destroy?
+        %span{data: {toggle: 'tooltip', placement: 'top', title: t('shared.delete')}}
+          = link_to scorecard_path(scorecard.uuid, associate_info: true), class: "btn btn-circle btn-sm btn-outline-danger", remote: true do
+            %i.fas.fa-trash-alt

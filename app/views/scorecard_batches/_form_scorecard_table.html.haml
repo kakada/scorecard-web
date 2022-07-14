@@ -1,0 +1,50 @@
+.table-responsive
+  %table.table.table-hover.pretty
+    %thead
+      %tr
+        %th #
+        %th= t('scorecard.year')
+        %th= t('scorecard.facility')
+        %th= t('scorecard.scorecard_type')
+        %th= t('scorecard.province')
+        %th= t('scorecard.district')
+        %th= t('scorecard.commune')
+        %th= t('scorecard.primary_school')
+        %th= t('scorecard.local_ngo')
+        %th= t('scorecard.planned_start_date')
+        %th= t('scorecard.planned_end_date')
+        %th= t('scorecard_batch.is_valid')
+
+    %tbody
+      - @scorecard_batch.scorecards.each_with_index do |scorecard, index|
+        - if scorecard.valid?
+          = f.fields_for :scorecards, scorecard do |ff|
+            = render 'scorecard_fields', f: ff
+        %tr
+          %td= index + 1
+          %td= scorecard.year
+          %td
+            = "#{scorecard.unit_type.name} → #{scorecard.facility_name}" if scorecard.facility_id.present?
+          %td
+            = t("scorecard.#{scorecard.scorecard_type}") if scorecard.scorecard_type.present?
+          %td
+            = scorecard.province if scorecard.province_id.present?
+          %td
+            = scorecard.district if scorecard.district_id.present?
+          %td
+            = scorecard.commune if scorecard.commune_id.present?
+          %td
+            = scorecard.primary_school_name if scorecard.primary_school_code.present?
+          %td
+            = scorecard.local_ngo_name if scorecard.local_ngo_id.present?
+          %td
+            = display_date(scorecard.planned_start_date)
+          %td
+            = display_date(scorecard.planned_start_date)
+          %td
+            - if scorecard.valid?
+              %i.fas.fa-check.text-success
+            - else
+              %span.text-danger.d-flex.align-items-center{'data-toggle' => 'tooltip', title: scorecard.errors.full_messages.join(', '), style: 'min-width: 80px;' }
+                %i.fas.fa-times.text-danger
+                %small.ml-1= t('shared.reason')

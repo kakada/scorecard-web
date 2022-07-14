@@ -1,0 +1,25 @@
+en:
+  scorecard_batch:
+    scorecard_batch: Scorecard batch
+    new_scorecard_batch: New scorecard batch
+    display_items: "There are <b>%{total_scorecard}</b> scorecards(valid: <b>%{total_valid}</b>) in <b>%{total_province}</b> provinces, <b>%{total_district}</b> districts, and <b>%{total_commune}</b> communes"
+    is_valid: Is valid?
+    valid: Valid data
+    invalid: Invalid data
+    imported_at: Imported at
+    short_description: "Total items: %{total_item} (valid: %{total_valid})"
+    download_sample_form: Download sample file to complete (Excel file .xlsx)
+    attach_excel_file: Attach a completed template
+    scorecard_import_wizard: Scorecard Import Wizard
+    congratulation: Congratulation!
+    show_list: Show List
+    download_list: Download List
+    congratulation_message: There are total scorecard <b>%{total_item}</b> in <b>%{total_province}</b> provinces, <b>%{total_district}</b> districts, and <b>%{total_commune}</b>communes imported to the stystem under Batch code <b>%{batch_code}</b>
+    valid_data_in_province: "total valid data in province <b>%{total_province}</b>, in district <b>%{total_district}</b>, in commune <b>%{total_commune}</b>"
+    excel_file: Excel file (maximum 150 KB)
+    todo_step: Todo step
+    _yes: Yes, I approve
+    confirm_message: "There are total scorecard <b>%{total_item}</b> in <b>%{total_province}</b> provinces, <b>%{total_district}</b> districts, and <b>%{total_commune}</b>communes importing to the stystem! Do you approve it?"
+    confirm_title: Confirm import scorecard
+    at_least_one_scorecard: There must be at least 1 valid scorecard
+    import_batch: Import Batch

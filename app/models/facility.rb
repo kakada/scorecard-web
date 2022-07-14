@@ -35,6 +35,8 @@ class Facility < ApplicationRecord
   validates :code, presence: true
   validates :dataset, presence: true, if: -> { self.has_child }
 
+  scope :only_children, -> { where.not(parent_id: nil) }
+
   DATASETS = [
     { code: "ps", name_en: "Primary School", name_km: "បឋមសិក្សា", dataset: "PrimarySchool" }
   ]

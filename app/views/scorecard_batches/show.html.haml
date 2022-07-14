@@ -1,0 +1,17 @@
+= render "progress_arrow_header", progress_num: 3
+
+.card.shadow.mb-4.w-50{style: 'margin: 0 auto;'}
+  .card-body.text-center
+    %h2.h3.mb-3= t('scorecard_batch.congratulation')
+
+    .mb-4
+      = t('scorecard_batch.congratulation_message', total_item: @scorecard_batch.total_valid, total_province: @scorecard_batch.total_province, total_district: @scorecard_batch.total_district, total_commune: @scorecard_batch.total_commune, batch_code: @scorecard_batch.code).html_safe
+
+    .mb-2
+      = link_to scorecards_path(batch_code: @scorecard_batch.code, format: :xlsx), class: 'btn btn-warning mr-2' do
+        %i.fas.fa-cloud-download-alt
+        %span= t('scorecard_batch.download_list')
+
+      = link_to scorecards_path(batch_code: @scorecard_batch.code), class: 'btn btn-primary' do
+        %i.far.fa-fw.fa-clipboard
+        %span= t('scorecard_batch.show_list')

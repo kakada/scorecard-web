@@ -41,12 +41,13 @@
 #  running_date              :datetime
 #  deleted_at                :datetime
 #  published                 :boolean          default(FALSE)
+#  device_type               :string
 #  submitted_at              :datetime
 #  completed_at              :datetime
-#  device_type               :string
 #  device_token              :string
 #  completor_id              :integer
 #  proposed_indicator_method :integer          default("participant_based")
+#  scorecard_batch_code      :string
 #
 require "rails_helper"
 

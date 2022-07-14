@@ -1,0 +1,38 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t('scorecard_batch.scorecard_batch')
+
+  .d-flex.mt-3.mt-md-0.justify-content-end
+    = render "shared/buttons/back_button", url: scorecards_path
+    = render "shared/buttons/add_new_button", url: new_scorecard_batch_path, title: t('scorecard_batch.import_batch')
+
+= render "shared/modals/modal_import_excel", form_url: scorecard_batches_path, sample_url: 'todo'
+
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @scorecard_batches }
+
+    - if @scorecard_batches.present?
+      = render "shared/pagination_title", objects: @scorecard_batches
+
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
+            %tr
+              %th= t("shared.code")
+              %th= sortable "created_at", t('scorecard_batch.imported_at')
+              %th= t("shared.description")
+          %tbody
+            - @scorecard_batches.each do |batch|
+              %tr
+                %td= link_to batch.code, scorecards_path(batch_code: batch.code), class: 'btn btn-link'
+                %td= timeago(batch.created_at).html_safe
+                %td
+                  = short_description(batch)
+                  %span{'data-toggle' => 'tooltip', title: long_description(batch), 'data-html' => 'true'}
+                    %i.fas.fa-info-circle
+
+    - if @pagy.pages > 1
+      .pagy-wrapper.justify-content-lg-end.justify-content-center
+        != pagy_bootstrap_compact_nav(@pagy)
+
+= render "shared/modal_confirm"

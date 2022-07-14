@@ -1,5 +1,6 @@
 .d-sm-flex.align-items-center.justify-content-between.mb-4
   %h1.h3.mb-0.text-gray-800= t("scorecard.scorecards")
+
   .mt-3.mt-md-0.text-right
     - if policy(Scorecard).setting?
       %a.btn.btn-secondary.btn-sm.shadow-sm{ href: setting_url }
@@ -7,7 +8,7 @@
         = t("sidebar.settings")
 
     - if policy(Scorecard).index?
-      %a.btn.btn-warning.btn-sm.shadow-sm{ href: scorecards_path(params.permit(:start_date, :scorecard_type , :uuid, :filter, years: [], province_ids: [], local_ngo_ids: [], facility_ids: []).merge(format: :xlsx)), target: '_blank' }
+      %a.btn.btn-warning.btn-sm.shadow-sm{ href: scorecards_path(params.permit(:start_date, :scorecard_type , :uuid, :filter, :batch_code, years: [], province_ids: [], local_ngo_ids: [], facility_ids: []).merge(format: :xlsx)), target: '_blank' }
         %i.fas.fa-download
         = t('scorecard.download_excel')
 
@@ -15,3 +16,16 @@
       %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_scorecard_path }
         %i.fas.fa-plus.fa-sm.text-white-50
         = t("scorecard.add_new")
+
+    / More Options
+    %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+      %i.fas.fa-ellipsis-v
+
+    .dropdown-menu.dropdown-menu-right
+      %a.btn.dropdown-item{ href: new_scorecard_batch_path }
+        %i.fas.fa-file-import.drop-menu-icon
+        %span= t("scorecard.batch_import")
+
+      %a.btn.dropdown-item{ href: scorecard_batches_path }
+        %i.fas.fa-history.drop-menu-icon
+        %span= t('scorecard.import_history')

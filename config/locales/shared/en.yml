@@ -68,3 +68,7 @@ en:
     you_are_in_testing_mode: You’re currently in testing mode
     testing: Testing
     new: New
+    add_new: Add new %{name}
+    code: Code
+    description: Description
+    reason: Reason

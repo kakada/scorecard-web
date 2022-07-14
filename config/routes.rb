@@ -108,6 +108,10 @@ Rails.application.routes.draw do
 
   resources :mobile_notifications, only: [:index, :new, :create]
 
+  resources :scorecard_batches, except: [:update, :edit], param: :code do
+    get :sample, on: :collection
+  end
+
   namespace :api do
     namespace :v1 do
       resources :programs, only: [] do

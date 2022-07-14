@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Spreadsheets::BaseSpreadsheet
   def import(file_path)
     return unless valid?(file_path)

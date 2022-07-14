@@ -37,6 +37,7 @@ class Program < ApplicationRecord
   has_many :data_publication_logs, dependent: :destroy
   has_one  :telegram_bot, dependent: :destroy
   has_one  :gf_dashboard
+  has_many :scorecard_batches
 
   validates :name, presence: true, uniqueness: true
   validates :shortcut_name, presence: true, uniqueness: true

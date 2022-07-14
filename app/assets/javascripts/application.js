@@ -57,6 +57,7 @@
 //= require mobile_notifications
 //= require activity_logs
 //= require request_changes/new
+//= require scorecard_batches/new
 
 document.addEventListener("turbolinks:load", function () {
   CW.Common.Topbar.init();
