@@ -32,6 +32,6 @@ class Spreadsheets::BaseSpreadsheet
     end
 
     def parse_date(date)
-      Date.parse(parse_string(date)) rescue nil
+      DateTime.parse(parse_string(date)) rescue nil
     end
 end
