@@ -31,23 +31,24 @@ module Spreadsheets
     end
 
     def process(row)
-      @facility = program.facilities.find_by code: row["facility_code"] if row["facility_code"].present?
-      @commune = Pumi::Commune.find_by_id(row["commune_code"]) if row["commune_code"].present?
-      @primary_school = PrimarySchool.find_by code: row["primary_school_code"] if row["primary_school_code"].present? && @facility.try(:dataset).present?
-      @local_ngo = program.local_ngos.find_by code: row["local_ngo_code"] if row["local_ngo_code"].present?
+      facility = program.facilities.find_by(code: parse_string(row["facility_code"])) if row["facility_code"].present?
+      commune = Pumi::Commune.find_by_id(parse_string(row["commune_code"])) if row["commune_code"].present?
+      primary_school = PrimarySchool.find_by(code: parse_string(row["primary_school_code"])) if row["primary_school_code"].present? && facility.try(:dataset).present?
+      local_ngo = program.local_ngos.find_by(code: parse_string(row["local_ngo_code"])) if row["local_ngo_code"].present?
+      scorecard_type = parse_string(row["scorecard_type_en"]) if Scorecard.scorecard_types.keys.include? parse_string(row["scorecard_type_en"])
 
       @scorecards_attributes.push({
         year: row["year"],
-        unit_type_id: @facility.try(:parent_id),
-        facility_id: @facility.try(:id),
-        scorecard_type: row["scorecard_type_en"],
-        commune_id: @commune.try(:id),
-        district_id: @commune.try(:district_id),
-        province_id: @commune.try(:province_id),
-        primary_school_code: @primary_school.try(:id),
-        local_ngo_id: @local_ngo.try(:id),
-        planned_start_date: row["planned_start_date"],
-        planned_end_date: row["planned_end_date"],
+        unit_type_id: facility.try(:parent_id),
+        facility_id: facility.try(:id),
+        scorecard_type: scorecard_type,
+        commune_id: commune.try(:id),
+        district_id: commune.try(:district_id),
+        province_id: commune.try(:province_id),
+        primary_school_code: primary_school.try(:id),
+        local_ngo_id: local_ngo.try(:id),
+        planned_start_date: parse_date(row["planned_start_date"]),
+        planned_end_date: parse_date(row["planned_end_date"]),
         program_id: program.id,
         creator_id: @user.id
       })

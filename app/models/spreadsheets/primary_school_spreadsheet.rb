@@ -19,7 +19,7 @@ class Spreadsheets::PrimarySchoolSpreadsheet < Spreadsheets::BaseSpreadsheet
     def get_commune(row)
       return nil if row["commune_code"].blank?
 
-      Pumi::Commune.where(id: row["commune_code"].strip).first
+      Pumi::Commune.where(id: parse_string(row["commune_code"])).first
     end
 
     def build_school_code(commune)
