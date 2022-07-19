@@ -49,6 +49,7 @@ en:
 
     # Scorecard Report
     number: "#"
+    province: Province
     district: District
     commune: Commune
     conducted_place: Name of service provider

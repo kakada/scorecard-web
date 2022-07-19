@@ -49,6 +49,7 @@ km:
 
     # Scorecard Report
     number: ល.រ
+    province: ខេត្ត
     district: ស្រុក
     commune: ឃុំ
     conducted_place: ឈ្មោះអង្គភាពផ្តល់សេវា
