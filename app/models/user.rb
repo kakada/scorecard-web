@@ -70,6 +70,7 @@ class User < ApplicationRecord
   has_many   :scorecard_progresses
   has_many   :request_changes, foreign_key: :proposer_id
   has_many   :review_suggestions, foreign_key: :reviewer_id, class_name: "RequestChange"
+  has_many   :scorecard_batches
 
   has_many :access_grants,
            class_name: "Doorkeeper::AccessGrant",

@@ -1,0 +1,25 @@
+km:
+  scorecard_batch:
+    scorecard_batch: ប្រវត្តិនៃការបញ្ចូលប័ណ្ណដាក់ពិន្ទុ
+    new_scorecard_batch: Batch ប័ណ្ណដាក់ពិន្ទុថ្មី
+    display_items: "មានប័ណ្ណដាក់ពិន្ទុសរុប <b>%{total_scorecard}</b>(ត្រឹមត្រូវ: <b>%{total_valid}</b>) ក្នុងខេត្តចំនួន <b>%{total_province}</b> ស្រុកចំនួន <b>%{total_district}</b> និងឃុំចំនួន <b>%{total_commune}</b>"
+    is_valid: ត្រឹមត្រូវឬទេ?
+    valid: ទិន្នន័យត្រឹមត្រូវ
+    invalid: ទិន្នន័យមិនត្រឹមត្រូវ
+    imported_at: កាលបរិច្ឆេទបញ្ចូល
+    short_description: "ចំនួនប័ណ្ណដាក់ពិន្ទុសរុប: %{total_item} (ត្រឹមត្រូវ: %{total_valid})"
+    download_sample_form: ទាញយកគម្រូឯកសារទៅបំពេញ (Excel file .xlsx)
+    attach_excel_file: ភ្ជាប់គម្រូឯកសារដែលបំពេញរួចមកវិញ
+    scorecard_import_wizard: បញ្ចូលប័ណ្ណដាក់ពិន្ទុ Wizard
+    congratulation: អបអរសាទរ!
+    show_list: បង្ហាញទិន្នន័យ
+    download_list: ទាញយកទិន្នន័យ
+    congratulation_message: មានប័ណ្ណដាក់ពិន្ទុសរុប <b>%{total_item}</b> ក្នុងខេត្តចំនួន <b>%{total_province}</b> ស្រុកចំនួន <b>%{total_district}</b> និងឃុំចំនួន <b>%{total_commune}</b> បានបញ្ចូលទៅក្នុងប្រព័ន្ធ ក្រោមលេខកូដ Batch <b>%{batch_code}</b>
+    valid_data_in_province: "ទិន្នន័យត្រឹមត្រូវមានក្នុងខេត្តចំនួន <b>%{total_province}</b> ស្រុកចំនួន <b>%{total_district}</b> ឃុំចំនួន <b>%{total_commune}</b>"
+    excel_file: ឯកសារ Excel (អតិបរិមា 150 KB)
+    todo_step: ជំហ៊ានដែលត្រូវធ្វើ
+    _yes: បាទ/ចាស ខ្ញុំយល់ព្រម
+    confirm_message: "មានប័ណ្ណដាក់ពិន្ទុសរុប <b>%{total_item}</b> ក្នុងខេត្តចំនួន <b>%{total_province}</b> ស្រុកចំនួន <b>%{total_district}</b> និងឃុំចំនួន %{total_commune} នឹងត្រូវបញ្ចូលក្នុងប្រព័ន្ធ! តើអ្នកយល់ព្រមឬទេ?"
+    confirm_title: បញ្ចាក់ការបញ្ចូលប័ណ្ណដាក់ពិន្ទុ
+    at_least_one_scorecard: ត្រូវមានប័ណ្ណដាក់ពិន្ទុដែលត្រឹមត្រូវយ៉ាងហោចណាស់ 1
+    import_batch: បញ្ចូលប័ណ្ណដាក់ពិន្ទុជាតាម Excel

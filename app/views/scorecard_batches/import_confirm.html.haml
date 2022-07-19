@@ -1,0 +1,28 @@
+= render "progress_arrow_header", progress_num: 2
+
+- valid_scorecards = @scorecard_batch.scorecards.select{ |s| s.valid? }
+
+= simple_form_for @scorecard_batch do |f|
+  = f.hidden_field :code, value: @scorecard_batch.code
+  = f.hidden_field :total_item
+  = f.hidden_field :total_valid
+  = f.hidden_field :total_province
+  = f.hidden_field :total_district
+  = f.hidden_field :total_commune
+
+  .d-flex.align-items-center{style: 'flex-wrap: wrap-reverse;'}
+    .flex-grow-1
+      %div= short_description(@scorecard_batch).html_safe
+      %small.text-muted
+        = t('scorecard_batch.valid_data_in_province', total_province: @scorecard_batch.total_province, total_district: @scorecard_batch.total_district, total_commune: @scorecard_batch.total_commune).html_safe
+
+    .d-flex.mb-2
+      = render "shared/buttons/back_button", url: new_scorecard_batch_path
+
+      - tooltip_title = @scorecard_batch.total_valid.positive? ? "" : t("scorecard_batch.at_least_one_scorecard")
+
+      %span{ 'data-toggle' => 'tooltip', title: tooltip_title }
+        %button.btn.btn-primary.btn-sm{'data-toggle' => 'modal', 'data-target' => '#confirmModal', type: 'button', class: ('disabled' if @scorecard_batch.total_valid.zero?)}= t('scorecard_batch._yes')
+
+  = render 'form_scorecard_table', f: f
+  = render 'modal_import_confirm', f: f

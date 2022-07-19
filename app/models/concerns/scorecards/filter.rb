@@ -15,6 +15,7 @@ module Scorecards::Filter
       scope = scope.where(scorecard_type: params[:scorecard_type]) if params[:scorecard_type].present?
       scope = scope.where(progress: planned_statuses) if params[:filter] == "planned"
       scope = scope.where(progress: params[:filter]) if params[:filter].present? && params[:filter] != "planned"
+      scope = scope.where(scorecard_batch_code: params[:batch_code]) if params[:batch_code].present?
       scope
     end
 

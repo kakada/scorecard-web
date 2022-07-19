@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_27_065957) do
+ActiveRecord::Schema.define(version: 2022_07_14_072738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -414,6 +414,19 @@ ActiveRecord::Schema.define(version: 2022_05_27_065957) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "scorecard_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.integer "total_item", default: 0
+    t.integer "total_valid", default: 0
+    t.integer "total_province", default: 0
+    t.integer "total_district", default: 0
+    t.integer "total_commune", default: 0
+    t.integer "user_id"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "scorecard_knowledges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
@@ -485,6 +498,7 @@ ActiveRecord::Schema.define(version: 2022_05_27_065957) do
     t.string "device_token"
     t.integer "completor_id"
     t.integer "proposed_indicator_method", default: 1
+    t.string "scorecard_batch_code"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end

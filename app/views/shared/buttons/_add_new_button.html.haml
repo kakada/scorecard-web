@@ -1,0 +1,9 @@
+- url ||= '#'
+- name ||= ''
+- title ||= t('shared.add_new', name: name)
+- disabled ||= false
+
+%div
+  = link_to url, class: ['btn btn-primary btn-sm shadow-sm', ('disabled' if disabled)] do
+    %i.fas.fa-plus.text-white-50
+    = title

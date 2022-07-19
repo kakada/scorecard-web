@@ -27,4 +27,8 @@
       - if current_program.present?
         = render 'scorecards/index/filter_year'
         = render 'scorecards/index/filter_facility'
+
+    - if current_program.present?
+      .d-lg-flex.mb-2
         = render 'scorecards/index/filter_local_ngo'
+        = render 'scorecards/index/filter_batch'

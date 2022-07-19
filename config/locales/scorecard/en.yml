@@ -70,6 +70,7 @@ en:
     any_facility: Any facility
     any_local_ngo: Any local NGO
     any_scorecard_type: Any scorecard type
+    any_scorecard_batch: Any batch
     absolute: Absolute
     relative: Relative
     start_date: Start date
@@ -152,3 +153,5 @@ en:
     participant_based: Participant-based
     indicator_based: Indicator-based
     device_id: Device ID
+    batch_import: Batch Import
+    import_history: Import History

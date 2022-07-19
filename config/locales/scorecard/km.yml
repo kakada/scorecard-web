@@ -70,6 +70,7 @@ km:
     any_facility: គ្រប់វិស័យ
     any_local_ngo: គ្រប់អ្នកអនុវត្ត
     any_scorecard_type: គ្រប់ប្រភេទប័ណ្ណដាក់ពិន្ទុ
+    any_scorecard_batch: គ្រប់ Batch
     absolute: Absolute
     relative: Relative
     start_date: ថ្ងៃចាប់ផ្តើម
@@ -152,3 +153,5 @@ km:
     participant_based: ផ្អែកលើអ្នកចូលរួមជាគោល
     indicator_based: ផ្អែកលើលក្ខណៈវិនិច្ឆ័យជាគោល
     device_id: ID ឧបករណ៍
+    batch_import: បញ្ចូលប័ណ្ណដាក់ពិន្ទុតាម Excel
+    import_history: ប្រវត្តិនៃការបញ្ចូលប័ណ្ណដាក់ពិន្ទុ
