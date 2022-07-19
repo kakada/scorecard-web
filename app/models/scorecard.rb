@@ -114,7 +114,7 @@ class Scorecard < ApplicationRecord
   validates :commune_id, presence: true
   validates :unit_type_id, presence: true
   validates :facility_id, presence: true
-  validates :scorecard_type, presence: true
+  validates :scorecard_type, presence: true, inclusion: { in: scorecard_types.keys }
   validates :local_ngo_id, presence: true
   validates :primary_school_code, presence: true, if: -> { facility.try(:dataset).present? }
 

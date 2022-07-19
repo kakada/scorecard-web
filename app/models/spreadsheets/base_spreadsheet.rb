@@ -26,4 +26,12 @@ class Spreadsheets::BaseSpreadsheet
     def accepted_formats
       [".xls", ".xlsx"]
     end
+
+    def parse_string(data)
+      data.to_s.strip
+    end
+
+    def parse_date(date)
+      Date.parse(parse_string(date)) rescue nil
+    end
 end
