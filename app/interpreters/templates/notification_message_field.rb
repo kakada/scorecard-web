@@ -12,6 +12,7 @@ module Templates
         { name: "planned_start_date", code: "scorecard.planned_start_date" },
         { name: "planned_end_date", code: "scorecard.planned_end_date" },
         { name: "primary_caf_name", code: "facilitator.name" },
+        { name: "running_date", code: "scorecard.running_date" },
         { name: "finished_date", code: "scorecard.finished_date" },
         { name: "submitted_date", code: "scorecard.submitted_date" },
         { name: "completed_date", code: "scorecard.completed_date" },
