@@ -4,7 +4,7 @@ class ScorecardBatchesController < ApplicationController
   before_action :set_scorecard_batch, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pagy, @scorecard_batches = pagy(current_user.scorecard_batches)
+    @pagy, @scorecard_batches = pagy(ScorecardBatch.filter(filter_params).order(updated_at: :desc))
   end
 
   def show
@@ -47,7 +47,7 @@ class ScorecardBatchesController < ApplicationController
     def scorecard_batch_params
       params.require(:scorecard_batch).permit(
         :total_item, :total_valid, :total_province,
-          :total_district, :total_commune,
+          :total_district, :total_commune, :filename,
           scorecards_attributes: [
             :year, :unit_type_id, :facility_id, :scorecard_type,
             :province_id, :district_id, :commune_id,
@@ -68,5 +68,10 @@ class ScorecardBatchesController < ApplicationController
       else
         render :import_confirm
       end
+    end
+
+    def filter_params
+      params.permit(:keyword)
+            .merge(program_id: current_program.id)
     end
 end

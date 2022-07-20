@@ -25,4 +25,12 @@ class ScorecardBatch < ApplicationRecord
   before_create :secure_code
 
   accepts_nested_attributes_for :scorecards, allow_destroy: true
+
+  def self.filter(params)
+    keyword = params[:keyword].to_s.strip
+    scope = all
+    scope = scope.where("code LIKE ? OR filename LIKE ?", "%#{keyword}%", "%#{keyword}%") if keyword.present?
+    scope = scope.where(program_id: params[:program_id]) if params[:program_id].present?
+    scope
+  end
 end
