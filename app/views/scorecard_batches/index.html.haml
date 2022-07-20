@@ -5,7 +5,7 @@
     = render "shared/buttons/back_button", url: scorecards_path
     = render "shared/buttons/add_new_button", url: new_scorecard_batch_path, title: t('scorecard_batch.import_batch')
 
-= render "shared/modals/modal_import_excel", form_url: scorecard_batches_path, sample_url: 'todo'
+= render 'filter'
 
 .card.shadow.mb-4
   .card-body
@@ -18,18 +18,22 @@
         %table.table.table-hover.pretty
           %thead
             %tr
+              %th #
               %th= t("shared.code")
-              %th= sortable "created_at", t('scorecard_batch.imported_at')
+              %th= t("scorecard_batch.filename")
               %th= t("shared.description")
+              %th= t('scorecard_batch.imported_at')
           %tbody
-            - @scorecard_batches.each do |batch|
+            - @scorecard_batches.each_with_index do |batch, index|
               %tr
-                %td= link_to batch.code, scorecards_path(batch_code: batch.code), class: 'btn btn-link'
-                %td= timeago(batch.created_at).html_safe
+                %td= index + 1
+                %td= link_to batch.code, scorecards_path(batch_code: batch.code), class: 'text-primary'
+                %td= batch.filename
                 %td
                   = short_description(batch)
                   %span{'data-toggle' => 'tooltip', title: long_description(batch), 'data-html' => 'true'}
                     %i.fas.fa-info-circle
+                %td= timeago(batch.created_at, 'datetime').html_safe
 
     - if @pagy.pages > 1
       .pagy-wrapper.justify-content-lg-end.justify-content-center

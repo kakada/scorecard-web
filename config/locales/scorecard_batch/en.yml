@@ -23,3 +23,5 @@ en:
     confirm_title: Confirm import scorecard
     at_least_one_scorecard: There must be at least 1 valid scorecard
     import_batch: Import Batch
+    filename: Filename
+    search_by_code_or_filename: Code or filename

@@ -11,10 +11,10 @@ module Spreadsheets
       @scorecards_attributes = []
     end
 
-    def import(file_path)
-      return unless valid?(file_path)
+    def import(file)
+      return unless valid?(file)
 
-      spreadsheet(file_path).each_with_pagename do |sheet_name, sheet|
+      spreadsheet(file).each_with_pagename do |sheet_name, sheet|
         next unless sheet_name.to_s.downcase == "scorecard"
 
         rows = sheet.parse(headers: true)
@@ -26,7 +26,7 @@ module Spreadsheets
       end
 
       batch.scorecards_attributes = @scorecards_attributes
-      batch.attributes = batch.attributes.merge(batch_params)
+      batch.attributes = batch.attributes.merge(batch_params(file))
       batch
     end
 
@@ -55,14 +55,15 @@ module Spreadsheets
     end
 
     private
-      def batch_params
+      def batch_params(file)
         valid_scorecards = batch.scorecards.select { |s| s.valid? }
         {
           total_item: batch.scorecards.length,
           total_valid: valid_scorecards.length,
           total_province: valid_scorecards.pluck(:province_id).uniq.length,
           total_district: valid_scorecards.pluck(:district_id).uniq.length,
-          total_commune: valid_scorecards.pluck(:commune_id).uniq.length
+          total_commune: valid_scorecards.pluck(:commune_id).uniq.length,
+          filename: file.original_filename
         }
       end
   end

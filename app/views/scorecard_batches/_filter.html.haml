@@ -1,0 +1,7 @@
+%form{ action: scorecard_batches_path, method: 'get' }
+  .form-group{style: 'width: 300px'}
+    .input-group
+      = text_field_tag(:keyword, params[:keyword], class: 'form-control', placeholder: t('scorecard_batch.search_by_code_or_filename'))
+      .input-group-append
+        .input-group-text
+          %i.fas.fa-search
