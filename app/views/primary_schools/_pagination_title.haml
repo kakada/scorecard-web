@@ -1,0 +1,19 @@
+- objects ||= []
+
+.d-flex.mb-3.flex-grow-1
+  - if objects.present?
+    .pagy-wrapper.justify-content-lg-end.justify-content-center
+      .d-flex.flex-grow-1
+        .flex-1.d-flex.align-items-center.mb-2
+          %span= t('shared.pagination_title', from: @pagy.from, to: @pagy.to, total: number_with_delimiter(@pagy.count)).html_safe
+
+    .ml-2
+      - url = primary_schools_path(params.permit(:keyword, :province_id, :district_id, :commune_id).merge(format: :xlsx))
+      %a.btn.btn-warning.btn-sm.shadow-sm{ href: url, target: '_blank', 'data-toggle': 'tooltip', title: t('shared.download_excel') }
+        %i.fas.fa-download
+
+  .flex-grow-1
+
+  - if @pagy.pages > 1
+    .d-lg-block.d-none
+      != pagy_bootstrap_nav(@pagy)

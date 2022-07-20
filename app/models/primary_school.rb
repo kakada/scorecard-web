@@ -36,9 +36,9 @@ class PrimarySchool < ApplicationRecord
   def self.filter(params)
     scope = all
     scope = scope.where("code LIKE ? OR name_en LIKE ? OR name_km LIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") if params[:keyword].present?
-    scope = scope.where(commune_id: params[:commune_id]) if params[:commune_id].present?
-    scope = scope.where(district_id: params[:district_id]) if params[:district_id].present?
     scope = scope.where(province_id: params[:province_id]) if params[:province_id].present?
+    scope = scope.where(district_id: params[:district_id]) if params[:district_id].present? && params[:province_id].present?
+    scope = scope.where(commune_id: params[:commune_id]) if params[:commune_id].present? && params[:district_id].present? && params[:province_id].present?
     scope
   end
 end

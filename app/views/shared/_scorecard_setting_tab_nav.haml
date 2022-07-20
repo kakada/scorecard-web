@@ -30,6 +30,12 @@
         %i.fas.fa-fw.fa-users
         %span.d-none.d-md-inline= t("sidebar.local_ngo")
 
+  - if policy(PrimarySchool).index?
+    %li.nav-item{ class: css_nested_active_class('primary_schools') }
+      %a.nav-link{:href => primary_schools_path}
+        %i.fas.fa-fw.fa-school
+        %span.d-none.d-md-inline= t("sidebar.primary_schools")
+
   - if policy(RatingScale).create?
     %li.nav-item{ class: css_nested_active_class('rating_scales') }
       %a.nav-link{:href => rating_scales_path}

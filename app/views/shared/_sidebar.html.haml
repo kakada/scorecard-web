@@ -50,12 +50,6 @@
           %i.fas.fa-fw.fa-wrench
           %span= t('sidebar.settings')
 
-    - if policy(PrimarySchool).index?
-      %li.nav-item{ class: css_active_class('primary_schools') }
-        %a.nav-link{:href => primary_schools_path}
-          %i.fas.fa-fw.fa-school
-          %span= t('sidebar.primary_schools')
-
     - if policy(ActivityLog).index?
       %li.nav-item{ class: css_active_class('activity_logs') }
         %a.nav-link{:href => activity_logs_path}
