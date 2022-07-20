@@ -2,7 +2,15 @@
 
 class PrimarySchoolsController < ApplicationController
   def index
-    @pagy, @primary_schools = pagy(authorize PrimarySchool.filter(params).order("#{sort_column} #{sort_direction}"))
+    respond_to do |format|
+      format.html { @pagy, @primary_schools = pagy(authorize query_primary_schools) }
+
+      format.xlsx {
+        @primary_schools = authorize query_primary_schools
+
+        render xlsx: "index", filename: "primary_schools_#{Time.new.strftime('%Y%m%d_%H_%M_%S')}.xlsx"
+      }
+    end
   end
 
   def show
@@ -59,5 +67,13 @@ class PrimarySchoolsController < ApplicationController
       params.require(:primary_school).permit(:code, :name_en, :name_km,
         :commune_id, :district_id, :province_id
       )
+    end
+
+    def query_primary_schools
+      PrimarySchool.filter(filter_params).order("#{sort_column} #{sort_direction}")
+    end
+
+    def filter_params
+      params.permit(:keyword, :province_id, :district_id, :commune_id)
     end
 end

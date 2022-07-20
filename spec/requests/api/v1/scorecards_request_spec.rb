@@ -216,7 +216,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let!(:user)       { create(:user) }
     let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
     let!(:custom_indicator) { create(:indicator, type: "Indicators::CustomIndicator", categorizable: facility) }
-    let!(:custom_indicator2) { create(:indicator, type: "Indicators::CustomIndicator", categorizable: facility)}
+    let!(:custom_indicator2) { create(:indicator, type: "Indicators::CustomIndicator", categorizable: facility) }
     let!(:indicator)   { facility.indicators.first }
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }

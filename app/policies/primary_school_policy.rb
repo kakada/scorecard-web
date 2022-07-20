@@ -2,19 +2,19 @@
 
 class PrimarySchoolPolicy < ApplicationPolicy
   def index?
-    user.system_admin?
+    true
   end
 
   def create?
-    index?
+    user.system_admin?
   end
 
   def update?
-    index?
+    create?
   end
 
   def destroy?
-    index?
+    create?
   end
 
   class Scope < Scope

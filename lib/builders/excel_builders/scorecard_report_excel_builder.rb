@@ -69,7 +69,7 @@ module ExcelBuilders
         ]
       end
 
-      def main_row(scorecard, voting_indicator, is_first_row=false)
+      def main_row(scorecard, voting_indicator, is_first_row = false)
         [
           @row_count,
           scorecard.uuid,

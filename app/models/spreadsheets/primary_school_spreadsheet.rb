@@ -9,9 +9,9 @@ class Spreadsheets::PrimarySchoolSpreadsheet < Spreadsheets::BaseSpreadsheet
     school.code = school.code.presence || build_school_code(commune)
     school.name_km = row["school_name_km"]
     school.name_en = row["school_name_en"] || row["school_name_km"]
-    school.commune_id ||= commune.id
-    school.district_id ||= commune.district_id
-    school.province_id ||= commune.province_id
+    school.commune_id = commune.id
+    school.district_id = commune.district_id
+    school.province_id = commune.province_id
     school.save
   end
 
