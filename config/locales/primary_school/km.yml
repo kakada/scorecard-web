@@ -9,3 +9,7 @@ km:
     new_primary_school: បង្កើតបឋមសិក្សាថ្មី
     edit_primary_school: កែតម្រូវបឋមសិក្សា
     are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបសាលា <b>%{name}</b> នេះមែនទេ?
+    commune_code: លេខកូដឃុំ
+    province: ខេត្ត
+    district: ស្រុក
+    commune: ឃុំ

@@ -1,0 +1,14 @@
+- value ||= ''
+- label = label.nil? ? value : label
+- tooltip_title ||= t('shared.copied')
+
+.d-flex.align-items-center
+  %span.mr-1= label
+  %input.input-for-copy{ value: value }
+
+  / Copied label
+  %a.btn.btn-default.btn-copy.p-0.text-dark{href: '#', style: 'height: 26px;'}
+    %i.far.fa-copy
+
+  %span.btn-check.d-none{"data-placement" => "right", :title => tooltip_title, "data-trigger": :focus, style: 'height: 26px;'}
+    %i.fas.fa-check.text-success

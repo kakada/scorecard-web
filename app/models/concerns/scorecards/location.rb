@@ -4,24 +4,14 @@ module Scorecards::Location
   extend ActiveSupport::Concern
 
   included do
+    include PumiLocation
+
     before_validation :set_location_code
 
     def location_name(address = "address_km")
       return if location_code.blank?
 
       "Pumi::#{Location.location_kind(location_code).titlecase}".constantize.find_by_id(location_code).try("address_#{I18n.locale}".to_sym)
-    end
-
-    def province
-      Pumi::Province.find_by_id(province_id)["name_#{I18n.locale}"]
-    end
-
-    def district
-      Pumi::District.find_by_id(district_id).try("name_#{I18n.locale}")
-    end
-
-    def commune
-      Pumi::Commune.find_by_id(commune_id).try("name_#{I18n.locale}")
     end
 
     def conducted_place

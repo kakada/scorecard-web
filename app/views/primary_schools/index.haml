@@ -17,17 +17,23 @@
               %th= sortable "code", t('primary_school.code')
               %th= sortable "name_en", t('primary_school.name_en')
               %th= sortable "name_km", t('primary_school.name_km')
-              %th= t('primary_school.address')
+              %th= t('primary_school.province')
+              %th= t('primary_school.district')
+              %th= t('primary_school.commune')
+              %th= t('primary_school.commune_code')
               %th= sortable "created_at", t('shared.created_at')
               %th= sortable "updated_at", t('shared.updated_at')
               %th
           %tbody
             - @primary_schools.each do |school|
               %tr
-                %td= school.code
+                %td= render 'shared/copy', value: school.code
                 %td= school.name_en
                 %td= school.name_km
-                %td= school.address
+                %td= school.province
+                %td= school.district
+                %td= school.commune
+                %td= render 'shared/copy', value: school.commune_id
                 %td= timeago(school.created_at).html_safe
                 %td= timeago(school.updated_at).html_safe
                 %td
