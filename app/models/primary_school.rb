@@ -15,6 +15,8 @@
 #  province_id :string
 #
 class PrimarySchool < ApplicationRecord
+  include PumiLocation
+
   validates :code, presence: true, uniqueness: true
   validates :name_km, presence: true, uniqueness: { scope: :commune_id }
   validates :name_en, presence: true, uniqueness: { scope: :commune_id }

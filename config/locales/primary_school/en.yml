@@ -9,3 +9,7 @@ en:
     new_primary_school: New primary school
     edit_primary_school: Edit primary school
     are_you_sure_to_delete: Are you sure to delete the school <b>%{name}</b>?
+    commune_code: Commune code
+    province: Province
+    district: District
+    commune: Commune

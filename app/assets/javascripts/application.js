@@ -30,6 +30,7 @@
 //= require common/timeago
 //= require common/select_picker
 //= require common/import_file
+//= require common/copy
 
 //= require facilities
 //= require templates
@@ -66,6 +67,7 @@ document.addEventListener("turbolinks:load", function () {
   CW.Common.Timeago.init();
   CW.Common.SelectPicker.init();
   CW.Common.ImportFile.init();
+  CW.Common.Copy.init();
 
   $("[role='tooltip']").remove();
   $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });

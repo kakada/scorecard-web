@@ -7,8 +7,9 @@
     .d-flex.align-items-center
       %small.text-muted.mr-1{style: 'margin-top: 1px;', 'data-toggle' => 'tooltip', title: scorecard.facility_name}
         = "#{scorecard.facility.code}"
-      = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'text-primary mr-1'
-      = render 'scorecards/scorecard_copy', scorecard: scorecard
+
+      = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'text-primary'
+      = render 'shared/copy', value: scorecard_url(scorecard.uuid), label: '', tooltip_title: (t('shared.copied_testing_code') if test_mode?)
 
   %td= scorecard.year
   %td= scorecard.local_ngo_name

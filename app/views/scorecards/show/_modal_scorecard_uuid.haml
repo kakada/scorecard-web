@@ -17,10 +17,9 @@
             %span{"aria-hidden" => "true"} ×
 
         .modal-body
-          %p
-            %span.text-primary
-              = @scorecard.uuid
-              = render 'scorecard_copy', scorecard: @scorecard
+          .d-flex
+            %span.text-primary.mr-2
+              = render 'shared/copy', value: scorecard_url(@scorecard.uuid), label: @scorecard.uuid, tooltip_title: (t('shared.copied_testing_code') if test_mode?)
 
             %span= t('scorecard.use_this_code_to_download_scorecard')
         .modal-footer

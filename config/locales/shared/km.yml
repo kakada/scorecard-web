@@ -63,8 +63,8 @@ km:
     import_from_zip_file: បញ្ចូលទិន្នន័យពី Zip(.zip)
     zip_file: ឯកសារ Zip
     download_sample_zip: ទាញយកគំរូ (.zip)
-    copied: បានចម្លង!
-    copied_testing_code: បានចម្លងលេខកូដសាកល្បង!
+    copied: បានថតចម្លង!
+    copied_testing_code: បានថតចម្លងលេខកូដសាកល្បង!
     you_are_in_testing_mode: បច្ចុប្បន្នអ្នកស្ថិតនៅក្នុងមុខងារសាកល្បង
     testing: សាកល្បង
     new: បន្ថែមថ្មី

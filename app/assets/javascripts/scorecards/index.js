@@ -1,7 +1,6 @@
 CW.ScorecardsIndex = (() => {
   function init() {
     CW.DaterangPicker.init()
-    CW.ScorecardsShow.onClickBtnCopy();
 
     handleDisplayCollapseContent();
     onShowCollapse();

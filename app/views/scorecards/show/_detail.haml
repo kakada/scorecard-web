@@ -4,8 +4,7 @@
 .row
   %label.col-sm-4.col-form-label= t("scorecard.id")
   %label.col-sm-8.col-form-label
-    = " : #{@scorecard.uuid}"
-    = render 'scorecard_copy', scorecard: @scorecard
+    = render 'shared/copy', value: scorecard_url(@scorecard.uuid), label: " : #{@scorecard.uuid}", tooltip_title: (t('shared.copied_testing_code') if test_mode?)
 
 .row
   %label.col-sm-4.col-form-label= t("scorecard.scorecard_type")
