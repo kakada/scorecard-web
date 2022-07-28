@@ -3,10 +3,10 @@
 
 .card.shadow.mb-4
   .card-body
-    = render partial: "shared/no_data", locals: { items: @notifications, url: new_mobile_notification_path, label: t('shared.add_new') }
+    = render partial: "shared/no_data", locals: { items: @notifications, url: new_mobile_notification_path, label: t('shared.add_new', name: t("sidebar.notification")) }
 
     - if @notifications.present?
-      = render "shared/pagination_title", objects: @notifications, url: new_mobile_notification_path, label: t('shared.add_new'), hide_pagy: true
+      = render "shared/pagination_title", objects: @notifications, url: new_mobile_notification_path, label: t('shared.add_new', name: t("sidebar.notification")), hide_pagy: true
 
       %table.table.table-hover
         %thead
@@ -14,6 +14,7 @@
             %th #
             %th= t('mobile_notification.notification_title')
             %th= t('mobile_notification.notification_text')
+            %th= t('shared.description')
             %th= t('shared.created_at')
             %th
         %tbody
@@ -22,6 +23,7 @@
               %td= @pagy.from + index
               %td= notification.title
               %td= notification.body
+              %td= notification.description
               %td= timeago(notification.created_at).html_safe
               %td
                 - if notification.success_count.present?
