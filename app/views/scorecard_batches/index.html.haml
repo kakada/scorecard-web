@@ -22,6 +22,7 @@
               %th= t("shared.code")
               %th= t("scorecard_batch.filename")
               %th= t("shared.description")
+              %th= t("scorecard_batch.imported_by")
               %th= t('scorecard_batch.imported_at')
           %tbody
             - @scorecard_batches.each_with_index do |batch, index|
@@ -33,6 +34,7 @@
                   = short_description(batch)
                   %span{'data-toggle' => 'tooltip', title: long_description(batch), 'data-html' => 'true'}
                     %i.fas.fa-info-circle
+                %td= batch.user_email
                 %td= timeago(batch.created_at, 'datetime').html_safe
 
     - if @pagy.pages > 1

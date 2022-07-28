@@ -25,6 +25,8 @@ class ScorecardBatch < ApplicationRecord
 
   before_create :secure_code
 
+  delegate :email, to: :user, prefix: :user
+
   accepts_nested_attributes_for :scorecards, allow_destroy: true
 
   def self.filter(params)
