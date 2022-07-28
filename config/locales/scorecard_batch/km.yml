@@ -25,3 +25,4 @@ km:
     import_batch: បញ្ចូលប័ណ្ណដាក់ពិន្ទុជាតាម Excel
     filename: ឈ្មោះឯកសារ
     search_by_code_or_filename: លេខកូដ ឬ ឈ្មោះឯកសារ
+    imported_by: បញ្ចូលដោយ

@@ -25,3 +25,4 @@ en:
     import_batch: Import Batch
     filename: Filename
     search_by_code_or_filename: Code or filename
+    imported_by: Imported by
