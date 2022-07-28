@@ -15,6 +15,7 @@
 #  program_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  filename       :string
 #
 class ScorecardBatchSerializer < ActiveModel::Serializer
   attributes :id, :user_id, :program_id

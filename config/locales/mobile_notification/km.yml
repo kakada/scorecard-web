@@ -8,3 +8,4 @@ km:
     max_title: អតិបរមា 64 តួ
     max_body: អតិបរមា 255 តួ
     push_notification: បញ្ជូនការជូនដំណឹង
+    description: ជោគជ័យចំនួន %{success_count}; បរាជ័យចំនួន %{failure_count}

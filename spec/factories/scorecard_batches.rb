@@ -15,6 +15,7 @@
 #  program_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  filename       :string
 #
 FactoryBot.define do
   factory :scorecard_batch do

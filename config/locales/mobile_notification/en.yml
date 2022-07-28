@@ -8,3 +8,4 @@ en:
     max_title: max 64 characters
     max_body: max 255 characters
     push_notification: Push Notification
+    description: Success %{success_count}; Failure %{failure_count}
