@@ -33,7 +33,7 @@ class LocalNgo < ApplicationRecord
   validates :website_url, url: {  allow_blank: true,
                                   no_local: true,
                                   public_suffix: true,
-                                  message: I18n.t("local_ngo.website_url.invalid") }
+                                  message: I18n.t("local_ngo.invalid") }
 
   before_save :set_target_provinces, if: :will_save_change_to_target_province_ids?
   before_create :secure_code
