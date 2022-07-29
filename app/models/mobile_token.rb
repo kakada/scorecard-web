@@ -21,4 +21,10 @@ class MobileToken < ApplicationRecord
     tablet: 2,
     unknown: 3
   }
+
+  def self.filter(params={})
+    scope = all
+    scope = scope.where(app_version: params[:app_versions]) if params[:app_versions].present?
+    scope
+  end
 end

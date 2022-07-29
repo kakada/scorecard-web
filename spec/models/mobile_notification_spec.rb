@@ -13,6 +13,7 @@
 #  program_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  app_versions  :string           default([]), is an Array
 #
 require "rails_helper"
 

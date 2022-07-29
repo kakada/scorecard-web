@@ -67,10 +67,10 @@ module ApplicationHelper
     I18n.l(date, format: :"#{format}")
   end
 
-  def timeago(date, type='date')
+  def timeago(date, type = "date")
     return "" unless date.present?
 
-    dis_date = type == 'date' ? display_date(date) : display_datetime(date)
+    dis_date = type == "date" ? display_date(date) : display_datetime(date)
     str = "<span class='timeago' data-date='#{dis_date}'>"
     str += time_ago_in_words(date)
     str += "</span>"

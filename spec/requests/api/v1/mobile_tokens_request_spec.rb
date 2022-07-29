@@ -9,7 +9,7 @@ RSpec.describe "Api::V1::MobileTokensController", type: :request do
 
     context "new token" do
       let(:params) {
-        {id: '', token: 'abcd', device_id: 'a1b2', device_type: 'mobile', app_version: '1.0.1', program_id: program.id }
+        {id: "", token: "abcd", device_id: "a1b2", device_type: "mobile", app_version: "1.0.1", program_id: program.id }
       }
 
       before {

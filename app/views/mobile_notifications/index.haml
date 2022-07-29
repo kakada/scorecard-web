@@ -15,8 +15,13 @@
             %th= t('mobile_notification.notification_title')
             %th= t('mobile_notification.notification_text')
             %th= t('shared.description')
+
+            - if current_user.system_admin?
+              %th= t('mobile_notification.app_version')
+
             %th= t('shared.created_at')
             %th
+
         %tbody
           - @notifications.each_with_index do |notification, index|
             %tr
@@ -24,6 +29,10 @@
               %td= notification.title
               %td= notification.body
               %td= notification.description
+
+              - if current_user.system_admin?
+                %td= notification.app_versions.join(', ').presence || t('mobile_notification.all_version')
+
               %td= timeago(notification.created_at).html_safe
               %td
                 - if notification.success_count.present?

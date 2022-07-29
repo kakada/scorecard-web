@@ -5,10 +5,9 @@ class MobileNotificationWorker
 
   def perform(notification_id)
     @notification = MobileNotification.find_by(id: notification_id)
+    filter_params = { app_versions: @notification.app_versions }
 
-    return unless @notification.present?
-
-    Pundit.policy_scope(@notification.creator, MobileToken).in_batches do |relation|
+    Pundit.policy_scope(@notification.creator, MobileToken.filter(filter_params)).in_batches do |relation|
       response = PushNotificationService.notify(relation.pluck(:token), @notification.build_content)
       res_body = JSON.parse(response[:body])
 
