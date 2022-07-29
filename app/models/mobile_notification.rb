@@ -13,6 +13,7 @@
 #  program_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  app_versions  :string           default([]), is an Array
 #
 class MobileNotification < ApplicationRecord
   validates :body, presence: true
@@ -31,7 +32,7 @@ class MobileNotification < ApplicationRecord
   def description
     return nil if success_count.nil?
 
-    I18n.t('mobile_notification.description',
+    I18n.t("mobile_notification.description",
       success_count: success_count,
       failure_count: failure_count
     )

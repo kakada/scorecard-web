@@ -9,3 +9,7 @@ km:
     max_body: អតិបរមា 255 តួ
     push_notification: បញ្ជូនការជូនដំណឹង
     description: ជោគជ័យចំនួន %{success_count}; បរាជ័យចំនួន %{failure_count}
+    app_version: លេខកំណែកម្មវិធីទូរស័ព្ទប័ណ្ណដាក់ពិន្ទុសហគមន៍
+    any_version: គ្រប់លេខកំណែ
+    versions_selected: លេខកំណែត្រូវបានជ្រើសរើស
+    all_version: ទាំងអស់

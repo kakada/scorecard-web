@@ -9,3 +9,7 @@ en:
     max_body: max 255 characters
     push_notification: Push Notification
     description: Success %{success_count}; Failure %{failure_count}
+    app_version: Community Scorecard App version number
+    any_version: Any version
+    versions_selected: versions selected
+    all_version: All version
