@@ -43,7 +43,7 @@ RSpec.describe LocalNgo, type: :model do
       subject.valid?
 
       expect(subject).not_to be_valid
-      expect(subject.errors[:website_url]).to eq [I18n.t("local_ngo.website_url.invalid")]
+      expect(subject.errors[:website_url]).to eq [I18n.t("local_ngo.invalid")]
     end
   end
 end

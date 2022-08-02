@@ -13,8 +13,7 @@ en:
     manage_caf: Manage caf
     add_new: Add new local ngo
     search: Search by name or province
-    website_url:
-      invalid: is invalid
+    invalid: is invalid
     are_you_sure_to_delete: Are you sure to delete the local NGOs <b>%{name}</b>?
     already_in_used: Can't delete, there are scorecards belonging to
     website_url: Website Url
