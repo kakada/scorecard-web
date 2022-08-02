@@ -29,3 +29,5 @@ en:
     restore_successfully: "User %{email} is restored successfully!"
     are_you_sure_to_delete: Are you sure to delete the user <b>%{email}</b>?
     last_sign_in_at: Last sign in at
+    any_program: Any Program
+    programs_selected: programs selected
