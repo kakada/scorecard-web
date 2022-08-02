@@ -14,6 +14,7 @@
 #  youth          :boolean          default(FALSE)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  countable      :boolean          default(TRUE)
 #
 FactoryBot.define do
   factory :participant do

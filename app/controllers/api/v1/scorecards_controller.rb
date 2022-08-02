@@ -49,7 +49,7 @@ module Api
             :finished_date, :language_conducted_code, :running_date, :device_type, :device_token,
             :proposed_indicator_method,
             facilitators_attributes: [ :id, :caf_id, :position, :scorecard_uuid ],
-            participants_attributes: [ :uuid, :age, :gender, :disability, :minority, :youth, :poor_card, :scorecard_uuid ],
+            participants_attributes: [ :uuid, :age, :gender, :disability, :minority, :youth, :poor_card, :scorecard_uuid, :countable ],
             raised_indicators_attributes: [
               :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :selected, :voting_indicator_uuid, :scorecard_uuid, tag_attributes: [:name]
             ],

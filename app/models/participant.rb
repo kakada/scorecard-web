@@ -14,6 +14,7 @@
 #  youth          :boolean          default(FALSE)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  countable      :boolean          default(TRUE)
 #
 class Participant < ApplicationRecord
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
