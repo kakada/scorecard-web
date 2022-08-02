@@ -18,11 +18,6 @@
   }
 }
 
-.topbar .nav-item .nav-link .img-profile {
-  height: 24px;
-  width: 24px;
-}
-
 .test-mode-message {
   position: absolute;
   text-align: center;
@@ -31,4 +26,19 @@
   z-index: 1;
   transform: translate(-50%);
   width: 500px;
+}
+
+.topbar {
+  .program-name {
+    font-size: 8px;
+  }
+
+  .user-display-name {
+    max-width: 100px;
+  }
+
+  .nav-item .nav-link .img-profile {
+    height: 24px;
+    width: 24px;
+  }
 }

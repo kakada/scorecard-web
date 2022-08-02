@@ -30,7 +30,10 @@
     %li.nav-item.dropdown.no-arrow
       / User display
       %a#userDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-        %span.mr-2.d-none.d-lg-inline.text-gray-600.small= current_user.display_name
+        .d-flex.mr-2.flex-column.align-items-center
+          %span.text-gray-600.user-display-name.text-truncate.small
+            = current_user.display_name
+          %small.text-gray-600.program-name= "@#{current_program.try(:shortcut_name) || 'SYSTEM'}"
 
         = image_tag 'default_profile.png', alt: 'profile', class: 'img-profile rounded-circle'
 

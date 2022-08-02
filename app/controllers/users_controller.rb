@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def index
-    @pagy, @users = pagy(policy_scope(authorize User.filter(params).order(sort_column + " " + sort_direction).includes(:program)))
+    @pagy, @users = pagy(policy_scope(authorize User.filter(filter_params).order(sort_column + " " + sort_direction).includes(:program)))
   end
 
   def new
@@ -94,5 +94,9 @@ class UsersController < ApplicationController
 
     def locale_params
       params.require(:user).permit(:language_code)
+    end
+
+    def filter_params
+      params.permit(:email, :actived, program_ids: [])
     end
 end

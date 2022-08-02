@@ -29,3 +29,5 @@ km:
     restore_successfully: "អ្នកប្រើប្រាស់ %{email} ត្រូវបានស្តារដោយជោគជ័យ!"
     are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបគណនី <b>%{email}</b> នេះមែនទេ?
     last_sign_in_at: កាលបរិច្ឆេទចូលគណនីចុងក្រោយ
+    any_program: គ្រប់ប្រូក្រាម
+    programs_selected: ប្រូក្រាមត្រូវបានជ្រើសរើស
