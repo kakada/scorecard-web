@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_02_093552) do
+ActiveRecord::Schema.define(version: 2022_08_02_105042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -505,6 +505,7 @@ ActiveRecord::Schema.define(version: 2022_08_02_093552) do
     t.integer "completor_id"
     t.integer "proposed_indicator_method", default: 1
     t.string "scorecard_batch_code"
+    t.integer "number_of_anonymous"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end

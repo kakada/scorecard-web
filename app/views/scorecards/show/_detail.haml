@@ -43,7 +43,10 @@
     %small= t('scorecard.participant_info')
   .row
     %label.col-sm-4.col-form-label= t("scorecard.number_of_participant")
-    %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_participant}"
+    %label.col-sm-8.col-form-label
+      = " : #{@scorecard.number_of_participant}"
+      - if @scorecard.number_of_anonymous.present? && @scorecard.number_of_anonymous.positive?
+        = "+ #{t('scorecard.anonymous')} #{@scorecard.number_of_anonymous}"
   .row
     %label.col-sm-4.col-form-label= t("scorecard.number_of_female")
     %label.col-sm-8.col-form-label= " : #{@scorecard.number_of_female}"
