@@ -56,6 +56,12 @@
           %i.fas.fa-fw.fa-shoe-prints
           %span= t('sidebar.activity_logs')
 
+    - if current_user.system_admin?
+      %li.nav-item{ class: css_active_class('primary_schools') }
+        %a.nav-link{:href => primary_schools_path}
+          %i.fas.fa-fw.fa-school
+          %span= t('sidebar.primary_schools')
+
     %li.nav-item{ class: css_active_class('about') }
       %a.nav-link{:href => about_path}
         %i.fas.fa-fw.fa-exclamation-circle
