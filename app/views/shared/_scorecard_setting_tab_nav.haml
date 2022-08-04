@@ -30,7 +30,7 @@
         %i.fas.fa-fw.fa-users
         %span.d-none.d-md-inline= t("sidebar.local_ngo")
 
-  - if policy(PrimarySchool).index?
+  - if policy(PrimarySchool).index? && !current_user.system_admin?
     %li.nav-item{ class: css_nested_active_class('primary_schools') }
       %a.nav-link{:href => primary_schools_path}
         %i.fas.fa-fw.fa-school
