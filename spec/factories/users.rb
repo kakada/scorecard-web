@@ -35,7 +35,7 @@
 #  last_sign_in_ip        :inet
 #
 FactoryBot.define do
-  factory :user, aliases: [:creator] do
+  factory :user, aliases: [:creator, :submitter, :completor] do
     email         { FFaker::Internet.email }
     password      { FFaker::Internet.password }
     role          { "program_admin" }

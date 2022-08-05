@@ -21,7 +21,7 @@ namespace :raised_indicator do
     def update_missing_indicator_uuid(collection)
       collection.each do |ri|
         params = { indicator_uuid: ri.indicatorable.uuid }
-        params.merge({indicatorable_type: 'Indicators::CustomIndicator'}) if ri.indicatorable_type == 'CustomIndicator'
+        params.merge({ indicatorable_type: "Indicators::CustomIndicator" }) if ri.indicatorable_type == "CustomIndicator"
 
         ri.update_columns(params)
       end
