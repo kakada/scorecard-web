@@ -48,6 +48,9 @@
 #  completor_id              :integer
 #  proposed_indicator_method :integer          default("participant_based")
 #  scorecard_batch_code      :string
+#  number_of_anonymous       :integer
+#  device_id                 :string
+#  submitter_id              :integer
 #
 require "rails_helper"
 
@@ -240,9 +243,9 @@ RSpec.describe Scorecard, type: :model do
 
     it { expect { scorecard.update(progress: :in_review, submitter: submitter) }.to change { scorecard.scorecard_progresses.count }.by 1 }
 
-    it 'creates scorecard in_review progress' do
+    it "creates scorecard in_review progress" do
       scorecard.update(progress: :in_review, submitter: submitter)
-      expect(scorecard.scorecard_progresses.last.status).to eq('in_review')
+      expect(scorecard.scorecard_progresses.last.status).to eq("in_review")
     end
   end
 
@@ -252,9 +255,9 @@ RSpec.describe Scorecard, type: :model do
 
     it { expect { scorecard.update(progress: :completed, completor: completor) }.to change { scorecard.scorecard_progresses.count }.by 1 }
 
-    it 'creates scorecard completed progress' do
+    it "creates scorecard completed progress" do
       scorecard.update(progress: :completed, completor: completor)
-      expect(scorecard.scorecard_progresses.last.status).to eq('completed')
+      expect(scorecard.scorecard_progresses.last.status).to eq("completed")
     end
   end
 end

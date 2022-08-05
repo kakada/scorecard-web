@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddDeviceIdAndSubmitterIdToScorecards < ActiveRecord::Migration[6.1]
   def change
     add_column :scorecards, :device_id, :string

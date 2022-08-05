@@ -48,6 +48,9 @@
 #  completor_id              :integer
 #  proposed_indicator_method :integer          default("participant_based")
 #  scorecard_batch_code      :string
+#  number_of_anonymous       :integer
+#  device_id                 :string
+#  submitter_id              :integer
 #
 
 class Scorecard < ApplicationRecord
