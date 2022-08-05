@@ -54,9 +54,9 @@ FactoryBot.define do
     year         { Date.today.year }
     facility     { create(:facility, :with_parent) }
     unit_type_id { facility.parent_id }
-    program
-    creator
-    local_ngo
+    program      { create(:program) }
+    creator      { create(:creator, program: program) }
+    local_ngo    { create(:local_ngo, program: program) }
     status       { "planned" }
     scorecard_type { Scorecard::SCORECARD_TYPES.sample.last }
     commune_id   { Pumi::Commune.all.sample.id }
@@ -69,6 +69,17 @@ FactoryBot.define do
       facility            { create(:facility, :with_parent, :dataset) }
       primary_school_code { PrimarySchool.first.code }
       commune_id          { PrimarySchool.first.commune_id }
+    end
+
+    trait :submitted do
+      submitter    { create(:submitter, program: program) }
+      submitted_at { Time.now.utc }
+      device_id  { SecureRandom.uuid[0..5] }
+    end
+
+    trait :completed do
+      completor     { create(:completor, program: program) }
+      completed_at  { Time.now.utc }
     end
   end
 end

@@ -28,10 +28,7 @@ module Scorecards::Lockable
     end
 
     def unlock_access!
-      self.completed_at = nil
-      self.progress = Scorecard::STATUS_IN_REVIEW
-
-      save(validate: false)
+      update_columns(completed_at: nil, progress: Scorecard::STATUS_IN_REVIEW)
     end
 
     def access_locked?

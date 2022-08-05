@@ -47,7 +47,7 @@ module Api
             :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,
             :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
             :finished_date, :language_conducted_code, :running_date, :device_type, :device_token,
-            :proposed_indicator_method, :number_of_anonymous,
+            :proposed_indicator_method, :number_of_anonymous, :device_id,
             facilitators_attributes: [ :id, :caf_id, :position, :scorecard_uuid ],
             participants_attributes: [ :uuid, :age, :gender, :disability, :minority, :youth, :poor_card, :scorecard_uuid, :countable ],
             raised_indicators_attributes: [
@@ -63,7 +63,7 @@ module Api
               indicator_activities_attributes: [ :uuid, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]
             ],
             ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ]
-          )
+          ).merge(submitter_id: current_user.id)
 
           # Todo remove after device is no longer installed mobile app 1.4.2 (require report from play store)
           (param[:raised_indicators_attributes] || []).each do |ri|

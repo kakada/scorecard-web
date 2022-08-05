@@ -76,6 +76,44 @@ RSpec.describe Scorecard, type: :model do
   it { is_expected.to validate_presence_of(:planned_start_date) }
   it { is_expected.to validate_presence_of(:planned_end_date) }
 
+  describe "#validate submitter" do
+    context "no submitted_at" do
+      let(:scorecard) { build(:scorecard, submitted_at: nil, submitter_id: nil) }
+
+      it { expect(scorecard.valid?).to be_truthy }
+    end
+
+    context "has submitted_at" do
+      let(:scorecard) { build(:scorecard, submitted_at: Time.now.utc, submitter_id: nil) }
+
+      it { expect(scorecard.valid?).to be_falsey }
+
+      it "requires submitter_id to be presence" do
+        scorecard.valid?
+        expect(scorecard.errors.messages[:submitter_id]).not_to be_nil
+      end
+    end
+  end
+
+  describe "#validate completor" do
+    context "no completed_at" do
+      let(:scorecard) { build(:scorecard, completed_at: nil, completor_id: nil) }
+
+      it { expect(scorecard.valid?).to be_truthy }
+    end
+
+    context "has completed_at" do
+      let(:scorecard) { build(:scorecard, completed_at: Time.now.utc, completor_id: nil) }
+
+      it { expect(scorecard.valid?).to be_falsey }
+
+      it "requires completor_id to be presence" do
+        scorecard.valid?
+        expect(scorecard.errors.messages[:completor_id]).not_to be_nil
+      end
+    end
+  end
+
   describe "#secure_uuid" do
     let!(:uuid) { SecureRandom.random_number(1..999999).to_s.rjust(6, "0") }
     let!(:scorecard1) { create(:scorecard, uuid: uuid) }
@@ -91,7 +129,7 @@ RSpec.describe Scorecard, type: :model do
   end
 
   describe "validate #locked_scorecard" do
-    let!(:scorecard) { create(:scorecard, completed_at: DateTime.now) }
+    let!(:scorecard) { create(:scorecard, :completed) }
 
     it { expect(scorecard.update(name: "test")).to be_falsey }
 
@@ -109,7 +147,8 @@ RSpec.describe Scorecard, type: :model do
   end
 
   describe "#unlock_access!" do
-    let!(:scorecard) { create(:scorecard, completed_at: Time.now.utc) }
+    let!(:scorecard) { create(:scorecard, :submitted, :completed) }
+
     before { scorecard.unlock_access! }
 
     it { expect(scorecard.completed_at).to be_nil }
@@ -118,7 +157,7 @@ RSpec.describe Scorecard, type: :model do
 
   describe "#access_locked?" do
     context "true" do
-      let!(:scorecard) { create(:scorecard, completed_at: Time.now.utc) }
+      let!(:scorecard) { create(:scorecard, :completed) }
 
       it { expect(scorecard.access_locked?).to be_truthy }
     end
@@ -192,6 +231,30 @@ RSpec.describe Scorecard, type: :model do
 
       it { expect(scorecard1.reload.published).to be_falsey }
       it { expect(scorecard2.reload.published).to be_truthy }
+    end
+  end
+
+  describe "#after_commit on update, #create_submitted_progress" do
+    let!(:scorecard) { create(:scorecard) }
+    let!(:submitter) { scorecard.creator }
+
+    it { expect { scorecard.update(progress: :in_review, submitter: submitter) }.to change { scorecard.scorecard_progresses.count }.by 1 }
+
+    it 'creates scorecard in_review progress' do
+      scorecard.update(progress: :in_review, submitter: submitter)
+      expect(scorecard.scorecard_progresses.last.status).to eq('in_review')
+    end
+  end
+
+  describe "#after_commit on update, #create_completed_progress" do
+    let!(:scorecard) { create(:scorecard, :submitted) }
+    let!(:completor) { scorecard.creator }
+
+    it { expect { scorecard.update(progress: :completed, completor: completor) }.to change { scorecard.scorecard_progresses.count }.by 1 }
+
+    it 'creates scorecard completed progress' do
+      scorecard.update(progress: :completed, completor: completor)
+      expect(scorecard.scorecard_progresses.last.status).to eq('completed')
     end
   end
 end

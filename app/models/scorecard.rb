@@ -59,6 +59,7 @@ class Scorecard < ApplicationRecord
 
   acts_as_paranoid if column_names.include? "deleted_at"
 
+  # Enum field
   enum scorecard_type: {
     self_assessment: 1,
     community_scorecard: 2
@@ -71,16 +72,19 @@ class Scorecard < ApplicationRecord
     indicator_based: 2
   }
 
+  # Constant
   STATUS_COMPLETED = "completed"
   STATUS_IN_REVIEW = "in_review"
   SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
 
+  # Association
   belongs_to :unit_type, class_name: "Facility"
   belongs_to :facility
   belongs_to :local_ngo, optional: true
   belongs_to :program
   belongs_to :location, foreign_key: :location_code, optional: true
   belongs_to :creator, class_name: "User"
+  belongs_to :submitter, class_name: "User", optional: true
   belongs_to :completor, class_name: "User", optional: true
   belongs_to :primary_school, foreign_key: :primary_school_code, optional: true
   belongs_to :language, foreign_key: :language_conducted_code, primary_key: :code, optional: true
@@ -103,11 +107,13 @@ class Scorecard < ApplicationRecord
   has_many   :weakness_indicator_activities, foreign_key: :scorecard_uuid, primary_key: :uuid
   has_many   :suggested_indicator_activities, foreign_key: :scorecard_uuid, primary_key: :uuid
 
+  # Delegation
   delegate  :name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
   delegate  :name_en, :name_km, to: :primary_school, prefix: :primary_school, allow_nil: true
   delegate  :name, to: :facility, prefix: :facility, allow_nil: true
   delegate  :name, to: :primary_school, prefix: :primary_school, allow_nil: true
 
+  # Validation
   validates :year, presence: true
   validates :province_id, presence: true
   validates :district_id, presence: true
@@ -121,32 +127,33 @@ class Scorecard < ApplicationRecord
   validates :planned_start_date, presence: true
   validates :planned_end_date, presence: true, date: { after_or_equal_to: :planned_start_date }
 
+  validates :submitter_id, presence: true, if: -> { submitted_at.present? }
+  validates :completor_id, presence: true, if: -> { completed_at.present? }
+
+  # Callback
   before_create :secure_uuid
   before_create :set_name
   before_create :set_published
   before_save   :clear_primary_school_code, unless: -> { facility.try(:dataset).present? }
 
+  after_commit  :create_submitted_progress, on: [:update], if: -> { saved_change_to_progress? && in_review? }
+  after_commit  :create_completed_progress, on: [:update], if: -> { saved_change_to_progress? && completed? }
   after_commit  :index_document_async, on: [:create, :update], if: -> { ENV["ELASTICSEARCH_ENABLED"] == "true" }
   after_destroy :delete_document_async, if: -> { ENV["ELASTICSEARCH_ENABLED"] == "true" }
 
+  # Nested Attribute
   accepts_nested_attributes_for :facilitators, allow_destroy: true
   accepts_nested_attributes_for :participants, allow_destroy: true
   accepts_nested_attributes_for :raised_indicators, allow_destroy: true
   accepts_nested_attributes_for :voting_indicators, allow_destroy: true
   accepts_nested_attributes_for :ratings, allow_destroy: true
 
-  scope :completeds, -> { where.not(locked_at: nil) }
+  # Scope
+  scope :completeds, -> { where.not(completed_at: nil) }
+  scope :lockeds, -> { where.not(locked_at: nil) }
 
   def status
     progress.present? ? progress : "planned"
-  end
-
-  def completed?
-    access_locked?
-  end
-
-  def renewed?
-    progress == "renewed"
   end
 
   # Class method
@@ -178,5 +185,13 @@ class Scorecard < ApplicationRecord
 
     def clear_primary_school_code
       self.primary_school_code = nil
+    end
+
+    def create_submitted_progress
+      scorecard_progresses.create(status: STATUS_IN_REVIEW, device_id: device_id, user_id: submitter_id)
+    end
+
+    def create_completed_progress
+      scorecard_progresses.create(status: STATUS_COMPLETED, user_id: completor_id)
     end
 end
