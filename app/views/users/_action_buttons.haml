@@ -10,8 +10,9 @@
         %i.fas.fa-trash-alt
 
   - else
-    %button.disabled{data: {toggle: 'tooltip', placement: 'top', title: t('user.cannnot_be_deleted')}, class: 'btn btn-circle btn-sm btn-outline-danger'}
-      %i.fas.fa-trash-alt
+    %span{data: {toggle: 'tooltip', placement: 'top', title: t('user.cannnot_be_deleted')}}
+      %button.disabled.btn.btn-circle.btn-sm.btn-outline-danger
+        %i.fas.fa-trash-alt
 
 - else
   - if policy(user).archive?
