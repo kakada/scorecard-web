@@ -30,4 +30,15 @@ namespace :scorecard do
     scorecards = Scorecard.where.not(local_ngo_id: LocalNgo.pluck(:id))
     scorecards.update_all(local_ngo_id: -1)
   end
+
+  # params scorecard_uuids uses space separated
+  # rake scorecard:migrate_wrong_progress_for_scorcard_in_review['222222 111111']
+  desc "migrate wrong progress status for scorecard in_review"
+  task :migrate_wrong_progress_for_scorcard_in_review, [:scorecard_uuids] => :environment do |task, args|
+    uuids = args[:scorecard_uuids].to_s.split(" ") || []
+
+    Scorecard.where(uuid: uuids).each do |scorecard|
+      scorecard.update_column(:progress, "in_review") if scorecard.submitted_at.present? && scorecard.completed_at.blank?
+    end
+  end
 end

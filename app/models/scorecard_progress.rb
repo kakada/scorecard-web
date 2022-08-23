@@ -36,6 +36,7 @@ class ScorecardProgress < ApplicationRecord
     end
 
     def set_scorecard_progress
+      return if scorecard.in_review? || scorecard.completed?
       return if !scorecard.renewed? && self.class.statuses[scorecard.progress].to_i >= self.class.statuses[status].to_i
 
       scorecard.progress = status
