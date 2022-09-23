@@ -112,6 +112,12 @@ Rails.application.routes.draw do
     get :sample, on: :collection
   end
 
+  resources :categories do
+    resources :datasets do
+      post :import, on: :collection
+    end
+  end
+
   namespace :api do
     namespace :v1 do
       resources :programs, only: [] do
@@ -120,6 +126,7 @@ Rails.application.routes.draw do
       end
 
       resources :primary_schools, only: [:index]
+      resources :datasets, only: [:index]
 
       resources :contacts, only: [:index]
       resource  :mobile_tokens, only: [:update]

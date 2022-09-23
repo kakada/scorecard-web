@@ -51,6 +51,7 @@
 #  number_of_anonymous       :integer
 #  device_id                 :string
 #  submitter_id              :integer
+#  dataset_id                :uuid
 #
 
 class Scorecard < ApplicationRecord
@@ -92,6 +93,7 @@ class Scorecard < ApplicationRecord
   belongs_to :primary_school, foreign_key: :primary_school_code, optional: true
   belongs_to :language, foreign_key: :language_conducted_code, primary_key: :code, optional: true
   belongs_to :scorecard_batch, foreign_key: :scorecard_batch_code, primary_key: :code, optional: true
+  belongs_to :dataset, optional: true
 
   has_many   :facilitators, foreign_key: :scorecard_uuid
   has_many   :cafs, through: :facilitators
@@ -115,6 +117,7 @@ class Scorecard < ApplicationRecord
   delegate  :name_en, :name_km, to: :primary_school, prefix: :primary_school, allow_nil: true
   delegate  :name, to: :facility, prefix: :facility, allow_nil: true
   delegate  :name, to: :primary_school, prefix: :primary_school, allow_nil: true
+  delegate  :name, :code, to: :dataset, prefix: :dataset, allow_nil: true
 
   # Validation
   validates :year, presence: true

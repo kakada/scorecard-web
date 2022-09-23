@@ -1,7 +1,9 @@
-code,name_en,name_km,parent_code,default,dataset
-PA,Public Administration,រដ្ឋបាល​សាធារណៈ,,true,
+code,name_en,name_km,parent_code,default,category_code
+PA,Public Administration,រដ្ឋបាលសាធារណៈ,,true,
 CA,Commune Administrative,រដ្ឋបាលឃុំសង្កាត់,PA,true,
 ED,Education,ការអប់រំ,,true,
-PS,Primary School,បឋមសិក្សា,ED,true,ps
+PS,Primary School,បឋមសិក្សា,ED,true,D_PS
 HE,Health,សុខភាព,,true,
 HC,Health Center,មណ្ឌលសុខភាព,HE,true,
+GS,Gament Sector,វិស័យកាត់ដេរ,,true,
+FA,Factory,រោងចក្រ,GS,true,D_FA

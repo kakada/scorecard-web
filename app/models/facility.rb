@@ -18,6 +18,7 @@
 #  dataset        :string
 #  default        :boolean          default(FALSE)
 #  name_km        :string
+#  category_id    :uuid
 #
 class Facility < ApplicationRecord
   include Categorizable
@@ -27,15 +28,19 @@ class Facility < ApplicationRecord
   acts_as_nested_set scope: [:program_id]
 
   belongs_to :program
+  belongs_to :category, optional: true
   has_many :unit_scorecards, foreign_key: :unit_type_id, class_name: "Scorecard"
   has_many :scorecards, foreign_key: :facility_id
 
   validates :name_en, presence: true
   validates :name_km, presence: true
   validates :code, presence: true
-  validates :dataset, presence: true, if: -> { self.has_child }
+  validates :category_id, presence: true, if: -> { self.has_child }
 
   scope :only_children, -> { where.not(parent_id: nil) }
+
+  # Delegation
+  delegate :name, to: :category, prefix: true, allow_nil: true
 
   DATASETS = [
     { code: "ps", name_en: "Primary School", name_km: "បឋមសិក្សា", dataset: "PrimarySchool" }

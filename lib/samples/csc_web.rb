@@ -9,7 +9,8 @@ module Samples
       ::Samples::Language.load
       ::Samples::PdfTemplate.load
       ::Samples::Location.load
-      ::Samples::PrimarySchool.load
+      ::Samples::Category.load
+      ::Samples::Dataset.load
       ::Samples::LocalNgo.load
       ::Samples::User.load
       ::Samples::Facility.load

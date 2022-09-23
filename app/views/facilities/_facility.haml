@@ -3,8 +3,7 @@
     = "#{facility.name} (#{facility.code})"
 
   .w-25
-    - if facility.dataset.present?
-      = Facility::DATASETS.select{|s| s[:code] == facility.dataset }[0][:"name_#{I18n.locale}"]
+    = facility.category_name
 
   .flex-1
     = timeago(facility.created_at).html_safe

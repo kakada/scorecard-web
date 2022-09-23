@@ -1,0 +1,38 @@
+= render "page_title"
+
+= render "filter"
+
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @datasets, url: new_category_dataset_path(@category), label: t('shared.add_new', name: t("dataset.dataset")) }
+
+    - if @datasets.present?
+      = render "shared/pagination_title", objects: @datasets
+
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
+            %tr
+              %th= sortable "code", t('dataset.code')
+              %th= sortable "name_en", t('dataset.name_en')
+              %th= sortable "name_km", t('dataset.name_km')
+              %th= t('dataset.address')
+              %th= sortable "created_at", t('shared.created_at')
+              %th
+          %tbody
+            - @datasets.each do |dataset|
+              %tr
+                %td= dataset.code
+                %td= dataset.name_en
+                %td= dataset.name_km
+                %td= dataset.address
+                %td= timeago(dataset.created_at).html_safe
+                %td
+                  .d-flex.justify-content-end
+                    = render 'shared/action_buttons', edit_url: edit_category_dataset_path(@category, dataset), delete_url: category_dataset_path(@category, dataset), object: dataset
+
+    - if @pagy.pages > 1
+      .pagy-wrapper.justify-content-lg-end.justify-content-center
+        != pagy_bootstrap_compact_nav(@pagy)
+
+= render "shared/modal_confirm"

@@ -1,0 +1,17 @@
+km:
+  category:
+    code: កូដ
+    name_en: ឈ្មោះជាភាសាអង់គ្លេស
+    name_km: ឈ្មោះជាភាសាខ្មែរ
+    hierarchy: ឋានានុក្រម
+    categories: ប្រភេទសំណុំទិន្នន័យ
+    category: ប្រភេទសំណុំទិន្នន័យ
+    new_category: ប្រភេទសំណុំទិន្នន័យថ្មី
+    edit_category: កែតម្រូវប្រភេទសំណុំទិន្នន័យ
+    are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបប្រភេទសំណុំទិន្នន័យ <b>%{name}</b> នេះមែនទេ?
+    province: ខេត្ត
+    district: ស្រុក
+    commune: ឃុំ
+    dataset: សំណុំទិន្នន័យ
+    category_name: ឈ្មោះប្រភេទសំណុំទិន្នន័យ
+    manage_dataset: គ្រប់គ្រងសំណុំទិន្នន័យ

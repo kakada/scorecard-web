@@ -1,0 +1,4 @@
+$('#confirmModal .title').html("<%= t('category.categories') %>");
+$('#confirmModal .modal-body').html("<%= t('category.are_you_sure_to_delete', name: @dataset.name).html_safe %>");
+$("#confirmModal .btn-yes").attr('href', "<%= category_dataset_path(@category, @dataset) %>");
+$("#confirmModal").modal("show");

@@ -1,0 +1,23 @@
+.w-50.view-center
+  = simple_form_for @category do |f|
+    = f.input :code, label: t('category.code')
+    = f.input :name_en, label: t('category.name_en')
+    = f.input :name_km, label: t('category.name_km')
+
+    / Nested checkbox
+    .form-group.hierarchy{"data-label" => t('category.category_name')}
+      %label
+        = t('category.hierarchy')
+        %abbr{title: "required"} *
+        %span.live-label
+          = "(#{@category.hierarchy_display})" if @category.hierarchy.present?
+      %input{ type: :hidden, name: 'category[hierarchy][]'}
+      - steps.each do |step|
+        = render 'hierarchy', step: step
+
+      - if error_message = f.object.errors.messages[:hierarchy].presence
+        .d-block.invalid-feedback= "#{t('category.hierarchy')} #{error_message.join('')}"
+
+    .actions
+      = link_to t('shared.cancel'), categories_path, class: 'btn btn-secondary'
+      = f.submit t('shared.save'), class: 'btn btn-primary'

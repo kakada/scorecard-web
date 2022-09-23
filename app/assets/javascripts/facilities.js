@@ -14,7 +14,7 @@ CW.FacilitiesNew = (() => {
   function onSwitchHasChild() {
     $("[name='facility[has_child]']").on("change", (e) => {
       let hasChild = !!$("[name='facility[has_child]']:checked").length;
-      $("#facility_dataset").attr("disabled", !hasChild);
+      $("#facility_category_id").attr("disabled", !hasChild);
     })
   }
 

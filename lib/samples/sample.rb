@@ -10,6 +10,8 @@ require_relative "program"
 require_relative "pdf_template"
 require_relative "primary_school"
 require_relative "location"
+require_relative "category"
+require_relative "dataset"
 
 require_relative "local_ngo"
 require_relative "caf"

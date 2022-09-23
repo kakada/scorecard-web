@@ -1,0 +1,17 @@
+en:
+  category:
+    code: Code
+    name_en: Name in English
+    name_km: Name in Khmer
+    hierarchy: Hierarchy
+    categories: Category
+    category: Category
+    new_category: New Category
+    edit_category: Edit Category
+    are_you_sure_to_delete: Are you sure to delete the category <b>%{name}</b>?
+    province: Province
+    district: District
+    commune: Commune
+    dataset: Dataset
+    category_name: Category Name
+    manage_dataset: Manage Dataset

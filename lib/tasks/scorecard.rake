@@ -41,4 +41,13 @@ namespace :scorecard do
       scorecard.update_column(:progress, "in_review") if scorecard.submitted_at.present? && scorecard.completed_at.blank?
     end
   end
+
+  desc "migrate to have dataset_id from primary school code"
+  task migrate_to_have_dataset: :environment do
+    Scorecard.where.not(primary_school_code: nil).each do |scorecard|
+      dataset = Dataset.find_by code: scorecard.primary_school.code
+
+      scorecard.update_column(:dataset_id, dataset.id)
+    end
+  end
 end

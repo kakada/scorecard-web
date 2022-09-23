@@ -18,8 +18,8 @@
               %span
 
           .form-group.flex-1
-            - dataset_error = f.object.errors[:dataset]
-            = f.select :dataset, Facility::DATASETS.pluck(:"name_#{I18n.locale}", :code), {:include_blank => true}, { class: ['form-control custom-select', ('is-invalid' if dataset_error.present?)], disabled: !f.object.has_child }
+            - dataset_error = f.object.errors[:category_id]
+            = f.select :category_id, Category.pluck(:"name_#{I18n.locale}", :id), {:include_blank => true}, { class: ['form-control custom-select', ('is-invalid' if dataset_error.present?)], disabled: !f.object.has_child }
             .invalid-feedback.d-block= dataset_error.join(';')
 
     .actions

@@ -51,6 +51,7 @@
 #  number_of_anonymous       :integer
 #  device_id                 :string
 #  submitter_id              :integer
+#  dataset_id                :uuid
 #
 require "rails_helper"
 
