@@ -1,0 +1,41 @@
+= render "shared/page_title", title: t("category.categories"), url: new_category_path, label: t('shared.add_new', name: t("category.category"))
+
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @categories, url: new_category_path, label: t('shared.add_new', name: t("category.category")) }
+
+    - if @categories.present?
+      = render "shared/pagination_title", objects: @categories, label: t('shared.add_new', name: t("category.category"))
+
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
+            %tr
+              %th= sortable "code", t('category.code')
+              %th= sortable "name_en", t('category.name_en')
+              %th= sortable "name_km", t('category.name_km')
+              %th= t('category.hierarchy')
+              %th= sortable "created_at", t('shared.created_at')
+              %th= sortable "updated_at", t('shared.updated_at')
+              %th
+          %tbody
+            - @categories.each do |category|
+              %tr
+                %td= category.code
+                %td= category.name_en
+                %td= category.name_km
+                %td= category.hierarchy_display
+                %td= timeago(category.created_at).html_safe
+                %td= timeago(category.updated_at).html_safe
+                %td
+                  .d-flex.justify-content-end
+                    = link_to category_datasets_path(category), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('category.manage_dataset') } do
+                      %i.fas.fa-fw.fa-solid.fa-database
+
+                    = render 'shared/action_buttons', edit_url: edit_category_path(category), delete_url: category_path(category), object: category
+
+    - if @pagy.pages > 1
+      .pagy-wrapper.justify-content-lg-end.justify-content-center
+        != pagy_bootstrap_compact_nav(@pagy)
+
+= render "shared/modal_confirm"

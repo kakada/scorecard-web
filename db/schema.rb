@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_04_110316) do
+ActiveRecord::Schema.define(version: 2022_09_23_043114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 2022_08_04_110316) do
   create_table "cafs_scorecard_knowledges", force: :cascade do |t|
     t.integer "caf_id"
     t.uuid "scorecard_knowledge_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.string "name_en"
+    t.string "name_km"
+    t.string "hierarchy"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -109,6 +118,18 @@ ActiveRecord::Schema.define(version: 2022_08_04_110316) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "datasets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.string "name_en"
+    t.string "name_km"
+    t.string "category_id"
+    t.string "province_id"
+    t.string "district_id"
+    t.string "commune_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "educational_backgrounds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
@@ -139,6 +160,7 @@ ActiveRecord::Schema.define(version: 2022_08_04_110316) do
     t.string "dataset"
     t.boolean "default", default: false
     t.string "name_km"
+    t.uuid "category_id"
     t.index ["lft"], name: "index_facilities_on_lft"
     t.index ["parent_id"], name: "index_facilities_on_parent_id"
     t.index ["rgt"], name: "index_facilities_on_rgt"
@@ -508,6 +530,7 @@ ActiveRecord::Schema.define(version: 2022_08_04_110316) do
     t.integer "number_of_anonymous"
     t.string "device_id"
     t.integer "submitter_id"
+    t.uuid "dataset_id"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end

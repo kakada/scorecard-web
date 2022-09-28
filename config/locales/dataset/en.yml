@@ -1,0 +1,13 @@
+en:
+  dataset:
+    datasets: Datasets
+    dataset: Dataset
+    code: Code
+    name_en: Name in English
+    name_km: Name in Khmer
+    address: Address
+    new_dataset: New Dataset
+    edit_dataset: Edit Dataset
+    province: Province
+    district: District
+    commune: Commune

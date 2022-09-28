@@ -1,0 +1,8 @@
+%ul
+  %li
+    %input.option{ type: :checkbox, name: "category[hierarchy][]", id: step[:name], checked: @category.hierarchy.include?(step[:name]), value: step[:name] }
+
+    %label{ for: step[:name], class: step[:name] }= t("category.#{step[:name]}")
+
+    - step[:children].each do |st|
+      = render "hierarchy", step: st

@@ -50,6 +50,12 @@
           %i.fas.fa-fw.fa-wrench
           %span= t('sidebar.settings')
 
+    - if policy(Category).index?
+      %li.nav-item{ class: css_active_class('categories') }
+        %a.nav-link{:href => categories_path}
+          %i.fas.fa-solid.fa-database
+          %span= t('sidebar.categories')
+
     - if policy(ActivityLog).index?
       %li.nav-item{ class: css_active_class('activity_logs') }
         %a.nav-link{:href => activity_logs_path}

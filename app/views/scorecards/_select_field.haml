@@ -7,16 +7,18 @@
 - select_populate_on_load ||= false
 - select_collection_label_method ||= "name_#{I18n.locale}"
 - select_allow_none ||= false
+- label ||= ""
+- select_collection_value_method ||= "id"
 
 .form-group
   = f.label(field_name) do
-    = t("scorecard.#{select_id}")
+    %span.title= label.presence || t("scorecard.#{select_id}")
     %abbr{title: "required"} *
   = f.hidden_field(field_name)
 
   - if select_populate_on_load
-    = f.select(field_name, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_target => select_target, :pumi_select_collection_url => select_collection_url, :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => select_collection_label_method, :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: ["form-control custom-select #{select_id}", ('is-invalid' if errors.present?)]})
+    = f.select(field_name, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_target => select_target, :pumi_select_collection_url => select_collection_url, :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => select_collection_label_method, :pumi_select_collection_value_method => select_collection_value_method, :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: ["form-control custom-select #{select_id}", ('is-invalid' if errors.present?)]})
   - else
-    = f.select(field_name, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => select_id, :pumi_select_target => select_target, :pumi_select_collection_url => select_collection_url, :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => select_collection_label_method, :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "##{select_id}", :pumi_select_has_hidden_value => true, :pumi_select_allow_none => select_allow_none}, class: ["form-control custom-select #{select_id}", ('is-invalid' if errors.present?)]})
+    = f.select(field_name, [], {:include_blank => t('shared.please_select')}, {:data => {:pumi_select_id => select_id, :pumi_select_target => select_target, :pumi_select_collection_url => select_collection_url, :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => select_collection_label_method, :pumi_select_collection_value_method => select_collection_value_method, :pumi_select_disabled_target => "##{select_id}", :pumi_select_has_hidden_value => true, :pumi_select_allow_none => select_allow_none}, class: ["form-control custom-select #{select_id}", ('is-invalid' if errors.present?)]})
 
   .invalid-feedback.d-block= errors.join(';')

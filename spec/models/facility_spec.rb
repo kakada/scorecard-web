@@ -18,6 +18,7 @@
 #  dataset        :string
 #  default        :boolean          default(FALSE)
 #  name_km        :string
+#  category_id    :uuid
 #
 require "rails_helper"
 

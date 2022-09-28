@@ -14,7 +14,7 @@ module Samples
         facility.name_km = data[2]
         facility.parent_id = program.facilities.find_by(code: data[3]).id if data[3].present?
         facility.default = data[4]
-        facility.dataset = data[5]
+        facility.category_id = ::Category.find_by(code: data[5]).id if data[5].present?
         facility.save
       end
     end

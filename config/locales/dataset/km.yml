@@ -1,0 +1,13 @@
+km:
+  dataset:
+    datasets: សំណុំទិន្នន័យ
+    dataset: សំណុំទិន្នន័យ
+    code: កូដ
+    name_en: ឈ្មោះជាភាសាអង់គ្លេស
+    name_km: ឈ្មោះជាភាសាខ្មែរ
+    address: អាស័យដ្ឋាន
+    new_dataset: សំណុំទិន្នន័យថ្មី
+    edit_dataset: កែតម្រូវសំណុំទិន្នន័យ
+    province: ខេត្ត
+    district: ស្រុក
+    commune: ឃុំ

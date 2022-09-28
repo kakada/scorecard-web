@@ -51,6 +51,7 @@
 #  number_of_anonymous       :integer
 #  device_id                 :string
 #  submitter_id              :integer
+#  dataset_id                :uuid
 #
 class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :facility_id, :scorecard_type,

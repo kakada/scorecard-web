@@ -38,8 +38,8 @@ module Samples
         number_of_female = rand(1...number_of_participant)
         conducted_date = Date.today
         facility = ::Facility.where.not(parent_id: nil).sample
-        primary_school = ::PrimarySchool.all.sample if facility.dataset.present?
-        commune = primary_school.present? ? ::Pumi::Commune.find_by_id(primary_school.commune_id) : ::Pumi::Commune.all.sample
+        dataset = facility.category.datasets.sample if facility.category.present?
+        commune = dataset.present? ? ::Pumi::Commune.find_by_id(dataset.commune_id) : ::Pumi::Commune.all.sample
         local_ngo = ::LocalNgo.all.sample
 
         ::Scorecard.create({
@@ -50,7 +50,7 @@ module Samples
           commune_id: commune.id,
           facility_id: facility.id,
           unit_type_id: facility.parent_id,
-          primary_school_code: primary_school.try(:code),
+          dataset_id: dataset.try(:id),
           number_of_caf: number_of_caf,
           number_of_participant: number_of_participant,
           number_of_female: number_of_female,
