@@ -15,6 +15,7 @@
               %th= sortable "name_en", t('category.name_en')
               %th= sortable "name_km", t('category.name_km')
               %th= t('category.hierarchy')
+              %th= t('category.number_of_record')
               %th= sortable "created_at", t('shared.created_at')
               %th= sortable "updated_at", t('shared.updated_at')
               %th
@@ -25,6 +26,7 @@
                 %td= category.name_en
                 %td= category.name_km
                 %td= category.hierarchy_display
+                %td= category.datasets.length
                 %td= timeago(category.created_at).html_safe
                 %td= timeago(category.updated_at).html_safe
                 %td
