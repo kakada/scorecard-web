@@ -15,3 +15,4 @@ en:
     dataset: Dataset
     category_name: Category Name
     manage_dataset: Manage Dataset
+    number_of_record: "# of records"

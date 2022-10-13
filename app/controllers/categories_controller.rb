@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pagy, @categories = pagy(authorize Category.order("#{sort_column} #{sort_direction}"))
+    @pagy, @categories = pagy(authorize Category.order("#{sort_column} #{sort_direction}").includes(:datasets))
   end
 
   def show
