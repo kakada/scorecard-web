@@ -35,7 +35,7 @@ module PdfTemplates
     end
 
     def scorecard_type
-      I18n.t("scorecard.#{scorecard.scorecard_type}")
+      scorecard.t_scorecard_type
     end
   end
 end

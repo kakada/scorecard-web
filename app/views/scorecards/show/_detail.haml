@@ -8,7 +8,7 @@
 
 .row
   %label.col-sm-4.col-form-label= t("scorecard.scorecard_type")
-  %label.col-sm-8.col-form-label= " : " + t("scorecard.#{@scorecard.scorecard_type}")
+  %label.col-sm-8.col-form-label= " : #{@scorecard.t_scorecard_type}"
 
 .row
   %label.col-sm-4.col-form-label= t("scorecard.facility")

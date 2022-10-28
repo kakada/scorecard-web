@@ -37,7 +37,7 @@ RSpec.describe Dataset, type: :model do
     end
 
     context "hierarchy has district" do
-      let!(:category) { build(:category, hierarchy: ["province", "district"])}
+      let!(:category) { build(:category, hierarchy: ["province", "district"]) }
       subject { described_class.new(category: category) }
 
       it { is_expected.to validate_presence_of(:district_id) }

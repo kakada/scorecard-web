@@ -59,7 +59,8 @@ class ScorecardSerializer < ActiveModel::Serializer
              :number_of_caf, :number_of_participant, :number_of_female,
              :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
              :planned_start_date, :planned_end_date, :status, :program_uuid,
-             :program_id, :local_ngo_id, :local_ngo_name, :province, :district, :commune, :progress
+             :program_id, :local_ngo_id, :local_ngo_name, :province, :district, :commune, :progress,
+             :program_scorecard_type
 
   belongs_to :facility
   belongs_to :primary_school
@@ -74,5 +75,11 @@ class ScorecardSerializer < ActiveModel::Serializer
 
   def program_uuid
     object.program.uuid
+  end
+
+  def program_scorecard_type
+    return {} unless object.program_scorecard_type.present?
+
+    ProgramScorecardTypeSerializer.new(object.program_scorecard_type)
   end
 end

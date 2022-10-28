@@ -22,7 +22,7 @@
     .d-lg-flex.mb-2
       = render 'scorecards/index/filter_province'
 
-      = select_tag :scorecard_type, options_for_select(Scorecard.t_scorecard_types, params[:scorecard_type]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_scorecard_type")
+      = select_tag :scorecard_type, options_for_select(program_scorecard_types, params[:scorecard_type]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_scorecard_type")
 
       - if current_program.present?
         = render 'scorecards/index/filter_year'

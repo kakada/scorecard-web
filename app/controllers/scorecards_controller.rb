@@ -10,7 +10,7 @@ class ScorecardsController < ApplicationController
           policy_scope(Scorecard.filter(filter_params)
             .order("#{sort_column} #{sort_direction}")
             .includes(
-              :facility, :local_ngo, :request_changes, :primary_school, :scorecard_progresses
+              :facility, :local_ngo, :request_changes, :primary_school, :scorecard_progresses, program: :program_scorecard_types
             )
           )
         )

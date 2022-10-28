@@ -1,6 +1,6 @@
 %tr
   %td
-    .line-badge{ class: scorecard.scorecard_type, 'data-toggle' => 'tooltip', title: t("scorecard.#{scorecard.scorecard_type}") }
+    .line-badge{ class: scorecard.scorecard_type, 'data-toggle' => 'tooltip', title: scorecard.t_scorecard_type }
       = @pagy.from + index
 
   %td

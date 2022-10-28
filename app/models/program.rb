@@ -38,6 +38,7 @@ class Program < ApplicationRecord
   has_one  :telegram_bot, dependent: :destroy
   has_one  :gf_dashboard
   has_many :scorecard_batches
+  has_many :program_scorecard_types
 
   validates :name, presence: true, uniqueness: true
   validates :shortcut_name, presence: true, uniqueness: true
@@ -56,6 +57,7 @@ class Program < ApplicationRecord
   accepts_nested_attributes_for :contacts, allow_destroy: true
   accepts_nested_attributes_for :telegram_bot, allow_destroy: true
   accepts_nested_attributes_for :data_publication, allow_destroy: true
+  accepts_nested_attributes_for :program_scorecard_types, allow_destroy: true
 
   delegate :enabled, to: :telegram_bot, prefix: :telegram_bot, allow_nil: true
 
@@ -74,6 +76,13 @@ class Program < ApplicationRecord
 
     self.uuid = SecureRandom.uuid[0..7]
     secure_uuid
+  end
+
+  def create_program_scorecard_types
+    ProgramScorecardType::TYPES.each do |ty|
+      scorecard_type = program_scorecard_types.find_or_initialize_by(code: ty[:code])
+      scorecard_type.update(ty)
+    end
   end
 
   private

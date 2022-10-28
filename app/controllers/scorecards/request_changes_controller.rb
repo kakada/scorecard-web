@@ -51,7 +51,7 @@ module Scorecards
 
       def request_change_params
         params.require(:request_change).permit(:year, :scorecard_type, :changed_reason,
-          :province_id, :district_id, :commune_id, :primary_school_code
+          :province_id, :district_id, :commune_id, :primary_school_code, :dataset_id
         ).merge({ proposer_id: current_user.id })
       end
 
