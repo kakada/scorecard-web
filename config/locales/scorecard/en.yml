@@ -135,10 +135,6 @@ en:
     name: Name
     gender: Gender
     age: Age
-    youth: Youth
-    disability: Disability
-    id_poor: ID Poor
-    minority: Minority
     scorecard_is_checked: "The scorecard %{uuid} is checked, so you can download and share it now!"
     completed_scorecard: Completed Scorecard
     no_request_change: No scorecard request change
@@ -156,3 +152,9 @@ en:
     batch_import: Batch Import
     import_history: Import History
     anonymous: Anonymous
+    female_shortcut: F
+    minority_shortcut: EM
+    disability_shortcut: PwD
+    poor_card_shortcut:  IdP
+    youth_shortcut: Y
+    note: Note

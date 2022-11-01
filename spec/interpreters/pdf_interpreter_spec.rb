@@ -50,7 +50,7 @@ RSpec.describe PdfTemplateInterpreter do
 
       let(:t_body) {
         str = "<tr>"
-        str += "<td>#{voting_indicator.indicator.name}</td>"
+        str += "<td>#{voting_indicator.indicator.name}<br/></td>"
         str += "<td class='text-center'>មិនពេញចិត្តខ្លាំង (1)</td>"
         str += "<td><ul><li>#{strength_indicator_activity.content} </li></ul></td>"
         str += "<td><ul><li>#{weakness_indicator_activity.content} </li></ul></td>"
@@ -58,11 +58,21 @@ RSpec.describe PdfTemplateInterpreter do
         str + "</tr>"
       }
 
+      let(:shortcut_note) {
+        "<div>" +
+          "#{I18n.t('scorecard.note')}: " +
+          %w(female minority disability poor_card youth).map { |profile| I18n.t("scorecard.#{profile}_shortcut") + ": " + I18n.t("scorecard.#{profile}") }.join(", ") +
+        "</div>"
+      }
+
       let(:html) {
-        str = "<div><table class='table table-bordered'>"
-        str += "<thead>#{t_head}</thead>"
-        str += "<tbody>#{t_body}</tbody>"
-        str + "</table></div>"
+        "<div>" +
+          "<table class='table table-bordered'>" +
+            "<thead>#{t_head}</thead>" +
+            "<tbody>#{t_body}</tbody>" +
+          "</table>" +
+          shortcut_note +
+        "</div>"
       }
 
       before { I18n.locale = :km }

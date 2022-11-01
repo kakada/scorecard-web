@@ -18,7 +18,7 @@ km:
     year: ឆ្នាំ
     indicator_development: ការអភិវឌ្ឍន៍លក្ខណៈវិនិច្ឆ័យ
     create_successfully: បង្កើតបានជោគជ័យ
-    number_of_disability: ចំនួនជនពិការ
+    number_of_disability: ចំនួនជនមានពិការភាព
     number_of_ethnic_minority: ចំនួនជនជាតិដើម
     number_of_youth: ចំនួនយុវជន
     number_of_id_poor: ចំនួនអ្នកមានបណ្ណក្រីក្រ
@@ -55,7 +55,7 @@ km:
     poor_card: មានប័ណ្ណក្រីក្រ
     minority: ជនជាតិដើម
     youth: យុវជន
-    disability: ពិការភាព
+    disability: ជនមានពិការភាព
     female: ស្រី
     selected_indicators: លក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស
     planned: នឹងត្រូវអនុវត្ត
@@ -135,10 +135,6 @@ km:
     name: ឈ្មោះ
     gender: ភេទ
     age: អាយុ
-    youth: យុវជន
-    disability: ពិការភាព
-    id_poor: ប័ណ្ណក្រីក្រ
-    minority: ជនជាតិដើម
     scorecard_is_checked: "ប័ណ្ណដាក់ពិន្ទុ %{uuid} នេះត្រួវបានត្រួតពិនិត្យរួចរាល់ហើយ ដូចនេះអ្នកអាចទាញយកនិងចែករំលែកបាន!"
     completed_scorecard: ប័ណ្ណពិន្ទុត្រូវបានត្រួតពិនិត្យរួចរាល់
     no_request_change: មិនមានការស្នើរធ្វើការផ្លាស់ប្តូរព័ត៌មានប័ណ្ណដាក់ពិន្ទុទេ
@@ -156,3 +152,9 @@ km:
     batch_import: បញ្ចូលប័ណ្ណដាក់ពិន្ទុតាម Excel
     import_history: ប្រវត្តិនៃការបញ្ចូលប័ណ្ណដាក់ពិន្ទុ
     anonymous: អនាមិក
+    female_shortcut: ស្រី
+    minority_shortcut: ជ.ភ.ត
+    disability_shortcut: ជ.ព
+    poor_card_shortcut:  ប.ក
+    youth_shortcut: យ.វ
+    note: ចំណាំ

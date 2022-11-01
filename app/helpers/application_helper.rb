@@ -108,9 +108,7 @@ module ApplicationHelper
 
       tooltip_title = t("scorecard.#{field}")
       str = "<span data-toggle='tooltip' data-placement='top' title=#{tooltip_title}>"
-      str += field == "female" ? "<i class='fas fa-venus'></i>: " : "<span class='text-uppercase'>#{field[0]}: </span>"
-      str += "</span>"
-      str += "<span>#{value}</span>"
-      str
+      str += I18n.t("scorecard.#{field}_shortcut") + ": #{value}"
+      str + "</span>"
     end
 end
