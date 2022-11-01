@@ -25,7 +25,7 @@ module ExcelBuilders
         I18n.t("excel.gender"),
         I18n.t("excel.youth"),
         I18n.t("excel.disability"),
-        I18n.t("excel.id_poor"),
+        I18n.t("excel.poor_card"),
         I18n.t("excel.minority")
       ]
     end

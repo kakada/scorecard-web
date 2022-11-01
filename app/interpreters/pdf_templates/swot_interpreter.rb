@@ -4,6 +4,7 @@ module PdfTemplates
   class SwotInterpreter
     def initialize(scorecard)
       @scorecard = scorecard
+      @proposed_indicators = Scorecards::ProposedCriteria.new(@scorecard).criterias
     end
 
     def load(field)
@@ -11,35 +12,54 @@ module PdfTemplates
     end
 
     def result_table
-      html = "<table class='table table-bordered'>"
-      html += "<thead>#{ build_result_header }</thead>"
-      html += "<tbody>#{ build_result_rows }</tbody>"
-      html + "</table>"
+      "<table class='table table-bordered'>" +
+        "<thead>#{ render_head }</thead>" +
+        "<tbody>#{ render_body }</tbody>" +
+      "</table>" +
+      render_shortcut_note
     end
 
     private
-      def build_result_header
+      def render_head
         columns = %w(indicator average_score strength weakness suggested_action)
-
-        headers = columns.map { |col|
-          "<th class='text-center'>" + I18n.t("scorecard.#{col}") + "</th>"
-        }.join("")
+        headers = columns.map { |col| "<th class='text-center'>" + I18n.t("scorecard.#{col}") + "</th>" }.join("")
 
         "<tr>#{headers}</tr>"
       end
 
-      def build_result_rows
-        @scorecard.voting_indicators.map { |vi|
-          "<tr>#{ build_result_columns(vi) }</tr>"
-        }.join("")
+      def render_body
+        @scorecard.voting_indicators.map { |vi| "<tr>#{ render_each_row(vi) }</tr>" }.join("")
       end
 
-      def build_result_columns(voting_indicator)
-        str = "<td>#{voting_indicator.indicator.name}</td>"
-        str += build_column_median(voting_indicator.median)
-        str += build_list(voting_indicator.strength_indicator_activities)
-        str += build_list(voting_indicator.weakness_indicator_activities)
-        str + build_list(voting_indicator.suggested_indicator_activities)
+      def render_each_row(voting_indicator)
+        build_column_indicator_name(voting_indicator) +
+        build_column_median(voting_indicator.median) +
+        build_column_activity(voting_indicator.strength_indicator_activities) +
+        build_column_activity(voting_indicator.weakness_indicator_activities) +
+        build_column_activity(voting_indicator.suggested_indicator_activities)
+      end
+
+      def build_column_indicator_name(voting_indicator)
+        criteria = @proposed_indicators.select { |pi| pi["indicator"].uuid == voting_indicator.indicator_uuid }.first
+
+        "<td>" +
+          voting_indicator.indicator.name + "<br/>" +
+          participant_profiles.map { |field| participant_info(criteria, field) }.compact.join(", ") +
+        "</td>"
+      end
+
+      def participant_info(criteria, field)
+        return unless criteria.present?
+
+        value = criteria["#{field}_count"].to_i
+        I18n.t("scorecard.#{field}_shortcut") + ": #{value}" if value > 0
+      end
+
+      def render_shortcut_note
+        "<div>" +
+          "#{I18n.t('scorecard.note')}: " +
+          participant_profiles.map { |profile| I18n.t("scorecard.#{profile}_shortcut") + ": " + I18n.t("scorecard.#{profile}") }.join(", ") +
+        "</div>"
       end
 
       def build_column_median(median)
@@ -47,7 +67,7 @@ module PdfTemplates
         "<td class='text-center'>#{str}</td>"
       end
 
-      def build_list(indicator_activities)
+      def build_column_activity(indicator_activities)
         str = "<td><ul>"
         str += indicator_activities.map { |indicator_activity|
           selected = indicator_activity.selected? ? "(#{I18n.t('indicator.selected')})" : ""
@@ -55,6 +75,10 @@ module PdfTemplates
         }.join("")
 
         str + "</ul></td>"
+      end
+
+      def participant_profiles
+        @participant_profiles ||= %w(female minority disability poor_card youth)
       end
   end
 end
