@@ -123,7 +123,7 @@ class Scorecard < ApplicationRecord
   validates :year, presence: true
   validates :province_id, presence: true
   validates :district_id, presence: true
-  validates :commune_id, presence: true
+  validates :commune_id, presence: true, if: -> { facility.try(:category_id).nil? || facility.category.hierarchy.include?("commune") }
   validates :unit_type_id, presence: true
   validates :facility_id, presence: true
   validates :scorecard_type, presence: true, inclusion: { in: scorecard_types.keys }
