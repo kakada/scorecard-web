@@ -57,6 +57,8 @@ class ProgramsController < ApplicationController
 
   private
     def program_params
-      params.require(:program).permit(:name, :shortcut_name)
+      params.require(:program).permit(:name, :shortcut_name,
+        program_scorecard_types_attributes: [:id, :code, :name_en, :name_km]
+      )
     end
 end

@@ -20,6 +20,7 @@
 #  resolved_date       :datetime
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  dataset_id          :uuid
 #
 require "rails_helper"
 

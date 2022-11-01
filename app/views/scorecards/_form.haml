@@ -5,7 +5,7 @@
     = f.input :year, label: t('scorecard.year'), collection: [current_year + 1, current_year, current_year - 1], input_html: { class: 'custom-select'}, selected: f.object.year || current_year
 
     = render "unit_type_and_facility_fields", f: f
-    = f.input :scorecard_type, label: t('scorecard.scorecard_type'), collection: Scorecard::SCORECARD_TYPES, input_html: { class: 'custom-select'}
+    = f.input :scorecard_type, label: t('scorecard.scorecard_type'), collection: program_scorecard_types, input_html: { class: 'custom-select'}
 
     = render "location_fields", f: f
     = render "shared/date_field", f: f, field: :planned_start_date, label: t("scorecard.planned_start_date"), required: true

@@ -167,6 +167,14 @@ class Scorecard < ApplicationRecord
     self.scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
   end
 
+  def t_scorecard_type
+    program_scorecard_type.try(:name) || I18n.t("scorecard.#{scorecard_type}")
+  end
+
+  def program_scorecard_type
+    @program_scorecard_type ||= program.program_scorecard_types.select { |ty| ty.code == scorecard_type }.first
+  end
+
   private
     def secure_uuid
       self.uuid ||= six_digit_rand

@@ -1,4 +1,4 @@
-.w-50.view-center
+.w-75.view-center
   = simple_form_for @program do |f|
     = f.input :name, label: t('program.name')
 
@@ -13,6 +13,32 @@
         %span.short-name-count 0
         %span /
         %span 10
+
+    %fieldset.p-2.border
+      %legend.w-auto= t('program.scorecard_type')
+      %table.w-100
+        %thead
+          %tr
+            %th= t('program.code')
+            %th
+              = t('program.name_en')
+              %abbr{title: 'required'} *
+            %th
+              = t('program.name_km')
+              %abbr{title: 'required'} *
+        %tbody
+          - ProgramScorecardType::TYPES.each do |type|
+            %tr
+              - tt = f.object.program_scorecard_types.select {|t| t.code == type[:code] }.first || f.object.program_scorecard_types.new(type)
+
+              = f.simple_fields_for :program_scorecard_types, tt do |ff|
+                %td
+                  = ff.input :code, as: :hidden
+                  .mb-3= ff.object.code
+                %td
+                  = ff.input :name_en, label: false, wraper_html: {style: 'margin-bottom: 0'}
+                %td
+                  = ff.input :name_km, label: false
 
     .actions
       = link_to t('shared.cancel'), programs_path, class: 'btn btn-secondary'

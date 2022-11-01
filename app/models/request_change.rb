@@ -20,6 +20,7 @@
 #  resolved_date       :datetime
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  dataset_id          :uuid
 #
 class RequestChange < ApplicationRecord
   include RequestChanges::CallbackNotification
@@ -71,6 +72,7 @@ class RequestChange < ApplicationRecord
       params[:district_id] = district_id if district_id.present? && scorecard.district_id != district_id
       params[:commune_id] = commune_id if commune_id.present? && scorecard.commune_id != commune_id
       params[:primary_school_code] = primary_school_code if primary_school_code.present? && scorecard.primary_school_code != primary_school_code
+      params[:dataset_id] = dataset_id if dataset_id.present? && scorecard.dataset_id != dataset_id
       params
     end
 
