@@ -64,6 +64,7 @@ class ScorecardSerializer < ActiveModel::Serializer
 
   belongs_to :facility
   belongs_to :primary_school
+  belongs_to :dataset
 
   def unit_type_name
     object.unit_type.name
