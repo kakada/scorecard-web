@@ -15,7 +15,7 @@ km:
     number_of_participant_as_male: ប្រុស
     number_of_participant_as_other: ចំនួនអ្នកចូលរួមដែលមានភេទផ្សេងៗ
     number_of_youth: យុវជន (15-30)
-    number_of_minority: ជនជាតិដើម
+    number_of_minority: ជនជាតិភាគតិច
     number_of_disability: ជនមានពិការភាព
     number_of_id_poor: មានប័ណ្ណក្រីក្រ
     number_of_raised_indicator: ចំនួនលក្ខណៈវិនិច្ឆ័យដែលស្នើឡើង
@@ -29,7 +29,7 @@ km:
     youth: យុវជន
     disability: ពិការភាព
     id_poor: ប័ណ្ណក្រីក្រ
-    minority: ជនជាតិដើម
+    minority: ជនជាតិភាគតិច
     # Indicator
     indicator_id: លេខសម្គាល់លក្ខណៈវិនិច្ឆ័យ
     indicator_name: ឈ្មោះលក្ខណៈវិនិច្ឆ័យ

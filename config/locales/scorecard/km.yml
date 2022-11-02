@@ -19,7 +19,7 @@ km:
     indicator_development: ការអភិវឌ្ឍន៍លក្ខណៈវិនិច្ឆ័យ
     create_successfully: បង្កើតបានជោគជ័យ
     number_of_disability: ចំនួនជនមានពិការភាព
-    number_of_ethnic_minority: ចំនួនជនជាតិដើម
+    number_of_ethnic_minority: ចំនួនជនជាតិភាគតិច
     number_of_youth: ចំនួនយុវជន
     number_of_id_poor: ចំនួនអ្នកមានបណ្ណក្រីក្រ
     proposed_indicator: លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
@@ -53,7 +53,7 @@ km:
     number_of_selected_indicator: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស"
     participant: អ្នកចូលរួម
     poor_card: មានប័ណ្ណក្រីក្រ
-    minority: ជនជាតិដើម
+    minority: ជនជាតិភាគតិច
     youth: យុវជន
     disability: ជនមានពិការភាព
     female: ស្រី
@@ -152,9 +152,14 @@ km:
     batch_import: បញ្ចូលប័ណ្ណដាក់ពិន្ទុតាម Excel
     import_history: ប្រវត្តិនៃការបញ្ចូលប័ណ្ណដាក់ពិន្ទុ
     anonymous: អនាមិក
-    female_shortcut: ស្រី
+    female_shortcut: ស
     minority_shortcut: ជ.ភ.ត
     disability_shortcut: ជ.ព
     poor_card_shortcut:  ប.ក
     youth_shortcut: យ.វ
+    female_fullword: ស្ត្រី
+    minority_fullword: ជនជាតិភាគតិច
+    disability_fullword: ជនមានពិការភាព
+    poor_card_fullword:  មានប័ណ្ណក្រីក្រ
+    youth_fullword: យុវជន
     note: ចំណាំ

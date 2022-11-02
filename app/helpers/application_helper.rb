@@ -106,7 +106,7 @@ module ApplicationHelper
       value = criteria["#{field}_#{agg_function}"].to_i
       return unless value > 0
 
-      tooltip_title = t("scorecard.#{field}")
+      tooltip_title = t("scorecard.#{field}_fullword")
       str = "<span data-toggle='tooltip' data-placement='top' title=#{tooltip_title}>"
       str += I18n.t("scorecard.#{field}_shortcut") + ": #{value}"
       str + "</span>"

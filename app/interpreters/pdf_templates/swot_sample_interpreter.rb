@@ -7,14 +7,15 @@ module PdfTemplates
     end
 
     def result_table
-      html = "<table class='table table-bordered'>"
-      html += "<thead>#{ build_result_header }</thead>"
-      html += "<tbody>#{ build_result_rows }</tbody>"
-      html + "</table>"
+      "<table class='table table-bordered'>" +
+        "<thead>#{ render_head }</thead>" +
+        "<tbody>#{ render_body }</tbody>" +
+      "</table>" +
+      render_shortcut_note
     end
 
     private
-      def build_result_header
+      def render_head
         columns = %w(indicator average_score strength weakness suggested_action)
 
         headers = columns.map { |col|
@@ -24,11 +25,11 @@ module PdfTemplates
         "<tr>#{headers}</tr>"
       end
 
-      def build_result_rows
-        "<tr>#{ build_result_columns }</tr>"
+      def render_body
+        "<tr>#{ render_each_row }</tr>"
       end
 
-      def build_result_columns
+      def render_each_row
         columns = %w(name median strength weakness suggested_action)
         columns.map do |field|
           field_value = VotingIndicator.new[field]
@@ -44,6 +45,17 @@ module PdfTemplates
 
       def fill_in_value
         "&lt;#{ I18n.t('shared.fill_in') }&gt;"
+      end
+
+      def render_shortcut_note
+        "<div>" +
+          "#{I18n.t('scorecard.note')}: " +
+          participant_profiles.map { |profile| I18n.t("scorecard.#{profile}_shortcut") + ": " + I18n.t("scorecard.#{profile}_fullword") }.join(", ") +
+        "</div>"
+      end
+
+      def participant_profiles
+        @participant_profiles ||= %w(female minority disability poor_card youth)
       end
   end
 end
