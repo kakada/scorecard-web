@@ -40,25 +40,31 @@ module PdfTemplates
       end
 
       def build_column_indicator_name(voting_indicator)
-        criteria = @proposed_indicators.select { |pi| pi["indicator"].uuid == voting_indicator.indicator_uuid }.first
-
         "<td>" +
           voting_indicator.indicator.name + "<br/>" +
-          participant_profiles.map { |field| participant_info(criteria, field) }.compact.join(", ") +
+          render_participant_profiles(voting_indicator) +
         "</td>"
+      end
+
+      def render_participant_profiles(voting_indicator)
+        criteria = @proposed_indicators.select { |pi| pi["indicator"].uuid == voting_indicator.indicator_uuid }.first
+
+        str = participant_profiles.map { |field| participant_info(criteria, field) }.compact.join(", ")
+        str = "<span class='participant-profile'>#{str}</span>" if str.present?
+        str
       end
 
       def participant_info(criteria, field)
         return unless criteria.present?
 
         value = criteria["#{field}_count"].to_i
-        I18n.t("scorecard.#{field}_shortcut") + ": #{value}" if value > 0
+        I18n.t("scorecard.#{field}_shortcut") + ": #{value}" if value.positive?
       end
 
       def render_shortcut_note
         "<div>" +
           "#{I18n.t('scorecard.note')}: " +
-          participant_profiles.map { |profile| I18n.t("scorecard.#{profile}_shortcut") + ": " + I18n.t("scorecard.#{profile}") }.join(", ") +
+          participant_profiles.map { |profile| I18n.t("scorecard.#{profile}_shortcut") + ": " + I18n.t("scorecard.#{profile}_fullword") }.join(", ") +
         "</div>"
       end
 

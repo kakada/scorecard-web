@@ -61,7 +61,7 @@ RSpec.describe PdfTemplateInterpreter do
       let(:shortcut_note) {
         "<div>" +
           "#{I18n.t('scorecard.note')}: " +
-          %w(female minority disability poor_card youth).map { |profile| I18n.t("scorecard.#{profile}_shortcut") + ": " + I18n.t("scorecard.#{profile}") }.join(", ") +
+          %w(female minority disability poor_card youth).map { |profile| I18n.t("scorecard.#{profile}_shortcut") + ": " + I18n.t("scorecard.#{profile}_fullword") }.join(", ") +
         "</div>"
       }
 
