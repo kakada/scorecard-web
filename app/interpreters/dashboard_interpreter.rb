@@ -15,7 +15,7 @@ class DashboardInterpreter < Dashboards::BaseInterpreter
     %w(panel variable).each do |model|
       "Dashboards::#{model.camelcase}Interpreter".constantize.new(program, data).interpret
       rescue
-        Rails.logger.warn "Model #{model} is unknwon"
+        Rails.logger.warn "Model Dashboards::#{model.camelcase}Interpreter is unknwon"
     end
 
     data
