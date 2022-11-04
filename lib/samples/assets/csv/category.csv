@@ -1,4 +1,4 @@
 code,name_en,name_km,hierarchy
-D_PS,Primary School,បឋមសិក្សា,province|district|commune
-D_HC,Health Center,មណ្ឌលសុខភាព,province|district
-D_FA,Factory,រោងចក្រ,province|district|commune
+DS_PS,Primary School,បឋមសិក្សា,province|district|commune
+DS_HC,Health Center,មណ្ឌលសុខភាព,province|district
+DS_FA,Factory,រោងចក្រ,province|district|commune

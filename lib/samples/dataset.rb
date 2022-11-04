@@ -6,9 +6,9 @@ module Samples
   class Dataset < Base
     def self.load
       categories = [
-        { code: "D_PS", filename: "primary_schools.xlsx" },
-        { code: "D_HC", filename: "health_centers.xlsx" },
-        { code: "D_FA", filename: "factories.xlsx" }
+        { code: "DS_PS", filename: "primary_schools.xlsx" },
+        { code: "DS_HC", filename: "health_centers.xlsx" },
+        { code: "DS_FA", filename: "factories.xlsx" }
       ]
 
       categories.each do |cate|

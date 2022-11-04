@@ -46,7 +46,7 @@ RSpec.describe Dataset, type: :model do
 
   describe "validation presence of #commune_id" do
     context "hierarchy has no commune" do
-      let!(:category) { build(:category, hierarchy: ["province", "district"])}
+      let!(:category) { build(:category, hierarchy: ["province", "district"]) }
       subject { described_class.new(category: category) }
 
       it { is_expected.not_to validate_presence_of(:commune_id) }

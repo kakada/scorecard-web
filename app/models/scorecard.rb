@@ -128,7 +128,7 @@ class Scorecard < ApplicationRecord
   validates :facility_id, presence: true
   validates :scorecard_type, presence: true, inclusion: { in: scorecard_types.keys }
   validates :local_ngo_id, presence: true
-  validates :primary_school_code, presence: true, if: -> { facility.try(:dataset).present? }
+  validates :dataset_id, presence: true, if: -> { facility.try(:category_id).present? }
 
   validates :planned_start_date, presence: true
   validates :planned_end_date, presence: true, date: { after_or_equal_to: :planned_start_date }
@@ -140,7 +140,8 @@ class Scorecard < ApplicationRecord
   before_create :secure_uuid
   before_create :set_name
   before_create :set_published
-  before_save   :clear_primary_school_code, unless: -> { facility.try(:dataset).present? }
+  before_save   :clear_dataset_id, unless: -> { facility.try(:category_id).present? }
+  before_save   :set_primary_school_code
 
   after_commit  :create_submitted_progress, on: [:update], if: -> { saved_change_to_progress? && in_review? }
   after_commit  :create_completed_progress, on: [:update], if: -> { saved_change_to_progress? && completed? }
@@ -197,7 +198,8 @@ class Scorecard < ApplicationRecord
       self.published = program.data_publication.present? && !program.data_publication.stop_publish_data?
     end
 
-    def clear_primary_school_code
+    def clear_dataset_id
+      self.dataset_id = nil
       self.primary_school_code = nil
     end
 
@@ -207,5 +209,11 @@ class Scorecard < ApplicationRecord
 
     def create_completed_progress
       scorecard_progresses.create(status: STATUS_COMPLETED, user_id: completor_id)
+    end
+
+    def set_primary_school_code
+      return unless dataset_id.present? && facility.try(:category_code) == "DS_PS"
+
+      self.primary_school_code = PrimarySchool.find_by(code: dataset_code).try(:id)
     end
 end

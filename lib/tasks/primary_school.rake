@@ -25,11 +25,11 @@ namespace :primary_school do
     end
 
     def get_category
-      cate = Category.find_by(code: "D_PS")
+      cate = Category.find_by(code: "DS_PS")
       return cate if cate.present?
 
       Category.create(
-        code: "D_PS",
+        code: "DS_PS",
         name_en: "Primary school",
         name_km: "បឋមសិក្សា",
         hierarchy: ["province", "district", "commune"]

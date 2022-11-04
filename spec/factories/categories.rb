@@ -14,13 +14,13 @@
 #
 FactoryBot.define do
   factory :category do
-    code      { "D_PS" }
+    code      { "DS_PS" }
     name_en   { "Primary School" }
     name_km   { "បឋមសិក្សា" }
     hierarchy { ["province", "district", "commune"] }
 
     trait :health_center do
-      code      { "D_HC" }
+      code      { "DS_HC" }
       name_en   { "Health Center" }
       name_km   { "មណ្ឌលសុខភាព" }
       hierarchy { ["province", "district"] }

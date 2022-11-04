@@ -63,6 +63,8 @@ RSpec.describe Scorecard, type: :model do
   it { is_expected.to belong_to(:unit_type).class_name("Facility") }
   it { is_expected.to belong_to(:facility) }
   it { is_expected.to belong_to(:location).optional }
+  it { is_expected.to belong_to(:dataset).optional }
+  it { is_expected.to belong_to(:primary_school).optional }
 
   it { is_expected.to have_many(:facilitators) }
   it { is_expected.to have_many(:cafs).through(:facilitators) }
@@ -259,6 +261,64 @@ RSpec.describe Scorecard, type: :model do
     it "creates scorecard completed progress" do
       scorecard.update(progress: :completed, completor: completor)
       expect(scorecard.scorecard_progresses.last.status).to eq("completed")
+    end
+  end
+
+  describe "#before_save, set_primary_school_code" do
+    context "no dataset_id" do
+      subject { build(:scorecard, dataset_id: nil) }
+
+      it "doesn't set primary_school" do
+        subject.save
+
+        expect(subject.primary_school_code).to be_nil
+      end
+    end
+
+    context "has dataset_id but facility category is not a primary school" do
+      let!(:category) { create(:category, :health_center) }
+      let!(:dataset) { create(:dataset, category: category, code: "171405_1", name_en: "Toul", name_km: "Toul", commune_id: "171405", district_id: "1714", province_id: "17") }
+
+      subject { build(:scorecard, dataset_id: dataset.id) }
+
+      it "doesn't set primary_school" do
+        subject.save
+
+        expect(subject.primary_school_code).to be_nil
+      end
+    end
+
+    context "has dataset_id and facility category is a primary school" do
+      let!(:category) { create(:category) }
+      let!(:dataset) { create(:dataset, category: category, code: "171405_1", name_en: "Toul", name_km: "Toul", commune_id: "171405", district_id: "1714", province_id: "17") }
+      let!(:primary_school) { create(:primary_school, code: dataset.code) }
+      let!(:facility) { create(:facility, :with_parent, category: dataset.category) }
+
+      subject { build(:scorecard, dataset_id: dataset.id, facility: facility, unit_type: facility.parent) }
+
+      it "doesn't set primary_school" do
+        subject.save
+
+        expect(subject.primary_school_code).to eq(primary_school.id.to_s)
+      end
+    end
+  end
+
+  describe "#before_save, clear_dataset_id" do
+    let!(:category) { create(:category) }
+    let!(:dataset) { create(:dataset, category: category, code: "171405_1", name_en: "Toul", name_km: "Toul", commune_id: "171405", district_id: "1714", province_id: "17") }
+    let!(:primary_school) { create(:primary_school, code: dataset.code) }
+    let!(:facility) { create(:facility, :with_parent, category: dataset.category) }
+
+    subject { create(:scorecard, dataset_id: dataset.id, facility: facility, unit_type: facility.parent) }
+
+    before {
+      facility.update(category_id: nil)
+      subject.save
+    }
+
+    it "doesn't set primary_school" do
+      expect(subject.dataset_id).to be_nil
     end
   end
 end

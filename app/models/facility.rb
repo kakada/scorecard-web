@@ -40,7 +40,7 @@ class Facility < ApplicationRecord
   scope :only_children, -> { where.not(parent_id: nil) }
 
   # Delegation
-  delegate :name, to: :category, prefix: true, allow_nil: true
+  delegate :name, :code, to: :category, prefix: true, allow_nil: true
 
   DATASETS = [
     { code: "ps", name_en: "Primary School", name_km: "បឋមសិក្សា", dataset: "PrimarySchool" }
