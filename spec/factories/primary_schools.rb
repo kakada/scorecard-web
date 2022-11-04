@@ -20,5 +20,7 @@ FactoryBot.define do
     name_en    { FFaker::Name.name }
     name_km    { FFaker::Name.name }
     commune_id { Pumi::Commune.all.sample.id }
+    district_id { commune_id[0..3] }
+    province_id { commune_id[0..1] }
   end
 end

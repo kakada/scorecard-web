@@ -60,11 +60,11 @@ module Dashboards
       end
 
       def self_assessment
-        @self_assessment ||= @program.program_scorecard_types.find_by(code: 'self_assessment')
+        @self_assessment ||= @program.program_scorecard_types.find_by(code: "self_assessment")
       end
 
       def community_scorecard
-        @community_scorecard ||= @program.program_scorecard_types.find_by(code: 'community_scorecard')
+        @community_scorecard ||= @program.program_scorecard_types.find_by(code: "community_scorecard")
       end
   end
 end

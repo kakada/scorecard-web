@@ -9,6 +9,6 @@ namespace :facility do
 
   private
     def category
-      @category ||= Category.find_by(code: "D_PS")
+      @category ||= Category.find_by(code: "DS_PS")
     end
 end
