@@ -6,15 +6,15 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def create?
-    index?
+    user.system_admin?
   end
 
   def update?
-    index?
+    create?
   end
 
   def destroy?
-    index?
+    create?
   end
 
   class Scope < Scope

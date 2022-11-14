@@ -85,6 +85,10 @@ class Program < ApplicationRecord
     end
   end
 
+  def dataset_categories
+    @dataset_categories ||= Category.where(id: facilities.pluck(:category_id))
+  end
+
   private
     def create_default_language
       languages.create(code: "km", name_en: "Khmer", name_km: "ខ្មែរ")

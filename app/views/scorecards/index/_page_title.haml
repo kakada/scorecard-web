@@ -17,15 +17,16 @@
         %i.fas.fa-plus.fa-sm.text-white-50
         = t("scorecard.add_new")
 
-    / More Options
-    %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-      %i.fas.fa-ellipsis-v
+    - if policy(Scorecard).create?
+      / More Options
+      %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+        %i.fas.fa-ellipsis-v
 
-    .dropdown-menu.dropdown-menu-right
-      %a.btn.dropdown-item{ href: new_scorecard_batch_path }
-        %i.fas.fa-file-import.drop-menu-icon
-        %span= t("scorecard.batch_import")
+      .dropdown-menu.dropdown-menu-right
+        %a.btn.dropdown-item{ href: new_scorecard_batch_path }
+          %i.fas.fa-file-import.drop-menu-icon
+          %span= t("scorecard.batch_import")
 
-      %a.btn.dropdown-item{ href: scorecard_batches_path }
-        %i.fas.fa-history.drop-menu-icon
-        %span= t('scorecard.import_history')
+        %a.btn.dropdown-item{ href: scorecard_batches_path }
+          %i.fas.fa-history.drop-menu-icon
+          %span= t('scorecard.import_history')

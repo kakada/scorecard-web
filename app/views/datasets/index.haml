@@ -1,5 +1,5 @@
+= render "public_view_header" if policy(Dataset).public_view?
 = render "page_title"
-
 = render "filter"
 
 .card.shadow.mb-4
@@ -7,7 +7,7 @@
     = render partial: "shared/no_data", locals: { items: @datasets, url: new_category_dataset_path(@category), label: t('shared.add_new', name: t("dataset.dataset")) }
 
     - if @datasets.present?
-      = render "shared/pagination_title", objects: @datasets
+      = render "pagination_title"
 
       .table-responsive
         %table.table.table-hover.pretty
