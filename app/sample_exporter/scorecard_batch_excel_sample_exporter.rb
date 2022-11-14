@@ -17,6 +17,8 @@ class ScorecardBatchExcelSampleExporter
     sheets.each do |sheet|
       add_worksheet(sheet)
     end
+
+    add_worksheet_for_datasets
   end
 
   private
@@ -29,5 +31,9 @@ class ScorecardBatchExcelSampleExporter
 
       rescue
         Rails.logger.warn "Unknown ExcelBuilder model #{klass}"
+    end
+
+    def add_worksheet_for_datasets
+      ScorecardBatchExcelSamples::DatasetInfo.new(@workbook, @program).build
     end
 end

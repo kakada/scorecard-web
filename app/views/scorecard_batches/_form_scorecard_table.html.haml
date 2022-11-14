@@ -9,7 +9,7 @@
         %th= t('scorecard.province')
         %th= t('scorecard.district')
         %th= t('scorecard.commune')
-        %th= t('scorecard.primary_school')
+        %th= t('scorecard.institution_name')
         %th= t('scorecard.local_ngo')
         %th= t('scorecard.planned_start_date')
         %th= t('scorecard.planned_end_date')
@@ -26,17 +26,17 @@
           %td
             = "#{scorecard.unit_type.name} → #{scorecard.facility_name}" if scorecard.facility_id.present?
           %td
-            = t("scorecard.#{scorecard.scorecard_type}") if scorecard.scorecard_type.present?
+            = scorecard.program_scorecard_type.try(:name)
           %td
-            = scorecard.province if scorecard.province_id.present?
+            = scorecard.province
           %td
-            = scorecard.district if scorecard.district_id.present?
+            = scorecard.district
           %td
-            = scorecard.commune if scorecard.commune_id.present?
+            = scorecard.commune
           %td
-            = scorecard.primary_school_name if scorecard.primary_school_code.present?
+            = scorecard.dataset_name
           %td
-            = scorecard.local_ngo_name if scorecard.local_ngo_id.present?
+            = scorecard.local_ngo_name
           %td
             = display_date(scorecard.planned_start_date)
           %td

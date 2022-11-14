@@ -6,4 +6,8 @@ module ProgramsHelper
 
     current_program.program_scorecard_types.pluck(:"name_#{I18n.locale}", :code)
   end
+
+  def program_dataset_categories
+    current_program.dataset_categories
+  end
 end

@@ -30,11 +30,13 @@
         %i.fas.fa-fw.fa-users
         %span.d-none.d-md-inline= t("sidebar.local_ngo")
 
-  - if policy(PrimarySchool).index? && !current_user.system_admin?
-    %li.nav-item{ class: css_nested_active_class('primary_schools') }
-      %a.nav-link{:href => primary_schools_path}
+  - if policy(Dataset).public_view?
+    %li.nav-item{ class: css_nested_active_class('datasets') }
+      - category = program_dataset_categories.first
+      %a.nav-link{ :href => category_datasets_path(category) }
         %i.fas.fa-fw.fa-school
-        %span.d-none.d-md-inline= t("sidebar.primary_schools")
+        %span.d-none.d-md-inline
+          = program_dataset_categories.length > 1 ? t("scorecard.institution_name") : category.name
 
   - if policy(RatingScale).create?
     %li.nav-item{ class: css_nested_active_class('rating_scales') }

@@ -4,7 +4,15 @@ class DatasetsController < ApplicationController
   before_action :set_category
 
   def index
-    @pagy, @datasets = pagy(authorize Dataset.filter(params).order("#{sort_column} #{sort_direction}"))
+    respond_to do |format|
+      format.html { @pagy, @datasets = pagy(authorize query_datasets) }
+
+      format.xlsx {
+        @datasets = authorize query_datasets
+
+        render xlsx: "index", filename: "#{@category.name}_#{Time.new.strftime('%Y%m%d_%H_%M_%S')}.xlsx"
+      }
+    end
   end
 
   def show
@@ -71,5 +79,9 @@ class DatasetsController < ApplicationController
       params.require(:dataset).permit(:code, :name_en, :name_km,
         :commune_id, :district_id, :province_id
       ).merge(category_id: @category.id)
+    end
+
+    def query_datasets
+      Dataset.filter(filter_params).order("#{sort_column} #{sort_direction}")
     end
 end

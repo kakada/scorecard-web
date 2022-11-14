@@ -1,0 +1,7 @@
+= content_for :pagination_title_center do
+  .ml-2
+    - url = category_datasets_path(@category, params.permit(:keyword, :province_id, :district_id, :commune_id).merge(format: :xlsx))
+    %a.btn.btn-warning.btn-sm.shadow-sm{ href: url, target: '_blank', 'data-toggle': 'tooltip', title: t('shared.download_excel') }
+      %i.fas.fa-download
+
+= render "shared/pagination_title", objects: @datasets

@@ -122,7 +122,7 @@ class Scorecard < ApplicationRecord
   # Validation
   validates :year, presence: true
   validates :province_id, presence: true
-  validates :district_id, presence: true
+  validates :district_id, presence: true, if: -> { facility.try(:category_id).nil? || facility.category.hierarchy.include?("district") }
   validates :commune_id, presence: true, if: -> { facility.try(:category_id).nil? || facility.category.hierarchy.include?("commune") }
   validates :unit_type_id, presence: true
   validates :facility_id, presence: true

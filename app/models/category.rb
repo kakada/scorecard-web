@@ -29,6 +29,10 @@ class Category < ApplicationRecord
     self["name_#{I18n.locale}"]
   end
 
+  def column_code_name
+    @column_code_name ||= name_en.downcase.split(" ").join("_") + "_code"
+  end
+
   def hierarchy_display
     return "" unless hierarchy.present?
 

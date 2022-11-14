@@ -1,24 +1,25 @@
-.d-sm-flex.align-items-center.justify-content-between.mb-4
-  %h1.h3.mb-0.text-gray-800= "#{@category.name}: #{t('dataset.datasets')}"
+- if policy(Dataset).create?
+  .d-sm-flex.align-items-center.justify-content-between.mb-4
+    %h1.h3.mb-0.text-gray-800= "#{@category.name}: #{t('dataset.datasets')}"
 
-  %div
-    / Back button
-    = link_to categories_path, class: 'btn btn-secondary mr-2 btn-sm shadow-sm' do
-      %i.fas.fa-arrow-left.fa-sm.text-white-50
-      = t('shared.back')
+    %div
+      / Back button
+      = link_to categories_path, class: 'btn btn-secondary mr-2 btn-sm shadow-sm' do
+        %i.fas.fa-arrow-left.fa-sm.text-white-50
+        = t('shared.back')
 
-    / Create new
-    %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_category_dataset_path(@category) }
-      %i.fas.fa-plus.fa-sm.text-white-50
-      = t('shared.add_new', name: t("dataset.dataset"))
+      / Create new
+      %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_category_dataset_path(@category) }
+        %i.fas.fa-plus.fa-sm.text-white-50
+        = t('shared.add_new', name: t("dataset.dataset"))
 
-    / More option
-    %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-      %i.fas.fa-ellipsis-v
+      / More option
+      %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+        %i.fas.fa-ellipsis-v
 
-    .dropdown-menu.dropdown-menu-right
-      %a.btn.dropdown-item{ "data-target" => "#importModal", "data-toggle" => "modal", href: '#' }
-        %i.fas.fa-file-import.drop-menu-icon
-        = t("shared.import_from_file")
+      .dropdown-menu.dropdown-menu-right
+        %a.btn.dropdown-item{ "data-target" => "#importModal", "data-toggle" => "modal", href: '#' }
+          %i.fas.fa-file-import.drop-menu-icon
+          = t("shared.import_from_file")
 
-= render "modal_import_from_file"
+  = render "modal_import_from_file"
