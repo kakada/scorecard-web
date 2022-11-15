@@ -64,4 +64,24 @@ module ScorecardsHelper
     str += " <span class='badge badge-info'>#{t('scorecard.selected_action_count', count: scorecard.suggested_indicator_activities.selecteds.count)}</span>"
     str.html_safe
   end
+
+  def province_next_target(scorecard)
+    return "district" if default_option(scorecard)
+
+    scorecard.facility.category.hierarchy[1] || "dataset"
+  end
+
+  def dataset_filter_param(scorecard)
+    return { commune_id: "FILTER" } if default_option(scorecard)
+
+    param = {}
+    param["#{scorecard.facility.category.hierarchy.last}_id"] = "FILTER"
+    param[:category_id] = scorecard.facility.category_id
+    param
+  end
+
+  private
+    def default_option(scorecard)
+      scorecard.new_record? || scorecard.facility.nil? || scorecard.facility.category_id.nil?
+    end
 end

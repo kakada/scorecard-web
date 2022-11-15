@@ -1,5 +1,5 @@
 #province
-  = render partial: "scorecards/select_field", locals: { f: f, field_name: "province_id", select_id: "province", select_target: "district", select_collection_url: pumi.provinces_path, select_populate_on_load: true }
+  = render partial: "scorecards/select_field", locals: { f: f, field_name: "province_id", select_id: "province", select_target: province_next_target(@scorecard), select_collection_url: pumi.provinces_path, select_populate_on_load: true }
 
 #district.hierarchy
   = render partial: "scorecards/select_field", locals: { f: f, field_name: "district_id", select_id: "district", select_target: "#{@scorecard.commune_id.present? ? 'commune' : 'dataset'}", select_collection_url: pumi.districts_path(:province_id => "FILTER"), select_disabled_target: "#district", select_allow_none: true }
@@ -8,5 +8,4 @@
   = render partial: "scorecards/select_field", locals: { f: f, field_name: "commune_id", select_id: "commune", select_target: "dataset", select_collection_url: pumi.communes_path(:district_id => "FILTER"), select_disabled_target: "#commune", select_allow_none: true }
 
 #dataset.hierarchy.d-none{"data-categories" => Category.all.map{|c| {id: c.id, name: c.name, hierarchies: c.hierarchy}}.to_json}
-  - filter_params = @scorecard.commune_id.present? ? {:commune_id => "FILTER"} : {:district_id => "FILTER"}
-  = render partial: "scorecards/select_field", locals: { f: f, field_name: "dataset_id", select_id: "dataset", select_target: "none", select_collection_url: api_v1_datasets_path(filter_params), select_disabled_target: "#dataset", select_collection_value_method: "id", label: @scorecard.facility}
+  = render partial: "scorecards/select_field", locals: { f: f, field_name: "dataset_id", select_id: "dataset", select_target: "none", select_collection_url: api_v1_datasets_path(dataset_filter_param(@scorecard)), select_disabled_target: "#dataset", select_collection_value_method: "id", label: @scorecard.facility}

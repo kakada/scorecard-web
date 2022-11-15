@@ -39,9 +39,9 @@ class Dataset < ApplicationRecord
   def self.filter(params)
     scope = all
     scope = scope.where("code LIKE ? OR name_en LIKE ? OR name_km LIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") if params[:keyword].present?
-    scope = scope.where(commune_id: params[:commune_id]) if params[:commune_id].present?
-    scope = scope.where(district_id: params[:district_id]) if params[:district_id].present?
-    scope = scope.where(province_id: params[:province_id]) if params[:province_id].present?
+    scope = scope.where(commune_id: params[:commune_id][0..5]) if params[:commune_id].present?
+    scope = scope.where(district_id: params[:district_id][0..3]) if params[:district_id].present?
+    scope = scope.where(province_id: params[:province_id][0..1]) if params[:province_id].present?
     scope = scope.where(category_id: params[:category_id]) if params[:category_id].present?
     scope
   end
