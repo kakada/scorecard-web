@@ -79,8 +79,10 @@ CW.ScorecardsNew = (() => {
   }
 
   function setHierarchiesSelectTarget(hierarchies) {
-    for(let i = 0; i < hierarchies.length - 1; i++) {
-      $(`#${hierarchies[i]} select`).data('pumiSelectTarget', hierarchies[i+1]);
+    for(let i = 0; i < hierarchies.length; i++) {
+      let pumiSelectTarget = hierarchies[i + 1] || 'dataset';
+      $(`#${hierarchies[i]} select`).attr('data-pumi-select-target', pumiSelectTarget);
+      $(`#${hierarchies[i]} select`).data('pumiSelectTarget', pumiSelectTarget);
     }
   }
 

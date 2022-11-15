@@ -83,10 +83,9 @@ module Spreadsheets
       def dataset(facility, row)
         return nil if facility.nil? || facility.category.nil?
 
-        category = facility.category
         dataset_code = program.dataset_categories.map { |category| row[category.column_code_name] }.compact.first
 
-        category.datasets.find_by(code: parse_string(dataset_code))
+        facility.category.datasets.find_by(code: parse_string(dataset_code))
       end
   end
 end
