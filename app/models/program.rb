@@ -22,6 +22,7 @@ class Program < ApplicationRecord
   has_many :users
   has_many :languages
   has_many :facilities
+  has_many :indicators, through: :facilities
   has_many :templates
   has_many :local_ngos
   has_many :cafs, through: :local_ngos

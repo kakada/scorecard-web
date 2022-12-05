@@ -36,6 +36,15 @@ module Messages
       scorecard.t_scorecard_type
     end
 
+    def location_name
+      return scorecard.location_name unless scorecard.dataset_name.present?
+
+      dataset_name = "#{scorecard.facility.category_name}#{scorecard.dataset_name}"
+      dataset_name = "#{scorecard.dataset_name} #{scorecard.facility.category_name}," if I18n.locale == :en
+
+      [dataset_name, scorecard.location_name].join(" ")
+    end
+
     private
       def render_date(field)
         date = scorecard.send(field.to_sym)
