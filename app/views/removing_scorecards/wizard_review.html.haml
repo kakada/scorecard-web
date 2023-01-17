@@ -1,0 +1,27 @@
+= render "shared/headers/progress_arrow_header", progress_num: 2
+
+= simple_form_for @batch, url: removing_scorecards_path do |f|
+  / Hidden field
+  = f.hidden_field :code
+  = f.hidden_field :total_count
+  = f.hidden_field :valid_count
+  = f.hidden_field :reference_cache
+
+  / Overal description
+  .d-flex.align-items-center{style: 'flex-wrap: wrap-reverse;'}
+    .flex-grow-1
+      %div
+        = t("scorecard_batch.removing_short_description", total_item: @batch.total_count, total_valid: @batch.valid_count)
+
+    / Button Back
+    .d-flex.mb-2
+      = render "shared/buttons/back_button", url: new_removing_scorecard_path
+
+      / Button Yes
+      - tooltip_title = @batch.valid_count.positive? ? "" : t("scorecard_batch.at_least_one_scorecard")
+
+      %span{ 'data-toggle' => 'tooltip', title: tooltip_title }
+        %button.btn.btn-primary.btn-sm{'data-toggle' => 'modal', 'data-target' => '#confirmModal', type: 'button', class: ('disabled' if @batch.valid_count.zero?)}= t('scorecard_batch._yes')
+
+  = render 'wizard_list', f: f
+  = render 'modal_wizard_confirm_popup', f: f

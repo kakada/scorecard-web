@@ -1,0 +1,7 @@
+/ - @batch = RemovingScorecardBatch.new()
+/ = render template: "removing_scorecards/wizard_review"
+
+.container-fluid.px-4
+  = render "shared/headers/progress_arrow_header", title: "Remove Scorecard with excel"
+
+  = render "shared/forms/wizard_form", cancel_url: scorecards_path, sample_url: '/samples/removing_scorecards_sample.xlsx', item: @batch, form_url: removing_scorecards_path

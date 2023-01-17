@@ -1,0 +1,28 @@
+.table-responsive
+  %table.table.table-hover.pretty
+    %thead
+      %tr
+        %th #
+        %th= t('scorecard.code')
+        %th= t('scorecard.scorecard_type')
+        %th= t('scorecard.local_ngo')
+        %th= t('scorecard_batch.is_valid')
+
+    %tbody
+      - @batch.removing_scorecards.each_with_index do |scorecard, index|
+        %tr
+          %td
+            = index + 1
+            - if scorecard.valid?
+              %input.invisible{type: 'checkbox', value: scorecard.code, name: 'removing_scorecard_batch[removing_scorecard_codes][]', checked: true}
+
+          %td= scorecard.code
+          %td= scorecard.scorecard_type
+          %td= scorecard.local_ngo
+          %td
+            - if scorecard.valid?
+              %i.fas.fa-check.text-success
+            - else
+              %span.text-danger.d-flex.align-items-center{'data-toggle' => 'tooltip', 'data-placement': 'left', title: scorecard.invalid_reason, style: 'min-width: 80px;' }
+                %i.fas.fa-times.text-danger
+                %small.ml-1= t('shared.reason')

@@ -1,6 +1,8 @@
 CW.Scorecard_batchesNew = (() => {
   return {
-    init
+    init,
+    onChangeImportFile,
+    onClickBtnRemoveFile
   }
 
   function init() {

@@ -1,0 +1,17 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-2
+  %h1.h3.mb-0.text-gray-800
+    = "លុបប័ណ្ណដាក់ពិន្ទុ Wizard"
+
+  .mt-3.mt-md-0.text-right.mr-2
+
+    - progress_num ||= 1
+
+    %ul.breadcrumb-arrows.pl-0.text-center
+      %li{class: ('active' if progress_num == 1)}
+        %a
+          .num 1
+          Upload File
+      %li{class: ('active' if progress_num == 2)}
+        %a
+          .num 2
+          Review

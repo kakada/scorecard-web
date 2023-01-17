@@ -59,6 +59,8 @@
 //= require activity_logs
 //= require request_changes/new
 //= require scorecard_batches/new
+//= require removing_scorecards/new
+//= require removing_scorecards/create
 //= require categories
 
 document.addEventListener("turbolinks:load", function () {

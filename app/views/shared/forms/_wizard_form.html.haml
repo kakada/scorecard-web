@@ -1,0 +1,52 @@
+- cancel_url ||= "/"
+- sample_url ||= "/"
+- item ||= @batch
+- form_url ||= '#'
+
+.w-50.m-auto
+  .mt-4= "#{t('scorecard_batch.todo_step')}:"
+  %ol.mb-3
+    %li= t('scorecard_batch.download_sample_form')
+    %li= t('scorecard_batch.attach_excel_file')
+
+  .card.shadow.mb-2
+    .card-body
+      %span.mr-2 1.
+
+      %a.btn.btn-link.p-0{ href: sample_url, target: "_blank" }
+        %i.fas.fa-cloud-download-alt.fa-sm
+        = t("scorecard_batch.download_sample_form")
+
+  .arrow-wrapper.text-center
+    %i.fas.fa-long-arrow-alt-down
+
+  = form_for item, url: form_url do |f|
+    #importModals
+      .file-wrapper
+        .card.shadow
+          .card-body
+            %span.mr-2 2.
+            .form-control.file-control-wrapper
+              = f.file_field :file, accept: ".xls,.xlsx"
+
+        %small= t('scorecard_batch.excel_file')
+
+      .display-file.d-none
+        .card.shadow
+          .card-body.d-flex
+            .excel-icon-wrapper.mr-2
+              %i.fas.fa-file-excel
+
+            .flex-grow-1
+              .filename
+              %small.text-muted.filesize
+
+            %div
+              %span{data: {toggle: 'tooltip', placement: 'top', title: t('shared.delete')}}
+                = link_to '#', class: "btn btn-circle btn-sm btn-outline-danger btn-remove-file" do
+                  %i.fas.fa-trash-alt
+
+      .modal-footer.mt-3
+        = link_to t('shared.cancel'), cancel_url, class: 'btn btn-secondary'
+
+        %button.btn.btn-primary{:type => "submit", disabled: true}= t('shared.preview')

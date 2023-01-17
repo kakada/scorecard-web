@@ -26,3 +26,15 @@ km:
     filename: ឈ្មោះឯកសារ
     search_by_code_or_filename: លេខកូដ ឬ ឈ្មោះឯកសារ
     imported_by: បញ្ចូលដោយ
+    # Removing scorecard batch
+    removing_scorecard_history: ប្រវត្តិនៃការលុបប័ណ្ណដាក់ពិន្ទុ
+    remove_batch: បន្ថែមការលុបប័ណ្ណដាក់ពិន្ទុ
+    removing_short_description: "ប័ណ្ណដាក់ពិន្ទុសរុប: %{total_item} (ត្រឹមត្រូវ: %{total_valid})"
+    message_confirm_remove: "មានប័ណ្ណដាក់ពិន្ទុសរុប <b>%{total_item}</b> នឹងត្រូវលុបចេញពីប្រព័ន្ធ! តើអ្នកយល់ព្រមឬទេ?"
+    removing_scorecard_confirmation: បញ្ជាក់ការលុបប័ណ្ណដាក់ពិន្ទុ
+    deleted_scorecard: ប័ណ្ណដាក់ពិន្ទុដែលបានលុប
+    are_you_sure_to_delete_scorecard: តើអ្នកប្រាកដជាលុបប័ណ្ណដាក់ពិន្ទុ <b>%{codes}</b> នេះមែនទេ?
+    this_cannot_undone: សកម្មភាពនេះមិនអាចត្រឡប់វិញបានទេ។ វានឹងលុបប័ណ្ណដាក់ពិន្ទុខាងលើជាអចិន្ត្រៃយ៍។
+    please_type_to_confirm: សូមបញ្ចូលលេខកូដប័ណ្ណដាក់ពិន្ទុ <b>%{codes}</b> ដើម្បីបញ្ជាក់.
+    insert_scorecard_codes_to_confirm: បញ្ចូលលេខកូដប័ណ្ណដាក់ពិន្ទុដើម្បីលុប
+    mismatch_code_or_type_or_lngo: អ្នកអាចបញ្ចូលខុសនូវ លេខកូដប័ណ្ណដាក់ពិន្ទុ ប្រភេទប័ណ្ណដាក់ពិន្ទុ ឬអ្នកអនុវត្ត!

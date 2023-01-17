@@ -26,3 +26,15 @@ en:
     filename: Filename
     search_by_code_or_filename: Code or filename
     imported_by: Imported by
+    # Removing scorecard batch
+    removing_scorecard_history: Removing scorecard history
+    remove_batch: Add Removing Batch
+    removing_short_description: "Total items: %{total_item} (valid: %{total_valid})"
+    message_confirm_remove: "There are total scorecard <b>%{total_item}</b> will be removed from the stystem! Do you approve it?"
+    removing_scorecard_confirmation: Removing scorecard confirmation
+    deleted_scorecard: Deleted scorecard
+    are_you_sure_to_delete_scorecard: Are you sure to delete these scorecards <b>%{codes}</b>?
+    this_cannot_undone: This action cannot be undone. This will permanently delete the scorecards.
+    please_type_to_confirm: Please type <b>%{codes}</b> to confirm.
+    insert_scorecard_codes_to_confirm: Input scorecard codes to confirm delete
+    mismatch_code_or_type_or_lngo: You may mismatch scorecard code, scorecard type, or Local NGO!
