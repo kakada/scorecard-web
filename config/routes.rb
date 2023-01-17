@@ -112,6 +112,8 @@ Rails.application.routes.draw do
     get :sample, on: :collection
   end
 
+  resources :removing_scorecards, only: [:index, :new, :create]
+
   resources :categories do
     resources :datasets do
       post :import, on: :collection

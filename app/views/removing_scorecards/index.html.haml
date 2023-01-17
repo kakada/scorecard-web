@@ -1,0 +1,48 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t('scorecard_batch.removing_scorecard_history')
+
+  .d-flex.mt-3.mt-md-0.justify-content-end
+    = render "shared/buttons/back_button", url: scorecards_path
+    = render "shared/buttons/add_new_button", url: new_removing_scorecard_path, title: t('scorecard_batch.remove_batch')
+
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @batches }
+
+    - if @batches.present?
+      = render "shared/pagination_title", objects: @batches
+
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
+            %tr
+              %th #
+              %th= t("shared.code")
+              %th= t("scorecard_batch.filename")
+              %th= t("shared.description")
+              %th= t("scorecard_batch.deleted_scorecard")
+              %th= t("scorecard_batch.imported_by")
+              %th= t('scorecard_batch.imported_at')
+          %tbody
+            - @batches.each_with_index do |batch, index|
+              %tr
+                %td= index + 1
+                %td= batch.code
+                %td
+                  - if batch.reference_url.present?
+                    = link_to batch.reference_identifier, batch.reference_url, class: "text-primary", target: "_blank"
+
+                %td
+                  = t("scorecard_batch.removing_short_description", total_item: batch.total_count, total_valid: batch.valid_count)
+
+                %td
+                  = batch.scorecards.pluck(:uuid).join(', ')
+
+                %td= batch.user_email
+                %td= timeago(batch.created_at, 'datetime').html_safe
+
+    - if @pagy.pages > 1
+      .pagy-wrapper.justify-content-lg-end.justify-content-center
+        != pagy_bootstrap_compact_nav(@pagy)
+
+= render "shared/modal_confirm"

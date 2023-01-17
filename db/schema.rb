@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_28_090309) do
+ActiveRecord::Schema.define(version: 2023_01_12_033307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -432,6 +432,17 @@ ActiveRecord::Schema.define(version: 2022_10_28_090309) do
     t.string "participant_uuid"
   end
 
+  create_table "removing_scorecard_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.integer "total_count", default: 0
+    t.integer "valid_count", default: 0
+    t.string "reference"
+    t.integer "user_id"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "request_changes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "scorecard_uuid"
     t.integer "proposer_id"
@@ -541,6 +552,7 @@ ActiveRecord::Schema.define(version: 2022_10_28_090309) do
     t.string "device_id"
     t.integer "submitter_id"
     t.uuid "dataset_id"
+    t.uuid "removing_scorecard_batch_id"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end

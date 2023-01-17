@@ -12,7 +12,7 @@
       = render 'shared/copy', value: scorecard_url(scorecard.uuid), label: '', tooltip_title: (t('shared.copied_testing_code') if test_mode?)
 
   %td= scorecard.year
-  %td= scorecard.local_ngo_name
+  %td= "#{scorecard.local_ngo_name}(#{scorecard.local_ngo_code})"
   %td= scorecard_location(scorecard)
   %td= status_html(scorecard)
   %td.text-center

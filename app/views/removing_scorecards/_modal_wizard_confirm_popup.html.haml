@@ -1,0 +1,34 @@
+#confirmModal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1" }
+  .modal-dialog.modal-dialog-centered{:role => "document"}
+    .modal-content.text-black
+      / Header
+      .modal-header
+        %h5.modal-title
+          %i.fas.fa-exclamation-triangle.text-danger
+          %span.title= t("scorecard_batch.removing_scorecard_confirmation")
+
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+
+      - if scorecards = @batch.removing_scorecards.select{|s| s.valid? }.presence
+        / Body
+        .modal-body.text-left
+
+          = t('scorecard_batch.message_confirm_remove', total_item: @batch.valid_count).html_safe
+
+          .form-group
+            - codes = scorecards.collect(&:code).join(', ')
+            = t('scorecard_batch.are_you_sure_to_delete_scorecard', codes: codes).html_safe
+
+          .form-group
+            = t('scorecard_batch.this_cannot_undone').html_safe
+
+          .form-group
+            = t('scorecard_batch.please_type_to_confirm', codes: codes).html_safe
+
+          = f.input :confirm_removing_scorecard_codes, input_html: {class: 'confirm-input', placeholder: t('scorecard_batch.insert_scorecard_codes_to_confirm'), 'data-codes': codes}, label: false
+
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
+
+          = f.submit t('scorecard_batch._yes'), class: 'btn btn-danger btn-yes', disabled: true

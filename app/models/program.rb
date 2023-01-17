@@ -8,7 +8,7 @@
 #  name                      :string
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
-#  datetime_format           :string           default("DD-MM-YYYY")
+#  datetime_format           :string           default("YYYY-MM-DD")
 #  enable_email_notification :boolean          default(FALSE)
 #  shortcut_name             :string
 #  dashboard_user_emails     :text             default([]), is an Array
@@ -39,6 +39,7 @@ class Program < ApplicationRecord
   has_one  :gf_dashboard
   has_many :scorecard_batches
   has_many :program_scorecard_types
+  has_many :removing_scorecard_batches
 
   validates :name, presence: true, uniqueness: true
   validates :shortcut_name, presence: true, uniqueness: true

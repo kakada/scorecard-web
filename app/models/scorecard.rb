@@ -4,54 +4,55 @@
 #
 # Table name: scorecards
 #
-#  id                        :bigint           not null, primary key
-#  uuid                      :string
-#  unit_type_id              :integer
-#  facility_id               :integer
-#  name                      :string
-#  description               :text
-#  province_id               :string(2)
-#  district_id               :string(4)
-#  commune_id                :string(6)
-#  year                      :integer
-#  conducted_date            :datetime
-#  number_of_caf             :integer
-#  number_of_participant     :integer
-#  number_of_female          :integer
-#  planned_start_date        :datetime
-#  planned_end_date          :datetime
-#  status                    :integer
-#  program_id                :integer
-#  local_ngo_id              :integer
-#  scorecard_type            :integer
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
-#  location_code             :string
-#  number_of_disability      :integer
-#  number_of_ethnic_minority :integer
-#  number_of_youth           :integer
-#  number_of_id_poor         :integer
-#  creator_id                :integer
-#  locked_at                 :datetime
-#  primary_school_code       :string
-#  downloaded_count          :integer          default(0)
-#  progress                  :integer
-#  language_conducted_code   :string
-#  finished_date             :datetime
-#  running_date              :datetime
-#  deleted_at                :datetime
-#  published                 :boolean          default(FALSE)
-#  device_type               :string
-#  submitted_at              :datetime
-#  completed_at              :datetime
-#  device_token              :string
-#  completor_id              :integer
-#  proposed_indicator_method :integer          default("participant_based")
-#  scorecard_batch_code      :string
-#  number_of_anonymous       :integer
-#  device_id                 :string
-#  submitter_id              :integer
-#  dataset_id                :uuid
+#  id                          :bigint           not null, primary key
+#  uuid                        :string
+#  unit_type_id                :integer
+#  facility_id                 :integer
+#  name                        :string
+#  description                 :text
+#  province_id                 :string(2)
+#  district_id                 :string(4)
+#  commune_id                  :string(6)
+#  year                        :integer
+#  conducted_date              :datetime
+#  number_of_caf               :integer
+#  number_of_participant       :integer
+#  number_of_female            :integer
+#  planned_start_date          :datetime
+#  planned_end_date            :datetime
+#  status                      :integer
+#  program_id                  :integer
+#  local_ngo_id                :integer
+#  scorecard_type              :integer
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  location_code               :string
+#  number_of_disability        :integer
+#  number_of_ethnic_minority   :integer
+#  number_of_youth             :integer
+#  number_of_id_poor           :integer
+#  creator_id                  :integer
+#  locked_at                   :datetime
+#  primary_school_code         :string
+#  downloaded_count            :integer          default(0)
+#  progress                    :integer
+#  language_conducted_code     :string
+#  finished_date               :datetime
+#  running_date                :datetime
+#  deleted_at                  :datetime
+#  published                   :boolean          default(FALSE)
+#  device_type                 :string
+#  submitted_at                :datetime
+#  completed_at                :datetime
+#  device_token                :string
+#  completor_id                :integer
+#  proposed_indicator_method   :integer          default("participant_based")
+#  scorecard_batch_code        :string
+#  number_of_anonymous         :integer
+#  device_id                   :string
+#  submitter_id                :integer
+#  dataset_id                  :uuid
+#  removing_scorecard_batch_id :uuid
 #
 
 class Scorecard < ApplicationRecord
@@ -93,6 +94,7 @@ class Scorecard < ApplicationRecord
   belongs_to :primary_school, foreign_key: :primary_school_code, optional: true
   belongs_to :language, foreign_key: :language_conducted_code, primary_key: :code, optional: true
   belongs_to :scorecard_batch, foreign_key: :scorecard_batch_code, primary_key: :code, optional: true
+  belongs_to :removing_scorecard_batch, optional: true
   belongs_to :dataset, optional: true
 
   has_many   :facilitators, foreign_key: :scorecard_uuid
@@ -113,7 +115,7 @@ class Scorecard < ApplicationRecord
   has_many   :suggested_indicator_activities, foreign_key: :scorecard_uuid, primary_key: :uuid
 
   # Delegation
-  delegate  :name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
+  delegate  :name, :code, to: :local_ngo, prefix: :local_ngo, allow_nil: true
   delegate  :name_en, :name_km, to: :primary_school, prefix: :primary_school, allow_nil: true
   delegate  :name, to: :facility, prefix: :facility, allow_nil: true
   delegate  :name, to: :primary_school, prefix: :primary_school, allow_nil: true
