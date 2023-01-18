@@ -41,7 +41,7 @@ RSpec.describe RemovingScorecardBatch, type: :model do
     end
 
     context "removing_scorecard_codes is present and match confirm_removing_scorecard_codes" do
-      subject { described_class.new(removing_scorecard_codes: ['123456'], confirm_removing_scorecard_codes: "123456") }
+      subject { described_class.new(removing_scorecard_codes: ['123456'], confirm_removing_scorecard_codes: "123456123456") }
 
       it "has errors miss matching scorecard codes" do
         subject.valid?
@@ -56,7 +56,7 @@ RSpec.describe RemovingScorecardBatch, type: :model do
     let!(:scorecard2) { create(:scorecard) }
 
     context "different program" do
-      let!(:batch) { create(:removing_scorecard_batch, user: user, removing_scorecard_codes: [scorecard1.uuid, scorecard2.uuid], confirm_removing_scorecard_codes: "#{scorecard1.uuid}, #{scorecard2.uuid}") }
+      let!(:batch) { create(:removing_scorecard_batch, user: user, removing_scorecard_codes: [scorecard1.uuid, scorecard2.uuid], confirm_removing_scorecard_codes: "#{scorecard1.uuid}#{scorecard2.uuid}") }
 
       it "deletes only scorecard1" do
         expect(Scorecard.only_deleted.find_by(uuid: scorecard1.uuid)).not_to be_nil

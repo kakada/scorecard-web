@@ -10,23 +10,43 @@
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
 
-      - if scorecards = @batch.removing_scorecards.select{|s| s.valid? }.presence
+      - if scorecards = @batch.removing_scorecards.select{ |s| s.valid? }.presence
         / Body
         .modal-body.text-left
 
           = t('scorecard_batch.message_confirm_remove', total_item: @batch.valid_count).html_safe
 
+          / Copy codes
+          - codes = scorecards.collect(&:code)
+          .d-flex
+            .text-truncate
+              = "(#{codes.join(', ')}"
+            .d-flex
+              )
+              = render 'shared/copy', value: codes.join(', '), label: ''
+
+          / Statuses
           .form-group
-            - codes = scorecards.collect(&:code).join(', ')
-            = t('scorecard_batch.are_you_sure_to_delete_scorecard', codes: codes).html_safe
+            - statuses = scorecards.group_by(&:status).sort_by{ |k, v| Scorecard.statuses.index(k) }
+            %ul
+              - statuses.each do |status, value|
+                %li
+                  %small.text-muted= t("scorecard.#{status}") + ": "
+                  %strong= value.length
+                  - if status == Scorecard::STATUS_COMPLETED
+                    %small.text-danger= "(#{t('scorecard_batch.will_affect_dashboard_result')})"
 
           .form-group
             = t('scorecard_batch.this_cannot_undone').html_safe
 
           .form-group
-            = t('scorecard_batch.please_type_to_confirm', codes: codes).html_safe
+            = t('scorecard_batch.are_you_sure_to_delete_scorecard').html_safe
 
-          = f.input :confirm_removing_scorecard_codes, input_html: {class: 'confirm-input', placeholder: t('scorecard_batch.insert_scorecard_codes_to_confirm'), 'data-codes': codes}, label: false
+            - confirm_code = codes.first + codes.last
+
+            = t('scorecard_batch.please_type_to_confirm', codes: confirm_code).html_safe
+
+          = f.input :confirm_removing_scorecard_codes, input_html: {class: 'confirm-input', placeholder: t('scorecard_batch.insert_scorecard_codes_to_confirm'), 'data-codes': confirm_code}, label: false
 
         .modal-footer
           %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
