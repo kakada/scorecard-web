@@ -6,6 +6,7 @@
         %th= t('scorecard.code')
         %th= t('scorecard.scorecard_type')
         %th= t('scorecard.local_ngo')
+        %th= t('scorecard.status')
         %th= t('scorecard_batch.is_valid')
 
     %tbody
@@ -19,6 +20,7 @@
           %td= scorecard.code
           %td= scorecard.scorecard_type
           %td= scorecard.local_ngo
+          %td= status_html(scorecard)
           %td
             - if scorecard.valid?
               %i.fas.fa-check.text-success

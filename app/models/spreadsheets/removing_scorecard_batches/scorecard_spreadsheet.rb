@@ -8,7 +8,7 @@ module Spreadsheets
       def initialize(program, row)
         @program = program
         @row = row
-        @klass = Struct.new("Scorecard", :code, :local_ngo, :scorecard_type, :valid?, :invalid_reason)
+        @klass = Struct.new("Scorecard", :code, :local_ngo, :scorecard_type, :status, :valid?, :invalid_reason)
       end
 
       def process
@@ -16,6 +16,7 @@ module Spreadsheets
           scorecard_code,
           local_ngo_name,
           scorecard_type_name,
+          removing_scorecard.try(:status),
           removing_scorecard.present?,
           (removing_scorecard.present? ? "" : invalid_message)
         )

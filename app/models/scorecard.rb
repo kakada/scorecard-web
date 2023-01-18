@@ -178,6 +178,10 @@ class Scorecard < ApplicationRecord
     @program_scorecard_type ||= program.program_scorecard_types.select { |ty| ty.code == scorecard_type }.first
   end
 
+  def self.statuses
+    ["planned"] + self.progresses.keys
+  end
+
   private
     def secure_uuid
       self.uuid ||= six_digit_rand

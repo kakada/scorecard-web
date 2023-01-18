@@ -46,15 +46,23 @@ class RemovingScorecardBatch < ApplicationRecord
     @removing_scorecards || []
   end
 
+  def self.filter(params)
+    keyword = params[:keyword].to_s.strip
+    scope = all
+    scope = scope.where("code LIKE ?", "%#{keyword}%") if keyword.present?
+    scope = scope.where(program_id: params[:program_id]) if params[:program_id].present?
+    scope
+  end
+
   private
     def soft_delete_scorecards
       to_remove_scorecards = program.scorecards.where(uuid: removing_scorecard_codes)
-      to_remove_scorecards.update(removing_scorecard_batch_id: id)
+      to_remove_scorecards.update_all(removing_scorecard_batch_id: id)
       to_remove_scorecards.destroy_all
     end
 
     def secure_confirmation
-      return if removing_scorecard_codes.present? && removing_scorecard_codes.join(", ") == confirm_removing_scorecard_codes
+      return if removing_scorecard_codes.present? && removing_scorecard_codes.values_at(0,-1).join == confirm_removing_scorecard_codes
 
       errors.add :scorecards, :mismatch, message: "mismatch removing scorecard codes"
 
