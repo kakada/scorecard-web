@@ -80,6 +80,7 @@ class Scorecard < ApplicationRecord
   # Constant
   STATUS_COMPLETED = "completed"
   STATUS_IN_REVIEW = "in_review"
+  STATUS_RUNNING = "running"
   SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
 
   # Association

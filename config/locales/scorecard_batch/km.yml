@@ -38,4 +38,6 @@ km:
     please_type_to_confirm: សូមបញ្ចូលលេខកូដនេះ <small class='bg-warning'>%{codes}</small> ដើម្បីបញ្ជាក់ការលុប.
     insert_scorecard_codes_to_confirm: បញ្ចូលលេខកូដដើម្បីបញ្ជាក់ការលុប
     mismatch_code_or_type_or_lngo: អ្នកអាចបញ្ចូលខុសនូវ លេខកូដប័ណ្ណដាក់ពិន្ទុ ប្រភេទប័ណ្ណដាក់ពិន្ទុ ឬអ្នកអនុវត្ត!
-    will_affect_dashboard_result: វានឹងមានផលប៉ះពាល់ដល់ស្ថិតិផ្ទាំងគ្រប់គ្រង
+    will_affect_dashboard_result: នឹងមានផលប៉ះពាល់ដល់ស្ថិតិផ្ទាំងគ្រប់គ្រង
+    will_affect_implementing_scorecard_in_device: នឹងមានផលប៉ះពាល់ដល់លេខកូដប័ណ្ណដែលកំពុងអនុវត្តលើឧបករណ៍
+    accept_consequence_note: "ចំណាំ៖ ប្រសិនបើអ្នកយល់ព្រម មានន័យថាអ្នកទទួលយកផលប៉ះពាល់ដែលបានជូនដំណឹងខាងលើ"

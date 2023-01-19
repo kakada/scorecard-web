@@ -38,4 +38,6 @@ en:
     please_type_to_confirm: Please insert the code <small class='bg-warning'>%{codes}</small> to confirm delete.
     insert_scorecard_codes_to_confirm: Insert code to confirm delete
     mismatch_code_or_type_or_lngo: You may mismatch scorecard code, scorecard type, or Local NGO!
-    will_affect_dashboard_result: It will be affect dashboard result
+    will_affect_dashboard_result: Will be affect dashboard result
+    will_affect_implementing_scorecard_in_device: Will affect the code being implemented on the device
+    accept_consequence_note: "Note: If you agree, it means that you will accept the above notice."
