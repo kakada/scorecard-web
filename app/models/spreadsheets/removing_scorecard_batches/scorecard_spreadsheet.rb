@@ -8,17 +8,18 @@ module Spreadsheets
       def initialize(program, row)
         @program = program
         @row = row
-        @klass = Struct.new("Scorecard", :code, :local_ngo, :scorecard_type, :status, :valid?, :invalid_reason)
       end
 
       def process
-        @klass.new(
-          scorecard_code,
-          local_ngo_name,
-          scorecard_type_name,
-          removing_scorecard.try(:status),
-          removing_scorecard.present?,
-          (removing_scorecard.present? ? "" : invalid_message)
+        OpenStruct.new(
+          code: scorecard_code,
+          local_ngo: local_ngo_name,
+          scorecard_type: scorecard_type_name,
+          status: removing_scorecard.try(:status),
+          valid?: removing_scorecard.present?,
+          invalid_reason: (removing_scorecard.present? ? "" : invalid_message),
+          planned_start_date: removing_scorecard.try(:planned_start_date),
+          facility: removing_scorecard.try(:facility_name)
         )
       end
 

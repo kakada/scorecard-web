@@ -6,6 +6,8 @@
         %th= t('scorecard.code')
         %th= t('scorecard.scorecard_type')
         %th= t('scorecard.local_ngo')
+        %th= t('scorecard.facility')
+        %th= t('scorecard.planned_start_date')
         %th= t('scorecard.status')
         %th= t('scorecard_batch.is_valid')
 
@@ -20,6 +22,8 @@
           %td= scorecard.code
           %td= scorecard.scorecard_type
           %td= scorecard.local_ngo
+          %td= scorecard.facility
+          %td= timeago(scorecard.planned_start_date).html_safe
           %td= status_html(scorecard)
           %td
             - if scorecard.valid?
