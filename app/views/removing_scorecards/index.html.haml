@@ -35,9 +35,7 @@
                 %td
                   = t("scorecard_batch.removing_short_description", total_item: batch.total_count, total_valid: batch.valid_count)
 
-                %td
-                  = batch.scorecards.pluck(:uuid).join(', ')
-
+                %td= batch.scorecards.pluck(:uuid).join(', ')
                 %td= batch.user_email
                 %td= timeago(batch.created_at, 'datetime').html_safe
 

@@ -2,7 +2,7 @@
 
 class RemovingScorecardsController < ApplicationController
   def index
-    @pagy, @batches = pagy(RemovingScorecardBatch.filter(filter_params).order(updated_at: :desc).includes(:scorecards, :user))
+    @pagy, @batches = pagy(policy_scope(authorize(RemovingScorecardBatch.order(updated_at: :desc).includes(:scorecards, :user))))
   end
 
   def new
@@ -41,10 +41,5 @@ class RemovingScorecardsController < ApplicationController
       else
         redirect_to new_removing_scorecard_url, alert: "There are some invalid records, please check and reimport!"
       end
-    end
-
-    def filter_params
-      params.permit(:keyword)
-            .merge(program_id: current_program.id)
     end
 end

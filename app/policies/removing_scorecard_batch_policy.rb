@@ -2,11 +2,7 @@
 
 class RemovingScorecardBatchPolicy < ApplicationPolicy
   def index?
-    true
-  end
-
-  def show?
-    user.system_admin? || user.program_admin? && (record.program_id == user.program_id)
+    user.program_admin?
   end
 
   def create?
@@ -18,7 +14,7 @@ class RemovingScorecardBatchPolicy < ApplicationPolicy
   end
 
   def destroy?
-    recored.scorecards.blank?
+    false
   end
 
   class Scope < Scope

@@ -34,10 +34,11 @@
           %i.fas.fa-history.drop-menu-icon
           %span= t('scorecard.import_history')
 
-        %a.btn.dropdown-item{ href: new_removing_scorecard_path }
-          %i.fas.fa-minus-circle.dropdown-item-icon
-          %span= t('scorecard.remove_scorecard_from_excel')
+        - if policy(RemovingScorecardBatch).create?
+          %a.btn.dropdown-item{ href: new_removing_scorecard_path }
+            %i.fas.fa-minus-circle.dropdown-item-icon
+            %span= t('scorecard.remove_scorecard_from_excel')
 
-        %a.btn.dropdown-item{ href: removing_scorecards_path }
-          %i.fas.fa-eraser.dropdown-item-icon
-          %span= t('scorecard_batch.removing_scorecard_history')
+          %a.btn.dropdown-item{ href: removing_scorecards_path }
+            %i.fas.fa-eraser.dropdown-item-icon
+            %span= t('scorecard_batch.removing_scorecard_history')
