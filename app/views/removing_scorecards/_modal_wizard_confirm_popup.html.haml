@@ -35,10 +35,14 @@
                   %strong= value.length
                   - if status == Scorecard::STATUS_COMPLETED
                     %small.text-danger= "(#{t('scorecard_batch.will_affect_dashboard_result')})"
+                  - elsif status == Scorecard::STATUS_RUNNING
+                    %small.text-warning= "(#{t('scorecard_batch.will_affect_implementing_scorecard_in_device')})"
 
+          / Cannot undo
           .form-group
             = t('scorecard_batch.this_cannot_undone').html_safe
 
+          / Are you sure?
           .form-group
             = t('scorecard_batch.are_you_sure_to_delete_scorecard').html_safe
 
@@ -46,7 +50,12 @@
 
             = t('scorecard_batch.please_type_to_confirm', codes: confirm_code).html_safe
 
-          = f.input :confirm_removing_scorecard_codes, input_html: {class: 'confirm-input', placeholder: t('scorecard_batch.insert_scorecard_codes_to_confirm'), 'data-codes': confirm_code}, label: false
+          / confirm input
+          = f.input :confirm_removing_scorecard_codes, input_html: {class: 'confirm-input', placeholder: t('scorecard_batch.insert_scorecard_codes_to_confirm'), 'data-codes': confirm_code}, label: false, wrapper_html: { class: 'mb-0'}
+
+          / Note
+          %div
+            %small= t("scorecard_batch.accept_consequence_note")
 
         .modal-footer
           %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
