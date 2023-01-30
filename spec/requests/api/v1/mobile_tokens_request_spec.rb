@@ -7,9 +7,9 @@ RSpec.describe "Api::V1::MobileTokensController", type: :request do
     let!(:program) { create(:program) }
     let(:json_response) { JSON.parse(response.body) }
 
-    context "new token" do
+    context "new device_id" do
       let(:params) {
-        { id: "", token: "abcd", device_id: "a1b2", device_type: "mobile", app_version: "1.0.1", program_id: program.id }
+        { token: "abcd", device_id: "a1b2", device_type: "mobile", app_version: "1.0.1", program_id: program.id }
       }
 
       before {
@@ -18,6 +18,23 @@ RSpec.describe "Api::V1::MobileTokensController", type: :request do
       }
 
       it { expect(response.status).to eq(200) }
+      it { expect(MobileToken.count).to eq(1) }
+    end
+
+    context "existing device_id" do
+      let!(:mobile_token) { create(:mobile_token, token: "abcd", device_id: "a1b2", device_type: "mobile", app_version: "1.0.1", program_id: program.id) }
+      let(:params) {
+        { token: "abcdefgh", device_id: "a1b2", device_type: "mobile", app_version: "1.0.2", program_id: program.id }
+      }
+
+      before {
+        headers = { "ACCEPT" => "application/json" }
+        put "/api/v1/mobile_tokens", params: { mobile_token: params }, headers: headers
+      }
+
+      it { expect(response.status).to eq(200) }
+      it { expect(MobileToken.count).to eq(1) }
+      it { expect(mobile_token.reload.token).to eq("abcdefgh") }
     end
   end
 end
