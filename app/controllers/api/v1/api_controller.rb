@@ -20,6 +20,12 @@ module Api
         raise ::V1::Exceptions::RoutingError.new(request.method, params[:path])
       end
 
+      def append_info_to_payload(payload)
+        super
+        payload[:current_user_id] = current_user.try(:id)
+        payload[:remote_ip] = request.remote_ip
+      end
+
       private
         def restrict_access
           @current_user = User.from_authentication_token(auth_token)
