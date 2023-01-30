@@ -5,7 +5,7 @@
     = render partial: "shared/no_data", locals: { items: @pdf_templates, url: new_pdf_template_path, label: t("pdf_template.new_pdf_template") }
 
     - if @pdf_templates.present?
-      = render "shared/pagination_title", objects: @pdf_templates, url: new_pdf_template_path, label: t('shared.add_new'), hide_pagy: true
+      = render "shared/pagination_title", objects: @pdf_templates, url: new_pdf_template_path, label: t('shared.add_new', name: t('pdf_template.pdf_template')), hide_pagy: true
 
       .table-responsive
         %table.table.table-hover

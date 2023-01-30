@@ -39,7 +39,7 @@
 
     - if policy(Message).index? || policy(MobileNotification).index?
       %li.nav-item{ class: [css_active_class('messages'), css_nested_active_class('messages'), css_active_class('mobile_notifications')] }
-        - url = current_user.system_admin? ? mobile_notifications_path : messages_path
+        - url = current_user.system_admin? || current_user.staff? ? mobile_notifications_path : messages_path
         %a.nav-link{ :href => url }
           %i.far.fa-fw.fa-bell
           %span= t("sidebar.notification")

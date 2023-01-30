@@ -83,6 +83,7 @@ class User < ApplicationRecord
            dependent: :delete_all # or :destroy if you need callbacks
 
   # Validation
+  validates :email, presence: true
   validates :role, presence: true
   validates :program_id, presence: true, unless: -> { system_admin? }
   validates :local_ngo_id, presence: true, if: -> { lngo? }
