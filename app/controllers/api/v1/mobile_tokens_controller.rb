@@ -6,7 +6,7 @@ module Api
       skip_before_action :restrict_access
 
       def update
-        @token = MobileToken.find_or_initialize_by(id: token_params["id"])
+        @token = MobileToken.find_or_initialize_by(device_id: token_params["device_id"])
 
         if @token.update(token_params)
           render json: @token
@@ -18,7 +18,7 @@ module Api
       private
         def token_params
           params.require(:mobile_token).permit(
-            :id, :token, :program_id, :device_id, :device_type, :app_version
+            :token, :program_id, :device_id, :device_type, :app_version
           )
         end
     end
