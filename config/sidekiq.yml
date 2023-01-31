@@ -10,3 +10,9 @@ production:
   - ["index_document", 2]
 
 :max_retries: 15
+
+:scheduler:
+  :schedule:
+    clean_old_activity_logs:
+      cron: '0 0 0 * * *'   # Runs at hour 00:00:00
+      class: ActivityLogsCleaningWorker
