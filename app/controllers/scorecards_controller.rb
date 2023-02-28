@@ -20,7 +20,7 @@ class ScorecardsController < ApplicationController
         @scorecards = policy_scope(Scorecard.filter(filter_params).order("#{sort_column} #{sort_direction}"))
 
         if @scorecards.length > Settings.max_download_scorecard_record
-          flash[:alert] = t("scorecard.file_size_is_too_big")
+          flash[:alert] = t("scorecard.file_size_is_too_big", max_record: Settings.max_download_scorecard_record)
           redirect_to scorecards_url
         else
           render xlsx: "index", filename: "scorecards_#{Time.new.strftime('%Y%m%d_%H_%M_%S')}.xlsx"
