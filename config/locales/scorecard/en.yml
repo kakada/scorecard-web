@@ -119,7 +119,7 @@ en:
     completed_date: Completed date
     mark_as_completed: Mark as completed
     selected: Selected
-    file_size_is_too_big: The file size is too big, please filter it!
+    file_size_is_too_big: Download size too large, please filter. You can download up to %{max_record} records
     download_excel: Download as Excel(.xlsx)
     scorecard_id: Scorecard ID
     proposed_indicator_id: Proposed Indicator ID

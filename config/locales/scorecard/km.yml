@@ -119,7 +119,7 @@ km:
     completed_date: កាលបរិច្ឆេទបញ្ចប់
     mark_as_completed: សម្គាល់ថាបានបញ្ចប់
     selected: ត្រូវបានជ្រើសរើស
-    file_size_is_too_big: ទំហំឯកសារធំពេកសូមច្រោះវា!
+    file_size_is_too_big: ទំហំឯកសារធំពេក សូមធ្វើការច្រោះ អ្នកអាចទាញយកធំបំផុត %{max_record} ជួរដេក!
     download_excel: ទាញយកជា Excel(.xlsx)
     scorecard_id: លេខសម្គាល់ប័ណ្ណដាក់ពិន្ទុ
     proposed_indicator_id: លេខសម្គាល់លក្ខណៈវិនិច្ឆ័យដែលបានស្នើ
