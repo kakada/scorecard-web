@@ -24,7 +24,7 @@ class Spreadsheets::BaseSpreadsheet
     end
 
     def accepted_formats
-      [".xls", ".xlsx"]
+      [".xlsx"]
     end
 
     def parse_string(data)
