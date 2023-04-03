@@ -8,13 +8,18 @@
           .input-group-text
             %i.fas.fa-search
 
+    .form-group.search-input.mr-2
+      .tooltips{ 'data-toggle' => 'tooltip', 'data-placement': 'top' }
+        - options = policy_scope(LocalNgo).pluck(:name, :id)
+        = select_tag 'local_ngo_ids[]', options_for_select(options, params[:local_ngo_ids]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('user.local_ngos_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("user.any_local_ngo"), class: 'selectpicker form-control'
+
     - if current_user.system_admin?
       .form-group.search-input
         .tooltips{ 'data-toggle' => 'tooltip', 'data-placement': 'top' }
           - options = Program.pluck(:name, :id)
           = select_tag 'program_ids[]', options_for_select(options, params[:program_ids]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('user.programs_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("user.any_program"), class: 'selectpicker form-control'
 
-      %div
-        %button.btn.btn-primary.ml-md-2{type: :submit}
-          %i.fas.fa-search
-          %span.d-none.d-lg-inline= t('shared.search')
+    %div
+      %button.btn.btn-primary.ml-md-2{type: :submit}
+        %i.fas.fa-search
+        %span.d-none.d-lg-inline= t('shared.search')

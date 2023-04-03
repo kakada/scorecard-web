@@ -44,7 +44,7 @@
                 %li= "#{t('scorecard.scorecard_type')}: " + t("scorecard.#{rc.scorecard_type}")
 
               - if rc.province_id.present?
-                %li= "#{t("scorecard.location")}: #{rc.location_name}"
+                %li= "#{t("scorecard.location")}: #{scorecard_location(rc)}"
 
               - if rc.primary_school_code.present?
                 %li= "#{t('scorecard.primary_school')}: #{rc.primary_school.name}"
