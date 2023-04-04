@@ -107,6 +107,7 @@ class User < ApplicationRecord
     scope = all
     scope = scope.where("email LIKE ?", "%#{params[:email]}%") if params[:email].present?
     scope = scope.where(program_id: params[:program_ids]) if params[:program_ids].present?
+    scope = scope.where(local_ngo_id: params[:local_ngo_ids]) if params[:local_ngo_ids].present?
     scope = scope.only_deleted if params[:archived] == "true"
     scope
   end

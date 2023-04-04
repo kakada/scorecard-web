@@ -97,6 +97,6 @@ class UsersController < ApplicationController
     end
 
     def filter_params
-      params.permit(:email, :archived, program_ids: [])
+      params.permit(:email, :archived, program_ids: [], local_ngo_ids: [])
     end
 end

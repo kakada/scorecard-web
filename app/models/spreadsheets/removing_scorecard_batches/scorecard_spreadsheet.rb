@@ -25,7 +25,7 @@ module Spreadsheets
 
       private
         def invalid_message
-          I18n.t('scorecard_batch.mismatch_code_or_type_or_lngo')
+          I18n.t("scorecard_batch.mismatch_code_or_type_or_lngo")
         end
 
         def removing_scorecard

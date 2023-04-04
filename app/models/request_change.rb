@@ -35,7 +35,7 @@ class RequestChange < ApplicationRecord
   belongs_to :scorecard, primary_key: "uuid", foreign_key: "scorecard_uuid"
   belongs_to :proposer, class_name: "User"
   belongs_to :reviewer, class_name: "User", optional: true
-  belongs_to :primary_school, foreign_key: :primary_school_code, optional: true
+  belongs_to :dataset, optional: true
 
   validates :changed_reason, presence: true
   validates :reviewer, presence: true, if: -> { approved? || rejected? }
@@ -44,7 +44,7 @@ class RequestChange < ApplicationRecord
 
   validates :district_id, presence: true, if: -> { province_id.present? }
   validates :commune_id, presence: true, if: -> { province_id.present? }
-  validates :primary_school_code, presence: true, if: -> { province_id.present? && scorecard.facility.dataset.present? }
+  validates :dataset_id, presence: true, if: -> { province_id.present? && scorecard.facility.dataset.present? }
 
   before_validation :set_resolved_date, if: -> { approved? || rejected? }
   before_create :set_status
@@ -52,6 +52,8 @@ class RequestChange < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
   scope :submitteds, -> { where(status: "submitted") }
+
+  delegate :name, :code, to: :dataset, prefix: :dataset, allow_nil: true
 
   def location_name(address = "address_km")
     return if commune_id.blank?
@@ -71,7 +73,6 @@ class RequestChange < ApplicationRecord
       params[:province_id] = province_id if province_id.present? && scorecard.province_id != province_id
       params[:district_id] = district_id if district_id.present? && scorecard.district_id != district_id
       params[:commune_id] = commune_id if commune_id.present? && scorecard.commune_id != commune_id
-      params[:primary_school_code] = primary_school_code if primary_school_code.present? && scorecard.primary_school_code != primary_school_code
       params[:dataset_id] = dataset_id if dataset_id.present? && scorecard.dataset_id != dataset_id
       params
     end
