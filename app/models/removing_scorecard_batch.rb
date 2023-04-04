@@ -62,7 +62,7 @@ class RemovingScorecardBatch < ApplicationRecord
     end
 
     def secure_confirmation
-      return if removing_scorecard_codes.present? && removing_scorecard_codes.values_at(0,-1).join == confirm_removing_scorecard_codes
+      return if removing_scorecard_codes.present? && removing_scorecard_codes.values_at(0, -1).join == confirm_removing_scorecard_codes
 
       errors.add :scorecards, :mismatch, message: "mismatch removing scorecard codes"
 

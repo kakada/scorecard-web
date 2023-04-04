@@ -32,7 +32,7 @@ RSpec.describe RemovingScorecardBatch, type: :model do
     end
 
     context "removing_scorecard_codes is present but miss match confirm_removing_scorecard_codes" do
-      subject { described_class.new(removing_scorecard_codes: ['123456'], confirm_removing_scorecard_codes: "234567,234567") }
+      subject { described_class.new(removing_scorecard_codes: ["123456"], confirm_removing_scorecard_codes: "234567,234567") }
 
       it "has errors miss matching scorecard codes" do
         subject.valid?
@@ -41,7 +41,7 @@ RSpec.describe RemovingScorecardBatch, type: :model do
     end
 
     context "removing_scorecard_codes is present and match confirm_removing_scorecard_codes" do
-      subject { described_class.new(removing_scorecard_codes: ['123456'], confirm_removing_scorecard_codes: "123456123456") }
+      subject { described_class.new(removing_scorecard_codes: ["123456"], confirm_removing_scorecard_codes: "123456123456") }
 
       it "has errors miss matching scorecard codes" do
         subject.valid?

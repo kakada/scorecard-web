@@ -4,8 +4,8 @@ require "rails_helper"
 
 RSpec.describe Spreadsheets::RemovingScorecardBatches::ScorecardSpreadsheet do
   describe "#process" do
-    let!(:lngo) { create(:local_ngo, code: 'lngo11') }
-    let!(:scorecard) { create(:scorecard, uuid: '123456', local_ngo: lngo, scorecard_type: 'self_assessment', program: lngo.program) }
+    let!(:lngo) { create(:local_ngo, code: "lngo11") }
+    let!(:scorecard) { create(:scorecard, uuid: "123456", local_ngo: lngo, scorecard_type: "self_assessment", program: lngo.program) }
     let!(:scorecard_types) { scorecard.program.create_program_scorecard_types }
     let(:spreadsheed) { Spreadsheets::RemovingScorecardBatches::ScorecardSpreadsheet.new(scorecard.program, row) }
 

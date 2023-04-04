@@ -53,7 +53,7 @@ class RequestChange < ApplicationRecord
   default_scope { order(created_at: :desc) }
   scope :submitteds, -> { where(status: "submitted") }
 
-  delegate  :name, :code, to: :dataset, prefix: :dataset, allow_nil: true
+  delegate :name, :code, to: :dataset, prefix: :dataset, allow_nil: true
 
   def location_name(address = "address_km")
     return if commune_id.blank?
