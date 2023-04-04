@@ -1,8 +1,25 @@
 # frozen_string_literal: true
 
 class LocalNgosController < ApplicationController
+  helper_method :filter_params
+
   def index
-    @pagy, @local_ngos = pagy(policy_scope(authorize LocalNgo.filter(filter_params).order(sort_param)))
+    respond_to do |format|
+      format.html {
+        @pagy, @local_ngos = pagy(policy_scope(authorize LocalNgo.filter(filter_params).order(sort_param).includes(:scorecards)))
+      }
+
+      format.xlsx {
+        @local_ngos = policy_scope(authorize LocalNgo.filter(filter_params).order(sort_param))
+
+        if @local_ngos.length > Settings.max_download_record
+          flash[:alert] = t("shared.file_size_is_too_big", max_record: Settings.max_download_record)
+          redirect_to local_ngos_url
+        else
+          render xlsx: "index", filename: "local_ngos_#{Time.new.strftime('%Y%m%d_%H_%M_%S')}.xlsx"
+        end
+      }
+    end
   end
 
   def show

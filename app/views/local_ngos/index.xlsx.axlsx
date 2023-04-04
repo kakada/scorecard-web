@@ -1,0 +1,53 @@
+# frozen_string_literal: true
+
+wb = xlsx_package.workbook
+
+# Sheet: LocalNgo
+wb.add_worksheet(name: "LocalNgo") do |sheet|
+  sheet.add_row [
+    t("local_ngo.code"),
+    t("shared.name"),
+    t("local_ngo.address"),
+    t("local_ngo.target_provinces"),
+    t("shared.created_at")
+  ]
+
+  @local_ngos.each do |local_ngo|
+    sheet.add_row [
+      local_ngo.code,
+      local_ngo.name,
+      local_ngo.address,
+      local_ngo.target_provinces,
+      l(local_ngo.created_at)
+    ], types: [:string]
+  end
+end
+
+# Sheet: Cafs
+wb.add_worksheet(name: "Cafs") do |sheet|
+  sheet.add_row [
+    t("caf.local_ngo_code"),
+    t("caf.name"),
+    t("caf.address"),
+    t("caf.tel"),
+    t("caf.date_of_birth"),
+    t("caf.educational_background"),
+    t("caf.scorecard_knowledge"),
+    t("shared.created_at")
+  ]
+
+  @local_ngos.includes(cafs: [:educational_background, :scorecard_knowledges]).each do |local_ngo|
+    local_ngo.cafs.each do |caf|
+      sheet.add_row [
+        local_ngo.code,
+        caf.name,
+        caf.address,
+        caf.tel,
+        caf.date_of_birth,
+        caf.educational_background_name,
+        caf.scorecard_knowledges.pluck(:"shortcut_name_#{I18n.locale}").join("; "),
+        l(caf.created_at)
+      ], types: [:string, :string, :string, :string]
+    end
+  end
+end

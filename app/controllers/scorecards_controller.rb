@@ -8,7 +8,7 @@ class ScorecardsController < ApplicationController
       format.html {
         @pagy, @scorecards = pagy(
           policy_scope(Scorecard.filter(filter_params)
-            .order("#{sort_column} #{sort_direction}")
+            .order(sort_param)
             .includes(
               :facility, :local_ngo, :request_changes, :primary_school, :scorecard_progresses, program: :program_scorecard_types
             )
@@ -17,7 +17,7 @@ class ScorecardsController < ApplicationController
       }
 
       format.xlsx {
-        @scorecards = policy_scope(Scorecard.filter(filter_params).order("#{sort_column} #{sort_direction}"))
+        @scorecards = policy_scope(Scorecard.filter(filter_params).order(sort_param))
 
         if @scorecards.length > Settings.max_download_scorecard_record
           flash[:alert] = t("scorecard.file_size_is_too_big", max_record: Settings.max_download_scorecard_record)
