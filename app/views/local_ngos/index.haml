@@ -7,11 +7,12 @@
         = render 'filter'
 
       - if policy(LocalNgo).create?
-        .text-right
+        .text-right.d-flex.align-items-center
+          .mr-1= render "shared/buttons/download_button", url: local_ngos_path(filter_params.merge(format: :xlsx))
+
+          = render "shared/buttons/add_new_button", name: t("local_ngo.local_ngos"), url: new_local_ngo_path
+
           = render "more_option"
-          %a.my-2.my-md-0.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_path }
-            %i.fas.fa-plus.fa-sm.text-white-50
-            = t("local_ngo.add_new")
 
     = render partial: "shared/no_data", locals: { items: @local_ngos, url: new_local_ngo_path, label: t("local_ngo.add_new") }
 

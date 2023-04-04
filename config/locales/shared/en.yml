@@ -73,3 +73,4 @@ en:
     description: Description
     reason: Reason
     download_excel: Download as Excel(.xlsx)
+    file_size_is_too_big: Download size too large, please filter. You can download up to %{max_record} records
