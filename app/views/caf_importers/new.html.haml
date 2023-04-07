@@ -1,0 +1,3 @@
+= render "shared/headers/progress_arrow_header", title: "#{@local_ngo.name}: Import cafs with excel"
+
+= render "shared/forms/wizard_form", cancel_url: local_ngo_cafs_path(local_ngo_id: @local_ngo.id), sample_url: sample_local_ngo_caf_importers_path(format: 'xlsx', local_ngo_id: @local_ngo.id), item: @batch, form_url: local_ngo_caf_importers_path(local_ngo_id: @local_ngo.id)

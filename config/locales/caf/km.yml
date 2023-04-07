@@ -20,3 +20,6 @@ km:
     scorecard_knowledge: ចំណេះដឹងគណនេយ្យភាពសង្គម
     lessons_selected: មេរៀនត្រូវបានជ្រើសរើស
     local_ngo_code: លេខកូដអ្នកអនុវត្ត (Local Ngo)
+    based_location: ទីតាំងប្រចាំការ
+    import_success: "Cafs ចំនួន %{count} ត្រូវបានបញ្ចូលដោយជោគជ័យ"
+    some_invalid_records: មានទិន្នន័យ មួយចំនួនមិនត្រឹមត្រូវ សូមធ្វើការត្រួតពិនិត្យ និងបញ្ចូលឡើងវិញ!

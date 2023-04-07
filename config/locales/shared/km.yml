@@ -74,3 +74,12 @@ km:
     reason: មូលហេតុ
     download_excel: ទាញយកជា Excel(.xlsx)
     file_size_is_too_big: ទំហំឯកសារធំពេក សូមធ្វើការច្រោះ អ្នកអាចទាញយកធំបំផុត %{max_record} ជួរដេក!
+    reference: ឯកសារយោង
+    imported_by: អ្នកអនុវត្ត
+    imported_at: កាលបរិច្ឆេទអនុវត្ត
+    new: ថ្មី
+    invalid: មិនត្រឹមត្រូវ
+    at_least_one_valid_item: ត្រូវមានទិន្នន័យដែលត្រឹមត្រូវយ៉ាងហោចណាស់ 1
+    yes_i_approve: "បាទ/ចាស ខ្ញុំយល់ព្រម"
+    confirm_message: "មានទិន្នន័យសរុប <b>%{total_count}</b> ក្នុងខេត្តចំនួន <b>%{province_count}</b> នឹងត្រូវបញ្ចូលក្នុងប្រព័ន្ធ! តើអ្នកយល់ព្រមឬទេ?"
+    is_valid: ត្រឹមត្រូវឬទេ?

@@ -17,6 +17,9 @@
 #  educational_background_id :string
 #  scorecard_knowledge_id    :string
 #  deleted_at                :datetime
+#  province_id               :string
+#  district_id               :string
+#  commune_id                :string
 #
 
 FactoryBot.define do
@@ -26,6 +29,9 @@ FactoryBot.define do
     date_of_birth { rand(18..70).years.ago }
     tel           { FFaker::PhoneNumber.phone_number }
     address       { FFaker::Address.street_name }
+    commune_id    { Pumi::Commune.all.sample.id }
+    district_id   { commune_id[2..3] }
+    province_id   { commune_id[0..1] }
     local_ngo
   end
 end

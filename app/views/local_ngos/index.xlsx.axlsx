@@ -5,6 +5,7 @@ wb = xlsx_package.workbook
 # Sheet: LocalNgo
 wb.add_worksheet(name: "LocalNgo") do |sheet|
   sheet.add_row [
+    t("shared.number"),
     t("local_ngo.code"),
     t("shared.name"),
     t("local_ngo.address"),
@@ -12,8 +13,9 @@ wb.add_worksheet(name: "LocalNgo") do |sheet|
     t("shared.created_at")
   ]
 
-  @local_ngos.each do |local_ngo|
+  @local_ngos.each_with_index do |local_ngo, index|
     sheet.add_row [
+      index + 1,
       local_ngo.code,
       local_ngo.name,
       local_ngo.address,
@@ -26,9 +28,10 @@ end
 # Sheet: Cafs
 wb.add_worksheet(name: "Cafs") do |sheet|
   sheet.add_row [
+    t("shared.number"),
     t("caf.local_ngo_code"),
     t("caf.name"),
-    t("caf.address"),
+    t("caf.based_location"),
     t("caf.tel"),
     t("caf.date_of_birth"),
     t("caf.educational_background"),
@@ -37,11 +40,12 @@ wb.add_worksheet(name: "Cafs") do |sheet|
   ]
 
   @local_ngos.includes(cafs: [:educational_background, :scorecard_knowledges]).each do |local_ngo|
-    local_ngo.cafs.each do |caf|
+    local_ngo.cafs.each_with_index do |caf, index|
       sheet.add_row [
+        index + 1,
         local_ngo.code,
         caf.name,
-        caf.address,
+        caf.based_location_name,
         caf.tel,
         caf.date_of_birth,
         caf.educational_background_name,

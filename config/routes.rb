@@ -89,6 +89,10 @@ Rails.application.routes.draw do
       post :import, on: :collection
     end
 
+    resources :caf_importers, except: [:update, :edit], param: :code do
+      get :sample, on: :collection
+    end
+
     post :import, on: :collection
   end
 

@@ -1,0 +1,18 @@
+#confirmModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h5.modal-title
+          %i.fas.fa-exclamation-triangle.text-danger
+          %span.title= t('caf_batch.confirm_title')
+
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+
+      .modal-body.text-left
+        = t('shared.confirm_message', total_count: @batch.valid_count, province_count: @batch.province_count).html_safe
+
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
+
+        = f.submit t('shared.yes_i_approve'), class: 'btn btn-primary'

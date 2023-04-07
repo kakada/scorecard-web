@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_12_033307) do
+ActiveRecord::Schema.define(version: 2023_04_06_062607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -35,6 +35,18 @@ ActiveRecord::Schema.define(version: 2023_01_12_033307) do
     t.index ["user_id"], name: "index_activity_logs_on_user_id"
   end
 
+  create_table "caf_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.integer "total_count", default: 0
+    t.integer "valid_count", default: 0
+    t.integer "new_count", default: 0
+    t.integer "province_count", default: 0
+    t.integer "user_id"
+    t.string "reference"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "cafs", force: :cascade do |t|
     t.string "name"
     t.string "sex"
@@ -48,6 +60,9 @@ ActiveRecord::Schema.define(version: 2023_01_12_033307) do
     t.string "educational_background_id"
     t.string "scorecard_knowledge_id"
     t.datetime "deleted_at"
+    t.string "province_id"
+    t.string "district_id"
+    t.string "commune_id"
     t.index ["deleted_at"], name: "index_cafs_on_deleted_at"
   end
 
@@ -173,6 +188,13 @@ ActiveRecord::Schema.define(version: 2023_01_12_033307) do
     t.integer "org_id"
     t.string "org_token"
     t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "importing_cafs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "caf_id"
+    t.uuid "caf_batch_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -393,7 +415,7 @@ ActiveRecord::Schema.define(version: 2023_01_12_033307) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "datetime_format", default: "DD-MM-YYYY"
+    t.string "datetime_format", default: "YYYY-MM-DD"
     t.boolean "enable_email_notification", default: false
     t.string "shortcut_name"
     t.text "dashboard_user_emails", default: [], array: true

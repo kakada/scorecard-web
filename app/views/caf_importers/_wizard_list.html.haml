@@ -1,0 +1,40 @@
+.table-responsive
+  %table.table.table-hover.pretty
+    %thead
+      %tr
+        %th #
+        %th= t("caf.name")
+        %th= t('caf.gender')
+        %th= t('caf.tel')
+        %th= t('caf.date_of_birth')
+        %th= t('caf.based_location')
+        %th= t('caf.educational_background')
+        %th= t('caf.scorecard_knowledge')
+        %th= t('shared.is_valid')
+    %tbody
+      - @batch.importing_cafs.each_with_index do |importing_caf, index|
+        - caf = importing_caf.caf
+        - if caf.valid?
+          = f.fields_for :importing_cafs, importing_caf do |ff|
+            = ff.hidden_field :caf_id
+            = ff.fields_for :caf, caf do |fff|
+              = render 'field_for_caf', f: fff
+        %tr
+          %td= index + 1
+          %td= caf.name
+          %td= caf.sex
+          %td= caf.tel
+          %td= dob(caf.date_of_birth).html_safe
+          %td= caf.based_location_name
+          %td= caf.educational_background_name
+          %td= scorecard_knowledges_html(caf).html_safe
+
+          / Validation status
+          %td
+            - if caf.valid?
+              %i.fas.fa-check.text-success
+
+            - else
+              %span.text-danger.d-flex.align-items-center{'data-toggle' => 'tooltip', 'data-placement': 'left', title: caf.errors.full_messages.join(', '), style: 'min-width: 80px;' }
+                %i.fas.fa-times.text-danger
+                %small.ml-1= t('shared.reason')

@@ -1,0 +1,8 @@
+en:
+  caf_batch:
+    importing_caf_history: ប្រវត្តវនៃការបញ្ចូល Cafs តាម Excel
+    caf_batch: Cafs batch
+    imported_cafs: ចំនួន Cafs
+    short_description: "ចំនួនប័ណ្ណដាក់ពិន្ទុសរុប: %{total_count} (ត្រឹមត្រូវ: %{valid_count})"
+    valid_data_in_province: "ទិន្នន័យត្រឹមត្រូវមានក្នុងខេត្តចំនួន <b>%{province_count}</b>"
+    confirm_title: បញ្ចាក់ការបញ្ចូល Cafs

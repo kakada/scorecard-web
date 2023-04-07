@@ -17,13 +17,22 @@
 #  educational_background_id :string
 #  scorecard_knowledge_id    :string
 #  deleted_at                :datetime
+#  province_id               :string
+#  district_id               :string
+#  commune_id                :string
 #
 require "rails_helper"
 
 RSpec.describe Caf, type: :model do
   it { is_expected.to belong_to(:local_ngo) }
+  it { is_expected.to have_many(:importing_cafs) }
+  it { is_expected.to have_many(:caf_batches).through(:importing_cafs) }
+
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_inclusion_of(:sex).in_array(%w(female male other)).allow_nil }
+  it { is_expected.to validate_presence_of(:province_id) }
+  it { is_expected.to validate_presence_of(:district_id) }
+  it { is_expected.to validate_presence_of(:commune_id) }
 
   describe "soft delete" do
     let(:caf) { create(:caf) }

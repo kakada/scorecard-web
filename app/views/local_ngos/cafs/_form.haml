@@ -1,10 +1,5 @@
 .w-50.view-center
   = simple_form_for [@local_ngo, @caf] do |f|
-    .d-flex
-      .control{style: 'margin-right: -16px;'}
-        = form_check_toggle({name: "caf[actived]", checked: f.object.actived}).html_safe
-      %label.flex-1= t('caf.set_active')
-
     = f.input :name, label: t('local_ngo.name')
 
     .form-group
@@ -17,8 +12,42 @@
 
     = render "shared/date_field", f: f, field: :date_of_birth, label: t('caf.date_of_birth')
     = f.input :tel, label: t('caf.tel')
-    = f.input :address, label: t('caf.address')
-    = f.input :educational_background_id, collection: EducationalBackground.pluck(:"name_#{I18n.locale}", :id), label: t('caf.educational_background'), prompt: t('shared.please_select')
+
+    .form-group
+      %label= t('caf.based_location')
+
+      .d-flex.flex-row.justify-content-between
+        #province.flex-1
+          = f.label(:province_id) do
+            %small.text-muted
+              = t('local_ngo.province')
+              %abbr{title: "required"} *
+          = f.hidden_field(:province_id)
+          = f.select(:province_id, [], {:include_blank => t("shared.please_select")}, {:data => {:pumi_select_target => "district", :pumi_select_collection_url => pumi.provinces_path, :pumi_select_collection_label_method => "name_#{I18n.locale}", :pumi_select_collection_value_method => "id", :pumi_select_populate_on_load => true, :pumi_select_has_hidden_value => true}, class: 'form-control custom-select'})
+
+          .invalid-feedback.d-block= f.object.errors[:province_id].join(", ") if f.object.errors[:province_id].present?
+
+        #district.flex-1.mx-1
+          = f.label(:district_id) do
+            %small.text-muted
+              = t('local_ngo.district')
+              %abbr{title: "required"} *
+          = f.hidden_field(:district_id)
+          = f.select(:district_id, [], {:include_blank => t("shared.please_select")}, {:data => {:pumi_select_id => "district", :pumi_select_target => "commune", :pumi_select_collection_url => pumi.districts_path(:province_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_#{I18n.locale}", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#district", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control custom-select'})
+
+          .invalid-feedback.d-block= f.object.errors[:district_id].join(", ") if f.object.errors[:district_id].present?
+
+        #commune.flex-1
+          = f.label(:commune_id) do
+            %small.text-muted
+              = t('local_ngo.commune')
+              %abbr{title: "required"} *
+          = f.hidden_field(:commune_id)
+          = f.select(:commune_id, [], {:include_blank => t("shared.please_select")}, {:data => {:pumi_select_id => "commune", :pumi_select_collection_url => pumi.communes_path(:district_id => "FILTER"), :pumi_select_collection_url_filter_interpolation_key => "FILTER", :pumi_select_collection_label_method => "name_#{I18n.locale}", :pumi_select_collection_value_method => "id", :pumi_select_disabled_target => "#commune", :pumi_select_disabled_class => "my-disabled-class", :pumi_select_has_hidden_value => true}, class: 'form-control custom-select'})
+
+          .invalid-feedback.d-block= f.object.errors[:commune_id].join(", ") if f.object.errors[:commune_id].present?
+
+    = f.input :educational_background_id, collection: EducationalBackground.pluck(:"name_#{I18n.locale}", :id), label: t('caf.educational_background'), prompt: t('shared.please_select'), input_html: {class: 'custom-select'}
 
     .form-group
       %label= t('caf.scorecard_knowledge')
