@@ -6,13 +6,7 @@
       .flex-grow-1
         = render 'filter'
 
-      - if policy(LocalNgo).create?
-        .text-right.d-flex.align-items-center
-          .mr-1= render "shared/buttons/download_button", url: local_ngos_path(filter_params.merge(format: :xlsx))
-
-          = render "shared/buttons/add_new_button", name: t("local_ngo.local_ngos"), url: new_local_ngo_path
-
-          = render "more_option"
+      = render "more_option"
 
     = render partial: "shared/no_data", locals: { items: @local_ngos, url: new_local_ngo_path, label: t("local_ngo.add_new") }
 
@@ -58,8 +52,6 @@
                         = link_to local_ngo_path(local_ngo), remote: true, class: ["btn btn-circle btn-sm btn-outline-danger", ("disabled" if local_ngo.locked?)] do
                           %i.fas.fa-trash-alt
 
-    - if @pagy.pages > 1
-      .pagy-wrapper.justify-content-lg-end.justify-content-center
-        != pagy_bootstrap_compact_nav(@pagy)
+    = render "shared/footers/pagination"
 
 = render "shared/modal_confirm"

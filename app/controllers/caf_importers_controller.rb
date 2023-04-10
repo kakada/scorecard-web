@@ -5,7 +5,7 @@ class CafImportersController < ApplicationController
   before_action :set_caf_batch, only: [:edit, :update, :destroy]
 
   def index
-    @pagy, @batches = pagy(authorize CafBatch.filter(filter_params).order(updated_at: :desc).includes(:cafs))
+    @pagy, @batches = pagy(policy_scope(authorize CafBatch.filter(filter_params).order(updated_at: :desc).includes(:cafs)))
   end
 
   def new

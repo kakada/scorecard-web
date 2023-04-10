@@ -1,0 +1,43 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t('local_ngo_batch.importing_local_ngo_history')
+
+  .d-flex.mt-3.mt-md-0.justify-content-end
+    = render "shared/buttons/back_button", url: local_ngos_path
+    = render "shared/buttons/add_new_button", url: new_local_ngo_importer_path, name: t('local_ngo_batch.local_ngo_batch')
+
+.card.shadow.mb-4
+  .card-body
+    = render partial: "shared/no_data", locals: { items: @batches }
+
+    - if @batches.present?
+      = render "shared/pagination_title", objects: @batches
+
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
+            %tr
+              %th #
+              %th= t("shared.code")
+              %th= t("shared.reference")
+              %th= t("shared.description")
+              %th= t("shared.imported_by")
+              %th= t('shared.imported_at')
+          %tbody
+            - @batches.each_with_index do |batch, index|
+              %tr
+                %td= index + 1
+                %td= batch.code
+                %td
+                  = link_to batch.reference_identifier, batch.reference_url, class: "text-primary", target: "_blank" if batch.reference_url.present?
+
+                %td
+                  = t("caf_batch.short_description", total_count: batch.total_count, valid_count: batch.valid_count)
+
+                %td= batch.user_email
+                %td= timeago(batch.created_at, 'datetime').html_safe
+
+    - if @pagy.pages > 1
+      .pagy-wrapper.justify-content-lg-end.justify-content-center
+        != pagy_bootstrap_compact_nav(@pagy)
+
+= render "shared/modal_confirm"

@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+wb = xlsx_package.workbook
+
+# Sheet: LocalNgo
+wb.add_worksheet(name: "LocalNgo") do |sheet|
+  sheet.add_row %w[name commune_id target_province_ids website]
+  sheet.add_row ["LNGO11", "010201", "01,02", "https://example.com"], types: [:string, :string, :string, :string]
+  sheet.add_row ["LNGO1", "010202", "01,011", "https://example2.com"], types: [:string, :string, :string, :string]
+  sheet.add_row ["LNGO123", "01020201", "01,011", "https://example2.com"], types: [:string, :string, :string, :string]
+  sheet.add_row ["LNGO222", "01020201", nil, "https://example2.com"], types: [:string, :string, :string, :string]
+end
+
+wb.add_worksheet(name: "REF-Commune") do |sheet|
+  sheet.add_row %w[province_id province_name district_id district_name commune_id commune_name]
+
+  Pumi::Commune.all.each do |commune|
+    sheet.add_row [
+      commune.province_id,
+      commune.province.name_km,
+      commune.district_id,
+      commune.district.name_km,
+      commune.id,
+      commune.name_km
+    ], types: [:string, :string, :string, :string, :string, :string]
+  end
+end

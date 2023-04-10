@@ -18,6 +18,7 @@
 #  target_provinces    :string
 #  website_url         :string
 #  deleted_at          :datetime
+#  local_ngo_batch_id  :uuid
 #
 require "rails_helper"
 

@@ -1,0 +1,6 @@
+km:
+  local_ngo_batch:
+    confirm_message: "មានប័ណ្ណដាក់ពិន្ទុសរុប <b>%{total_count}</b> នឹងត្រូវបញ្ចូលក្នុងប្រព័ន្ធ! តើអ្នកយល់ព្រមឬទេ?"
+    local_ngo_batch: Local Ngos Batch
+    importing_local_ngo_history: ប្រវត្តនៃការបញ្ចូល Local Ngos តាម Excel
+    importing_local_ngo_wizard: ការបញ្ចូល Local Ngos តាម Excel

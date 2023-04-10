@@ -18,7 +18,6 @@
     .d-lg-block.d-none
       != pagy_bootstrap_nav(@pagy)
 
-
   - if url.present? && policy(objects.class.to_s.split("::").first.constantize).create?
     %div
       = link_to url, remote: remote, class: "btn btn-primary btn-sm shadow-sm" do

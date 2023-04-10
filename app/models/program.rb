@@ -40,6 +40,7 @@ class Program < ApplicationRecord
   has_many :scorecard_batches
   has_many :program_scorecard_types
   has_many :removing_scorecard_batches
+  has_many :local_ngo_batches
 
   validates :name, presence: true, uniqueness: true
   validates :shortcut_name, presence: true, uniqueness: true
