@@ -10,9 +10,18 @@
 
     / Download button
     - if policy(Scorecard).index?
-      %a.btn.btn-warning.btn-sm.shadow-sm{ href: scorecards_path(params.permit(:start_date, :scorecard_type , :uuid, :filter, :batch_code, years: [], province_ids: [], local_ngo_ids: [], facility_ids: []).merge(format: :xlsx)), target: '_blank' }
-        %i.fas.fa-download
-        = t('scorecard.download_excel')
+      .btn-group
+        %button.btn.btn-warning.btn-sm.shadow-sm.dropdown-toggle{type: "button", "aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
+
+          %i.fas.fa-download
+          = t('shared.download_excel')
+
+        .dropdown-menu
+          - options = [[t('scorecard.download_in_short'), 'short'], [t('scorecard.download_in_full'), 'full']]
+          - options.each do |option|
+            %a.btn.dropdown-item{href: scorecards_path(filter_params.merge(format: :xlsx, mode: option[1])), target: '_blank'}
+              %i.fas.fa-download.drop-menu-icon
+              %span= option[0]
 
     / Add new button
     - if policy(Scorecard).create?
@@ -22,23 +31,24 @@
 
     / More Options
     - if policy(Scorecard).create?
-      %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-        %i.fas.fa-ellipsis-v
+      .btn-group
+        %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+          %i.fas.fa-ellipsis-v
 
-      .dropdown-menu.dropdown-menu-right
-        %a.btn.dropdown-item{ href: new_scorecard_batch_path }
-          %i.fas.fa-file-import.drop-menu-icon
-          %span= t("scorecard.batch_import")
+        .dropdown-menu.dropdown-menu-right
+          %a.btn.dropdown-item{ href: new_scorecard_batch_path }
+            %i.fas.fa-file-import.drop-menu-icon
+            %span= t("scorecard.batch_import")
 
-        %a.btn.dropdown-item{ href: scorecard_batches_path }
-          %i.fas.fa-history.drop-menu-icon
-          %span= t('scorecard.import_history')
+          %a.btn.dropdown-item{ href: scorecard_batches_path }
+            %i.fas.fa-history.drop-menu-icon
+            %span= t('scorecard.import_history')
 
-        - if policy(RemovingScorecardBatch).create?
-          %a.btn.dropdown-item{ href: new_removing_scorecard_path }
-            %i.fas.fa-minus-circle.dropdown-item-icon
-            %span= t('scorecard.remove_scorecard_from_excel')
+          - if policy(RemovingScorecardBatch).create?
+            %a.btn.dropdown-item{ href: new_removing_scorecard_path }
+              %i.fas.fa-minus-circle.dropdown-item-icon
+              %span= t('scorecard.remove_scorecard_from_excel')
 
-          %a.btn.dropdown-item{ href: removing_scorecards_path }
-            %i.fas.fa-eraser.dropdown-item-icon
-            %span= t('scorecard_batch.removing_scorecard_history')
+            %a.btn.dropdown-item{ href: removing_scorecards_path }
+              %i.fas.fa-eraser.dropdown-item-icon
+              %span= t('scorecard_batch.removing_scorecard_history')

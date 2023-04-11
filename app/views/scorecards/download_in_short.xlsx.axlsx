@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+wb = xlsx_package.workbook
+
+# Sheet: LocalNgo
+wb.add_worksheet(name: "Scorecards") do |sheet|
+  sheet.add_row ["Scorecard ID", "Status", "Province", "District", "Commune", "LocalNGO"]
+
+  @scorecards.each do |scorecard|
+    sheet.add_row [
+      scorecard.uuid,
+      t("scorecard.#{scorecard.status}"),
+      scorecard.province,
+      scorecard.district,
+      scorecard.commune,
+      scorecard.local_ngo_name
+    ], types: [:string]
+  end
+end

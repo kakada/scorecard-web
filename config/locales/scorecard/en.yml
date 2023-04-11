@@ -165,3 +165,6 @@ en:
     note: Note
     institution_name: Institution name
     remove_scorecard_from_excel: Remove scoreard from excel
+    download_in_full: Download full information
+    download_in_short: Download short information
+

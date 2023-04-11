@@ -61,6 +61,10 @@ class RequestChange < ApplicationRecord
     "Pumi::#{Location.location_kind(commune_id).titlecase}".constantize.find_by_id(commune_id).try("address_#{I18n.locale}".to_sym)
   end
 
+  def location_code
+    commune_id || district_id || province_id
+  end
+
   private
     def update_scorecard
       scorecard.update(scorecard_param)

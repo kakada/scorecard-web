@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ScorecardsController < ApplicationController
+  helper_method :filter_params
   before_action :set_scorecard, only: [:show, :edit, :update, :destroy, :complete]
 
   def index
@@ -17,13 +18,13 @@ class ScorecardsController < ApplicationController
       }
 
       format.xlsx {
-        @scorecards = policy_scope(Scorecard.filter(filter_params).order(sort_param))
+        @scorecards = policy_scope(authorize Scorecard.filter(filter_params).order(sort_param))
 
         if @scorecards.length > Settings.max_download_scorecard_record
           flash[:alert] = t("scorecard.file_size_is_too_big", max_record: Settings.max_download_scorecard_record)
           redirect_to scorecards_url
         else
-          render xlsx: "index", filename: "scorecards_#{Time.new.strftime('%Y%m%d_%H_%M_%S')}.xlsx"
+          render xlsx: download_template_name, filename: "scorecards_#{Time.new.strftime('%Y%m%d_%H_%M_%S')}.xlsx"
         end
       }
     end
@@ -107,5 +108,11 @@ class ScorecardsController < ApplicationController
         :start_date, :end_date, :uuid, :filter, :scorecard_type, :batch_code,
         years: [], province_ids: [], local_ngo_ids: [], facility_ids: []
       ).merge(program_id: current_user.program_id)
+    end
+
+    def download_template_name
+      mode = params["mode"] == "full" ? "full" : "short"
+
+      "download_in_#{mode}"
     end
 end
