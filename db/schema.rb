@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_06_062607) do
+ActiveRecord::Schema.define(version: 2023_04_07_091322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -257,6 +257,17 @@ ActiveRecord::Schema.define(version: 2023_04_06_062607) do
     t.integer "version", default: 0
   end
 
+  create_table "local_ngo_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "code"
+    t.integer "total_count", default: 0
+    t.integer "valid_count", default: 0
+    t.string "reference"
+    t.integer "user_id"
+    t.integer "program_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "local_ngos", force: :cascade do |t|
     t.string "name"
     t.string "province_id", limit: 2
@@ -271,6 +282,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_062607) do
     t.string "target_provinces"
     t.string "website_url"
     t.datetime "deleted_at"
+    t.uuid "local_ngo_batch_id"
     t.index ["deleted_at"], name: "index_local_ngos_on_deleted_at"
   end
 

@@ -18,6 +18,7 @@
 #  target_provinces    :string
 #  website_url         :string
 #  deleted_at          :datetime
+#  local_ngo_batch_id  :uuid
 #
 class LocalNgo < ApplicationRecord
   include LocalNgos::Filter
@@ -34,6 +35,7 @@ class LocalNgo < ApplicationRecord
                                   no_local: true,
                                   public_suffix: true,
                                   message: I18n.t("local_ngo.invalid") }
+  validate :verify_target_provinces
 
   before_save :set_target_provinces, if: :will_save_change_to_target_province_ids?
   before_create :secure_code
@@ -48,5 +50,23 @@ class LocalNgo < ApplicationRecord
   private
     def set_target_provinces
       self.target_provinces = Pumi::Province.all.select { |p| target_province_ids.to_s.split(",").include?(p.id) }.sort_by { |x| x.id }.map(&:name_km).join(", ")
+    end
+
+    def verify_target_provinces
+      return unless target_province_ids.present?
+
+      errors.add :target_province_ids, "is invalid" if !valid_target_provinces?
+    end
+
+    def valid_target_provinces?
+      province_ids.length == provinces.length
+    end
+
+    def province_ids
+      @province_ids ||= target_province_ids.to_s.delete(" ").split(",")
+    end
+
+    def provinces
+      @provinces ||= Pumi::Province.all.select { |p| province_ids.include?(p.id) }
     end
 end

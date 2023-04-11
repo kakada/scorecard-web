@@ -1,11 +1,9 @@
-= render "shared/headers/progress_arrow_header", title: "#{@local_ngo.name}: Import cafs with excel", progress_num: 2
+= render "shared/headers/progress_arrow_header", title: t("local_ngo_batch.importing_local_ngo_wizard"), progress_num: 1
 
-= simple_form_for @batch, url: local_ngo_caf_importers_path(local_ngo_id: @local_ngo.id) do |f|
+= simple_form_for @batch, url: local_ngo_importers_path do |f|
   = f.hidden_field :code, value: @batch.code
   = f.hidden_field :total_count
   = f.hidden_field :valid_count
-  = f.hidden_field :new_count
-  = f.hidden_field :province_count
   = f.hidden_field :reference_cache
 
   .d-flex.align-items-center{style: 'flex-wrap: wrap-reverse;'}
@@ -13,12 +11,9 @@
     .flex-grow-1
       %div= t("caf_batch.short_description", total_count: @batch.total_count, valid_count: @batch.valid_count).html_safe
 
-      %small.text-muted
-        = t('caf_batch.valid_data_in_province', province_count: @batch.province_count).html_safe
-
     .d-flex.mb-2
       / Back button
-      = render "shared/buttons/back_button", url: new_local_ngo_caf_importer_path(@local_ngo)
+      = render "shared/buttons/back_button", url: new_local_ngo_importer_path
 
       / Yes confirm button
       - tooltip_title = @batch.valid_count.positive? ? "" : t("shared.at_least_one_valid_item")

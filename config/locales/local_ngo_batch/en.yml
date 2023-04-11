@@ -1,0 +1,7 @@
+en:
+  local_ngo_batch:
+    confirm_message: "There are total scorecard <b>%{total_count}</b> importing to the stystem! Do you approve it?"
+    local_ngo_batch: Local Ngos Batch
+    importing_local_ngo_history: Importing Local Ngos history
+    importing_local_ngo_wizard: Importing Local Ngos wizard
+

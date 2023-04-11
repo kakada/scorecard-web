@@ -96,6 +96,10 @@ Rails.application.routes.draw do
     post :import, on: :collection
   end
 
+  resources :local_ngo_importers, except: [:update, :edit, :destroy] do
+    get :sample, on: :collection
+  end
+
   resource :download, only: [:show]
   resources :users do
     put :unlock_access, on: :member
