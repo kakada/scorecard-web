@@ -17,6 +17,9 @@
 #  educational_background_id :string
 #  scorecard_knowledge_id    :string
 #  deleted_at                :datetime
+#  province_id               :string
+#  district_id               :string
+#  commune_id                :string
 #
 class CafSerializer < ActiveModel::Serializer
   attributes :id, :name, :sex, :date_of_birth, :tel, :address, :local_ngo_id,

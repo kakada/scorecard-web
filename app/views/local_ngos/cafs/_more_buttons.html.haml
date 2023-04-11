@@ -1,0 +1,26 @@
+%div
+  / Back button
+  = link_to local_ngos_path, class: 'btn btn-secondary mr-1 btn-sm shadow-sm' do
+    %i.fas.fa-arrow-left.fa-sm.text-white-50
+    = t('shared.back')
+
+  / Download button
+  = render "shared/buttons/download_button", url: local_ngo_cafs_path(filter_params.merge(format: 'xlsx'))
+
+  / Add new button
+  %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_caf_path(@local_ngo) }
+    %i.fas.fa-plus.fa-sm.text-white-50
+    = t("caf.add_new")
+
+  / Dropdown more button
+  %button.btn{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+    %i.fas.fa-ellipsis-v
+
+  .dropdown-menu.dropdown-menu-right
+    %a.btn.dropdown-item{ href: new_local_ngo_caf_importer_path(@local_ngo) }
+      %i.fas.fa-file-import.drop-menu-icon
+      = t("shared.import_from_file")
+
+    %a.btn.dropdown-item{ href: local_ngo_caf_importers_path(@local_ngo) }
+      %i.fas.fa-eraser.dropdown-item-icon
+      %span= t('caf_batch.importing_caf_history')

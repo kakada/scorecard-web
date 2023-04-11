@@ -1,0 +1,28 @@
+# frozen_string_literal: true
+
+wb = xlsx_package.workbook
+
+# Sheet: LocalNgo
+wb.add_worksheet(name: "Caf") do |sheet|
+  sheet.add_row %w[name date_of_birth gender based_commune_code phone_number educational_background_code scorecard_knowledge_codes local_ngo_code]
+  sheet.add_row [
+    "សុខា", "2000-01-01", "female", "010201", "011222333", EducationalBackground.first.code, ScorecardKnowledge.limit(2).map(&:code).join(","), @local_ngo.code
+  ], types: [:string, :string, :string, :string, :string, :string, :string]
+end
+
+wb.add_worksheet(name: "REF-EducationalBackground") do |sheet|
+  sheet.add_row %w[code name_km]
+
+  EducationalBackground.all.each do |ed|
+    sheet.add_row [ed.code, ed.name_km]
+  end
+end
+
+
+wb.add_worksheet(name: "REF-ScorecardKnowledge") do |sheet|
+  sheet.add_row %w[code name_km]
+
+  ScorecardKnowledge.all.each do |sk|
+    sheet.add_row [sk.code, sk.name_km]
+  end
+end

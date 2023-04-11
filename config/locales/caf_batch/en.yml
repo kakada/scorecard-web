@@ -1,0 +1,8 @@
+en:
+  caf_batch:
+    importing_caf_history: Importing cafs history
+    caf_batch: Cafs batch
+    imported_cafs: "# of imported cafs"
+    short_description: "Total items: %{total_count} (valid: %{valid_count})"
+    valid_data_in_province: "total valid data in province <b>%{province_count}</b>"
+    confirm_title: Confirm import cafs

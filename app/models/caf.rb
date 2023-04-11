@@ -17,6 +17,9 @@
 #  educational_background_id :string
 #  scorecard_knowledge_id    :string
 #  deleted_at                :datetime
+#  province_id               :string
+#  district_id               :string
+#  commune_id                :string
 #
 class Caf < ApplicationRecord
   belongs_to :local_ngo
@@ -27,6 +30,9 @@ class Caf < ApplicationRecord
   has_many :cafs_scorecard_knowledges
   has_many :scorecard_knowledges, through: :cafs_scorecard_knowledges
 
+  has_many :importing_cafs
+  has_many :caf_batches, through: :importing_cafs
+
   acts_as_paranoid if column_names.include? "deleted_at"
 
   delegate :name, to: :educational_background, prefix: :educational_background, allow_nil: true
@@ -36,6 +42,9 @@ class Caf < ApplicationRecord
 
   validates :name, presence: true
   validates :sex, inclusion: { in: GENDERS }, allow_blank: true
+  validates :province_id, presence: true
+  validates :district_id, presence: true
+  validates :commune_id, presence: true
 
   scope :actives, -> { where(actived: true) }
 
@@ -44,5 +53,11 @@ class Caf < ApplicationRecord
     scope = scope.where("LOWER(name) LIKE ? OR tel LIKE ?", "%#{params[:keyword].downcase}%", "%#{params[:keyword].downcase}%") if params[:keyword].present?
     scope = scope.where(local_ngo_id: params[:local_ngo_id]) if params[:local_ngo_id].present?
     scope
+  end
+
+  def based_location_name
+    return if commune_id.blank?
+
+    Pumi::Commune.find_by_id(commune_id).try("address_#{I18n.locale}".to_sym)
   end
 end

@@ -31,6 +31,7 @@
 //= require common/select_picker
 //= require common/import_file
 //= require common/copy
+//= require common/wizard_new
 
 //= require facilities
 //= require templates
@@ -59,7 +60,6 @@
 //= require activity_logs
 //= require request_changes/new
 //= require scorecard_batches/new
-//= require removing_scorecards/new
 //= require removing_scorecards/create
 //= require categories
 
@@ -71,6 +71,7 @@ document.addEventListener("turbolinks:load", function () {
   CW.Common.SelectPicker.init();
   CW.Common.ImportFile.init();
   CW.Common.Copy.init();
+  CW.Common.WizardNew.init();
 
   $("[role='tooltip']").remove();
   $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });

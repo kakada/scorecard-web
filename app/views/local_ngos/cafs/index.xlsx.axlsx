@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+wb = xlsx_package.workbook
+
+# Sheet: Caf
+wb.add_worksheet(name: "#{@local_ngo.code}_#{@local_ngo.name}'s Cafs") do |sheet|
+  sheet.add_row [
+    t("shared.number"),
+    t("caf.local_ngo_code"),
+    t("caf.name"),
+    t("caf.based_location"),
+    t("caf.tel"),
+    t("caf.date_of_birth"),
+    t("caf.educational_background"),
+    t("caf.scorecard_knowledge"),
+    t("shared.created_at")
+  ]
+
+  @cafs.each_with_index do |caf, index|
+    sheet.add_row [
+      index + 1,
+      @local_ngo.code,
+      caf.name,
+      caf.based_location_name,
+      caf.tel,
+      caf.date_of_birth,
+      caf.educational_background_name,
+      caf.scorecard_knowledges.pluck(:"shortcut_name_#{I18n.locale}").join("; "),
+      l(caf.created_at)
+    ], types: [:string, :string, :string, :string]
+  end
+end

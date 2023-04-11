@@ -20,3 +20,6 @@ en:
     scorecard_knowledge: Social Accountability Knowledge
     lessons_selected: lessons selected
     local_ngo_code: Local Ngo code
+    based_location: Based Location
+    import_success: "%{count} cafs were successfully imported!"
+    some_invalid_records: There are some invalid records, please check and reimport!

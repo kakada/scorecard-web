@@ -1,4 +1,4 @@
-CW.Removing_scorecardsNew = (() => {
+CW.Common.WizardNew = (() => {
   return {
     init
   }

@@ -74,3 +74,12 @@ en:
     reason: Reason
     download_excel: Download as Excel(.xlsx)
     file_size_is_too_big: Download size too large, please filter. You can download up to %{max_record} records
+    reference: Reference
+    imported_by: Imported by
+    imported_at: Imported at
+    new: new
+    invalid: invalid
+    at_least_one_valid_item: There must be at least 1 valid item
+    yes_i_approve: Yes, I approve
+    confirm_message: "There are total item <b>%{total_count}</b> in <b>%{province_count}</b> provinces importing to the stystem! Do you approve it?"
+    is_valid: Is valid?

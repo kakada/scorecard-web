@@ -1,19 +1,7 @@
 .d-sm-flex.align-items-center.justify-content-between.mb-4
   %h1.h3.mb-0.text-gray-800.flex-1= "#{@local_ngo.name}: #{t('caf.cafs')}"
-  %div
-    = link_to local_ngos_path, class: 'btn btn-secondary mr-2 btn-sm shadow-sm' do
-      %i.fas.fa-arrow-left.fa-sm.text-white-50
-      = t('shared.back')
 
-    %a.btn.btn-warning.btn-sm.shadow-sm{ "data-target" => "#importModal", "data-toggle" => "modal", href: '#' }
-      %i.fas.fa-file-import.fa-sm.text-white-50
-      = t("shared.import_from_file")
-
-    = render "shared/modals/modal_import_excel", form_url: import_local_ngo_cafs_path(@local_ngo), sample_url: '/caf_sample.xlsx'
-
-    %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_local_ngo_caf_path(@local_ngo) }
-      %i.fas.fa-plus.fa-sm.text-white-50
-      = t("caf.add_new")
+  = render "more_buttons"
 
 .card.shadow.mb-4
   .card-body
@@ -29,9 +17,10 @@
           %tr
             %th #
             %th= sortable "name", t("caf.name")
-            %th= t('caf.address')
+            %th= t('caf.gender')
             %th= t('caf.tel')
             %th= t('caf.date_of_birth')
+            %th= t('caf.based_location')
             %th= t('caf.educational_background')
             %th= t('caf.scorecard_knowledge')
             %th= sortable "created_at", t("shared.created_at")
@@ -42,14 +31,14 @@
             %tr{ class: ("disabled-bg" unless caf.actived?) }
               %td= @pagy.from + index
               %td= caf.name
-              %td= caf.address
+              %td
+                = t("caf.#{caf.sex}") if caf.sex.present?
               %td.text-nowrap= caf.tel
               %td.text-nowrap= dob(caf.date_of_birth).html_safe
+              %td= caf.based_location_name
               %td= caf.educational_background_name
               %td
-                - title = caf.scorecard_knowledges.map{ |sk| "<div class='mb-2 text-left'>#{sk.name}</div>"}.join('')
-                %span{data: { toggle: 'tooltip', html: "true", placement: 'top', title: title }}
-                  = caf.scorecard_knowledges.pluck(:"shortcut_name_#{I18n.locale}").join("; ")
+                = scorecard_knowledges_html(caf).html_safe
 
               %td= timeago(caf.created_at).html_safe
               %td.text-nowrap.text-right
