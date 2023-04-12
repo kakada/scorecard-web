@@ -30,9 +30,9 @@ RSpec.describe Caf, type: :model do
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_inclusion_of(:sex).in_array(%w(female male other)).allow_nil }
-  it { is_expected.to validate_presence_of(:province_id) }
-  it { is_expected.to validate_presence_of(:district_id) }
-  it { is_expected.to validate_presence_of(:commune_id) }
+  it { is_expected.to validate_inclusion_of(:province_id).in_array(Pumi::Province.all.pluck(:id)).allow_nil }
+  it { is_expected.to validate_inclusion_of(:district_id).in_array(Pumi::District.all.pluck(:id)).allow_nil }
+  it { is_expected.to validate_inclusion_of(:commune_id).in_array(Pumi::Commune.all.pluck(:id)).allow_nil }
 
   describe "soft delete" do
     let(:caf) { create(:caf) }

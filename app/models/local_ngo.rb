@@ -24,12 +24,15 @@ class LocalNgo < ApplicationRecord
   include LocalNgos::Filter
   include LocalNgos::Removing
 
+  # Association
   belongs_to :program
   has_many :cafs, dependent: :destroy
   has_many :scorecards
 
+  # Soft delete
   acts_as_paranoid if column_names.include? "deleted_at"
 
+  # Validation
   validates :name, presence: true, uniqueness: { scope: :program_id }
   validates :website_url, url: {  allow_blank: true,
                                   no_local: true,
@@ -37,29 +40,31 @@ class LocalNgo < ApplicationRecord
                                   message: I18n.t("local_ngo.invalid") }
   validate :verify_target_provinces
 
-  before_save :set_target_provinces, if: :will_save_change_to_target_province_ids?
+  # Callback
   before_create :secure_code
 
+  # Instant method
   def address(address_local = "address_km")
     address_code = village_id.presence || commune_id.presence || district_id.presence || province_id.presence
     return if address_code.nil?
 
-    "Pumi::#{Location.location_kind(address_code).titlecase}".constantize.find_by_id(address_code).try("#{address_local}".to_sym)
+    "Pumi::#{Location.location_kind(address_code).titlecase}".constantize.find_by_id(address_code).try("#{address_local}".to_sym) || address_code
+  end
+
+  def valid_target_provinces?
+    province_ids.length == provinces.length
   end
 
   private
-    def set_target_provinces
-      self.target_provinces = Pumi::Province.all.select { |p| target_province_ids.to_s.split(",").include?(p.id) }.sort_by { |x| x.id }.map(&:name_km).join(", ")
-    end
-
     def verify_target_provinces
       return unless target_province_ids.present?
+      return errors.add :target_province_ids, "is invalid" unless valid_target_provinces?
 
-      errors.add :target_province_ids, "is invalid" if !valid_target_provinces?
+      set_target_provinces
     end
 
-    def valid_target_provinces?
-      province_ids.length == provinces.length
+    def set_target_provinces
+      self.target_provinces = provinces.sort_by { |p| p.id }.map(&:name_km).join(", ")
     end
 
     def province_ids

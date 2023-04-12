@@ -83,3 +83,4 @@ en:
     yes_i_approve: Yes, I approve
     confirm_message: "There are total item <b>%{total_count}</b> in <b>%{province_count}</b> provinces importing to the stystem! Do you approve it?"
     is_valid: Is valid?
+    import_success: "%{count} items were successfully imported!"

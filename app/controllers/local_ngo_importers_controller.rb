@@ -36,7 +36,7 @@ class LocalNgoImportersController < ApplicationController
       @batch = LocalNgoBatch.new(local_ngo_batch_params)
 
       if @batch.save
-        redirect_to local_ngos_url(@local_ngo), notice: I18n.t("shred.import_success", count: @batch.local_ngos.length)
+        redirect_to local_ngos_url(@local_ngo), notice: I18n.t("shared.import_success", count: @batch.local_ngos.length)
       else
         redirect_to new_local_ngo_importer_url(@local_ngo), alert: I18n.t("shared.some_invalid_records")
       end
@@ -46,7 +46,7 @@ class LocalNgoImportersController < ApplicationController
       params.require(:local_ngo_batch).permit(
         :total_count, :valid_count, :reference_cache,
         local_ngos_attributes: [
-          :name, :province_id, :district_id, :commune_id, :village_id, :program_id
+          :name, :province_id, :district_id, :commune_id, :village_id, :program_id, :target_province_ids
         ]
       ).merge({
         user_id: current_user.id,
