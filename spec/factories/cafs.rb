@@ -30,7 +30,7 @@ FactoryBot.define do
     tel           { FFaker::PhoneNumber.phone_number }
     address       { FFaker::Address.street_name }
     commune_id    { Pumi::Commune.all.sample.id }
-    district_id   { commune_id[2..3] }
+    district_id   { commune_id[0..3] }
     province_id   { commune_id[0..1] }
     local_ngo
   end

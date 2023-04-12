@@ -15,7 +15,7 @@
             = index + 1
 
             - if local_ngo.valid?
-              = f.fields_for :local_ngos, local_ngo.local_ngo do |ff|
+              = f.fields_for :local_ngos, local_ngo do |ff|
                 = render 'field_for_local_ngo', f: ff
 
           %td= local_ngo.name
@@ -29,6 +29,6 @@
               %i.fas.fa-check.text-success
 
             - else
-              %span.text-danger.d-flex.align-items-center{'data-toggle' => 'tooltip', 'data-placement': 'left', title: local_ngo.reason.join(', '), style: 'min-width: 80px;' }
+              %span.text-danger.d-flex.align-items-center{'data-toggle' => 'tooltip', 'data-placement': 'left', title: local_ngo.errors.full_messages.join(', '), style: 'min-width: 80px;' }
                 %i.fas.fa-times.text-danger
                 %small.ml-1= t('shared.reason')

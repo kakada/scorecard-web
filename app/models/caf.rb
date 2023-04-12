@@ -42,9 +42,9 @@ class Caf < ApplicationRecord
 
   validates :name, presence: true
   validates :sex, inclusion: { in: GENDERS }, allow_blank: true
-  validates :province_id, presence: true
-  validates :district_id, presence: true
-  validates :commune_id, presence: true
+  validates :province_id, inclusion: { in: Pumi::Province.all.pluck(:id) }, allow_blank: true
+  validates :district_id, inclusion: { in: Pumi::District.all.pluck(:id) }, allow_blank: true
+  validates :commune_id, inclusion: { in: Pumi::Commune.all.pluck(:id) }, allow_blank: true
 
   scope :actives, -> { where(actived: true) }
 
@@ -55,9 +55,14 @@ class Caf < ApplicationRecord
     scope
   end
 
-  def based_location_name
-    return if commune_id.blank?
+  def location_code
+    commune_id || district_id || province_id
+  end
 
-    Pumi::Commune.find_by_id(commune_id).try("address_#{I18n.locale}".to_sym)
+  def based_location_name
+    return if location_code.blank?
+
+    klass = Location.location_kind(location_code)
+    "Pumi::#{klass.capitalize}".constantize.find_by_id(location_code).try("address_#{I18n.locale}".to_sym)
   end
 end
