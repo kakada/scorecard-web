@@ -121,6 +121,7 @@ class Scorecard < ApplicationRecord
   delegate  :name, to: :facility, prefix: :facility, allow_nil: true
   delegate  :name, to: :primary_school, prefix: :primary_school, allow_nil: true
   delegate  :name, :code, to: :dataset, prefix: :dataset, allow_nil: true
+  delegate  :email, to: :completor, prefix: :completor, allow_nil: true
 
   # Validation
   validates :year, presence: true

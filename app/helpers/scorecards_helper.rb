@@ -34,7 +34,7 @@ module ScorecardsHelper
 
   def status_html(scorecard)
     status_type = ["status", scorecard.status, "html"].compact.join("_")
-    send(status_type, scorecard.status) rescue scorecard.status
+    send(status_type, scorecard) rescue scorecard.status
   end
 
   def filter_date_options

@@ -24,7 +24,8 @@
           %td= scorecard.local_ngo
           %td= scorecard.facility
           %td= timeago(scorecard.planned_start_date).html_safe
-          %td= status_html(scorecard)
+          %td
+            = status_html(scorecard).html_safe
           %td
             - if scorecard.valid?
               %i.fas.fa-check.text-success
