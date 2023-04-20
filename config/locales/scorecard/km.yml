@@ -12,11 +12,11 @@ km:
     number_of_female: ចំនួនអ្នកចូលរួមស្រី
     number_of_caf: ចំនួនអ្នកសម្របសម្រួល
     scorecard_info: ព័ត៌មានប័ណ្ណដាក់ពិន្ទុ
-    swot_table: តារាងសកម្មភាពអាទិភាពផ្អែកលើលក្ខណៈវិនិច្ឆ័យ
+    swot_table: តារាងសកម្មភាពអាទិភាព
     content: មាតិការ
     tag: ថេក
     year: ឆ្នាំ
-    indicator_development: ការអភិវឌ្ឍន៍លក្ខណៈវិនិច្ឆ័យ
+    indicator_development: លក្ខណៈវិនិច្ឆ័យអាទិភាព និងការដាក់ពិន្ទុ
     create_successfully: បង្កើតបានជោគជ័យ
     number_of_disability: ចំនួនជនមានពិការភាព
     number_of_ethnic_minority: ចំនួនជនជាតិភាគតិច
@@ -171,3 +171,4 @@ km:
     completed_by: ត្រួតពិនិត្យដោយ
     conducted_in_app: បានធ្វើឡើងនៅក្នុងកម្មវិធីទូរស័ព្ទ
     submitted_from_app: បានបញ្ជូនពីកម្មវិធីទូរស័ព្ទ
+    total_participant: អ្នកចូលរួមសរុប
