@@ -50,4 +50,13 @@ namespace :scorecard do
       scorecard.update_column(:dataset_id, dataset.id)
     end
   end
+
+  desc "migrate to have those missing submitter_ids"
+  task migrate_missing_submitter_id: :environment do
+    Scorecard.where(progress: [:in_review, :completed], submitter_id: nil).includes(:scorecard_progresses).each do |scorecard|
+      progress = scorecard.scorecard_progresses.select{ |sp| sp.in_review? }.last
+
+      scorecard.update_column(:submitter_id, progress.user_id) if progress&.user_id.present?
+    end
+  end
 end

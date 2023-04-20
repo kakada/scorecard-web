@@ -20,7 +20,9 @@
     .circle
       %span &middot;
     .content
-      %p.milestone-title= t("scorecard.in_review_date")
+      %p.milestone-title
+        = t("scorecard.submitted_date")
+        %sup= "(#{t('scorecard.in_review')})"
       %small= @scorecard.submitted_at ? l(@scorecard.submitted_at, format: :nice) : '-'
 
   / Completed date (completed_date)
@@ -28,5 +30,7 @@
     .circle
       %span &middot;
     .content
-      %p.milestone-title= t("scorecard.completed_date")
+      %p.milestone-title
+        = t("scorecard.completed_date")
+        %sup= "(#{t('scorecard.reviewed')})"
       %small= @scorecard.completed_at ? l(@scorecard.completed_at, format: :nice) : '-'

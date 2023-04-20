@@ -82,7 +82,7 @@ km:
     running: កំពុងដំណើរការ
     submitted: បានដាក់ស្នើ
     renewed: ស្នើឡើងវិញ
-    in_review: កំពុងត្រួតពិនិត្យ
+    in_review: ដាក់ជូនត្រួតពិនិត្យ
     completed: អនុវត្តរួចរាល់
     references: ឯកសារយោង
     implemented_date: កាលបរិច្ឆេទអនុវត្ត
@@ -172,3 +172,4 @@ km:
     conducted_in_app: បានធ្វើឡើងនៅក្នុងកម្មវិធីទូរស័ព្ទ
     submitted_from_app: បានបញ្ជូនពីកម្មវិធីទូរស័ព្ទ
     total_participant: អ្នកចូលរួមសរុប
+    submitted_by: ដាក់ស្នើជូនដោយ
