@@ -4,13 +4,23 @@ module ScorecardsHelper
   def scorecard_setup_sub_title
     return "" unless @scorecard.number_of_participant.present?
 
-    str = "#{t('scorecard.participant')}: #{@scorecard.number_of_participant}, "
+    str = "#{t('scorecard.total_participant')}: #{@scorecard.number_of_participant} "
+    str += "(#{t('scorecard.anonymous')} #{@scorecard.number_of_anonymous}) - " if @scorecard.number_of_anonymous.to_i.positive?
+    str += "<small class='text-muted'>("
     str += "#{t('scorecard.female')}: #{@scorecard.number_of_female || 0}, "
     str += "#{t('scorecard.disability')}: #{@scorecard.number_of_disability || 0}, "
     str += "#{t('scorecard.minority')}: #{@scorecard.number_of_ethnic_minority || 0}, "
     str += "#{t('scorecard.youth')}: #{@scorecard.number_of_youth || 0}, "
     str += "#{t('scorecard.poor_card')}: #{@scorecard.number_of_id_poor || 0}"
-    str
+    str + ")</small>"
+  end
+
+  def indicator_development_sub_title(scorecard)
+    indicator_description(t('scorecard.number_of_proposed_indicator'), scorecard.raised_indicators.map(&:indicator).uniq)
+  end
+
+  def voting_indicator_sub_title(scorecard)
+    indicator_description(t('scorecard.number_of_selected_indicator'), scorecard.voting_indicators.map(&:indicator))
   end
 
   def scorecard_descriptions
@@ -83,5 +93,13 @@ module ScorecardsHelper
   private
     def default_option(scorecard)
       scorecard.new_record? || scorecard.facility.nil? || scorecard.facility.category_id.nil?
+    end
+
+    def indicator_description(label, indicators)
+      new_count = indicators.select { |indicator| indicator.custom? }.length
+
+      str = "#{label}: #{indicators.length} "
+      str += "<small class='text-muted'>(#{t('shared.new')}: #{new_count})</small>" if new_count.positive?
+      str
     end
 end

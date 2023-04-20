@@ -16,7 +16,7 @@ en:
     content: Content
     tag: Tag
     year: Year
-    indicator_development: Indicator development
+    indicator_development: Indicator development and voting
     create_successfully: Create successfully
     number_of_disability: Number of disability
     number_of_ethnic_minority: Number of ethnic minority
@@ -171,3 +171,4 @@ en:
     completed_by: Completed by
     conducted_in_app: Conducted in mobile app
     submitted_from_app: Submitted from mobile app
+    total_participant: Total participant

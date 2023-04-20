@@ -10,7 +10,7 @@
 
   .card-body
     .d-flex
-      .flex-1= disabled ? '_' : sub_title
+      .flex-1= disabled ? '_' : sub_title.html_safe
 
       - unless disabled
         %div
