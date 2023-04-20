@@ -20,20 +20,21 @@ module ScorecardsStatusesHelper
   end
 
   def status_in_review_html(scorecard)
-    content_tag :span, class: "badge badge-info" do
-      t("scorecard.in_review")
-    end
+    title = "<div class='text-left'>" +
+            "<div>#{t('scorecard.in_review_date')}: #{display_datetime(scorecard.submitted_at)}</div>" +
+            "<div>#{t('scorecard.submitted_by')}: #{scorecard.submitter_email}</div>" +
+            "</div>"
+
+    wrap_in_tooltip(title, scorecard.status, 'badge-info')
   end
 
   def status_completed_html(scorecard)
     title = "<div class='text-left'>" +
-            "<div>#{t('scorecard.completed_date')}: #{display_datetime(scorecard.completed_at)}</div>" +
-            "<div>#{t('scorecard.completed_by')}: #{scorecard.completor_email}</div>" +
+              "<div>#{t('scorecard.completed_date')}: #{display_datetime(scorecard.completed_at)}</div>" +
+              "<div>#{t('scorecard.completed_by')}: #{scorecard.completor_email}</div>" +
             "</div>"
 
-    "<span data-toggle='tooltip' data-html='true' data-placement='top' title='#{sanitize(title)}'>" +
-    "<span class='badge badge-success' >#{t('scorecard.completed')}</span>" +
-    "<span>"
+    wrap_in_tooltip(title, scorecard.status, 'badge-success')
   end
 
   def status_downloaded_html(scorecard)
@@ -41,4 +42,11 @@ module ScorecardsStatusesHelper
       t("scorecard.downloaded")
     end
   end
+
+  private
+    def wrap_in_tooltip(title, status, css_klass)
+      "<span data-toggle='tooltip' data-html='true' data-placement='top' title='#{sanitize(title)}'>" +
+      "<span class='badge #{css_klass}' > " + t("scorecard.#{status}") + "</span>" +
+      "<span>"
+    end
 end

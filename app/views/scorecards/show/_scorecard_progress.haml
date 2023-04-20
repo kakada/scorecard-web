@@ -18,7 +18,7 @@
     %li
       %a.d-inline-block.my-2{class: ('disabled' unless @scorecard.submitted_at.present?)}
         = t("scorecard.submitted_date")
-        %sup= "(#{t('scorecard.in_review_date')})"
+        %sup= "(#{t('scorecard.in_review')})"
 
       - if @scorecard.submitted_at.present?
         %span.badge.badge-light.duration= distance_of_time_in_words(@scorecard.conducted_date, @scorecard.submitted_at)
