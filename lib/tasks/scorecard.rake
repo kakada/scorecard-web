@@ -54,9 +54,29 @@ namespace :scorecard do
   desc "migrate to have those missing submitter_ids"
   task migrate_missing_submitter_id: :environment do
     Scorecard.where(progress: [:in_review, :completed], submitter_id: nil).includes(:scorecard_progresses).each do |scorecard|
-      progress = scorecard.scorecard_progresses.select{ |sp| sp.in_review? }.last
+      progress = scorecard.scorecard_progresses.select { |sp| sp.in_review? }.last
 
       scorecard.update_column(:submitter_id, progress.user_id) if progress&.user_id.present?
+    end
+  end
+
+  desc "migrate submitted scorecards to have runner_id"
+  task migrate_submitted_scorecard_to_have_runner_id: :environment do
+    Scorecard.where.not(running_date: nil).includes(:scorecard_progresses).each do |scorecard|
+      progress = scorecard.scorecard_progresses.select { |sp| sp.running? }.last
+      progress.update_column(:conducted_at, scorecard.running_date) if progress.present? && progress.conducted_at.blank?
+
+      scorecard.update_column(:runner_id, scorecard.submitter_id)
+    end
+  end
+
+  desc "migrate running scorecards to have runner id and running date"
+  task migrate_running_scorecard_to_have_runner_id_and_running_date: :environment do
+    Scorecard.running.includes(:scorecard_progresses).each do |scorecard|
+      progress = scorecard.scorecard_progresses.select { |sp| sp.running? }.last
+      progress.update_column(:conducted_at, progress.created_at) if progress.present? && progress.conducted_at.blank?
+
+      scorecard.update_columns(runner_id: progress.user_id, running_date: progress.conducted_at)
     end
   end
 end

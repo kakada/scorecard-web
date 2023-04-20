@@ -11,10 +11,12 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  user_id        :integer
+#  conducted_at   :datetime
 #
 FactoryBot.define do
   factory :scorecard_progress do
     scorecard
     user
+    conducted_at { Time.now }
   end
 end

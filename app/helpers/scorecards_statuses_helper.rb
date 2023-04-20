@@ -14,9 +14,12 @@ module ScorecardsStatusesHelper
   end
 
   def status_running_html(scorecard)
-    content_tag :span, class: "badge badge-warning" do
-      t("scorecard.running")
-    end
+    title = "<div class='text-left'>" +
+            "<div>#{t('scorecard.running_date')}: #{display_datetime(scorecard.running_date)}</div>" +
+            "<div>#{t('scorecard.ran_by')}: #{scorecard.runner_email}</div>" +
+            "</div>"
+
+    wrap_in_tooltip(title, scorecard.status, "badge-warning")
   end
 
   def status_in_review_html(scorecard)
@@ -25,7 +28,7 @@ module ScorecardsStatusesHelper
             "<div>#{t('scorecard.submitted_by')}: #{scorecard.submitter_email}</div>" +
             "</div>"
 
-    wrap_in_tooltip(title, scorecard.status, 'badge-info')
+    wrap_in_tooltip(title, scorecard.status, "badge-info")
   end
 
   def status_completed_html(scorecard)
@@ -34,7 +37,7 @@ module ScorecardsStatusesHelper
               "<div>#{t('scorecard.completed_by')}: #{scorecard.completor_email}</div>" +
             "</div>"
 
-    wrap_in_tooltip(title, scorecard.status, 'badge-success')
+    wrap_in_tooltip(title, scorecard.status, "badge-success")
   end
 
   def status_downloaded_html(scorecard)

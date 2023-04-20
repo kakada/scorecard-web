@@ -16,11 +16,11 @@ module ScorecardsHelper
   end
 
   def indicator_development_sub_title(scorecard)
-    indicator_description(t('scorecard.number_of_proposed_indicator'), scorecard.raised_indicators.map(&:indicator).uniq)
+    indicator_description(t("scorecard.number_of_proposed_indicator"), scorecard.raised_indicators.map(&:indicator).uniq)
   end
 
   def voting_indicator_sub_title(scorecard)
-    indicator_description(t('scorecard.number_of_selected_indicator'), scorecard.voting_indicators.map(&:indicator))
+    indicator_description(t("scorecard.number_of_selected_indicator"), scorecard.voting_indicators.map(&:indicator))
   end
 
   def scorecard_descriptions
