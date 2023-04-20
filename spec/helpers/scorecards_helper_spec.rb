@@ -7,25 +7,25 @@ RSpec.describe ScorecardsHelper, type: :helper do
     let(:planned_scorecard) { build(:scorecard) }
 
     it "#status_planned_html" do
-      expect(helper).to receive(:status_planned_html).with("planned")
+      expect(helper).to receive(:status_planned_html).with(planned_scorecard)
       helper.status_html(planned_scorecard)
     end
 
     it "#status_renewed_html" do
       planned_scorecard.progress = "renewed"
-      expect(helper).to receive(:status_renewed_html).with("renewed")
+      expect(helper).to receive(:status_renewed_html).with(planned_scorecard)
       helper.status_html(planned_scorecard)
     end
 
     it "#status_running_html" do
       planned_scorecard.progress = "running"
-      expect(helper).to receive(:status_running_html).with("running")
+      expect(helper).to receive(:status_running_html).with(planned_scorecard)
       helper.status_html(planned_scorecard)
     end
 
     it "#status_completed_html" do
       planned_scorecard.progress = "completed"
-      expect(helper).to receive(:status_completed_html).with("completed")
+      expect(helper).to receive(:status_completed_html).with(planned_scorecard)
       helper.status_html(planned_scorecard)
     end
   end

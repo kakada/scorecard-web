@@ -167,4 +167,7 @@ en:
     remove_scorecard_from_excel: Remove scoreard from excel
     download_in_full: Download full information
     download_in_short: Download short information
-
+    reviewed: Reviewed
+    completed_by: Completed by
+    conducted_in_app: Conducted in mobile app
+    submitted_from_app: Submitted from mobile app

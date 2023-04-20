@@ -2,12 +2,12 @@
   %ol
     / Start date (Planned started date)
     %li
-      %a.btn.btn-link.pl-0.text-left= t("scorecard.planned_start_date")
+      %a.d-inline-block.my-2= t("scorecard.planned_start_date")
       .at= display_datetime(@scorecard.planned_start_date)
 
     / Implemented date (conducted_date)
     %li
-      %a.btn.btn-link.pl-0.text-left{class: ('disabled' unless @scorecard.conducted_date.present?)}= t("scorecard.implemented_date")
+      %a.d-inline-block.my-2{class: ('disabled' unless @scorecard.conducted_date.present?)}= t("scorecard.implemented_date")
 
       - if @scorecard.conducted_date.present?
         %span.badge.badge-light.duration= distance_of_time_in_words(@scorecard.planned_start_date, @scorecard.conducted_date)
@@ -16,7 +16,9 @@
 
     / In review date (submitted_date)
     %li
-      %a.btn.btn-link.pl-0.text-left{class: ('disabled' unless @scorecard.submitted_at.present?)}= t("scorecard.in_review_date")
+      %a.d-inline-block.my-2{class: ('disabled' unless @scorecard.submitted_at.present?)}
+        = t("scorecard.submitted_date")
+        %sup= "(#{t('scorecard.in_review_date')})"
 
       - if @scorecard.submitted_at.present?
         %span.badge.badge-light.duration= distance_of_time_in_words(@scorecard.conducted_date, @scorecard.submitted_at)
@@ -24,7 +26,9 @@
 
     / Completed date (completed_date)
     %li
-      %a.btn.btn-link.pl-0.text-left{class: ('disabled' unless @scorecard.completed_at.present?)}= t("scorecard.completed_date")
+      %a.d-inline-block.my-2{class: ('disabled' unless @scorecard.completed_at.present?)}
+        = t("scorecard.completed_date")
+        %sup= "(#{t('scorecard.reviewed')})"
 
       - if @scorecard.completed_at.present?
         %span.badge.badge-light.duration= distance_of_time_in_words(@scorecard.submitted_at, @scorecard.completed_at)

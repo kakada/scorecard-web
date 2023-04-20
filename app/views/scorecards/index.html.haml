@@ -21,8 +21,12 @@
               %th= t('scorecard.status')
               %th= t('scorecard.number_of_downloaded')
               %th= sortable "created_at", t('shared.created_at')
-              %th= sortable "conducted_date", t('scorecard.conducted_at')
-              %th= sortable "locked_at", t('scorecard.submitted_at')
+              %th
+                %span{data: { toggle: 'tooltip', title: t('scorecard.conducted_in_app')}}
+                  = sortable "conducted_date", t('scorecard.conducted_at')
+              %th
+                %span{data: { toggle: 'tooltip', title: t('scorecard.submitted_from_app')}}
+                  = sortable "submitted_at", t('scorecard.submitted_at')
               %th
 
           %tbody
