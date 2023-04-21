@@ -53,6 +53,7 @@
 #  submitter_id                :integer
 #  dataset_id                  :uuid
 #  removing_scorecard_batch_id :uuid
+#  runner_id                   :integer
 #
 FactoryBot.define do
   factory :scorecard do

@@ -63,7 +63,7 @@ module Api
               indicator_activities_attributes: [ :uuid, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]
             ],
             ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ]
-          ).merge(submitter_id: current_user.id)
+          ).merge(submitter_id: current_user.id, runner_id: current_user.id)
 
           # Todo remove after device is no longer installed mobile app 1.4.2 (require report from play store)
           (param[:raised_indicators_attributes] || []).each do |ri|

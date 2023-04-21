@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_07_091322) do
+ActiveRecord::Schema.define(version: 2023_04_20_085836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -527,6 +527,7 @@ ActiveRecord::Schema.define(version: 2023_04_07_091322) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.datetime "conducted_at"
   end
 
   create_table "scorecard_references", force: :cascade do |t|
@@ -587,6 +588,7 @@ ActiveRecord::Schema.define(version: 2023_04_07_091322) do
     t.integer "submitter_id"
     t.uuid "dataset_id"
     t.uuid "removing_scorecard_batch_id"
+    t.integer "runner_id"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end

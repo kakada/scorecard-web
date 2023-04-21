@@ -53,6 +53,7 @@
 #  submitter_id                :integer
 #  dataset_id                  :uuid
 #  removing_scorecard_batch_id :uuid
+#  runner_id                   :integer
 #
 
 class Scorecard < ApplicationRecord
@@ -92,6 +93,7 @@ class Scorecard < ApplicationRecord
   belongs_to :creator, class_name: "User"
   belongs_to :submitter, class_name: "User", optional: true
   belongs_to :completor, class_name: "User", optional: true
+  belongs_to :runner, class_name: "User", optional: true
   belongs_to :primary_school, foreign_key: :primary_school_code, optional: true
   belongs_to :language, foreign_key: :language_conducted_code, primary_key: :code, optional: true
   belongs_to :scorecard_batch, foreign_key: :scorecard_batch_code, primary_key: :code, optional: true
@@ -123,6 +125,7 @@ class Scorecard < ApplicationRecord
   delegate  :name, :code, to: :dataset, prefix: :dataset, allow_nil: true
   delegate  :email, to: :completor, prefix: :completor, allow_nil: true
   delegate  :email, to: :submitter, prefix: :submitter, allow_nil: true
+  delegate  :email, to: :runner, prefix: :runner, allow_nil: true
 
   # Validation
   validates :year, presence: true

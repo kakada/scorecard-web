@@ -11,6 +11,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  user_id        :integer
+#  conducted_at   :datetime
 #
 require "rails_helper"
 
@@ -21,10 +22,12 @@ RSpec.describe ScorecardProgress, type: :model do
   describe "#after_save: set_scorecard_progress" do
     context "scorecard progress is smaller than scorecard_progress status" do
       let!(:scorecard) { create(:scorecard, progress: :downloaded) }
-      let!(:scorecard_progress) { create(:scorecard_progress, status: :running, scorecard: scorecard) }
+      let!(:scorecard_progress) { create(:scorecard_progress, status: :running, conducted_at: DateTime.yesterday, scorecard: scorecard) }
 
       it "set scorecard progress to downloaded" do
         expect(scorecard.reload.progress).to eq("running")
+        expect(scorecard.reload.running_date).to eq(scorecard_progress.conducted_at)
+        expect(scorecard.reload.runner_id).to eq(scorecard_progress.user_id)
       end
     end
 
@@ -103,6 +106,26 @@ RSpec.describe ScorecardProgress, type: :model do
       it "doesn't update downloaded_count" do
         scorecard_progress.destroy
         expect(scorecard.reload.downloaded_count).to eq(1)
+      end
+    end
+  end
+
+  describe "#before_create set conducted_at" do
+    context "having conducted_at" do
+      let!(:scorecard) { create(:scorecard, progress: :downloaded) }
+      let!(:scorecard_progress) { create(:scorecard_progress, status: :running, conducted_at: DateTime.yesterday, scorecard: scorecard) }
+
+      it "doesn't reset conducted_at" do
+        expect(scorecard_progress.conducted_at).not_to eq(scorecard_progress.created_at)
+      end
+    end
+
+    context "having no conducted_at" do
+      let!(:scorecard) { create(:scorecard, progress: :downloaded) }
+      let!(:scorecard_progress) { create(:scorecard_progress, status: :running, conducted_at: nil, scorecard: scorecard) }
+
+      it "set conducted_at as created_at" do
+        expect(scorecard_progress.conducted_at).to eq(scorecard_progress.created_at)
       end
     end
   end

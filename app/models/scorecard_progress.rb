@@ -11,11 +11,17 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  user_id        :integer
+#  conducted_at   :datetime
 #
 class ScorecardProgress < ApplicationRecord
+  # Module
+  include ScorecardProgresses::ScorecardCallbackConcern
+
+  # Association
   belongs_to :scorecard, primary_key: "uuid", foreign_key: "scorecard_uuid"
   belongs_to :user
 
+  # Enum
   enum status: {
     downloaded: 1,
     running: 2,
@@ -24,22 +30,14 @@ class ScorecardProgress < ApplicationRecord
     completed: 5
   }
 
-  after_save :set_scorecard_progress
-  after_save :update_counter_cache, if: :downloaded?
-  after_destroy :update_counter_cache, if: :downloaded?
+  # Callback
+  before_create :set_conducted_at
 
+  # Scope
   scope :downloadeds, -> { where(status: :downloaded) }
 
   private
-    def update_counter_cache
-      scorecard.update_column(:downloaded_count, scorecard.scorecard_progresses.downloadeds.count)
-    end
-
-    def set_scorecard_progress
-      return if scorecard.in_review? || scorecard.completed?
-      return if !scorecard.renewed? && self.class.statuses[scorecard.progress].to_i >= self.class.statuses[status].to_i
-
-      scorecard.progress = status
-      scorecard.save(validate: false)
+    def set_conducted_at
+      self.conducted_at ||= created_at
     end
 end
