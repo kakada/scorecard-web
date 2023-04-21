@@ -24,11 +24,13 @@ class ScorecardProgress < ApplicationRecord
   # Enum
   enum status: {
     downloaded: 1,
-    running: 2,
     renewed: 4,
+    running: 2,
     in_review: 3,
     completed: 5
   }
+
+  DOWNLOADED = 'downloaded'
 
   # Callback
   before_create :set_conducted_at
