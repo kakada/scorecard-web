@@ -64,7 +64,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let!(:user)       { create(:user) }
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program_id: user.program_id) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
-    let(:params)      { { number_of_caf: 3, number_of_participant: 15, number_of_female: 5 } }
+    let(:params)      { { number_of_caf: 3, number_of_participant: 15, number_of_female: 5, app_version: 15013 } }
 
     context "success" do
       before {
@@ -74,6 +74,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(response.content_type).to eq("application/json; charset=utf-8") }
       it { expect(response).to have_http_status(:ok) }
       it { expect(scorecard.reload.number_of_participant).to eq(15) }
+      it { expect(scorecard.reload.app_version).to eq(15013) }
     end
 
     context "is locked" do
