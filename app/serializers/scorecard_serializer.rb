@@ -54,6 +54,7 @@
 #  dataset_id                  :uuid
 #  removing_scorecard_batch_id :uuid
 #  runner_id                   :integer
+#  app_version                 :integer
 #
 class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :facility_id, :scorecard_type,
