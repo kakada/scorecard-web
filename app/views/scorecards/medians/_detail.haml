@@ -1,14 +1,16 @@
 %table.table.table-bordered
   %thead
     %tr
+      %th.text-center{:scope => "col"} #
       %th{:scope => "col"}= t("scorecard.selected_indicators")
       %th{:scope => "col"}
         = t("scorecard.average_score")
         %div= "(#{t('scorecard.median')})"
 
   %tbody
-    - @voting_indicators.each do |criteria|
+    - @voting_indicators.each_with_index do |criteria, index|
       %tr
+        %td.text-center= index + 1
         %td
           .mb-1= criteria["name"]
           .d-flex

@@ -1,6 +1,7 @@
 %table.table.table-bordered
   %thead
     %tr
+      %th.text-center{:scope => "col"} #
       %th.align-middle.text-center= t("scorecard.indicator")
       %th.align-middle.text-center= t("scorecard.median")
       %th.align-middle.text-center= t("scorecard.strength")
@@ -10,7 +11,8 @@
   %tbody
     - @voting_indicators.each_with_index do |vi, index|
       %tr
-        %td.text-break= "#{index + 1}) #{vi.indicator.name}"
+        %td.text-center= index + 1
+        %td.text-break= vi.indicator.name
         %td.text-center= VotingIndicator.medians[vi.median]
 
         - ['strength', 'weakness', 'suggested'].each do |action|

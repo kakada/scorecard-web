@@ -89,7 +89,7 @@ km:
     submitted_date: កាលបរិច្ឆេទទទួលបានសំណើរ
     participant_info: ព័ត៌មានរបស់អ្នកចូលរួម
     fill_in: បំពេញ
-    view_as_pdf: មើលជា PDF
+    view_as_pdf: មើលលទ្ធផលជា PDF
     cannot_delete_running_scorecard: ប័ណ្ណដាក់ពិន្ទុដែលកំពុងដំណើរការមិនអាចលុបបានទេ
     scorecard_being_downloaded: ប័ណ្ណដាក់ពិន្ទុនេះកំពុងត្រូវបានទាញយក (%{count}ដង).
     number_of_downloaded: "ចំនួនទាញយក"
@@ -165,9 +165,9 @@ km:
     note: ចំណាំ
     institution_name: ឈ្មោះគ្រឹះស្ថាន
     remove_scorecard_from_excel: លុបប័ណ្ណដាក់ពិន្ទុតាម Excel
-    download_in_full: ទាញយកទិន្នន័យពេញលេញ
-    download_in_short: ទាញយកទិន្នន័យសង្ខេប
-    reviewed: ត្រួតពិនិត្យរួច
+    download_in_full: ទាញយកទម្រង់អនុវត្តរួចរាល់
+    download_in_short: ទាញយកទម្រង់សម្រាប់អនុវត្ត
+    reviewed: ត្រួតពិនិត្យរួចរាល់
     completed_by: ត្រួតពិនិត្យដោយ
     conducted_in_app: បានធ្វើឡើងនៅក្នុងកម្មវិធីទូរស័ព្ទ
     submitted_from_app: បានបញ្ជូនពីកម្មវិធីទូរស័ព្ទ
