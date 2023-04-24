@@ -175,3 +175,6 @@ km:
     submitted_by: ដាក់ស្នើជូនដោយ
     running_date: កាលបរិច្ឆេទដំណើរការ
     ran_by: ដំណើរការដោយ
+    last_items:
+      one: "ចុងក្រោយ"
+      other: "%{count} ចុងក្រោយ"

@@ -79,4 +79,39 @@ namespace :scorecard do
       scorecard.update_columns(runner_id: progress.user_id, running_date: progress.conducted_at)
     end
   end
+
+  # -------- migrate missing submitter_id start
+  desc "migrate completed scorecard to have completor_id"
+  task migrate_completed_scorecard_to_have_completer_id: :environment do
+    missing_completor_scorecards = Scorecard.completed.where(completor_id: nil).where.not(submitter_id: nil)
+    missing_completor_scorecards.each do |scorecard|
+      scorecard.update_column(:completor_id, scorecard.submitter_id)
+    end
+  end
+
+  desc "migrate completed scorecard to have completor_id and submitter_id"
+  task migrate_completed_scorecard_to_have_completer_id_and_submitter_id: :environment do
+    missing_submitter_and_completer_scorecards = Scorecard.completed.where(completor_id: nil).where(submitter_id: nil).includes(:scorecard_progresses)
+    missing_submitter_and_completer_scorecards.each do |scorecard|
+      progress = get_last_progress(scorecard)
+
+      scorecard.update_columns(completor_id: progress.user_id, submitter_id: progress.user_id) if progress&.user_id.present?
+    end
+  end
+
+  desc "migrate submitted scorecard to have submitter_id"
+  task migrate_submitted_scorecard_to_have_submitter_id: :environment do
+    missing_submitter_scorecards = Scorecard.in_review.where(submitter_id: nil).includes(:scorecard_progresses)
+    missing_submitter_scorecards.each do |scorecard|
+      progress = get_last_progress(scorecard)
+
+      scorecard.update_column(:submitter_id, progress.user_id) if progress&.user_id.present?
+    end
+  end
+  # -------- migrate missing submitter_id end
+
+  private
+    def get_last_progress(scorecard)
+      scorecard.scorecard_progresses.select { |s| s.in_review? || s.running? }.sort_by(&:created_at).sort_by { |k, v| Scorecard.statuses.index(k) }.first
+    end
 end

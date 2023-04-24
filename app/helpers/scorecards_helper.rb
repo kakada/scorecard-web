@@ -90,6 +90,12 @@ module ScorecardsHelper
     param
   end
 
+  def scorecard_progress_title(selected_count, limit_count, status)
+    return t("scorecard.#{status}") unless selected_count > limit_count
+
+    t("scorecard.#{status}") + " (#{t("scorecard.last_items", count: limit_count)}) :"
+  end
+
   private
     def default_option(scorecard)
       scorecard.new_record? || scorecard.facility.nil? || scorecard.facility.category_id.nil?

@@ -2,12 +2,13 @@
 - statuses = progresses.pluck(:status).uniq.sort_by(&ScorecardProgress.statuses.keys.reverse.method(:index))
 - statuses.each do |status|
   .text-left.mt-1
-    %div= t("scorecard.#{status}") + ":"
+    - num = status == ScorecardProgress::DOWNLOADED ? 3 : 1
+    - selecteds = progresses.select { |pr| pr.status == status }
+
+    %div= scorecard_progress_title(selecteds.length, num, status)
     %div
       %ul
-        - num = status == ScorecardProgress::DOWNLOADED ? 3 : 1
-        - selecteds = progresses.select { |pr| pr.status == status }.take(num)
-        - selecteds.each do |progress|
+        - selecteds.take(num).each do |progress|
           %li
             %span= "#{t('scorecard.device_id')}: "
             %span= "#{progress.device_id} (#{display_datetime(progress.created_at)})"

@@ -30,7 +30,7 @@ class ScorecardProgress < ApplicationRecord
     completed: 5
   }
 
-  DOWNLOADED = 'downloaded'
+  DOWNLOADED = "downloaded"
 
   # Callback
   before_create :set_conducted_at
