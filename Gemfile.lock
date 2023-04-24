@@ -391,8 +391,6 @@ GEM
     rake (13.1.0)
     recaptcha (5.7.0)
       json
-    redis (5.0.8)
-      redis-client (>= 0.17.0)
     redis-client (0.18.0)
       connection_pool
     regexp_parser (2.8.2)
@@ -468,10 +466,14 @@ GEM
       faraday (>= 1.0)
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
-    sidekiq (6.4.2)
-      connection_pool (>= 2.2.2)
-      rack (~> 2.0)
-      redis (>= 4.2.0)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 6, < 8)
+      tilt (>= 1.4.0)
+    sidekiq (7.0.9)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.11.0)
     sidekiq-scheduler (5.0.3)
       rufus-scheduler (~> 3.2)
       sidekiq (>= 6, < 8)
@@ -594,7 +596,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-raven (~> 3.0.4)
   shoulda-matchers (~> 4.0)
-  sidekiq (~> 6.4.0)
+  sidekiq (~> 7.0.8)
   sidekiq-scheduler (~> 5.0.0)
   simple_form (~> 5.0.3)
   spring
