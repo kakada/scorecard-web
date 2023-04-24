@@ -175,3 +175,6 @@ en:
     submitted_by: Submitted by
     running_date: Running date
     ran_by: Ran by
+    last_items:
+      one: "Last 1"
+      other: "Last %{count}"
