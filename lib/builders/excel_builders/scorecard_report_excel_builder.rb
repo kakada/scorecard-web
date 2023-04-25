@@ -60,8 +60,8 @@ module ExcelBuilders
           # Raiser
           I18n.t("excel.raised_by_female"),
           I18n.t("excel.raised_by_youth"),
-          I18n.t("excel.raised_by_ethnic_minority"),
           I18n.t("excel.raised_by_id_poor"),
+          I18n.t("excel.raised_by_ethnic_minority"),
           I18n.t("excel.raised_by_id_people_with_disability"),
           # Rating
           I18n.t("excel.very_bad"),
@@ -114,8 +114,8 @@ module ExcelBuilders
           (voting_indicator.indicatorable.name if voting_indicator.indicatorable.custom?),
           voting_indicator.participants.select(&:female?).length,
           voting_indicator.participants.select(&:youth?).length,
-          voting_indicator.participants.select(&:minority?).length,
           voting_indicator.participants.select(&:poor_card?).length,
+          voting_indicator.participants.select(&:minority?).length,
           voting_indicator.participants.select(&:disability?).length
         ]
         .concat(rating(voting_indicator))
