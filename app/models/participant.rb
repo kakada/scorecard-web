@@ -28,4 +28,12 @@ class Participant < ApplicationRecord
 
   scope :males, -> { where(gender: :male) }
   scope :others, -> { where(gender: :other) }
+
+  def female?
+    gender == GENDER_FEMALE
+  end
+
+  def male?
+    gender == GENDER_MALE
+  end
 end

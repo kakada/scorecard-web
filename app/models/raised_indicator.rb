@@ -25,6 +25,7 @@ class RaisedIndicator < ApplicationRecord
   belongs_to :indicator, foreign_key: :indicator_uuid, primary_key: :uuid, optional: true
   belongs_to :tag, optional: true
   belongs_to :voting_indicator, foreign_key: :voting_indicator_uuid, optional: true
+  belongs_to :participant, foreign_key: :participant_uuid, primary_key: :uuid, optional: true
 
   scope :selecteds, -> { where(selected: true) }
 

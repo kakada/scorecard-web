@@ -13,7 +13,7 @@ module ExcelBuilders
     def build
       build_header
 
-      @scorecards.includes(:facility, :participants, voting_indicators: [:indicatorable, :ratings, :weakness_indicator_activities, :strength_indicator_activities, :suggested_indicator_activities]).each do |scorecard|
+      @scorecards.includes(:facility, :participants, voting_indicators: [:indicatorable, :ratings, :weakness_indicator_activities, :strength_indicator_activities, :suggested_indicator_activities, :participants]).each do |scorecard|
         build_row(scorecard)
       end
     end
@@ -57,17 +57,26 @@ module ExcelBuilders
           I18n.t("excel.conducted_place"),
           I18n.t("excel.indicator_development"),
           I18n.t("excel.custom_indicator"),
+          # Raiser
+          I18n.t("excel.raised_by_female"),
+          I18n.t("excel.raised_by_youth"),
+          I18n.t("excel.raised_by_ethnic_minority"),
+          I18n.t("excel.raised_by_id_poor"),
+          I18n.t("excel.raised_by_id_people_with_disability"),
+          # Rating
           I18n.t("excel.very_bad"),
           I18n.t("excel.bad"),
           I18n.t("excel.acceptable"),
           I18n.t("excel.good"),
           I18n.t("excel.very_good"),
           I18n.t("excel.average_score"),
+          # Activity
           I18n.t("excel.strength"),
           I18n.t("excel.weakness"),
           I18n.t("excel.suggested_action", number: 1),
           I18n.t("excel.suggested_action", number: 2),
           I18n.t("excel.suggested_action", number: 3),
+          # conducted date
           I18n.t("excel.meeting_date")
         ]
       end
@@ -83,7 +92,7 @@ module ExcelBuilders
           scorecard.local_ngo_name,
           (scorecard.number_of_caf if is_first_row),
           (scorecard.number_of_participant if is_first_row),
-          (scorecard.participants.select { |p| p.gender == Participant::GENDER_MALE }.length if is_first_row && scorecard.participants.present?),
+          (scorecard.participants.select(&:male?).length if is_first_row && scorecard.participants.present?),
           (scorecard.number_of_female if is_first_row),
           (scorecard.number_of_youth if is_first_row),
           (scorecard.number_of_id_poor if is_first_row),
@@ -103,8 +112,14 @@ module ExcelBuilders
         [
           (voting_indicator.indicatorable.custom? ? I18n.t("excel.other") : voting_indicator.indicatorable.name),
           (voting_indicator.indicatorable.name if voting_indicator.indicatorable.custom?),
-        ].concat(rating(voting_indicator))
-         .concat(result(voting_indicator))
+          voting_indicator.participants.select(&:female?).length,
+          voting_indicator.participants.select(&:youth?).length,
+          voting_indicator.participants.select(&:minority?).length,
+          voting_indicator.participants.select(&:poor_card?).length,
+          voting_indicator.participants.select(&:disability?).length
+        ]
+        .concat(rating(voting_indicator))
+        .concat(result(voting_indicator))
       end
 
       def rating(voting_indicator)

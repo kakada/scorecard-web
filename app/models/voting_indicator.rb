@@ -24,6 +24,7 @@ class VotingIndicator < ApplicationRecord
   has_many :ratings, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many :suggested_actions, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many :raised_indicators, foreign_key: :voting_indicator_uuid
+  has_many :participants, through: :raised_indicators
 
   has_many   :indicator_activities, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many   :strength_indicator_activities, foreign_key: :voting_indicator_uuid, dependent: :destroy
