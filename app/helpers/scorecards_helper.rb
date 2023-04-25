@@ -4,14 +4,18 @@ module ScorecardsHelper
   def scorecard_setup_sub_title
     return "" unless @scorecard.number_of_participant.present?
 
-    str = "#{t('scorecard.total_participant')}: #{@scorecard.number_of_participant} "
-    str += "(#{t('scorecard.anonymous')} #{@scorecard.number_of_anonymous}) - " if @scorecard.number_of_anonymous.to_i.positive?
+    "#{t('scorecard.total_participant')}: " + participant_info(@scorecard)
+  end
+
+  def participant_info(scorecard)
+    str = "#{@scorecard.number_of_participant} "
+    str += "(#{t('scorecard.anonymous')} #{scorecard.number_of_anonymous}) - " if scorecard.number_of_anonymous.to_i.positive?
     str += "<small class='text-muted'>("
-    str += "#{t('scorecard.female')}: #{@scorecard.number_of_female || 0}, "
-    str += "#{t('scorecard.disability')}: #{@scorecard.number_of_disability || 0}, "
-    str += "#{t('scorecard.minority')}: #{@scorecard.number_of_ethnic_minority || 0}, "
-    str += "#{t('scorecard.youth')}: #{@scorecard.number_of_youth || 0}, "
-    str += "#{t('scorecard.poor_card')}: #{@scorecard.number_of_id_poor || 0}"
+    str += "#{t('scorecard.female')}: #{scorecard.number_of_female || 0}, "
+    str += "#{t('scorecard.disability')}: #{scorecard.number_of_disability || 0}, "
+    str += "#{t('scorecard.minority')}: #{scorecard.number_of_ethnic_minority || 0}, "
+    str += "#{t('scorecard.youth')}: #{scorecard.number_of_youth || 0}, "
+    str += "#{t('scorecard.poor_card')}: #{scorecard.number_of_id_poor || 0}"
     str + ")</small>"
   end
 
