@@ -19,6 +19,13 @@
 FactoryBot.define do
   factory :raised_indicator do
     tag
+    scorecard     { create(:scorecard) }
     indicatorable { create(:indicator) }
+    indicator_uuid { indicatorable.uuid }
+    participant   { create(:participant, scorecard: scorecard) }
+
+    trait :custom do
+      indicatorable { create(:indicator, :custom) }
+    end
   end
 end

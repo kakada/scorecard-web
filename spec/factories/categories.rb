@@ -25,5 +25,15 @@ FactoryBot.define do
       name_km   { "មណ្ឌលសុខភាព" }
       hierarchy { ["province", "district"] }
     end
+
+    trait :primary_school_with_dataset do
+      transient do
+        dataset_count { 1 }
+      end
+
+      after(:create) do |cate, evaluator|
+        create_list(:dataset, evaluator.dataset_count, category: cate)
+      end
+    end
   end
 end

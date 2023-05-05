@@ -63,6 +63,7 @@ class Scorecard < ApplicationRecord
   include Scorecards::Filter
   include Scorecards::CallbackNotification
   include Scorecards::Elasticsearch
+  include Scorecards::FacilityMigrationConcern
 
   acts_as_paranoid if column_names.include? "deleted_at"
 
