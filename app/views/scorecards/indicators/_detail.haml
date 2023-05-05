@@ -22,7 +22,7 @@
             - else
               = criteria["name"]
               - if is_custom
-                %small.border.rounded.px-1= t('shared.new')
+                %sup.px-1.text-danger.text-capitalize= t('shared.new')
 
               - if policy(@scorecard).in_review?
                 %span{data: { toggle: 'tooltip', placement: 'top', title: t("indicator.cannot_edit_predefine") }}

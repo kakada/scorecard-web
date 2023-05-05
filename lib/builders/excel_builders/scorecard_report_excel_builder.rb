@@ -112,12 +112,8 @@ module ExcelBuilders
         [
           (voting_indicator.indicatorable.custom? ? I18n.t("excel.other") : voting_indicator.indicatorable.name),
           (voting_indicator.indicatorable.name if voting_indicator.indicatorable.custom?),
-          voting_indicator.participants.select(&:female?).length,
-          voting_indicator.participants.select(&:youth?).length,
-          voting_indicator.participants.select(&:poor_card?).length,
-          voting_indicator.participants.select(&:minority?).length,
-          voting_indicator.participants.select(&:disability?).length
         ]
+        .concat(raisers(voting_indicator))
         .concat(rating(voting_indicator))
         .concat(result(voting_indicator))
       end
@@ -147,6 +143,14 @@ module ExcelBuilders
         return nil unless date.present?
 
         I18n.l(date, format: :nice)
+      end
+
+      # Raiser
+      def raisers(voting_indicator)
+        [:female?, :youth?, :poor_card?, :minority?, :disability?].map do |prop|
+          num = voting_indicator.participants.select{ |p| p.send(prop) }.length
+          num.positive? ? num : nil
+        end
       end
   end
 end

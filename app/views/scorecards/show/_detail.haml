@@ -38,11 +38,15 @@
 
 .row
   %label.col-sm-4.col-form-label= t("scorecard.proposed_indicator_method")
-  %label.col-sm-8.col-form-label= " : " + t("scorecard.#{@scorecard.proposed_indicator_method}") if @scorecard.submit_locked?
+  %label.col-sm-8.col-form-label
+    = " : "
+    = t("scorecard.#{@scorecard.proposed_indicator_method}") if @scorecard.submit_locked?
 
 .row
   %label.col-sm-4.col-form-label= t("scorecard.total_participant")
-  %label.col-sm-8.col-form-label= " : #{participant_info(@scorecard)}".html_safe
+  %label.col-sm-8.col-form-label
+    = " : "
+    = participant_info(@scorecard).html_safe if @scorecard.submit_locked?
 
 .row
   %label.col-sm-4.col-form-label= t("scorecard.number_of_caf")
