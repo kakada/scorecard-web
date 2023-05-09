@@ -91,6 +91,7 @@ en:
     fill_in: Fill in
     view_as_pdf: View result in PDF
     cannot_delete_running_scorecard: Running scorecard cannot be deleted
+    cannot_update_running_scorecard: Running scorecard cannot be editable
     scorecard_being_downloaded: This scorecard is being downloaded (%{count} times).
     number_of_downloaded: "# of downloads"
     suggested_action_count:

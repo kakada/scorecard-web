@@ -29,7 +29,7 @@ class ScorecardPolicy < ApplicationPolicy
   end
 
   def update?
-    create? && !record.access_locked?
+    create? && (record.planned? || record.renewed?)
   end
 
   def destroy?
