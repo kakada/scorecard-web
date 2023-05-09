@@ -46,9 +46,6 @@
               - if rc.province_id.present?
                 %li= "#{t("scorecard.location")}: #{scorecard_location(rc)}"
 
-              - if rc.primary_school_code.present?
-                %li= "#{t('scorecard.primary_school')}: #{rc.primary_school.name}"
-
             .mb-2
               %strong= t('scorecard.reason')
               %span= ": #{rc.changed_reason}"
