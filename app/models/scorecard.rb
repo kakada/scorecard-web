@@ -172,17 +172,21 @@ class Scorecard < ApplicationRecord
     progress.present? ? progress : "planned"
   end
 
-  # Class method
-  def self.t_scorecard_types
-    self.scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
-  end
-
   def t_scorecard_type
     program_scorecard_type.try(:name) || I18n.t("scorecard.#{scorecard_type}")
   end
 
   def program_scorecard_type
     @program_scorecard_type ||= program.program_scorecard_types.select { |ty| ty.code == scorecard_type }.first
+  end
+
+  def planned?
+    progress.nil?
+  end
+
+  # Class method
+  def self.t_scorecard_types
+    self.scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
   end
 
   def self.statuses

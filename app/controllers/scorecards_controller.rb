@@ -7,6 +7,8 @@ class ScorecardsController < ApplicationController
   def index
     respond_to do |format|
       format.html {
+        @progress_count = Scorecards::ScorecardProgress.new(policy_scope(Scorecard.filter(group_count_filter_params))).group_count
+
         @pagy, @scorecards = pagy(
           policy_scope(Scorecard.filter(filter_params)
             .order(sort_param)
@@ -108,6 +110,10 @@ class ScorecardsController < ApplicationController
         :start_date, :end_date, :uuid, :filter, :scorecard_type, :batch_code,
         years: [], province_ids: [], local_ngo_ids: [], facility_ids: []
       ).merge(program_id: current_user.program_id)
+    end
+
+    def group_count_filter_params
+      filter_params.except("filter")
     end
 
     def download_template_name
