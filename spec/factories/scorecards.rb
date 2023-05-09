@@ -72,6 +72,10 @@ FactoryBot.define do
     planned_start_date { 7.days.from_now }
     planned_end_date { planned_start_date }
 
+    trait :planned do
+      progress { nil }
+    end
+
     trait :with_primary_school do
       facility            { create(:facility, :with_parent, :dataset) }
       primary_school_code { PrimarySchool.first.code }
@@ -79,6 +83,7 @@ FactoryBot.define do
     end
 
     trait :submitted do
+      progress     { "in_review" }
       submitter    { create(:submitter, program: program) }
       submitted_at { Time.now.utc }
       device_id  { SecureRandom.uuid[0..5] }

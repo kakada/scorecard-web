@@ -17,5 +17,11 @@
 #
 FactoryBot.define do
   factory :dataset do
+    commune_id { Pumi::Commune.all.sample.id }
+    district_id { commune_id[0..3] }
+    province_id { commune_id[0..1] }
+    sequence(:code) { |n| "#{commune_id}_#{n}" }
+    name_en  { FFaker::Name.name }
+    name_km  { FFaker::Name.name }
   end
 end

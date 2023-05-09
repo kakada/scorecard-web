@@ -24,6 +24,10 @@ FactoryBot.define do
     tag
     name            { FFaker::Name.name }
 
+    trait :custom do
+      type { "Indicators::CustomIndicator" }
+    end
+
     trait :with_languages_indicators do
       transient do
         count { 1 }

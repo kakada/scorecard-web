@@ -43,11 +43,17 @@ FactoryBot.define do
       end
     end
 
-    trait :dataset do
-      dataset     { "ps" }
+    trait :primary_school_with_dataset do
+      category_id     { create(:category, :primary_school_with_dataset).id }
 
-      before(:create) do |facility, evaluator|
-        create(:primary_school)
+      after(:create) do |facility, evaluator|
+        facility.update(parent_id: create(:facility, program_id: facility.program_id).id)
+      end
+    end
+
+    trait :commune do
+      after(:create) do |facility, evaluator|
+        facility.parent_id = create(:facility, program_id: facility.program_id).id
       end
     end
   end
