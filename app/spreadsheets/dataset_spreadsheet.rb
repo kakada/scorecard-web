@@ -58,6 +58,6 @@ class DatasetSpreadsheet
       kind = Location.location_kind(location_id)
       num = @category.datasets.where("#{kind}_id": location_id).length + 1
 
-      "#{location_id}_#{@category.id}_#{num}"
+      "#{@category.code.split("_").last}_#{location_id}_#{sprintf("%02d", num)}"
     end
 end
