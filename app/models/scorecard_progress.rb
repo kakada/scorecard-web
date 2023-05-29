@@ -30,13 +30,12 @@ class ScorecardProgress < ApplicationRecord
     completed: 5
   }
 
+  delegate :email, to: :user, prefix: :user, allow_nil: true
+
   DOWNLOADED = "downloaded"
 
   # Callback
   before_create :set_conducted_at
-
-  # Scope
-  scope :downloadeds, -> { where(status: :downloaded) }
 
   private
     def set_conducted_at

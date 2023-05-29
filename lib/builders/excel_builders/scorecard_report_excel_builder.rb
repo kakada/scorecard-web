@@ -148,7 +148,7 @@ module ExcelBuilders
       # Raiser
       def raisers(voting_indicator)
         [:female?, :youth?, :poor_card?, :minority?, :disability?].map do |prop|
-          num = voting_indicator.participants.select{ |p| p.send(prop) }.length
+          num = voting_indicator.participants.select { |p| p.send(prop) }.length
           num.positive? ? num : nil
         end
       end

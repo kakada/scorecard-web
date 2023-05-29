@@ -116,7 +116,8 @@ km:
     add_suggestion: បន្ថែមសំណើ
     selected_action: សកម្មភាពដែលត្រូវបានជ្រើសរើស
     edit_selected_action: កែតម្រូវ (សកម្មភាពដែលត្រូវបានជ្រើសរើស)
-    in_review_date: កាលបរិច្ឆេទដាក់ត្រួតពិនិត្យ
+    in_review_at: "ដាក់ជូនត្រួតពិនិត្យនៅ៖"
+    completed_at: "បញ្ចប់នៅ៖"
     completed_date: កាលបរិច្ឆេទបញ្ចប់
     mark_as_completed: សម្គាល់ថាបានបញ្ចប់
     selected: ត្រូវបានជ្រើសរើស
@@ -169,13 +170,17 @@ km:
     download_in_full: ទាញយកទម្រង់អនុវត្តរួចរាល់
     download_in_short: ទាញយកទម្រង់សម្រាប់អនុវត្ត
     reviewed: ត្រួតពិនិត្យរួចរាល់
-    completed_by: ត្រួតពិនិត្យដោយ
+    completed_by: "ត្រួតពិនិត្យដោយ៖"
     conducted_in_app: បានធ្វើឡើងនៅក្នុងកម្មវិធីទូរស័ព្ទ
     submitted_from_app: បានបញ្ជូនពីកម្មវិធីទូរស័ព្ទ
     total_participant: អ្នកចូលរួមសរុប
-    submitted_by: ដាក់ស្នើជូនដោយ
-    running_date: កាលបរិច្ឆេទដំណើរការ
-    ran_by: ដំណើរការដោយ
+    submitted_by: "ដាក់ស្នើជូនដោយ៖"
+    running_at: "ដំណើរការនៅ៖"
+    ran_by: "ដំណើរការដោយ៖"
+    download_at: "ទាញយកនៅ៖"
+    download_by: "ទាញយកដោយ៖"
+    renewed_at: "ស្នើឡើងវិញនៅ៖"
+    renewed_by: "ស្នើឡើងវិញដោយ៖"
     last_items:
       one: "ចុងក្រោយ"
       other: "%{count} ចុងក្រោយ"
