@@ -10,7 +10,7 @@ module ScorecardProgresses::ScorecardCallbackConcern
 
     private
       def update_counter_cache
-        scorecard.update_column(:downloaded_count, scorecard.scorecard_progresses.downloadeds.count)
+        scorecard.update_column(:downloaded_count, scorecard.scorecard_progresses.downloaded.count)
       end
 
       def set_scorecard_progress

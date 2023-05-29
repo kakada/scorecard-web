@@ -1,8 +1,8 @@
 .modal-body.text-left
   - if @scorecard.downloaded?
-    %div= t('scorecard.scorecard_being_downloaded', count: @scorecard.scorecard_progresses.downloadeds.length)
+    %div= t('scorecard.scorecard_being_downloaded', count: @scorecard.scorecard_progresses.downloaded.length)
     %ol
-      - @scorecard.scorecard_progresses.downloadeds.each do |progress|
+      - @scorecard.scorecard_progresses.downloaded.each do |progress|
         - if user = progress.user.presence
           %li
             = user.local_ngo_name.present? ? "#{user.email} (#{user.local_ngo_name})" : user.email

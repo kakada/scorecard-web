@@ -116,7 +116,8 @@ en:
     add_suggestion: Add suggestion
     selected_action: Selected action
     edit_selected_action: Edit (selected action)
-    in_review_date: In review date
+    in_review_at: "In review at:"
+    completed_at: "Completed at:"
     completed_date: Completed date
     mark_as_completed: Mark as completed
     selected: Selected
@@ -169,13 +170,17 @@ en:
     download_in_full: Download result format
     download_in_short: Download implementation format
     reviewed: Reviewed
-    completed_by: Completed by
+    completed_by: "Completed by:"
     conducted_in_app: Conducted in mobile app
     submitted_from_app: Submitted from mobile app
     total_participant: Total participant
-    submitted_by: Submitted by
-    running_date: Running date
-    ran_by: Ran by
+    submitted_by: "Submitted by:"
+    running_at: "Running at:"
+    ran_by: "Ran by:"
+    download_at: "Download at:"
+    download_by: "Download by:"
+    renewed_at: "Renewed at:"
+    renewed_by: "Renewed by:"
     last_items:
       one: "Last 1"
       other: "Last %{count}"
