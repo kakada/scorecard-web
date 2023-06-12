@@ -30,7 +30,7 @@ gem "jbuilder"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
-gem "bootstrap"
+gem "bootstrap", "~> 4.0"
 gem "haml", "~> 5.1.2"
 gem "haml-rails", "~> 2.0"
 gem "jquery-rails",   "~> 4.4.0"
@@ -85,7 +85,7 @@ gem "recaptcha", "~> 5.7.0"
 gem "fcm", "~> 1.0.3"
 gem "bootstrap-daterangepicker-rails", "~> 3.0.4"
 
-gem "doorkeeper", "~> 5.5.2"
+gem "doorkeeper", "~> 5.6.6"
 gem "validate_url", "~> 1.0.13"
 
 gem "httparty", "~> 0.21.0"
