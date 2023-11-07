@@ -141,7 +141,8 @@ class Scorecard < ApplicationRecord
   validates :dataset_id, presence: true, if: -> { facility.try(:category_id).present? }
 
   validates :planned_start_date, presence: true
-  validates :planned_end_date, presence: true, date: { after_or_equal_to: :planned_start_date }
+  validates :planned_end_date, presence: true
+  validates_comparison_of :planned_end_date, greater_than_or_equal_to: :planned_start_date
 
   validates :submitter_id, presence: true, if: -> { submitted_at.present? }
   validates :completor_id, presence: true, if: -> { completed_at.present? }

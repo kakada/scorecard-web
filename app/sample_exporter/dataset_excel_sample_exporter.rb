@@ -5,7 +5,7 @@ class DatasetExcelSampleExporter
 
   def initialize(workbook, datasets, category)
     @workbook = workbook
-    @datasets = datasets.sort_by(&:commune_id)
+    @datasets = datasets.sort_by(&:district_id)
     @category = category
   end
 

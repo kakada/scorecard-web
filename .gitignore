@@ -77,3 +77,7 @@ yarn-debug.log*
 /lib/samples/assets/csv/primary_schools.csv
 /lib/samples/assets/audios/*
 elastic
+
+tmp/storage/*
+!tmp/storage/
+!tmp/storage/.keep
