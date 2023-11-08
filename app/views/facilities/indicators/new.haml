@@ -1,4 +1,5 @@
-= render "shared/page_title", title: t("indicator.new_indicator")
+- content_for :title do
+  = t("indicator.new_indicator")
 
 .card.shadow.mb-4
   .card-body

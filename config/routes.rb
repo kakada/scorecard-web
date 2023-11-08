@@ -107,10 +107,6 @@ Rails.application.routes.draw do
 
   resource :about, only: [:show]
 
-  resources :primary_schools do
-    post :import, on: :collection
-  end
-
   resources :mobile_notifications, only: [:index, :new, :create]
 
   resources :scorecard_batches, except: [:update, :edit], param: :code do

@@ -1,4 +1,5 @@
-= render "shared/page_title", title: t('contact.system_contact'), url: nil, label: t('shared.add_new')
+- content_for :title do
+  = t('contact.new_contact')
 
 .card.shadow.mb-4
   .card-body

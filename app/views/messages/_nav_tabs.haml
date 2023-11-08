@@ -1,3 +1,6 @@
+- content_for :title do
+  = t("sidebar.notification")
+
 %ul.nav.nav-tabs
   - if policy(Message).index?
     %li.nav-item{class: css_active_class('messages')}

@@ -83,3 +83,5 @@ km:
     confirm_message: "មានទិន្នន័យសរុប <b>%{total_count}</b> ក្នុងខេត្តចំនួន <b>%{province_count}</b> នឹងត្រូវបញ្ចូលក្នុងប្រព័ន្ធ! តើអ្នកយល់ព្រមឬទេ?"
     is_valid: ត្រឹមត្រូវឬទេ?
     import_success: "ទិន្នន័យចំនួន %{count} ត្រូវបានបញ្ចូលដោយជោគជ័យ"
+    advance_search: ស្វែងរកបន្ថែម
+    search_by_name: ស្វែងរកតាមឈ្មោះ

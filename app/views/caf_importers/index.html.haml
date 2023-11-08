@@ -7,10 +7,8 @@
 
 .card.shadow.mb-4
   .card-body
-    = render partial: "shared/no_data", locals: { items: @batches }
-
     - if @batches.present?
-      = render "shared/pagination_title", objects: @batches
+      = render "shared/pagination_title"
 
       .table-responsive
         %table.table.table-hover.pretty
@@ -36,8 +34,7 @@
                 %td= batch.user_email
                 %td= timeago(batch.created_at, 'datetime').html_safe
 
-    - if @pagy.pages > 1
-      .pagy-wrapper.justify-content-lg-end.justify-content-center
-        != pagy_bootstrap_compact_nav(@pagy)
+    = render "shared/no_data", items: @batches
+    = render "shared/footers/pagination"
 
 = render "shared/modal_confirm"

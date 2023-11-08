@@ -1,4 +1,5 @@
-= render "shared/page_title", title: t("sidebar.notification") + ": " + t("message.scorecard_#{@message.milestone}")
+- content_for :title do
+  = t("sidebar.notification") + ": " + t("message.scorecard_#{@message.milestone}")
 
 .card.shadow
   .card-body

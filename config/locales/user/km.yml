@@ -1,35 +1,36 @@
 km:
   user:
-    users: អ្នកប្រើប្រាស់
+    users: គណនី
     email: អ៊ីម៉ែល
     role: តួនាទី
     program: ប្រូក្រាម
     status: ស្ថានភាព
     copy_confirm_link: ថតចម្លងតំណភ្ជាប់
     copied: ត្រូវបានថតចម្លង!
-    new_users: អ្នកប្រើប្រាស់ថ្មី
+    new_users: គណនីថ្មី
     actived: សកម្ម
     deactivated: អសកម្ម
     pending: រង់ចាំ
     locked: ជាប់សោ
     number: លេខរៀង
     province: ខេត្ត
-    edit_user: កែតម្រូវអ្នកប្រើប្រាស់
+    edit_user: កែតម្រូវគណនី
     full_name: ឈ្មោះពេញ
-    add_new: បន្ថែមអ្នកប្រើប្រាស់ថ្មី
+    add_new: បន្ថែមគណនីថ្មី
     resend_confirmation: ផ្ញើតំណភ្ជាប់ម្តងទៀត
     resend_confirmation_successfully: ផ្ញើតំណភ្ជាប់ម្តងទៀតដោយជោគជ័យ!
     local_ngo: អង្គការក្នុងស្រុក
-    set_active: កំណត់អ្នកប្រើប្រាស់ឲ្យសកម្ម
+    set_active: កំណត់គណនីឲ្យសកម្ម
     all: ទាំងអស់
     archived: Archived
     cannnot_be_deleted: មិនអាចលុបបានទេ វាកំពុងត្រូវបានប្រើប្រាស់
     is_being_archived: ត្រូវបាន archived
-    archive_successfully: "អ្នកប្រើប្រាស់ %{email} ត្រូវបាន archived ដោយជោគជ័យ!"
-    restore_successfully: "អ្នកប្រើប្រាស់ %{email} ត្រូវបានស្តារដោយជោគជ័យ!"
+    archive_successfully: "គណនី %{email} ត្រូវបាន archived ដោយជោគជ័យ!"
+    restore_successfully: "គណនី %{email} ត្រូវបានស្តារដោយជោគជ័យ!"
     are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបគណនី <b>%{email}</b> នេះមែនទេ?
     last_sign_in_at: កាលបរិច្ឆេទចូលគណនីចុងក្រោយ
     any_program: គ្រប់ប្រូក្រាម
     programs_selected: ប្រូក្រាមត្រូវបានជ្រើសរើស
     any_local_ngo: គ្រប់ Local Ngos
     local_ngos_selected: Local Ngos ត្រូវបានជ្រើសរើស
+    search_by_email: ស្វែងរកតាមអ៊ីម៉ែល

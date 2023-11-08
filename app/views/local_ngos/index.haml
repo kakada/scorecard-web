@@ -1,18 +1,16 @@
 = render "shared/scorecard_setting_tab_nav"
 
+.d-md-flex
+  .flex-grow-1.my-2
+    = render "filter"
+
+  = render "more_option"
+
 .card.shadow.mb-4
   .card-body
-    .d-md-flex
-      .flex-grow-1
-        = render 'filter'
-
-      = render "more_option"
-
-    = render partial: "shared/no_data", locals: { items: @local_ngos, url: new_local_ngo_path, label: t("local_ngo.add_new") }
-
     - if @local_ngos.present?
       .d-sm-flex
-        = render "shared/pagination_title", objects: @local_ngos
+        = render "shared/pagination_title"
 
       .table-responsive
         %table.table.table-hover.pretty
@@ -52,6 +50,7 @@
                         = link_to local_ngo_path(local_ngo), remote: true, class: ["btn btn-circle btn-sm btn-outline-danger", ("disabled" if local_ngo.locked?)] do
                           %i.fas.fa-trash-alt
 
+    = render "shared/no_data", items: @local_ngos
     = render "shared/footers/pagination"
 
 = render "shared/modal_confirm"

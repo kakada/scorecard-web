@@ -1,0 +1,12 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-2
+  / Filter
+  %form{ action: facility_indicators_path(@facility), method: 'get' }
+    = render "shared/filters/filter_name"
+
+  / Action button
+  .d-flex
+    = render "shared/buttons/back_button", url: facilities_path
+
+    = render "shared/buttons/add_new_button", url: new_facility_indicator_path(@facility), title: t("indicator.add_new")
+
+    = render 'more_options'

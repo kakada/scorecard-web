@@ -2,11 +2,11 @@
 
 .card.shadow.mb-4.facilities
   .card-body.pretty
-    = render partial: "shared/no_data", locals: { items: @facilities, url: new_facility_path, label: t('facility.add_new') }
+    = render "shared/pagination_title", hide_pagy: true do
+      - if policy(Facility).create?
+        = render "shared/buttons/add_new_button", title: t('facility.add_new'), url: new_facility_path
 
     - if @facilities.present?
-      = render "shared/pagination_title", objects: @facilities, url: new_facility_path, label: t('facility.add_new'), hide_pagy: true
-
       .d-flex.facility-header
         %strong.name= sortable "name_#{I18n.locale}", t("facility.name")
         %strong.w-25= t("facility.dataset")
@@ -18,8 +18,7 @@
         - facility.children.each do |child|
           = render 'facility', facility: child
 
-    - if @pagy.pages > 1
-      .pagy-wrapper.justify-content-lg-end.justify-content-center
-        != pagy_bootstrap_nav(@pagy)
+    = render "shared/no_data", items: @facilities
+    = render "shared/footers/pagination"
 
 = render "shared/modal_confirm"

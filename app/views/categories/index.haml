@@ -1,11 +1,14 @@
-= render "shared/page_title", title: t("category.categories"), url: new_category_path, label: t('shared.add_new', name: t("category.category"))
+- content_for :title do
+  = t("category.categories")
+
+- if policy(Category).create?
+  .d-flex.justify-content-end.mb-2
+    = render "shared/buttons/add_new_button", title: t('shared.add_new', name: t("category.category")), url: new_category_path
 
 .card.shadow.mb-4
   .card-body
-    = render partial: "shared/no_data", locals: { items: @categories, url: new_category_path, label: t('shared.add_new', name: t("category.category")) }
-
     - if @categories.present?
-      = render "shared/pagination_title", objects: @categories, label: t('shared.add_new', name: t("category.category"))
+      = render "shared/pagination_title"
 
       .table-responsive
         %table.table.table-hover.pretty
@@ -36,8 +39,7 @@
 
                     = render 'shared/action_buttons', edit_url: edit_category_path(category), delete_url: category_path(category), object: category
 
-    - if @pagy.pages > 1
-      .pagy-wrapper.justify-content-lg-end.justify-content-center
-        != pagy_bootstrap_compact_nav(@pagy)
+    = render "shared/no_data", items: @categories
+    = render "shared/footers/pagination"
 
 = render "shared/modal_confirm"

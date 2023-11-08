@@ -1,22 +1,27 @@
-= render "shared/page_title", title: t('user.users'), url: new_user_path, label: t('user.add_new')
+- content_for :title do
+  = t('user.users')
 
-%ul.nav.nav-tabs.nav-justified
-  %li.nav-item{ class: ('active' if params[:archived].blank?) }
-    %a.nav-link{href: users_path }
-      %i.fas.fa-users
-      %span.d-none.d-lg-inline= t("user.all")
+.d-flex
+  .flex-grow-1.mb-2
+    %ul.nav.nav-tabs
+      %li.nav-item{ class: ('active' if params[:archived].blank?) }
+        %a.nav-link{href: users_path }
+          %i.fas.fa-users
+          %span.d-none.d-lg-inline= t("user.all")
 
-  %li.nav-item{ class:  ('active' if params[:archived].present?) }
-    %a.nav-link{ href: users_path(archived: true) }
-      %i.fas.fa-user-times
-      %span.d-none.d-lg-inline= t("user.archived")
+      %li.nav-item{ class:  ('active' if params[:archived].present?) }
+        %a.nav-link{ href: users_path(archived: true) }
+          %i.fas.fa-user-times
+          %span.d-none.d-lg-inline= t("user.archived")
+
+  - if policy(User).create?
+    = render "shared/buttons/add_new_button", title: t('user.add_new'), url: new_user_path
+
+= render 'filter'
 
 .card.shadow.mb-4
   .card-body
-    = render 'filter'
-    = render partial: "shared/no_data", locals: { items: @users }
-
-    = render "shared/pagination_title", objects: @users
+    = render "shared/pagination_title"
 
     - if @users.present?
       .table-responsive
@@ -52,9 +57,8 @@
                 %td.text-right{style: 'min-width: 168px;'}
                   = render 'action_buttons', user: user
 
-      - if @pagy.pages > 1
-        .pagy-wrapper.justify-content-lg-end.justify-content-center
-          != pagy_bootstrap_compact_nav(@pagy)
+      = render "shared/no_data", items: @users
+      = render "shared/footers/pagination"
 
 = render "shared/modal_confirm"
 = render "shared/toast_copy"

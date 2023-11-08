@@ -1,11 +1,10 @@
-.d-sm-flex.align-items-center.justify-content-between.mb-4
-  %h1.h3.mb-0.text-gray-800= t('scorecard.scorecard_settings')
-  %div
-    %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }
-      %i.fas.fa-arrow-left.fa-sm.text-white-50
-      = t("shared.back")
+= content_for :title do
+  = t('scorecard.scorecard_settings')
 
-%ul.nav.nav-tabs.nav-justified
+.d-sm-flex.align-items-center.justify-content-end.mb-2
+  = render "shared/buttons/back_button", url: scorecards_path
+
+%ul.nav.nav-tabs
   - if policy(Language).create?
     %li.nav-item{ class: css_nested_active_class('languages') }
       %a.nav-link{:href => languages_path}

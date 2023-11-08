@@ -32,6 +32,7 @@
 //= require common/import_file
 //= require common/copy
 //= require common/wizard_new
+//= require common/toggle_advance_search
 
 //= require facilities
 //= require templates
@@ -72,6 +73,7 @@ document.addEventListener("turbolinks:load", function () {
   CW.Common.ImportFile.init();
   CW.Common.Copy.init();
   CW.Common.WizardNew.init();
+  CW.Common.toggleAdvanceSearch.init();
 
   $("[role='tooltip']").remove();
   $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });

@@ -1,3 +1,3 @@
 - list = current_program.scorecard_batches.map{ |batch| ["#{batch.code}(#{display_datetime(batch.created_at)})", batch.code]}
 
-= select_tag :batch_code, options_for_select(list, params[:batch_code]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_scorecard_batch")
+= select_tag :batch_code, options_for_select(list, params[:batch_code]), class: 'form-control custom-select', prompt: t("scorecard.any_scorecard_batch")

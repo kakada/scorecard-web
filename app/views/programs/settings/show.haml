@@ -1,4 +1,5 @@
-= render "shared/page_title", title: t("program.program_settings")
+- content_for :title do
+  = t("program.program_settings")
 
 .card.shadow.mb-4
   .card-body
