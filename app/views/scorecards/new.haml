@@ -1,4 +1,5 @@
-= render "shared/page_title", title: t("scorecard.new_scorecard")
+- content_for :title do
+  = t("scorecard.new_scorecard")
 
 .card.shadow.mb-4
   .card-body

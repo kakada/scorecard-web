@@ -1,25 +1,23 @@
 %form{ action: '/users', method: 'get' }
-  .form-row
-    .form-group.mr-2
-      = hidden_field_tag :archived, params['archived']
-      .input-group
-        = text_field_tag(:email, params[:email], class: 'form-control search-email', placeholder: t('user.email'), id: 'email')
-        .input-group-append
-          .input-group-text
-            %i.fas.fa-search
+  .d-flex.flex-wrap
+    = hidden_field_tag :archived, params['archived']
 
-    .form-group.search-input.mr-2
-      .tooltips{ 'data-toggle' => 'tooltip', 'data-placement': 'top' }
-        - options = policy_scope(LocalNgo).pluck(:name, :id)
-        = select_tag 'local_ngo_ids[]', options_for_select(options, params[:local_ngo_ids]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('user.local_ngos_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("user.any_local_ngo"), class: 'selectpicker form-control'
+    .mb-2= render "shared/filters/filter_name", field_name: "email", placeholder: t('user.search_by_email')
 
-    - if current_user.system_admin?
-      .form-group.search-input
+    .ml-2
+      = render "shared/buttons/advance_search_button", toggler_variable: "advance_search_user"
+    .ml-2
+      = render "shared/buttons/search_button"
+  / Advance filter
+  #collapseOne.accordion-collapse.collapse.collapse-filter
+    .d-flex.m-2
+      .search-input.mr-2
         .tooltips{ 'data-toggle' => 'tooltip', 'data-placement': 'top' }
-          - options = Program.pluck(:name, :id)
-          = select_tag 'program_ids[]', options_for_select(options, params[:program_ids]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('user.programs_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("user.any_program"), class: 'selectpicker form-control'
+          - options = policy_scope(LocalNgo).pluck(:name, :id)
+          = select_tag 'local_ngo_ids[]', options_for_select(options, params[:local_ngo_ids]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('user.local_ngos_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("user.any_local_ngo"), class: 'selectpicker form-control'
 
-    %div
-      %button.btn.btn-primary.ml-md-2{type: :submit}
-        %i.fas.fa-search
-        %span.d-none.d-lg-inline= t('shared.search')
+      - if current_user.system_admin?
+        .search-input
+          .tooltips{ 'data-toggle' => 'tooltip', 'data-placement': 'top' }
+            - options = Program.pluck(:name, :id)
+            = select_tag 'program_ids[]', options_for_select(options, params[:program_ids]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('user.programs_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("user.any_program"), class: 'selectpicker form-control'

@@ -83,3 +83,5 @@ en:
     confirm_message: "There are total item <b>%{total_count}</b> in <b>%{province_count}</b> provinces importing to the stystem! Do you approve it?"
     is_valid: Is valid?
     import_success: "%{count} items were successfully imported!"
+    advance_search: Advance search
+    search_by_name: Search by name

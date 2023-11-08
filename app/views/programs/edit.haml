@@ -1,3 +1,4 @@
-= render "shared/page_title", title: t("program.edit_program")
+- content_for :title do
+  = t("program.edit_program")
 
 = render 'form'

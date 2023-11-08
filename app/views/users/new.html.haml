@@ -1,4 +1,5 @@
-= render "shared/page_title", title: t('user.new_users')
+- content_for :title do
+  = t('user.new_users')
 
 .card.shadow
   .card-body

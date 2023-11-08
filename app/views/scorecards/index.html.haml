@@ -1,13 +1,13 @@
-= render 'scorecards/index/page_title'
+= content_for :title do
+  = t('scorecard.scorecards')
+
 = render 'scorecards/index/nav_tabs'
 = render 'scorecards/index/filter'
 
 .card.shadow.mb-4
   .card-body
-    = render partial: "no_data", locals: { items: @scorecards }
-
     - if @scorecards.present?
-      = render "shared/pagination_title", objects: @scorecards
+      = render "shared/pagination_title"
 
       .table-responsive
         %table.table.table-hover.pretty
@@ -33,6 +33,7 @@
             - @scorecards.each_with_index do |scorecard, index|
               = render "scorecards/index/scorecard", scorecard: scorecard, index: index
 
+    = render "no_data", items: @scorecards
     = render "shared/footers/pagination"
 
 = render "scorecards/index/confirm_modal"

@@ -101,6 +101,10 @@ module ApplicationHelper
     !Rails.env.production?
   end
 
+  def pagy_label(pagy)
+    I18n.t('shared.pagination_title', from: @pagy.from, to: @pagy.to, total: number_with_delimiter(@pagy.count)).html_safe
+  end
+
   private
     def participant_tooltip(criteria, agg_function, field)
       value = criteria["#{field}_#{agg_function}"].to_i

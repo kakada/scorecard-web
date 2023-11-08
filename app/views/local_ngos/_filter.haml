@@ -1,8 +1,2 @@
 %form{ action: local_ngos_path, method: 'get' }
-  .form-row
-    .form-group
-      .input-group
-        = text_field_tag(:keyword, params[:keyword], class: 'form-control', placeholder: t('local_ngo.search'))
-        .input-group-append
-          .input-group-text
-            %i.fas.fa-search
+  = render "shared/filters/filter_name", field_name: "keyword", placeholder: t('local_ngo.search')

@@ -1,4 +1,5 @@
-= render "shared/page_title", title: "#{@category.name}: #{t('dataset.edit_dataset')}"
+- content_for :title do
+  = "#{@category.name}: #{t('dataset.edit_dataset')}"
 
 .card.shadow
   .card-body

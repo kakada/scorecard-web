@@ -2,8 +2,9 @@
 - name ||= ''
 - title ||= t('shared.add_new', name: name)
 - disabled ||= false
+- remote ||= false
 
 %div
-  = link_to url, class: ['btn btn-primary btn-sm shadow-sm', ('disabled' if disabled)] do
+  = link_to url, remote: remote, class: ['btn btn-primary btn-sm shadow-sm', ('disabled' if disabled)] do
     %i.fas.fa-plus.text-white-50
     = title

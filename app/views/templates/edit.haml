@@ -1,4 +1,5 @@
-= render "shared/page_title", title: t("template.edit_template")
+= content_for :title do
+  = t("template.edit_template")
 
 .card.shadow.mb-4
   .card-body

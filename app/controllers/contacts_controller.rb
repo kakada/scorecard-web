@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   before_action :set_contact, only: [:edit, :update, :destroy, :show]
 
   def index
-    @contacts = authorize Contact.no_program
+    @pagy, @contacts = pagy(authorize Contact.no_program)
   end
 
   def show

@@ -1,34 +1,32 @@
 %form{ action: '/scorecards', method: 'get' }
-  = hidden_field_tag :filter, params[:filter]
+  .d-flex.flex-wrap
+    .d-flex.flex-grow-1
+      = hidden_field_tag :filter, params[:filter]
 
-  / Default filter
-  .d-md-flex.my-2.text-right
-    = text_field_tag(:uuid, params[:uuid], class: 'form-control filter-input', placeholder: t('scorecard.code'), id: 'scorecard_code')
+      .mb-2= render "shared/filters/filter_name", field_name: "uuid", placeholder: t('scorecard.search_by_code')
 
-    = render 'scorecards/index/filter_date'
+      .ml-2
+        = render "shared/buttons/advance_search_button", toggler_variable: "advance_search_user"
+      .ml-2
+        = render "shared/buttons/search_button"
 
     %div
-      .btn-search-wrapper.d-block.d-md-flex
-        %a.btn.btn-outline-secondary.advance-search{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample", :role => "button"}
-          %span.d-none.d-lg-inline= t('scorecard.advance_search')
-          %i.fas.fa-angle-down
-
-        %button.btn.btn-primary.ml-md-2{type: :submit}
-          %i.fas.fa-search
-          %span.d-none.d-lg-inline= t('shared.search')
+      = render 'scorecards/index/more_buttons'
 
   / Advance filter
-  #collapseExample.collapse
-    .d-lg-flex.mb-2
-      = render 'scorecards/index/filter_province'
+  #collapseOne.accordion-collapse.collapse.collapse-filter
+    .d-flex.m-2.flex-wrap
+      .mr-2= render 'scorecards/index/filter_date'
 
-      = select_tag :scorecard_type, options_for_select(program_scorecard_types, params[:scorecard_type]), class: 'form-control custom-select filter-input', prompt: t("scorecard.any_scorecard_type")
+      .mr-2= render 'scorecards/index/filter_province'
+
+      .mr-2= select_tag :scorecard_type, options_for_select(program_scorecard_types, params[:scorecard_type]), class: 'form-control custom-select', prompt: t("scorecard.any_scorecard_type")
 
       - if current_program.present?
-        = render 'scorecards/index/filter_year'
-        = render 'scorecards/index/filter_facility'
+        .mr-2= render 'scorecards/index/filter_year'
+        .mr-2= render 'scorecards/index/filter_facility'
+        .mr-2= render 'scorecards/index/filter_local_ngo'
 
     - if current_program.present?
-      .d-lg-flex.mb-2
-        = render 'scorecards/index/filter_local_ngo'
-        = render 'scorecards/index/filter_batch'
+      .d-flex.m-2.flex-wrap
+        .mr-2= render 'scorecards/index/filter_batch'

@@ -1,4 +1,5 @@
-= render "shared/page_title", title: t('local_ngo.edit_local_ngo')
+= content_for :title do
+  = t('local_ngo.edit_local_ngo')
 
 .card.shadow.mb-4
   .card-body

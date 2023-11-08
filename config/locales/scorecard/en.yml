@@ -184,3 +184,4 @@ en:
     last_items:
       one: "Last 1"
       other: "Last %{count}"
+    search_by_code: Search by code

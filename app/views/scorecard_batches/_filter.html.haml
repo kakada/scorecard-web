@@ -1,7 +1,7 @@
-%form{ action: scorecard_batches_path, method: 'get' }
-  .form-group{style: 'width: 300px'}
-    .input-group
-      = text_field_tag(:keyword, params[:keyword], class: 'form-control', placeholder: t('scorecard_batch.search_by_code_or_filename'))
-      .input-group-append
-        .input-group-text
-          %i.fas.fa-search
+.d-sm-flex.align-items-center.justify-content-between.mb-2
+  %form{ action: scorecard_batches_path, method: 'get' }
+    = render "shared/filters/filter_name", field_name: "keyword", placeholder: t('scorecard_batch.search_by_code_or_filename')
+
+  .d-flex.mt-3.mt-md-0.justify-content-end
+    = render "shared/buttons/back_button", url: scorecards_path
+    = render "shared/buttons/add_new_button", url: new_scorecard_batch_path, title: t('scorecard_batch.import_batch')

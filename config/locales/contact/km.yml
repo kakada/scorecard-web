@@ -8,3 +8,5 @@ km:
     email_placeholder: abc@exmple.com
     system_contact: ទំនាក់ទំនងប្រព័ន្ធ
     are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបទំនាក់ទំនងប្រព័ន្ធ <b>%{value}</b> នេះមែនទេ?
+    new_contact: មធ្យោបាយទំនាក់ទំនងថ្មី
+    edit_contact: កែតម្រូវមធ្យោបាយទំនាក់ទំនង

@@ -1,18 +1,12 @@
-.d-sm-flex.align-items-center.justify-content-between.mb-4
-  %h1.h3.mb-0.text-gray-800= t('scorecard_batch.scorecard_batch')
+- content_for :title do
+  = t('scorecard_batch.scorecard_batch')
 
-  .d-flex.mt-3.mt-md-0.justify-content-end
-    = render "shared/buttons/back_button", url: scorecards_path
-    = render "shared/buttons/add_new_button", url: new_scorecard_batch_path, title: t('scorecard_batch.import_batch')
-
-= render 'filter'
+= render "filter"
 
 .card.shadow.mb-4
   .card-body
-    = render partial: "shared/no_data", locals: { items: @scorecard_batches }
-
     - if @scorecard_batches.present?
-      = render "shared/pagination_title", objects: @scorecard_batches
+      = render "shared/pagination_title"
 
       .table-responsive
         %table.table.table-hover.pretty
@@ -37,8 +31,7 @@
                 %td= batch.user_email
                 %td= timeago(batch.created_at, 'datetime').html_safe
 
-    - if @pagy.pages > 1
-      .pagy-wrapper.justify-content-lg-end.justify-content-center
-        != pagy_bootstrap_compact_nav(@pagy)
+    = render "shared/no_data", items: @scorecard_batches
+    = render "shared/footers/pagination"
 
 = render "shared/modal_confirm"

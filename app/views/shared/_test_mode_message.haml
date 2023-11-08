@@ -1,4 +1,7 @@
 - if test_mode?
-  .alert.alert-danger.test-mode-message
+  .alert.alert-danger.test-mode-message.alert-dismissible.fade.show
     %i.fas.fa-info-circle
     %span= t('shared.you_are_in_testing_mode')
+
+    %button.close{ type: "button", "data-dismiss": "alert", "aria-label": "Close" }
+      %span{"aria-hidden": "true"} &times;

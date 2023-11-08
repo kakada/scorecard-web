@@ -184,3 +184,4 @@ km:
     last_items:
       one: "ចុងក្រោយ"
       other: "%{count} ចុងក្រោយ"
+    search_by_code: ស្វែងរកតាមលេខកូដ

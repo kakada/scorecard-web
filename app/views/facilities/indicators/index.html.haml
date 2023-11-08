@@ -1,23 +1,12 @@
-.d-sm-flex.align-items-center.justify-content-between.mb-4
-  %h1.h3.mb-0.text-gray-800= "#{@facility.name}: #{t('indicator.indicators')}"
-  %div
-    = link_to facilities_path, class: 'btn btn-secondary mr-2 btn-sm shadow-sm' do
-      %i.fas.fa-arrow-left.fa-sm.text-white-50
-      = t('shared.back')
+= content_for :title do
+  = "#{@facility.name}: #{t('indicator.indicators')}"
 
-    %a.btn.btn-primary.btn-sm.shadow-sm{ href: new_facility_indicator_path(@facility) }
-      %i.fas.fa-plus.fa-sm.text-white-50
-      = t("indicator.add_new")
-
-    = render 'more_options'
+= render "page_heading"
 
 .card.shadow.mb-4
   .card-body
-    = render "filter"
-    = render partial: "shared/no_data", locals: { items: @indicators }
-
     - if @indicators.present?
-      = render "shared/pagination_title", objects: @indicators
+      = render "shared/pagination_title"
 
       %table.table.table-hover.pretty
         %thead
@@ -31,8 +20,7 @@
         %tbody
           = render partial: 'indicator', collection: @indicators
 
-    - if @pagy.pages > 1
-      .pagy-wrapper.justify-content-lg-end.justify-content-center
-        != pagy_bootstrap_nav(@pagy)
+    = render "shared/no_data", items: @indicators
+    = render "shared/footers/pagination",
 
 = render "shared/modal_confirm"

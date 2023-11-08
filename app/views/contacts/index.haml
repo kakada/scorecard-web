@@ -1,9 +1,14 @@
-%section.header
-  = render "shared/page_title", title: t('contact.system_contact'), url: new_system_contact_path, label: t('shared.add_new')
+- content_for :title do
+  = t('contact.system_contact')
 
-.clearfix
+- if policy(Contact).create?
+  .d-flex.justify-content-end.mb-2
+    = render "shared/buttons/add_new_button", title: t('shared.add_new', name: t('contact.system_contact')), url: new_system_contact_path
+
 .card
   .card-body.table-responsive
+    = render "shared/pagination_title"
+
     %table.table.table-hover.pretty
       %thead
         %tr
@@ -14,5 +19,8 @@
 
       %tbody
         = render @contacts
+
+    = render "shared/no_data", items: @contacts
+    = render "shared/footers/pagination"
 
 = render "shared/modal_confirm"

@@ -1,16 +1,14 @@
-.d-sm-flex.align-items-center.justify-content-between.mb-4
-  %h1.h3.mb-0.text-gray-800= t('scorecard_batch.removing_scorecard_history')
+- content_for :title do
+  = t('scorecard_batch.removing_scorecard_history')
 
-  .d-flex.mt-3.mt-md-0.justify-content-end
-    = render "shared/buttons/back_button", url: scorecards_path
-    = render "shared/buttons/add_new_button", url: new_removing_scorecard_path, title: t('scorecard_batch.remove_batch')
+.d-flex.justify-content-end.mb-2
+  = render "shared/buttons/back_button", url: scorecards_path
+  = render "shared/buttons/add_new_button", url: new_removing_scorecard_path, title: t('scorecard_batch.remove_batch')
 
 .card.shadow.mb-4
   .card-body
-    = render partial: "shared/no_data", locals: { items: @batches }
-
     - if @batches.present?
-      = render "shared/pagination_title", objects: @batches
+      = render "shared/pagination_title"
 
       .table-responsive
         %table.table.table-hover.pretty
@@ -39,8 +37,7 @@
                 %td= batch.user_email
                 %td= timeago(batch.created_at, 'datetime').html_safe
 
-    - if @pagy.pages > 1
-      .pagy-wrapper.justify-content-lg-end.justify-content-center
-        != pagy_bootstrap_compact_nav(@pagy)
+    = render "shared/no_data", items: @batches
+    = render "shared/footers/pagination"
 
 = render "shared/modal_confirm"

@@ -1,2 +1,2 @@
-.filter-input.tooltips{ 'data-toggle' => 'tooltip' }
+.tooltips{ 'data-toggle' => 'tooltip' }
   = select_tag 'years[]', options_for_select(current_program.scorecards.pluck(:year).sort.uniq, params[:years]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('scorecard.years_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("scorecard.any_year"), class: 'selectpicker form-control'
