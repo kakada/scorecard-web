@@ -73,7 +73,7 @@ gem "telegram-bot", "~> 0.15.3"
 gem "pdf-reader", "~> 2.5.0"
 
 gem "mimemagic", "~> 0.3.6"
-gem "sidekiq", "~> 7.0.8"
+gem "sidekiq", "~> 7.1.3"
 gem "sidekiq-scheduler", "~> 5.0.0"
 
 gem "elasticsearch-model", "~> 7.2.1"
