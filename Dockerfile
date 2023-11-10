@@ -1,4 +1,4 @@
-FROM ruby:3.2.2
+FROM ruby:3.1.3
 
 LABEL maintainer="Kakada CHHEANG <kakada@kawsang.com>"
 
