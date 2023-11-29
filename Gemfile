@@ -46,7 +46,7 @@ gem "bootsnap", require: false
 gem "sentry-raven", "~> 3.0.4"
 gem "pagy", "~> 5.1.3"
 gem "pumi", require: "pumi/rails"
-gem "carrierwave", "~> 2.1"
+gem "carrierwave", "~> 2.2"
 gem "pundit", "~> 2.1.0"
 gem "simple_form", "~> 5.0.3"
 gem "awesome_nested_set", "~> 3.6.0"
