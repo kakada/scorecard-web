@@ -189,8 +189,8 @@ HOST_URL=https://yourdomain.com  # Replace with your production domain
 ```bash
 DB_HOST=db
 DB_USER=postgres
-DB_PWD=  # Leave empty when using Docker with trust authentication (default)
-         # For production security, set a strong password and update docker-compose.production.yml
+DB_PWD=your_secure_password  # REQUIRED for secure production deployment
+                              # Leave empty only if using trust auth (NOT recommended)
 DB_NAME=csc_web_production
 ```
 
@@ -302,22 +302,22 @@ GEO_JSON_URL=https://yourdomain.com/provinces.json
 
 Edit `docker-compose.production.yml` and update the following:
 
-**Default Configuration (Trust Authentication - Not Recommended for Production):**
+**⚠️ Default Configuration (Trust Authentication - INSECURE - DO NOT USE IN PRODUCTION):**
 ```yaml
 services:
   db:
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_HOST_AUTH_METHOD=trust  # INSECURE - DO NOT USE IN PRODUCTION
 
   app:
     image: ilabsea/csc-web:0.0.1
     environment:
-      - DATABASE_URL=postgres://postgres@db/csc_web_production
+      - DATABASE_URL=postgres://postgres@db/csc_web_production  # INSECURE - No password authentication
       
       # ... other environment variables
 ```
 
-**Recommended Secure Configuration:**
+**✅ Recommended Secure Configuration (USE THIS FOR PRODUCTION):**
 ```yaml
 services:
   db:
