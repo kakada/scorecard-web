@@ -163,6 +163,9 @@ git checkout main  # or specific version tag
 
 ## Configuration
 
+> **⚠️ IMPORTANT SECURITY NOTICE**  
+> Before proceeding with configuration, be aware that the repository's default `docker-compose.production.yml` uses trust-based database authentication (`POSTGRES_HOST_AUTH_METHOD=trust`), which is **not secure for production use**. This guide provides instructions for implementing secure password authentication. Always use password-protected database connections in production environments.
+
 ### Step 1: Create Environment Configuration File
 
 ```bash
@@ -186,11 +189,21 @@ HOST_URL=https://yourdomain.com  # Replace with your production domain
 ```bash
 DB_HOST=db
 DB_USER=postgres
-DB_PWD=  # Leave empty when using Docker (trust authentication)
+DB_PWD=  # Leave empty when using Docker with trust authentication (default)
+         # For production security, set a strong password and update docker-compose.production.yml
 DB_NAME=csc_web_production
 ```
 
-**Note:** The production Docker deployment uses `POSTGRES_HOST_AUTH_METHOD=trust` for database authentication, which allows connections without a password within the Docker network. The `CSC_WEB_DATABASE_PASSWORD` in docker-compose.production.yml is for reference but not actively used due to trust authentication. For enhanced security in production, consider configuring password authentication instead.
+> **⚠️ SECURITY WARNING:**  
+> The default production Docker deployment uses `POSTGRES_HOST_AUTH_METHOD=trust` for database authentication, which allows connections without a password within the Docker network. **This is NOT recommended for production environments.**
+> 
+> **To implement secure database authentication:**
+> 1. Set a strong password in the `DB_PWD` variable above
+> 2. Update `docker-compose.production.yml`:
+>    - Remove or comment out `POSTGRES_HOST_AUTH_METHOD=trust`
+>    - Change `DATABASE_URL` to: `postgres://postgres:YOUR_PASSWORD@db/csc_web_production`
+>    - Set `POSTGRES_PASSWORD=YOUR_PASSWORD` in the db service environment
+> 3. Restart the database service for changes to take effect
 
 #### Redis Configuration
 ```bash
@@ -289,18 +302,34 @@ GEO_JSON_URL=https://yourdomain.com/provinces.json
 
 Edit `docker-compose.production.yml` and update the following:
 
+**Default Configuration (Trust Authentication - Not Recommended for Production):**
 ```yaml
 services:
   db:
     environment:
-      - CSC_WEB_DATABASE_PASSWORD=your_secure_database_password
-      - POSTGRES_HOST_AUTH_METHOD=trust  # Note: Using trust auth method
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  app:
+    image: ilabsea/csc-web:0.0.1
+    environment:
+      - DATABASE_URL=postgres://postgres@db/csc_web_production
+      
+      # ... other environment variables
+```
+
+**Recommended Secure Configuration:**
+```yaml
+services:
+  db:
+    environment:
+      - POSTGRES_PASSWORD=your_secure_database_password
+      # Remove or comment out POSTGRES_HOST_AUTH_METHOD=trust
 
   app:
     image: ilabsea/csc-web:0.0.1  # Or build from source
     environment:
-      # Database connection (using trust authentication)
-      - DATABASE_URL=postgres://postgres@db/csc_web_production
+      # Database connection with password authentication
+      - DATABASE_URL=postgres://postgres:your_secure_database_password@db/csc_web_production
       
       # SMTP Settings
       - SETTINGS__SMTP__ADDRESS=smtp.your-provider.com
@@ -321,6 +350,8 @@ services:
       - APP_SHORTCUT_NAME=CSC
       - APP_VERSION=0.0.1
 ```
+
+> **💡 Recommendation:** Always use password authentication for production databases. The secure configuration shown above is strongly recommended.
 
 ---
 
@@ -1115,7 +1146,24 @@ logging:
 
 ### Security Best Practices
 
-1. **Keep Software Updated:**
+1. **Database Security (CRITICAL):**
+   ```bash
+   # ALWAYS use password authentication in production
+   # Edit docker-compose.production.yml:
+   
+   # In db service:
+   environment:
+     - POSTGRES_PASSWORD=your_strong_password
+     # Remove: POSTGRES_HOST_AUTH_METHOD=trust
+   
+   # In app service:
+   environment:
+     - DATABASE_URL=postgres://postgres:your_strong_password@db/csc_web_production
+   ```
+   
+   **Why this matters:** Trust authentication allows any container in the Docker network to access your database without credentials, which is a critical security vulnerability.
+
+2. **Keep Software Updated:**
    - Regularly update Docker images
    - Apply security patches promptly
 
