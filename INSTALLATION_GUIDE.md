@@ -186,9 +186,11 @@ HOST_URL=https://yourdomain.com  # Replace with your production domain
 ```bash
 DB_HOST=db
 DB_USER=postgres
-DB_PWD=your_secure_database_password  # Set a strong password
+DB_PWD=  # Leave empty when using Docker (trust authentication)
 DB_NAME=csc_web_production
 ```
+
+**Note:** The production Docker deployment uses `POSTGRES_HOST_AUTH_METHOD=trust` for database authentication, which allows connections without a password within the Docker network. The `CSC_WEB_DATABASE_PASSWORD` in docker-compose.production.yml is for reference but not actively used due to trust authentication. For enhanced security in production, consider configuring password authentication instead.
 
 #### Redis Configuration
 ```bash
@@ -291,12 +293,14 @@ Edit `docker-compose.production.yml` and update the following:
 services:
   db:
     environment:
-      - CSC_WEB_DATABASE_PASSWORD=your_secure_database_password  # Match DB_PWD in app.env
+      - CSC_WEB_DATABASE_PASSWORD=your_secure_database_password
+      - POSTGRES_HOST_AUTH_METHOD=trust  # Note: Using trust auth method
 
   app:
     image: ilabsea/csc-web:0.0.1  # Or build from source
     environment:
-      - DATABASE_URL=postgres://postgres:your_secure_database_password@db/csc_web_production
+      # Database connection (using trust authentication)
+      - DATABASE_URL=postgres://postgres@db/csc_web_production
       
       # SMTP Settings
       - SETTINGS__SMTP__ADDRESS=smtp.your-provider.com
@@ -736,8 +740,9 @@ docker-compose -f docker-compose.production.yml ps db
 # Check database logs
 docker-compose -f docker-compose.production.yml logs db
 
-# Verify database credentials in app.env
-# Ensure DATABASE_URL matches DB_PWD
+# Verify database connection format
+# The production setup uses trust authentication, so no password in DATABASE_URL
+# Expected format: postgres://postgres@db/csc_web_production
 
 # Test database connection
 docker-compose -f docker-compose.production.yml exec db psql -U postgres -c "SELECT 1"
