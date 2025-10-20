@@ -298,7 +298,7 @@ GEM
       timeout
     net-smtp (0.4.0)
       net-protocol
-    nio4r (2.5.9)
+    nio4r (2.7.4)
     nokogiri (1.15.4-aarch64-linux)
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
@@ -343,7 +343,7 @@ GEM
     popper_js (1.16.1)
     psych (3.3.4)
     public_suffix (5.0.4)
-    puma (5.6.7)
+    puma (5.6.9)
       nio4r (~> 2.0)
     pumi (0.22.0)
     pundit (2.1.1)
@@ -529,7 +529,6 @@ GEM
       chronic (>= 0.6.3)
     wicked_pdf (2.1.0)
       activesupport
-    wkhtmltopdf-binary (0.12.6.6)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.12)
@@ -579,7 +578,7 @@ DEPENDENCIES
   pdf-reader (~> 2.5.0)
   pg (>= 0.18, < 2.0)
   psych (< 4)
-  puma (~> 5.6.7)
+  puma (~> 5.6.9)
   pumi
   pundit (~> 2.1.0)
   rack-attack (~> 6.5.0)
@@ -609,7 +608,6 @@ DEPENDENCIES
   web-console
   whenever (~> 1.0.0)
   wicked_pdf (~> 2.1.0)
-  wkhtmltopdf-binary (~> 0.12.6.5)
 
 RUBY VERSION
    ruby 3.1.3p185
