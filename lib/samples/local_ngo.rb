@@ -2,8 +2,9 @@
 
 module Samples
   class LocalNgo
-    def self.load
-      program = ::Program.find_by name: "CARE"
+    def self.load(program_name = "ISAF-II")
+      program = ::Program.find_by name: program_name
+      return if program.nil?
 
       local_ngos = ["NGO1", "NGO2"]
       local_ngos.each do |name|

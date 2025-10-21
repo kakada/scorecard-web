@@ -2,14 +2,15 @@
 
 module Samples
   class User
-    def self.load
-      care = ::Program.find_by name: "CARE"
-      lngo = care.local_ngos.first
+    def self.load(program_name = "ISAF-II")
+      program = ::Program.find_by name: program_name
+      return if program.nil?
+      lngo = program.local_ngos.first
 
       users = [
-        { email: "admin@program.org", role: :program_admin, program_id: care.id },
-        { email: "staff@care.org", role: :staff, program_id: care.id  },
-        { email: "lngo@care.org", role: :lngo, program_id: care.id, local_ngo_id: lngo.id },
+        { email: "admin@program.org", role: :program_admin, program_id: program.id },
+        { email: "staff@care.org", role: :staff, program_id: program.id  },
+        { email: "lngo@care.org", role: :lngo, program_id: program.id, local_ngo_id: lngo.id },
       ]
 
       users.each do |user|

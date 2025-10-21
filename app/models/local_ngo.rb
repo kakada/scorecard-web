@@ -28,6 +28,7 @@ class LocalNgo < ApplicationRecord
   belongs_to :program
   has_many :cafs, dependent: :destroy
   has_many :scorecards
+  has_many :users
 
   # Soft delete
   acts_as_paranoid if column_names.include? "deleted_at"
