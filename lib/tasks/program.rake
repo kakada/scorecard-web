@@ -32,6 +32,47 @@ namespace :program do
     end
   end
 
+  # Usage:
+  #   1. Log in as an admin user and create a new program (e.g., "World Vision").
+  #   2. In the terminal, run: `rake program:clone_program['ISAF-II','World Vision']`
+  #      → This command clones all data from the "ISAF-II" program to the "World Vision" program.
+  #   3. After cloning, create a new admin user for the "World Vision" program.
+  #   4. Log in as the new program admin user and create one or more Local NGOs.
+  #      → This step enables scorecard creation.
+  #   5. Create CAFs under each Local NGO (these are the users/CAFs listed in each scorecard within the mobile app who will conduct scorecard sessions with community users).
+  #   6. Create web app user accounts for each Local NGO.
+  #      → These accounts will log in to the scorecard app using a username and password to download scorecard data for offline use.
+  #      → Note: Each LNGO user can only download scorecards associated with their own NGO.
+  #
+  # Notes:
+  #   - Ensure both the source and target programs are created before running this task.
+  #   - The target program must be empty to avoid data conflicts. If not, data will be applied with upsert logic.
+  desc <<~DESC
+    Clone program data from a source program to a target program, case sensitive.
+      - Make sure both programs already exist.
+      - The target program should be empty before cloning. If not, data is applied with upsert logic.
+    Usage:
+      rake program:clone_program['source_program_name','target_program_name']
+  DESC
+  task :clone_program, [:source_program_name, :target_program_name] => :environment do |_task, args|
+    source_name = args[:source_program_name].to_s.strip
+    target_name = args[:target_program_name].to_s.strip
+
+    if source_name.blank? || target_name.blank?
+      abort "❌  Please provide both source and target program names.\nExample: rake program:clone_program['ISAF-II','World Vision']"
+    end
+
+    source_program = Program.find_by(name: source_name)
+    abort "❌  Source program '#{source_name}' does not exist. Please create it first." unless source_program
+
+    target_program = Program.find_by(name: target_name)
+    abort "❌  Target program '#{target_name}' does not exist. Please create it first." unless target_program
+
+    puts "🔄  Cloning data from '#{source_program.name}' → '#{target_program.name}'..."
+    ProgramService.new(target_program.id).clone_from_program(source_program)
+    puts "✅  Clone completed successfully!"
+  end
+
   desc "remove program and its dependency"
   task :remove_program, [:program_name] => :environment do |task, args|
     abort "This task requires to have a program name!" unless args[:program_name].present?

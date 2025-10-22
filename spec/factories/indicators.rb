@@ -34,7 +34,11 @@ FactoryBot.define do
       end
 
       after(:create) do |indicator, evaluator|
-        create_list(:languages_indicator, evaluator.count, indicator: indicator)
+        evaluator.count.times do |i|
+          indicator.categorizable.program.languages.each do |language|
+            create(:languages_indicator, language: language, indicator: indicator)
+          end
+        end
       end
     end
   end

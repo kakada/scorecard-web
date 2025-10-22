@@ -47,7 +47,7 @@ services:
 
       - SENTRY_LOGGER_DSN=logger_key
 
-      - APP_NAME=Care Score card
+      - APP_NAME=ISAF-II Score card
       - APP_SHORTCUT_NAME=CSC
       - APP_VERSION=0.0.1
 
