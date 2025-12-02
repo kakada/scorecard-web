@@ -3,7 +3,8 @@ FROM ruby:3.1.3
 LABEL maintainer="Kakada CHHEANG <kakada@kawsang.com>"
 
 RUN apt-get update -qq && \
-    apt-get install -y nodejs yarn cron && \
+    apt-get install -y nodejs yarn cron \
+    wkhtmltopdf xfonts-75dpi xfonts-base && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
