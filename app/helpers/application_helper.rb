@@ -8,11 +8,11 @@ module ApplicationHelper
   end
 
   def css_active_class(controller_name)
-    return "active" if request.path.split("/")[1] == controller_name
+    "active" if request.path.split("/")[1] == controller_name
   end
 
   def css_nested_active_class(controller_name)
-    return "active" if params["controller"] == controller_name
+    "active" if params["controller"] == controller_name
   end
 
   def sortable(column, title = nil)
@@ -102,7 +102,7 @@ module ApplicationHelper
   end
 
   def pagy_label(pagy)
-    I18n.t('shared.pagination_title', from: @pagy.from, to: @pagy.to, total: number_with_delimiter(@pagy.count)).html_safe
+    I18n.t("shared.pagination_title", from: @pagy.from, to: @pagy.to, total: number_with_delimiter(@pagy.count)).html_safe
   end
 
   private

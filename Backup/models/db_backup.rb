@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # encoding: utf-8
 
 ##
@@ -9,14 +10,14 @@
 # For more information about Backup's components, see the documentation at:
 # http://backup.github.io/backup
 #
-Model.new(:db_backup, 'Backup scorecards database') do
+Model.new(:db_backup, "Backup scorecards database") do
   database PostgreSQL do |db|
     # To dump all databases, set `db.name = :all` (or leave blank)
-    db.name               = ENV.fetch('DB_NAME') { 'csc_web_development' }
-    db.username           = ENV.fetch('DB_USER') { 'postgres' }
-    db.password           = ENV.fetch('DB_PWD') { '' }
-    db.host               = ENV.fetch('DB_HOST') { 'db' }
-    db.port               = ENV.fetch('DB_PORT') { 5432 }
+    db.name               = ENV.fetch("DB_NAME") { "csc_web_development" }
+    db.username           = ENV.fetch("DB_USER") { "postgres" }
+    db.password           = ENV.fetch("DB_PWD") { "" }
+    db.host               = ENV.fetch("DB_HOST") { "db" }
+    db.port               = ENV.fetch("DB_PORT") { 5432 }
     # db.socket             = "/tmp/pg.sock"
     # When dumping all databases, `skip_tables` and `only_tables` are ignored.
     # db.skip_tables        = ['skip', 'these', 'tables']
@@ -24,7 +25,7 @@ Model.new(:db_backup, 'Backup scorecards database') do
     db.additional_options = []
   end
 
-  if ENV['STORAGE_TYPE'] == "Local"
+  if ENV["STORAGE_TYPE"] == "Local"
     ##
     # Local (Copy) [Storage]
     #
@@ -54,5 +55,4 @@ Model.new(:db_backup, 'Backup scorecards database') do
   # Gzip [Compressor]
   #
   compress_with Gzip
-
 end

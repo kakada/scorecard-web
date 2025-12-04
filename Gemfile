@@ -114,7 +114,7 @@ group :development do
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem "rack-mini-profiler"
 
-   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
+  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   gem "spring"
 
   gem "annotate"
