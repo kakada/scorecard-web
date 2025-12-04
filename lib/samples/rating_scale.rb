@@ -42,7 +42,7 @@ module Samples
           lang_rating_scale.update(
             language_id: language.id,
             language_code: language.code,
-            content: "#{rating_scale.name} (#{language.code})",
+            content: rating_scale.name,
             audio: Pathname.new(audio).open
           )
         end

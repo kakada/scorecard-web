@@ -41,7 +41,7 @@ module Samples
           lang_indi.update(
             language_id: language.id,
             language_code: language.code,
-            content: "#{indicator.name} (#{language.code})",
+            content: indicator.name,
             audio: Pathname.new(audio).open
           )
         end
