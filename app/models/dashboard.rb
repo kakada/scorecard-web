@@ -36,7 +36,7 @@ class Dashboard
   end
 
   def create_org
-    option = { basic_auth: auth, body: { name: program.name } }
+    option = { basic_auth: auth, body: { name: program.name }.to_json, headers: { "Content-Type" => "application/json" } }
 
     result = self.class.post("/api/orgs", option)
     gf_dashboard.update(org_id: result.parsed_response["orgId"]) if result.response.is_a?(Net::HTTPSuccess)
@@ -49,7 +49,7 @@ class Dashboard
   end
 
   def create_org_token
-    option = { basic_auth: auth, body: { name: "#{program.name}_apikey", role: "Admin" } }
+    option = { basic_auth: auth, body: { name: "#{program.name}_apikey", role: "Admin" }.to_json, headers: { "Content-Type" => "application/json" } }
 
     result = self.class.post("/api/auth/keys", option)
     gf_dashboard.update(org_token: result.parsed_response["key"]) if result.response.is_a?(Net::HTTPSuccess)
@@ -84,8 +84,9 @@ class Dashboard
         email: user.email,
         login: user.email,
         password: SecureRandom.uuid,
-        org_id: gf_dashboard.org_id
-      }
+        orgId: gf_dashboard.org_id
+      }.to_json,
+      headers: { "Content-Type" => "application/json" }
     }
 
     result = self.class.post("/api/admin/users", option)
