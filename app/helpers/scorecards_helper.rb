@@ -43,7 +43,7 @@ module ScorecardsHelper
   end
 
   def css_active_tab(is_active)
-    return "active" if is_active
+    "active" if is_active
   end
 
   def status_html(scorecard)

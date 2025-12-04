@@ -102,8 +102,8 @@ namespace :program do
 
       program.contacts.destroy_all
       program.pdf_templates.destroy_all
-      program.chat_groups.destroy_all #:chat_groups_notifications
-      program.messages.destroy_all #:notifications, :chat_groups_notifications
+      program.chat_groups.destroy_all # :chat_groups_notifications
+      program.messages.destroy_all # :notifications, :chat_groups_notifications
       program.mobile_tokens.delete_all
       program.activity_logs.delete_all
       program.data_publication.try(:destroy)
@@ -112,10 +112,10 @@ namespace :program do
       program.gf_dashboard.try(:destroy)
 
       program.local_ngos.destroy_all
-      program.rating_scales.destroy_all #:language_rating_scales
-      program.facilities.destroy_all #:indicators, :languages_indicators
-      program.templates.destroy_all #:indicators, :languages_indicators
-      program.languages.destroy_all #:languages_indicators
+      program.rating_scales.destroy_all # :language_rating_scales
+      program.facilities.destroy_all # :indicators, :languages_indicators
+      program.templates.destroy_all # :indicators, :languages_indicators
+      program.languages.destroy_all # :languages_indicators
 
       program.users.with_deleted.each do |user|
         user.really_destroy!

@@ -2,7 +2,7 @@
 
 module ScorecardsStatusesHelper
   def status_renewed_html(scorecard)
-    scorecard_progress = scorecard.scorecard_progresses.select{ |sp| sp.status == 'renewed' }.last
+    scorecard_progress = scorecard.scorecard_progresses.select { |sp| sp.status == "renewed" }.last
 
     title = "<div class='text-left'>" +
               "<div>#{t('scorecard.renewed_at')} #{display_datetime(scorecard_progress.created_at)}</div>" +
@@ -46,7 +46,7 @@ module ScorecardsStatusesHelper
   end
 
   def status_downloaded_html(scorecard)
-    scorecard_progress = scorecard.scorecard_progresses.select{ |sp| sp.status == 'downloaded' }.last
+    scorecard_progress = scorecard.scorecard_progresses.select { |sp| sp.status == "downloaded" }.last
 
     title = "<div class='text-left'>" +
               "<div>#{t('scorecard.download_at')} #{display_datetime(scorecard_progress.created_at)}</div>" +
