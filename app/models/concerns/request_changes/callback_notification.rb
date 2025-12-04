@@ -14,8 +14,8 @@ module RequestChanges::CallbackNotification
       send_mail(scorecard.creator.email, display_message)
     end
 
-    def notify_status_rejected_to_proposer_async
-      display_message = "Your request change on the scorecard #{scorecard.uuid} has been rejeted. Reason: #{rejected_reason}"
+    def notify_status_rejected_to_proposer
+      display_message = "Your request change on the scorecard #{scorecard.uuid} has been rejected. Reason: #{rejected_reason}"
 
       send_mail(proposer.email, display_message)
     end
