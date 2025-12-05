@@ -420,11 +420,11 @@ The production deployment includes:
    - Automatic SSL certificate generation and renewal
    - Works with nginx-proxy
 
-5. **Redis** (if using separate service)
-   - Session storage and Sidekiq queue backend
-
-6. **Sidekiq** (background jobs)
-   - Processes async jobs (emails, notifications, etc.)
+> **Note:** The basic production docker-compose configuration includes only the services listed above. If your application requires Redis (for caching and Sidekiq queue) or background job processing with Sidekiq, you'll need to either:
+> - Add these services to your `docker-compose.production.yml`, or
+> - Set up external Redis and Sidekiq services separately
+> 
+> For development, these services are included in `docker-compose.yml`.
 
 ---
 
@@ -603,18 +603,24 @@ sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 
 ## Service Configuration
 
+> **Important:** The basic `docker-compose.production.yml` does not include Redis or Sidekiq services. If your application requires these services, you need to add them to the production configuration or set them up as external services. The development `docker-compose.yml` includes these services as reference.
+
 ### Sidekiq (Background Jobs)
 
 Sidekiq is used for processing background jobs. Configuration is in `config/sidekiq.yml`.
 
 **Key Workers:**
 - Email delivery
-- Push notifications
 - Activity log cleaning
+
+**To enable Sidekiq in production:**
+1. Add Redis and Sidekiq services to `docker-compose.production.yml` (refer to `docker-compose.yml` for service definitions)
+2. Ensure `REDIS_URL` environment variable is properly configured
+3. Start the services with your production deployment
 
 **Monitor Sidekiq:**
 ```bash
-# Docker deployment
+# Docker deployment (if Sidekiq service is added)
 docker-compose -f docker-compose.production.yml logs -f sidekiq
 
 # Manual deployment
@@ -648,7 +654,25 @@ Redis is used for:
 - Session storage
 - Caching
 
-**Connection string:** `redis://redis:6379` (Docker) or `redis://localhost:6379` (manual)
+**Note:** Redis is not included in the basic `docker-compose.production.yml`. To use Redis in production:
+
+1. **Add Redis service to `docker-compose.production.yml`:**
+   ```yaml
+   redis:
+     image: redis:7.2.3
+     restart: unless-stopped
+   ```
+
+2. **Configure the connection string:**
+   - Docker: `redis://redis:6379`
+   - Manual deployment: `redis://localhost:6379`
+
+3. **Set environment variable in app.env:**
+   ```bash
+   REDIS_URL=redis://redis:6379
+   ```
+
+Alternatively, use an external managed Redis service and update the `REDIS_URL` accordingly.
 
 ---
 
@@ -694,11 +718,13 @@ docker-compose -f docker-compose.production.yml run --rm app rails console -e pr
 
 ### Step 5: Check Background Jobs
 
+**Note:** This step applies only if you have configured Redis and Sidekiq services in your production setup.
+
 ```bash
-# Access Sidekiq Web UI
+# Access Sidekiq Web UI (if configured)
 https://yourdomain.com/sidekiq
 
-# Check Sidekiq logs
+# Check Sidekiq logs (if service added to docker-compose.production.yml)
 docker-compose -f docker-compose.production.yml logs sidekiq
 ```
 
@@ -804,20 +830,26 @@ docker-compose -f docker-compose.production.yml run --rm app rails console -e pr
 
 **Problem:** Background jobs stuck or not executing
 
+**Note:** This applies only if you have added Redis and Sidekiq services to your production setup.
+
 **Solutions:**
 ```bash
-# Check Sidekiq container status
+# Check Sidekiq container status (if service added to docker-compose.production.yml)
 docker-compose -f docker-compose.production.yml ps sidekiq
 
 # Check Sidekiq logs
 docker-compose -f docker-compose.production.yml logs sidekiq
 
-# Verify Redis connection
+# Verify Redis connection (if service added to docker-compose.production.yml)
 docker-compose -f docker-compose.production.yml exec redis redis-cli ping
 # Should return: PONG
 
 # Restart Sidekiq
 docker-compose -f docker-compose.production.yml restart sidekiq
+
+# For manual deployment
+sudo systemctl status scorecard-sidekiq
+sudo systemctl restart scorecard-sidekiq
 ```
 
 #### 6. High Memory Usage
@@ -1069,7 +1101,7 @@ services:
    - Configure GF_* variables in app.env
    - Access: Configured GF_DASHBOARD_URL
 
-3. **Sidekiq Web UI:**
+3. **Sidekiq Web UI:** (if configured)
    - Monitor background jobs
    - Access: https://yourdomain.com/sidekiq
 
