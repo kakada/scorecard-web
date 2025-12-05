@@ -25,7 +25,6 @@ The Scorecard Web is a community scorecard web application and backend API for t
 - Rails 7.0.8
 - PostgreSQL 12.4+
 - Redis 7.2.3+
-- Elasticsearch 7.12.0
 - Sidekiq (Background jobs)
 - Docker & Docker Compose
 
@@ -60,7 +59,6 @@ Before starting, ensure you have:
    - Google OAuth2 credentials (if using Google Sign-In)
    - Sentry DSN (for error tracking)
    - AWS credentials (if using S3 for file storage)
-   - Firebase Server Key (for push notifications)
    - Recaptcha keys (for form protection)
 
 3. **Email Service:**
@@ -89,7 +87,6 @@ Before starting, ensure you have:
 - `ruby:3.1.3`
 - `postgres:12.4`
 - `redis:7.2.3`
-- `elasticsearch:7.12.0`
 - `jwilder/nginx-proxy`
 - `jrcs/letsencrypt-nginx-proxy-companion`
 
@@ -249,17 +246,7 @@ AWS_NAME_OF_DB_BUCKET=your_db_backup_bucket
 AWS_PATH_TO_DB_BACKUP=backups/
 ```
 
-#### Push Notifications
-```bash
-FIREBASE_SERVER_KEY=your_firebase_server_key
-```
 
-#### Elasticsearch Configuration
-```bash
-ELASTICSEARCH_ENABLED=true  # Set to false if not using Elasticsearch
-ELASTICSEARCH_URL=http://elasticsearch:9200
-ELASTICSEARCH_REQUEST_TIMEOUT=300
-```
 
 #### Rate Limiting (Rack Attack)
 ```bash
@@ -436,10 +423,7 @@ The production deployment includes:
 5. **Redis** (if using separate service)
    - Session storage and Sidekiq queue backend
 
-6. **Elasticsearch** (optional)
-   - Full-text search capabilities
-
-7. **Sidekiq** (background jobs)
+6. **Sidekiq** (background jobs)
    - Processes async jobs (emails, notifications, etc.)
 
 ---
@@ -626,7 +610,6 @@ Sidekiq is used for processing background jobs. Configuration is in `config/side
 **Key Workers:**
 - Email delivery
 - Push notifications
-- Document indexing (Elasticsearch)
 - Activity log cleaning
 
 **Monitor Sidekiq:**
@@ -666,21 +649,6 @@ Redis is used for:
 - Caching
 
 **Connection string:** `redis://redis:6379` (Docker) or `redis://localhost:6379` (manual)
-
-### Elasticsearch Setup (Optional)
-
-Elasticsearch provides full-text search capabilities.
-
-**Enable/Disable:**
-```bash
-# In app.env
-ELASTICSEARCH_ENABLED=true  # or false
-```
-
-**Reindex data:**
-```bash
-docker-compose -f docker-compose.production.yml run --rm app rake elasticsearch:reindex RAILS_ENV=production
-```
 
 ---
 
@@ -852,26 +820,7 @@ docker-compose -f docker-compose.production.yml exec redis redis-cli ping
 docker-compose -f docker-compose.production.yml restart sidekiq
 ```
 
-#### 6. Elasticsearch Not Working
-
-**Problem:** Search functionality not working
-
-**Solutions:**
-```bash
-# Check Elasticsearch status
-docker-compose -f docker-compose.production.yml ps elasticsearch
-
-# Check Elasticsearch health
-curl http://localhost:9200/_cluster/health?pretty
-
-# Reindex data
-docker-compose -f docker-compose.production.yml run --rm app rake elasticsearch:reindex RAILS_ENV=production
-
-# Check Elasticsearch logs
-docker-compose -f docker-compose.production.yml logs elasticsearch
-```
-
-#### 7. High Memory Usage
+#### 6. High Memory Usage
 
 **Problem:** Server running out of memory
 
@@ -893,7 +842,7 @@ sudo swapon /swapfile
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
 
-#### 8. Permission Issues
+#### 7. Permission Issues
 
 **Problem:** File permission errors
 
@@ -908,7 +857,7 @@ sudo chown -R $USER:$USER ./storage ./log ./tmp
 docker-compose -f docker-compose.production.yml up -d
 ```
 
-#### 9. Port Already in Use
+#### 8. Port Already in Use
 
 **Problem:** Cannot bind to port 80 or 443
 
@@ -924,7 +873,7 @@ sudo systemctl stop apache2  # or nginx, if not using Docker's nginx
 # Or change port mapping in docker-compose.production.yml
 ```
 
-#### 10. Cannot Access Application
+#### 9. Cannot Access Application
 
 **Problem:** 502 Bad Gateway or connection refused
 
@@ -1225,7 +1174,6 @@ logging:
 - **Docker Documentation:** https://docs.docker.com/
 - **PostgreSQL Documentation:** https://www.postgresql.org/docs/
 - **Redis Documentation:** https://redis.io/documentation
-- **Elasticsearch Guide:** https://www.elastic.co/guide/
 - **Sidekiq Documentation:** https://github.com/sidekiq/sidekiq/wiki
 
 ### Project Resources
@@ -1265,8 +1213,6 @@ Complete list of all environment variables with descriptions:
 | `RECAPTCHA_SECRET_KEY` | Recaptcha secret key | No | - |
 | `AWS_ACCESS_KEY_ID` | AWS access key | No | - |
 | `AWS_SECRET_ACCESS_KEY` | AWS secret key | No | - |
-| `FIREBASE_SERVER_KEY` | Firebase server key | No | - |
-| `ELASTICSEARCH_ENABLED` | Enable Elasticsearch | No | false |
 | `TIME_ZONE` | Application timezone | Yes | Bangkok |
 
 ### B. Port Reference
@@ -1277,7 +1223,6 @@ Complete list of all environment variables with descriptions:
 | Nginx Proxy | 80, 443 | 80, 443 | HTTP/HTTPS traffic |
 | PostgreSQL | 5432 | - | Database |
 | Redis | 6379 | - | Cache and jobs |
-| Elasticsearch | 9200 | - | Search engine |
 | Sidekiq | - | - | Background jobs |
 
 ### C. Directory Structure
