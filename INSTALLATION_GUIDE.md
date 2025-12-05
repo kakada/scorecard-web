@@ -420,7 +420,7 @@ The production deployment includes:
    - Automatic SSL certificate generation and renewal
    - Works with nginx-proxy
 
-> **Note:** The basic production docker-compose configuration includes only the services listed above. If your application requires Redis (for caching and Sidekiq queue) or background job processing with Sidekiq, you'll need to either:
+> **Note:** The basic production docker-compose configuration includes only the four services listed above (PostgreSQL, Application Server, Nginx Reverse Proxy, and Let's Encrypt). If your application requires Redis (for caching and Sidekiq queue) or background job processing with Sidekiq, you'll need to either:
 > - Add these services to your `docker-compose.production.yml`, or
 > - Set up external Redis and Sidekiq services separately
 > 
@@ -612,6 +612,8 @@ Sidekiq is used for processing background jobs. Configuration is in `config/side
 **Key Workers:**
 - Email delivery
 - Activity log cleaning
+
+**Note:** Additional workers may be available depending on the features enabled in your application (e.g., data processing, notifications, etc.).
 
 **To enable Sidekiq in production:**
 1. Add Redis and Sidekiq services to `docker-compose.production.yml` (refer to `docker-compose.yml` for service definitions)
@@ -1101,8 +1103,8 @@ services:
    - Configure GF_* variables in app.env
    - Access: Configured GF_DASHBOARD_URL
 
-3. **Sidekiq Web UI:** (if configured)
-   - Monitor background jobs
+3. **Sidekiq Web UI:**
+   - Monitor background jobs (if Sidekiq is configured)
    - Access: https://yourdomain.com/sidekiq
 
 #### Log Management
