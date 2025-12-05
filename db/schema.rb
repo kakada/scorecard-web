@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_21_023208) do
-
+ActiveRecord::Schema[7.0].define(version: 2025_12_05_021805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -26,8 +25,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.bigint "user_id"
     t.bigint "program_id"
     t.json "payload", default: {}
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "remote_ip"
     t.index ["http_format"], name: "index_activity_logs_on_http_format"
     t.index ["http_method"], name: "index_activity_logs_on_http_method"
@@ -35,7 +34,7 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.index ["user_id"], name: "index_activity_logs_on_user_id"
   end
 
-  create_table "caf_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "caf_batches", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.integer "total_count", default: 0
     t.integer "valid_count", default: 0
@@ -43,8 +42,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.integer "province_count", default: 0
     t.integer "user_id"
     t.string "reference"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cafs", force: :cascade do |t|
@@ -54,12 +53,12 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "tel"
     t.string "address"
     t.integer "local_ngo_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "actived", default: true
     t.string "educational_background_id"
     t.string "scorecard_knowledge_id"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.string "province_id"
     t.string "district_id"
     t.string "commune_id"
@@ -69,17 +68,17 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
   create_table "cafs_scorecard_knowledges", force: :cascade do |t|
     t.integer "caf_id"
     t.uuid "scorecard_knowledge_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
     t.string "name_km"
     t.string "hierarchy"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "chat_groups", force: :cascade do |t|
@@ -90,50 +89,50 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "provider"
     t.integer "program_id"
     t.string "chat_type", default: "group"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "chat_groups_notifications", force: :cascade do |t|
     t.integer "chat_group_id"
     t.integer "notification_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "contacts", force: :cascade do |t|
     t.integer "contact_type"
     t.string "value"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "custom_indicators", force: :cascade do |t|
     t.string "name"
     t.string "audio"
     t.string "scorecard_uuid"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "tag_id"
     t.string "uuid"
   end
 
-  create_table "data_publication_logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "data_publication_logs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "program_id"
     t.integer "published_option"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "data_publications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "data_publications", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "program_id"
     t.integer "published_option"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "datasets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "datasets", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
     t.string "name_km"
@@ -141,15 +140,15 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "province_id"
     t.string "district_id"
     t.string "commune_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "educational_backgrounds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "educational_backgrounds", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name_km"
   end
 
@@ -157,8 +156,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.integer "caf_id"
     t.integer "scorecard_uuid"
     t.string "position"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "facilities", force: :cascade do |t|
@@ -170,8 +169,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.integer "depth", default: 0, null: false
     t.integer "children_count", default: 0, null: false
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "dataset"
     t.boolean "default", default: false
     t.string "name_km"
@@ -181,47 +180,48 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.index ["rgt"], name: "index_facilities_on_rgt"
   end
 
-  create_table "gf_dashboards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "gf_dashboards", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "dashboard_id"
     t.string "dashboard_uid"
     t.string "dashboard_url"
     t.integer "org_id"
     t.string "org_token"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "importing_cafs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "importing_cafs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "caf_id"
     t.uuid "caf_batch_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "indicator_activities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "indicator_activities", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "voting_indicator_uuid"
     t.string "scorecard_uuid"
     t.text "content"
     t.boolean "selected"
     t.string "type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "indicators", force: :cascade do |t|
     t.integer "categorizable_id"
     t.string "categorizable_type"
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "tag_id"
     t.integer "display_order"
     t.string "image"
     t.string "uuid"
     t.string "audio"
     t.string "type", default: "Indicators::PredefineIndicator"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
+    t.string "hint"
     t.index ["deleted_at"], name: "index_indicators_on_deleted_at"
   end
 
@@ -230,8 +230,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.integer "language_id"
     t.string "language_code"
     t.string "audio"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "content"
   end
 
@@ -239,10 +239,10 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "code"
     t.string "name_en"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name_km"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_languages_on_deleted_at"
   end
 
@@ -252,20 +252,20 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.integer "indicator_id"
     t.string "content"
     t.string "audio"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "version", default: 0
   end
 
-  create_table "local_ngo_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "local_ngo_batches", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.integer "total_count", default: 0
     t.integer "valid_count", default: 0
     t.string "reference"
     t.integer "user_id"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "local_ngos", force: :cascade do |t|
@@ -275,13 +275,13 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "commune_id", limit: 6
     t.string "village_id", limit: 8
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "code"
     t.string "target_province_ids"
     t.string "target_provinces"
     t.string "website_url"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.uuid "local_ngo_batch_id"
     t.index ["deleted_at"], name: "index_local_ngos_on_deleted_at"
   end
@@ -293,8 +293,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "parent_id"
     t.float "latitude"
     t.float "longitude"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.float "osm_latitude"
     t.float "osm_longitude"
   end
@@ -304,8 +304,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "milestone"
     t.integer "program_id"
     t.boolean "actived", default: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "mobile_notifications", force: :cascade do |t|
@@ -315,16 +315,16 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.integer "failure_count"
     t.integer "creator_id"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "app_versions", default: [], array: true
   end
 
   create_table "mobile_tokens", force: :cascade do |t|
     t.string "token"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "device_id"
     t.integer "device_type"
     t.string "app_version"
@@ -335,8 +335,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.text "emails", default: [], array: true
     t.integer "message_id"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -345,8 +345,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "token", null: false
     t.integer "expires_in", null: false
     t.text "redirect_uri", null: false
-    t.datetime "created_at", null: false
-    t.datetime "revoked_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "revoked_at", precision: nil
     t.string "scopes", default: "", null: false
     t.index ["application_id"], name: "index_oauth_access_grants_on_application_id"
     t.index ["resource_owner_id"], name: "index_oauth_access_grants_on_resource_owner_id"
@@ -359,8 +359,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "token", null: false
     t.string "refresh_token"
     t.integer "expires_in"
-    t.datetime "revoked_at"
-    t.datetime "created_at", null: false
+    t.datetime "revoked_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
     t.string "scopes"
     t.string "previous_refresh_token", default: "", null: false
     t.index ["application_id"], name: "index_oauth_access_tokens_on_application_id"
@@ -376,8 +376,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.text "redirect_uri", null: false
     t.string "scopes", default: "", null: false
     t.boolean "confidential", default: true, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
@@ -389,8 +389,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.boolean "minority", default: false
     t.boolean "poor_card", default: false
     t.boolean "youth", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "countable", default: true
   end
 
@@ -399,8 +399,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.text "content"
     t.string "language_code"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "primary_schools", force: :cascade do |t|
@@ -408,26 +408,26 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "name_en"
     t.string "name_km"
     t.string "commune_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "district_id"
     t.string "province_id"
   end
 
-  create_table "program_scorecard_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "program_scorecard_types", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "code"
     t.string "name_en"
     t.string "name_km"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "programs", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "datetime_format", default: "YYYY-MM-DD"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "datetime_format", default: "DD-MM-YYYY"
     t.boolean "enable_email_notification", default: false
     t.string "shortcut_name"
     t.text "dashboard_user_emails", default: [], array: true
@@ -439,8 +439,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.integer "indicatorable_id"
     t.string "indicatorable_type"
     t.string "scorecard_uuid"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "tag_id"
     t.string "participant_uuid"
     t.boolean "selected", default: false
@@ -453,31 +453,31 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "value"
     t.string "name"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ratings", primary_key: "uuid", id: :string, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string "scorecard_uuid"
     t.integer "score"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "voting_indicator_uuid"
     t.string "participant_uuid"
   end
 
-  create_table "removing_scorecard_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "removing_scorecard_batches", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.integer "total_count", default: 0
     t.integer "valid_count", default: 0
     t.string "reference"
     t.integer "user_id"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "request_changes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "request_changes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "scorecard_uuid"
     t.integer "proposer_id"
     t.integer "reviewer_id"
@@ -490,13 +490,13 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.text "changed_reason"
     t.text "rejected_reason"
     t.integer "status"
-    t.datetime "resolved_date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "resolved_date", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "dataset_id"
   end
 
-  create_table "scorecard_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "scorecard_batches", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.integer "total_item", default: 0
     t.integer "total_valid", default: 0
@@ -505,16 +505,16 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.integer "total_commune", default: 0
     t.integer "user_id"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "filename"
   end
 
-  create_table "scorecard_knowledges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "scorecard_knowledges", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name_km"
     t.string "shortcut_name_en"
     t.string "shortcut_name_km"
@@ -524,10 +524,10 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "scorecard_uuid"
     t.integer "status"
     t.string "device_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.datetime "conducted_at"
+    t.datetime "conducted_at", precision: nil
   end
 
   create_table "scorecard_references", force: :cascade do |t|
@@ -535,8 +535,15 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "scorecard_uuid"
     t.string "attachment"
     t.string "kind"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "scorecard_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "program_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "scorecards", force: :cascade do |t|
@@ -549,36 +556,36 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.string "district_id", limit: 4
     t.string "commune_id", limit: 6
     t.integer "year"
-    t.datetime "conducted_date"
+    t.datetime "conducted_date", precision: nil
     t.integer "number_of_caf"
     t.integer "number_of_participant"
     t.integer "number_of_female"
-    t.datetime "planned_start_date"
-    t.datetime "planned_end_date"
+    t.datetime "planned_start_date", precision: nil
+    t.datetime "planned_end_date", precision: nil
     t.integer "status"
     t.integer "program_id"
     t.integer "local_ngo_id"
     t.integer "scorecard_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "location_code"
     t.integer "number_of_disability"
     t.integer "number_of_ethnic_minority"
     t.integer "number_of_youth"
     t.integer "number_of_id_poor"
     t.integer "creator_id"
-    t.datetime "locked_at"
+    t.datetime "locked_at", precision: nil
     t.string "primary_school_code"
     t.integer "downloaded_count", default: 0
     t.integer "progress"
     t.string "language_conducted_code"
-    t.datetime "finished_date"
-    t.datetime "running_date"
-    t.datetime "deleted_at"
+    t.datetime "finished_date", precision: nil
+    t.datetime "running_date", precision: nil
+    t.datetime "deleted_at", precision: nil
     t.boolean "published", default: false
+    t.datetime "submitted_at", precision: nil
+    t.datetime "completed_at", precision: nil
     t.string "device_type"
-    t.datetime "submitted_at"
-    t.datetime "completed_at"
     t.string "device_token"
     t.integer "completor_id"
     t.integer "proposed_indicator_method", default: 1
@@ -594,20 +601,27 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end
 
+  create_table "scorecards_cafs", force: :cascade do |t|
+    t.integer "caf_id"
+    t.integer "scorecard_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "suggested_actions", force: :cascade do |t|
     t.string "voting_indicator_uuid"
     t.string "content"
     t.boolean "selected"
     t.string "scorecard_uuid"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.string "color"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "telegram_bots", force: :cascade do |t|
@@ -616,44 +630,44 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.boolean "enabled", default: false
     t.boolean "actived", default: false
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "templates", force: :cascade do |t|
     t.string "name"
     t.integer "program_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: ""
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "role"
     t.integer "program_id"
     t.string "authentication_token", default: ""
-    t.datetime "token_expired_date"
+    t.datetime "token_expired_date", precision: nil
     t.string "language_code", default: "km"
     t.string "unlock_token"
-    t.datetime "locked_at"
+    t.datetime "locked_at", precision: nil
     t.integer "failed_attempts", default: 0
     t.integer "local_ngo_id"
     t.boolean "actived", default: true
     t.integer "gf_user_id"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.integer "sign_in_count", default: 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
@@ -671,8 +685,8 @@ ActiveRecord::Schema.define(version: 2023_04_21_023208) do
     t.text "strength"
     t.text "weakness"
     t.text "suggested_action"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "display_order"
     t.string "indicator_uuid"
   end

@@ -11,7 +11,7 @@
         %td.text-center= index + 1
         %td
           .mb-2.review-indicator
-            - is_custom = criteria['indicator'].class.name.split('::').last == 'CustomIndicator'
+            - is_custom = criteria['indicator'].custom?
             - if is_custom && policy(@scorecard).in_review?
               .d-flex
                 .d-flex.align-items-start.tip{data: { toggle: 'tooltip', placement: 'top', title: t("shared.edit") }}
@@ -22,11 +22,17 @@
             - else
               = criteria["name"]
               - if is_custom
-                %sup.px-1.text-danger.text-capitalize= t('shared.new')
+                %sup.px-1.text-danger.text-capitalize.badge.border.border-danger{data: { toggle: 'tooltip', placement: 'top', title: t("indicator.custom_indicator") }}
+                  = t('shared.new')
 
               - if policy(@scorecard).in_review?
                 %span{data: { toggle: 'tooltip', placement: 'top', title: t("indicator.cannot_edit_predefine") }}
                   %i.fas.fa-pen.btn-sm.disabled
+
+              - if criteria['indicator'].hint.present?
+                %div
+                  %small.text-muted.ml-2
+                    %i= criteria['indicator'].hint
 
           .text-muted.card-subtitle.text-sm
             = participant_information(criteria, 'count').html_safe

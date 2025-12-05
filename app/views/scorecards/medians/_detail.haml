@@ -12,7 +12,17 @@
       %tr
         %td.text-center= index + 1
         %td
-          .mb-1= criteria["name"]
+          .mb-1
+            = criteria["indicator"].name
+            - if criteria["indicator"].custom?
+              %sup.px-1.text-danger.text-capitalize.badge.border.border-danger{data: { toggle: 'tooltip', placement: 'top', title: t("indicator.custom_indicator") }}
+                = t('shared.new')
+
+            - if criteria['indicator'].hint.present?
+              %div
+                %small.text-muted.ml-2
+                  %i= criteria['indicator'].hint
+
           .d-flex
             - VotingIndicator.medians.keys.each do |item|
               .d-flex.rating-wrapper

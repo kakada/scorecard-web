@@ -17,6 +17,7 @@
 #  audio              :string
 #  type               :string           default("Indicators::PredefineIndicator")
 #  deleted_at         :datetime
+#  hint               :string
 #
 FactoryBot.define do
   factory :indicator do

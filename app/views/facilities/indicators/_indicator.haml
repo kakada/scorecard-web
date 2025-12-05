@@ -1,6 +1,7 @@
 %tr
   %td= @pagy.from + indicator_counter
   %td= indicator.name
+  %td= indicator.hint
   %td
     %span.badge.badge-pill.badge-secondary= indicator.tag_name
   %td= timeago(indicator.created_at).html_safe

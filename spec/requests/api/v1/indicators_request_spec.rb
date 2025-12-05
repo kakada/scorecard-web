@@ -21,5 +21,6 @@ RSpec.describe "Api::V1::IndicatorsController", type: :request do
     it { expect(response.status).to eq(200) }
     it { expect(json_response.length).to eq(1) }
     it { expect(json_response.first["id"]).to eq(predefine_indicator.id) }
+    it { expect(json_response.first["hint"]).to eq(predefine_indicator.hint) }
   end
 end

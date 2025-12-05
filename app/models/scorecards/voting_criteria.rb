@@ -13,7 +13,7 @@ module Scorecards
         criteria = vi.as_json
         criteria = assign_rating_info(criteria, vi)
         criteria = assign_participant_info(criteria, vi)
-        criteria["name"] = vi.indicator.name
+        criteria["indicator"] = vi.indicator
         criteria
       end
     end
