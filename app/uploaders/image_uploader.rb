@@ -6,7 +6,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  if Rails.env.production? || Rails.env.staging?
+  # Use STORAGE_PROVIDER environment variable to dynamically select storage
+  # Options: "Local" (default) or "AWS"
+  if ENV["STORAGE_PROVIDER"].to_s.downcase == "aws"
     storage :fog
   else
     storage :file
