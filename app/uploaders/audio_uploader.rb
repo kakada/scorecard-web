@@ -6,9 +6,9 @@ class AudioUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  # Use STORAGE_TYPE environment variable to dynamically select storage
-  # Options: "Local" (default) or "S3"
-  if ENV["STORAGE_TYPE"] == "S3"
+  # Use STORAGE_PROVIDER environment variable to dynamically select storage
+  # Options: "Local" (default) or "AWS"
+  if ENV["STORAGE_PROVIDER"].to_s.downcase == "aws"
     storage :fog
   else
     storage :file

@@ -19,7 +19,7 @@ if Rails.env.test? || Rails.env.cucumber?
       end
     end
   end
-elsif ENV["STORAGE_TYPE"] == "S3"
+elsif ENV["STORAGE_PROVIDER"].to_s.downcase == "aws"
   CarrierWave.configure do |config|
     config.fog_credentials = {
       provider:              "AWS",
