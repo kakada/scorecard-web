@@ -4,8 +4,8 @@ require "rails_helper"
 
 RSpec.describe "Api::V1::ScorecardReferencesController", type: :request do
   describe "POST #create" do
-    let!(:user)       { create(:user) }
-    let!(:scorecard)  { create(:scorecard, program: user.program) }
+    let!(:user)       { create(:user, :lngo) }
+    let!(:scorecard)  { create(:scorecard, program: user.program, local_ngo_id: user.local_ngo_id) }
     let(:json_response) { JSON.parse(response.body) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { uuid: "123", kind: "swot_result" } }

@@ -5,8 +5,8 @@ require "stringio"
 
 RSpec.describe "Api::V1::ScorecardsController", type: :request do
   describe "GET #show" do
-    let!(:user) { create(:user) }
-    let!(:scorecard)  { create(:scorecard, program_id: user.program_id) }
+    let!(:user) { create(:user, :lngo) }
+    let!(:scorecard)  { create(:scorecard, program_id: user.program_id, local_ngo_id: user.local_ngo_id) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
 
     before {
@@ -61,8 +61,8 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
   end
 
   describe "PUT #update" do
-    let!(:user)       { create(:user) }
-    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program_id: user.program_id) }
+    let!(:user)       { create(:user, :lngo) }
+    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program_id: user.program_id, local_ngo_id: user.local_ngo_id) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { number_of_caf: 3, number_of_participant: 15, number_of_female: 5, app_version: 15013 } }
 
@@ -110,10 +110,10 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
   end
 
   describe "PUT #update, suggested_actions_attributes" do
-    let!(:user)       { create(:user) }
+    let!(:user)       { create(:user, :lngo) }
     let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
     let!(:indicator)   { facility.indicators.first }
-    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
+    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, local_ngo_id: user.local_ngo_id, facility: facility) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { voting_indicators_attributes: [ {
                           uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
@@ -140,8 +140,8 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
   end
 
   describe "PUT #update, facilitators_attributes with soft delete caf" do
-    let!(:user)       { create(:user) }
-    let!(:local_ngo)  { create(:local_ngo, program: user.program) }
+    let!(:local_ngo)  { create(:local_ngo) }
+    let!(:user)       { create(:user, :lngo, local_ngo: local_ngo, program: local_ngo.program) }
     let!(:caf1)        { create(:caf, local_ngo: local_ngo) }
     let!(:caf2)        { create(:caf, local_ngo: local_ngo) }
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, local_ngo: local_ngo) }
@@ -214,12 +214,12 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
   end
 
   describe "PUT #update, raised_indicator and voting_indicators" do
-    let!(:user)       { create(:user) }
+    let!(:user)       { create(:user, :lngo) }
     let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
     let!(:custom_indicator) { create(:indicator, type: "Indicators::CustomIndicator", categorizable: facility) }
     let!(:custom_indicator2) { create(:indicator, type: "Indicators::CustomIndicator", categorizable: facility) }
     let!(:indicator)   { facility.indicators.first }
-    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
+    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility, local_ngo_id: user.local_ngo_id) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { raised_indicators_attributes: [
                             { indicatorable_id: indicator.id, indicatorable_type: "Indicator", scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "123", selected: true },

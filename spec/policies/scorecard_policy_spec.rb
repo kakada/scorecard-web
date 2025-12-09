@@ -109,8 +109,8 @@ RSpec.describe ScorecardPolicy do
       let(:scorecard) { create(:scorecard) }
       let(:user) { User.new(role: :staff, program_id: scorecard.program_id) }
 
-      it "accept access" do
-        expect(subject).to permit(user, scorecard)
+      it "denies access" do
+        expect(subject).not_to permit(user, scorecard)
       end
     end
 
@@ -118,8 +118,8 @@ RSpec.describe ScorecardPolicy do
       let(:scorecard) { create(:scorecard) }
       let(:user) { User.new(role: :program_admin, program_id: scorecard.program_id) }
 
-      it "accept access" do
-        expect(subject).to permit(user, scorecard)
+      it "denies access" do
+        expect(subject).not_to permit(user, scorecard)
       end
     end
   end
@@ -169,8 +169,8 @@ RSpec.describe ScorecardPolicy do
       let(:scorecard) { create(:scorecard) }
       let(:user) { User.new(role: :staff, program_id: scorecard.program_id) }
 
-      it "accept access" do
-        expect(subject).to permit(user, scorecard)
+      it "denies access" do
+        expect(subject).not_to permit(user, scorecard)
       end
     end
 
@@ -178,8 +178,8 @@ RSpec.describe ScorecardPolicy do
       let(:scorecard) { create(:scorecard) }
       let(:user) { User.new(role: :program_admin, program_id: scorecard.program_id) }
 
-      it "accept access" do
-        expect(subject).to permit(user, scorecard)
+      it "denies access" do
+        expect(subject).not_to permit(user, scorecard)
       end
     end
   end
