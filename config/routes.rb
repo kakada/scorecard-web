@@ -75,6 +75,7 @@ Rails.application.routes.draw do
 
   resources :facilities do
     get :children, on: :member
+    get :predefined_facilities, on: :collection
     resources :indicators, module: "facilities" do
       post :clone_from_template, on: :collection
       post :clone_to_template, on: :collection

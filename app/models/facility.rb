@@ -36,6 +36,7 @@ class Facility < ApplicationRecord
   validates :name_km, presence: true
   validates :code, presence: true
   validates :category_id, presence: true, if: -> { self.has_child }
+  validate :check_predefined_facility_name, unless: :default?
 
   scope :only_children, -> { where.not(parent_id: nil) }
 
@@ -57,4 +58,11 @@ class Facility < ApplicationRecord
   def locked?
     self.default? || self.unit_scorecards.present? || self.scorecards.present?
   end
+
+  private
+    def check_predefined_facility_name
+      if PredefinedFacility.exists?(name_en: name_en) || PredefinedFacility.exists?(name_km: name_km)
+        errors.add(:base, I18n.t('facility.matches_predefined_facility'))
+      end
+    end
 end

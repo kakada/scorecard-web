@@ -1,27 +1,58 @@
-.w-50.view-center
-  = simple_form_for @facility do |f|
-    = f.input :name_en, label: t('facility.name_en')
-    = f.input :name_km, label: t('facility.name_km')
-    = f.input :code, label: t('facility.code')
+.view-center{style: 'max-width: 900px;'}
+  %ul.nav.nav-tabs.mb-4{role: 'tablist'}
+    %li.nav-item
+      %a.nav-link.active{href: '#custom-facility', 'data-toggle': 'tab', role: 'tab'}= t('facility.create_new')
+    %li.nav-item
+      %a.nav-link{href: '#predefined-facility', 'data-toggle': 'tab', role: 'tab', id: 'predefined-tab'}= t('facility.select_predefined')
 
-    .form-group
-      %label= t('facility.parent')
-      = f.select :parent_id, current_program.facilities.roots.pluck(:"name_#{I18n.locale}", :id), {:include_blank => true}, {class: 'form-control custom-select'}
+  .tab-content
+    #custom-facility.tab-pane.fade.show.active{role: 'tabpanel'}
+      .w-50
+        = simple_form_for @facility do |f|
+          - if @facility.errors[:base].present?
+            .alert.alert-warning.d-flex.align-items-center.justify-content-between
+              %div
+                = @facility.errors[:base].first
+              %button.btn.btn-sm.btn-outline-primary{type: 'button', onclick: "$('#predefined-tab').click()"}
+                = t('facility.switch_to_predefined')
 
-    .dataset.d-none
-      .form-group
-        %label= t('facility.dataset')
-        .d-flex
-          .form-check
-            %label.form-check-label.form-check-toggle
-              %input.form-check-input{type: 'checkbox', name: "facility[has_child]", checked: f.object.has_child, disabled: !f.object.parent_id.present?}
-              %span
+          = f.input :name_en, label: t('facility.name_en')
+          = f.input :name_km, label: t('facility.name_km')
+          = f.input :code, label: t('facility.code')
 
-          .form-group.flex-1
-            - dataset_error = f.object.errors[:category_id]
-            = f.select :category_id, Category.pluck(:"name_#{I18n.locale}", :id), {:include_blank => true}, { class: ['form-control custom-select', ('is-invalid' if dataset_error.present?)], disabled: !f.object.has_child }
-            .invalid-feedback.d-block= dataset_error.join(';')
+          .form-group
+            %label= t('facility.parent')
+            = f.select :parent_id, current_program.facilities.roots.pluck(:"name_#{I18n.locale}", :id), {:include_blank => true}, {class: 'form-control custom-select'}
 
-    .actions
-      = link_to t('shared.cancel'), facilities_path, class: 'btn btn-secondary'
-      = f.submit t('shared.save'), class: 'btn btn-primary'
+          .dataset.d-none
+            .form-group
+              %label= t('facility.dataset')
+              .d-flex
+                .form-check
+                  %label.form-check-label.form-check-toggle
+                    %input.form-check-input{type: 'checkbox', name: "facility[has_child]", checked: f.object.has_child, disabled: !f.object.parent_id.present?}
+                    %span
+
+                .form-group.flex-1
+                  - dataset_error = f.object.errors[:category_id]
+                  = f.select :category_id, Category.pluck(:"name_#{I18n.locale}", :id), {:include_blank => true}, { class: ['form-control custom-select', ('is-invalid' if dataset_error.present?)], disabled: !f.object.has_child }
+                  .invalid-feedback.d-block= dataset_error.join(';')
+
+          .actions
+            = link_to t('shared.cancel'), facilities_path, class: 'btn btn-secondary'
+            = f.submit t('shared.save'), class: 'btn btn-primary'
+
+    #predefined-facility.tab-pane.fade{role: 'tabpanel'}
+      .alert.alert-info.mb-3
+        = t('facility.predefined_info')
+
+      #predefined-facilities-container
+        .text-center.py-5
+          .spinner-border{role: 'status'}
+            %span.sr-only Loading...
+
+      = form_with url: facilities_path, method: :post, id: 'predefined-form' do
+        #predefined-checkboxes
+        .actions.mt-3
+          = link_to t('shared.cancel'), facilities_path, class: 'btn btn-secondary'
+          %button.btn.btn-primary{type: 'submit', id: 'submit-predefined'}= t('shared.save')

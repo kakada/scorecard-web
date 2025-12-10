@@ -32,13 +32,24 @@ class FacilitiesController < ApplicationController
   end
 
   def create
-    @facility = authorize current_program.facilities.new(facility_params)
-
-    if @facility.save
-      redirect_to facilities_url
+    if params[:predefined_facility_codes].present?
+      create_from_predefined
     else
-      render :new
+      @facility = authorize current_program.facilities.new(facility_params)
+
+      if @facility.save
+        redirect_to facilities_url
+      else
+        render :new
+      end
     end
+  end
+
+  def predefined_facilities
+    existing_codes = current_program.facilities.where(default: true).pluck(:code)
+    @predefined_facilities = PredefinedFacility.all.reject { |pf| existing_codes.include?(pf.code) }
+
+    render json: @predefined_facilities.as_json(methods: [:root?])
   end
 
   def destroy
@@ -51,5 +62,59 @@ class FacilitiesController < ApplicationController
   private
     def facility_params
       params.require(:facility).permit(:name_en, :name_km, :code, :parent_id, :has_child, :dataset, :category_id)
+    end
+
+    def create_from_predefined
+      codes = params[:predefined_facility_codes].reject(&:blank?)
+      created_facilities = []
+
+      ActiveRecord::Base.transaction do
+        codes.each do |code|
+          predefined = PredefinedFacility.find_by(code: code)
+          next if predefined.nil?
+
+          # Skip if already exists
+          next if current_program.facilities.exists?(code: code, default: true)
+
+          # Find or create parent if exists
+          parent_id = nil
+          if predefined.parent_code.present?
+            parent = current_program.facilities.find_or_initialize_by(code: predefined.parent_code, default: true)
+            if parent.new_record?
+              parent_predefined = PredefinedFacility.find_by(code: predefined.parent_code)
+              parent.assign_attributes(
+                name_en: parent_predefined.name_en,
+                name_km: parent_predefined.name_km,
+                program_id: current_program.id
+              )
+              authorize parent
+              parent.save!
+            end
+            parent_id = parent.id
+          end
+
+          # Find category if exists
+          category_id = nil
+          if predefined.category_code.present?
+            category = Category.find_by(code: predefined.category_code)
+            category_id = category&.id
+          end
+
+          facility = authorize current_program.facilities.new(
+            code: predefined.code,
+            name_en: predefined.name_en,
+            name_km: predefined.name_km,
+            parent_id: parent_id,
+            category_id: category_id,
+            default: true
+          )
+          facility.save!
+          created_facilities << facility
+        end
+      end
+
+      redirect_to facilities_url, notice: "#{created_facilities.count} facilities created successfully."
+    rescue ActiveRecord::RecordInvalid => e
+      redirect_to new_facility_path, alert: "Error creating facilities: #{e.message}"
     end
 end

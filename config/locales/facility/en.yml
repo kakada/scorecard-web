@@ -11,3 +11,11 @@ en:
     already_in_used: Can't delete, it's already in used.
     dataset: Dataset
     are_you_sure_to_delete: Are you sure to delete the facility <b>%{name}</b>?
+    new_facility: New Facility
+    create_new: Create New Custom Facility
+    select_predefined: Select from Predefined Facilities
+    matches_predefined_facility: "This name matches a predefined facility. Please select it from the predefined list instead."
+    switch_to_predefined: Switch to Predefined List
+    select_facilities: Select Facilities to Add
+    predefined_info: "Select predefined facilities to ensure consistent codes across all programs. Parent facilities will automatically include their children."
+    already_added: Already added to program
