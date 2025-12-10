@@ -53,7 +53,15 @@ CW.FacilitiesNew = (() => {
     const roots = facilities.filter(f => f.root);
     const children = facilities.filter(f => !f.root);
 
-    let html = '<table class="table table-bordered"><tbody>';
+    let html = '<table class="table table-bordered">';
+    html += '<thead><tr>';
+    html += '<th width="40"></th>';
+    html += '<th>Facility</th>';
+    html += '<th>Name (KM)</th>';
+    html += '<th>Parent</th>';
+    html += '<th>Dataset</th>';
+    html += '</tr></thead>';
+    html += '<tbody>';
     
     roots.forEach(parent => {
       html += renderFacilityRow(parent, 0);
@@ -111,8 +119,13 @@ CW.FacilitiesNew = (() => {
     if (isParent) {
       // When parent is checked/unchecked, auto-select/deselect children
       const children = $(`.child-checkbox[data-parent-code="${code}"]`);
-      children.prop('checked', checkbox.is(':checked'));
-      children.prop('disabled', !checkbox.is(':checked'));
+      if (checkbox.is(':checked')) {
+        children.prop('checked', true);
+        children.prop('disabled', false);
+      } else {
+        children.prop('checked', false);
+        children.prop('disabled', true);
+      }
     }
   }
 

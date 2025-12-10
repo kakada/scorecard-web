@@ -69,47 +69,53 @@ class FacilitiesController < ApplicationController
       created_facilities = []
 
       ActiveRecord::Base.transaction do
-        codes.each do |code|
-          predefined = PredefinedFacility.find_by(code: code)
-          next if predefined.nil?
+        # Get all predefined facilities and sort by parent relationship
+        # Parents should be created before children
+        predefined_list = PredefinedFacility.where(code: codes)
+        parents = predefined_list.where(parent_code: nil)
+        children = predefined_list.where.not(parent_code: nil)
 
-          # Skip if already exists
-          next if current_program.facilities.exists?(code: code, default: true)
+        # Create parents first
+        [parents, children].each do |group|
+          group.each do |predefined|
+            # Skip if already exists
+            next if current_program.facilities.exists?(code: predefined.code, default: true)
 
-          # Find or create parent if exists
-          parent_id = nil
-          if predefined.parent_code.present?
-            parent = current_program.facilities.find_or_initialize_by(code: predefined.parent_code, default: true)
-            if parent.new_record?
-              parent_predefined = PredefinedFacility.find_by(code: predefined.parent_code)
-              parent.assign_attributes(
-                name_en: parent_predefined.name_en,
-                name_km: parent_predefined.name_km,
-                program_id: current_program.id
-              )
-              authorize parent
-              parent.save!
+            # Find or create parent if exists
+            parent_id = nil
+            if predefined.parent_code.present?
+              parent = current_program.facilities.find_or_initialize_by(code: predefined.parent_code, default: true)
+              if parent.new_record?
+                parent_predefined = PredefinedFacility.find_by(code: predefined.parent_code)
+                parent.assign_attributes(
+                  name_en: parent_predefined.name_en,
+                  name_km: parent_predefined.name_km,
+                  program_id: current_program.id
+                )
+                authorize parent
+                parent.save!
+              end
+              parent_id = parent.id
             end
-            parent_id = parent.id
-          end
 
-          # Find category if exists
-          category_id = nil
-          if predefined.category_code.present?
-            category = Category.find_by(code: predefined.category_code)
-            category_id = category&.id
-          end
+            # Find category if exists
+            category_id = nil
+            if predefined.category_code.present?
+              category = Category.find_by(code: predefined.category_code)
+              category_id = category&.id
+            end
 
-          facility = authorize current_program.facilities.new(
-            code: predefined.code,
-            name_en: predefined.name_en,
-            name_km: predefined.name_km,
-            parent_id: parent_id,
-            category_id: category_id,
-            default: true
-          )
-          facility.save!
-          created_facilities << facility
+            facility = authorize current_program.facilities.new(
+              code: predefined.code,
+              name_en: predefined.name_en,
+              name_km: predefined.name_km,
+              parent_id: parent_id,
+              category_id: category_id,
+              default: true
+            )
+            facility.save!
+            created_facilities << facility
+          end
         end
       end
 
