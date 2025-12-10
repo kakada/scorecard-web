@@ -87,6 +87,12 @@ class FacilitiesController < ApplicationController
               parent = current_program.facilities.find_or_initialize_by(code: predefined.parent_code, default: true)
               if parent.new_record?
                 parent_predefined = PredefinedFacility.find_by(code: predefined.parent_code)
+                
+                if parent_predefined.nil?
+                  Rails.logger.warn("Parent predefined facility not found: #{predefined.parent_code}")
+                  next
+                end
+                
                 parent.assign_attributes(
                   name_en: parent_predefined.name_en,
                   name_km: parent_predefined.name_km,
@@ -102,6 +108,9 @@ class FacilitiesController < ApplicationController
             category_id = nil
             if predefined.category_code.present?
               category = Category.find_by(code: predefined.category_code)
+              if category.nil?
+                Rails.logger.warn("Category not found for code: #{predefined.category_code}")
+              end
               category_id = category&.id
             end
 

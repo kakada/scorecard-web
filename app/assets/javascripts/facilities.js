@@ -96,15 +96,18 @@ CW.FacilitiesNew = (() => {
              id="facility_${facility.code}">
     ` : '';
     
-    // For children, add a hidden input that will be added when parent is selected
+    // For children, add a hidden input that will be enabled when parent is selected
     const hiddenInputHtml = !isParent ? `
-      <input type="checkbox" 
-             class="child-checkbox d-none" 
+      <input type="hidden" 
+             class="child-input" 
              name="predefined_facility_codes[]" 
              value="${facility.code}"
              data-parent-code="${facility.parent_code}"
              disabled>
     ` : '';
+    
+    // Only add clickable label for parents
+    const labelFor = isParent ? `for="facility_${facility.code}"` : '';
     
     return `
       <tr class="${rowClass}">
@@ -113,7 +116,7 @@ CW.FacilitiesNew = (() => {
           ${hiddenInputHtml}
         </td>
         <td ${indent}>
-          <label for="facility_${facility.code}" class="mb-0">
+          <label ${labelFor} class="mb-0" style="${isParent ? 'cursor: pointer;' : ''}">
             <strong>${facility.code}</strong> | ${facility.name_en}
           </label>
         </td>
@@ -130,14 +133,12 @@ CW.FacilitiesNew = (() => {
     const isParent = checkbox.hasClass('parent-checkbox');
     
     if (isParent) {
-      // When parent is checked/unchecked, auto-select/deselect children
-      const children = $(`.child-checkbox[data-parent-code="${code}"]`);
+      // When parent is checked/unchecked, enable/disable children hidden inputs
+      const children = $(`.child-input[data-parent-code="${code}"]`);
       if (checkbox.is(':checked')) {
-        children.prop('checked', true);
         children.prop('disabled', false);
       } else {
-        children.prop('checked', false);
-        children.prop('disabled', false);
+        children.prop('disabled', true);
       }
     }
   }
