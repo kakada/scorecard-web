@@ -11,7 +11,6 @@ CW.FacilitiesNew = (() => {
     handleDisplayDataset($('#facility_parent_id').val());
     onChangeFacility();
     onSwitchHasChild();
-    loadPredefinedFacilities();
     handleTabSwitch();
   }
 
@@ -78,26 +77,40 @@ CW.FacilitiesNew = (() => {
 
     // Handle checkbox interactions
     $('.predefined-checkbox').on('change', handleCheckboxChange);
-    
-    // Disable children checkboxes by default
-    $('.child-checkbox').prop('disabled', true);
   }
 
   function renderFacilityRow(facility, level) {
     const indent = level === 0 ? '' : 'style="padding-left: 30px;"';
     const checkboxClass = level === 0 ? 'parent-checkbox' : 'child-checkbox';
     const rowClass = level === 0 ? '' : 'bg-light';
+    const isParent = level === 0;
+    
+    // Only show checkbox for parent facilities
+    const checkboxHtml = isParent ? `
+      <input type="checkbox" 
+             class="predefined-checkbox ${checkboxClass}" 
+             name="predefined_facility_codes[]" 
+             value="${facility.code}"
+             data-code="${facility.code}"
+             data-parent-code="${facility.parent_code || ''}"
+             id="facility_${facility.code}">
+    ` : '';
+    
+    // For children, add a hidden input that will be added when parent is selected
+    const hiddenInputHtml = !isParent ? `
+      <input type="checkbox" 
+             class="child-checkbox d-none" 
+             name="predefined_facility_codes[]" 
+             value="${facility.code}"
+             data-parent-code="${facility.parent_code}"
+             disabled>
+    ` : '';
     
     return `
       <tr class="${rowClass}">
         <td width="40" class="text-center">
-          <input type="checkbox" 
-                 class="predefined-checkbox ${checkboxClass}" 
-                 name="predefined_facility_codes[]" 
-                 value="${facility.code}"
-                 data-code="${facility.code}"
-                 data-parent-code="${facility.parent_code || ''}"
-                 id="facility_${facility.code}">
+          ${checkboxHtml}
+          ${hiddenInputHtml}
         </td>
         <td ${indent}>
           <label for="facility_${facility.code}" class="mb-0">
@@ -124,7 +137,7 @@ CW.FacilitiesNew = (() => {
         children.prop('disabled', false);
       } else {
         children.prop('checked', false);
-        children.prop('disabled', true);
+        children.prop('disabled', false);
       }
     }
   }
