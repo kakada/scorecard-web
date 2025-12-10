@@ -1,0 +1,22 @@
+- title ||= ""
+.w-75.m-auto
+  .mt-3.mt-md-0.text-right.mr-2
+    - progress_num ||= 1
+
+    %ul.breadcrumb-arrows.pl-0.text-center
+      %li{class: ('active' if progress_num == 1)}
+        %a
+          .num 1
+          = t('program_clone.steps.select_method')
+      %li{class: ('active' if progress_num == 2)}
+        %a
+          .num 2
+          = t('program_clone.steps.select_components')
+      %li{class: ('active' if progress_num == 3)}
+        %a
+          .num 3
+          = t('program_clone.steps.review')
+      %li{class: ('active' if progress_num == 4)}
+        %a
+          .num 4
+          = t('program_clone.steps.execute')

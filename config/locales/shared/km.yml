@@ -32,6 +32,7 @@ km:
     confirm_logout: តើអ្នកពិតជាចង់ចាកចេញឬទេ?
     name: ឈ្មោះ
     close: បិទ
+    view: មើល
     view_detail: មើលលម្អិត
     created_at: កាលបរិច្ឆេទបង្កើត
     updated_at: កាលបរិច្ឆេទធ្វើបច្ចុប្បន្នភាព
@@ -85,3 +86,4 @@ km:
     import_success: "ទិន្នន័យចំនួន %{count} ត្រូវបានបញ្ចូលដោយជោគជ័យ"
     advance_search: ស្វែងរកបន្ថែម
     search_by_name: ស្វែងរកតាមឈ្មោះ
+    next: បន្ទាប់

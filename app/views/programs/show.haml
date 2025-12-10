@@ -1,0 +1,100 @@
+.d-flex.justify-content-between.align-items-center.mb-3
+  %h1.h3.mb-0.text-gray-800
+    = t("program_clone.program_detail") + ": " + @program.name
+  .d-flex
+    - if policy(ProgramClone.new).new?
+      = link_to clone_wizard_program_step_path(@program, "select_method", restart: true), class: "btn btn-info btn-sm mr-2" do
+        %i.fas.fa-clone.mr-1
+        = t('program_clone.clone_setup')
+    = link_to t('shared.back'), programs_path, class: 'btn btn-secondary btn-sm'
+
+.row
+  .col-lg-8
+    .card.shadow.mb-4
+      .card-header.py-3
+        %h6.m-0.font-weight-bold.text-primary= t('program_clone.summary')
+      .card-body
+        .row.mb-4
+          .col-md-6
+            %h6.font-weight-bold.text-secondary= t('language.languages')
+            - if @program.languages.any?
+              .d-flex.flex-wrap.mt-2
+                - @program.languages.each do |lang|
+                  %span.badge.border.border-info.mr-2.mb-2= "#{lang.name_en} #{"(" + lang.code.upcase + ")"}"
+            - else
+              %p.text-muted.mb-0= t('shared.no_data_found')
+
+          .col-md-6
+            %h6.font-weight-bold.text-secondary= t('rating_scale.rating_scales')
+            - if @program.rating_scales.any?
+              .d-flex.align-items-center.mt-2
+                %i.fas.fa-layer-group.text-primary.mr-2
+                - @program.rating_scales.each do |rs|
+                  %span.badge.border.border-primary.mr-2.mb-2= rs.name
+            - else
+              %p.text-muted.mb-0= t('shared.no_data_found')
+
+        .mb-4
+          %h6.font-weight-bold.text-secondary= t('facility.facilities')
+          - if @program.facilities.any?
+            - facilities_with_indicators = @program.facilities.includes(:indicators, :parent).where.not(parent_id: nil)
+            - if facilities_with_indicators.any?
+              %ul.list-group.mt-2
+                - facilities_with_indicators.each do |child|
+                  %li.list-group-item.d-flex.justify-content-between.align-items-center
+                    %div
+                      %strong= "#{child.parent.name_en} > #{child.name_en}"
+                      %div.text-muted.small= "#{t('indicator.indicators')}: #{child.indicators.size}"
+                    %span.badge.border.border-primary.badge-pill= child.indicators.size
+            - else
+              %p.text-muted.mb-0= t('shared.no_data_found')
+          - else
+            %p.text-muted.mb-0= t('shared.no_data_found')
+
+        .row.mt-4
+          .col-sm-6
+            .card.border-0.bg-light.mb-2
+              .card-body.p-3.d-flex.align-items-center
+                %i.fas.fa-file-pdf.fa-2x.text-danger.mr-3
+                %div
+                  %div.small.text-muted= t('pdf_template.pdf_templates')
+                  %div.h5.mb-0= @program.pdf_templates.count
+
+  .col-lg-4
+    - users_count = @program.respond_to?(:users) ? @program.users.count : 0
+    .card.shadow.mb-3
+      .card-body.p-3.d-flex.align-items-center.justify-content-between
+        .d-flex.align-items-center
+          %i.fas.fa-users.fa-2x.text-primary.mr-3
+          %div
+            %div.small.text-muted= t('user.users')
+            %div.h4.mb-0.font-weight-bold= users_count
+            - if users_count == 0
+              %div.small.text-secondary.mt-1= t('program_clone.no_users_hint', default: 'No users assigned — at least one user is required to access the program')
+
+        .d-flex
+          - if users_count > 0
+            = link_to t('shared.visit_all'), users_path(program_ids: [@program.id]), class: 'btn btn-sm btn-outline-primary'
+          - else
+            = link_to t('user.add_new'), new_user_path, class: 'btn btn-sm btn-primary', style: 'min-width: 100px;'
+
+    .card.shadow.mb-4
+      .card-header.py-3.d-flex.justify-content-between.align-items-center
+        %h6.m-0.font-weight-bold.text-primary= t('program_clone.copy_history')
+      .card-body
+        - program_clones = @program.program_clones.order(created_at: :desc).limit(10)
+        - if program_clones.any?
+          .list-group.list-group-flush
+            - program_clones.each do |pc|
+              .list-group-item.px-0.py-2
+                .d-flex.justify-content-between
+                  %div
+                    .font-weight-bold= (pc.clone_from_sample? ? t('program_clone.clone_from_sample') : (pc.source_program&.name || t('program_clone.clone_from_program')) )
+                    %div.text-muted.small= l(pc.created_at, format: :short)
+                  %div.text-right
+                    %span{class: "badge border border-#{status_class(pc.status)} mr-2"}
+                      = t("program_clone.status.#{pc.status}")
+                    - if policy(pc).show?
+                      = link_to t('shared.view'), program_program_clone_path(@program, pc), class: 'btn btn-sm btn-outline-secondary'
+        - else
+          %p.text-muted.mb-0= t('program_clone.no_copy_operations')

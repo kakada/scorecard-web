@@ -1,0 +1,42 @@
+- content_for :title do
+  = t("program_clone.wizard_title", program_name: @program.name)
+
+= render "shared/headers/progress_arrow_header_clone", progress_num: 1, title: t("program_clone.wizard_title", program_name: @program.name)
+
+.w-75.m-auto{'data-step': 'select_method'}
+  .card.shadow.mb-4
+    .card-body
+      %h5.card-title.mb-4= t('program_clone.select_setup_method')
+      %p.text-muted= t('program_clone.select_setup_method_description')
+
+      = form_tag clone_wizard_program_step_path(@program, "select_method"), method: :patch do
+        .form-group
+          .card.mb-3.cursor-pointer.option-card{data: { method: 'sample' }}
+            .card-body
+              .d-flex.align-items-center
+                .form-check.mb-0
+                  = radio_button_tag :clone_method, 'sample', @program_clone.clone_method == 'sample', class: 'form-check-input', id: 'clone_method_sample'
+                  = label_tag :clone_method_sample, class: 'form-check-label' do
+                    %strong= t('program_clone.clone_from_sample')
+                    %br
+                    %small.text-muted= t('program_clone.clone_from_sample_description')
+
+          .card.mb-3.cursor-pointer.option-card{data: { method: 'program' }}
+            .card-body
+              .d-flex.align-items-center
+                .form-check.mb-0
+                  = radio_button_tag :clone_method, 'program', @program_clone.clone_method == 'program', class: 'form-check-input', id: 'clone_method_program'
+                  = label_tag :clone_method_program, class: 'form-check-label' do
+                    %strong= t('program_clone.clone_from_program')
+                    %br
+                    %small.text-muted= t('program_clone.clone_from_program_description')
+
+        #program_selection_wrapper{style: (@program_clone.clone_method == 'program' ? '' : 'display: none;')}
+          .form-group.mt-3
+            = label_tag :source_program_id, t('program_clone.source_program')
+            = select_tag :source_program_id, options_from_collection_for_select(available_programs || [], :id, :name, @program_clone.source_program_id),
+              { include_blank: t('program_clone.select_program'), class: 'form-control' }
+
+        .d-flex.justify-content-between.mt-4
+          = link_to t('shared.cancel'), programs_path, class: 'btn btn-secondary'
+          = submit_tag t('shared.next'), class: 'btn btn-primary', id: 'btn-next-method'

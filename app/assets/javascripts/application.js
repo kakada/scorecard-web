@@ -63,6 +63,7 @@
 //= require scorecard_batches/new
 //= require removing_scorecards/create
 //= require categories
+//= require clone_wizard/show
 
 document.addEventListener("turbolinks:load", function () {
   CW.Common.Topbar.init();

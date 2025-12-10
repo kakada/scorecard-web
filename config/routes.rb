@@ -40,6 +40,13 @@ Rails.application.routes.draw do
 
   resources :programs do
     get :es_reindex, on: :member
+
+    resources :program_clones, only: [:show], path: "clone_wizard"
+
+    scope :clone_wizard, as: :clone_wizard do
+      get ":step", to: "clone_wizard#show", as: :step
+      patch ":step", to: "clone_wizard#update"
+    end
   end
 
   scope module: :programs do

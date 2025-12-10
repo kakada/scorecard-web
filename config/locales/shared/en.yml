@@ -32,6 +32,7 @@ en:
     confirm_logout: Are you sure you want to logout?
     name: Name
     close: Close
+    view: View
     view_detail: View Detail
     created_at: Created at
     updated_at: Updated at
@@ -85,3 +86,4 @@ en:
     import_success: "%{count} items were successfully imported!"
     advance_search: Advance search
     search_by_name: Search by name
+    next: Next

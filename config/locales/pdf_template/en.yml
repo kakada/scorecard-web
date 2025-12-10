@@ -9,3 +9,4 @@ en:
     fill_in: Fill in
     make_sure_you_save_it_before_preview: Make sure you save it before previewing
     are_you_sure_to_delete: Are you sure to delete the template <b>%{name}</b>?
+    pdf_templates: PDF templates
