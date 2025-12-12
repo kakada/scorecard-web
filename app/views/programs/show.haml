@@ -76,7 +76,7 @@
           - if users_count > 0
             = link_to t('shared.visit_all'), users_path(program_ids: [@program.id]), class: 'btn btn-sm btn-outline-primary'
           - else
-            = link_to t('user.add_new'), new_user_path, class: 'btn btn-sm btn-primary', style: 'min-width: 100px;'
+            = link_to t('user.add_new'), new_user_path, class: 'btn btn-sm btn-primary', style: 'min-width: 110px;'
 
     .card.shadow.mb-4
       .card-header.py-3.d-flex.justify-content-between.align-items-center
@@ -90,10 +90,10 @@
                 .d-flex.justify-content-between
                   %div
                     .font-weight-bold= (pc.clone_from_sample? ? t('program_clone.clone_from_sample') : (pc.source_program&.name || t('program_clone.clone_from_program')) )
-                    %div.text-muted.small= l(pc.created_at, format: :short)
+                    %div.text-muted.small= l(pc.created_at)
                   %div.text-right
                     %span{class: "badge border border-#{status_class(pc.status)} mr-2"}
-                      = t("program_clone.status.#{pc.status}")
+                      = t("program_clone.status_label.#{pc.status}")
                     - if policy(pc).show?
                       = link_to t('shared.view'), program_program_clone_path(@program, pc), class: 'btn btn-sm btn-outline-secondary'
         - else

@@ -56,13 +56,13 @@
 
       .mt-4
         - if @program_clone.completed?
-          = link_to t('program_clone.back_to_programs'), programs_path, class: 'btn btn-primary'
+          = link_to t('program_clone.back_to_programs'), program_path(@program), class: 'btn btn-primary'
         - elsif @program_clone.processing? || @program_clone.pending?
           = link_to t('shared.refresh'), program_program_clone_path(@program, @program_clone), class: 'btn btn-secondary'
-          = link_to t('program_clone.back_to_programs'), programs_path, class: 'btn btn-primary'
+          = link_to t('program_clone.back_to_programs'), program_path(@program), class: 'btn btn-primary'
         - else
           = link_to t('program_clone.try_again'), clone_wizard_program_step_path(@program, 'select_method', restart: true), class: 'btn btn-secondary'
-          = link_to t('program_clone.back_to_programs'), programs_path, class: 'btn btn-primary'
+          = link_to t('program_clone.back_to_programs'), program_path(@program), class: 'btn btn-primary'
 
 - if @program_clone.processing? || @program_clone.pending?
   :javascript
