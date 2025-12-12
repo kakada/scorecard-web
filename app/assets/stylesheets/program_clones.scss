@@ -1,0 +1,27 @@
+// Place all the styles related to the ProgramClones controller here.
+// They will automatically be included in application.css.
+
+.option-card {
+  transition: all 0.2s ease-in-out;
+  border: 2px solid transparent;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #4e73df;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .form-check-input:checked ~ .form-check-label {
+    color: #4e73df;
+  }
+}
+
+.component-checkbox:checked ~ .form-check-label {
+  color: #4e73df;
+  font-weight: 600;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

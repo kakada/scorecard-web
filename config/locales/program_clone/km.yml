@@ -1,0 +1,83 @@
+km:
+  program_clone:
+    wizard_title: "ការថតចម្លងការដំឡើងសម្រាប់ %{program_name}"
+    clone_setup: "ថតចម្លង"
+
+    # Step 1: Select Method
+    select_setup_method: "ជ្រើសរើសវិធីសាស្រ្តដំឡើង"
+    select_setup_method_description: "ជ្រើសរើសរបៀបដែលអ្នកចង់ដំឡើងការកំណត់ scorecard របស់កម្មវិធីនេះ។"
+    clone_from_sample: "ថតចម្លងពីគំរូ"
+    clone_from_sample_description: "នាំចូលសមាសធាតុគំរូដែលបានកំណត់រួចជាស្រេច រួមទាំងភាសា វិស័យសេវា សូចនាករ និងផ្សេងទៀត។"
+    clone_from_program: "ថតចម្លងពីកម្មវិធីដែលមានស្រាប់"
+    clone_from_program_description: "ចម្លងការកំណត់ពីកម្មវិធីផ្សេងទៀតក្នុងប្រព័ន្ធ។"
+
+    # Step 2A: Select Program
+    select_source_program: "ជ្រើសរើសកម្មវិធីប្រភព"
+    select_source_program_description: "ជ្រើសរើសកម្មវិធីដែលត្រូវថតចម្លងការកំណត់។"
+    source_program: "កម្មវិធីប្រភព"
+    select_program: "-- ជ្រើសរើសកម្មវិធី --"
+
+    # Step 2B: Select Components
+    select_components: "ជ្រើសរើសសមាសធាតុដើម្បីថតចម្លង"
+    select_components_description: "ជ្រើសរើសសមាសធាតុដែលអ្នកចង់នាំចូល។"
+    select_all: "ជ្រើសរើសទាំងអស់"
+    selected_components_label: "សមាសធាតុដើម្បីថតចម្លង"
+
+    # Component names and descriptions
+    components:
+      languages: "ភាសា"
+      languages_description: "ភាសាប្រព័ន្ធសម្រាប់ការធ្វើមូលដ្ឋានីយកម្ម scorecard"
+      facilities: "វិស័យសេវា"
+      facilities_description: "ប្រភេទវិស័យសេវាសម្រាប់ scorecard"
+      indicators: "សូចនាករ"
+      indicators_description: "សូចនាករវាយតម្លៃសម្រាប់ scorecard"
+      rating_scales: "មាត្រដ្ឋានវាយតម្លៃ"
+      rating_scales_description: "និយមន័យមាត្រដ្ឋានវាយតម្លៃជាមួយឯកសារសំឡេង"
+      pdf_templates: "ទម្រង់ PDF"
+      pdf_templates_description: "ទម្រង់សម្រាប់នាំចេញ scorecard ជា PDF"
+
+    # Step 3: Review
+    review_and_confirm: "ពិនិត្យ និងបញ្ជាក់"
+    review_description: "សូមពិនិត្យមើលការជ្រើសរើសរបស់អ្នកមុនពេលចាប់ផ្តើមដំណើរការថតចម្លង។"
+    target_program: "កម្មវិធីគោលដៅ"
+    clone_method_label: "វិធីសាស្រ្តថតចម្លង"
+    start_cloning: "ចាប់ផ្តើមថតចម្លង"
+
+    # Step 4: Status
+    cloning_status: "ស្ថានភាពថតចម្លង"
+    status:
+      pending: "កំពុងរង់ចាំ - រង់ចាំចាប់ផ្តើម"
+      processing: "កំពុងដំណើរការ - ការថតចម្លងកំពុងដំណើរការ..."
+      completed: "បានបញ្ចប់ - ប្រតិបត្តិការថតចម្លងបានបញ្ចប់ដោយជោគជ័យ"
+      failed: "បរាជ័យ - កំហុសបានកើតឡើងក្នុងអំឡុងពេលថតចម្លង"
+    completed_message: "ដំណើរការថតចម្លងបានបញ្ចប់ដោយជោគជ័យ។ កម្មវិធីរបស់អ្នកឥឡូវនេះមានសមាសធាតុដែលបានជ្រើសរើស។"
+    failed_message: "ដំណើរការថតចម្លងបានបរាជ័យ។ សូមពិនិត្យមើលកំហុស ហើយព្យាយាមម្តងទៀត។"
+    started_at: "ចាប់ផ្តើមនៅ"
+    completed_at: "បានបញ្ចប់នៅ"
+    back_to_programs: "ត្រឡប់ទៅកម្មវិធី"
+    try_again: "ព្យាយាមម្តងទៀត"
+
+    # Steps navigation
+    steps:
+      select_method: "ជ្រើសរើសវិធីសាស្រ្ត"
+      select_components: "ជ្រើសរើសសមាសធាតុ"
+      review: "ពិនិត្យ"
+      execute: "អនុវត្ត"
+
+    # Messages
+    started_successfully: "ដំណើរការថតចម្លងបានចាប់ផ្តើមក្នុងផ្ទៃខាងក្រោយ។ អ្នកនឹងទទួលបានការជូនដំណឹងនៅពេលវាបញ្ចប់។"
+    source_program_not_found: "កម្មវិធីប្រភពដែលបានជ្រើសរើសមិនអាចរកឃើញទេ។ សូមជ្រើសរើសកម្មវិធីដែលត្រឹមត្រូវ។"
+    session_expired: "សេសសិនរបស់អ្នកបានផុតកំណត់។ សូមចាប់ផ្តើមការណែនាំឡើងវិញ។"
+    please_select_method: "សូមជ្រើសរើសវិធីសាស្រ្តថតចម្លង។"
+    please_select_program: "សូមជ្រើសរើសកម្មវិធីប្រភព។"
+    please_select_components: "សូមជ្រើសរើសសមាសធាតុយ៉ាងហោចណាស់មួយដើម្បីថតចម្លង។"
+
+    # Program Detail Page
+    program_detail: "ព័ត៌មានលម្អិតកម្មវិធី"
+    summary: "សង្ខេប"
+    copy_history: "ប្រវត្តិថតចម្លង"
+    view_copy_status: "មើលស្ថានភាពថតចម្លង"
+    no_copy_operations: "រកមិនឃើញប្រតិបត្តិការថតចម្លងសម្រាប់កម្មវិធីនេះទេ។"
+
+    no_users_hint: មិនមានគណនីត្រូវបានចាត់តាំង — ត្រូវការគណនីយ៉ាងហោចណាស់មួយដើម្បីដំណើរការកម្មវិធី
+    failed_to_select_method: "ការជ្រើសរើសវិធីសាស្រ្តថតចម្លងបានបរាជ័យ។ សូមព្យាយាមម្តងទៀត។"

@@ -1,0 +1,72 @@
+- content_for :title do
+  = t("program_clone.wizard_title", program_name: @program.name)
+
+= render "shared/headers/progress_arrow_header_clone", progress_num: 4, title: t("program_clone.wizard_title", program_name: @program.name)
+
+.w-75.m-auto
+  .card.shadow.mb-4
+    .card-body
+      %h5.card-title.mb-4= t('program_clone.cloning_status')
+
+      .alert{class: "alert-#{status_class(@program_clone.status)}"}
+        %h5
+          = status_icon(@program_clone.status)
+          = t("program_clone.status.#{@program_clone.status}")
+
+        - if @program_clone.completed?
+          %p.mb-0= t('program_clone.completed_message')
+        - elsif @program_clone.failed?
+          %p.mb-0
+            = t('program_clone.failed_message')
+            - if @program_clone.error_message.present?
+              %br
+              %strong= "#{t('shared.error')}:"
+              = sanitize @program_clone.error_message
+
+      .table-responsive
+        %table.table.table-bordered
+          %tbody
+            %tr
+              %th{style: 'width: 30%'}= t('program_clone.target_program')
+              %td= @program.name
+            %tr
+              %th= t('program_clone.clone_method_label')
+              %td
+                - if @program_clone.clone_from_sample?
+                  = t('program_clone.clone_from_sample')
+                - else
+                  = t('program_clone.clone_from_program')
+            - if @program_clone.clone_from_program? && @program_clone.source_program.present?
+              %tr
+                %th= t('program_clone.source_program')
+                %td= @program_clone.source_program.name
+            %tr
+              %th= t('program_clone.selected_components_label')
+              %td
+                %ul.mb-0
+                  - @program_clone.selected_components.each do |component|
+                    %li= t("program_clone.components.#{component}")
+            %tr
+              %th= t('program_clone.started_at')
+              %td= l(@program_clone.created_at, format: :long)
+            - if @program_clone.completed_at.present?
+              %tr
+                %th= t('program_clone.completed_at')
+                %td= l(@program_clone.completed_at, format: :long)
+
+      .mt-4
+        - if @program_clone.completed?
+          = link_to t('program_clone.back_to_programs'), programs_path, class: 'btn btn-primary'
+        - elsif @program_clone.processing? || @program_clone.pending?
+          = link_to t('shared.refresh'), program_program_clone_path(@program, @program_clone), class: 'btn btn-secondary'
+          = link_to t('program_clone.back_to_programs'), programs_path, class: 'btn btn-primary'
+        - else
+          = link_to t('program_clone.try_again'), clone_wizard_program_step_path(@program, 'select_method', restart: true), class: 'btn btn-secondary'
+          = link_to t('program_clone.back_to_programs'), programs_path, class: 'btn btn-primary'
+
+- if @program_clone.processing? || @program_clone.pending?
+  :javascript
+    // Auto-refresh every 5 seconds if still processing
+    setTimeout(function() {
+      location.reload();
+    }, 5000);

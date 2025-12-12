@@ -23,10 +23,14 @@
             - @programs.each do |program|
               %tr
                 %td= program.uuid
-                %td= program.name
+                %td
+                  = link_to program.name, program_path(program), class: 'text-primary'
                 %td= program.shortcut_name
                 %td
                   .d-flex.justify-content-end
+                    - if policy(ProgramClone.new).new?
+                      = link_to clone_wizard_program_step_path(program, "select_method", restart: true), class: "btn btn-circle btn-sm btn-outline-info mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('program_clone.clone_setup')} do
+                        %i.fas.fa-clone
                     = render 'shared/action_buttons', edit_url: edit_program_path(program), delete_url: program_path(program), object: program
 
     = render "shared/no_data", items: @programs

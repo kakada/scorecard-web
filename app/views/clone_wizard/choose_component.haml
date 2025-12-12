@@ -1,0 +1,40 @@
+- content_for :title do
+  = t("program_clone.wizard_title", program_name: @program.name)
+
+= render "shared/headers/progress_arrow_header_clone", progress_num: 2, title: t("program_clone.wizard_title", program_name: @program.name)
+
+.container{'data-step': 'choose_component'}
+  .row.justify-content-center
+    .col-lg-12
+      .card.shadow.mb-4
+        .card-body
+          %h5.card-title.mb-4= t('program_clone.select_components')
+          %p.text-muted= t('program_clone.select_components_description')
+
+          = form_tag clone_wizard_program_step_path(@program, "choose_component"), method: :patch, class: 'mb-0' do
+            .form-row.align-items-center.mb-3
+              .col-auto.pl-4
+                .form-check.mb-0
+                  = check_box_tag 'select_all', '1', false, class: 'form-check-input', id: 'select_all'
+                  = label_tag :select_all, t('program_clone.select_all'), class: 'form-check-label.font-weight-bold'
+
+            %hr
+
+            .row
+              - ProgramClone::COMPONENTS.each do |component|
+                - key = component.to_s
+                .col-md-6.mb-3
+                  .card.option-component.h-100{data: {component: key}, tabindex: 0}
+                    .card-body.d-flex.justify-content-between.align-items-start
+                      .component-meta
+                        %div
+                          %strong= t("program_clone.components.#{key}")
+                        %div.text-muted.small= t("program_clone.components.#{key}_description")
+                      .component-action.ml-3
+                        = check_box_tag 'program_clone[selected_components][]', component,
+                          @program_clone.selected_components&.include?(component.to_s),
+                          class: 'form-check-input component-checkbox', id: "component_#{key}"
+
+            .d-flex.justify-content-between.mt-4
+              = link_to t('shared.back'), clone_wizard_program_step_path(@program, "select_method"), class: 'btn btn-secondary'
+              = submit_tag t('shared.next'), class: 'btn btn-primary', id: 'btn-next-components', disabled: true

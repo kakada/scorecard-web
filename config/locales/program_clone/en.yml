@@ -1,0 +1,83 @@
+en:
+  program_clone:
+    wizard_title: "Copy Setup Wizard for %{program_name}"
+    clone_setup: "Make a Copy"
+
+    # Step 1: Select Method
+    select_setup_method: "Select Setup Method"
+    select_setup_method_description: "Choose how you would like to set up this program's scorecard settings."
+    clone_from_sample: "Copy from Sample"
+    clone_from_sample_description: "Import pre-configured sample components including languages, facilities, indicators, and more."
+    clone_from_program: "Copy from Existing Program"
+    clone_from_program_description: "Copy settings from another program in the system."
+
+    # Step 2A: Select Program
+    select_source_program: "Select Source Program"
+    select_source_program_description: "Choose which program to copy settings from."
+    source_program: "Source Program"
+    select_program: "-- Select a program --"
+
+    # Step 2B: Select Components
+    select_components: "Select Components to Copy"
+    select_components_description: "Choose which components you want to import."
+    select_all: "Select All"
+    selected_components_label: "Components to Copy"
+
+    # Component names and descriptions
+    components:
+      languages: "Languages"
+      languages_description: "System languages for scorecard localization"
+      facilities: "Facilities"
+      facilities_description: "Facility types and categories"
+      indicators: "Indicators"
+      indicators_description: "Evaluation indicators for scorecards"
+      rating_scales: "Rating Scales"
+      rating_scales_description: "Rating scale definitions with audio files"
+      pdf_templates: "PDF Templates"
+      pdf_templates_description: "Templates for scorecard PDF exports"
+
+    # Step 3: Review
+    review_and_confirm: "Review & Confirm"
+    review_description: "Please review your selections before starting the copy process."
+    target_program: "Target Program"
+    clone_method_label: "Copy Method"
+    start_cloning: "Start Copying"
+
+    # Step 4: Status
+    cloning_status: "Copy Status"
+    status:
+      pending: "Pending - Waiting to start"
+      processing: "Processing - Copy in progress..."
+      completed: "Completed - Copy operation finished successfully"
+      failed: "Failed - An error occurred during copy"
+    completed_message: "The copy process has completed successfully. Your program now has the selected components."
+    failed_message: "The copy process failed. Please review the error and try again."
+    started_at: "Started At"
+    completed_at: "Completed At"
+    back_to_programs: "Back to Programs"
+    try_again: "Try Again"
+
+    # Steps navigation
+    steps:
+      select_method: "Select Method"
+      select_components: "Select Components"
+      review: "Review"
+      execute: "Execute"
+
+    # Messages
+    started_successfully: "Copy process has been started in the background. You will be notified when it completes."
+    source_program_not_found: "The selected source program could not be found. Please select a valid program."
+    session_expired: "Your session has expired. Please start the wizard again."
+    please_select_method: "Please select a copy method."
+    please_select_program: "Please select a source program."
+    please_select_components: "Please select at least one component to copy."
+
+    # Program Detail Page
+    program_detail: "Program Detail"
+    summary: "Summary"
+    copy_history: "Copy History"
+    view_copy_status: "View Copy Status"
+    no_copy_operations: "No copy operations found for this program."
+
+    no_users_hint: No users assigned — at least one user is required to access the program
+    failed_to_select_method: "Failed to select copy method. Please try again."

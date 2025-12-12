@@ -1,0 +1,46 @@
+- content_for :title do
+  = t("program_clone.wizard_title", program_name: @program.name)
+
+= render "shared/headers/progress_arrow_header_clone", progress_num: 3, title: t("program_clone.wizard_title", program_name: @program.name)
+
+.w-75.m-auto
+  .card.shadow.mb-4
+    .card-body
+      %h5.card-title.mb-4= t('program_clone.review_and_confirm')
+      %p.text-muted= t('program_clone.review_description')
+
+      = form_tag clone_wizard_program_step_path(@program, "review"), method: :patch do
+        .table-responsive
+          %table.table.table-bordered
+            %tbody
+              %tr
+                %th{style: 'width: 30%'}= t('program_clone.target_program')
+                %td= @program.name
+              %tr
+                %th= t('program_clone.clone_method_label')
+                %td
+                  - if @program_clone.clone_from_sample?
+                    = t('program_clone.clone_from_sample')
+                  - else
+                    = t('program_clone.clone_from_program')
+              - if @program_clone.clone_from_program?
+                %tr
+                  %th= t('program_clone.source_program')
+                  %td= @program_clone.source_program&.name
+              %tr
+                %th= t('program_clone.selected_components_label')
+                %td
+                  %ul.mb-0
+                    - @program_clone.selected_components.each do |component|
+                      %li= t("program_clone.components.#{component}")
+
+        - if @program_clone.errors.any?
+          .alert.alert-danger.mt-3
+            %h5= t('shared.errors_found', count: @program_clone.errors.count)
+            %ul
+              - @program_clone.errors.full_messages.each do |message|
+                %li= message
+
+        .d-flex.justify-content-between.mt-4
+          = link_to t('shared.back'), clone_wizard_program_step_path(@program, "choose_component"), class: 'btn btn-secondary'
+          = submit_tag t('program_clone.start_cloning'), class: 'btn btn-primary'
