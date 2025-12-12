@@ -50,6 +50,11 @@ en:
       processing: "Processing - Copy in progress..."
       completed: "Completed - Copy operation finished successfully"
       failed: "Failed - An error occurred during copy"
+    status_label:
+      pending: "Pending"
+      processing: "Processing"
+      completed: "Completed"
+      failed: "Failed"
     completed_message: "The copy process has completed successfully. Your program now has the selected components."
     failed_message: "The copy process failed. Please review the error and try again."
     started_at: "Started At"
