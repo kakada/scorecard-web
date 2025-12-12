@@ -5,17 +5,29 @@ require "stringio"
 
 RSpec.describe "Api::V1::ScorecardsController", type: :request do
   describe "GET #show" do
-    let!(:user) { create(:user, :lngo) }
-    let!(:scorecard)  { create(:scorecard, program_id: user.program_id, local_ngo_id: user.local_ngo_id) }
-    let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+    context "scorecard belongs to the same lngo to logged in user" do
+      let!(:user) { create(:user, :lngo) }
+      let!(:facility) { create(:facility, :primary_school_with_dataset, program: user.program) }
+      let(:dataset)  { facility.category.datasets.first }
+      let!(:scorecard)  { create(:scorecard, facility: facility, program_id: user.program_id, local_ngo_id: user.local_ngo_id, dataset_id: dataset.id) }
+      let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
 
-    before {
-      get "/api/v1/scorecards/#{scorecard.uuid}", headers: headers
-    }
+      before {
+        get "/api/v1/scorecards/#{scorecard.uuid}", headers: headers
+      }
 
-    it { expect(response.content_type).to eq("application/json; charset=utf-8") }
-    it { expect(response.status).to eq(200) }
-    it { expect(response.body).not_to be_nil }
+      it { expect(response.content_type).to eq("application/json; charset=utf-8") }
+      it { expect(response.status).to eq(200) }
+      it { expect(response.body).not_to be_nil }
+
+      it "returns the expected scorecard data" do
+        json_response = JSON.parse(response.body)
+
+        expect(json_response["uuid"]).to eq(scorecard.uuid)
+        expect(json_response["number_of_participant"]).to eq(scorecard.number_of_participant)
+        expect(json_response["dataset"]["category_name"]).to eq(dataset.category.name)
+      end
+    end
 
     context "different local ngo" do
       let!(:user) { create(:user, :lngo) }
