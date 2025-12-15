@@ -6,7 +6,7 @@
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
 
-      = form_for '', url: import_facility_indicators_path(@facility) do |f|
+      = form_for '', url: import_facility_indicators_path(@facility), html: { id: 'import-indicator-form' } do |f|
         .modal-body
           .form-group
             .d-flex
@@ -16,8 +16,8 @@
                   %i.fas.fa-cloud-download-alt.drop-menu-icon
                   = t("shared.download_sample_zip")
             .form-control.file-control-wrapper
-              = f.file_field :file, accept: ".zip,.rar,.7zip"
+              = f.file_field :file, accept: ".zip,.rar,.7zip", id: 'indicator-file-input'
 
         .modal-footer
           %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t('shared.cancel')
-          %button.btn.btn-primary{:type => "submit"}= t('shared.done')
+          %button.btn.btn-primary{:type => "submit", :id => "import-submit-btn", :disabled => true}= t('shared.done')

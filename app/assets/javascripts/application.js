@@ -36,7 +36,8 @@
 
 //= require facilities
 //= require templates
-//= require indicators
+//= require indicators/index
+//= require indicators/new
 //= require scorecards/locale
 //= require scorecards/daterange_picker
 //= require scorecards/index

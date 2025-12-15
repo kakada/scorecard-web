@@ -45,7 +45,10 @@ class IndicatorService
     end
 
     def indicator_params(row)
-      { tag_attributes: { name: (row["tag"] || row["Scorecard Criterias"]) } }
+      {
+        tag_attributes: { name: (row["tag"] || row["Scorecard Criterias"]) },
+        hint: row["hint"]
+      }
     end
 
     def upsert_languages_indicators(indicator, row)
