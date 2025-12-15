@@ -5,6 +5,8 @@ en:
     parent: Unit
     manage_indicator: Manage Indicator
     add_new: Add new facility
+    new_facility: New Facility
+    edit_facility: Edit Facility
     name_en: Name in English
     name_km: Name in Khmer
     code: Code

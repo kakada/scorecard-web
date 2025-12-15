@@ -5,6 +5,8 @@ km:
     parent: យូនីត
     manage_indicator: គ្រប់គ្រងលក្ខណៈវិនិច្ឆ័យ
     add_new: បន្ថែម Facility ថ្មី
+    new_facility: Facility ថ្មី
+    edit_facility: កែប្រែ Facility
     name_en: ឈ្មោះជាភាសាអង់គ្លេស
     name_km: ឈ្មោះជាភាសាខ្មែរ
     code: លេខកូដ

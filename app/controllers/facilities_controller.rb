@@ -41,6 +41,19 @@ class FacilitiesController < ApplicationController
     end
   end
 
+  def edit
+    @facility = authorize Facility.find(params[:id])
+  end
+
+  def update
+    @facility = authorize Facility.find(params[:id])
+    if @facility.update(facility_params)
+      redirect_to facilities_url
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @facility = authorize Facility.find(params[:id])
     @facility.destroy
