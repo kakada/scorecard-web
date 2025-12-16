@@ -25,7 +25,12 @@ module Samples
           next if indicator_name.blank?
 
           indicator = facility.indicators.find_or_initialize_by(name: indicator_name)
-          indicator.update(tag_attributes: { name: indicator_name })
+          update_params = {
+            tag_attributes: { name: row["tag"] || indicator_name },
+            hint: row["hint"]
+          }
+
+          indicator.update(update_params)
 
           upsert_languages_indicators(facility, indicator, row)
         end
