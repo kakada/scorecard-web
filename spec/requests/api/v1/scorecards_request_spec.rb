@@ -25,7 +25,8 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
         expect(json_response["uuid"]).to eq(scorecard.uuid)
         expect(json_response["number_of_participant"]).to eq(scorecard.number_of_participant)
-        expect(json_response["dataset"]["category_name"]).to eq(dataset.category.name)
+        expect(json_response["dataset"]["category_name_en"]).to eq(dataset.category.name_en)
+        expect(json_response["dataset"]["category_name_km"]).to eq(dataset.category.name_km)
       end
     end
 
