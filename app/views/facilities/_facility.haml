@@ -12,6 +12,10 @@
     = link_to facility_indicators_path(facility), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('facility.manage_indicator') } do
       %i.fas.fa-pencil-ruler
 
+  - if policy(facility).update?
+    = link_to edit_facility_path(facility), class: "btn btn-circle btn-sm btn-outline-warning mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+      %i.fas.fa-pen
+
   - if policy(facility).destroy?
     - title = facility.locked? ? t('facility.already_in_used') : t('shared.delete')
     %span{ data: { toggle: 'tooltip', placement: 'top', title: title }}
