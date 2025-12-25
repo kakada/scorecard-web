@@ -170,7 +170,7 @@ class JaapSpreadsheet {
 
     const rows = Array.from(tbody.children);
     if (rows.length <= 1) {
-      alert('Cannot delete the last row. At least one row is required.');
+      this.showNotification('Cannot delete the last row. At least one row is required.', 'warning');
       return;
     }
 
@@ -365,10 +365,41 @@ class JaapSpreadsheet {
     });
 
     if (!isValid) {
-      alert('Please fill in all required fields:\n' + errors.join('\n'));
+      this.showNotification('Please fill in all required fields. Check highlighted cells.', 'danger');
+      // Scroll to first error
+      const firstInvalidInput = tbody.querySelector('.is-invalid');
+      if (firstInvalidInput) {
+        firstInvalidInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalidInput.focus();
+      }
     }
 
     return isValid;
+  }
+
+  showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+    notification.style.cssText = 'top: 80px; right: 20px; z-index: 9999; max-width: 400px;';
+    notification.setAttribute('role', 'alert');
+    
+    notification.innerHTML = `
+      ${message}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 150);
+      }
+    }, 5000);
   }
 }
 
