@@ -71,7 +71,7 @@ class PublicVotesController < ApplicationController
 
     def check_voting_open
       unless @scorecard.voting_open?
-        render json: { error: I18n.t("public_votes.voting_closed") }, status: :forbidden
+        render json: { error: I18n.t("public_votes.voting_closed") }, status: :unprocessable_entity
       end
     end
 

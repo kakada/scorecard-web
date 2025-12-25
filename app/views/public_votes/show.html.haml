@@ -164,7 +164,7 @@
       const totalIndicators = document.querySelectorAll('.indicator-item').length;
       
       if (ratingInputs.length < totalIndicators) {
-        alert('#{t('public_votes.please_rate_all')}');
+        alert('#{escape_javascript(t('public_votes.please_rate_all'))}');
         return;
       }
 
@@ -185,7 +185,7 @@
 
       // Submit via AJAX
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm mr-2"></span>#{t('public_votes.submitting')}';
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm mr-2"></span>#{escape_javascript(t('public_votes.submitting'))}';
 
       fetch('#{public_vote_path(@scorecard.uuid)}', {
         method: 'POST',
@@ -201,16 +201,16 @@
           successMessage.style.display = 'block';
         } else {
           errorMessage.style.display = 'block';
-          document.getElementById('error-text').textContent = data.error || '#{t('public_votes.submission_error')}';
+          document.getElementById('error-text').textContent = data.error || '#{escape_javascript(t('public_votes.submission_error'))}';
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '#{t('public_votes.submit')} <i class="fas fa-check ml-2"></i>';
+          submitBtn.innerHTML = '#{escape_javascript(t('public_votes.submit'))} <i class="fas fa-check ml-2"></i>';
         }
       })
       .catch(error => {
         errorMessage.style.display = 'block';
-        document.getElementById('error-text').textContent = '#{t('public_votes.submission_error')}';
+        document.getElementById('error-text').textContent = '#{escape_javascript(t('public_votes.submission_error'))}';
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '#{t('public_votes.submit')} <i class="fas fa-check ml-2"></i>';
+        submitBtn.innerHTML = '#{escape_javascript(t('public_votes.submit'))} <i class="fas fa-check ml-2"></i>';
       });
     });
   });
