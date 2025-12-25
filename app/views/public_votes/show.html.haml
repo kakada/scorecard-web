@@ -65,13 +65,13 @@
                         .rating-scale
                           %label.d-block.mb-2
                             = t('public_votes.rate_indicator')
-                          .btn-group.btn-group-toggle.w-100{ data: { toggle: "buttons" } }
+                          .rating-buttons-group
                             - (1..5).each do |score|
-                              %label.btn.btn-outline-primary.flex-fill{ class: "rating-btn" }
-                                %input{ type: "radio", name: "indicators[#{indicator.uuid}][score]", value: score, autocomplete: "off", required: true, data: { indicator_uuid: indicator.uuid } }
-                                = score
-                                %br
-                                %small= t("public_votes.rating_#{score}")
+                              %label.rating-btn.btn.btn-outline-primary
+                                %input{ type: "radio", name: "indicators[#{indicator.uuid}][score]", value: score, autocomplete: "off", required: true, data: { indicator_uuid: indicator.uuid }, style: "display: none;" }
+                                .rating-content
+                                  .rating-score= score
+                                  %small.rating-label= t("public_votes.rating_#{score}")
 
                   .d-flex.justify-content-between.mt-4
                     %button.btn.btn-secondary{ type: "button", id: "back-to-profile" }
@@ -108,6 +108,22 @@
     
     let participantData = {};
 
+    // Handle rating button clicks
+    document.querySelectorAll('.rating-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const radio = this.querySelector('input[type="radio"]');
+        // Remove active class from siblings
+        this.parentElement.querySelectorAll('.rating-btn').forEach(b => {
+          b.classList.remove('active', 'btn-primary');
+          b.classList.add('btn-outline-primary');
+        });
+        // Add active class to clicked button
+        this.classList.remove('btn-outline-primary');
+        this.classList.add('active', 'btn-primary');
+        radio.checked = true;
+      });
+    });
+
     // Step 1 to Step 2
     nextBtn.addEventListener('click', function() {
       // Validate participant form
@@ -131,12 +147,14 @@
       // Move to step 2
       step1.style.display = 'none';
       step2.style.display = 'block';
+      window.scrollTo(0, 0);
     });
 
     // Step 2 back to Step 1
     backBtn.addEventListener('click', function() {
       step2.style.display = 'none';
       step1.style.display = 'block';
+      window.scrollTo(0, 0);
     });
 
     // Submit vote
