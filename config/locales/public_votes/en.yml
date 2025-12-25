@@ -1,0 +1,42 @@
+en:
+  public_votes:
+    title: "Community Scorecard Voting"
+    scorecard: "Scorecard"
+    voting_closed: "Voting is Currently Closed"
+    voting_closed_message: "This voting period is not currently open. Please check back later or contact the organizer for more information."
+    voting_ended: "The voting period has ended"
+    participant_profile: "Participant Profile"
+    rate_indicators_title: "Rate Indicators"
+    age: "Age *"
+    gender: "Gender"
+    gender_female: "Female"
+    gender_male: "Male"
+    gender_other: "Other"
+    select_gender: "Select gender"
+    participant_type: "Participant Type"
+    disability: "Disability"
+    minority: "Ethnic minority"
+    poor_card: "ID Poor card holder"
+    submit: "Submit"
+    submitting: "Submitting..."
+    error_title: "Submission Error"
+    thank_you_title: "Thank You!"
+    thank_you_message: "Thank you for your participation. Your vote has been recorded."
+
+    errors:
+      score_required: "Please select a score for %{indicator}."
+
+  activemodel:
+    attributes:
+      public_vote_form:
+        age: "Age"
+        gender: "Gender"
+
+    errors:
+      models:
+        public_vote_form:
+          attributes:
+            age:
+              blank: "Please enter your age"
+            gender:
+              blank: "Please select your gender"

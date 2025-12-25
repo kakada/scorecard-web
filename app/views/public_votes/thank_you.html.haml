@@ -1,0 +1,13 @@
+.public-vote-container
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-10
+        .card.shadow-sm
+          = render 'public_votes/header'
+
+          .card-body.text-center
+            %h3.mt-3.mb-2
+              %i.fas.fa-check-circle.text-success.mr-2
+              = t('public_votes.thank_you_title', default: 'Thank you!')
+            %p.text-muted.mb-4
+              = t('public_votes.thank_you_message', default: 'Your vote has been recorded.')

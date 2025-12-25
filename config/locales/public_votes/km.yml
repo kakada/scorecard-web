@@ -1,0 +1,42 @@
+km:
+  public_votes:
+    title: "ការបោះឆ្នោតប័ណ្ណដាក់ពិន្ទុសហគមន៍"
+    scorecard: "ប័ណ្ណដាក់ពិន្ទុ"
+    voting_closed: "បិទការបោះឆ្នោត"
+    voting_closed_message: "រយៈពេលបោះឆ្នោតនេះមិនត្រូវបានបើកទេ។ សូមពិនិត្យមើលម្តងទៀតនៅពេលក្រោយ ឬទាក់ទងអ្នករៀបចំសម្រាប់ព័ត៌មានបន្ថែម។"
+    voting_ended: "រយៈពេលបោះឆ្នោតបានបញ្ចប់"
+    participant_profile: "ព័ត៌មានអ្នកចូលរួម"
+    rate_indicators_title: "ការដាក់ពិន្ទុ"
+    age: "អាយុ"
+    gender: "ភេទ"
+    gender_female: "ស្រី"
+    gender_male: "ប្រុស"
+    gender_other: "ផ្សេងទៀត"
+    select_gender: "ជ្រើសរើសភេទ"
+    participant_type: "លក្ខណៈសម្បត្តិ"
+    disability: "ពិការភាព"
+    minority: "ជនជាតិភាគតិច"
+    poor_card: "មានប័ណ្ណក្រីក្រ"
+    submit: "រក្សាទុក"
+    submitting: "កំពុងដាក់ស្នើ..."
+    error_title: "កំហុសក្នុងការដាក់ស្នើ"
+    thank_you_title: "សូមអរគុណ!"
+    thank_you_message: "ការបោះឆ្នោតរបស់អ្នកត្រូវបានកត់ត្រា។ យើងសូមអរគុណចំពោះការចូលរួមរបស់អ្នក។"
+
+    errors:
+      score_required: "សូមជ្រើសរើសពិន្ទុសម្រាប់ `%{indicator}`។"
+
+  activemodel:
+    attributes:
+      public_vote_form:
+        age: "អាយុ"
+        gender: "ភេទ"
+
+    errors:
+      models:
+        public_vote_form:
+          attributes:
+            age:
+              blank: "សូមបញ្ចូលអាយុរបស់អ្នក"
+            gender:
+              blank: "សូមជ្រើសរើសភេទរបស់អ្នក"

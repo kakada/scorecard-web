@@ -42,6 +42,15 @@ module ScorecardsHelper
     [str, scorecard.location_name].join(" ")
   end
 
+  def scorecard_location_name(scorecard)
+    return "#{scorecard.location_name}" unless scorecard.dataset.present?
+
+    title = scorecard.dataset.category.name
+    str = I18n.locale == :km ? "#{title}#{scorecard.dataset_name}" : "#{scorecard.dataset_name} #{title},"
+
+    [str, scorecard.location_name].join(" ")
+  end
+
   def css_active_tab(is_active)
     "active" if is_active
   end
