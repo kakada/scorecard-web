@@ -1,0 +1,143 @@
+// JAAP Spreadsheet Styles
+#jaap-spreadsheet-container {
+  margin-top: 2rem;
+}
+
+#jaap-spreadsheet {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+
+  th {
+    background-color: #4e73df;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border: 1px solid #3a5bb8;
+  }
+
+  td {
+    padding: 0.25rem;
+    border: 1px solid #e3e6f0;
+    vertical-align: middle;
+
+    &.row-number {
+      background-color: #f8f9fc;
+      font-weight: 600;
+      color: #5a5c69;
+      width: 50px;
+      text-align: center;
+    }
+  }
+
+  .jaap-cell-input {
+    border: 1px solid transparent;
+    border-radius: 0;
+    padding: 0.375rem 0.5rem;
+    font-size: 0.875rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:focus {
+      border-color: #4e73df;
+      box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+      outline: 0;
+    }
+
+    &.is-invalid {
+      border-color: #e74a3b;
+      background-color: #fff5f5;
+    }
+  }
+
+  textarea.jaap-cell-input {
+    resize: vertical;
+    min-height: 60px;
+  }
+
+  .delete-row-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+
+    i {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  #jaap-spreadsheet {
+    font-size: 0.75rem;
+
+    th, td {
+      padding: 0.5rem;
+    }
+
+    .jaap-cell-input {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.375rem;
+    }
+  }
+}
+
+// Add row button styling
+#add-row-btn {
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+// Loading state
+.jaap-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2rem;
+    height: 2rem;
+    margin-top: -1rem;
+    margin-left: -1rem;
+    border: 0.25rem solid #f3f3f3;
+    border-top: 0.25rem solid #4e73df;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Table container responsiveness
+.table-responsive {
+  max-height: 600px;
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+    
+    &:hover {
+      background: #555;
+    }
+  }
+}

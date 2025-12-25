@@ -1,0 +1,62 @@
+.d-md-flex.align-items-center.justify-content-between.mb-4
+  %h1.h3.mb-0.text-gray-800= t('jaap.title')
+  - if policy(Jaap).create?
+    = link_to new_jaap_path, class: "btn btn-primary btn-icon-split" do
+      %span.icon.text-white-50
+        %i.fas.fa-plus
+      %span.text= t('jaap.new')
+
+.card.shadow.mb-4
+  .card-body
+    - if @jaaps.present?
+      .d-sm-flex
+        = render "shared/pagination_title"
+
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
+            %tr
+              %th #
+              %th= t("jaap.title_label")
+              %th= t("jaap.program")
+              %th= t("jaap.scorecard")
+              %th= t("jaap.created_by")
+              %th= t("jaap.status")
+              %th= t("shared.created_at")
+              %th
+
+          %tbody
+            - @jaaps.each_with_index do |jaap, index|
+              %tr
+                %td= @pagy.from + index
+                %td
+                  = link_to jaap.title, jaap_path(jaap.uuid)
+                %td= jaap.program.name
+                %td
+                  - if jaap.scorecard.present?
+                    = link_to jaap.scorecard.uuid, scorecard_path(jaap.scorecard.uuid)
+                  - else
+                    = t('shared.not_applicable')
+                %td= jaap.user.name
+                %td
+                  - if jaap.completed?
+                    %span.badge.badge-success= t('jaap.completed')
+                  - else
+                    %span.badge.badge-warning= t('jaap.in_progress')
+                %td= timeago(jaap.created_at).html_safe
+                %td
+                  .d-flex.justify-content-end
+                    - if policy(jaap).show?
+                      = link_to jaap_path(jaap.uuid), class: "btn btn-circle btn-sm btn-outline-info mr-2", data: { toggle: 'tooltip', placement: 'top', title: t('shared.view') } do
+                        %i.fas.fa-eye
+
+                    - if policy(jaap).update?
+                      = link_to edit_jaap_path(jaap.uuid), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
+                        %i.fas.fa-pen
+
+                    - if policy(jaap).destroy?
+                      = link_to jaap_path(jaap.uuid), method: :delete, data: { confirm: t('shared.are_you_sure') }, class: "btn btn-circle btn-sm btn-outline-danger" do
+                        %i.fas.fa-trash-alt
+
+    = render "shared/no_data", items: @jaaps
+    = render "shared/footers/pagination"

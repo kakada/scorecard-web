@@ -65,6 +65,7 @@
 //= require removing_scorecards/create
 //= require categories
 //= require clone_wizard/show
+//= require jaaps/spreadsheet
 
 document.addEventListener("turbolinks:load", function () {
   CW.Common.Topbar.init();
