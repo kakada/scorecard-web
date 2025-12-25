@@ -1,0 +1,380 @@
+// Public Voting Page Styles
+.public-vote-container {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding: 0;
+
+  .card {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    .card-header {
+      background: #c65e28;
+      border-bottom: none;
+      padding: 20px;
+      color: white;
+
+      h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+    }
+
+    .card-body {
+      padding: 25px 20px;
+      background: white;
+    }
+  }
+
+  // Section titles
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ddd;
+  }
+
+  // Form elements
+  .form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    font-size: 1rem;
+
+    &:focus {
+      border-color: #c65e28;
+      box-shadow: 0 0 0 0.2rem rgba(198, 94, 40, 0.15);
+    }
+  }
+
+  // Gender options
+  .gender-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    .gender-option {
+      flex: 1;
+      min-width: 100px;
+      cursor: pointer;
+      position: relative;
+
+      .gender-radio {
+        display: none;
+      }
+
+      .gender-box {
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        background: white;
+
+        .gender-icon {
+          font-size: 2rem;
+          margin-bottom: 8px;
+          color: #666;
+
+          i {
+            font-size: 2.5rem;
+          }
+        }
+
+        .gender-label {
+          font-size: 0.9rem;
+          color: #666;
+          font-weight: 500;
+        }
+      }
+
+      &.selected .gender-box,
+      &:has(.gender-radio:checked) .gender-box {
+        border-color: #ff8533;
+        background: #fff5ee;
+
+        .gender-icon {
+          color: #ff8533;
+        }
+
+        .gender-label {
+          color: #ff8533;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  // Participant type options
+  .participant-type-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    .type-option {
+      flex: 0 0 calc(33.333% - 10px);
+      min-width: 120px;
+      cursor: pointer;
+      position: relative;
+
+      .type-checkbox {
+        display: none;
+      }
+
+      .type-box {
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        padding: 15px 10px;
+        text-align: center;
+        transition: all 0.3s ease;
+        background: white;
+
+        .type-icon {
+          font-size: 1.8rem;
+          margin-bottom: 8px;
+          color: #666;
+        }
+
+        .type-label {
+          font-size: 0.85rem;
+          color: #666;
+          font-weight: 500;
+        }
+      }
+
+      &.selected .type-box,
+      &:has(.type-checkbox:checked) .type-box {
+        border-color: #ddd;
+        background: #f5f5f5;
+
+        .type-icon {
+          color: #333;
+        }
+
+        .type-label {
+          color: #333;
+        }
+      }
+    }
+  }
+
+  // Youth option
+  .youth-option {
+    .type-option {
+      flex: 0 0 auto;
+      min-width: 150px;
+    }
+  }
+
+  // Indicator items
+  .indicator-item {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    .indicator-header {
+      .indicator-number {
+        font-weight: 700;
+        color: #333;
+        font-size: 1.1rem;
+        min-width: 30px;
+      }
+
+      .indicator-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+      }
+
+      .indicator-hint {
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 5px;
+      }
+
+      .audio-icon {
+        color: #c65e28;
+        font-size: 1.3rem;
+      }
+    }
+
+    .rating-options {
+      margin-top: 15px;
+
+      .rating-description {
+        color: #666;
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+      }
+
+      .rating-buttons-group {
+        display: flex;
+        gap: 8px;
+        justify-content: space-between;
+
+        .rating-option {
+          flex: 1;
+          cursor: pointer;
+          position: relative;
+
+          .rating-radio {
+            display: none;
+          }
+
+          .rating-box {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 12px 5px;
+            text-align: center;
+            transition: all 0.2s ease;
+            background: white;
+
+            .rating-emoji {
+              margin-bottom: 5px;
+              display: block;
+              .rating-emoji-img { width: 36px; height: 36px; display: block; }
+            }
+
+            .rating-label {
+              font-size: 0.7rem;
+              color: #666;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 3px;
+
+              .rating-score {
+                font-weight: 600;
+              }
+
+              i {
+                font-size: 0.65rem;
+                color: #ff8533;
+              }
+            }
+          }
+
+          // Default hover effect
+          &:hover .rating-box {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          }
+
+          // Per-score color themes for selected/checked state
+          &.score-1 {
+            &:hover .rating-box { border-color: #e74c3c; box-shadow: 0 2px 8px rgba(231, 76, 60, 0.20); }
+            &.selected .rating-box,
+            &:has(.rating-radio:checked) .rating-box { border-color: #e74c3c; background: #fdecea; }
+            &.selected .rating-label { color: #e74c3c; font-weight: 600; }
+          }
+          &.score-2 {
+            &:hover .rating-box { border-color: #f39c12; box-shadow: 0 2px 8px rgba(243, 156, 18, 0.20); }
+            &.selected .rating-box,
+            &:has(.rating-radio:checked) .rating-box { border-color: #f39c12; background: #fff3e0; }
+            &.selected .rating-label { color: #f39c12; font-weight: 600; }
+          }
+          &.score-3 {
+            &:hover .rating-box { border-color: #f1c40f; box-shadow: 0 2px 8px rgba(241, 196, 15, 0.20); }
+            &.selected .rating-box,
+            &:has(.rating-radio:checked) .rating-box { border-color: #f1c40f; background: #fff9db; }
+            &.selected .rating-label { color: #f1c40f; font-weight: 600; }
+          }
+          &.score-4 {
+            &:hover .rating-box { border-color: #7cb342; box-shadow: 0 2px 8px rgba(124, 179, 66, 0.20); }
+            &.selected .rating-box,
+            &:has(.rating-radio:checked) .rating-box { border-color: #7cb342; background: #e8f5e9; }
+            &.selected .rating-label { color: #7cb342; font-weight: 600; }
+          }
+          &.score-5 {
+            &:hover .rating-box { border-color: #2ecc71; box-shadow: 0 2px 8px rgba(46, 204, 113, 0.20); }
+            &.selected .rating-box,
+            &:has(.rating-radio:checked) .rating-box { border-color: #2ecc71; background: #eafaf1; }
+            &.selected .rating-label { color: #2ecc71; font-weight: 600; }
+          }
+        }
+        .validation-error {
+          margin-top: 8px;
+          color: #c0392b;
+          font-size: 0.8rem;
+          display: none;
+        }
+      }
+    }
+  }
+
+  .indicator-item.invalid {
+    border-color: #f5b7b1;
+    background: #fff5f5;
+  }
+
+  // Alert messages
+  .alert {
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+
+    .alert-heading {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      i {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  // Responsive
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 20px 15px;
+    }
+
+    .gender-options {
+      .gender-option {
+        flex: 0 0 calc(33.333% - 10px);
+        min-width: 90px;
+      }
+    }
+
+    .participant-type-options {
+      .type-option {
+        flex: 0 0 calc(50% - 7.5px);
+      }
+    }
+
+    .indicator-item {
+      .rating-options {
+        .rating-buttons-group {
+          gap: 5px;
+
+          .rating-option {
+            .rating-box {
+              padding: 10px 3px;
+
+              .rating-emoji {
+                font-size: 1.5rem;
+              }
+
+              .rating-label {
+                font-size: 0.65rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

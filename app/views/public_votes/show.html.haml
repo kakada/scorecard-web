@@ -1,0 +1,142 @@
+.public-vote-container
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-10
+        .card.shadow-sm
+          .card-header.bg-primary.text-white
+            %h3.mb-0
+              = t('public_votes.title')
+            %p.mb-0.small
+              = "#{t('public_votes.scorecard')}: #{@scorecard.name}"
+
+          .card-body
+            - unless @scorecard.open_voting?
+              .alert.alert-warning.text-center
+                %h4= t('public_votes.voting_closed')
+                %p= t('public_votes.voting_closed_message')
+            - else
+              = simple_form_for @form, url: public_vote_path(@scorecard.uuid), id: "voting-form", local: false do |f|
+                / Participant Profile Section
+                .participant-profile-section.mb-5
+                  %h4.section-title.mb-4= t('public_votes.participant_profile')
+
+                  .form-group.mb-3
+                    = label_tag :age, t('public_votes.age'), class: "form-label"
+                    = number_field_tag 'participant[age]', nil, id: 'participant-age', class: "form-control", required: true, min: 1, max: 150, placeholder: "0"
+
+                  .form-group.mb-4
+                    = label_tag :gender, t('public_votes.gender'), class: "form-label"
+
+                    .gender-options.d-flex.gap-3
+                      - Participant::GENDERS.each do |gender|
+                        %label.gender-option
+                          = radio_button_tag 'participant[gender]', gender, false, required: true, class: "gender-radio"
+                          .gender-box
+                            .gender-icon
+                              - if gender == 'female'
+                                %i.fas.fa-venus
+                              - elsif gender == 'male'
+                                %i.fas.fa-mars
+                              - else
+                                %i.fas.fa-genderless
+                            .gender-label= t("public_votes.gender_#{gender}")
+
+                  .form-group.mb-4
+                    %label.form-label.d-block= t('public_votes.participant_type')
+                    .participant-type-options.d-flex.flex-wrap.gap-3
+                      %label.type-option
+                        = check_box_tag 'participant[disability]', '1', false, class: "type-checkbox"
+                        .type-box
+                          .type-icon
+                            %i.fas.fa-wheelchair
+                          .type-label= t('public_votes.disability')
+
+                      %label.type-option
+                        = check_box_tag 'participant[minority]', '1', false, class: "type-checkbox"
+                        .type-box
+                          .type-icon
+                            %i.fas.fa-users
+                          .type-label= t('public_votes.minority')
+
+                      %label.type-option
+                        = check_box_tag 'participant[poor_card]', '1', false, class: "type-checkbox"
+                        .type-box
+                          .type-icon
+                            %i.fas.fa-id-card
+                          .type-label= t('public_votes.poor_card')
+
+                  -# Youth option hidden; value is auto-set from age (15-30)
+                  = hidden_field_tag 'participant[youth]', '0', id: 'participant-youth'
+
+                %hr.my-5
+
+                / Voting Section
+                .voting-section
+                  %h4.section-title.mb-4= t('public_votes.rate_indicators_title')
+
+                  #indicators-container
+                    - @indicators.each_with_index do |voting_indicator, index|
+                      .indicator-item.mb-4
+                        .indicator-header.d-flex.align-items-start.mb-3
+                          .indicator-number.mr-3
+                            = "#{index + 1}."
+                          .indicator-info.flex-grow-1
+                            %h5.indicator-name.mb-2
+                              = voting_indicator.indicator.try(:name) || voting_indicator.indicatorable.try(:name)
+                            - if voting_indicator.indicator.try(:hint).present?
+                              %p.indicator-hint.text-muted.small.mb-0
+                                = voting_indicator.indicator.hint
+                          - if voting_indicator.indicator.try(:audio).present?
+                            .audio-icon
+                              %i.fas.fa-volume-up
+
+                        .rating-options
+                          .rating-buttons-group.d-flex.justify-content-between
+                            - RatingScale.defaults.each do |scale|
+                              %label.rating-option{ data: { indicator_uuid: voting_indicator.uuid }, class: "score-#{scale[:value]}" }
+                                = radio_button_tag "ratings[#{voting_indicator.uuid}]", scale[:value], false, required: true, class: "rating-radio", data: { indicator_uuid: voting_indicator.uuid }
+                                .rating-box.d-flex.flex-column.align-items-center
+                                  .rating-emoji
+                                    = image_tag "#{scale[:code]}.png", class: "rating-emoji-img", alt: scale[:label]
+
+                                  .rating-label
+                                    %span.rating-score
+                                      = t("rating_scale.#{scale[:code]}")
+                                      = "(#{scale[:value]})"
+
+                  / Submit Button
+                  .d-flex.justify-content-center.mt-5
+                    %button.btn.btn-primary.btn-lg.px-5{ type: "submit", id: "submit-vote"}
+                      = t('public_votes.submit')
+
+                / Success Message (initially hidden)
+                #success-message.alert.alert-success.mt-4{ style: "display: none;" }
+                  %h4.alert-heading
+                    %i.fas.fa-check-circle.mr-2
+                    = t('public_votes.success_title')
+                  %p= t('public_votes.success_message')
+
+                / Error Message (initially hidden)
+                #error-message.alert.alert-danger.mt-4{ style: "display: none;" }
+                  %h4.alert-heading
+                    %i.fas.fa-exclamation-circle.mr-2
+                    = t('public_votes.error_title')
+                  %p#error-text
+
+:javascript
+  document.addEventListener('DOMContentLoaded', function() {
+    var ageInput = document.getElementById('participant-age');
+    var youthHidden = document.getElementById('participant-youth');
+    var votingForm = document.getElementById('voting-form');
+    var submitBtn = document.getElementById('submit-vote');
+
+    function syncYouth() {
+      var age = parseInt(ageInput.value, 10);
+      var isYouth = !isNaN(age) && age >= 15 && age <= 30;
+      if (youthHidden) { youthHidden.value = isYouth ? '1' : '0'; }
+    }
+    if (ageInput) {
+      ageInput.addEventListener('input', syncYouth);
+      syncYouth();
+    }
+  });
