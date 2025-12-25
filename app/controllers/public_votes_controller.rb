@@ -14,7 +14,7 @@ class PublicVotesController < ApplicationController
     end
 
     @participant = Participant.new
-    @indicators = @scorecard.facility.indicators
+    @indicators = @scorecard.voting_indicators.includes(:indicator).order(:display_order)
   end
 
   def create
@@ -33,19 +33,12 @@ class PublicVotesController < ApplicationController
         return
       end
 
-      # Create voting indicators and ratings
+      # Create ratings from voting data
       voting_data = params[:voting_data] || []
       voting_data.each do |vote|
-        indicator = Indicator.find_by(uuid: vote[:indicator_uuid])
-        next unless indicator
-
-        # Find or create voting indicator
-        voting_indicator = @scorecard.voting_indicators.find_or_initialize_by(
-          indicator_uuid: indicator.uuid,
-          indicatorable_id: indicator.id,
-          indicatorable_type: indicator.class.name
-        )
-        voting_indicator.save! if voting_indicator.new_record?
+        # The indicator_uuid here is actually the voting_indicator uuid
+        voting_indicator = @scorecard.voting_indicators.find_by(uuid: vote[:indicator_uuid])
+        next unless voting_indicator
 
         # Create rating
         @scorecard.ratings.create!(
