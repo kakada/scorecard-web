@@ -324,4 +324,40 @@ RSpec.describe Scorecard, type: :model do
       expect(subject.dataset_id).to be_nil
     end
   end
+
+  describe "voting_open attribute" do
+    let(:program) { create(:program) }
+    let(:user) { create(:user, program: program) }
+    let(:facility) { create(:facility, program: program) }
+
+    context "when voting_open is true" do
+      subject { create(:scorecard, program: program, facility: facility, creator: user, voting_open: true) }
+
+      it "allows public voting" do
+        expect(subject.voting_open).to be true
+      end
+    end
+
+    context "when voting_open is false (default)" do
+      subject { create(:scorecard, program: program, facility: facility, creator: user) }
+
+      it "does not allow public voting" do
+        expect(subject.voting_open).to be false
+      end
+    end
+
+    context "when toggling voting_open" do
+      subject { create(:scorecard, program: program, facility: facility, creator: user, voting_open: false) }
+
+      it "can be opened and closed" do
+        expect(subject.voting_open).to be false
+
+        subject.update(voting_open: true)
+        expect(subject.reload.voting_open).to be true
+
+        subject.update(voting_open: false)
+        expect(subject.reload.voting_open).to be false
+      end
+    end
+  end
 end

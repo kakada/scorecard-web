@@ -1,0 +1,262 @@
+.public-vote-container
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-10
+        .card.shadow-sm
+          .card-header.bg-primary.text-white
+            %h3.mb-0
+              = t('public_votes.title')
+            %p.mb-0.small
+              = "#{t('public_votes.scorecard')}: #{@scorecard.name}"
+
+          .card-body
+            - if @voting_closed
+              .alert.alert-warning.text-center
+                %h4= t('public_votes.voting_closed')
+                %p= t('public_votes.voting_closed_message')
+            - else
+              = form_with url: public_vote_path(@scorecard.uuid), id: "voting-form", local: false do |f|
+                / Participant Profile Section
+                .participant-profile-section.mb-5
+                  %h4.section-title.mb-4= t('public_votes.participant_profile')
+                  
+                  .form-group.mb-3
+                    = label_tag :age, t('public_votes.age'), class: "form-label"
+                    = number_field_tag 'participant[age]', nil, class: "form-control", required: true, min: 1, max: 150, placeholder: "0"
+
+                  .form-group.mb-4
+                    = label_tag :gender, t('public_votes.gender'), class: "form-label"
+                    .gender-options.d-flex.gap-3
+                      - Participant::GENDERS.each do |gender|
+                        %label.gender-option
+                          = radio_button_tag 'participant[gender]', gender, false, required: true, class: "gender-radio"
+                          .gender-box
+                            .gender-icon
+                              - if gender == 'female'
+                                %i.fas.fa-venus
+                              - elsif gender == 'male'
+                                %i.fas.fa-mars
+                              - else
+                                %i.fas.fa-genderless
+                            .gender-label= t("public_votes.gender_#{gender}")
+
+                  .form-group.mb-4
+                    %label.form-label.d-block= t('public_votes.participant_type')
+                    .participant-type-options.d-flex.flex-wrap.gap-3
+                      %label.type-option
+                        = check_box_tag 'participant[disability]', '1', false, class: "type-checkbox"
+                        .type-box
+                          .type-icon
+                            %i.fas.fa-wheelchair
+                          .type-label= t('public_votes.disability')
+
+                      %label.type-option
+                        = check_box_tag 'participant[minority]', '1', false, class: "type-checkbox"
+                        .type-box
+                          .type-icon
+                            %i.fas.fa-users
+                          .type-label= t('public_votes.minority')
+
+                      %label.type-option
+                        = check_box_tag 'participant[poor_card]', '1', false, class: "type-checkbox"
+                        .type-box
+                          .type-icon
+                            %i.fas.fa-id-card
+                          .type-label= t('public_votes.poor_card')
+
+                  .form-group.mb-4
+                    %label.form-label.d-block
+                      = t('public_votes.youth_question')
+                      %span.badge.badge-info.ml-2= t('public_votes.youth_age_range')
+                    .youth-option
+                      %label.type-option
+                        = check_box_tag 'participant[youth]', '1', false, class: "type-checkbox"
+                        .type-box
+                          .type-icon
+                            %i.fas.fa-user-graduate
+                          .type-label= t('public_votes.youth')
+
+                %hr.my-5
+
+                / Voting Section
+                .voting-section
+                  %h4.section-title.mb-4= t('public_votes.rate_indicators_title')
+                  
+                  #indicators-container
+                    - @indicators.each_with_index do |voting_indicator, index|
+                      .indicator-item.mb-4
+                        .indicator-header.d-flex.align-items-start.mb-3
+                          .indicator-number.mr-3
+                            = "#{index + 1}."
+                          .indicator-info.flex-grow-1
+                            %h5.indicator-name.mb-2
+                              = voting_indicator.indicator.try(:name) || voting_indicator.indicatorable.try(:name)
+                            - if voting_indicator.indicator.try(:hint).present?
+                              %p.indicator-hint.text-muted.small.mb-0
+                                = voting_indicator.indicator.hint
+                          - if voting_indicator.indicator.try(:audio).present?
+                            .audio-icon
+                              %i.fas.fa-volume-up
+                        
+                        .rating-options
+                          .rating-description.mb-2
+                            %small.text-muted= t('public_votes.rating_scale_description')
+                          .rating-buttons-group.d-flex.justify-content-between
+                            - (1..5).each do |score|
+                              %label.rating-option{ data: { indicator_uuid: voting_indicator.uuid } }
+                                = radio_button_tag "ratings[#{voting_indicator.uuid}]", score, false, required: true, class: "rating-radio", data: { indicator_uuid: voting_indicator.uuid }
+                                .rating-box
+                                  .rating-emoji
+                                    - if score == 1
+                                      😢
+                                    - elsif score == 2
+                                      😞
+                                    - elsif score == 3
+                                      😐
+                                    - elsif score == 4
+                                      😊
+                                    - else
+                                      😄
+                                  .rating-label
+                                    %span.rating-score= score
+                                    - if voting_indicator.indicator.try(:audio).present?
+                                      %i.fas.fa-volume-up.ml-1
+
+                  / Submit Button
+                  .d-flex.justify-content-center.mt-5
+                    %button.btn.btn-primary.btn-lg.px-5{ type: "submit", id: "submit-vote" }
+                      = t('public_votes.submit')
+                      %i.fas.fa-paper-plane.ml-2
+
+                / Success Message (initially hidden)
+                #success-message.alert.alert-success.mt-4{ style: "display: none;" }
+                  %h4.alert-heading
+                    %i.fas.fa-check-circle.mr-2
+                    = t('public_votes.success_title')
+                  %p= t('public_votes.success_message')
+
+                / Error Message (initially hidden)
+                #error-message.alert.alert-danger.mt-4{ style: "display: none;" }
+                  %h4.alert-heading
+                    %i.fas.fa-exclamation-circle.mr-2
+                    = t('public_votes.error_title')
+                  %p#error-text
+
+:javascript
+  document.addEventListener('DOMContentLoaded', function() {
+    const votingForm = document.getElementById('voting-form');
+    const submitBtn = document.getElementById('submit-vote');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+
+    // Handle gender option clicks
+    document.querySelectorAll('.gender-option').forEach(option => {
+      option.addEventListener('click', function() {
+        document.querySelectorAll('.gender-option').forEach(opt => {
+          opt.classList.remove('selected');
+        });
+        this.classList.add('selected');
+      });
+    });
+
+    // Handle participant type option clicks
+    document.querySelectorAll('.type-option').forEach(option => {
+      const checkbox = option.querySelector('.type-checkbox');
+      option.addEventListener('click', function(e) {
+        if (e.target !== checkbox) {
+          checkbox.checked = !checkbox.checked;
+        }
+        if (checkbox.checked) {
+          this.classList.add('selected');
+        } else {
+          this.classList.remove('selected');
+        }
+      });
+    });
+
+    // Handle rating option clicks
+    document.querySelectorAll('.rating-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const indicatorUuid = this.dataset.indicatorUuid;
+        const indicatorGroup = document.querySelectorAll(`.rating-option[data-indicator-uuid="${indicatorUuid}"]`);
+        indicatorGroup.forEach(opt => {
+          opt.classList.remove('selected');
+        });
+        this.classList.add('selected');
+      });
+    });
+
+    // Handle form submission
+    votingForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Validate all indicators are rated
+      const totalIndicators = document.querySelectorAll('.indicator-item').length;
+      const ratedIndicators = document.querySelectorAll('.rating-radio:checked').length;
+
+      if (ratedIndicators < totalIndicators) {
+        alert('#{escape_javascript(t('public_votes.please_rate_all'))}');
+        return;
+      }
+
+      // Collect form data
+      const formData = new FormData(votingForm);
+      
+      const participantData = {
+        age: formData.get('participant[age]'),
+        gender: formData.get('participant[gender]'),
+        disability: formData.get('participant[disability]') === '1',
+        minority: formData.get('participant[minority]') === '1',
+        poor_card: formData.get('participant[poor_card]') === '1',
+        youth: formData.get('participant[youth]') === '1'
+      };
+
+      const votingData = [];
+      document.querySelectorAll('.rating-radio:checked').forEach(radio => {
+        votingData.push({
+          indicator_uuid: radio.dataset.indicatorUuid,
+          score: parseInt(radio.value)
+        });
+      });
+
+      const submissionData = {
+        participant: participantData,
+        voting_data: votingData
+      };
+
+      // Submit via AJAX
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm mr-2"></span>#{escape_javascript(t('public_votes.submitting'))}';
+
+      // Get CSRF token
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+      fetch('#{public_vote_path(@scorecard.uuid)}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken
+        },
+        body: JSON.stringify(submissionData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          votingForm.style.display = 'none';
+          successMessage.style.display = 'block';
+          window.scrollTo(0, 0);
+        } else {
+          errorMessage.style.display = 'block';
+          document.getElementById('error-text').textContent = data.error || '#{escape_javascript(t('public_votes.submission_error'))}';
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '#{escape_javascript(t('public_votes.submit'))} <i class="fas fa-paper-plane ml-2"></i>';
+        }
+      })
+      .catch(error => {
+        errorMessage.style.display = 'block';
+        document.getElementById('error-text').textContent = '#{escape_javascript(t('public_votes.submission_error'))}';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '#{escape_javascript(t('public_votes.submit'))} <i class="fas fa-paper-plane ml-2"></i>';
+      });
+    });
+  });

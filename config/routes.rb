@@ -18,6 +18,11 @@ Rails.application.routes.draw do
   end
 
   resources :activity_logs, only: :index
+  
+  # Public voting route (no authentication required)
+  get "/scorecards/:scorecard_uuid/vote", to: "public_votes#show", as: :public_vote
+  post "/scorecards/:scorecard_uuid/vote", to: "public_votes#create"
+  
   resources :scorecards, param: :uuid do
     put :complete, on: :member
 
