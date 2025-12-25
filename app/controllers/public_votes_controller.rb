@@ -2,7 +2,6 @@
 
 class PublicVotesController < ApplicationController
   skip_before_action :authenticate_user!
-  skip_before_action :verify_authenticity_token, only: [:create]
   before_action :set_scorecard
   before_action :check_voting_open, except: [:show]
 
