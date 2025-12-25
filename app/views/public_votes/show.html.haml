@@ -1,0 +1,198 @@
+.public-vote-container
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-10
+        .card.shadow-sm
+          .card-header.bg-primary.text-white
+            %h3.mb-0
+              = t('public_votes.title')
+            %p.mb-0.small
+              = "#{t('public_votes.scorecard')}: #{@scorecard.name}"
+
+          .card-body
+            - if @voting_closed
+              .alert.alert-warning.text-center
+                %h4= t('public_votes.voting_closed')
+                %p= t('public_votes.voting_closed_message')
+            - else
+              #voting-form
+                / Step 1: Participant Profile Form
+                #step-1.voting-step
+                  %h4.mb-4= t('public_votes.step_1_title')
+                  
+                  = form_with model: @participant, url: public_vote_path(@scorecard.uuid), id: "participant-form", local: false do |f|
+                    .form-group.mb-3
+                      = f.label :age, t('public_votes.age')
+                      = f.number_field :age, class: "form-control", required: true, min: 1, max: 150
+
+                    .form-group.mb-3
+                      = f.label :gender, t('public_votes.gender')
+                      = f.select :gender, options_for_select(Participant::GENDERS.map { |g| [t("public_votes.gender_#{g}"), g] }), { prompt: t('public_votes.select_gender') }, class: "form-control", required: true
+
+                    .form-check.mb-2
+                      = f.check_box :disability, class: "form-check-input"
+                      = f.label :disability, t('public_votes.disability'), class: "form-check-label"
+
+                    .form-check.mb-2
+                      = f.check_box :minority, class: "form-check-input"
+                      = f.label :minority, t('public_votes.minority'), class: "form-check-label"
+
+                    .form-check.mb-2
+                      = f.check_box :poor_card, class: "form-check-input"
+                      = f.label :poor_card, t('public_votes.poor_card'), class: "form-check-label"
+
+                    .form-check.mb-4
+                      = f.check_box :youth, class: "form-check-input"
+                      = f.label :youth, t('public_votes.youth'), class: "form-check-label"
+
+                    .d-flex.justify-content-end
+                      %button.btn.btn-primary{ type: "button", id: "next-to-voting" }
+                        = t('public_votes.next')
+                        %i.fas.fa-arrow-right.ml-2
+
+                / Step 2: Indicator Voting Form
+                #step-2.voting-step{ style: "display: none;" }
+                  %h4.mb-4= t('public_votes.step_2_title')
+                  
+                  #indicators-container
+                    - @indicators.each do |indicator|
+                      .indicator-item.mb-4.p-3.border.rounded
+                        .indicator-header.mb-3
+                          %h5.mb-2= indicator.name
+                          - if indicator.hint.present?
+                            %p.text-muted.small.mb-0= indicator.hint
+                        
+                        .rating-scale
+                          %label.d-block.mb-2
+                            = t('public_votes.rate_indicator')
+                          .btn-group.btn-group-toggle.w-100{ data: { toggle: "buttons" } }
+                            - (1..5).each do |score|
+                              %label.btn.btn-outline-primary.flex-fill{ class: "rating-btn" }
+                                %input{ type: "radio", name: "indicators[#{indicator.uuid}][score]", value: score, autocomplete: "off", required: true, data: { indicator_uuid: indicator.uuid } }
+                                = score
+                                %br
+                                %small= t("public_votes.rating_#{score}")
+
+                  .d-flex.justify-content-between.mt-4
+                    %button.btn.btn-secondary{ type: "button", id: "back-to-profile" }
+                      %i.fas.fa-arrow-left.mr-2
+                      = t('public_votes.back')
+                    %button.btn.btn-success{ type: "button", id: "submit-vote" }
+                      = t('public_votes.submit')
+                      %i.fas.fa-check.ml-2
+
+                / Success Message (initially hidden)
+                #success-message.alert.alert-success{ style: "display: none;" }
+                  %h4.alert-heading
+                    %i.fas.fa-check-circle.mr-2
+                    = t('public_votes.success_title')
+                  %p= t('public_votes.success_message')
+
+                / Error Message (initially hidden)
+                #error-message.alert.alert-danger{ style: "display: none;" }
+                  %h4.alert-heading
+                    %i.fas.fa-exclamation-circle.mr-2
+                    = t('public_votes.error_title')
+                  %p#error-text
+
+:javascript
+  document.addEventListener('DOMContentLoaded', function() {
+    const step1 = document.getElementById('step-1');
+    const step2 = document.getElementById('step-2');
+    const nextBtn = document.getElementById('next-to-voting');
+    const backBtn = document.getElementById('back-to-profile');
+    const submitBtn = document.getElementById('submit-vote');
+    const participantForm = document.getElementById('participant-form');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    
+    let participantData = {};
+
+    // Step 1 to Step 2
+    nextBtn.addEventListener('click', function() {
+      // Validate participant form
+      const form = participantForm;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Store participant data
+      const formData = new FormData(form);
+      participantData = {
+        age: formData.get('participant[age]'),
+        gender: formData.get('participant[gender]'),
+        disability: formData.get('participant[disability]') === '1',
+        minority: formData.get('participant[minority]') === '1',
+        poor_card: formData.get('participant[poor_card]') === '1',
+        youth: formData.get('participant[youth]') === '1'
+      };
+
+      // Move to step 2
+      step1.style.display = 'none';
+      step2.style.display = 'block';
+    });
+
+    // Step 2 back to Step 1
+    backBtn.addEventListener('click', function() {
+      step2.style.display = 'none';
+      step1.style.display = 'block';
+    });
+
+    // Submit vote
+    submitBtn.addEventListener('click', function() {
+      // Validate all indicators are rated
+      const ratingInputs = document.querySelectorAll('input[name^="indicators"]:checked');
+      const totalIndicators = document.querySelectorAll('.indicator-item').length;
+      
+      if (ratingInputs.length < totalIndicators) {
+        alert('#{t('public_votes.please_rate_all')}');
+        return;
+      }
+
+      // Collect voting data
+      const votingData = [];
+      ratingInputs.forEach(input => {
+        votingData.push({
+          indicator_uuid: input.dataset.indicatorUuid,
+          score: parseInt(input.value)
+        });
+      });
+
+      // Prepare submission data
+      const submissionData = {
+        participant: participantData,
+        voting_data: votingData
+      };
+
+      // Submit via AJAX
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm mr-2"></span>#{t('public_votes.submitting')}';
+
+      fetch('#{public_vote_path(@scorecard.uuid)}', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(submissionData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          step2.style.display = 'none';
+          successMessage.style.display = 'block';
+        } else {
+          errorMessage.style.display = 'block';
+          document.getElementById('error-text').textContent = data.error || '#{t('public_votes.submission_error')}';
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '#{t('public_votes.submit')} <i class="fas fa-check ml-2"></i>';
+        }
+      })
+      .catch(error => {
+        errorMessage.style.display = 'block';
+        document.getElementById('error-text').textContent = '#{t('public_votes.submission_error')}';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '#{t('public_votes.submit')} <i class="fas fa-check ml-2"></i>';
+      });
+    });
+  });
