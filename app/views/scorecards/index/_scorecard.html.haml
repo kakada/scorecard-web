@@ -9,6 +9,10 @@
         = "#{scorecard.facility.code}"
 
       = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'text-primary'
+
+      %small{class: scorecard.running_mode, 'data-toggle' => 'tooltip', title: "#{t("scorecard.running_mode")}: #{t("scorecard.running_mode_#{scorecard.running_mode}")}"}
+        = "(#{t("scorecard.running_mode_#{scorecard.running_mode}")})"
+
       = render 'shared/copy', value: scorecard_url(scorecard.uuid), label: '', tooltip_title: (t('shared.copied_testing_code') if test_mode?)
 
   %td= scorecard.year

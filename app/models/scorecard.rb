@@ -80,6 +80,11 @@ class Scorecard < ApplicationRecord
     indicator_based: 2
   }
 
+  enum running_mode: {
+    offline: 0,
+    online: 1
+  }
+
   # Constant
   STATUS_COMPLETED = "completed"
   STATUS_IN_REVIEW = "in_review"
@@ -146,6 +151,8 @@ class Scorecard < ApplicationRecord
 
   validates :submitter_id, presence: true, if: -> { submitted_at.present? }
   validates :completor_id, presence: true, if: -> { completed_at.present? }
+
+  validates :running_mode, presence: true, inclusion: { in: running_modes.keys }
 
   # Callback
   before_create :secure_uuid

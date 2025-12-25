@@ -21,6 +21,10 @@
   %label.col-sm-8.col-form-label= " : #{scorecard_location(@scorecard)}"
 
 .row
+  %label.col-sm-4.col-form-label= t("scorecard.running_mode")
+  %label.col-sm-8.col-form-label{class: @scorecard.running_mode}= " : #{I18n.t("scorecard.running_mode_#{@scorecard.running_mode}")}"
+
+.row
   %label.col-sm-4.col-form-label= t("scorecard.conducted_at")
   %label.col-sm-8.col-form-label= " : #{date_html(@scorecard.conducted_date)}".html_safe
 

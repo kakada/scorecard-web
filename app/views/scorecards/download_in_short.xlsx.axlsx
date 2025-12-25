@@ -4,7 +4,7 @@ wb = xlsx_package.workbook
 
 # Sheet: LocalNgo
 wb.add_worksheet(name: "Scorecards") do |sheet|
-  sheet.add_row ["No.", "Scorecard ID", "Status", "Province", "District", "Commune", "LocalNGO", "Scorecard Type", "Facility", "Name of service provider", "Start Date", "End Date"]
+  sheet.add_row ["No.", "Scorecard ID", "Status", "Province", "District", "Commune", "Running Mode", "LocalNGO", "Scorecard Type", "Facility", "Name of service provider", "Start Date", "End Date"]
 
   @scorecards.each_with_index do |scorecard, index|
     sheet.add_row [
@@ -14,6 +14,7 @@ wb.add_worksheet(name: "Scorecards") do |sheet|
       scorecard.province,
       scorecard.district,
       scorecard.commune,
+      t("scorecard.running_mode_#{scorecard.running_mode}"),
       scorecard.local_ngo_name,
       scorecard.t_scorecard_type,
       scorecard.facility_name,

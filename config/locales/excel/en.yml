@@ -9,6 +9,7 @@ en:
     completed_date: Completed Date
     status: Status
     scorecard_type: Scorecard Type (1=Self Assessment, 2=Community Scorecard)
+    running_mode: Running Mode
     implementer: Implementer
     total_participant: Total Participant
     number_of_participant_as_female: Female

@@ -7,6 +7,9 @@ en:
     unit_type: Unit Type
     facility: Facility
     scorecard_type: Scorecard Type
+    running_mode: Running Mode
+    running_mode_offline: Offline
+    running_mode_online: Online
     sector: Sector
     number_of_participant: Number of participant
     number_of_female: Number of female

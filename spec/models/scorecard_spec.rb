@@ -324,4 +324,38 @@ RSpec.describe Scorecard, type: :model do
       expect(subject.dataset_id).to be_nil
     end
   end
+
+  describe "#running_mode enum" do
+    it "defines offline mode" do
+      expect(Scorecard.running_modes[:offline]).to eq(0)
+    end
+
+    it "defines online mode" do
+      expect(Scorecard.running_modes[:online]).to eq(1)
+    end
+
+    context "with offline running_mode" do
+      let(:scorecard) { build(:scorecard, running_mode: :offline) }
+
+      it "is valid" do
+        expect(scorecard.valid?).to be_truthy
+      end
+
+      it "has offline running_mode" do
+        expect(scorecard.running_mode).to eq("offline")
+      end
+    end
+
+    context "with online running_mode" do
+      let(:scorecard) { build(:scorecard, running_mode: :online) }
+
+      it "is valid" do
+        expect(scorecard.valid?).to be_truthy
+      end
+
+      it "has online running_mode" do
+        expect(scorecard.running_mode).to eq("online")
+      end
+    end
+  end
 end

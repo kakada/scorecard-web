@@ -34,6 +34,7 @@ module Spreadsheets
       local_ngo = program.local_ngos.find_by(code: parse_string(row["local_ngo_code"]))
       facility = program.facilities.find_by(code: parse_string(row["facility_code"]))
       scorecard_type = parse_string(row["scorecard_type_en"]) if Scorecard.scorecard_types.keys.include? parse_string(row["scorecard_type_en"])
+      running_mode = Scorecard.running_modes.keys.include?(parse_string(row["running_mode_en"])) ? parse_string(row["running_mode_en"]) : "offline"
 
       @scorecards_attributes.push(
         {
@@ -41,6 +42,7 @@ module Spreadsheets
           unit_type_id: facility.try(:parent_id),
           facility_id: facility.try(:id),
           scorecard_type: scorecard_type,
+          running_mode: running_mode,
           local_ngo_id: local_ngo.try(:id),
           planned_start_date: parse_date(row["planned_start_date"]),
           planned_end_date: parse_date(row["planned_end_date"]),

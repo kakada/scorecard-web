@@ -51,7 +51,7 @@ class ScorecardBatchesController < ApplicationController
           scorecards_attributes: [
             :year, :unit_type_id, :facility_id, :scorecard_type,
             :province_id, :district_id, :commune_id, :dataset_id,
-            :primary_school_code, :local_ngo_id, :program_id,
+            :primary_school_code, :local_ngo_id, :program_id, :running_mode,
             :planned_start_date, :planned_end_date, :creator_id, :_destroy
           ]
         ).merge({
