@@ -1,0 +1,72 @@
+#content
+  .text-justify.public-content-width
+    - unless user_signed_in?
+      .d-flex.my-4.mx-auto.introduction
+        = link_to t('shared.back'), new_user_session_path
+
+    .row
+      .col-md-12
+        .text-center
+          = image_tag 'csc_logo.png', size: '120x120', alt: "CSC logo", class: "rounded-xl"
+
+    .d-flex.justify-content-center.mt-4.mb-3.mx-auto.introduction
+      %h3.font-weight-normal
+        = t('terms_and_conditions.title')
+
+    .mx-auto.introduction.pb-5
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.acceptance_title')
+        %p= t('terms_and_conditions.acceptance_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.description_title')
+        %p= t('terms_and_conditions.description_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.user_accounts_title')
+        %p= t('terms_and_conditions.user_accounts_text')
+        %ul
+          %li= t('terms_and_conditions.account_security')
+          %li= t('terms_and_conditions.account_information')
+          %li= t('terms_and_conditions.account_responsibility')
+
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.user_responsibilities_title')
+        %p= t('terms_and_conditions.user_responsibilities_text')
+        %ul
+          %li= t('terms_and_conditions.responsibility_lawful')
+          %li= t('terms_and_conditions.responsibility_accurate')
+          %li= t('terms_and_conditions.responsibility_confidential')
+          %li= t('terms_and_conditions.responsibility_unauthorized')
+
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.prohibited_uses_title')
+        %p= t('terms_and_conditions.prohibited_uses_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.intellectual_property_title')
+        %p= t('terms_and_conditions.intellectual_property_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.limitation_liability_title')
+        %p= t('terms_and_conditions.limitation_liability_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.modifications_title')
+        %p= t('terms_and_conditions.modifications_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.termination_title')
+        %p= t('terms_and_conditions.termination_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.governing_law_title')
+        %p= t('terms_and_conditions.governing_law_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('terms_and_conditions.contact_title')
+        %p
+          = t('terms_and_conditions.contact_text')
+          - support_email = ENV['CSC_SUPPORT_EMAIL']
+          - if support_email.present?
+            = mail_to support_email, support_email

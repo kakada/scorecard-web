@@ -1,0 +1,43 @@
+en:
+  privacy_policy:
+    title: "Privacy Policy"
+    introduction_title: "Introduction"
+    introduction_text: "This Privacy Policy describes how the Community Scorecard Digital application collects, uses, and protects your personal information. By using this application, you agree to the terms outlined in this policy."
+    
+    information_collection_title: "Information We Collect"
+    information_collection_text: "We collect the following types of information:"
+    personal_information: "Personal Information: Name, email address, contact details, and other information you provide during registration."
+    usage_data: "Usage Data: Information about how you use the application, including access times, pages viewed, and features used."
+    device_information: "Device Information: Device type, operating system, and unique device identifiers."
+    
+    use_of_information_title: "How We Use Your Information"
+    use_of_information_text: "We use the collected information for the following purposes:"
+    use_provide_services: "To provide and maintain the application services"
+    use_improve_services: "To improve and optimize the application functionality"
+    use_communication: "To communicate with you about updates, notifications, and support"
+    use_security: "To ensure the security and integrity of the application"
+    
+    data_sharing_title: "Data Sharing and Disclosure"
+    data_sharing_text: "We do not sell, trade, or rent your personal information to third parties. We may share information with project partners and governmental officials only when necessary for service improvement and with your explicit consent."
+    
+    data_security_title: "Data Security"
+    data_security_text: "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure."
+    
+    data_retention_title: "Data Retention"
+    data_retention_text: "We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy or as required by law."
+    
+    user_rights_title: "Your Rights"
+    user_rights_text: "You have the following rights regarding your personal information:"
+    right_access: "Access: You can request access to your personal information."
+    right_correction: "Correction: You can request correction of inaccurate information."
+    right_deletion: "Deletion: You can request deletion of your personal information."
+    right_data_portability: "Data Portability: You can request a copy of your data in a structured format."
+    
+    cookies_title: "Cookies and Tracking"
+    cookies_text: "We use cookies and similar tracking technologies to enhance user experience and analyze application usage. You can control cookie settings through your browser preferences."
+    
+    changes_title: "Changes to This Privacy Policy"
+    changes_text: "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the 'last updated' date."
+    
+    contact_title: "Contact Us"
+    contact_text: "If you have any questions about this Privacy Policy, please contact us at: "

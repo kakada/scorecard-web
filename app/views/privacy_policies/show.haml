@@ -1,0 +1,73 @@
+#content
+  .text-justify.public-content-width
+    - unless user_signed_in?
+      .d-flex.my-4.mx-auto.introduction
+        = link_to t('shared.back'), new_user_session_path
+
+    .row
+      .col-md-12
+        .text-center
+          = image_tag 'csc_logo.png', size: '120x120', alt: "CSC logo", class: "rounded-xl"
+
+    .d-flex.justify-content-center.mt-4.mb-3.mx-auto.introduction
+      %h3.font-weight-normal
+        = t('privacy_policy.title')
+
+    .mx-auto.introduction.pb-5
+      .mb-4
+        %h5.font-weight-bold= t('privacy_policy.introduction_title')
+        %p= t('privacy_policy.introduction_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('privacy_policy.information_collection_title')
+        %p= t('privacy_policy.information_collection_text')
+        %ul
+          %li= t('privacy_policy.personal_information')
+          %li= t('privacy_policy.usage_data')
+          %li= t('privacy_policy.device_information')
+
+      .mb-4
+        %h5.font-weight-bold= t('privacy_policy.use_of_information_title')
+        %p= t('privacy_policy.use_of_information_text')
+        %ul
+          %li= t('privacy_policy.use_provide_services')
+          %li= t('privacy_policy.use_improve_services')
+          %li= t('privacy_policy.use_communication')
+          %li= t('privacy_policy.use_security')
+
+      .mb-4
+        %h5.font-weight-bold= t('privacy_policy.data_sharing_title')
+        %p= t('privacy_policy.data_sharing_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('privacy_policy.data_security_title')
+        %p= t('privacy_policy.data_security_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('privacy_policy.data_retention_title')
+        %p= t('privacy_policy.data_retention_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('privacy_policy.user_rights_title')
+        %p= t('privacy_policy.user_rights_text')
+        %ul
+          %li= t('privacy_policy.right_access')
+          %li= t('privacy_policy.right_correction')
+          %li= t('privacy_policy.right_deletion')
+          %li= t('privacy_policy.right_data_portability')
+
+      .mb-4
+        %h5.font-weight-bold= t('privacy_policy.cookies_title')
+        %p= t('privacy_policy.cookies_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('privacy_policy.changes_title')
+        %p= t('privacy_policy.changes_text')
+
+      .mb-4
+        %h5.font-weight-bold= t('privacy_policy.contact_title')
+        %p
+          = t('privacy_policy.contact_text')
+          - support_email = ENV['CSC_SUPPORT_EMAIL']
+          - if support_email.present?
+            = mail_to support_email, support_email

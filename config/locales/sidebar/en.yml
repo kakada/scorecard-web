@@ -3,6 +3,8 @@ en:
     dashboard: Dashboard
     user: User
     about: About
+    privacy_policy: Privacy Policy
+    terms_and_conditions: Terms and Conditions
     logout: Logout
     version: Version
     program: Program
