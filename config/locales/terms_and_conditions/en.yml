@@ -1,0 +1,43 @@
+en:
+  terms_and_conditions:
+    title: "Terms and Conditions"
+    
+    acceptance_title: "Acceptance of Terms"
+    acceptance_text: "By accessing and using the Community Scorecard Digital application, you accept and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use the application."
+    
+    description_title: "Description of Service"
+    description_text: "The Community Scorecard Digital application is a platform developed to support meaningful civic engagement and improved social accountability by leveraging digital technologies. The application is funded by the European Union and implemented by CARE Cambodia, API, and InSTEDD iLab Southeast Asia under the ISAF-II project."
+    
+    user_accounts_title: "User Accounts"
+    user_accounts_text: "To use certain features of the application, you must register for an account. When registering, you agree to:"
+    account_security: "Maintain the security of your account credentials and accept responsibility for all activities under your account."
+    account_information: "Provide accurate, current, and complete information during registration."
+    account_responsibility: "Notify us immediately of any unauthorized use of your account."
+    
+    user_responsibilities_title: "User Responsibilities"
+    user_responsibilities_text: "As a user of the application, you agree to:"
+    responsibility_lawful: "Use the application only for lawful purposes and in accordance with these Terms and Conditions."
+    responsibility_accurate: "Provide accurate and truthful information when using scorecard features."
+    responsibility_confidential: "Respect the confidentiality of information shared by other users and stakeholders."
+    responsibility_unauthorized: "Not attempt to gain unauthorized access to any part of the application or its systems."
+    
+    prohibited_uses_title: "Prohibited Uses"
+    prohibited_uses_text: "You may not use the application to transmit harmful, offensive, or illegal content, or to interfere with the normal operation of the application. Any violation may result in immediate termination of your account."
+    
+    intellectual_property_title: "Intellectual Property Rights"
+    intellectual_property_text: "All content, features, and functionality of the application are owned by the project partners and are protected by international copyright, trademark, and other intellectual property laws."
+    
+    limitation_liability_title: "Limitation of Liability"
+    limitation_liability_text: "The application is provided 'as is' without warranties of any kind. We shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use the application."
+    
+    modifications_title: "Modifications to Terms"
+    modifications_text: "We reserve the right to modify these Terms and Conditions at any time. Changes will be effective immediately upon posting to the application. Your continued use of the application after changes constitutes acceptance of the modified terms."
+    
+    termination_title: "Termination"
+    termination_text: "We may terminate or suspend your account and access to the application at our discretion, without prior notice, for conduct that we believe violates these Terms and Conditions or is harmful to other users, us, or third parties."
+    
+    governing_law_title: "Governing Law"
+    governing_law_text: "These Terms and Conditions shall be governed by and construed in accordance with the laws of Cambodia, without regard to its conflict of law provisions."
+    
+    contact_title: "Contact Information"
+    contact_text: "If you have any questions about these Terms and Conditions, please contact us at: "

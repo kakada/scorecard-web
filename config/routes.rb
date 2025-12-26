@@ -113,6 +113,8 @@ Rails.application.routes.draw do
   end
 
   resource :about, only: [:show]
+  resource :privacy_policy, only: [:show]
+  resource :terms_and_conditions, only: [:show]
 
   resources :mobile_notifications, only: [:index, :new, :create]
 

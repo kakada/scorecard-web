@@ -42,6 +42,7 @@ RSpec.describe LocalNgo, type: :model do
     subject { build(:local_ngo, website_url: "htp://invalidurl") }
 
     it "validates website_url" do
+      I18n.locale = :en
       subject.valid?
 
       expect(subject).not_to be_valid
