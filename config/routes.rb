@@ -124,6 +124,10 @@ Rails.application.routes.draw do
 
   resources :removing_scorecards, only: [:index, :new, :create]
 
+  resources :jaaps, param: :uuid do
+    put :complete, on: :member
+  end
+
   resources :categories do
     resources :datasets do
       post :import, on: :collection

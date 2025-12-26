@@ -1,0 +1,47 @@
+.container-fluid
+  .row.justify-content-center
+    .col-lg-10
+      .card.shadow.mb-4
+        .card-header.py-3
+          %h6.m-0.font-weight-bold.text-primary
+            = @jaap.persisted? ? t('jaap.edit') : t('jaap.new')
+        .card-body
+          = simple_form_for @jaap, url: @jaap.persisted? ? jaap_path(@jaap.uuid) : jaaps_path do |f|
+            = f.input :title, label: t('jaap.title_label'), required: true, input_html: { class: 'form-control' }
+            = f.input :description, label: t('jaap.description'), as: :text, input_html: { class: 'form-control', rows: 3 }
+            
+            .form-group
+              = f.label :scorecard_id, t('jaap.scorecard_optional')
+              = f.input_field :scorecard_id, class: 'form-control', placeholder: t('jaap.scorecard_uuid_placeholder')
+
+            #jaap-spreadsheet-container
+              %h5.mt-4= t('jaap.action_plan_table')
+              
+              .table-responsive
+                %table#jaap-spreadsheet.table.table-bordered.table-hover
+                  %thead
+                    %tr#jaap-header-row
+                      %th.row-number #
+                  %tbody#jaap-body
+
+              .mt-3
+                %button.btn.btn-success.btn-sm{ type: 'button', id: 'add-row-btn' }
+                  %i.fas.fa-plus
+                  = t('jaap.add_row')
+
+            = f.hidden_field :field_definitions, id: 'field-definitions-input'
+            = f.hidden_field :rows_data, id: 'rows-data-input'
+
+            .actions.mt-4
+              = link_to t('shared.cancel'), jaaps_path, class: 'btn btn-secondary'
+              = f.submit t('shared.save'), class: 'btn btn-primary', id: 'save-jaap-btn'
+
+:javascript
+  document.addEventListener('turbolinks:load', function() {
+    if (document.getElementById('jaap-spreadsheet')) {
+      const fieldDefinitions = #{@jaap.field_definitions.to_json};
+      const rowsData = #{@jaap.rows_data.to_json};
+      const jaapSpreadsheet = new JaapSpreadsheet('jaap-spreadsheet', fieldDefinitions, rowsData);
+      jaapSpreadsheet.init();
+    }
+  });

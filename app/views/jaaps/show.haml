@@ -1,0 +1,88 @@
+.container-fluid
+  .d-md-flex.align-items-center.justify-content-between.mb-4
+    %h1.h3.mb-0.text-gray-800= @jaap.title
+    .btn-group
+      - if policy(@jaap).update? && !@jaap.completed?
+        = link_to edit_jaap_path(@jaap.uuid), class: "btn btn-warning" do
+          %i.fas.fa-pen
+          = t('shared.edit')
+      
+      - if policy(@jaap).complete? && !@jaap.completed?
+        = link_to complete_jaap_path(@jaap.uuid), method: :put, data: { confirm: t('jaap.confirm_complete') }, class: "btn btn-success" do
+          %i.fas.fa-check
+          = t('jaap.mark_complete')
+      
+      - if policy(@jaap).destroy?
+        = link_to jaap_path(@jaap.uuid), method: :delete, data: { confirm: t('shared.are_you_sure') }, class: "btn btn-danger" do
+          %i.fas.fa-trash-alt
+          = t('shared.delete')
+
+  .row
+    .col-lg-12
+      .card.shadow.mb-4
+        .card-header.py-3
+          %h6.m-0.font-weight-bold.text-primary= t('jaap.details')
+        .card-body
+          .row.mb-3
+            .col-md-6
+              %strong= t('jaap.title_label') + ':'
+              %p= @jaap.title
+            .col-md-6
+              %strong= t('jaap.status') + ':'
+              - if @jaap.completed?
+                %span.badge.badge-success= t('jaap.completed')
+              - else
+                %span.badge.badge-warning= t('jaap.in_progress')
+
+          - if @jaap.description.present?
+            .row.mb-3
+              .col-md-12
+                %strong= t('jaap.description') + ':'
+                %p= @jaap.description
+
+          .row.mb-3
+            .col-md-6
+              %strong= t('jaap.program') + ':'
+              %p= @jaap.program.name
+            .col-md-6
+              %strong= t('jaap.created_by') + ':'
+              %p= @jaap.user.name
+
+          - if @jaap.scorecard.present?
+            .row.mb-3
+              .col-md-6
+                %strong= t('jaap.scorecard') + ':'
+                %p= link_to @jaap.scorecard.uuid, scorecard_path(@jaap.scorecard.uuid)
+
+          .row.mb-3
+            .col-md-6
+              %strong= t('shared.created_at') + ':'
+              %p= l(@jaap.created_at, format: :long)
+            .col-md-6
+              %strong= t('shared.updated_at') + ':'
+              %p= l(@jaap.updated_at, format: :long)
+
+  .row
+    .col-lg-12
+      .card.shadow.mb-4
+        .card-header.py-3
+          %h6.m-0.font-weight-bold.text-primary= t('jaap.action_plan_data')
+        .card-body
+          .table-responsive
+            %table.table.table-bordered.table-hover
+              %thead
+                %tr
+                  %th #
+                  - @jaap.field_definitions.each do |field|
+                    %th= field['label']
+              %tbody
+                - if @jaap.rows_data.present? && @jaap.rows_data.is_a?(Array)
+                  - @jaap.rows_data.each_with_index do |row, index|
+                    %tr
+                      %td= index + 1
+                      - @jaap.field_definitions.each do |field|
+                        %td= row[field['key']]
+                - else
+                  %tr
+                    %td{ colspan: @jaap.field_definitions.length + 1 }
+                      .text-center.text-muted= t('jaap.no_data')

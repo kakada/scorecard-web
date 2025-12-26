@@ -5,6 +5,17 @@
 
 The scorecard-web is a community scorecard web application and backend API for [scorecard_mobile](https://github.com/ilabsea/scorecard_mobile) Application.
 
+## Features
+
+### JAAP - Join Accountable Action Plan
+Dynamic action plan feature with Excel-like spreadsheet interface for managing community action plans. See [JAAP Documentation](docs/JAAP_FEATURE.md) for details.
+
+- **Dynamic Fields**: Configurable form fields
+- **Excel-like UI**: Spreadsheet interface with keyboard navigation
+- **Inline Editing**: Edit cells directly with validation
+- **Flexible Data**: Support for text, textarea, number, date, and select fields
+- **Row Management**: Add/remove rows dynamically
+
 ## Development Setup
 ### System dependencies
 

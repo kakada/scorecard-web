@@ -29,6 +29,7 @@ en:
     import_from_file: Import from Excel(.xlsx)
     download_sample_form: Download sample Excel(.xlsx)
     are_you_sure_to_delete: Are you sure to delete it?
+    are_you_sure: Are you sure?
     confirm_logout: Are you sure you want to logout?
     name: Name
     close: Close
