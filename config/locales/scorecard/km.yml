@@ -7,6 +7,9 @@ km:
     unit_type: ប្រភេទវិស័យ
     facility: ប្រភេទសេវា
     scorecard_type: ប្រភេទប័ណ្ណដាក់ពិន្ទុ
+    running_mode: របៀបអនុវត្ត
+    running_mode_offline: Offline
+    running_mode_online: Online
     sector: វិស័យ
     number_of_participant: ចំនួនអ្នកចូលរួម
     number_of_female: ចំនួនអ្នកចូលរួមស្រី

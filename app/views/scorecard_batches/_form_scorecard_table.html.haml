@@ -10,6 +10,7 @@
         %th= t('scorecard.district')
         %th= t('scorecard.commune')
         %th= t('scorecard.institution_name')
+        %th= t('scorecard.running_mode')
         %th= t('scorecard.local_ngo')
         %th= t('scorecard.planned_start_date')
         %th= t('scorecard.planned_end_date')
@@ -35,6 +36,8 @@
             = scorecard.commune
           %td
             = scorecard.dataset_name
+          %td{class: scorecard.running_mode}
+            = t("scorecard.running_mode_#{scorecard.running_mode}")
           %td
             = scorecard.local_ngo_name
           %td

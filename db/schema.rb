@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_12_10_080500) do
+ActiveRecord::Schema[7.0].define(version: 2025_12_25_065245) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -601,9 +601,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_12_10_080500) do
     t.datetime "running_date", precision: nil
     t.datetime "deleted_at", precision: nil
     t.boolean "published", default: false
+    t.string "device_type"
     t.datetime "submitted_at", precision: nil
     t.datetime "completed_at", precision: nil
-    t.string "device_type"
     t.string "device_token"
     t.integer "completor_id"
     t.integer "proposed_indicator_method", default: 1
@@ -615,6 +615,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_12_10_080500) do
     t.uuid "removing_scorecard_batch_id"
     t.integer "runner_id"
     t.integer "app_version"
+    t.integer "running_mode", default: 0
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end

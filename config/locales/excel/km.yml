@@ -9,6 +9,7 @@ km:
     completed_date: កាលបរិច្ឆេទអនុវត្តរួចរាល់
     status: ស្ថានភាព
     scorecard_type: ប្រភេទប័ណ្ណដាក់ពិន្ទុ(1=ប្រជាពលរដ្ឋ, 2=អង្ភភាពផ្តល់សេវា)
+    running_mode: របៀបអនុវត្ត
     implementer: អ្នកអនុវត្ត
     total_participant: អ្នកចូលរួមសរុប
     number_of_participant_as_female: ស្រី

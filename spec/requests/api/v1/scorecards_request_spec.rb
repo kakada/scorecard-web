@@ -28,6 +28,12 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
         expect(json_response["dataset"]["category_name_en"]).to eq(dataset.category.name_en)
         expect(json_response["dataset"]["category_name_km"]).to eq(dataset.category.name_km)
       end
+
+      it "includes running_mode in the response" do
+        json_response = JSON.parse(response.body)
+
+        expect(json_response).to have_key("running_mode")
+      end
     end
 
     context "different local ngo" do
