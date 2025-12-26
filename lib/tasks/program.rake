@@ -129,6 +129,16 @@ namespace :program do
     abort "Unable to find the program: #{args[:program_name]}"
   end
 
+  desc "seed sandbox program and its dependency"
+  task seed_sandbox: :environment do |task, args|
+    require "samples/sandbox_seeder"
+
+    ::Samples::SandboxSeeder.new.load
+    puts "✅  Seed sandbox program successfully!"
+  rescue => e
+    abort "Failed to seed sandbox program: #{e.message}"
+  end
+
   private
     def add_dashboard_and_uses(program)
       program.create_dashboard

@@ -24,5 +24,8 @@ require_relative "facility"
 require_relative "language"
 require_relative "rating_scale"
 
+# Load sandbox program
+require_relative "sandbox_seeder"
+
 # For scorecard
 require_relative "scorecard"

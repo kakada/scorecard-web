@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_12_25_065245) do
+ActiveRecord::Schema[7.0].define(version: 2025_12_26_015930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -451,6 +451,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_12_25_065245) do
     t.text "dashboard_user_emails", default: [], array: true
     t.string "dashboard_user_roles", default: [], array: true
     t.string "uuid"
+    t.boolean "sandbox", default: false, null: false
   end
 
   create_table "raised_indicators", force: :cascade do |t|
