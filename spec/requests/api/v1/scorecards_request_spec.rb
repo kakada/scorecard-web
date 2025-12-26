@@ -126,6 +126,22 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
         expect(scorecard.reload.submit_locked?).to be_truthy
       end
     end
+
+    context "program is sandbox" do
+      before do
+        user.program.update!(sandbox: true)
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
+      end
+
+      it { expect(response).to have_http_status(:ok) }
+
+      it "does not update attributes or lock submission" do
+        sc = scorecard.reload
+        expect(sc.number_of_participant).to eq(3)   # unchanged
+        expect(sc.app_version).to be_nil            # unchanged
+        expect(sc.submit_locked?).to be_falsey
+      end
+    end
   end
 
   describe "PUT #update, suggested_actions_attributes" do

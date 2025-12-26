@@ -27,6 +27,8 @@ module Api
       def update
         authorize @scorecard, :submit?
 
+        return render(json: @scorecard, status: :ok) if @scorecard.program.sandbox?
+
         if @scorecard.update(scorecard_params)
           @scorecard.lock_submit!
           render json: @scorecard, status: :ok
