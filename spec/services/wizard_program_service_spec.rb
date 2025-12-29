@@ -6,7 +6,8 @@ RSpec.describe WizardProgramService do
   describe "#clone_from_program" do
     let!(:source_program)  { create(:program, :allow_callback) }
     let!(:pdf_template) { create(:pdf_template, program: source_program) }
-    let!(:facility) { create(:facility, :with_parent, :with_indicators, program: source_program) }
+    let!(:unit) { create(:facility, program: source_program) }
+    let!(:facility) { create(:facility, :with_indicators, program_id: source_program.id, parent_id: unit.id) }
 
     let(:target_program)   { create(:program, name: "Target Program", shortcut_name: "TARGET") }
     let(:target_last_facility) { target_program.facilities.where.not(parent_id: nil).last }
