@@ -26,6 +26,14 @@ class ScorecardProgress < ApplicationRecord
     downloaded: 1,
     renewed: 4,
     running: 2,
+
+    # Additional statuses for online mode (open voting and close voting):
+    # - When the user submits the first step of an online scorecard,
+    #   create a scorecard progress record with status `open_voting`, and scorecard will generate qr_code for voting url.
+    # - After voting is closed, create a scorecard progress status to `close_voting`.
+    open_voting: 6,
+    close_voting: 7,
+
     in_review: 3,
     completed: 5
   }
