@@ -18,6 +18,11 @@ Rails.application.routes.draw do
   end
 
   resources :activity_logs, only: :index
+
+  # TODO: the function of this route will implemented later
+  # Public voting route (no authentication required)
+  get "/scorecards/:scorecard_uuid/vote", to: "public_votes#show", as: :public_vote
+
   resources :scorecards, param: :uuid do
     put :complete, on: :member
 
@@ -150,6 +155,7 @@ Rails.application.routes.draw do
       resources :scorecards, only: [:show, :update] do
         resources :custom_indicators, only: [:create]
         resources :scorecard_references, only: [:create]
+        resource :qr_code, only: [:show], controller: "scorecards/qr_codes"
       end
 
       resources :scorecard_progresses, only: [:create]

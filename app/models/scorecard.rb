@@ -91,6 +91,9 @@ class Scorecard < ApplicationRecord
   STATUS_RUNNING = "running"
   SCORECARD_TYPES = scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
 
+  # Uploader
+  mount_uploader :qr_code, QrCodeUploader
+
   # Association
   belongs_to :unit_type, class_name: "Facility"
   belongs_to :facility

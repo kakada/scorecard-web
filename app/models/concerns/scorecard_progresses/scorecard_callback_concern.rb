@@ -7,6 +7,7 @@ module ScorecardProgresses::ScorecardCallbackConcern
     after_save :set_scorecard_progress
     after_save :update_counter_cache, if: :downloaded?
     after_destroy :update_counter_cache, if: :downloaded?
+    after_save :generate_qr_code, if: :open_voting?
 
     private
       def update_counter_cache
@@ -29,6 +30,10 @@ module ScorecardProgresses::ScorecardCallbackConcern
             "running_date" => conducted_at
           }
         }
+      end
+
+      def generate_qr_code
+        Scorecards::OpenVotingService.new(scorecard).call
       end
   end
 end
