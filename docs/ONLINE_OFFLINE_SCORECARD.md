@@ -12,6 +12,7 @@ This document explains the updated behavior for submitting scorecards in offline
 ## API Endpoints
 - Update scorecard (two-step online or single-step offline): `PUT /api/v1/scorecards/:uuid`
 - Create scorecard progress (open/close voting): `POST /api/v1/scorecard_progresses`
+- Get QR code for voting: `GET /api/v1/scorecards/:uuid/qr_code`
 
 ## Controller Logic
 - File: app/controllers/api/v1/scorecards_controller.rb
@@ -92,6 +93,7 @@ Authorization: Token <user-token>
 Effect:
 - Creates a `ScorecardProgress`.
 - Advances `scorecard.progress` to `open_voting`.
+- Automatically generates a QR code for the scorecard voting URL.
 
 ```
 POST /api/v1/scorecard_progresses
@@ -103,6 +105,40 @@ Authorization: Token <user-token>
 Effect:
 - Advances `scorecard.progress` to `close_voting`.
 
+## QR Code for Voting
+- File: app/services/scorecards/open_voting_service.rb
+- Endpoint: `GET /api/v1/scorecards/:uuid/qr_code`
+
+When a scorecard progress is created with status `open_voting`, the system automatically generates a QR code containing the voting URL: `/scorecards/:uuid/vote`
+
+### Get QR Code
+Request:
+```
+GET /api/v1/scorecards/:uuid/qr_code
+Content-Type: application/json
+Authorization: Token <user-token>
+```
+
+Response (when QR code exists):
+```
+{
+  "qr_code_url": "/uploads/scorecard/qr_code/123/qr_code.png",
+  "voting_url": "/scorecards/:uuid/vote"
+}
+```
+
+Response (when QR code does not exist):
+```
+{
+  "error": "QR code not available"
+}
+```
+
+Effect:
+- Returns the URL to download the QR code image
+- Returns the voting URL encoded in the QR code
+- Users can scan the QR code to access the voting form
+
 ## Sandbox Mode
 - When `scorecard.program.sandbox?` is true, `PUT /api/v1/scorecards/:uuid` responds 200 but does not update attributes or lock the scorecard.
 
@@ -110,8 +146,12 @@ Effect:
 - Request specs: spec/requests/api/v1/scorecards_request_spec.rb
   - Verifies draft vs final submits and locking behavior.
   - Verifies `indicator_activities_attributes` persistence and counts.
+  - Verifies QR code endpoint returns correct data or 404 when not available.
 - Model specs: spec/models/scorecard_progress_spec.rb
   - Verifies `open_voting` and `close_voting` progress transitions.
+  - Verifies QR code generation when status is `open_voting`.
+- Service specs: spec/services/scorecards/open_voting_service_spec.rb
+  - Verifies QR code generation logic and prevents regeneration.
 
 ## Compatibility Notes
 - Legacy fields (`strength`, `weakness`, `suggested_action`) and `suggested_actions_attributes` are still permitted to support older mobile app versions; they map to `indicator_activities` internally.
@@ -121,3 +161,4 @@ Effect:
 - Online: two-step submit with lock on second step.
 - Offline: single-step submit with immediate lock.
 - Progress: `open_voting` and `close_voting` statuses move the scorecard through the online workflow.
+- QR Code: automatically generated when status is `open_voting`, contains voting URL for easy scanning.
