@@ -45,6 +45,14 @@ module ScorecardsStatusesHelper
     wrap_in_tooltip(title, scorecard.status, "badge-success")
   end
 
+  def status_open_voting_html(scorecard)
+    wrap_in_tooltip(title, scorecard.status, "badge-primary")
+  end
+
+  def status_close_voting_html(scorecard)
+    wrap_in_tooltip(title, scorecard.status, "badge-light")
+  end
+
   def status_downloaded_html(scorecard)
     scorecard_progress = scorecard.scorecard_progresses.select { |sp| sp.status == "downloaded" }.last
 

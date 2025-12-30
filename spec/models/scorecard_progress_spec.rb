@@ -17,7 +17,7 @@ require "rails_helper"
 
 RSpec.describe ScorecardProgress, type: :model do
   it { is_expected.to belong_to(:scorecard).with_foreign_key(:scorecard_uuid) }
-  it { is_expected.to define_enum_for(:status).with_values({ downloaded: 1, running: 2, renewed: 4, in_review: 3, completed: 5, open_voting: 6, close_voting: 7 }) }
+  it { is_expected.to define_enum_for(:status).with_values({ downloaded: 1, running: 2, renewed: 3, open_voting: 4, close_voting: 5, in_review: 6, completed: 7 }) }
 
   describe "#after_save: set_scorecard_progress" do
     context "scorecard progress is smaller than scorecard_progress status" do
