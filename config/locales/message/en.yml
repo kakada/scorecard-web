@@ -13,6 +13,8 @@ en:
     scorecard_renewed: Scorecard is renewed
     scorecard_in_review: Scorecard is in review
     scorecard_completed: Scorecard is completed
+    scorecard_open_voting: Scorecard voting is opened (Online Voting)
+    scorecard_close_voting: Scorecard voting is closed (Online Voting)
     notify_to: Notify to
     telegram_notification_inactive: Telegram notification is inactive
     no_chat_group_selected: No chat group is selected

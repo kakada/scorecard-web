@@ -117,12 +117,35 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       end
     end
 
-    context "update and lock_access" do
+    context "update without indicator activities does not lock" do
       before {
         put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: params }, headers: headers
       }
 
-      it "lock_submit" do
+      it "does not lock submission" do
+        expect(scorecard.reload.submit_locked?).to be_falsey
+      end
+    end
+
+    context "update with indicator activities locks submission" do
+      let(:final_submit_params) do
+        {
+          voting_indicators_attributes: [
+            {
+              uuid: "vi-123", scorecard_uuid: scorecard.uuid,
+              indicator_activities_attributes: [
+                { voting_indicator_uuid: "vi-123", scorecard_uuid: scorecard.uuid, content: "activity 1", selected: true, type: "IndicatorActivity" }
+              ]
+            }
+          ]
+        }
+      end
+
+      before {
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: final_submit_params }, headers: headers
+      }
+
+      it "locks submission" do
         expect(scorecard.reload.submit_locked?).to be_truthy
       end
     end
@@ -144,7 +167,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     end
   end
 
-  describe "PUT #update, suggested_actions_attributes" do
+  describe "PUT #update, indicator_activities_attributes" do
     let!(:user)       { create(:user, :lngo) }
     let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
     let!(:indicator)   { facility.indicators.first }
@@ -152,9 +175,9 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { voting_indicators_attributes: [ {
                           uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
-                          suggested_actions_attributes: [
-                            { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action1", selected: true },
-                            { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action2", selected: false },
+                          indicator_activities_attributes: [
+                            { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action1", selected: true, type: "SuggestedIndicatorActivity" },
+                            { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action2", selected: false, type: "SuggestedIndicatorActivity" },
                           ]
                         }] }
                       }
@@ -168,9 +191,66 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(response.content_type).to eq("application/json; charset=utf-8") }
       it { expect(response).to have_http_status(:ok) }
       it { expect(voting_indicators.length).to eq(1) }
-      it { expect(voting_indicators.first.suggested_actions.length).to eq(2) }
-      it { expect(voting_indicators.first.suggested_actions.selecteds.length).to eq(1) }
+      it { expect(voting_indicators.first.suggested_indicator_activities.length).to eq(2) }
+      it { expect(voting_indicators.first.suggested_indicator_activities.select { |act| act.selected? }.length).to eq(1) }
       it { expect(voting_indicators.first.display_order).to eq(1) }
+    end
+  end
+
+  describe "PUT #update, online mode two-step" do
+    let!(:user)       { create(:user, :lngo) }
+    let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
+    let!(:indicator)  { facility.indicators.first }
+    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, local_ngo_id: user.local_ngo_id, facility: facility) }
+    let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+
+    context "first submit without activities (draft)" do
+      let(:first_params) do
+        {
+          number_of_participant: 10,
+          app_version: 15013,
+          voting_indicators_attributes: [
+            { uuid: "vi-001", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1 }
+          ]
+        }
+      end
+
+      before {
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: first_params }, headers: headers
+      }
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(scorecard.reload.submit_locked?).to be_falsey }
+      it { expect(scorecard.reload.number_of_participant).to eq(10) }
+      it { expect(scorecard.reload.voting_indicators.map(&:uuid)).to include("vi-001") }
+    end
+
+    context "second submit with activities (final)" do
+      let(:second_params) do
+        {
+          voting_indicators_attributes: [
+            {
+              uuid: "vi-001",
+              indicator_activities_attributes: [
+                { voting_indicator_uuid: "vi-001", scorecard_uuid: scorecard.uuid, content: "activity 1", selected: true, type: "SuggestedIndicatorActivity" }
+              ]
+            }
+          ]
+        }
+      end
+
+      before do
+        # Ensure the first step has created the voting indicator
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: {
+          voting_indicators_attributes: [ { uuid: "vi-001", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1 } ]
+        } }, headers: headers
+
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: second_params }, headers: headers
+      end
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(scorecard.reload.submit_locked?).to be_truthy }
+      it { expect(scorecard.reload.voting_indicators.first.suggested_indicator_activities.length).to eq(1) }
     end
   end
 

@@ -87,6 +87,8 @@ en:
     renewed: Renewed
     in_review: In review
     completed: Completed
+    open_voting: Open voting
+    close_voting: Close voting
     references: References
     implemented_date: Implemented date
     submitted_date: Submitted date

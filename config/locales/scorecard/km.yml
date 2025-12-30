@@ -87,6 +87,8 @@ km:
     renewed: ស្នើឡើងវិញ
     in_review: ដាក់ជូនត្រួតពិនិត្យ
     completed: អនុវត្តរួចរាល់
+    open_voting: បើកការដាក់ពិន្ទុ
+    close_voting: បិទការដាក់ពិន្ទុ
     references: ឯកសារយោង
     implemented_date: កាលបរិច្ឆេទអនុវត្ត
     submitted_date: កាលបរិច្ឆេទទទួលបានសំណើរ

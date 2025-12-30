@@ -30,7 +30,7 @@ module Api
         return render(json: @scorecard, status: :ok) if @scorecard.program.sandbox?
 
         if @scorecard.update(scorecard_params)
-          @scorecard.lock_submit!
+          @scorecard.lock_submit! if final_submit?
           render json: @scorecard, status: :ok
         else
           render json: { errors: @scorecard.errors }, status: :unprocessable_entity
@@ -58,24 +58,29 @@ module Api
             voting_indicators_attributes: [
               :uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid,
               :median, :scorecard_uuid, :display_order,
-              # Todo remove after device is no longer installed mobile app 1.4.2 (require report from play store)
-              strength: [], weakness: [], suggested_action: [],
-              suggested_actions_attributes: [ :voting_indicator_uuid, :scorecard_uuid, :content, :selected ],
-
-              indicator_activities_attributes: [ :uuid, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]
+              indicator_activities_attributes: [ :id, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]
             ],
             ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ]
           ).merge(submitter_id: current_user.id, runner_id: current_user.id)
 
-          # Todo remove after device is no longer installed mobile app 1.4.2 (require report from play store)
-          (param[:raised_indicators_attributes] || []).each do |ri|
-            ri[:indicatorable_type] = "Indicators::CustomIndicator" if ri[:indicatorable_type] == "CustomIndicator"
-          end
-          (param[:voting_indicators_attributes] || []).each do |ri|
-            ri[:indicatorable_type] = "Indicators::CustomIndicator" if ri[:indicatorable_type] == "CustomIndicator"
-          end
-
           param
+        end
+
+        # Scorecards support both offline and online running modes.
+        #
+        # Offline mode:
+        # - Scorecard is submitted with indicator activities(SWOT table) in a single step
+        # - The scorecard is saved and immediately locked (previous behavior)
+        #
+        # Online mode:
+        # - First submit: scorecard is saved without indicator activities (draft, not locked)
+        # - Second submit: scorecard is submitted with indicator activities (finalized and locked)
+        #
+        # A scorecard is considered a final submission when indicator activities are present.
+        def final_submit?
+          scorecard_params
+            .dig(:voting_indicators_attributes)
+            &.any? { |vi| vi[:indicator_activities_attributes].present? }
         end
     end
   end
