@@ -10,16 +10,16 @@ RSpec.describe PublicVotesController, type: :controller do
   let(:indicator2) { create(:indicator, categorizable: facility) }
   let(:scorecard) { create(:scorecard, program: program, facility: facility, creator: user, progress: voting_progress) }
 
-  describe "GET #show" do
+  describe "GET #new" do
     context "when voting is open" do
       let(:voting_progress) { :open_voting }
 
       it "renders the voting form" do
-        get :show, params: { scorecard_uuid: scorecard.uuid }
+        get :new, params: { scorecard_uuid: scorecard.uuid }
         
         expect(response).to have_http_status(:success)
         expect(assigns(:scorecard)).to eq(scorecard)
-        expect(assigns(:participant)).to be_a_new(Participant)
+        expect(assigns(:form)).to be_a(PublicVoteForm)
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe PublicVotesController, type: :controller do
       let(:voting_progress) { :running }
 
       it "shows voting closed message" do
-        get :show, params: { scorecard_uuid: scorecard.uuid }
+        get :new, params: { scorecard_uuid: scorecard.uuid }
         
         expect(response).to have_http_status(:success)
         expect(assigns(:voting_closed)).to be true
@@ -36,7 +36,7 @@ RSpec.describe PublicVotesController, type: :controller do
 
     context "when scorecard does not exist" do
       it "returns not found" do
-        get :show, params: { scorecard_uuid: "invalid-uuid" }
+        get :new, params: { scorecard_uuid: "invalid-uuid" }
         
         expect(response).to have_http_status(:not_found)
       end

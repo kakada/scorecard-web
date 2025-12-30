@@ -15,6 +15,12 @@ class PublicVoteForm
 
   validate :validate_all_indicators_rated
 
+  # Load voting indicators from the form object itself
+  def voting_indicators
+    return [] unless scorecard.present?
+    @voting_indicators ||= scorecard.voting_indicators.includes(:indicator).order(:display_order)
+  end
+
   def save
     return false unless valid?
     # Persist participant and ratings according to domain rules.
@@ -25,7 +31,7 @@ class PublicVoteForm
   private
     def validate_all_indicators_rated
       return if scorecard.blank?
-      required = scorecard.voting_indicators.pluck(:uuid)
+      required = voting_indicators.pluck(:uuid)
       present = (ratings || {}).keys.map(&:to_s)
       missing = required - present
       if missing.any?

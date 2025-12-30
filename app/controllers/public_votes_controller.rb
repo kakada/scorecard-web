@@ -3,18 +3,18 @@
 class PublicVotesController < ApplicationController
   skip_before_action :authenticate_user!
   before_action :set_scorecard
-  before_action :check_voting_open, except: [:show]
+  before_action :check_voting_open, except: [:new]
 
   layout "layouts/footer_less"
 
-  def show
+  def new
     unless @scorecard.open_voting?
       @voting_closed = true
       return
     end
 
     @form = PublicVoteForm.new(scorecard: @scorecard)
-    @indicators = @scorecard.voting_indicators.includes(:indicator).order(:display_order)
+    @indicators = @form.voting_indicators
   end
 
   def create
