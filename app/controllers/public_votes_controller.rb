@@ -14,7 +14,6 @@ class PublicVotesController < ApplicationController
     end
 
     @form = PublicVoteForm.new(scorecard: @scorecard)
-    @indicators = @form.voting_indicators
   end
 
   def create

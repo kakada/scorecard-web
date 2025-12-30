@@ -75,7 +75,7 @@
                   %h4.section-title.mb-4= t('public_votes.rate_indicators_title')
 
                   #indicators-container
-                    - @indicators.each_with_index do |voting_indicator, index|
+                    - @form.voting_indicators.each_with_index do |voting_indicator, index|
                       .indicator-item.mb-4
                         .indicator-header.d-flex.align-items-start.mb-3
                           .indicator-number.mr-3

@@ -13,10 +13,12 @@ RSpec.describe PublicVoteForm, type: :model do
   let(:voting_indicator2) { create(:voting_indicator, scorecard: scorecard, indicator: indicator2, display_order: 2) }
 
   describe "#voting_indicators" do
-    it "loads voting indicators from the scorecard" do
+    before do
       voting_indicator1
       voting_indicator2
-      
+    end
+
+    it "loads voting indicators from the scorecard" do
       form = PublicVoteForm.new(scorecard: scorecard)
       indicators = form.voting_indicators
       
@@ -26,9 +28,6 @@ RSpec.describe PublicVoteForm, type: :model do
     end
 
     it "orders indicators by display_order" do
-      voting_indicator2
-      voting_indicator1
-      
       form = PublicVoteForm.new(scorecard: scorecard)
       indicators = form.voting_indicators
       
@@ -37,8 +36,6 @@ RSpec.describe PublicVoteForm, type: :model do
     end
 
     it "includes the indicator association" do
-      voting_indicator1
-      
       form = PublicVoteForm.new(scorecard: scorecard)
       
       # This should not trigger an additional query
@@ -54,6 +51,11 @@ RSpec.describe PublicVoteForm, type: :model do
   end
 
   describe "validations" do
+    before do
+      voting_indicator1
+      voting_indicator2
+    end
+
     let(:form) do
       PublicVoteForm.new(
         scorecard: scorecard,
@@ -65,8 +67,6 @@ RSpec.describe PublicVoteForm, type: :model do
 
     context "when all indicators are rated" do
       let(:ratings) do
-        voting_indicator1
-        voting_indicator2
         {
           voting_indicator1.uuid => 4,
           voting_indicator2.uuid => 5
@@ -80,8 +80,6 @@ RSpec.describe PublicVoteForm, type: :model do
 
     context "when some indicators are missing ratings" do
       let(:ratings) do
-        voting_indicator1
-        voting_indicator2
         {
           voting_indicator1.uuid => 4
         }
@@ -97,9 +95,6 @@ RSpec.describe PublicVoteForm, type: :model do
       let(:ratings) { nil }
 
       it "is invalid" do
-        voting_indicator1
-        voting_indicator2
-        
         expect(form).not_to be_valid
         expect(form.errors[:ratings]).to include("Please rate all indicators")
       end
