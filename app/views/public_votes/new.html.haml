@@ -1,0 +1,105 @@
+.public-vote-container
+  .container.my-5
+    .row.justify-content-center
+      .col-md-10
+        .card.shadow-sm
+          = render 'public_votes/header'
+
+          .card-body
+            = simple_form_for @form, url: public_vote_path(@scorecard.uuid), id: "voting-form" do |f|
+              / Participant Profile Section
+              .participant-profile-section.mb-5
+                %h4.section-title.mb-4= t('public_votes.participant_profile')
+
+                .form-group.mb-3
+                  = f.input :age, as: :integer, input_html: { min: 1, max: 100, placeholder: "0" }, label: t('public_votes.age')
+
+                .form-group.mb-3
+                  = f.label :gender, t('public_votes.gender'), class: "form-label", required: true
+
+                  .gender-options.d-flex.gap-3
+                    - Participant::GENDERS.each do |gender|
+                      %label.gender-option
+                        = radio_button_tag 'public_vote_form[gender]', gender, f.object.gender == gender, required: true, class: "gender-radio"
+                        .gender-box
+                          .gender-icon
+                            - if gender == 'female'
+                              %i.fas.fa-venus
+                            - elsif gender == 'male'
+                              %i.fas.fa-mars
+                            - else
+                              %i.fas.fa-genderless
+                          .gender-label= t("public_votes.gender_#{gender}")
+
+                  - if f.object.errors[:gender].present?
+                    %small.text-danger.mt-2= f.object.errors[:gender].join(", ")
+
+                .form-group.mb-3
+                  -# Profile Type Checkboxes
+                  %label.form-label.d-block= t('public_votes.participant_type')
+                  .participant-type-options.d-flex.flex-wrap.gap-3
+                    %label.type-option
+                      = check_box_tag 'public_vote_form[disability]', '1', false, class: "type-checkbox"
+                      .type-box
+                        .type-icon
+                          %i.fas.fa-wheelchair
+                        .type-label= t('public_votes.disability')
+
+                    %label.type-option
+                      = check_box_tag 'public_vote_form[minority]', '1', false, class: "type-checkbox"
+                      .type-box
+                        .type-icon
+                          %i.fas.fa-users
+                        .type-label= t('public_votes.minority')
+
+                    %label.type-option
+                      = check_box_tag 'public_vote_form[poor_card]', '1', false, class: "type-checkbox"
+                      .type-box
+                        .type-icon
+                          %i.fas.fa-id-card
+                        .type-label= t('public_votes.poor_card')
+
+              %hr.my-5
+
+              -# Voting Indicators Section
+              .voting-section
+                %h4.section-title.mb-4= t('public_votes.rate_indicators_title')
+
+                #indicators-container
+                - @form.indicators.each_with_index do |voting_indicator, index|
+                  .indicator-item.mb-4
+                    .indicator-header.d-flex.align-items-start.mb-3
+                      .indicator-number.mr-3
+                        = "#{index + 1}."
+                      .indicator-info.flex-grow-1
+                        %h5.indicator-name.mb-2
+                          = voting_indicator.indicator.try(:name)
+                        - if voting_indicator.indicator.try(:hint).present?
+                          %p.indicator-hint.text-muted.small.mb-0
+                            = voting_indicator.indicator.hint
+
+                    / ⭐ RATING SCALE INPUT (RADIO BUTTONS & STYLING)
+                    .rating-options
+                      .rating-buttons-group.d-flex.justify-content-between
+                        - RatingScale.defaults.each do |scale|
+                          %label.rating-option{ class: "score-#{scale[:value]}" }
+
+                            = radio_button_tag( "public_vote_form[scores][#{voting_indicator.uuid}]", scale[:value], f.object.scores[voting_indicator.uuid] == scale[:value], required: true, class: "rating-radio")
+
+                            .rating-box.d-flex.flex-column.align-items-center
+                              .rating-emoji
+                                = image_tag("#{scale[:code]}.png", class: "rating-emoji-img", alt: scale[:label])
+
+                              .rating-label
+                                %span.rating-score
+                                  = t("rating_scale.#{scale[:code]}")
+                              .rating-label
+                                %span.rating-score
+                                  = "(#{scale[:value]})"
+
+                      - if @form.score_error?(voting_indicator)
+                        %small.text-danger.mt-1
+                          = @form.score_error_for(voting_indicator)
+
+              .form-group.text-center.mt-5
+                = f.submit t('public_votes.submit'), class: "btn btn-primary btn-lg px-5"

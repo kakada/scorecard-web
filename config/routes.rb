@@ -19,9 +19,10 @@ Rails.application.routes.draw do
 
   resources :activity_logs, only: :index
 
-  # TODO: the function of this route will implemented later
   # Public voting route (no authentication required)
-  get "/scorecards/:scorecard_uuid/vote", to: "public_votes#show", as: :public_vote
+  get "/scorecards/:scorecard_uuid/vote", to: "public_votes#new", as: :public_vote
+  post "/scorecards/:scorecard_uuid/vote", to: "public_votes#create"
+  get "/scorecards/:scorecard_uuid/vote/thank_you", to: "public_votes#thank_you", as: :thank_you_scorecard_vote
 
   resources :scorecards, param: :uuid do
     put :complete, on: :member

@@ -1,0 +1,19 @@
+.card-header.bg-primary.text-white
+  %h3.mb-0
+    = t('public_votes.title')
+  .mb-0.small
+    %span.line-badge{ class: @scorecard.scorecard_type, 'data-toggle' => 'tooltip', title: @scorecard.t_scorecard_type }
+      = "#{@scorecard.uuid}"
+    %span.ml-1= "(#{scorecard_location_name(@scorecard)})"
+
+  / Language dropdown for public voting
+  - language_images = { en: 'english.png', km: 'khmer.png' }
+  .dropdown.mt-2
+    %a#publicLanguageDropdown.btn.btn-light.btn-sm.dropdown-toggle{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', href: '#', role: 'button' }
+      = image_tag language_images[I18n.locale.to_sym], alt: 'locale', size: '20x20', class: 'mr-2'
+      %span= t("language.#{I18n.locale}")
+    .dropdown-menu.shadow{ 'aria-labelledby' => 'publicLanguageDropdown' }
+      - program_languages.each do |lang|
+        = link_to public_vote_path(@scorecard.uuid, locale: lang[:code]), class: 'dropdown-item d-flex align-items-center' do
+          = image_tag lang[:image], alt: 'locale', size: '20x20', class: 'mr-2'
+          %span= lang[:label]

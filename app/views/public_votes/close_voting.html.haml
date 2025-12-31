@@ -1,0 +1,11 @@
+.public-vote-container
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-10
+        .card.shadow-sm
+          = render 'public_votes/header'
+
+          .card-body
+            .alert.alert-warning.text-center
+              %h4= t('public_votes.voting_closed')
+              %p= t('public_votes.voting_closed_message')
