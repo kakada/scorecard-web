@@ -18,7 +18,16 @@
     if (document.getElementById('jaap-table-editor')) {
       // Get existing data or set defaults
       var existingData = document.getElementById('jaap_data_field').value;
-      var tableData = existingData ? JSON.parse(existingData) : { columns: [], rows: [] };
+      var tableData = { columns: [], rows: [] };
+      
+      try {
+        if (existingData) {
+          tableData = JSON.parse(existingData);
+        }
+      } catch (e) {
+        console.error("Invalid JSON data, using defaults", e);
+        tableData = { columns: [], rows: [] };
+      }
       
       // Initialize with default columns if empty
       if (tableData.columns.length === 0) {
@@ -42,7 +51,7 @@
       
       // Add row button functionality
       var addButton = document.createElement("button");
-      addButton.textContent = "#{I18n.t('jaap.add_row')}";
+      addButton.textContent = "#{t('jaap.add_row')}";
       addButton.className = "btn btn-sm btn-success mt-2";
       addButton.type = "button";
       addButton.addEventListener("click", function() {

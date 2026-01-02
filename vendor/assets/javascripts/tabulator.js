@@ -5,6 +5,13 @@
 (function(window) {
   'use strict';
 
+  // HTML escape function to prevent XSS
+  function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   function Tabulator(selector, options) {
     this.element = typeof selector === 'string' ? document.querySelector(selector) : selector;
     this.options = options || {};
@@ -24,7 +31,7 @@
     // Header
     html += '<thead><tr>';
     this.columns.forEach(function(col) {
-      html += '<th>' + col.title + '</th>';
+      html += '<th>' + escapeHtml(col.title || '') + '</th>';
     });
     html += '<th style="width: 80px;">Actions</th>';
     html += '</tr></thead>';
@@ -38,16 +45,16 @@
         var value = row[col.field] || '';
         if (col.editor === 'select') {
           html += '<td>';
-          html += '<select class="form-control form-control-sm" data-field="' + col.field + '">';
+          html += '<select class="form-control form-control-sm" data-field="' + escapeHtml(col.field) + '">';
           html += '<option value="">Select...</option>';
           (col.editorParams.values || []).forEach(function(opt) {
             var selected = value === opt ? 'selected' : '';
-            html += '<option value="' + opt + '" ' + selected + '>' + opt + '</option>';
+            html += '<option value="' + escapeHtml(opt) + '" ' + selected + '>' + escapeHtml(opt) + '</option>';
           });
           html += '</select>';
           html += '</td>';
         } else {
-          html += '<td><input type="text" class="form-control form-control-sm" data-field="' + col.field + '" value="' + value + '"></td>';
+          html += '<td><input type="text" class="form-control form-control-sm" data-field="' + escapeHtml(col.field) + '" value="' + escapeHtml(value) + '"></td>';
         }
       });
       html += '<td><button type="button" class="btn btn-sm btn-danger delete-row" data-row-index="' + index + '">Delete</button></td>';
@@ -58,6 +65,7 @@
     
     this.element.innerHTML = html;
     this.attachEvents();
+  };
   };
 
   Tabulator.prototype.attachEvents = function() {
@@ -80,7 +88,9 @@
         var row = this.closest('tr');
         var rowIndex = parseInt(row.getAttribute('data-row-index'));
         var field = this.getAttribute('data-field');
-        self.data[rowIndex][field] = this.value;
+        if (self.data[rowIndex]) {
+          self.data[rowIndex][field] = this.value;
+        }
       });
     });
   };
