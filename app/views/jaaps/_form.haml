@@ -1,11 +1,11 @@
 .w-75.view-center
   = simple_form_for @jaap do |f|
-    = f.input :province_id, label: "Province"
-    = f.input :district_id, label: "District"
-    = f.input :commune_id, label: "Commune"
+    = f.input :province_id, label: t('jaap.province')
+    = f.input :district_id, label: t('jaap.district')
+    = f.input :commune_id, label: t('jaap.commune')
     
     .form-group
-      %label Action Plan Table
+      %label= t('jaap.action_plan_table')
       #jaap-table-editor
       = f.hidden_field :data, id: "jaap_data_field"
 
@@ -42,7 +42,7 @@
       
       // Add row button functionality
       var addButton = document.createElement("button");
-      addButton.textContent = "Add Row";
+      addButton.textContent = "#{I18n.t('jaap.add_row')}";
       addButton.className = "btn btn-sm btn-success mt-2";
       addButton.type = "button";
       addButton.addEventListener("click", function() {

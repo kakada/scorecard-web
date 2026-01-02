@@ -1,33 +1,33 @@
 - content_for :title do
-  = "JAAP Details"
+  = t('jaap.jaap_details')
 
 .card.shadow.mb-4
   .card-body
     .row.mb-3
       .col-md-3
-        %strong Province:
+        %strong= "#{t('jaap.province')}:"
       .col-md-9
         = @jaap.province_id
     .row.mb-3
       .col-md-3
-        %strong District:
+        %strong= "#{t('jaap.district')}:"
       .col-md-9
         = @jaap.district_id
     .row.mb-3
       .col-md-3
-        %strong Commune:
+        %strong= "#{t('jaap.commune')}:"
       .col-md-9
         = @jaap.commune_id
     
     .row.mb-3
       .col-md-12
-        %h5 Action Plan Table
+        %h5= t('jaap.action_plan_table')
         #jaap-table
 
     .row.mt-3
       .col-md-12
-        = link_to "Edit", edit_jaap_path(@jaap), class: "btn btn-primary"
-        = link_to "Back", jaaps_path, class: "btn btn-secondary"
+        = link_to t('shared.edit'), edit_jaap_path(@jaap), class: "btn btn-primary"
+        = link_to t('shared.back'), jaaps_path, class: "btn btn-secondary"
 
 :javascript
   document.addEventListener("turbolinks:load", function() {

@@ -1,19 +1,19 @@
 - content_for :title do
-  = "JAAPs"
+  = t('jaap.jaaps')
 
 - if policy(Jaap).create?
   .d-flex.justify-content-end.mb-2
-    = link_to "Add New JAAP", new_jaap_path, class: 'btn btn-sm btn-primary'
+    = link_to t('shared.add_new', name: t('jaap.jaaps')), new_jaap_path, class: 'btn btn-sm btn-primary'
 
 .card
   .card-body.table-responsive
     %table.table.table-hover.pretty
       %thead
         %tr
-          %th Province
-          %th District
-          %th Commune
-          %th Created At
+          %th= t('jaap.province')
+          %th= t('jaap.district')
+          %th= t('jaap.commune')
+          %th= t('shared.created_at')
           %th
 
       %tbody
@@ -24,11 +24,11 @@
             %td= jaap.commune_id
             %td= jaap.created_at.strftime("%Y-%m-%d %H:%M")
             %td
-              = link_to "View", jaap_path(jaap), class: "btn btn-sm btn-info"
-              = link_to "Edit", edit_jaap_path(jaap), class: "btn btn-sm btn-primary"
+              = link_to t('shared.view'), jaap_path(jaap), class: "btn btn-sm btn-info"
+              = link_to t('shared.edit'), edit_jaap_path(jaap), class: "btn btn-sm btn-primary"
 
     - if @jaaps.empty?
       .text-center.py-4
-        %p.text-muted No JAAPs found
+        %p.text-muted= t('shared.no_data_found')
 
     = render "shared/footers/pagination" if @jaaps.any?
