@@ -1,0 +1,43 @@
+- content_for :title do
+  = "JAAP Details"
+
+.card.shadow.mb-4
+  .card-body
+    .row.mb-3
+      .col-md-3
+        %strong Province:
+      .col-md-9
+        = @jaap.province_id
+    .row.mb-3
+      .col-md-3
+        %strong District:
+      .col-md-9
+        = @jaap.district_id
+    .row.mb-3
+      .col-md-3
+        %strong Commune:
+      .col-md-9
+        = @jaap.commune_id
+    
+    .row.mb-3
+      .col-md-12
+        %h5 Action Plan Table
+        #jaap-table
+
+    .row.mt-3
+      .col-md-12
+        = link_to "Edit", edit_jaap_path(@jaap), class: "btn btn-primary"
+        = link_to "Back", jaaps_path, class: "btn btn-secondary"
+
+:javascript
+  document.addEventListener("turbolinks:load", function() {
+    if (document.getElementById('jaap-table')) {
+      var tableData = #{raw @jaap.data.to_json};
+      var table = new Tabulator("#jaap-table", {
+        data: tableData.rows || [],
+        columns: tableData.columns || [],
+        layout: "fitColumns",
+        height: "400px"
+      });
+    }
+  });
