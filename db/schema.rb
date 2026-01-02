@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_12_29_042721) do
+ActiveRecord::Schema[7.0].define(version: 2026_01_02_030000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -223,6 +223,19 @@ ActiveRecord::Schema[7.0].define(version: 2025_12_29_042721) do
     t.datetime "deleted_at", precision: nil
     t.string "hint"
     t.index ["deleted_at"], name: "index_indicators_on_deleted_at"
+  end
+
+  create_table "jaaps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "province_id"
+    t.string "district_id"
+    t.string "commune_id"
+    t.string "reference"
+    t.jsonb "data", default: {}
+    t.integer "program_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data"], name: "index_jaaps_on_data", using: :gin
+    t.index ["program_id"], name: "index_jaaps_on_program_id"
   end
 
   create_table "language_rating_scales", force: :cascade do |t|

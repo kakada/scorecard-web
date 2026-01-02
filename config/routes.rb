@@ -84,6 +84,8 @@ Rails.application.routes.draw do
     resources :contacts, as: :system_contacts
   end
 
+  resources :jaaps
+
   resources :languages
 
   resources :facilities do

@@ -1,0 +1,42 @@
+.d-sm-flex.mb-4
+  .d-flex.flex-column.flex-grow-1
+    %h1.h3.mb-0.text-gray-800= t('jaap.action_plan_table')
+
+  - if policy(@jaap).edit?
+    = link_to edit_jaap_path(@jaap), class: "btn btn-primary btn-sm mr-2" do
+      %i.fas.fa-edit.fa-sm.text-white-50.mr-1
+      = t('shared.edit')
+
+  = link_to jaaps_path, class: "btn btn-secondary btn-sm" do
+    %i.fas.fa-arrow-left.fa-sm.text-white-50.mr-1
+    = t("shared.back")
+
+  -# More Options
+  .mr-1
+    %button.btn.btn-sm{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+      %i.fas.fa-ellipsis-v
+
+    .dropdown-menu.dropdown-menu-right
+      %a.btn.dropdown-item#download-jaap-excel{ href: "#" }
+        %i.fas.fa-download.drop-menu-icon
+        %span= t('shared.download_excel')
+
+      - if policy(@jaap).destroy?
+        = link_to jaap_path(@jaap), method: :delete, data: { confirm: t('jaap.are_you_sure_to_delete', commune_name: commune_name(@jaap.commune_id)) }, class: "btn dropdown-item" do
+          %i.fas.fa-trash-alt.drop-menu-icon
+          %span= t('shared.delete')
+
+.card.shadow.mb-4
+  .card-body
+    .row.mb-3
+      .col-md-12
+        %h6.text-primary{ 'data-location' => commune_name(@jaap.commune_id) }
+          = location_name(@jaap.commune_id)
+        - if @jaap.reference.present?
+          %small
+            = "#{t('jaap.reference_file')}: "
+            = link_to @jaap.reference_identifier, @jaap.reference_url, target: '_blank'
+
+    .row.mb-3
+      .col-md-12
+        #jaap-table{'data-content' => @jaap.data}
