@@ -1,0 +1,15 @@
+en:
+  jaap:
+    jaaps: JAAPs
+    new_jaap: New JAAP
+    edit_jaap: Edit JAAP
+    jaap_details: JAAP Details
+    province: Province
+    district: District
+    commune: Commune
+    action_plan_table: Action Plan Table
+    add_row: Add Row
+    activity: Activity
+    responsible_person: Responsible Person
+    timeline: Timeline
+    status: Status

@@ -1,0 +1,71 @@
+.w-75.view-center
+  = simple_form_for @jaap do |f|
+    = f.input :province_id, label: t('jaap.province')
+    = f.input :district_id, label: t('jaap.district')
+    = f.input :commune_id, label: t('jaap.commune')
+    
+    .form-group
+      %label= t('jaap.action_plan_table')
+      #jaap-table-editor
+      = f.hidden_field :data, id: "jaap_data_field"
+
+    .actions
+      = link_to t('shared.cancel'), jaaps_path, class: 'btn btn-secondary'
+      = f.submit t('shared.save'), class: 'btn btn-primary', id: 'submit-jaap'
+
+:javascript
+  document.addEventListener("turbolinks:load", function() {
+    if (document.getElementById('jaap-table-editor')) {
+      // Get existing data or set defaults
+      var existingData = document.getElementById('jaap_data_field').value;
+      var tableData = { columns: [], rows: [] };
+      
+      try {
+        if (existingData) {
+          tableData = JSON.parse(existingData);
+        }
+      } catch (e) {
+        console.error("Invalid JSON data, using defaults", e);
+        tableData = { columns: [], rows: [] };
+      }
+      
+      // Initialize with default columns if empty
+      if (tableData.columns.length === 0) {
+        tableData.columns = [
+          { title: "Activity", field: "activity", editor: "input", width: 200 },
+          { title: "Responsible Person", field: "responsible", editor: "input", width: 150 },
+          { title: "Timeline", field: "timeline", editor: "input", width: 120 },
+          { title: "Status", field: "status", editor: "select", editorParams: {values: ["Pending", "In Progress", "Completed"]}, width: 120 }
+        ];
+      }
+      
+      // Initialize Tabulator
+      var table = new Tabulator("#jaap-table-editor", {
+        data: tableData.rows || [],
+        columns: tableData.columns,
+        layout: "fitColumns",
+        height: "400px",
+        addRowPos: "bottom",
+        movableRows: true
+      });
+      
+      // Add row button functionality
+      var addButton = document.createElement("button");
+      addButton.textContent = "#{t('jaap.add_row')}";
+      addButton.className = "btn btn-sm btn-success mt-2";
+      addButton.type = "button";
+      addButton.addEventListener("click", function() {
+        table.addRow({});
+      });
+      document.getElementById("jaap-table-editor").parentNode.appendChild(addButton);
+      
+      // Save table data before form submission
+      document.getElementById('submit-jaap').addEventListener('click', function(e) {
+        var data = {
+          columns: tableData.columns,
+          rows: table.getData()
+        };
+        document.getElementById('jaap_data_field').value = JSON.stringify(data);
+      });
+    }
+  });

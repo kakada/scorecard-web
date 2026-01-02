@@ -66,6 +66,7 @@
 //= require categories
 //= require clone_wizard/show
 //= require public_votes/new
+//= require tabulator
 
 document.addEventListener("turbolinks:load", function () {
   CW.Common.Topbar.init();
