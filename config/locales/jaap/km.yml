@@ -19,3 +19,7 @@ km:
     action_plan_table_help: ចំណាំ៖ សូមចុច Mouse ស្ដាំលើ​ Row នៃតារាងដើម្បីបន្ថែម ឬលុប​​ Row និមួយៗ។
     reference_file: ឯកសារយោង
     reference_file_hint: "(ទំហំអតិបរមា៖ 5MB។ ប្រភេទដែលអនុញ្ញាត៖ រូបភាព, PDF, Excel)"
+    select_location: ជ្រើសរើសទីតាំងគម្រោង
+    available_datasets: ទិន្នន័យដែលមាន
+    select_commune_first: សូមជ្រើសរើសឃុំ/សង្កាត់ដើម្បីមើលទិន្នន័យដែលមាន
+    no_datasets_found: រកមិនឃើញទិន្នន័យសម្រាប់ទីតាំងនេះទេ

@@ -5,6 +5,7 @@ km:
     edit: កែតម្រូវ
     delete: លុប
     cancel: បោះបង់
+    clear: សម្អាត
     save: រក្សាទុក
     back: ថយក្រោយ
     done: រួចរាល់
@@ -87,3 +88,4 @@ km:
     advance_search: ស្វែងរកបន្ថែម
     search_by_name: ស្វែងរកតាមឈ្មោះ
     next: បន្ទាប់
+    confirm: បញ្ជាក់

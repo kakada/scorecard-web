@@ -3,7 +3,7 @@ CW.JaapsNew = (() => {
   let table = null;
   let tr = null;
   const SAMPLE_DATA = CW.JaapSampleData || [];
-  const MAX_FILE_SIZE_MB = 5; // Must match JaapReferenceUploader::MAX_FILE_SIZE_MB
+  let currentCell = null; // Track the current cell being edited
 
   return {
     init: init,
@@ -21,81 +21,12 @@ CW.JaapsNew = (() => {
     onSubmitJaapForm();
     onCellEdit();
     onClickCancel();
-    onFileInputChange();
-    onClickRemoveReference();
+
+    // This handle reference file uploads/removals
+    CW.JaapReferenceFile.init(tr);
+    // This is for clicking location cells in the table
+    CW.JaapLocationModal.init(getCurrentCell, saveDraftToLocalStorage, tr);
   }
-
-  function onClickRemoveReference() {
-    // remove existing file
-    $(document).on("click", ".js-remove-reference", function () {
-      var wrapper = $(this).closest(".reference-wrapper")
-
-      wrapper.find(".reference-existing").addClass("d-none")
-      wrapper.find(".reference-input").val("").removeClass("d-none")
-
-      wrapper.find("input[name*='[remove_reference]']").val("1")
-
-      // IMPORTANT: clear file input value
-      var fileInput = wrapper.find(".js-reference-input")
-      fileInput.val("")
-
-      wrapper.find(".reference-filename").text("")
-    })
-  }
-
-  function onFileInputChange() {
-    // file selected (NEW form fix)
-    $(document).on("change", ".js-reference-input", function () {
-      var wrapper = $(this).closest(".reference-wrapper")
-      var file = this.files && this.files.length > 0 ? this.files[0] : null
-
-      if (!file) return
-
-      // Check file size limit (must match JaapReferenceUploader::MAX_FILE_SIZE_MB)
-      var maxSizeBytes = MAX_FILE_SIZE_MB * 1024 * 1024
-      if (file.size > maxSizeBytes) {
-        var defaultErrorMsg = `File size exceeds ${MAX_FILE_SIZE_MB}MB limit. Please choose a smaller file.`
-        var errorMsg = (tr && tr.file_size_error) || defaultErrorMsg
-        alert(errorMsg)
-        $(this).val("") // Clear the file input
-        return
-      }
-
-      var fileName = file.name
-
-      // Add icon based on file extension
-      var icon = getFileTypeIcon(fileName)
-      wrapper.find(".reference-filename").html(icon + ' ' + fileName)
-      wrapper.find(".reference-existing").removeClass("d-none")
-      wrapper.find(".reference-input").addClass("d-none")
-
-      // user selected a new file → ensure we are NOT removing it
-      wrapper.find("input[name*='[remove_reference]']").val("0")
-    })
-  }
-
-  function getFileTypeIcon(filename) {
-    if (!filename) return '<i class="fas fa-file"></i>'
-
-    var parts = filename.split('.')
-    var extension = parts.length > 1 ? parts.pop().toLowerCase() : ''
-
-    switch (extension) {
-      case 'pdf':
-        return '<i class="fas fa-file-pdf text-danger"></i>'
-      case 'xls':
-      case 'xlsx':
-        return '<i class="fas fa-file-excel text-success"></i>'
-      case 'jpg':
-      case 'jpeg':
-      case 'png':
-      case 'gif':
-        return '<i class="fas fa-file-image text-primary"></i>'
-      default:
-        return '<i class="fas fa-file"></i>'
-    }
-  }
-
 
   function initStatus(dataSource) {
     if (dataSource === 'draft') {
@@ -117,6 +48,14 @@ CW.JaapsNew = (() => {
 
   function getUserId() {
     return getJaapId() || $('[data-user-id]').data('userId');
+  }
+
+  function getJaapId() {
+    return $('[data-jaap-id]').data('jaapId');
+  }
+
+  function getCurrentCell() {
+    return currentCell;
   }
 
   function updateStatus(text, type) {
@@ -249,7 +188,17 @@ CW.JaapsNew = (() => {
       { title: tr.priority_activity, field: "priority_activity", width: 300, frozen: true, headerSort: false, editor: editable ? "input" : false },
       { title: tr.proposer, field: "proposer", width: 80, headerSort: false, editor: editable ? "input" : false },
       { title: tr.target_response, field: "target_response", width: 120, headerSort: false, editor: editable ? "input" : false },
-      { title: tr.location, field: "location", width: 180, headerSort: false, editor: editable ? "input" : false },
+      {
+        title: tr.location,
+        field: "location",
+        width: 180,
+        headerSort: false,
+        editor: false,
+        cellClick: editable ? function(e, cell) {
+          currentCell = cell;
+          $('#locationModal').modal('show');
+        } : undefined
+      },
       {
         title: tr.results,
         columns: [
@@ -278,9 +227,7 @@ CW.JaapsNew = (() => {
     ];
   }
 
-  function getJaapId() {
-    return $('[data-jaap-id]').data('jaapId');
-  }
+
 
   function getInitialData() {
     const draftData = localStorage.getItem(STORAGE_KEY);

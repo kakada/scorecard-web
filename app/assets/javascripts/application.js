@@ -69,8 +69,10 @@
 //= require categories
 //= require clone_wizard/show
 //= require public_votes/new
-//= require jaaps/locale
-//= require jaaps/sample_data
+//= require jaaps/form/locale
+//= require jaaps/form/sample_data
+//= require jaaps/form/location_modal
+//= require jaaps/form/reference_file
 //= require jaaps/new
 //= require jaaps/show
 
