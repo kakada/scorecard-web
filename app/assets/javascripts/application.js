@@ -21,6 +21,8 @@
 //= require jquery.richtext
 //= require daterangepicker
 //= require best_in_place
+//= require xlsx.full.min
+//= require tabulator.min
 
 //= require application/namespace
 //= require application/util
@@ -33,6 +35,7 @@
 //= require common/copy
 //= require common/wizard_new
 //= require common/toggle_advance_search
+//= require common/data_link_click
 
 //= require facilities
 //= require templates
@@ -66,6 +69,10 @@
 //= require categories
 //= require clone_wizard/show
 //= require public_votes/new
+//= require jaaps/locale
+//= require jaaps/sample_data
+//= require jaaps/new
+//= require jaaps/show
 
 document.addEventListener("turbolinks:load", function () {
   CW.Common.Topbar.init();
@@ -77,6 +84,7 @@ document.addEventListener("turbolinks:load", function () {
   CW.Common.Copy.init();
   CW.Common.WizardNew.init();
   CW.Common.toggleAdvanceSearch.init();
+  CW.Common.DataLinkClick.init();
 
   $("[role='tooltip']").remove();
   $('[data-toggle="tooltip"]').tooltip({ trigger: "hover" });

@@ -1,0 +1,20 @@
+en:
+  jaap:
+    jaaps: JAAPs
+    new_jaap: New JAAP
+    edit_jaap: Edit JAAP
+    jaap_details: JAAP Details
+    province: Province
+    district: District
+    commune: Commune
+    action_plan_table: Action Plan Table
+    add_row: Add Row
+    activity: Activity
+    responsible_person: Responsible Person
+    timeline: Timeline
+    status: Status
+    are_you_sure_to_delete: Are you sure you want to delete this JAAP at "%{commune_name}"?
+    load_sample: Copy table from sample data
+    load_sample_tooltip: Load sample data into the action plan table
+    action_plan_table_help: "Note: Right click on the row of the table to add or delete rows."
+    reference_file: Reference File

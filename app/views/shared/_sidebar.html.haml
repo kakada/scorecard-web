@@ -37,6 +37,12 @@
         %i.far.fa-fw.fa-clipboard
         %span= t("sidebar.scorecard")
 
+    - if policy(Jaap).index?
+      %li.nav-item{ class: [css_active_class('jaaps'), css_nested_active_class('jaaps')] }
+        %a.nav-link{:href => jaaps_path}
+          %i.far.fa-fw.fa-file-alt
+          %span= t("sidebar.jaaps")
+
     - if policy(Message).index? || policy(MobileNotification).index?
       %li.nav-item{ class: [css_active_class('messages'), css_nested_active_class('messages'), css_active_class('mobile_notifications')] }
         - url = current_user.system_admin? || current_user.staff? ? mobile_notifications_path : messages_path

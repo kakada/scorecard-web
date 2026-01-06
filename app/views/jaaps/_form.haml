@@ -1,0 +1,45 @@
+.view-center{'data-jaap-id' => @jaap.id }
+  = simple_form_for @jaap do |f|
+    .form-group.row
+      .col-12.col-md-4.mb-2.mb-md-0
+        = render partial: "scorecards/select_field", locals: { f: f, field_name: "province_id", select_id: "province", select_target: "district", select_collection_url: pumi.provinces_path, select_populate_on_load: true }
+      .col-12.col-md-4.mb-2.mb-md-0
+        = render partial: "scorecards/select_field", locals: { f: f, field_name: "district_id", select_id: "district", select_target: "commune", select_collection_url: pumi.districts_path(:province_id => "FILTER"), select_disabled_target: "#district", select_allow_none: true }
+      .col-12.col-md-4
+        = render partial: "scorecards/select_field", locals: { f: f, field_name: "commune_id", select_id: "commune", select_target: "dataset", select_collection_url: pumi.communes_path(:district_id => "FILTER"), select_disabled_target: "#commune", select_allow_none: true }
+
+
+    -# Reference File Upload
+    .reference-wrapper.form-group.row
+      .col-12.col-md-4.mb-2.mb-md-0
+        - has_reference = @jaap.reference.present? || @jaap.reference_cache.present?
+
+        %label= t('jaap.reference_file')
+        .reference-existing.mb-2{ class: ('d-none' unless has_reference) }
+          %small.reference-filename.fw-semibold
+            = @jaap.reference&.file&.filename || @jaap.reference_cache
+
+          %button.btn.btn-sm.btn-outline-danger.js-remove-reference{ type: "button" }
+            %i.fas.fa-times.ms-1
+
+        .reference-input{ class: ('d-none' if has_reference) }
+          = f.input :reference, as: :file, label: false, input_html: { class: "js-reference-input form-control" }
+
+        = f.hidden_field :reference_cache
+        = f.hidden_field :remove_reference, value: "0"
+
+    -# Table layout
+    .form-group
+      = f.hidden_field :data, id: "jaap_data_field"
+      %label
+        = t('jaap.action_plan_table')
+        %span{id: "data-status", class: "status-badge"}
+        = link_to t('jaap.load_sample'), '#', id: 'load-sample', class: 'btn btn-link btn-sm ml-2', data: { toggle: 'tooltip' }, title: t('jaap.load_sample_tooltip')
+      %small.text-muted.d-block.mb-2= t('jaap.action_plan_table_help')
+
+      -# the jaap table
+      #jaap-table{'data-content' => @jaap.data}
+
+    .actions
+      = link_to t('shared.cancel'), jaaps_path, class: 'btn btn-secondary btn-cancel'
+      = f.submit t('shared.save'), class: 'btn btn-primary', id: 'submit-jaap'
