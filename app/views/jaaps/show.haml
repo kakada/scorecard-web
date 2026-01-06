@@ -35,6 +35,7 @@
         - if @jaap.reference.present?
           %small
             = "#{t('jaap.reference_file')}: "
+            %i{ class: file_type_icon(@jaap.reference_identifier) }
             = link_to @jaap.reference_identifier, @jaap.reference_url, target: '_blank'
 
     .row.mb-3

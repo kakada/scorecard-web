@@ -25,7 +25,8 @@ CW.JaapLocale = {
     draft_changes: "✏️ Draft changes (has not saved to server)",
     draft_restored: "✏️ Draft restored (has not saved to server)",
     loaded_from_server: "🟢 Loaded from server",
-    load_sample_confirm: "This action will override your current table. Do you want to load a sample plan to get started?"
+    load_sample_confirm: "This action will override your current table. Do you want to load a sample plan to get started?",
+    file_size_error: "File size exceeds 5MB limit. Please choose a smaller file."
   },
   km: {
     no: "ល.រ",
@@ -53,6 +54,7 @@ CW.JaapLocale = {
     draft_changes: "✏️ ទិន្នន័យមានការផ្លាស់ប្តូរ​ (មិនទាន់បានរក្សាទុកនៅម៉ាស៊ីនមេ)",
     draft_restored: "🟡 សេចក្ដីព្រៀង (មិនទាន់បានរក្សាទុកនៅម៉ាស៊ីនមេ)",
     loaded_from_server: "🟢 ទិន្នន័យទាំងស្រុងពីម៉ាស៊ីនមេ",
-    load_sample_confirm: "សកម្មភាពនេះនឹងជំនួសទិន្នន័យក្នុងតារាងបច្ចុប្បន្នរបស់អ្នក។ តើអ្នកចង់ប្រើប្រាស់តារាងគំរូផែនការសកម្មភាពមែនឬទេ?"
+    load_sample_confirm: "សកម្មភាពនេះនឹងជំនួសទិន្នន័យក្នុងតារាងបច្ចុប្បន្នរបស់អ្នក។ តើអ្នកចង់ប្រើប្រាស់តារាងគំរូផែនការសកម្មភាពមែនឬទេ?",
+    file_size_error: "ទំហំឯកសារលើសពី 5MB។ សូមជ្រើសរើសឯកសារតូចជាងនេះ។"
   }
 };

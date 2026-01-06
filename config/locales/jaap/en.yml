@@ -18,3 +18,4 @@ en:
     load_sample_tooltip: Load sample data into the action plan table
     action_plan_table_help: "Note: Right click on the row of the table to add or delete rows."
     reference_file: Reference File
+    reference_file_hint: "(Max size: 5MB. Allowed types: images, PDF, Excel)"
