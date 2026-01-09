@@ -18,7 +18,7 @@ module Scorecards
     end
 
     def voting_url
-      public_vote_url(scorecard.uuid, host: host)
+      new_scorecard_vote_url(scorecard.token, host: host)
     end
 
     private

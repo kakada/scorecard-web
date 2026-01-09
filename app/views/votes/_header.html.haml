@@ -14,6 +14,6 @@
       %span= t("language.#{I18n.locale}")
     .dropdown-menu.shadow{ 'aria-labelledby' => 'publicLanguageDropdown' }
       - program_languages.each do |lang|
-        = link_to public_vote_path(@scorecard.uuid, locale: lang[:code]), class: 'dropdown-item d-flex align-items-center' do
+        = link_to new_scorecard_vote_path(@scorecard.token, locale: lang[:code]), class: 'dropdown-item d-flex align-items-center' do
           = image_tag lang[:image], alt: 'locale', size: '20x20', class: 'mr-2'
           %span= lang[:label]

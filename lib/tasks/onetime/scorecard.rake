@@ -67,5 +67,18 @@ namespace :onetime do
       puts "❌ Migration failed: #{e.message}"
       raise
     end
+
+    desc "Generate token for scorecards"
+    task generate_tokens: :environment do
+      Scorecard.where(token: nil).find_each(batch_size: 1000) do |scorecard|
+        scorecard.send(:generate_token)
+        scorecard.save!(validate: false)
+      end
+
+      puts "✅ Token generation completed successfully!"
+    rescue StandardError => e
+      puts "❌ Token generation failed: #{e.message}"
+      raise
+    end
   end
 end

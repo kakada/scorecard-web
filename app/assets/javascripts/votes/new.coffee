@@ -1,4 +1,4 @@
-CW.Public_votesNew = do ->
+CW.VotesNew = do ->
   init = ->
     #  Scroll to the first server-rendered error (gender or indicator score)
     firstError = document.querySelector('.text-danger, .invalid-feedback')
@@ -15,4 +15,4 @@ CW.Public_votesNew = do ->
 
   { init }
 
-CW.Public_votesCreate = CW.Public_votesNew
+CW.VotesCreate = CW.VotesNew

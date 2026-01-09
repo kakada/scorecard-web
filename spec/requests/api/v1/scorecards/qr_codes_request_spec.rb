@@ -21,7 +21,7 @@ RSpec.describe "Api::V1::Scorecards::QrCodesController", type: :request do
         json_response = JSON.parse(response.body)
 
         expect(json_response["qr_code_url"]).to be_present
-        expect(json_response["voting_url"]).to eq("http://localhost:3000/scorecards/#{scorecard.uuid}/vote")
+        expect(json_response["voting_url"]).to eq("http://localhost:3000/scorecards/#{scorecard.token}/votes/new")
       end
     end
 

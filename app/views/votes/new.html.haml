@@ -3,10 +3,10 @@
     .row.justify-content-center
       .col-md-10
         .card.shadow-sm
-          = render 'public_votes/header'
+          = render 'votes/header'
 
           .card-body
-            = simple_form_for @form, url: public_vote_path(@scorecard.uuid), id: "voting-form" do |f|
+            = simple_form_for @form, url: scorecard_votes_path(@scorecard.token), id: "voting-form" do |f|
               / Participant Profile Section
               .participant-profile-section.mb-5
                 %h4.section-title.mb-4= t('public_votes.participant_profile')
@@ -39,21 +39,21 @@
                   %label.form-label.d-block= t('public_votes.participant_type')
                   .participant-type-options.d-flex.flex-wrap.gap-3
                     %label.type-option
-                      = check_box_tag 'public_vote_form[disability]', '1', false, class: "type-checkbox"
+                      = check_box_tag 'public_vote_form[disability]', '1', f.object.disability, class: "type-checkbox"
                       .type-box
                         .type-icon
                           %i.fas.fa-wheelchair
                         .type-label= t('public_votes.disability')
 
                     %label.type-option
-                      = check_box_tag 'public_vote_form[minority]', '1', false, class: "type-checkbox"
+                      = check_box_tag 'public_vote_form[minority]', '1', f.object.minority, class: "type-checkbox"
                       .type-box
                         .type-icon
                           %i.fas.fa-users
                         .type-label= t('public_votes.minority')
 
                     %label.type-option
-                      = check_box_tag 'public_vote_form[poor_card]', '1', false, class: "type-checkbox"
+                      = check_box_tag 'public_vote_form[poor_card]', '1', f.object.poor_card, class: "type-checkbox"
                       .type-box
                         .type-icon
                           %i.fas.fa-id-card
