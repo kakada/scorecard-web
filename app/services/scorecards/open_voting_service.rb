@@ -61,7 +61,7 @@ module Scorecards
       end
 
       def host
-        Rails.application.config.action_mailer.default_url_options&[:host] || "localhost:3000"
+        ENV.fetch("HOST_URL") { "localhost:3000" }
       end
   end
 end
