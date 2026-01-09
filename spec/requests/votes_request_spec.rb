@@ -2,17 +2,24 @@
 
 require "rails_helper"
 
-RSpec.describe "PublicVotesController", type: :request do
+RSpec.describe "VotesController", type: :request do
   let!(:user) { create(:user, :lngo) }
   let!(:unit) { create(:facility, program: user.program) }
   let!(:facility) { create(:facility, :with_indicators, parent_id: unit.id, program: user.program) }
   let!(:indicator) { facility.indicators.first }
   let!(:scorecard) { create(:scorecard, facility: facility, program: user.program, local_ngo_id: user.local_ngo_id, progress: :open_voting) }
 
-  describe "GET /scorecards/:uuid/vote (new)" do
+  describe "GET /scorecards/:token/votes (index)" do
+    it "redirects to new action" do
+      get scorecard_votes_path(scorecard.token)
+      expect(response).to redirect_to(new_scorecard_vote_path(scorecard.token))
+    end
+  end
+
+  describe "GET /scorecards/:token/votes/new (new)" do
     context "when voting is open" do
       it "returns 200" do
-        get public_vote_path(scorecard.uuid)
+        get new_scorecard_vote_path(scorecard.token)
         expect(response).to have_http_status(:ok)
       end
     end
@@ -21,13 +28,13 @@ RSpec.describe "PublicVotesController", type: :request do
       before { scorecard.update!(progress: :close_voting) }
 
       it "returns 403" do
-        get public_vote_path(scorecard.uuid)
+        get new_scorecard_vote_path(scorecard.token)
         expect(response).to have_http_status(:forbidden)
       end
     end
   end
 
-  describe "POST /scorecards/:uuid/vote (create)" do
+  describe "POST /scorecards/:token/votes (create)" do
     let!(:vi1) { create(:voting_indicator, scorecard_uuid: scorecard.id, indicatorable_id: indicator.id, indicatorable_type: "Indicators::PredefineIndicator", display_order: 1) }
     let!(:vi2) { create(:voting_indicator, scorecard_uuid: scorecard.id, indicatorable_id: indicator.id, indicatorable_type: "Indicators::PredefineIndicator", display_order: 2) }
 
@@ -48,16 +55,16 @@ RSpec.describe "PublicVotesController", type: :request do
         }
       end
 
-      it "creates participant and ratings, then redirects to thank_you" do
+      it "creates participant and ratings, then redirects to show" do
         expect {
-          post public_vote_path(scorecard.uuid), params: params
+          post scorecard_votes_path(scorecard.token), params: params
         }.to change { scorecard.participants.count }.by(1)
          .and change { scorecard.ratings.count }.by(2)
 
         expect(vi1.reload.ratings.count).to eq(1)
         expect(vi2.reload.ratings.count).to eq(1)
 
-        expect(response).to redirect_to(thank_you_scorecard_vote_url(scorecard.uuid))
+        expect(response).to redirect_to(scorecard_vote_url(scorecard.token, "thank-you"))
       end
     end
 
@@ -72,7 +79,7 @@ RSpec.describe "PublicVotesController", type: :request do
       end
 
       it "renders new with 422" do
-        post public_vote_path(scorecard.uuid), params: params
+        post scorecard_votes_path(scorecard.token), params: params
         expect(response).to have_http_status(:unprocessable_entity)
         expect(scorecard.participants.count).to eq(0)
         expect(scorecard.ratings.count).to eq(0)
@@ -91,7 +98,7 @@ RSpec.describe "PublicVotesController", type: :request do
       end
 
       it "renders new with 422" do
-        post public_vote_path(scorecard.uuid), params: params
+        post scorecard_votes_path(scorecard.token), params: params
         expect(response).to have_http_status(:unprocessable_entity)
         expect(scorecard.participants.count).to eq(0)
         expect(scorecard.ratings.count).to eq(0)
@@ -99,9 +106,9 @@ RSpec.describe "PublicVotesController", type: :request do
     end
   end
 
-  describe "GET /scorecards/:uuid/vote/thank_you" do
+  describe "GET /scorecards/:token/votes/:id (show)" do
     it "returns 200" do
-      get thank_you_scorecard_vote_path(scorecard.uuid)
+      get scorecard_vote_path(scorecard.token, "thank-you")
       expect(response).to have_http_status(:ok)
     end
   end

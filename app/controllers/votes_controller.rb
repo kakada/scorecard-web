@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
-class PublicVotesController < ApplicationController
+class VotesController < ApplicationController
   skip_before_action :authenticate_user!
   before_action :assign_scorecard
   before_action :check_open_voting, only: [:new, :create]
   before_action :set_locale
 
   layout "layouts/footer_less"
+
+  def index
+    redirect_to new_scorecard_vote_path(@scorecard.token)
+  end
 
   def new
     @form = PublicVoteForm.new(scorecard: @scorecard)
@@ -16,19 +20,19 @@ class PublicVotesController < ApplicationController
     @form = PublicVoteForm.new(scorecard: @scorecard, params: public_vote_params)
 
     if PublicVotes::SubmitService.new(@form).call
-      redirect_to thank_you_scorecard_vote_path(@scorecard.uuid)
+      redirect_to scorecard_vote_path(@scorecard.token, "thank-you")
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def thank_you
+  def show
     # Renders a simple thank-you page after successful vote
   end
 
   private
     def assign_scorecard
-      @scorecard = Scorecard.find_by!(uuid: params[:scorecard_uuid])
+      @scorecard = Scorecard.find_by!(token: params[:scorecard_token])
     end
 
     def check_open_voting

@@ -68,7 +68,7 @@
 //= require removing_scorecards/create
 //= require categories
 //= require clone_wizard/show
-//= require public_votes/new
+//= require votes/new
 //= require jaaps/form/locale
 //= require jaaps/form/sample_data
 //= require jaaps/form/location_modal
