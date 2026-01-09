@@ -6,9 +6,9 @@ module Api
       skip_before_action :restrict_access
 
       def index
-        @datasets = Dataset.filter(dataset_params)
+        @datasets = Dataset.filter(dataset_params).includes(:category)
 
-        render json: @datasets
+        render json: @datasets, each_serializer: DatasetSerializer
       end
 
       private

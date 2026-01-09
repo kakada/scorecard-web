@@ -5,6 +5,7 @@ en:
     edit: Edit
     delete: Delete
     cancel: Cancel
+    clear: Clear
     save: Save
     back: Back
     done: Done
@@ -87,3 +88,4 @@ en:
     advance_search: Advance search
     search_by_name: Search by name
     next: Next
+    confirm: Confirm

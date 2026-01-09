@@ -26,7 +26,12 @@ CW.JaapLocale = {
     draft_restored: "✏️ Draft restored (has not saved to server)",
     loaded_from_server: "🟢 Loaded from server",
     load_sample_confirm: "This action will override your current table. Do you want to load a sample plan to get started?",
-    file_size_error: "File size exceeds 5MB limit. Please choose a smaller file."
+    file_size_error: "File size exceeds 5MB limit. Please choose a smaller file.",
+    please_select: "Please select",
+    select_commune_first: "Please select a commune to see available datasets",
+    no_datasets_found: "No datasets found for this location",
+    commune_administration: "Commune Administration",
+    commune: "Commune"
   },
   km: {
     no: "ល.រ",
@@ -55,6 +60,11 @@ CW.JaapLocale = {
     draft_restored: "🟡 សេចក្ដីព្រៀង (មិនទាន់បានរក្សាទុកនៅម៉ាស៊ីនមេ)",
     loaded_from_server: "🟢 ទិន្នន័យទាំងស្រុងពីម៉ាស៊ីនមេ",
     load_sample_confirm: "សកម្មភាពនេះនឹងជំនួសទិន្នន័យក្នុងតារាងបច្ចុប្បន្នរបស់អ្នក។ តើអ្នកចង់ប្រើប្រាស់តារាងគំរូផែនការសកម្មភាពមែនឬទេ?",
-    file_size_error: "ទំហំឯកសារលើសពី 5MB។ សូមជ្រើសរើសឯកសារតូចជាងនេះ។"
+    file_size_error: "ទំហំឯកសារលើសពី 5MB។ សូមជ្រើសរើសឯកសារតូចជាងនេះ។",
+    please_select: "សូមជ្រើសរើស",
+    select_commune_first: "សូមជ្រើសរើសឃុំ/សង្កាត់ដើម្បីមើលទិន្នន័យដែលមាន",
+    no_datasets_found: "រកមិនឃើញទិន្នន័យសម្រាប់ទីតាំងនេះទេ",
+    commune_administration: "រដ្ឋបាលឃុំ/សង្កាត់",
+    commune: "ឃុំ/សង្កាត់"
   }
 };

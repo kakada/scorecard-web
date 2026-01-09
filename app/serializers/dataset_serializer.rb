@@ -4,6 +4,8 @@ class DatasetSerializer < ActiveModel::Serializer
   attributes :id, :code, :name_en, :name_km, :province_id,
              :district_id, :commune_id, :category_id, :category_name_en, :category_name_km
 
+  belongs_to :category
+
   def category_name_en
     object.category&.name_en
   end
