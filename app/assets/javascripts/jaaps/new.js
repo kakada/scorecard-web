@@ -3,6 +3,7 @@ CW.JaapsNew = (() => {
   let table = null;
   let tr = null;
   const SAMPLE_DATA = CW.JaapSampleData || [];
+  const MAX_FILE_SIZE_MB = 5; // Must match JaapReferenceUploader::MAX_FILE_SIZE_MB
 
   return {
     init: init,
@@ -21,40 +22,78 @@ CW.JaapsNew = (() => {
     onCellEdit();
     onClickCancel();
     onFileInputChange();
+    onClickRemoveReference();
+  }
+
+  function onClickRemoveReference() {
+    // remove existing file
+    $(document).on("click", ".js-remove-reference", function () {
+      var wrapper = $(this).closest(".reference-wrapper")
+
+      wrapper.find(".reference-existing").addClass("d-none")
+      wrapper.find(".reference-input").val("").removeClass("d-none")
+
+      wrapper.find("input[name*='[remove_reference]']").val("1")
+
+      // IMPORTANT: clear file input value
+      var fileInput = wrapper.find(".js-reference-input")
+      fileInput.val("")
+
+      wrapper.find(".reference-filename").text("")
+    })
   }
 
   function onFileInputChange() {
-    $(document)
-      // remove existing file
-      .on("click", ".js-remove-reference", function () {
-        var wrapper = $(this).closest(".reference-wrapper")
+    // file selected (NEW form fix)
+    $(document).on("change", ".js-reference-input", function () {
+      var wrapper = $(this).closest(".reference-wrapper")
+      var file = this.files && this.files.length > 0 ? this.files[0] : null
 
-        wrapper.find(".reference-existing").addClass("d-none")
-        wrapper.find(".reference-input").val("").removeClass("d-none")
+      if (!file) return
 
-        wrapper.find("input[name*='[remove_reference]']").val("1")
+      // Check file size limit (must match JaapReferenceUploader::MAX_FILE_SIZE_MB)
+      var maxSizeBytes = MAX_FILE_SIZE_MB * 1024 * 1024
+      if (file.size > maxSizeBytes) {
+        var defaultErrorMsg = `File size exceeds ${MAX_FILE_SIZE_MB}MB limit. Please choose a smaller file.`
+        var errorMsg = (tr && tr.file_size_error) || defaultErrorMsg
+        alert(errorMsg)
+        $(this).val("") // Clear the file input
+        return
+      }
 
-        // IMPORTANT: clear file input value
-        var fileInput = wrapper.find(".js-reference-input")
-        fileInput.val("")
+      var fileName = file.name
 
-        wrapper.find(".reference-filename").text("")
-      })
+      // Add icon based on file extension
+      var icon = getFileTypeIcon(fileName)
+      wrapper.find(".reference-filename").html(icon + ' ' + fileName)
+      wrapper.find(".reference-existing").removeClass("d-none")
+      wrapper.find(".reference-input").addClass("d-none")
 
-      // file selected (NEW form fix)
-      .on("change", ".js-reference-input", function () {
-        var wrapper = $(this).closest(".reference-wrapper")
-        var fileName = this.files && this.files.length > 0 ? this.files[0].name : ""
+      // user selected a new file → ensure we are NOT removing it
+      wrapper.find("input[name*='[remove_reference]']").val("0")
+    })
+  }
 
-        if (!fileName) return
+  function getFileTypeIcon(filename) {
+    if (!filename) return '<i class="fas fa-file"></i>'
 
-        wrapper.find(".reference-filename").text(fileName)
-        wrapper.find(".reference-existing").removeClass("d-none")
-        wrapper.find(".reference-input").addClass("d-none")
+    var parts = filename.split('.')
+    var extension = parts.length > 1 ? parts.pop().toLowerCase() : ''
 
-        // user selected a new file → ensure we are NOT removing it
-        wrapper.find("input[name*='[remove_reference]']").val("0")
-      })
+    switch (extension) {
+      case 'pdf':
+        return '<i class="fas fa-file-pdf text-danger"></i>'
+      case 'xls':
+      case 'xlsx':
+        return '<i class="fas fa-file-excel text-success"></i>'
+      case 'jpg':
+      case 'jpeg':
+      case 'png':
+      case 'gif':
+        return '<i class="fas fa-file-image text-primary"></i>'
+      default:
+        return '<i class="fas fa-file"></i>'
+    }
   }
 
 

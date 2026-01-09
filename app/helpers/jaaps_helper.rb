@@ -24,4 +24,21 @@ module JaapsHelper
 
     "Pumi::#{Location.location_kind(commune_id).titlecase}".constantize.find_by_id(commune_id).try("address_#{I18n.locale}".to_sym)
   end
+
+  def file_type_icon(filename)
+    return "fas fa-file" if filename.blank?
+
+    extension = File.extname(filename).downcase.delete(".")
+
+    case extension
+    when "pdf"
+      "fas fa-file-pdf text-danger"
+    when "xls", "xlsx"
+      "fas fa-file-excel text-success"
+    when "jpg", "jpeg", "png", "gif"
+      "fas fa-file-image text-primary"
+    else
+      "fas fa-file"
+    end
+  end
 end

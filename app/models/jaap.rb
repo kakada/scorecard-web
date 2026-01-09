@@ -16,7 +16,7 @@
 #
 class Jaap < ApplicationRecord
   # Uploader
-  mount_uploader :reference, AttachmentUploader
+  mount_uploader :reference, JaapReferenceUploader
 
   # Associations
   belongs_to :program
