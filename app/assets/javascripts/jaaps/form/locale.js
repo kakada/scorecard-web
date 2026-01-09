@@ -30,7 +30,8 @@ CW.JaapLocale = {
     please_select: "Please select",
     select_commune_first: "Please select a commune to see available datasets",
     no_datasets_found: "No datasets found for this location",
-    commune_administration: "Commune Administration"
+    commune_administration: "Commune Administration",
+    commune: "Commune"
   },
   km: {
     no: "ល.រ",
@@ -63,6 +64,7 @@ CW.JaapLocale = {
     please_select: "សូមជ្រើសរើស",
     select_commune_first: "សូមជ្រើសរើសឃុំ/សង្កាត់ដើម្បីមើលទិន្នន័យដែលមាន",
     no_datasets_found: "រកមិនឃើញទិន្នន័យសម្រាប់ទីតាំងនេះទេ",
-    commune_administration: "ឃុំ/សង្កាត់"
+    commune_administration: "រដ្ឋបាលឃុំ/សង្កាត់",
+    commune: "ឃុំ/សង្កាត់"
   }
 };

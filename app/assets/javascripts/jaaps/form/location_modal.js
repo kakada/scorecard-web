@@ -190,7 +190,7 @@ CW.JaapLocationModal = (() => {
 
       // Get the selected commune name for the Commune Administration section
       const communeName = $communeSelect.find('option:selected').text();
-      const communeValue = `${tr.commune_administration} ${communeName}`;
+      const communeValue = `${tr.commune} ${communeName}`;
 
       $.ajax({
         url: '/api/v1/datasets?commune_id=' + communeId,
