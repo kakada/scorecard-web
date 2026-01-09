@@ -190,3 +190,4 @@ en:
       one: "Last 1"
       other: "Last %{count}"
     search_by_code: Search by code
+    go_voting: Go to voting

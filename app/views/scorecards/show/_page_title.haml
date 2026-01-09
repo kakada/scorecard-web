@@ -22,6 +22,11 @@
 
       = render "scorecards/show/modal_mark_as_completed"
 
+    - if @scorecard.open_voting?
+      %a.btn.btn-info.btn-sm.shadow-sm{ href: new_scorecard_vote_path(@scorecard.token), target: "_blank" }
+        %i.fas.fa-vote-yea.fa-sm.text-white-50
+        = t("scorecard.go_voting")
+
     %a.btn.btn-secondary.btn-sm.shadow-sm{ href: scorecards_path }
       %i.fas.fa-arrow-left.fa-sm.text-white-50
       = t("shared.back")
