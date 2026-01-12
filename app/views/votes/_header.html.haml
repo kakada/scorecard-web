@@ -4,7 +4,7 @@
   .mb-0.small
     %span.line-badge{ class: @scorecard.scorecard_type, 'data-toggle' => 'tooltip', title: @scorecard.t_scorecard_type }
       = "#{@scorecard.uuid}"
-    %span.ml-1= "(#{scorecard_location_name(@scorecard)})"
+    %span.ml-1= "(#{@scorecard.location_short_detail})"
 
   / Language dropdown for public voting
   - language_images = { en: 'english.png', km: 'khmer.png' }

@@ -5,3 +5,6 @@ en:
     description: 'The digitised scorecard app development is funded by the EU, implemented by CARE, API and InSTEDD iLab SEA under the project “supports civic engagement and improves social accountability by leveraging digital technologies (Re: ISAF-II)”. The community members, local NGO partners and governmental officials use the app to enhance their participation and dialogue with regards to public services improvement.'
     twitter:
       site: Community Scorecard (CSC)
+    voting:
+      title: 'Vote on Scorecard: %{scorecard}'
+      description: 'Scan the QR code or visit the link to participate in community scorecard voting'
