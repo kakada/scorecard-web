@@ -67,6 +67,8 @@ class Scorecard < ApplicationRecord
   include Scorecards::CallbackNotification
   include Scorecards::Elasticsearch
   include Scorecards::FacilityMigrationConcern
+  include Scorecards::QrCodeGeneratorConcern
+  include Scorecards::VotableResultConcern
 
   acts_as_paranoid if column_names.include? "deleted_at"
 

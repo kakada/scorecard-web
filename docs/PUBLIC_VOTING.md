@@ -287,10 +287,10 @@ scorecard.progress  # Should return "open_voting"
 
 ### QR Code Not Generated
 
-Ensure the `OpenVotingService` is triggered:
+Ensure the `generate_qr_code` is triggered:
 ```ruby
 scorecard = Scorecard.find_by(uuid: "your-uuid")
-Scorecards::OpenVotingService.new(scorecard).call
+scorecard.generate_qr_code
 ```
 
 ### Public Votes Affecting Statistics

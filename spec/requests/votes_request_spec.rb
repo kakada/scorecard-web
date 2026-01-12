@@ -36,7 +36,7 @@ RSpec.describe "VotesController", type: :request do
       context "when scorecard has QR code" do
         before do
           # generate QR code for the scorecard
-          Scorecards::OpenVotingService.new(scorecard).call
+          scorecard.generate_qr_code
         end
 
         it "includes og:image meta tag with QR code URL" do
