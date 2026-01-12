@@ -45,8 +45,11 @@ services:
     image: redis:7.2.3
 
   ngrok:
-    image: wernight/ngrok
-    ports:
-      - 4040:4040
+    image: ngrok/ngrok:latest
+    depends_on:
+      - web
+    command: http web:3000
     environment:
-      NGROK_PORT: 'web:3000'
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN} #https://ngrok.com
+    ports:
+      - "4040:4040"
