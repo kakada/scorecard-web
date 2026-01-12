@@ -18,6 +18,15 @@ module Scorecards::Location
       primary_school_name || commune || district
     end
 
+    def location_short_detail
+      return "#{location_name}" unless dataset.present?
+
+      title = dataset.category.name
+      str = I18n.locale == :km ? "#{title}#{dataset_name}" : "#{dataset_name} #{title},"
+
+      [str, location_name].join(" ")
+    end
+
     private
       def set_location_code
         self.location_code = commune_id

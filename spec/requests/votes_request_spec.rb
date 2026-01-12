@@ -22,6 +22,28 @@ RSpec.describe "VotesController", type: :request do
         get new_scorecard_vote_path(scorecard.token)
         expect(response).to have_http_status(:ok)
       end
+
+      it "sets Open Graph meta tags" do
+        get new_scorecard_vote_path(scorecard.token)
+
+        # Check that response body contains OG meta tags
+        expect(response.body).to include("og:title")
+        expect(response.body).to include("og:description")
+        expect(response.body).to include("og:url")
+        expect(response.body).to include("og:type")
+      end
+
+      context "when scorecard has QR code" do
+        before do
+          # generate QR code for the scorecard
+          Scorecards::OpenVotingService.new(scorecard).call
+        end
+
+        it "includes og:image meta tag with QR code URL" do
+          get new_scorecard_vote_path(scorecard.token)
+          expect(response.body).to include("og:image")
+        end
+      end
     end
 
     context "when voting is closed" do
