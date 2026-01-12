@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_01_02_030000) do
+ActiveRecord::Schema[7.0].define(version: 2026_01_09_081002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -631,7 +631,9 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_02_030000) do
     t.integer "app_version"
     t.integer "running_mode", default: 0
     t.string "qr_code"
+    t.string "token", limit: 64
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
+    t.index ["token"], name: "index_scorecards_on_token", unique: true
     t.index ["uuid"], name: "index_scorecards_on_uuid"
   end
 

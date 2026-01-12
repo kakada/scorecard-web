@@ -156,9 +156,11 @@ class Scorecard < ApplicationRecord
   validates :completor_id, presence: true, if: -> { completed_at.present? }
 
   validates :running_mode, presence: true, inclusion: { in: running_modes.keys }
+  validates :token, uniqueness: true, allow_nil: true
 
   # Callback
   before_create :secure_uuid
+  before_create :generate_token
   before_create :set_name
   before_create :set_published
   before_save   :clear_dataset_id, unless: -> { facility.try(:category_id).present? }
@@ -217,6 +219,23 @@ class Scorecard < ApplicationRecord
 
     def six_digit_rand
       SecureRandom.random_number(1..999999).to_s.rjust(6, "0")
+    end
+
+    def generate_token
+      return if token.present?
+
+      max_attempts = 10
+      attempts = 0
+
+      loop do
+        self.token = SecureRandom.hex(32)
+        break unless self.class.exists?(token: token)
+
+        attempts += 1
+        if attempts >= max_attempts
+          raise "Failed to generate unique token after #{max_attempts} attempts"
+        end
+      end
     end
 
     def set_name
