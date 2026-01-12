@@ -14,6 +14,7 @@
 #  dashboard_user_emails     :text             default([]), is an Array
 #  dashboard_user_roles      :string           default([]), is an Array
 #  uuid                      :string
+#  sandbox                   :boolean          default(FALSE), not null
 #
 require "rails_helper"
 

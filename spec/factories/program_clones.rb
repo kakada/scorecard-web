@@ -1,5 +1,21 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: program_clones
+#
+#  id                  :bigint           not null, primary key
+#  source_program_id   :bigint
+#  target_program_id   :bigint           not null
+#  user_id             :bigint           not null
+#  selected_components :text             default([]), is an Array
+#  clone_method        :string           not null
+#  status              :integer          default("pending")
+#  error_message       :text
+#  completed_at        :datetime
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
 FactoryBot.define do
   factory :program_clone do
     association :target_program, factory: :program

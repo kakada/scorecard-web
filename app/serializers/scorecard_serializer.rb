@@ -55,6 +55,9 @@
 #  removing_scorecard_batch_id :uuid
 #  runner_id                   :integer
 #  app_version                 :integer
+#  running_mode                :integer          default("offline")
+#  qr_code                     :string
+#  token                       :string(64)
 #
 class ScorecardSerializer < ActiveModel::Serializer
   attributes :uuid, :unit_type_name, :facility_id, :scorecard_type,
