@@ -16,14 +16,13 @@
       .veticial-line
 
       / Indicator Development
-
-      = render 'scorecards/show/progress_step', label: "2. #{t('scorecard.proposed_indicator')}", url: scorecard_indicators_path(@scorecard.uuid), disabled: disabled_button, in_review: policy(@scorecard).in_review?, sub_title: indicator_development_sub_title(@scorecard)
+      - results_available = @scorecard.progress_before_type_cast >= Scorecard.progresses[:close_voting]
+      = render 'scorecards/show/progress_step', label: "2. #{t('scorecard.proposed_indicator')}", url: scorecard_indicators_path(@scorecard.uuid), disabled: !results_available, in_review: policy(@scorecard).in_review?, sub_title: indicator_development_sub_title(@scorecard)
 
       .veticial-line
 
       / Voting Indicator
-
-      = render 'scorecards/show/progress_step', label: "3. #{t('scorecard.indicator_development')}", url: scorecard_medians_path(@scorecard.uuid), disabled: disabled_button, sub_title: voting_indicator_sub_title(@scorecard)
+      = render 'scorecards/show/progress_step', label: "3. #{t('scorecard.indicator_development')}", url: scorecard_medians_path(@scorecard.uuid), disabled: !results_available, sub_title: voting_indicator_sub_title(@scorecard)
 
       .veticial-line
 

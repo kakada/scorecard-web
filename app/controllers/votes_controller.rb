@@ -19,7 +19,7 @@ class VotesController < ApplicationController
   def create
     @form = PublicVoteForm.new(scorecard: @scorecard, params: public_vote_params)
 
-    if PublicVotes::SubmitService.new(@form).call
+    if @form.save
       redirect_to scorecard_vote_path(@scorecard.token, "thank-you")
     else
       render :new, status: :unprocessable_entity
