@@ -55,6 +55,9 @@
 #  removing_scorecard_batch_id :uuid
 #  runner_id                   :integer
 #  app_version                 :integer
+#  running_mode                :integer          default("offline")
+#  qr_code                     :string
+#  token                       :string(64)
 #
 require "rails_helper"
 
