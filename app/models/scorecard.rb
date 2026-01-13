@@ -91,6 +91,7 @@ class Scorecard < ApplicationRecord
   }
 
   # Constant
+  STATUS_PLANNED = "planned"
   STATUS_COMPLETED = "completed"
   STATUS_IN_REVIEW = "in_review"
   STATUS_RUNNING = "running"
@@ -170,6 +171,7 @@ class Scorecard < ApplicationRecord
   before_create :set_published
   before_save   :clear_dataset_id, unless: -> { facility.try(:category_id).present? }
   before_save   :set_primary_school_code
+  after_initialize :set_default_progress, if: :new_record?
 
   after_commit  :create_submitted_progress, on: [:update], if: -> { saved_change_to_progress? && in_review? }
   after_commit  :create_completed_progress, on: [:update], if: -> { saved_change_to_progress? && completed? }
@@ -188,7 +190,7 @@ class Scorecard < ApplicationRecord
   scope :lockeds, -> { where.not(locked_at: nil) }
 
   def status
-    progress.present? ? progress : "planned"
+    progress
   end
 
   def t_scorecard_type
@@ -199,17 +201,13 @@ class Scorecard < ApplicationRecord
     @program_scorecard_type ||= program.program_scorecard_types.select { |ty| ty.code == scorecard_type }.first
   end
 
-  def planned?
-    progress.nil?
-  end
-
   # Class method
   def self.t_scorecard_types
     self.scorecard_types.keys.map { |key| [I18n.t("scorecard.#{key}"), key] }
   end
 
   def self.statuses
-    ["planned"] + self.progresses.keys
+    progresses.keys
   end
 
   private
@@ -268,5 +266,9 @@ class Scorecard < ApplicationRecord
       return unless dataset_id.present? && facility.try(:category_code) == "DS_PS"
 
       self.primary_school_code = PrimarySchool.find_by(code: dataset_code).try(:id)
+    end
+
+    def set_default_progress
+      self.progress ||= STATUS_PLANNED
     end
 end

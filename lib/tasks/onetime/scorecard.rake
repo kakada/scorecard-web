@@ -80,5 +80,15 @@ namespace :onetime do
       puts "❌ Token generation failed: #{e.message}"
       raise
     end
+
+    desc "Generate default progress for scorecards with nil progress"
+    task generate_default_progress: :environment do
+      Scorecard.where(progress: nil).update_all(progress: Scorecard.progresses[Scorecard::STATUS_PLANNED])
+
+      puts "✅ Default progress generation completed successfully!"
+    rescue StandardError => e
+      puts "❌ Default progress generation failed: #{e.message}"
+      raise
+    end
   end
 end

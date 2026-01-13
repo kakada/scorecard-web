@@ -23,6 +23,7 @@ class ScorecardProgress < ApplicationRecord
 
   # Enum
   enum status: {
+    planned: 0,
     downloaded: 1,
     running: 2,
     renewed: 3,
