@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-class QrCodeGenerator
+require "rqrcode"
+require "chunky_png"
+
+class QrCodeImageGenerator
   LOGO_PADDING = 12
 
   attr_reader :value, :logo_url
@@ -16,15 +19,7 @@ class QrCodeGenerator
       level: :h # REQUIRED when adding logo
     )
 
-    qr_png = qrcode.as_png(
-      bit_depth: 1,
-      border_modules: 4,
-      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
-      color: ChunkyPNG::Color::BLACK,
-      fill: ChunkyPNG::Color::WHITE,
-      module_px_size: 6,
-      size: 300
-    )
+    qr_png = qrcode.as_png(default_png_options)
 
     add_logo!(qr_png) if logo_url
 
@@ -32,6 +27,18 @@ class QrCodeGenerator
   end
 
   private
+    def default_png_options
+      {
+        bit_depth: 1,
+        border_modules: 4,
+        color_mode: ChunkyPNG::COLOR_GRAYSCALE,
+        color: ChunkyPNG::Color::BLACK,
+        fill: ChunkyPNG::Color::WHITE,
+        module_px_size: 6,
+        size: 300
+      }
+    end
+
     def add_logo!(qr_png)
       return unless File.exist?(logo_url)
 

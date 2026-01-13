@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe QrCodeGenerator do
+RSpec.describe QrCodeImageGenerator do
   describe "#call" do
     let(:value) { "https://example.com/path?q=1" }
 
