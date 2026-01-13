@@ -22,7 +22,7 @@ System Admins oversee the entire platform. They create programs, control system-
 4. If you forget your password, click **Forgot your password?** to receive a reset email.
 
 ## Navigating the Dashboard
-After signing in you land on the dashboard:
+After signing in, you land on the dashboard:
 - The top navigation bar provides links to Programs, Users, Languages, Facilities, Indicators, Rating Scales, Templates, Activity Logs, and Settings.
 - The bell or notification area shows background job statuses and system alerts.
 - A profile menu (top right) lets you switch language, update your password, or sign out.  

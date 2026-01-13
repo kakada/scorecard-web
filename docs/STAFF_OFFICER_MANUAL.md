@@ -36,7 +36,7 @@ Staff/Officer users collect data and facilitate community scorecard sessions. Th
 
 ### Create and Update Scorecards
 1. Go to **Scorecards** and click **New Scorecard**.
-2. Select the batch (if prompted), facility, and language.
+2. Select the batch (if prompted), a facility, and a language.
 3. Add ratings for each indicator and capture notes or issues raised by participants.
 4. Attach photos, audio, or documents when available as evidence.  
    _Placeholder: Insert screenshot of the scorecard form._
