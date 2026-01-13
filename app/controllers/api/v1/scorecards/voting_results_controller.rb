@@ -8,9 +8,17 @@ module Api
 
         def index
           authorize @scorecard, :download?
-          @voting_indicators = @scorecard.voting_indicators.order(:display_order)
 
-          render json: @voting_indicators, each_serializer: VotingResultsSerializer, status: :ok
+          voting_indicators = @scorecard.voting_indicators.order(:display_order).to_a
+          rating_counts = Rating
+            .where(voting_indicator_uuid: voting_indicators.map(&:uuid))
+            .group(:voting_indicator_uuid, :score)
+            .count
+
+          render json: voting_indicators,
+            each_serializer: VotingResultsSerializer,
+            status: :ok,
+            rating_counts: rating_counts
         end
 
         private
