@@ -29,6 +29,11 @@ RSpec.describe "Api::V1::Scorecards::VotingResultsController", type: :request do
       end
 
       before do
+        # Seed ratings for voting_indicator1 to validate aggregation
+        create_list(:rating, 5,  voting_indicator_uuid: voting_indicator1.uuid, score: 1)
+        create_list(:rating, 10, voting_indicator_uuid: voting_indicator1.uuid, score: 2)
+        create_list(:rating, 15, voting_indicator_uuid: voting_indicator1.uuid, score: 3)
+
         get "/api/v1/scorecards/#{scorecard.uuid}/voting_results", headers: headers
       end
 
@@ -40,6 +45,31 @@ RSpec.describe "Api::V1::Scorecards::VotingResultsController", type: :request do
 
         expect(json_response).to be_an(Array)
         expect(json_response.length).to eq(2)
+      end
+
+      it "returns results with aggregated vote_count for each score (1..5)" do
+        json_response = JSON.parse(response.body)
+        first = json_response.find { |item| item["uuid"] == voting_indicator1.uuid }
+        second = json_response.find { |item| item["uuid"] == voting_indicator2.uuid }
+
+        expect(first).to be_present
+        expect(second).to be_present
+
+        expect(first["results"]).to eq([
+          { "score" => 1, "vote_count" => 5 },
+          { "score" => 2, "vote_count" => 10 },
+          { "score" => 3, "vote_count" => 15 },
+          { "score" => 4, "vote_count" => 0 },
+          { "score" => 5, "vote_count" => 0 }
+        ])
+
+        expect(second["results"]).to eq([
+          { "score" => 1, "vote_count" => 0 },
+          { "score" => 2, "vote_count" => 0 },
+          { "score" => 3, "vote_count" => 0 },
+          { "score" => 4, "vote_count" => 0 },
+          { "score" => 5, "vote_count" => 0 }
+        ])
       end
     end
 
