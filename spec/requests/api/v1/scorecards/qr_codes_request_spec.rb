@@ -11,7 +11,7 @@ RSpec.describe "Api::V1::Scorecards::QrCodesController", type: :request do
     context "when QR code exists" do
       before do
         # Generate QR code
-        Scorecards::OpenVotingService.new(scorecard).call
+        scorecard.generate_qr_code
         get "/api/v1/scorecards/#{scorecard.uuid}/qr_code", headers: headers
       end
 

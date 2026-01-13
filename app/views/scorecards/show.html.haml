@@ -16,7 +16,7 @@
       .veticial-line
 
       / Indicator Development
-      - results_available = @scorecard.progress_before_type_cast >= Scorecard.progresses[:close_voting]
+      - results_available = (@scorecard.progress_before_type_cast || 0) >= Scorecard.progresses[:close_voting]
       = render 'scorecards/show/progress_step', label: "2. #{t('scorecard.proposed_indicator')}", url: scorecard_indicators_path(@scorecard.uuid), disabled: !results_available, in_review: policy(@scorecard).in_review?, sub_title: indicator_development_sub_title(@scorecard)
 
       .veticial-line
