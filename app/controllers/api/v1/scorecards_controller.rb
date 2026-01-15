@@ -56,7 +56,7 @@ module Api
               :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :selected, :voting_indicator_uuid, :scorecard_uuid, tag_attributes: [:name]
             ],
             voting_indicators_attributes: [
-              :uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid,
+              :uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type,
               :median, :scorecard_uuid, :display_order,
               indicator_activities_attributes: [ :id, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]
             ],
