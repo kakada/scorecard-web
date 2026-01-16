@@ -60,7 +60,7 @@ class LocalNgo < ApplicationRecord
   private
     def verify_target_provinces
       return unless target_province_ids.present?
-      
+
       unless valid_target_provinces?
         errors.add :target_province_ids, "is invalid"
         return
