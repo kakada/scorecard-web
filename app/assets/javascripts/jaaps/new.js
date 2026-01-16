@@ -18,6 +18,8 @@ CW.JaapsNew = (() => {
     initStatus(dataSource);
     toggleSampleButton(dataSource, initialData);
     initJaapTable(initialData);
+    initTableStateControl();  // Add table state control
+    initProvinceFilter();     // Add province filtering for LNGO users
     onSubmitJaapForm();
     onCellEdit();
     onClickCancel();
@@ -177,6 +179,39 @@ CW.JaapsNew = (() => {
     });
   }
 
+  function initTableStateControl() {
+    const $communeSelect = $('#jaap_commune_id');
+    const $tableContainer = $('#jaap-table');
+    
+    // Check initial state
+    updateTableState();
+    
+    // Monitor commune selection changes
+    $communeSelect.on('change', function() {
+      updateTableState();
+    });
+    
+    function updateTableState() {
+      const communeId = $communeSelect.val();
+      const hasCommune = communeId && communeId.length > 0;
+      
+      if (hasCommune) {
+        // Enable table
+        $tableContainer.css('opacity', '1').css('pointer-events', 'auto');
+      } else {
+        // Disable table
+        $tableContainer.css('opacity', '0.5').css('pointer-events', 'none');
+      }
+    }
+  }
+
+  function setTableEditable(editable) {
+    if (!table) return;
+    
+    // Update columns with new editable state
+    table.setColumns(buildTableColumns(editable));
+  }
+
   function buildTableColumns(editable) {
     const locale = $('[data-language-code]').data('languageCode') || 'en';
     tr = CW.JaapLocale[locale] || {};
@@ -276,6 +311,43 @@ CW.JaapsNew = (() => {
   function hideSampleButton() {
     const $btn = $('#load-sample');
     if ($btn.length) { $btn.hide(); }
+  }
+
+  function initProvinceFilter() {
+    const $viewCenter = $('.view-center');
+    const userRole = $viewCenter.data('userRole');
+    const targetProvinceIds = $viewCenter.data('targetProvinceIds');
+    
+    // Only filter if user is LNGO and has target provinces
+    if (userRole === 'lngo' && targetProvinceIds) {
+      const allowedIds = targetProvinceIds.toString().split(',').filter(id => id.length > 0);
+      
+      if (allowedIds.length > 0) {
+        const $provinceSelect = $('#jaap_province_id');
+        
+        // Wait for provinces to be populated, then filter
+        const checkInterval = setInterval(function() {
+          const optionCount = $provinceSelect.find('option').length;
+          
+          if (optionCount > 1) { // More than just the "Please select" option
+            clearInterval(checkInterval);
+            
+            // Filter out provinces not in the allowed list
+            $provinceSelect.find('option').each(function() {
+              const optionValue = $(this).val();
+              if (optionValue && !allowedIds.includes(optionValue)) {
+                $(this).remove();
+              }
+            });
+          }
+        }, 100);
+        
+        // Clear interval after 5 seconds to prevent infinite loop
+        setTimeout(function() {
+          clearInterval(checkInterval);
+        }, 5000);
+      }
+    }
   }
 })();
 

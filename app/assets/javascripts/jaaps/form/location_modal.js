@@ -5,13 +5,11 @@ CW.JaapLocationModal = (() => {
 
   function init(getCurrentCell, saveDraftToLocalStorage, tr) {
     const $modal = $('#locationModal');
-    const $provinceSelect = $('#modal-province');
-    const $districtSelect = $('#modal-district');
-    const $communeSelect = $('#modal-commune');
     const $datasetList = $('#dataset-list');
     const $confirmBtn = $('#confirm-location');
     const $clearBtn = $('#clear-location');
     let selectedDataset = null;
+    let previouslySelectedDataset = null;
 
     // Helper function to get locale-specific field name
     function getLocaleNameField() {
@@ -31,48 +29,21 @@ CW.JaapLocationModal = (() => {
       return text ? text.replace(/[&<>"']/g, function(m) { return map[m]; }) : '';
     }
 
-    // Load provinces on modal show
+    // Load datasets on modal show based on commune from main form
     $modal.on('show.bs.modal', function() {
+      // Get current cell value to restore previous selection
+      let currentCell = getCurrentCell();
+      previouslySelectedDataset = currentCell ? currentCell.getValue() : null;
+      
       resetModal();
-      loadProvinces();
-    });
-
-    // Province change handler
-    $provinceSelect.on('change', function() {
-      const provinceId = $(this).val();
-      resetDistricts();
-      resetCommunes();
-      resetDatasets();
-      selectedDataset = null;
-      $confirmBtn.prop('disabled', true);
-
-      if (provinceId) {
-        loadDistricts(provinceId);
-      }
-    });
-
-    // District change handler
-    $districtSelect.on('change', function() {
-      const districtId = $(this).val();
-      resetCommunes();
-      resetDatasets();
-      selectedDataset = null;
-      $confirmBtn.prop('disabled', true);
-
-      if (districtId) {
-        loadCommunes(districtId);
-      }
-    });
-
-    // Commune change handler
-    $communeSelect.on('change', function() {
-      const communeId = $(this).val();
-      resetDatasets();
-      selectedDataset = null;
-      $confirmBtn.prop('disabled', true);
-
+      
+      // Get commune from main form
+      const communeId = $('#jaap_commune_id').val();
+      
       if (communeId) {
         loadDatasets(communeId);
+      } else {
+        $datasetList.html('<div class="text-muted text-center py-3">' + (tr.select_commune_in_form || 'Please select a commune in the main form first') + '</div>');
       }
     });
 
@@ -105,20 +76,9 @@ CW.JaapLocationModal = (() => {
     });
 
     function resetModal() {
-      $provinceSelect.val('').trigger('change');
-      resetDistricts();
-      resetCommunes();
       resetDatasets();
       selectedDataset = null;
       $confirmBtn.prop('disabled', true);
-    }
-
-    function resetDistricts() {
-      $districtSelect.html('<option value="">' + (tr.please_select || 'Please select') + '</option>').prop('disabled', true);
-    }
-
-    function resetCommunes() {
-      $communeSelect.html('<option value="">' + (tr.please_select || 'Please select') + '</option>').prop('disabled', true);
     }
 
     function resetDatasets() {
@@ -126,70 +86,11 @@ CW.JaapLocationModal = (() => {
       $datasetList.html('<div class="text-muted text-center py-3">' + msg + '</div>');
     }
 
-    function loadProvinces() {
-      $.ajax({
-        url: '/pumi/provinces',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          const nameField = getLocaleNameField();
-
-          $provinceSelect.html('<option value="">' + (tr.please_select || 'Please select') + '</option>');
-          data.forEach(function(province) {
-            $provinceSelect.append('<option value="' + escapeHtml(province.id) + '">' + escapeHtml(province[nameField]) + '</option>');
-          });
-        },
-        error: function() {
-          console.error('Failed to load provinces');
-        }
-      });
-    }
-
-    function loadDistricts(provinceId) {
-      $.ajax({
-        url: '/pumi/districts?province_id=' + provinceId,
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          const nameField = getLocaleNameField();
-
-          $districtSelect.html('<option value="">' + (tr.please_select || 'Please select') + '</option>');
-          data.forEach(function(district) {
-            $districtSelect.append('<option value="' + escapeHtml(district.id) + '">' + escapeHtml(district[nameField]) + '</option>');
-          });
-          $districtSelect.prop('disabled', false);
-        },
-        error: function() {
-          console.error('Failed to load districts');
-        }
-      });
-    }
-
-    function loadCommunes(districtId) {
-      $.ajax({
-        url: '/pumi/communes?district_id=' + districtId,
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          const nameField = getLocaleNameField();
-
-          $communeSelect.html('<option value="">' + (tr.please_select || 'Please select') + '</option>');
-          data.forEach(function(commune) {
-            $communeSelect.append('<option value="' + escapeHtml(commune.id) + '">' + escapeHtml(commune[nameField]) + '</option>');
-          });
-          $communeSelect.prop('disabled', false);
-        },
-        error: function() {
-          console.error('Failed to load communes');
-        }
-      });
-    }
-
     function loadDatasets(communeId) {
       $datasetList.html('<div class="text-muted text-center py-3"><i class="fas fa-spinner fa-spin"></i> Loading...</div>');
 
       // Get the selected commune name for the Commune Administration section
-      const communeName = $communeSelect.find('option:selected').text();
+      const communeName = $('#jaap_commune_id option:selected').text();
       const communeValue = `${tr.commune} ${communeName}`;
 
       $.ajax({
@@ -242,6 +143,17 @@ CW.JaapLocationModal = (() => {
             });
 
             $datasetList.html(html);
+          }
+          
+          // Restore previously selected dataset if it exists
+          if (previouslySelectedDataset) {
+            $datasetList.find('a.list-group-item').each(function() {
+              if ($(this).data('value') === previouslySelectedDataset) {
+                $(this).addClass('active');
+                selectedDataset = previouslySelectedDataset;
+                $confirmBtn.prop('disabled', false);
+              }
+            });
           }
         },
         error: function() {

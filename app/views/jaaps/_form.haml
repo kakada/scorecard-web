@@ -1,4 +1,4 @@
-.view-center{'data-jaap-id' => @jaap.id }
+.view-center{'data-jaap-id' => @jaap.id, 'data-user-role' => @user_role, 'data-target-province-ids' => @target_province_ids.join(',') }
   = simple_form_for @jaap do |f|
     .form-group.row
       .col-12.col-md-4.mb-2.mb-md-0
