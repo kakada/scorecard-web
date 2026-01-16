@@ -314,13 +314,16 @@ CW.JaapsNew = (() => {
   }
 
   function initProvinceFilter() {
+    const PROVINCE_LOAD_TIMEOUT = 5000; // Maximum time to wait for provinces to load
+    const PROVINCE_CHECK_INTERVAL = 100; // Check every 100ms
+    
     const $viewCenter = $('.view-center');
     const userRole = $viewCenter.data('userRole');
     const targetProvinceIds = $viewCenter.data('targetProvinceIds');
     
     // Only filter if user is LNGO and has target provinces
     if (userRole === 'lngo' && targetProvinceIds) {
-      const allowedIds = targetProvinceIds.toString().split(',').filter(id => id.length > 0);
+      const allowedIds = targetProvinceIds.split(',').filter(id => id.length > 0);
       
       if (allowedIds.length > 0) {
         const $provinceSelect = $('#jaap_province_id');
@@ -340,12 +343,12 @@ CW.JaapsNew = (() => {
               }
             });
           }
-        }, 100);
+        }, PROVINCE_CHECK_INTERVAL);
         
-        // Clear interval after 5 seconds to prevent infinite loop
+        // Clear interval after timeout to prevent infinite loop
         setTimeout(function() {
           clearInterval(checkInterval);
-        }, 5000);
+        }, PROVINCE_LOAD_TIMEOUT);
       }
     }
   }

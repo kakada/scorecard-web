@@ -43,7 +43,8 @@ CW.JaapLocationModal = (() => {
       if (communeId) {
         loadDatasets(communeId);
       } else {
-        $datasetList.html('<div class="text-muted text-center py-3">' + (tr.select_commune_in_form || 'Please select a commune in the main form first') + '</div>');
+        const msg = tr.select_commune_in_form || 'Please select a commune in the main form first';
+        $datasetList.html('<div class="text-muted text-center py-3">' + msg + '</div>');
       }
     });
 

@@ -51,7 +51,11 @@ class JaapsController < ApplicationController
 
     def set_user_context
       @user_role = current_user.role
-      @target_province_ids = current_user.lngo? && current_user.local_ngo.present? ? current_user.local_ngo.target_province_ids.to_s.split(",") : []
+      @target_province_ids = if current_user.lngo? && current_user.local_ngo.present? && current_user.local_ngo.target_province_ids.present?
+                               current_user.local_ngo.target_province_ids.split(",")
+                             else
+                               []
+                             end
     end
 
     def jaap_params
