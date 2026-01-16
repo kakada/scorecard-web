@@ -16,6 +16,7 @@ module Samples
           commune_id: village.commune_id,
           district_id: village.district_id,
           province_id: village.province_id,
+          target_province_ids: village.province_id,
         )
       end
     end

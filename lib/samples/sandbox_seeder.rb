@@ -56,7 +56,9 @@ module Samples
         ::LocalNgo.find_or_create_by!(
           name: SANDBOX_NAME,
           program_id: program.id
-        )
+        ) do |ngo|
+          ngo.target_province_ids = "01"
+        end
       end
 
       def create_cafs(local_ngo)

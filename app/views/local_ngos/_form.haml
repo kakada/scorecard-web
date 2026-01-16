@@ -28,7 +28,9 @@
 
     .form-group
       = f.hidden_field :target_province_ids
-      %label= t('local_ngo.target_provinces')
+      %label
+        = t('local_ngo.target_provinces')
+        %span.text-danger *
       %input{ name: 'tags', placeholder: t("shared.please_select"), "data-collection" => Pumi::Province.all.to_json }
 
     = f.input :website_url, label: t('local_ngo.website_url')

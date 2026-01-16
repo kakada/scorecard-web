@@ -24,5 +24,6 @@ FactoryBot.define do
   factory :local_ngo do
     program
     name        { FFaker::Name.name }
+    target_province_ids { "01" }
   end
 end
