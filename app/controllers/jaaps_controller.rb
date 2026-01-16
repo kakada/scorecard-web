@@ -17,6 +17,7 @@ class JaapsController < ApplicationController
     if @jaap.save
       redirect_to @jaap, notice: "JAAP saved!"
     else
+      set_user_context
       render :new
     end
   end
@@ -31,6 +32,7 @@ class JaapsController < ApplicationController
     if @jaap.update(jaap_params)
       redirect_to @jaap, notice: "JAAP updated!"
     else
+      set_user_context
       render :edit
     end
   end
@@ -51,11 +53,11 @@ class JaapsController < ApplicationController
 
     def set_user_context
       @user_role = current_user.role
-      @target_province_ids = if current_user.lngo? && current_user.local_ngo.present? && current_user.local_ngo.target_province_ids.present?
-                               current_user.local_ngo.target_province_ids.split(",")
-                             else
-                               []
-                             end
+      @target_province_ids = if current_user.lngo? && current_user.local_ngo&.target_province_ids.present?
+        current_user.local_ngo.target_province_ids.to_s.split(",")
+      else
+        []
+      end
     end
 
     def jaap_params

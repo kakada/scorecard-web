@@ -34,12 +34,12 @@ CW.JaapLocationModal = (() => {
       // Get current cell value to restore previous selection
       let currentCell = getCurrentCell();
       previouslySelectedDataset = currentCell ? currentCell.getValue() : null;
-      
+
       resetModal();
-      
+
       // Get commune from main form
-      const communeId = $('#jaap_commune_id').val();
-      
+      const communeId = $('select#jaap_commune_id').val();
+
       if (communeId) {
         loadDatasets(communeId);
       } else {
@@ -91,7 +91,7 @@ CW.JaapLocationModal = (() => {
       $datasetList.html('<div class="text-muted text-center py-3"><i class="fas fa-spinner fa-spin"></i> Loading...</div>');
 
       // Get the selected commune name for the Commune Administration section
-      const communeName = $('#jaap_commune_id option:selected').text();
+      const communeName = $('select#jaap_commune_id option:selected').text();
       const communeValue = `${tr.commune} ${communeName}`;
 
       $.ajax({
@@ -145,7 +145,7 @@ CW.JaapLocationModal = (() => {
 
             $datasetList.html(html);
           }
-          
+
           // Restore previously selected dataset if it exists
           if (previouslySelectedDataset) {
             $datasetList.find('a.list-group-item').each(function() {
