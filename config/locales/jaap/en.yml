@@ -22,4 +22,6 @@ en:
     select_location: Select Project Location
     available_datasets: Available Datasets
     select_commune_first: Please select a commune to see available datasets
+    select_commune_in_form: Please select a commune in the main form first
+    datasets_based_on_commune: Datasets will be loaded based on the commune selected in the main form
     no_datasets_found: No datasets found for this location
