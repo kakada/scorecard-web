@@ -35,6 +35,7 @@ class LocalNgo < ApplicationRecord
 
   # Validation
   validates :name, presence: true, uniqueness: { scope: :program_id }
+  validates :target_province_ids, presence: true
   validates :website_url, url: {  allow_blank: true,
                                   no_local: true,
                                   public_suffix: true,
@@ -59,7 +60,11 @@ class LocalNgo < ApplicationRecord
   private
     def verify_target_provinces
       return unless target_province_ids.present?
-      return errors.add :target_province_ids, "is invalid" unless valid_target_provinces?
+
+      unless valid_target_provinces?
+        errors.add :target_province_ids, "is invalid"
+        return
+      end
 
       set_target_provinces
     end
