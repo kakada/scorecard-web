@@ -191,35 +191,39 @@ CW.JaapsNew = (() => {
     // Check initial state
     updateTableState();
 
-    // Monitor commune selection changes
-    $communeSelect.on('change', function() {
-      const newCommuneId = $(this).val();
-      
-      // Check if table has data (not just an empty row)
-      if (previousCommuneId && tableHasData() && newCommuneId !== previousCommuneId) {
-        // Show warning
-        const message = tr.commune_change_warning || "Changing the commune may affect existing table data. Do you want to continue?";
-        if (!window.confirm(message)) {
-          // User cancelled - revert to previous commune
-          $(this).val(previousCommuneId);
-          // Trigger the underlying select library to update its display if needed
-          if ($(this).data('selectpicker')) {
-            $(this).selectpicker('val', previousCommuneId);
+    onChangeCommune();
+
+    function onChangeCommune() {
+      // Monitor commune selection changes
+      $communeSelect.on('change', function() {
+        const newCommuneId = $(this).val();
+
+        // Check if table has data (not just an empty row)
+        if (previousCommuneId && tableHasData() && newCommuneId !== previousCommuneId) {
+          // Show warning
+          const message = tr.commune_change_warning || "Changing the commune may affect existing table data. Do you want to continue?";
+          if (!window.confirm(message)) {
+            // User cancelled - revert to previous commune
+            $(this).val(previousCommuneId);
+            // Trigger the underlying select library to update its display if needed
+            if ($(this).data('selectpicker')) {
+              $(this).selectpicker('val', previousCommuneId);
+            }
+            return;
           }
-          return;
         }
-      }
-      
-      // Update previous commune ID for next change
-      previousCommuneId = newCommuneId;
-      updateTableState();
-    });
+
+        // Update previous commune ID for next change
+        previousCommuneId = newCommuneId;
+        updateTableState();
+      });
+    }
 
     function tableHasData() {
       if (!table) return false;
       const data = table.getData();
       if (!Array.isArray(data) || data.length === 0) return false;
-      
+
       // Check if we have more than just one empty row
       if (data.length === 1) {
         const firstRow = data[0];
@@ -229,7 +233,7 @@ CW.JaapsNew = (() => {
         });
         return hasValue;
       }
-      
+
       return data.length > 0;
     }
 

@@ -2,14 +2,14 @@
   .modal-dialog.modal-lg.modal-dialog-centered{:role => "document"}
     .modal-content
       .modal-header
-        %h5.modal-title#locationModalLabel= t('jaap.select_location')
+        %h5.modal-title#locationModalLabel
+          = t('jaap.select_location')
+          %span#selected-location.ml-2.text-muted
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
 
       .modal-body
         .form-group
-          %label= t('jaap.available_datasets')
-          %small.text-muted.d-block.mb-2= t('jaap.datasets_based_on_commune')
           #dataset-list.list-group
             .text-muted.text-center.py-3= t('jaap.select_commune_first')
 

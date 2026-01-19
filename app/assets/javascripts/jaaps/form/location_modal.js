@@ -78,8 +78,30 @@ CW.JaapLocationModal = (() => {
 
     function resetModal() {
       resetDatasets();
+      appendLocationBreadcrumbToTitle();
       selectedDataset = null;
       $confirmBtn.prop('disabled', true);
+    }
+
+    function appendLocationBreadcrumbToTitle() {
+      // Build location breadcrumb for modal title: Province > District > Commune
+      const provinceName = $('select#jaap_province_id option:selected').text();
+      const districtName = $('select#jaap_district_id option:selected').text();
+      const communeName  = $('select#jaap_commune_id option:selected').text();
+
+      const parts = [provinceName, districtName, communeName]
+        .map(function(name) { return name && name.trim(); })
+        .filter(function(name) { return name && name.length > 0; });
+
+      const breadcrumb = parts.join(' → ');
+      const $title = $('#selected-location');
+
+      if (breadcrumb.length > 0) {
+        $title.text(`(${breadcrumb})`);
+      } else {
+        const fallback = tr.select_location || $title.text();
+        $title.text(fallback);
+      }
     }
 
     function resetDatasets() {
