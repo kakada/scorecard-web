@@ -1,13 +1,15 @@
 .view-center{'data-jaap-id' => @jaap.id, 'data-user-role' => @user_role, 'data-target-province-ids' => @target_province_ids.join(',') }
   = simple_form_for @jaap do |f|
-    .form-group.row
-      .col-12.col-md-4.mb-2.mb-md-0
-        = render partial: "scorecards/select_field", locals: { f: f, field_name: "province_id", select_id: "province", select_target: "district", select_collection_url: pumi.provinces_path, select_populate_on_load: true }
-      .col-12.col-md-4.mb-2.mb-md-0
-        = render partial: "scorecards/select_field", locals: { f: f, field_name: "district_id", select_id: "district", select_target: "commune", select_collection_url: pumi.districts_path(:province_id => "FILTER"), select_disabled_target: "#district", select_allow_none: true }
-      .col-12.col-md-4
-        = render partial: "scorecards/select_field", locals: { f: f, field_name: "commune_id", select_id: "commune", select_target: "dataset", select_collection_url: pumi.communes_path(:district_id => "FILTER"), select_disabled_target: "#commune", select_allow_none: true }
-
+    .form-group
+      .row
+        .col-12.col-md-4.mb-2.mb-md-0
+          = render partial: "scorecards/select_field", locals: { f: f, field_name: "province_id", select_id: "province", select_target: "district", select_collection_url: pumi.provinces_path, select_populate_on_load: true }
+        .col-12.col-md-4.mb-2.mb-md-0
+          = render partial: "scorecards/select_field", locals: { f: f, field_name: "district_id", select_id: "district", select_target: "commune", select_collection_url: pumi.districts_path(:province_id => "FILTER"), select_disabled_target: "#district", select_allow_none: true }
+        .col-12.col-md-4
+          = render partial: "scorecards/select_field", locals: { f: f, field_name: "commune_id", select_id: "commune", select_target: "dataset", select_collection_url: pumi.communes_path(:district_id => "FILTER"), select_disabled_target: "#commune", select_allow_none: true }
+      %small.text-danger
+        = t('jaap.location_selection_warning')
 
     -# Reference File Upload
     .reference-wrapper.form-group.row
