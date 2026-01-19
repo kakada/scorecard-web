@@ -14,16 +14,14 @@ RSpec.describe "Api::V1::Scorecards::VotingResultsController", type: :request do
       let!(:voting_indicator1) do
         create(:voting_indicator,
                scorecard_uuid: scorecard.id,
-               indicatorable_id: indicator.id,
-               indicatorable_type: "Indicator",
+               indicator: indicator,
                median: :good,
                display_order: 1)
       end
       let!(:voting_indicator2) do
         create(:voting_indicator,
                scorecard_uuid: scorecard.id,
-               indicatorable_id: indicator.id,
-               indicatorable_type: "Indicator",
+               indicator: indicator,
                median: :acceptable,
                display_order: 2)
       end

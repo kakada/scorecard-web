@@ -4,8 +4,6 @@
 #
 # Table name: voting_indicators
 #
-#  indicatorable_id   :integer
-#  indicatorable_type :string
 #  scorecard_uuid     :string
 #  median             :integer
 #  strength           :text
@@ -20,7 +18,7 @@
 FactoryBot.define do
   factory :voting_indicator do
     indicator      { create(:indicator) }
-    indicatorable  { indicator }
+    indicator_uuid { indicator.uuid }
     scorecard
     median         { rand(1..5) }
   end

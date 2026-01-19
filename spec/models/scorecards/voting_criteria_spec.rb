@@ -13,12 +13,12 @@ RSpec.describe Scorecards::VotingCriteria, type: :model do
     let!(:indicator1) { create(:indicator) }
     let!(:indicator2) { create(:indicator) }
 
-    let!(:voting_indicator1) { create(:voting_indicator, scorecard: scorecard, indicatorable: indicator1) }
-    let!(:voting_indicator2) { create(:voting_indicator, scorecard: scorecard, indicatorable: indicator2) }
+    let!(:voting_indicator1) { create(:voting_indicator, scorecard: scorecard, indicator: indicator1) }
+    let!(:voting_indicator2) { create(:voting_indicator, scorecard: scorecard, indicator: indicator2) }
 
     let(:criterias) { Scorecards::VotingCriteria.new(scorecard).criterias }
-    let(:criteria1) { criterias.select { |c| c["indicatorable_id"] == indicator1.id }[0] }
-    let(:criteria2) { criterias.select { |c| c["indicatorable_id"] == indicator2.id }[0] }
+    let(:criteria1) { criterias.select { |c| c["indicator_uuid"] == indicator1.uuid }[0] }
+    let(:criteria2) { criterias.select { |c| c["indicator_uuid"] == indicator2.uuid }[0] }
 
     before do
       create(:rating, scorecard: scorecard, voting_indicator_uuid: voting_indicator1.uuid, participant_uuid: female.uuid, score: 1)

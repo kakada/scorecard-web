@@ -174,7 +174,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, local_ngo_id: user.local_ngo_id, facility: facility) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { voting_indicators_attributes: [ {
-                          uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
+                          uuid: "123", indicator_uuid: indicator.uuid, scorecard_uuid: scorecard.uuid, display_order: 1,
                           indicator_activities_attributes: [
                             { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action1", selected: true, type: "SuggestedIndicatorActivity" },
                             { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action2", selected: false, type: "SuggestedIndicatorActivity" },
@@ -210,7 +210,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
           number_of_participant: 10,
           app_version: 15013,
           voting_indicators_attributes: [
-            { uuid: "vi-001", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1 }
+            { uuid: "vi-001", indicator_uuid: indicator.uuid, scorecard_uuid: scorecard.uuid, display_order: 1 }
           ]
         }
       end
@@ -243,7 +243,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       before do
         # Ensure the first step has created the voting indicator
         put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: {
-          voting_indicators_attributes: [ { uuid: "vi-001", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1 } ]
+          voting_indicators_attributes: [ { uuid: "vi-001", indicator_uuid: indicator.uuid, scorecard_uuid: scorecard.uuid, display_order: 1 } ]
         } }, headers: headers
 
         put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: second_params }, headers: headers
@@ -339,14 +339,14 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility, local_ngo_id: user.local_ngo_id) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { raised_indicators_attributes: [
-                            { indicatorable_id: indicator.id, indicatorable_type: "Indicator", scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "123", selected: true },
-                            { indicatorable_id: custom_indicator.id, indicatorable_type: "CustomIndicator", scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "124", selected: true },
-                            { indicatorable_id: custom_indicator2.id, indicatorable_type: "Indicators::CustomIndicator", scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "125", selected: true },
+                            { indicator_uuid: indicator.uuid, scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "123", selected: true },
+                            { indicator_uuid: custom_indicator.uuid, scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "124", selected: true },
+                            { indicator_uuid: custom_indicator2.uuid, scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "125", selected: true },
                           ],
                           voting_indicators_attributes: [
-                            { uuid: "123", indicatorable_id: indicator.id, indicatorable_type: "Indicator", scorecard_uuid: scorecard.uuid, display_order: 1 },
-                            { uuid: "124", indicatorable_id: custom_indicator.id, indicatorable_type: "CustomIndicator", scorecard_uuid: scorecard.uuid, display_order: 2 },
-                            { uuid: "125", indicator_uuid: custom_indicator2.uuid, indicatorable_id: custom_indicator2.id, indicatorable_type: "Indicators::CustomIndicator", scorecard_uuid: scorecard.uuid, display_order: 2 },
+                            { uuid: "123", indicator_uuid: indicator.uuid, scorecard_uuid: scorecard.uuid, display_order: 1 },
+                            { uuid: "124", indicator_uuid: custom_indicator.uuid, scorecard_uuid: scorecard.uuid, display_order: 2 },
+                            { uuid: "125", indicator_uuid: custom_indicator2.uuid, scorecard_uuid: scorecard.uuid, display_order: 2 },
                           ]
                         }
                       }
