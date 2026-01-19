@@ -1,4 +1,4 @@
-.view-center{'data-jaap-id' => @jaap.id }
+.view-center{'data-jaap-id' => @jaap.id, 'data-user-role' => @user_role, 'data-target-province-ids' => @target_province_ids.join(',') }
   = simple_form_for @jaap do |f|
     .form-group.row
       .col-12.col-md-4.mb-2.mb-md-0
@@ -39,7 +39,7 @@
       %label
         = t('jaap.action_plan_table')
         %span{id: "data-status", class: "status-badge"}
-        = link_to t('jaap.load_sample'), '#', id: 'load-sample', class: 'btn btn-link btn-sm ml-2', data: { toggle: 'tooltip' }, title: t('jaap.load_sample_tooltip')
+        = link_to t('jaap.load_sample'), '#', id: 'load-sample', class: 'btn btn-link btn-sm ml-2 d-none', data: { toggle: 'tooltip' }, title: t('jaap.load_sample_tooltip')
       %small.text-muted.d-block.mb-2= t('jaap.action_plan_table_help')
 
       -# the jaap table
