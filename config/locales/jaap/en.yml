@@ -25,3 +25,4 @@ en:
     select_commune_in_form: Please select a commune in the main form first
     datasets_based_on_commune: Datasets will be loaded based on the commune selected in the main form
     no_datasets_found: No datasets found for this location
+    commune_change_warning: Changing the commune may affect existing table data. Do you want to continue?

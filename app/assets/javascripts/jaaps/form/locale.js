@@ -31,7 +31,8 @@ CW.JaapLocale = {
     select_commune_first: "Please select a commune to see available datasets",
     no_datasets_found: "No datasets found for this location",
     commune_administration: "Commune Administration",
-    commune: "Commune"
+    commune: "Commune",
+    commune_change_warning: "Changing the commune may affect existing table data. Do you want to continue?"
   },
   km: {
     no: "ល.រ",
@@ -65,6 +66,7 @@ CW.JaapLocale = {
     select_commune_first: "សូមជ្រើសរើសឃុំ/សង្កាត់ដើម្បីមើលទិន្នន័យដែលមាន",
     no_datasets_found: "រកមិនឃើញទិន្នន័យសម្រាប់ទីតាំងនេះទេ",
     commune_administration: "រដ្ឋបាលឃុំ/សង្កាត់",
-    commune: "ឃុំ/សង្កាត់"
+    commune: "ឃុំ/សង្កាត់",
+    commune_change_warning: "ការផ្លាស់ប្តូរឃុំ/សង្កាត់អាចប៉ះពាល់ដល់ទិន្នន័យតារាងដែលមានស្រាប់។ តើអ្នកចង់បន្តទេ?"
   }
 };
