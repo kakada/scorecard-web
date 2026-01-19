@@ -230,6 +230,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
         {
           voting_indicators_attributes: [
             {
+              id: "vi-001",
               uuid: "vi-001",
               indicator_activities_attributes: [
                 { voting_indicator_uuid: "vi-001", scorecard_uuid: scorecard.uuid, content: "activity 1", selected: true, type: "SuggestedIndicatorActivity" }
@@ -251,6 +252,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(response).to have_http_status(:ok) }
       it { expect(scorecard.reload.submit_locked?).to be_truthy }
       it { expect(scorecard.reload.voting_indicators.first.suggested_indicator_activities.length).to eq(1) }
+      it { expect(scorecard.reload.voting_indicators.length).to eq(1) }
     end
   end
 
