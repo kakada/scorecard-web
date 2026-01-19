@@ -22,3 +22,4 @@ en:
     select_location: Select Project Location
     select_commune_first: Please select a commune to see available datasets
     select_commune_in_form: Please select a commune in the main form first
+    location_selection_warning: "*** Warning: Changing the location will affect the consistency of existing JAAPs table data. ***"
