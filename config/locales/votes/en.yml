@@ -3,11 +3,11 @@ en:
     title: "Community Scorecard Voting"
     scorecard: "Scorecard"
     voting_closed: "Voting is Currently Closed"
-    voting_closed_message: "This voting period is not currently open. Please check back later or contact the organizer for more information."
+    voting_closed_message: "This voting has been closed. Please contact the organizer for more information."
     voting_ended: "The voting period has ended"
     participant_profile: "Participant Profile"
     rate_indicators_title: "Rate Indicators"
-    age: "Age *"
+    age: "Age"
     gender: "Gender"
     gender_female: "Female"
     gender_male: "Male"
@@ -24,7 +24,7 @@ en:
     thank_you_message: "Thank you for your participation. Your vote has been recorded."
 
     errors:
-      score_required: "Please select a score for %{indicator}."
+      score_required: "Please select a score for `%{indicator}`."
 
   activemodel:
     attributes:

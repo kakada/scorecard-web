@@ -21,7 +21,7 @@ class VotesController < ApplicationController
     @form = PublicVoteForm.new(scorecard: @scorecard, params: public_vote_params)
 
     if @form.save
-      redirect_to scorecard_vote_path(@scorecard.token, "thank-you")
+      redirect_to scorecard_vote_path(@scorecard.token, "thank-you", locale: I18n.locale)
     else
       render :new, status: :unprocessable_entity
     end
