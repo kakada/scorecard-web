@@ -86,7 +86,7 @@ RSpec.describe "VotesController", type: :request do
         expect(vi1.reload.ratings.count).to eq(1)
         expect(vi2.reload.ratings.count).to eq(1)
 
-        expect(response).to redirect_to(scorecard_vote_url(scorecard.token, "thank-you"))
+        expect(response).to redirect_to(scorecard_vote_url(scorecard.token, "thank-you", locale: I18n.locale))
       end
     end
 

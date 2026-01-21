@@ -23,6 +23,7 @@
 //= require best_in_place
 //= require xlsx.full.min
 //= require tabulator.min
+//= require lottie.min
 
 //= require application/namespace
 //= require application/util
@@ -69,6 +70,7 @@
 //= require categories
 //= require clone_wizard/show
 //= require votes/new
+//= require votes/show
 //= require jaaps/form/locale
 //= require jaaps/form/sample_data
 //= require jaaps/form/location_modal

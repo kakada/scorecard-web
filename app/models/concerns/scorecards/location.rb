@@ -22,7 +22,7 @@ module Scorecards::Location
       return "#{location_name}" unless dataset.present?
 
       title = dataset.category.name
-      str = I18n.locale == :km ? "#{title}#{dataset_name}" : "#{dataset_name} #{title},"
+      str = I18n.locale == :km ? "#{title}៖ #{dataset_name}" : "#{dataset_name} #{title},"
 
       [str, location_name].join(" ")
     end

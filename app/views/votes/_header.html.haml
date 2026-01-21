@@ -1,3 +1,5 @@
+- show_language ||= false
+
 .card-header.bg-primary.text-white
   %h3.mb-0
     = t('public_votes.title')
@@ -6,14 +8,15 @@
       = "#{@scorecard.uuid}"
     %span.ml-1= "(#{@scorecard.location_short_detail})"
 
-  / Language dropdown for public voting
-  - language_images = { en: 'english.png', km: 'khmer.png' }
-  .dropdown.mt-2
-    %a#publicLanguageDropdown.btn.btn-light.btn-sm.dropdown-toggle{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', href: '#', role: 'button' }
-      = image_tag language_images[I18n.locale.to_sym], alt: 'locale', size: '20x20', class: 'mr-2'
-      %span= t("language.#{I18n.locale}")
-    .dropdown-menu.shadow{ 'aria-labelledby' => 'publicLanguageDropdown' }
-      - program_languages.each do |lang|
-        = link_to new_scorecard_vote_path(@scorecard.token, locale: lang[:code]), class: 'dropdown-item d-flex align-items-center' do
-          = image_tag lang[:image], alt: 'locale', size: '20x20', class: 'mr-2'
-          %span= lang[:label]
+  - if show_language
+    / Language dropdown for public voting
+    - language_images = { en: 'english.png', km: 'khmer.png' }
+    .dropdown.mt-2
+      %a#publicLanguageDropdown.btn.btn-light.btn-sm.dropdown-toggle{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', href: '#', role: 'button' }
+        = image_tag language_images[I18n.locale.to_sym], alt: 'locale', size: '20x20', class: 'mr-2'
+        %span= t("language.#{I18n.locale}")
+      .dropdown-menu.shadow{ 'aria-labelledby' => 'publicLanguageDropdown' }
+        - program_languages.each do |lang|
+          = link_to new_scorecard_vote_path(@scorecard.token, locale: lang[:code]), class: 'dropdown-item d-flex align-items-center' do
+            = image_tag lang[:image], alt: 'locale', size: '20x20', class: 'mr-2'
+            %span= lang[:label]
