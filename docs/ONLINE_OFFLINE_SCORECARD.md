@@ -17,14 +17,22 @@ This document explains the updated behavior for submitting scorecards in offline
 ## Controller Logic
 - File: app/controllers/api/v1/scorecards_controller.rb
 - `update`:
+  - Normalizes voting indicators using `Scorecards::NormalizeVotingIndicators` to prevent duplicates.
   - Saves permitted params.
-  - Locks with `@scorecard.lock_submit!` only when `final_submit?` returns true.
+  - Finalizes submission using `Scorecards::FinalizeSubmission` when `final_submit?` returns true.
 - `final_submit?`:
   - Returns true if `voting_indicators_attributes` contains at least one `indicator_activities_attributes` entry.
+- Services:
+  - `Scorecards::NormalizeVotingIndicators`: Matches existing voting indicators by `indicator_uuid` to prevent duplicate creation on retries.
+  - `Scorecards::FinalizeSubmission`: Handles final submission logic including demographic calculation for online scorecards and scorecard locking.
 
 ## Strong Parameters (subset)
-- `voting_indicators_attributes`: `:uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :median, :scorecard_uuid, :display_order, indicator_activities_attributes: [ :id, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]`
+- `voting_indicators_attributes`: `:id, :uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type, :median, :display_order, indicator_activities_attributes: [ :id, :voting_indicator_uuid, :content, :selected, :type ]`
+- `participants_attributes`: `:uuid, :age, :gender, :disability, :minority, :youth, :poor_card, :countable`
+- `facilitators_attributes`: `:id, :caf_id, :position`
+- `ratings_attributes`: `:uuid, :voting_indicator_uuid, :participant_uuid, :score`
 - Legacy arrays (`strength`, `weakness`, `suggested_action`) and `suggested_actions_attributes` remain permitted for compatibility with older clients.
+- Note: `scorecard_uuid` is no longer required in nested attributes as it's automatically inferred from the parent scorecard.
 
 ## Online Mode: Two-Step Flow
 ### Step 1: Draft submit (no activities → no lock)
@@ -36,18 +44,24 @@ Authorization: Token <user-token>
 
 {
   "scorecard": {
-    "number_of_participant": 10,
     "app_version": 15013,
     "voting_indicators_attributes": [
-      { "uuid": "vi-001", "indicatorable_id": <id>, "indicatorable_type": "Indicator", "scorecard_uuid": ":uuid", "display_order": 1 }
+      { "uuid": "vi-001", "indicator_uuid": "ind-001", "indicatorable_id": <id>, "indicatorable_type": "Indicator", "display_order": 1 }
+    ],
+    "participants_attributes": [
+      { "uuid": "p1", "gender": "female", "disability": true, "minority": false, "youth": true, "poor_card": false, "countable": true },
+      { "uuid": "p2", "gender": "male", "disability": false, "minority": true, "youth": false, "poor_card": true, "countable": true }
     ]
   }
 }
 ```
 Effect:
 - Returns 200.
+- Voting indicators are normalized to prevent duplicates (matched by `indicator_uuid`).
 - Scorecard updates fields.
+- Participant records are created/updated.
 - Scorecard remains unlocked (`submit_locked?` = false).
+- Note: In online mode, demographic fields (number_of_participant, number_of_female, etc.) should not be submitted by the client, as they will be automatically calculated on final submit.
 
 ### Step 2: Final submit (includes activities → lock)
 Request:
@@ -61,8 +75,9 @@ Authorization: Token <user-token>
     "voting_indicators_attributes": [
       {
         "uuid": "vi-001",
+        "indicator_uuid": "ind-001",
         "indicator_activities_attributes": [
-          { "voting_indicator_uuid": "vi-001", "scorecard_uuid": ":uuid", "content": "activity 1", "selected": true, "type": "SuggestedIndicatorActivity" }
+          { "voting_indicator_uuid": "vi-001", "content": "activity 1", "selected": true, "type": "SuggestedIndicatorActivity" }
         ]
       }
     ]
@@ -72,10 +87,13 @@ Authorization: Token <user-token>
 Effect:
 - Returns 200.
 - Activities are persisted under the voting indicator.
-- Scorecard locks (`submit_locked?` = true).
+- `Scorecards::FinalizeSubmission` service is invoked:
+  - **For online scorecards**: Demographic fields (number_of_participant, number_of_female, number_of_disability, number_of_ethnic_minority, number_of_youth, number_of_id_poor) are automatically calculated from participant records.
+  - Scorecard locks (`submit_locked?` = true).
 
 ## Offline Mode: Single-Step Submit
 - Submit all data including `indicator_activities_attributes` in one request to lock immediately.
+- **For offline scorecards**: Demographic fields (number_of_participant, number_of_female, number_of_disability, number_of_ethnic_minority, number_of_youth, number_of_id_poor) must be submitted by the client and are saved as provided.
 
 ## Scorecard Progress: Open/Close Voting
 - File: app/controllers/api/v1/scorecard_progresses_controller.rb
@@ -147,18 +165,34 @@ Effect:
   - Verifies draft vs final submits and locking behavior.
   - Verifies `indicator_activities_attributes` persistence and counts.
   - Verifies QR code endpoint returns correct data or 404 when not available.
+  - Verifies automatic demographic calculation for online scorecards.
+  - Verifies offline scorecards use submitted demographic values.
+- Service specs:
+  - spec/services/scorecards/finalize_submission_spec.rb: Verifies demographic calculation and scorecard locking logic for online scorecards.
+  - spec/services/scorecards/normalize_voting_indicators_spec.rb: Verifies duplicate voting indicator prevention and indicator matching by `indicator_uuid`.
+  - spec/services/scorecards/open_voting_service_spec.rb: Verifies QR code generation logic and prevents regeneration.
 - Model specs: spec/models/scorecard_progress_spec.rb
   - Verifies `open_voting` and `close_voting` progress transitions.
   - Verifies QR code generation when status is `open_voting`.
-- Service specs: spec/services/scorecards/open_voting_service_spec.rb
-  - Verifies QR code generation logic and prevents regeneration.
 
 ## Compatibility Notes
 - Legacy fields (`strength`, `weakness`, `suggested_action`) and `suggested_actions_attributes` are still permitted to support older mobile app versions; they map to `indicator_activities` internally.
 - New clients should prefer `indicator_activities_attributes` with proper `type` (e.g., `SuggestedIndicatorActivity`).
 
+## Participant Demographics Calculation
+- **Implementation**: The demographic calculation is handled by `Scorecards::FinalizeSubmission` service (app/services/scorecards/finalize_submission.rb).
+- **Online scorecards**: Demographic fields are automatically calculated from participant records on final submit. The calculation counts only participants where `countable` is `true`.
+  - `number_of_participant`: Total count of countable participants
+  - `number_of_female`: Count of countable participants with gender = "female"
+  - `number_of_disability`: Count of countable participants with disability = true
+  - `number_of_ethnic_minority`: Count of countable participants with minority = true
+  - `number_of_youth`: Count of countable participants with youth = true
+  - `number_of_id_poor`: Count of countable participants with poor_card = true
+- **Offline scorecards**: Demographic fields must be provided by the client and are saved as submitted.
+- **Transaction safety**: The demographic calculation and scorecard locking happen within a single database transaction to ensure data consistency.
+
 ## Summary
-- Online: two-step submit with lock on second step.
-- Offline: single-step submit with immediate lock.
+- Online: two-step submit with lock on second step. Demographic fields automatically calculated on final submit.
+- Offline: single-step submit with immediate lock. Demographic fields provided by client.
 - Progress: `open_voting` and `close_voting` statuses move the scorecard through the online workflow.
 - QR Code: automatically generated when status is `open_voting`, contains voting URL for easy scanning.

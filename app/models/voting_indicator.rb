@@ -49,6 +49,12 @@ class VotingIndicator < ApplicationRecord
   before_create :secure_uuid
   after_validation :set_indicator_uuid
 
+  validates :indicator_uuid,
+    uniqueness: {
+    scope: :scorecard_uuid,
+    message: "already exists for this scorecard"
+  }
+
   # Todo: after interim period of v1 and v2, they should be removed
   after_validation :set_strength_indicator_activities
   after_validation :set_weakness_indicator_activities
