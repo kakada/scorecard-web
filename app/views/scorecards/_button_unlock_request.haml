@@ -1,0 +1,21 @@
+- if policy(scorecard).request_unlock?
+  - if scorecard.unlock_requests.submitteds.any?
+    - popup_content = sanitize(render(template: 'scorecards/unlock_requests/popup', locals: {scorecard: scorecard}))
+    
+    %a.d-inline-block.position-relative{ data: { toggle: 'popover', trigger: 'focus', html: 'true', content: "#{popup_content}"}, role: 'button', tabindex: '0'}
+      %span{ class: 'btn btn-circle btn-sm btn-outline-warning mr-1', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.unlock_requests')}}
+        %i.fas.fa-unlock
+      
+      %span.full-stop
+  - else
+    = link_to new_scorecard_unlock_request_path(scorecard.uuid), class: 'btn btn-circle btn-sm btn-outline-warning mr-1', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.request_unlock')} do
+      %i.fas.fa-unlock
+
+- if policy(scorecard).create? && scorecard.unlock_requests.submitteds.any?
+  - popup_content = sanitize(render(template: 'scorecards/unlock_requests/popup', locals: {scorecard: scorecard}))
+  
+  %a.d-inline-block.position-relative{ data: { toggle: 'popover', trigger: 'focus', html: 'true', content: "#{popup_content}"}, role: 'button', tabindex: '0'}
+    %span{ class: 'btn btn-circle btn-sm btn-outline-warning mr-1', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.unlock_requests')}}
+      %i.fas.fa-unlock
+    
+    %span.full-stop
