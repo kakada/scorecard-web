@@ -90,6 +90,24 @@ RSpec.describe RequestChange, type: :model do
     let!(:program) { create(:program) }
     let!(:proposer) { create(:user, :lngo, program: program) }
     
+    context "when province_id is not present" do
+      let!(:facility) { create(:facility, program: program) }
+      let!(:scorecard) { create(:scorecard, facility: facility, program: program) }
+      let!(:request_change) { build(:request_change, scorecard: scorecard, proposer: proposer, province_id: nil) }
+
+      it "does not require district_id" do
+        request_change.district_id = nil
+        request_change.commune_id = nil
+        expect(request_change).to be_valid
+      end
+
+      it "does not require commune_id" do
+        request_change.district_id = nil
+        request_change.commune_id = nil
+        expect(request_change).to be_valid
+      end
+    end
+    
     context "when facility has no category (default hierarchy)" do
       let!(:facility) { create(:facility, program: program) }
       let!(:scorecard) { create(:scorecard, facility: facility, program: program) }
