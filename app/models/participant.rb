@@ -15,6 +15,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  countable      :boolean          default(TRUE)
+#  none           :boolean          default(FALSE)
 #
 class Participant < ApplicationRecord
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true

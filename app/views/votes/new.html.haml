@@ -61,6 +61,13 @@
                           %i.fas.fa-id-card
                         .type-label= t('public_votes.poor_card')
 
+                    %label.type-option
+                      = check_box_tag 'public_vote_form[none]', '1', f.object.none, class: "type-checkbox"
+                      .type-box
+                        .type-icon
+                          %i.fas.fa-times-circle
+                        .type-label= t('public_votes.none')
+
               %hr.my-5
 
               -# Voting Indicators Section

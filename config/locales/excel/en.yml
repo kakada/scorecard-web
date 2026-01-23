@@ -31,6 +31,7 @@ en:
     disability: Disability
     id_poor: ID Poor
     minority: Minority
+    none: None
     # Indicator
     indicator_id: Indicator ID
     indicator_name: Indicator Name

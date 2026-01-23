@@ -31,6 +31,7 @@ km:
     disability: ពិការភាព
     id_poor: ប័ណ្ណក្រីក្រ
     minority: ជនជាតិភាគតិច
+    none: មិនមាន
     # Indicator
     indicator_id: លេខសម្គាល់លក្ខណៈវិនិច្ឆ័យ
     indicator_name: ឈ្មោះលក្ខណៈវិនិច្ឆ័យ

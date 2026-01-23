@@ -164,11 +164,13 @@ en:
     disability_shortcut: PwD
     poor_card_shortcut:  IdP
     youth_shortcut: Y
+    none_shortcut: N
     female_fullword: Female
     minority_fullword: Ethnic minority
     disability_fullword: People with disability
     poor_card_fullword:  ID Poor
     youth_fullword: Youth
+    none_fullword: None
     note: Note
     institution_name: Institution name
     remove_scorecard_from_excel: Remove scoreard from excel

@@ -25,6 +25,20 @@ RSpec.describe PublicVoteForm, type: :model do
       expect(form).to be_valid
     end
 
+    it "is valid with age, gender, none and scores for all indicators" do
+      form = described_class.new(
+        scorecard: scorecard,
+        params: {
+          age: 20,
+          gender: "male",
+          none: true,
+          scores: { vi1.uuid => 4, vi2.uuid => 3 }
+        }
+      )
+
+      expect(form).to be_valid
+    end
+
     it "requires age" do
       form = described_class.new(
         scorecard: scorecard,
@@ -82,6 +96,26 @@ RSpec.describe PublicVoteForm, type: :model do
       expect(ratings.count).to eq(2)
       expect(ratings.find_by(voting_indicator_uuid: vi1.uuid).score).to eq(4)
       expect(ratings.find_by(voting_indicator_uuid: vi2.uuid).score).to eq(2)
+    end
+
+    it "creates participant with none flag when specified" do
+      form = described_class.new(
+        scorecard: scorecard,
+        params: {
+          age: 25,
+          gender: "male",
+          disability: false,
+          minority: false,
+          poor_card: false,
+          none: true,
+          scores: { vi1.uuid => 3, vi2.uuid => 4 }
+        }
+      )
+
+      expect(form.save).to be(true)
+      expect(scorecard.participants.count).to eq(1)
+      participant = scorecard.participants.first
+      expect(participant.none).to be(true)
     end
 
     it "returns false and does not persist when invalid" do

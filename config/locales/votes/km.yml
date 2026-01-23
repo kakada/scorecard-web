@@ -17,6 +17,7 @@ km:
     disability: "ពិការភាព"
     minority: "ជនជាតិភាគតិច"
     poor_card: "មានប័ណ្ណក្រីក្រ"
+    none: "មិនមាន"
     submit: "រក្សាទុក"
     submitting: "កំពុងដាក់ស្នើ..."
     error_title: "កំហុសក្នុងការដាក់ស្នើ"

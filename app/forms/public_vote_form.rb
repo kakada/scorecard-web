@@ -12,6 +12,7 @@ class PublicVoteForm
   attribute :disability, :boolean
   attribute :minority, :boolean
   attribute :poor_card, :boolean
+  attribute :none, :boolean
   attribute :scores, default: {}
 
   attr_reader :scorecard
@@ -73,6 +74,7 @@ class PublicVoteForm
         disability: disability,
         minority: minority,
         poor_card: poor_card,
+        none: none,
         youth: age&.between?(15, 30)
       )
     end

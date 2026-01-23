@@ -164,11 +164,13 @@ km:
     disability_shortcut: ជ.ព
     poor_card_shortcut:  ប.ក
     youth_shortcut: យ.វ
+    none_shortcut: ម.ម
     female_fullword: ស្ត្រី
     minority_fullword: ជនជាតិភាគតិច
     disability_fullword: ជនមានពិការភាព
     poor_card_fullword:  មានប័ណ្ណក្រីក្រ
     youth_fullword: យុវជន
+    none_fullword: មិនមាន
     note: ចំណាំ
     institution_name: ឈ្មោះគ្រឹះស្ថាន
     remove_scorecard_from_excel: លុបប័ណ្ណដាក់ពិន្ទុតាម Excel

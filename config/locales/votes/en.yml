@@ -17,6 +17,7 @@ en:
     disability: "Disability"
     minority: "Ethnic minority"
     poor_card: "ID Poor card holder"
+    none: "None"
     submit: "Submit"
     submitting: "Submitting..."
     error_title: "Submission Error"
