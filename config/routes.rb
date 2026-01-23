@@ -35,6 +35,10 @@ Rails.application.routes.draw do
         put :approve, on: :member
         put :reject, on: :member
       end
+      resources :unlock_requests do
+        put :approve, on: :member
+        put :reject, on: :member
+      end
     end
   end
 

@@ -44,6 +44,10 @@ class ScorecardPolicy < ApplicationPolicy
     user.lngo? || (create? && record.request_changes.length > 0)
   end
 
+  def request_unlock?
+    user.lngo? && record.access_locked?
+  end
+
   def in_review?
     user.lngo? && record.in_review?
   end

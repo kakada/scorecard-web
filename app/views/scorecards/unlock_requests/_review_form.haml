@@ -1,0 +1,18 @@
+/ Review Form
+.w-50.mx-auto
+  - url = approve_scorecard_unlock_request_path(@scorecard.uuid, @unlock_request)
+
+  = simple_form_for @unlock_request, url: url, method: :put do |f|
+    .disabled
+      = f.input :reason, as: :text, input_html: { rows: 5, disabled: true }, label: t('scorecard.reason_for_unlock')
+
+  .actions
+    = link_to t('shared.approve'), url, method: :put, class: 'btn btn-primary'
+
+    %button.btn.btn-danger{"data-target" => "#rejectModal", "data-toggle" => "modal", :type => "button"}
+      = t('shared.reject')
+
+    = link_to t('shared.cancel'), scorecard_path(@scorecard.uuid), class: 'btn btn-secondary'
+
+/ Modal
+= render 'modal_reject'

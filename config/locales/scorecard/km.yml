@@ -119,6 +119,18 @@ km:
     approved: ត្រូវបានទទួលយក
     rejected: ត្រូវបានបដិសេធ
     add_suggestion: បន្ថែមសំណើ
+    request_unlock: ស្នើសុំដោះសោប័ណ្ណដាក់ពិន្ទុ
+    unlock_requests: សំណើដោះសោ
+    unlock_request_form: ទម្រង់សំណើដោះសោ
+    unlock_request_review: ត្រួតពិនិត្យសំណើដោះសោ
+    reason_for_unlock: មូលហេតុនៃការស្នើដោះសោ
+    unlock_request_submitted: សំណើដោះសោត្រូវបានដាក់ស្នើរួចរាល់
+    unlock_request_approved: សំណើដោះសោត្រូវបានទទួលយក
+    unlock_request_rejected: សំណើដោះសោត្រូវបានបដិសេធ
+    requested_by: ស្នើដោយ
+    requested_at: ស្នើនៅ
+    scorecard_uuid: លេខសម្គាល់ប័ណ្ណដាក់ពិន្ទុ
+    current_status: ស្ថានភាពបច្ចុប្បន្ន
     selected_action: សកម្មភាពដែលត្រូវបានជ្រើសរើស
     edit_selected_action: កែតម្រូវ (សកម្មភាពដែលត្រូវបានជ្រើសរើស)
     in_review_at: "ដាក់ជូនត្រួតពិនិត្យនៅ៖"

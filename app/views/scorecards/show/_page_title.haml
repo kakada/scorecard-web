@@ -15,6 +15,7 @@
 
   .w-25.text-right
     = render 'button_request_change', scorecard: @scorecard
+    = render 'button_unlock_request', scorecard: @scorecard
 
     - if policy(@scorecard).in_review?
       %button.btn.btn-primary.btn-sm.shadow-sm.mr-2{type: 'button', "data-toggle" => "modal", "data-target" => "#confirmModal"}

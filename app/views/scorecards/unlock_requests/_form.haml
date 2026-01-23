@@ -1,0 +1,9 @@
+/ Form
+.w-50.mx-auto
+  = simple_form_for @unlock_request, url: form_url, method: form_method do |f|
+    = f.input :reason, as: :text, input_html: { rows: 5 }, label: t('scorecard.reason_for_unlock')
+
+    .actions
+      = f.submit submit_label, class: 'btn btn-primary'
+
+      = link_to t('shared.cancel'), scorecard_path(@scorecard.uuid), class: 'btn btn-secondary'

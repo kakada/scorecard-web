@@ -119,6 +119,18 @@ en:
     approved: Accepted
     rejected: Rejected
     add_suggestion: Add suggestion
+    request_unlock: Request to unlock scorecard
+    unlock_requests: Unlock requests
+    unlock_request_form: Request Unlock Form
+    unlock_request_review: Review Unlock Request
+    reason_for_unlock: Reason for requesting unlock
+    unlock_request_submitted: Unlock request submitted successfully
+    unlock_request_approved: The unlock request has been approved
+    unlock_request_rejected: The unlock request has been rejected
+    requested_by: Requested by
+    requested_at: Requested at
+    scorecard_uuid: Scorecard UUID
+    current_status: Current status
     selected_action: Selected action
     edit_selected_action: Edit (selected action)
     in_review_at: "In review at:"
