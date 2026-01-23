@@ -26,7 +26,8 @@ module ExcelBuilders
         I18n.t("excel.youth"),
         I18n.t("excel.disability"),
         I18n.t("excel.poor_card"),
-        I18n.t("excel.minority")
+        I18n.t("excel.minority"),
+        I18n.t("excel.none")
       ]
     end
 
@@ -46,7 +47,8 @@ module ExcelBuilders
           participant.youth?,
           participant.disability?,
           participant.poor_card?,
-          participant.minority?
+          participant.minority?,
+          participant.none?
         ]
       end
   end

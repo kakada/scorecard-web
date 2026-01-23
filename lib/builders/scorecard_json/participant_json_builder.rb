@@ -23,7 +23,7 @@ module ScorecardJson
       def build_profiles
         profiles = [ { type: "female", count: scorecard.participants.select { |participant| participant.gender == "female" }.length } ]
 
-        %w(disability minority poor_card youth).each do |type|
+        %w(disability minority poor_card youth none).each do |type|
           profiles << { type: type, count: scorecard.participants.select { |participant| !!participant.send(type) }.length }
         end
 
