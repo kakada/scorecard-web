@@ -7,7 +7,7 @@
     = render "unit_type_and_facility_fields", f: f
     = f.input :scorecard_type, label: t('scorecard.scorecard_type'), collection: program_scorecard_types, input_html: { class: 'custom-select'}
     = render "location_fields", f: f
-    = f.input :running_mode, label: t('scorecard.running_mode'), collection: Scorecard.running_modes.keys.map { |key| [I18n.t("scorecard.running_mode_#{key}"), key] }, input_html: { class: 'custom-select' }
+    = f.input :running_mode, label: t('scorecard.running_mode'), collection: Scorecard.running_modes.keys.map { |key| [I18n.t("scorecard.running_mode_#{key}"), key] }, include_blank: false, input_html: { class: 'custom-select' }
     = render "shared/date_field", f: f, field: :planned_start_date, label: t("scorecard.planned_start_date"), required: true
     = render "shared/date_field", f: f, field: :planned_end_date, label: t("scorecard.planned_end_date"), required: true
 
