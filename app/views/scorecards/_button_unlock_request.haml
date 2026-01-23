@@ -1,0 +1,26 @@
+- if current_user.lngo?
+  - if policy(scorecard).request_unlock?
+    -# For lngo team: Requester
+    - if scorecard.unlock_requests.any?
+      = render 'scorecards/unlock_requests/unlock_button',
+        popup_content: unlock_popup_content(scorecard),
+        tooltip: t('scorecard.unlock_requests'),
+        full_stop_css: unlock_full_stop_class(scorecard)
+    - else
+      = link_to new_scorecard_unlock_request_path(scorecard.uuid),
+        class: 'btn btn-circle btn-sm btn-outline-warning mr-1',
+        data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.request_unlock') } do
+        %i.fas.fa-unlock
+
+  - elsif scorecard.unlock_requests.any?
+    = render 'scorecards/unlock_requests/unlock_button',
+        popup_content: unlock_popup_content(scorecard),
+        tooltip: t('scorecard.unlock_requests'),
+        full_stop_css: unlock_full_stop_class(scorecard)
+
+- elsif policy(scorecard).create? && scorecard.unlock_requests.any?
+  -# For admins to review unlock requests: Reviewer
+  = render 'scorecards/unlock_requests/unlock_button',
+    popup_content: unlock_popup_content(scorecard),
+    tooltip: t('scorecard.unlock_requests'),
+    full_stop_css: unlock_full_stop_class(scorecard)

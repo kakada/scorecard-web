@@ -1,0 +1,16 @@
+/ Preview Form (Read-only)
+.w-50.mx-auto
+  = simple_form_for @unlock_request, url: '#', html: { class: 'readonly-form' } do |f|
+    = f.input :reason, as: :text, input_html: { rows: 5, disabled: true }, label: t('scorecard.reason_for_unlock')
+    
+    - if @unlock_request.rejected?
+      = f.input :rejected_reason, as: :text, input_html: { rows: 3, disabled: true }, label: t('scorecard.rejected_reason')
+    
+    .form-group
+      %label= t('scorecard.status')
+      %p.form-control-plaintext
+        %span{class: "badge badge-#{@unlock_request.approved? ? 'success' : 'danger'}"}
+          = t("shared.#{@unlock_request.status}")
+
+  .actions
+    = link_to t('shared.back'), scorecard_path(@scorecard.uuid), class: 'btn btn-secondary'

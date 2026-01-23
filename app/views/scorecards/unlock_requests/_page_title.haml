@@ -1,0 +1,17 @@
+.d-sm-flex.mb-4
+  .d-flex.flex-column.flex-grow-1
+    / Title
+    .d-flex.align-items-center
+      %h1.h3.mb-0.text-gray-800.line-badge{ class: @scorecard.scorecard_type}
+        %span= "#{t('scorecard.request_unlock')}:"
+        %small.text-muted= @scorecard.facility.code
+        %span= @scorecard.uuid
+
+      / Progress status
+      %div.ml-1= status_html(@scorecard).html_safe
+
+    / Short description
+    .my-2.card-subtitle.text-muted
+      = scorecard_descriptions.html_safe
+      %span.line-badge{ class: @scorecard.scorecard_type}
+        = @scorecard.t_scorecard_type

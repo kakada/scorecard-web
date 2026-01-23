@@ -1,0 +1,27 @@
+= render "scorecards/unlock_requests/page_title"
+
+.card.shadow.mb-4
+  .card-body
+    %h5.mb-3
+      = t('scorecard.unlock_request_review')
+
+    %p
+      %span.text-muted= t('scorecard.scorecard_uuid') + ": "
+      = link_to @scorecard.uuid, scorecard_path(@scorecard.uuid), target: "_blank", class: 'text-primary'
+
+    %p
+      %span.text-muted= t('scorecard.requested_by') + ": "
+      %span= @unlock_request.proposer.email
+
+    %p
+      %span.text-muted= t('scorecard.requested_at') + ": "
+      %span= display_datetime(@unlock_request.created_at).html_safe
+
+    - if policy(@unlock_request).update?
+      = render 'form', form_url: scorecard_unlock_request_path(@scorecard.uuid, @unlock_request), submit_label: t('shared.save'), form_method: :put
+
+    - elsif policy(@unlock_request).review?
+      = render 'review_form'
+
+    - else
+      = render 'preview_form'
