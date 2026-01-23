@@ -3,7 +3,7 @@
     = t('scorecard.request_change')
 
   / Button Add new
-  - if !scorecard.access_locked? && policy(RequestChange).create?
+  - if !scorecard.access_locked? && policy(RequestChange).create? && scorecard.request_changes.submitteds.empty?
     %a.tip.btn.btn-circle.btn-outline-primary.ml-4{ href: new_scorecard_request_change_path(scorecard.uuid), data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.request_change')} }
       %i.fas.fa-comment-medical.fa-lg
       .tip-title.d-none= t('scorecard.add_suggestion')
