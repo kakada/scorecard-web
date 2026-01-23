@@ -49,6 +49,7 @@ CW.ScorecardsNew = (() => {
     let category = $('#dataset').data('categories').filter(cate => cate.id == facility.category_id)[0];
 
     clearProvince();
+    hideHierarchies();
     diplayHierarchies(category.hierarchies);
     setDatasetTitle(category.name);
     setDatasetCollectionUrl(category);
@@ -57,7 +58,7 @@ CW.ScorecardsNew = (() => {
 
   function handleDefaultLocation() {
     clearProvince();
-
+    $('#dataset').addClass('d-none');
     $('#district').removeClass('d-none');
     $('#commune').removeClass('d-none');
     $('#district select').data('pumiSelectTarget', 'commune')
