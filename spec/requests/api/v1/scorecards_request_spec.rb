@@ -81,7 +81,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
   describe "PUT #update" do
     let!(:user)       { create(:user, :lngo) }
-    let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program_id: user.program_id, local_ngo_id: user.local_ngo_id) }
+    let!(:scorecard)  { create(:scorecard, running_mode: "offline", number_of_participant: 3, program_id: user.program_id, local_ngo_id: user.local_ngo_id) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { number_of_caf: 3, number_of_participant: 15, number_of_female: 5, app_version: 15013 } }
 
@@ -132,9 +132,9 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
         {
           voting_indicators_attributes: [
             {
-              uuid: "vi-123", scorecard_uuid: scorecard.uuid,
+              uuid: "vi-123",
               indicator_activities_attributes: [
-                { voting_indicator_uuid: "vi-123", scorecard_uuid: scorecard.uuid, content: "activity 1", selected: true, type: "IndicatorActivity" }
+                { voting_indicator_uuid: "vi-123", content: "activity 1", selected: true, type: "IndicatorActivity" }
               ]
             }
           ]
@@ -174,10 +174,10 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, local_ngo_id: user.local_ngo_id, facility: facility) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { voting_indicators_attributes: [ {
-                          uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
+                          uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, display_order: 1,
                           indicator_activities_attributes: [
-                            { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action1", selected: true, type: "SuggestedIndicatorActivity" },
-                            { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action2", selected: false, type: "SuggestedIndicatorActivity" },
+                            { voting_indicator_uuid: "123", content: "action1", selected: true, type: "SuggestedIndicatorActivity" },
+                            { voting_indicator_uuid: "123", content: "action2", selected: false, type: "SuggestedIndicatorActivity" },
                           ]
                         }] }
                       }
@@ -207,10 +207,9 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     context "first submit without activities (draft)" do
       let(:first_params) do
         {
-          number_of_participant: 10,
           app_version: 15013,
           voting_indicators_attributes: [
-            { uuid: "vi-001", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1 }
+            { uuid: "vi-001", indicatorable_id: indicator.id, indicatorable_type: indicator.class, display_order: 1 }
           ]
         }
       end
@@ -221,7 +220,6 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(scorecard.reload.submit_locked?).to be_falsey }
-      it { expect(scorecard.reload.number_of_participant).to eq(10) }
       it { expect(scorecard.reload.voting_indicators.map(&:uuid)).to include("vi-001") }
     end
 
@@ -233,7 +231,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
               id: "vi-001",
               uuid: "vi-001",
               indicator_activities_attributes: [
-                { voting_indicator_uuid: "vi-001", scorecard_uuid: scorecard.uuid, content: "activity 1", selected: true, type: "SuggestedIndicatorActivity" }
+                { voting_indicator_uuid: "vi-001", content: "activity 1", selected: true, type: "SuggestedIndicatorActivity" }
               ]
             }
           ]
@@ -243,7 +241,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       before do
         # Ensure the first step has created the voting indicator
         put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: {
-          voting_indicators_attributes: [ { uuid: "vi-001", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1 } ]
+          voting_indicators_attributes: [ { uuid: "vi-001", indicatorable_id: indicator.id, indicatorable_type: indicator.class, display_order: 1 } ]
         } }, headers: headers
 
         put "/api/v1/scorecards/#{scorecard.uuid}", params: { scorecard: second_params }, headers: headers
@@ -265,8 +263,8 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { {
                           facilitators_attributes: [
-                            { caf_id: caf1.id, position: "lead", scorecard_uuid: scorecard.uuid },
-                            { caf_id: caf2.id, position: "other", scorecard_uuid: scorecard.uuid },
+                            { caf_id: caf1.id, position: "lead" },
+                            { caf_id: caf2.id, position: "other" },
                           ]
                         }
                       }
@@ -339,14 +337,14 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility, local_ngo_id: user.local_ngo_id) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { raised_indicators_attributes: [
-                            { indicatorable_id: indicator.id, indicatorable_type: "Indicator", scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "123", selected: true },
-                            { indicatorable_id: custom_indicator.id, indicatorable_type: "CustomIndicator", scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "124", selected: true },
-                            { indicatorable_id: custom_indicator2.id, indicatorable_type: "Indicators::CustomIndicator", scorecard_uuid: scorecard.uuid, voting_indicator_uuid: "125", selected: true },
+                            { indicatorable_id: indicator.id, indicatorable_type: "Indicator", voting_indicator_uuid: "123", selected: true },
+                            { indicatorable_id: custom_indicator.id, indicatorable_type: "CustomIndicator", voting_indicator_uuid: "124", selected: true },
+                            { indicatorable_id: custom_indicator2.id, indicatorable_type: "Indicators::CustomIndicator", voting_indicator_uuid: "125", selected: true },
                           ],
                           voting_indicators_attributes: [
-                            { uuid: "123", indicatorable_id: indicator.id, indicatorable_type: "Indicator", scorecard_uuid: scorecard.uuid, display_order: 1 },
-                            { uuid: "124", indicatorable_id: custom_indicator.id, indicatorable_type: "CustomIndicator", scorecard_uuid: scorecard.uuid, display_order: 2 },
-                            { uuid: "125", indicator_uuid: custom_indicator2.uuid, indicatorable_id: custom_indicator2.id, indicatorable_type: "Indicators::CustomIndicator", scorecard_uuid: scorecard.uuid, display_order: 2 },
+                            { uuid: "123", indicatorable_id: indicator.id, indicatorable_type: "Indicator", display_order: 1 },
+                            { uuid: "124", indicatorable_id: custom_indicator.id, indicatorable_type: "CustomIndicator", display_order: 2 },
+                            { uuid: "125", indicator_uuid: custom_indicator2.uuid, indicatorable_id: custom_indicator2.id, indicatorable_type: "Indicators::CustomIndicator", display_order: 2 },
                           ]
                         }
                       }
@@ -364,6 +362,204 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(raised_indicators.length).to eq(3) }
       it { expect(raised_indicators.first.selected).to be_truthy }
       it { expect(raised_indicators.first.voting_indicator_uuid).to eq("123") }
+    end
+  end
+
+  describe "PUT #update, automatic participant demographics calculation for online scorecard" do
+    let!(:user)       { create(:user, :lngo) }
+    let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
+    let!(:indicator)  { facility.indicators.first }
+    let!(:scorecard)  { create(:scorecard, program: user.program, local_ngo_id: user.local_ngo_id, facility: facility, running_mode: :online) }
+    let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+
+    context "final submit calculates demographics from participants" do
+      before do
+        # Create participants first
+        scorecard.participants.create!(uuid: "p1", gender: "female", disability: true, minority: false, youth: true, poor_card: false, countable: true)
+        scorecard.participants.create!(uuid: "p2", gender: "male", disability: false, minority: true, youth: false, poor_card: true, countable: true)
+        scorecard.participants.create!(uuid: "p3", gender: "female", disability: true, minority: true, youth: true, poor_card: true, countable: true)
+
+        # Final submit with indicator activities
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: {
+          scorecard: {
+            number_of_participant: 999, # This should be ignored for online scorecards
+            number_of_female: 999,
+            voting_indicators_attributes: [
+              {
+                uuid: "vi-001",
+                indicatorable_id: indicator.id,
+                indicatorable_type: indicator.class,
+                display_order: 1,
+                indicator_activities_attributes: [
+                  { voting_indicator_uuid: "vi-001", content: "activity 1", selected: true, type: "SuggestedIndicatorActivity" }
+                ]
+              }
+            ]
+          }
+        }, headers: headers
+      end
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(scorecard.reload.submit_locked?).to be_truthy }
+
+      it "calculates number_of_participant from participants" do
+        expect(scorecard.reload.number_of_participant).to eq(3)
+      end
+
+      it "calculates number_of_female from participants" do
+        expect(scorecard.reload.number_of_female).to eq(2)
+      end
+
+      it "calculates number_of_disability from participants" do
+        expect(scorecard.reload.number_of_disability).to eq(2)
+      end
+
+      it "calculates number_of_ethnic_minority from participants" do
+        expect(scorecard.reload.number_of_ethnic_minority).to eq(2)
+      end
+
+      it "calculates number_of_youth from participants" do
+        expect(scorecard.reload.number_of_youth).to eq(2)
+      end
+
+      it "calculates number_of_id_poor from participants" do
+        expect(scorecard.reload.number_of_id_poor).to eq(2)
+      end
+    end
+
+    context "draft submit does not calculate demographics" do
+      before do
+        # Create participants
+        scorecard.participants.create!(uuid: "p1", gender: "female", disability: true, minority: false, youth: true, poor_card: false, countable: true)
+
+        # Draft submit without indicator activities
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: {
+          scorecard: {
+            number_of_participant: 10,
+            voting_indicators_attributes: [
+              { uuid: "vi-001", indicatorable_id: indicator.id, indicatorable_type: indicator.class, display_order: 1 }
+            ]
+          }
+        }, headers: headers
+      end
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(scorecard.reload.submit_locked?).to be_falsey }
+
+      it "uses submitted number_of_participant value" do
+        expect(scorecard.reload.number_of_participant).to eq(1) # it is counted from online voted participants
+      end
+    end
+  end
+
+  describe "PUT #update, offline scorecard uses submitted demographics" do
+    let!(:user)       { create(:user, :lngo) }
+    let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
+    let!(:indicator)  { facility.indicators.first }
+    let!(:scorecard)  { create(:scorecard, program: user.program, local_ngo_id: user.local_ngo_id, facility: facility, running_mode: :offline) }
+    let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+
+    context "final submit uses submitted demographics" do
+      before do
+        # Create participants (these should be ignored for offline scorecards)
+        scorecard.participants.create!(uuid: "p1", gender: "female", disability: true, minority: false, youth: true, poor_card: false, countable: true)
+        scorecard.participants.create!(uuid: "p2", gender: "male", disability: false, minority: true, youth: false, poor_card: true, countable: true)
+
+        # Final submit with indicator activities and submitted demographics
+        put "/api/v1/scorecards/#{scorecard.uuid}", params: {
+          scorecard: {
+            number_of_participant: 50,
+            number_of_female: 30,
+            number_of_disability: 10,
+            number_of_ethnic_minority: 15,
+            number_of_youth: 20,
+            number_of_id_poor: 25,
+            voting_indicators_attributes: [
+              {
+                uuid: "vi-001",
+                indicatorable_id: indicator.id,
+                indicatorable_type: indicator.class,
+                display_order: 1,
+                indicator_activities_attributes: [
+                  { voting_indicator_uuid: "vi-001", content: "activity 1", selected: true, type: "SuggestedIndicatorActivity" }
+                ]
+              }
+            ]
+          }
+        }, headers: headers
+      end
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(scorecard.reload.submit_locked?).to be_truthy }
+
+      it "uses submitted number_of_participant value" do
+        expect(scorecard.reload.number_of_participant).to eq(50)
+      end
+
+      it "uses submitted number_of_female value" do
+        expect(scorecard.reload.number_of_female).to eq(30)
+      end
+
+      it "uses submitted number_of_disability value" do
+        expect(scorecard.reload.number_of_disability).to eq(10)
+      end
+
+      it "uses submitted number_of_ethnic_minority value" do
+        expect(scorecard.reload.number_of_ethnic_minority).to eq(15)
+      end
+
+      it "uses submitted number_of_youth value" do
+        expect(scorecard.reload.number_of_youth).to eq(20)
+      end
+
+      it "uses submitted number_of_id_poor value" do
+        expect(scorecard.reload.number_of_id_poor).to eq(25)
+      end
+    end
+  end
+
+  describe "PUT #update, online scorecard voting duplicates request" do
+    let!(:user)       { create(:user, :lngo) }
+    let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
+    let!(:indicator)  { facility.indicators.first }
+    let!(:scorecard)  { create(:scorecard, program: user.program, local_ngo_id: user.local_ngo_id, facility: facility, running_mode: :online) }
+    let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
+
+    it "does not create duplicate voting_indicators on repeated submissions" do
+      expect(scorecard.voting_indicators.count).to eq(0)
+
+      first_params = {
+        scorecard: {
+          voting_indicators_attributes: [
+            { uuid: "vi-123", indicator_uuid: indicator.uuid, display_order: 1 }
+          ]
+        }
+      }
+
+      put "/api/v1/scorecards/#{scorecard.uuid}", params: first_params, headers: headers
+      expect(response).to have_http_status(:ok)
+      scorecard.reload
+      expect(scorecard.voting_indicators.count).to eq(1)
+
+      # Submit the same indicator again (no id provided)
+      second_params = {
+        scorecard: {
+          voting_indicators_attributes: [
+            { uuid: "vi-123", indicator_uuid: indicator.uuid, display_order: 1 }
+          ]
+        }
+      }
+
+      put "/api/v1/scorecards/#{scorecard.uuid}", params: second_params, headers: headers
+
+      expect(response).to have_http_status(:ok)
+
+      scorecard.reload
+      expect(scorecard.voting_indicators.count).to eq(1)
+
+      # Ensure the record corresponds to the indicator
+      vi = scorecard.voting_indicators.first
+      expect(vi.indicator_uuid).to eq(indicator.uuid)
     end
   end
 end
