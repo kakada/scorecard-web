@@ -50,6 +50,6 @@ class UnlockRequest < ApplicationRecord
     end
 
     def set_resolved_date
-      self.resolved_date = Time.now
+      self.resolved_date = Time.current
     end
 end

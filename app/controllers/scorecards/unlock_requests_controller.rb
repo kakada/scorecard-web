@@ -32,13 +32,21 @@ module Scorecards
     end
 
     def approve
-      @unlock_request.update(status: :approved, reviewer_id: current_user.id)
+      if @unlock_request.update(status: :approved, reviewer_id: current_user.id)
+        flash[:notice] = t("scorecard.unlock_request_approved")
+      else
+        flash[:alert] = t("shared.update_failed")
+      end
 
       redirect_to scorecard_url(@scorecard.uuid)
     end
 
     def reject
-      @unlock_request.update(rejected_params)
+      if @unlock_request.update(rejected_params)
+        flash[:notice] = t("scorecard.unlock_request_rejected")
+      else
+        flash[:alert] = t("shared.update_failed")
+      end
 
       redirect_to scorecard_url(@scorecard.uuid)
     end
