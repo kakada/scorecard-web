@@ -53,10 +53,10 @@ module Api
             facilitators_attributes: [ :id, :caf_id, :position, :scorecard_uuid ],
             participants_attributes: [ :uuid, :age, :gender, :disability, :minority, :youth, :poor_card, :scorecard_uuid, :countable ],
             raised_indicators_attributes: [
-              :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :selected, :voting_indicator_uuid, :scorecard_uuid, tag_attributes: [:name]
+              :indicator_uuid, :participant_uuid, :selected, :voting_indicator_uuid, :scorecard_uuid, tag_attributes: [:name]
             ],
             voting_indicators_attributes: [
-              :id, :uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type,
+              :id, :uuid, :indicator_uuid,
               :median, :scorecard_uuid, :display_order,
               indicator_activities_attributes: [ :id, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]
             ],

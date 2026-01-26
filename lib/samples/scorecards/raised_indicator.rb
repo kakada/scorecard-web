@@ -33,8 +33,6 @@ module Samples
         def self.create_raised_indicator(scorecard, indicator, participant_index)
           participant = scorecard.participants[participant_index]
           scorecard.raised_indicators.create(
-            indicatorable_id: indicator.id,
-            indicatorable_type: indicator.class.name,
             indicator_uuid: indicator.uuid,
             tag_id: indicator.tag_id,
             participant_uuid: participant.uuid

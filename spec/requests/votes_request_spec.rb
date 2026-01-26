@@ -57,8 +57,8 @@ RSpec.describe "VotesController", type: :request do
   end
 
   describe "POST /scorecards/:token/votes (create)" do
-    let!(:vi1) { create(:voting_indicator, scorecard_uuid: scorecard.id, indicatorable_id: indicator.id, indicatorable_type: "Indicators::PredefineIndicator", display_order: 1) }
-    let!(:vi2) { create(:voting_indicator, scorecard_uuid: scorecard.id, indicatorable_id: indicator.id, indicatorable_type: "Indicators::PredefineIndicator", display_order: 2) }
+    let!(:vi1) { create(:voting_indicator, scorecard_uuid: scorecard.id, indicator: indicator, display_order: 1) }
+    let!(:vi2) { create(:voting_indicator, scorecard_uuid: scorecard.id, indicator: indicator, display_order: 2) }
 
     context "with valid params" do
       let(:params) do

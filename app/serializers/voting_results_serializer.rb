@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class VotingResultsSerializer < ActiveModel::Serializer
-  attributes :uuid, :indicator_uuid, :indicatorable_id,
-             :indicatorable_type, :median, :display_order, :results
+  attributes :uuid, :indicator_uuid, :median, :display_order, :results
 
   SCORE_RANGE = VotingIndicator.medians.values.freeze
 

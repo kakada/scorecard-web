@@ -23,7 +23,7 @@ This document explains the updated behavior for submitting scorecards in offline
   - Returns true if `voting_indicators_attributes` contains at least one `indicator_activities_attributes` entry.
 
 ## Strong Parameters (subset)
-- `voting_indicators_attributes`: `:uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :median, :scorecard_uuid, :display_order, indicator_activities_attributes: [ :id, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]`
+- `voting_indicators_attributes`: `:uuid, :indicator_uuid, :median, :scorecard_uuid, :display_order, indicator_activities_attributes: [ :id, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]`
 - Legacy arrays (`strength`, `weakness`, `suggested_action`) and `suggested_actions_attributes` remain permitted for compatibility with older clients.
 
 ## Online Mode: Two-Step Flow
@@ -39,7 +39,7 @@ Authorization: Token <user-token>
     "number_of_participant": 10,
     "app_version": 15013,
     "voting_indicators_attributes": [
-      { "uuid": "vi-001", "indicatorable_id": <id>, "indicatorable_type": "Indicator", "scorecard_uuid": ":uuid", "display_order": 1 }
+      { "uuid": "vi-001", "indicator_uuid": "<uuid>", "scorecard_uuid": ":uuid", "display_order": 1 }
     ]
   }
 }

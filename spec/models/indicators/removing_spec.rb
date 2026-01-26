@@ -24,7 +24,7 @@ RSpec.describe Indicator, type: :model do
   describe "#removing" do
     context "has raised indicator" do
       let!(:raised_indicator) { create(:raised_indicator) }
-      let(:indicator) { raised_indicator.indicatorable }
+      let(:indicator) { raised_indicator.indicator }
 
       it "doesn't do anything" do
         indicator.remove!

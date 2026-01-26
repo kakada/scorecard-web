@@ -4,8 +4,6 @@
 #
 # Table name: voting_indicators
 #
-#  indicatorable_id   :integer
-#  indicatorable_type :string
 #  scorecard_uuid     :string
 #  median             :integer
 #  strength           :text
@@ -21,7 +19,7 @@ require "rails_helper"
 
 RSpec.describe VotingIndicator, type: :model do
   it { is_expected.to belong_to(:scorecard).optional }
-  it { is_expected.to belong_to(:indicatorable).optional }
+  it { is_expected.to belong_to(:indicator).optional }
   it { is_expected.to have_many(:ratings).dependent(:destroy) }
   it { is_expected.to have_many(:raised_indicators) }
 
@@ -32,7 +30,7 @@ RSpec.describe VotingIndicator, type: :model do
       let!(:indicator)  { facility.indicators.first }
       let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
       let(:params)      { { voting_indicators_attributes: [ {
-                            uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
+                            uuid: "123", indicator_uuid: indicator.uuid, scorecard_uuid: scorecard.uuid, display_order: 1,
                             strength: ["strength1"],
                             weakness: ["weakness1"],
                             suggested_actions_attributes: [
@@ -59,7 +57,7 @@ RSpec.describe VotingIndicator, type: :model do
       let!(:indicator)   { facility.indicators.first }
       let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
       let(:params)      { { voting_indicators_attributes: [ {
-                            uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
+                            uuid: "123", indicator_uuid: indicator.uuid, scorecard_uuid: scorecard.uuid, display_order: 1,
                             strength: ["strength1"],
                             weakness: ["weakness1"],
                             suggested_actions_attributes: [
@@ -92,7 +90,7 @@ RSpec.describe VotingIndicator, type: :model do
       let!(:indicator)   { facility.indicators.first }
       let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
       let(:params)      { { voting_indicators_attributes: [ {
-                            uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
+                            uuid: "123", indicator_uuid: indicator.uuid, scorecard_uuid: scorecard.uuid, display_order: 1,
                             indicator_activities_attributes: [
                               { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "strength1", selected: false, type: "StrengthIndicatorActivity" },
                               { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "weakness1", selected: false, type: "WeaknessIndicatorActivity" },

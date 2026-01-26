@@ -4,8 +4,6 @@
 #
 # Table name: voting_indicators
 #
-#  indicatorable_id   :integer
-#  indicatorable_type :string
 #  scorecard_uuid     :string
 #  median             :integer
 #  strength           :text
@@ -19,7 +17,6 @@
 #
 class VotingIndicator < ApplicationRecord
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
-  belongs_to :indicatorable, polymorphic: true, optional: true
   belongs_to :indicator, foreign_key: :indicator_uuid, primary_key: :uuid, optional: true
   has_many :ratings, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many :suggested_actions, foreign_key: :voting_indicator_uuid, dependent: :destroy
@@ -47,7 +44,6 @@ class VotingIndicator < ApplicationRecord
   serialize :suggested_action, Array
 
   before_create :secure_uuid
-  after_validation :set_indicator_uuid
 
   # Todo: after interim period of v1 and v2, they should be removed
   after_validation :set_strength_indicator_activities
@@ -55,10 +51,6 @@ class VotingIndicator < ApplicationRecord
   after_validation :set_suggested_indicator_activities
 
   private
-    def set_indicator_uuid
-      self.indicator_uuid ||= indicatorable.try(:uuid)
-    end
-
     def set_strength_indicator_activities
       strength.each do |st|
         strength_indicator_activities.find_or_initialize_by(content: st, scorecard_uuid: scorecard_uuid)

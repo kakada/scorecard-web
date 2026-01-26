@@ -5,8 +5,6 @@
 # Table name: raised_indicators
 #
 #  id                    :bigint           not null, primary key
-#  indicatorable_id      :integer
-#  indicatorable_type    :string
 #  scorecard_uuid        :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
@@ -20,12 +18,12 @@ FactoryBot.define do
   factory :raised_indicator do
     tag
     scorecard     { create(:scorecard) }
-    indicatorable { create(:indicator) }
-    indicator_uuid { indicatorable.uuid }
+    indicator     { create(:indicator) }
+    indicator_uuid { indicator.uuid }
     participant   { create(:participant, scorecard: scorecard) }
 
     trait :custom do
-      indicatorable { create(:indicator, :custom) }
+      indicator { create(:indicator, :custom) }
     end
   end
 end

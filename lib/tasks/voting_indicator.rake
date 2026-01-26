@@ -28,11 +28,10 @@ namespace :voting_indicator do
     end
   end
 
-  desc "migrate indicator_uuid"
+  desc "migrate indicator_uuid (DEPRECATED - indicatorable association removed)"
   task migrate_indicator_uuid: :environment do
-    VotingIndicator.includes(:indicatorable).find_each do |ri|
-      ri.update(indicator_uuid: ri.indicatorable.uuid)
-    end
+    puts "WARNING: This task is deprecated. The indicatorable association has been removed."
+    puts "Use indicator_uuid directly instead."
   end
 
   private
@@ -65,7 +64,7 @@ namespace :voting_indicator do
 
     def update_selected_indicator(scorecard)
       scorecard.voting_indicators.each do |vi|
-        raised_indicators = scorecard.raised_indicators.where(indicatorable_id: vi.indicatorable_id, indicatorable_type: vi.indicatorable_type)
+        raised_indicators = scorecard.raised_indicators.where(indicator_uuid: vi.indicator_uuid)
         raised_indicators.update_all(voting_indicator_uuid: vi.uuid, selected: true)
       end
     end

@@ -8,8 +8,8 @@ RSpec.describe PublicVoteForm, type: :model do
   let!(:indicator) { facility.indicators.first }
   let!(:scorecard) { create(:scorecard, facility: facility, program: user.program, local_ngo_id: user.local_ngo_id) }
 
-  let!(:vi1) { create(:voting_indicator, scorecard_uuid: scorecard.id, indicatorable_id: indicator.id, indicatorable_type: "Indicators::PredefineIndicator", display_order: 1) }
-  let!(:vi2) { create(:voting_indicator, scorecard_uuid: scorecard.id, indicatorable_id: indicator.id, indicatorable_type: "Indicators::PredefineIndicator", display_order: 2) }
+  let!(:vi1) { create(:voting_indicator, scorecard_uuid: scorecard.id, indicator: indicator, display_order: 1) }
+  let!(:vi2) { create(:voting_indicator, scorecard_uuid: scorecard.id, indicator: indicator, display_order: 2) }
 
   describe "validations" do
     it "is valid with age, gender and scores for all indicators" do
