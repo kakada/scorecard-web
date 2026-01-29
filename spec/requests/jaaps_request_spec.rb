@@ -101,11 +101,17 @@ RSpec.describe "Jaaps", type: :request do
   end
 
   describe "GET /jaaps/:id" do
-    let!(:jaap) { create(:jaap, program: program) }
+    let!(:jaap) { create(:jaap, :with_data, program: program) }
 
     it "shows the record" do
       get jaap_path(jaap)
       expect(response).to have_http_status(:ok)
+    end
+
+    it "exports as PDF" do
+      get jaap_path(jaap, format: :pdf)
+      expect(response).to have_http_status(:ok)
+      expect(response.content_type).to include("application/pdf")
     end
   end
 end

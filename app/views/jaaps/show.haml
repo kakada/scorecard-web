@@ -21,6 +21,10 @@
         %i.fas.fa-download.drop-menu-icon
         %span= t('shared.download_excel')
 
+      = link_to jaap_path(@jaap, format: :pdf), class: "btn dropdown-item", target: "_blank" do
+        %i.fas.fa-file-pdf.drop-menu-icon
+        %span= t('shared.download_pdf')
+
       - if policy(@jaap).destroy?
         = link_to jaap_path(@jaap), method: :delete, data: { confirm: t('jaap.are_you_sure_to_delete', commune_name: commune_name(@jaap.commune_id)) }, class: "btn dropdown-item" do
           %i.fas.fa-trash-alt.drop-menu-icon

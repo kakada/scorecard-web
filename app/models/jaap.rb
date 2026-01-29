@@ -15,6 +15,9 @@
 #  updated_at  :datetime         not null
 #
 class Jaap < ApplicationRecord
+  # Constant
+  DATA_CHILD_MAX_DEPTH = 3
+
   # Uploader
   mount_uploader :reference, JaapReferenceUploader
 
@@ -25,4 +28,8 @@ class Jaap < ApplicationRecord
   validates :province_id, presence: true
   validates :district_id, presence: true
   validates :commune_id, presence: true
+
+  def commune
+    Pumi::Commune.find_by_id(commune_id)
+  end
 end

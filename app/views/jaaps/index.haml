@@ -22,16 +22,20 @@
 
       %tbody
         - @jaaps.each_with_index do |jaap, index|
-          %tr{'data-link' => jaap_path(jaap)}
+          %tr
             %td= index + 1
             %td= province_name(jaap.province_id)
             %td= district_name(jaap.district_id)
             %td= commune_name(jaap.commune_id)
             %td= jaap.created_at.strftime("%Y-%m-%d %H:%M")
             %td= jaap.updated_at.strftime("%Y-%m-%d %H:%M")
-            %td
-              %span.btn.btn-circle.btn-sm.btn-outline-info.mr-1{ data: { toggle: 'tooltip', placement: 'top', title: t('shared.view') } }
-                %i.fas.fa-eye
+            %td.text-right
+              - if policy(jaap).show?
+                = link_to jaap_path(jaap), class: "btn btn-circle btn-sm btn-outline-info mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.view') } do
+                  %i.fas.fa-eye
+
+                = link_to jaap_path(jaap, format: 'pdf'), class: "btn btn-circle btn-sm btn-outline-dark mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.download_pdf')}, target: '_blank' do
+                  = image_tag 'pdf.png', size: 14
 
     - if @jaaps.empty?
       .text-center.py-4

@@ -39,6 +39,16 @@ class JaapsController < ApplicationController
 
   def show
     authorize @jaap
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "jaaps_#{@jaap.commune&.full_name_km || 'unknown_commune'}",
+               template: "jaaps/pdf/show",
+               layout: "pdf",
+               formats: [:html]
+      end
+    end
   end
 
   def destroy

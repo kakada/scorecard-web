@@ -1,0 +1,25 @@
+- if level < Jaap::DATA_CHILD_MAX_DEPTH
+  - has_children = row_data['_children'].present?
+  - total_columns = 13
+
+  %tr
+    - if has_children
+      %td{ colspan: total_columns }
+        %strong= h [row_data['no'], row_data['priority_activity']].compact.join('. ')
+    - else
+      %td.center= h row_data['no']
+      %td= h row_data['priority_activity']
+      %td.center= h row_data['proposer']
+      %td.center= h row_data['target_response']
+      %td.center= h row_data['location']
+      %td.center= h row_data['result_quantity']
+      %td.center= h row_data['result_unit']
+      %td.center= h row_data['start_date']
+      %td.center= h row_data['end_date']
+      %td.right= h row_data['beneficiary_total']
+      %td.right= h row_data['beneficiary_female']
+      %td.right= h row_data['estimated_cost']
+      %td= h row_data['implementer']
+
+  - if has_children
+    = render partial: 'jaaps/pdf/row', collection: row_data['_children'], as: :row_data, locals: { level: level + 1 }
