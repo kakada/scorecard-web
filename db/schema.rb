@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_01_23_073828) do
+ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -725,6 +725,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_23_073828) do
     t.datetime "updated_at", null: false
     t.integer "display_order"
     t.string "indicator_uuid"
+    t.index ["scorecard_uuid", "indicator_uuid"], name: "index_voting_indicators_on_scorecard_uuid_and_indicator_uuid", unique: true
   end
 
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"

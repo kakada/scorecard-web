@@ -29,8 +29,9 @@ module Api
 
         return render(json: @scorecard, status: :ok) if @scorecard.program.sandbox?
 
-        if @scorecard.update(scorecard_params)
+        if @scorecard.update(params_to_update)
           @scorecard.lock_submit! if final_submit?
+
           render json: @scorecard, status: :ok
         else
           render json: { errors: @scorecard.errors }, status: :unprocessable_entity
@@ -44,23 +45,27 @@ module Api
           raise ActiveRecord::RecordNotFound, with: :render_record_not_found if @scorecard.nil?
         end
 
+        def params_to_update
+          ::Scorecards::NormalizeParamsToUpdateService.new(@scorecard, scorecard_params).call
+        end
+
         def scorecard_params
           param = params.require(:scorecard).permit(
             :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,
             :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
             :finished_date, :language_conducted_code, :running_date, :device_type, :device_token,
             :proposed_indicator_method, :number_of_anonymous, :device_id, :app_version,
-            facilitators_attributes: [ :id, :caf_id, :position, :scorecard_uuid ],
-            participants_attributes: [ :uuid, :age, :gender, :disability, :minority, :youth, :poor_card, :scorecard_uuid, :countable ],
+            facilitators_attributes: [ :id, :caf_id, :position ],
+            participants_attributes: [ :uuid, :age, :gender, :disability, :minority, :youth, :poor_card, :countable ],
             raised_indicators_attributes: [
-              :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :selected, :voting_indicator_uuid, :scorecard_uuid, tag_attributes: [:name]
+              :indicator_uuid, :indicatorable_id, :indicatorable_type, :participant_uuid, :selected, :voting_indicator_uuid, tag_attributes: [:name]
             ],
             voting_indicators_attributes: [
               :id, :uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type,
-              :median, :scorecard_uuid, :display_order,
-              indicator_activities_attributes: [ :id, :voting_indicator_uuid, :scorecard_uuid, :content, :selected, :type ]
+              :median, :display_order,
+              indicator_activities_attributes: [ :id, :voting_indicator_uuid, :content, :selected, :type ]
             ],
-            ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :scorecard_uuid, :score ]
+            ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :score ]
           ).merge(submitter_id: current_user.id, runner_id: current_user.id)
 
           param
