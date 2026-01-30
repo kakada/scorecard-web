@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
+ActiveRecord::Schema[7.0].define(version: 2026_01_30_024712) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.index ["user_id"], name: "index_activity_logs_on_user_id"
   end
 
-  create_table "caf_batches", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "caf_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.integer "total_count", default: 0
     t.integer "valid_count", default: 0
@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.string "province_id"
     t.string "district_id"
     t.string "commune_id"
+    t.integer "age"
     t.index ["deleted_at"], name: "index_cafs_on_deleted_at"
   end
 
@@ -72,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
     t.string "name_km"
@@ -118,21 +119,21 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.string "uuid"
   end
 
-  create_table "data_publication_logs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "data_publication_logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "program_id"
     t.integer "published_option"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "data_publications", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "data_publications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "program_id"
     t.integer "published_option"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "datasets", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "datasets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
     t.string "name_km"
@@ -144,7 +145,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "educational_backgrounds", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "educational_backgrounds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
     t.datetime "created_at", null: false
@@ -180,7 +181,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.index ["rgt"], name: "index_facilities_on_rgt"
   end
 
-  create_table "gf_dashboards", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "gf_dashboards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "dashboard_id"
     t.string "dashboard_uid"
     t.string "dashboard_url"
@@ -191,14 +192,14 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "importing_cafs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "importing_cafs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "caf_id"
     t.uuid "caf_batch_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "indicator_activities", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "indicator_activities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "voting_indicator_uuid"
     t.string "scorecard_uuid"
     t.text "content"
@@ -270,7 +271,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.integer "version", default: 0
   end
 
-  create_table "local_ngo_batches", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "local_ngo_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.integer "total_count", default: 0
     t.integer "valid_count", default: 0
@@ -445,7 +446,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.index ["user_id"], name: "index_program_clones_on_user_id"
   end
 
-  create_table "program_scorecard_types", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "program_scorecard_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "code"
     t.string "name_en"
     t.string "name_km"
@@ -498,7 +499,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.string "participant_uuid"
   end
 
-  create_table "removing_scorecard_batches", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "removing_scorecard_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.integer "total_count", default: 0
     t.integer "valid_count", default: 0
@@ -509,7 +510,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "request_changes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "request_changes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "scorecard_uuid"
     t.integer "proposer_id"
     t.integer "reviewer_id"
@@ -528,7 +529,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.uuid "dataset_id"
   end
 
-  create_table "scorecard_batches", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "scorecard_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.integer "total_item", default: 0
     t.integer "total_valid", default: 0
@@ -542,7 +543,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.string "filename"
   end
 
-  create_table "scorecard_knowledges", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "scorecard_knowledges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name_en"
     t.datetime "created_at", null: false
@@ -567,13 +568,6 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.string "scorecard_uuid"
     t.string "attachment"
     t.string "kind"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "scorecard_types", force: :cascade do |t|
-    t.string "name"
-    t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -615,9 +609,9 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.datetime "running_date", precision: nil
     t.datetime "deleted_at", precision: nil
     t.boolean "published", default: false
-    t.string "device_type"
     t.datetime "submitted_at", precision: nil
     t.datetime "completed_at", precision: nil
+    t.string "device_type"
     t.string "device_token"
     t.integer "completor_id"
     t.integer "proposed_indicator_method", default: 1
@@ -635,13 +629,6 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["token"], name: "index_scorecards_on_token", unique: true
     t.index ["uuid"], name: "index_scorecards_on_uuid"
-  end
-
-  create_table "scorecards_cafs", force: :cascade do |t|
-    t.integer "caf_id"
-    t.integer "scorecard_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "suggested_actions", force: :cascade do |t|

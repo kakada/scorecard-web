@@ -20,13 +20,14 @@
 #  province_id               :string
 #  district_id               :string
 #  commune_id                :string
+#  age                       :integer
 #
 
 FactoryBot.define do
   factory :caf do
     name          { FFaker::Name.name }
     sex           { %w(female male other).sample }
-    date_of_birth { rand(18..70).years.ago }
+    age           { rand(18..70) }
     tel           { FFaker::PhoneNumber.phone_number }
     address       { FFaker::Address.street_name }
     commune_id    { Pumi::Commune.all.sample.id }

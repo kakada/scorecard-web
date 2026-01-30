@@ -20,6 +20,7 @@
 #  province_id               :string
 #  district_id               :string
 #  commune_id                :string
+#  age                       :integer
 #
 class Caf < ApplicationRecord
   belongs_to :local_ngo
@@ -42,6 +43,7 @@ class Caf < ApplicationRecord
 
   validates :name, presence: true
   validates :sex, inclusion: { in: GENDERS }, allow_blank: true
+  validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 150 }, allow_blank: true
   validates :province_id, inclusion: { in: Pumi::Province.all.pluck(:id) }, allow_blank: true
   validates :district_id, inclusion: { in: Pumi::District.all.pluck(:id) }, allow_blank: true
   validates :commune_id, inclusion: { in: Pumi::Commune.all.pluck(:id) }, allow_blank: true

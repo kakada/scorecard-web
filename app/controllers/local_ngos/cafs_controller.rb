@@ -74,7 +74,7 @@ module LocalNgos
 
       def caf_params
         params.require(:caf).permit(
-          :name, :sex, :date_of_birth, :tel, :actived, :province_id, :district_id, :commune_id,
+          :name, :sex, :age, :tel, :actived, :province_id, :district_id, :commune_id,
           :educational_background_id, scorecard_knowledge_ids: []
         )
       end

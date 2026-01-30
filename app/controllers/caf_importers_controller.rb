@@ -49,7 +49,7 @@ class CafImportersController < ApplicationController
         importing_cafs_attributes: [
           :caf_id,
           caf_attributes: [
-            :id, :name, :sex, :date_of_birth, :tel, :commune_id, :district_id, :local_ngo_id,
+            :id, :name, :sex, :age, :tel, :commune_id, :district_id, :local_ngo_id,
             :province_id, :educational_background_id, scorecard_knowledge_ids: []
           ]
         ]

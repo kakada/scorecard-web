@@ -5,6 +5,7 @@ en:
     gender: Gender
     tel: Tel
     date_of_birth: Date of birth
+    age: Age
     address: Address
     add_new: Add New CAFs
     new_caf: New CAFs

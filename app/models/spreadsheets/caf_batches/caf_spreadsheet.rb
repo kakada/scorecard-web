@@ -15,7 +15,7 @@ module Spreadsheets
         caf.attributes = {
           name: row["name"],
           sex: row["gender"],
-          date_of_birth: row["date_of_birth"],
+          age: row["age"],
           tel: row["phone_number"],
           commune_id: commune.try(:id),
           district_id: commune.try(:district_id),
