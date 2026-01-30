@@ -42,9 +42,9 @@ class RequestChange < ApplicationRecord
   validates :resolved_date, presence: true, if: -> { approved? || rejected? }
   validates :rejected_reason, presence: true, if: -> { rejected? }
 
-  validates :district_id, presence: true, if: -> { province_id.present? }
-  validates :commune_id, presence: true, if: -> { province_id.present? }
-  validates :dataset_id, presence: true, if: -> { province_id.present? && scorecard.facility.dataset.present? }
+  validates :district_id, presence: true, if: -> { province_id.present? && (scorecard&.facility&.category_id.nil? || scorecard&.facility&.category&.hierarchy&.include?("district")) }
+  validates :commune_id, presence: true, if: -> { province_id.present? && (scorecard&.facility&.category_id.nil? || scorecard&.facility&.category&.hierarchy&.include?("commune")) }
+  validates :dataset_id, presence: true, if: -> { scorecard&.facility&.category_id.present? }
 
   before_validation :set_resolved_date, if: -> { approved? || rejected? }
   before_create :set_status

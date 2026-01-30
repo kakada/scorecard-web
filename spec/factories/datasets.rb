@@ -21,7 +21,7 @@ FactoryBot.define do
     district_id { commune_id[0..3] }
     province_id { commune_id[0..1] }
     sequence(:code) { |n| "#{commune_id}_#{n}" }
-    name_en  { FFaker::Name.name }
-    name_km  { FFaker::Name.name }
+    sequence(:name_en) { |n| "Dataset EN #{n}" }
+    sequence(:name_km) { |n| "Dataset KM #{n}" }
   end
 end
