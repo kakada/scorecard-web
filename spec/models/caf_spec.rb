@@ -31,6 +31,7 @@ RSpec.describe Caf, type: :model do
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_inclusion_of(:sex).in_array(%w(female male other)).allow_nil }
+  it { is_expected.to validate_numericality_of(:age).only_integer.is_greater_than_or_equal_to(0).is_less_than_or_equal_to(150).allow_nil }
   it { is_expected.to validate_inclusion_of(:province_id).in_array(Pumi::Province.all.pluck(:id)).allow_nil }
   it { is_expected.to validate_inclusion_of(:district_id).in_array(Pumi::District.all.pluck(:id)).allow_nil }
   it { is_expected.to validate_inclusion_of(:commune_id).in_array(Pumi::Commune.all.pluck(:id)).allow_nil }

@@ -9,7 +9,8 @@ class MigrateAgeDataFromDateOfBirth < ActiveRecord::Migration[7.0]
       begin
         # Parse date_of_birth and calculate age
         dob = Date.parse(caf.date_of_birth)
-        age = ((Date.today - dob).to_i / 365.25).floor
+        today = Date.today
+        age = today.year - dob.year - ((today.month > dob.month || (today.month == dob.month && today.day >= dob.day)) ? 0 : 1)
         caf.update_column(:age, age) if age >= 0
       rescue ArgumentError, TypeError
         # Skip records with invalid date formats
