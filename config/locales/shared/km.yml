@@ -74,6 +74,7 @@ km:
     description: បរិយាយ
     reason: មូលហេតុ
     download_excel: ទាញយកជា Excel(.xlsx)
+    download_pdf: ទាញយកជា PDF
     file_size_is_too_big: ទំហំឯកសារធំពេក សូមធ្វើការច្រោះ អ្នកអាចទាញយកធំបំផុត %{max_record} ជួរដេក!
     reference: ឯកសារយោង
     imported_by: អ្នកអនុវត្ត

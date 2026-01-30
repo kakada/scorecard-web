@@ -1,6 +1,15 @@
 @import "bootstrap";
 @import "sb-admin-2";
 
+// Read PDF_FONT.md for concept
+body, html, * {
+  font-family: 'Battambang', sans-serif;
+}
+
+.font-title {
+  font-family: 'Moul' !important;
+}
+
 .table.border-0 {
   border: none;
 

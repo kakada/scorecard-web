@@ -1,0 +1,67 @@
+- locale = I18n.locale.to_s
+- data = JSON.parse(@jaap.data || '[]') rescue []
+
+%style
+  :css
+    .header { margin-bottom: 20px; }
+    .header .kingdom { font-size: 18px; margin: 5px 0; }
+    .header .motto { font-size: 14px; margin: 5px 0; }
+    .header h1 { font-size: 16px; margin: 5px 0; }
+    .header h2 { font-size: 14px; margin-top: 10px; }
+    .location-info { position: absolute; bottom: 0; left: 0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th { background-color: #e6e6e6; padding: 8px 4px; text-align: center; border: 1px solid #000; font-size: 14px; font-weight: bold; }
+    td { padding: 6px 4px; border: 1px solid #000;}
+
+- commune = @jaap.commune
+
+.header.position-relative
+  .text-center
+    .kingdom.font-title= t('jaap.pdf_header_kingdom')
+    .motto.font-title= t('jaap.pdf_header_motto')
+    .mb-3= t('jaap.pdf_header_separator')
+
+    %h1.font-title= t('jaap.action_plan_table')
+    .div= locale == 'km' ? commune&.full_name_km : commune&.full_name_en
+
+  .text-left.location-info
+    %h2.font-title= locale == 'km' ? commune&.province&.full_name_km : commune&.province&.full_name_en
+    %h2.font-title= locale == 'km' ? commune&.district&.full_name_km : commune&.district&.full_name_en
+    %h2.font-title= "#{t('jaap.pdf_administration_label')} #{locale == 'km' ? commune&.full_name_km : commune&.full_name_en}"
+    %h2.font-title
+      = "#{t('jaap.pdf_reference_number')} "
+      %span= "......................................"
+
+%table
+  %thead
+    %tr
+      %th{rowspan: 2, style: "width: 3%"}
+        = locale == 'km' ? 'ល.រ' : 'No.'
+      %th{rowspan: 2, style: "width: 18%"}
+        = locale == 'km' ? raw('សកម្មភាពអាទិភាពដែលបានព្រមព្រៀងគ្នា <br/>(ឈ្មោះគម្រោងសកម្មភាពអាទិភាព)') : raw('Agreed Priority Activity<br/>(Priority Activity Project Name)')
+      %th{rowspan: 2, style: "width: 7%"}
+        = locale == 'km' ? 'អ្នកស្នើ' : 'Proposer'
+      %th{rowspan: 2, style: "width: 8%"}
+        = locale == 'km' ? 'ឆ្លើយតបគោលដៅ' : 'Target Response'
+      %th{rowspan: 2, style: "width: 8%"}
+        = locale == 'km' ? raw('ទីតាំង<br/>(គម្រោង)') : raw('Location<br/>(Project)')
+      %th{colspan: 2, style: "width: 10%"}
+        = locale == 'km' ? 'លទ្ធផល' : 'Results'
+      %th{colspan: 2, style: "width: 10%"}
+        = locale == 'km' ? 'ពេលវេលា' : 'Time'
+      %th{colspan: 2, style: "width: 10%"}
+        = locale == 'km' ? 'អ្នកទទួលផល' : 'Beneficiary'
+      %th{rowspan: 2, style: "width: 12%"}
+        = locale == 'km' ? raw('តម្លៃប៉ាន់ស្មាន <br/>(គិតជារៀល)') : raw('Estimated Cost<br/>(KHR)')
+      %th{rowspan: 2, style: "width: 14%"}
+        = locale == 'km' ? 'អ្នកដឹកនាំអនុវត្ត/សហការ' : 'Implementer/Collaborator'
+    %tr
+      %th= locale == 'km' ? 'បរិមាណ' : 'Quantity'
+      %th= locale == 'km' ? 'ឯកតា' : 'Unit'
+      %th= locale == 'km' ? 'ចាប់ផ្ដើម' : 'Start'
+      %th= locale == 'km' ? 'បញ្ចប់' : 'End'
+      %th= locale == 'km' ? 'សរុប' : 'Total'
+      %th= locale == 'km' ? 'ស្រី' : 'Female'
+
+  %tbody
+    = render partial: 'jaaps/pdf/row', collection: data, as: :row_data, locals: { level: 0 }

@@ -21,7 +21,7 @@ services:
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
-      - ./vendor/assets/fonts:/usr/share/fonts
+      - ./vendor/assets/fonts:/usr/share/fonts/truetype/custom
     ports:
       - '3000:3000'
     env_file: app.env

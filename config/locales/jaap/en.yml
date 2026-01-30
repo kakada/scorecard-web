@@ -23,3 +23,8 @@ en:
     select_commune_first: Please select a commune to see available datasets
     select_commune_in_form: Please select a commune in the main form first
     location_selection_warning: "*** Warning: Changing the location will affect the consistency of existing JAAPs table data. ***"
+    pdf_header_kingdom: "Kingdom of Cambodia"
+    pdf_header_motto: "Nation Religion King"
+    pdf_header_separator: "**********"
+    pdf_administration_label: "Administration"
+    pdf_reference_number: "No."
