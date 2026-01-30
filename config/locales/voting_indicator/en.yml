@@ -1,0 +1,9 @@
+en:
+  voting_indicator:
+    batch_limit_exceeded: "Cannot download more than %{max_record} scorecards in a batch"
+    median:
+      very_bad: "Very Bad"
+      bad: "Bad"
+      acceptable: "Acceptable"
+      good: "Good"
+      very_good: "Very Good"

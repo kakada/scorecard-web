@@ -116,6 +116,7 @@ Rails.application.routes.draw do
   end
 
   resource :download, only: [:show]
+  resources :voting_indicators, only: [:index]
   resources :users do
     put :unlock_access, on: :member
     post :update_locale, on: :collection
