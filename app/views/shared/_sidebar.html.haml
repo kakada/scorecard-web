@@ -68,6 +68,12 @@
           %i.fas.fa-fw.fa-shoe-prints
           %span= t('sidebar.activity_logs')
 
+    - if policy(:user_guide).index?
+      %li.nav-item{ class: css_active_class('user_guides') }
+        %a.nav-link{:href => user_guides_path}
+          %i.fas.fa-fw.fa-book
+          %span= t('sidebar.user_guides')
+
     %li.nav-item{ class: css_active_class('about') }
       %a.nav-link{:href => about_path}
         %i.fas.fa-fw.fa-exclamation-circle

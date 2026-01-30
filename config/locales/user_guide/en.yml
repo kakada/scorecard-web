@@ -1,0 +1,17 @@
+en:
+  user_guide:
+    title: User Guides
+    description: Download user guides based on your role and learn how to use the application effectively.
+    download: Download PDF
+    guides:
+      system_admin: System Admin User Guide
+      program_admin: Program Admin User Guide
+      staff: Staff/Officer User Guide
+      lngo: Local NGO User Guide
+      mobile_app: DCSC Mobile App User Guide
+    guide_descriptions:
+      system_admin: Comprehensive guide for system administrators covering all features and settings.
+      program_admin: Guide for program administrators to manage programs, users, and scorecards.
+      staff: Guide for staff and officers to create and manage scorecards and activities.
+      lngo: Guide for local NGO users to participate in community scorecards.
+      mobile_app: Complete guide for using the DCSC mobile application.
