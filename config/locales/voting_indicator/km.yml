@@ -1,0 +1,9 @@
+km:
+  voting_indicator:
+    batch_limit_exceeded: "មិនអាចទាញយកបានច្រើនជាង %{max_record} scorecards ក្នុងមួយ batch"
+    median:
+      very_bad: "មិនល្អខ្លាំង"
+      bad: "មិនល្អ"
+      acceptable: "អាចទទួលយកបាន"
+      good: "ល្អ"
+      very_good: "ល្អខ្លាំង"

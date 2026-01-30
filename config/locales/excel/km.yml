@@ -72,3 +72,13 @@ km:
     raised_by_ethnic_minority: លើកឡើងដោយជនជាតិភាគតិច
     raised_by_id_poor: លើកឡើងដោយអ្នកមានប័ណ្ណក្រីក្រ
     raised_by_id_people_with_disability: លើកឡើងដោយជនមានពិការភាព
+    
+    # Voting Indicator Raw Data
+    scorecard_batch_code: លេខកូដបាច់
+    median: ពិន្ទុមេដ្យាន
+    total_ratings: ចំនួនពិន្ទុសរុប
+    very_bad_count: ចំនួនមិនល្អខ្លាំង
+    bad_count: ចំនួនមិនល្អ
+    acceptable_count: ចំនួនអាចទទួលយកបាន
+    good_count: ចំនួនល្អ
+    very_good_count: ចំនួនល្អខ្លាំង
