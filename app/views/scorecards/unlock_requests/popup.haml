@@ -1,0 +1,60 @@
+%h3.popover-header.pop-header.d-flex
+  .flex-grow-1.d-flex.align-items-center
+    = t('scorecard.unlock_requests')
+
+  / Button Add new
+  - if scorecard.access_locked? && policy(scorecard).request_unlock? && scorecard.unlock_requests.pendings.empty?
+    %a.tip.btn.btn-circle.btn-outline-primary.ml-4{ href: new_scorecard_unlock_request_path(scorecard.uuid), data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.request_unlock')} }
+      %i.fas.fa-unlock.fa-lg
+      .tip-title.d-none= t('scorecard.request_unlock')
+
+%div.popup-body
+  - scorecard.unlock_requests.each do |ur|
+    .card.mb-2
+      .card-body
+        / Flag approved or rejected
+        - unless ur.pending?
+          .flag{class: ur.status}= t("scorecard.#{ur.status}")
+
+        / Proposer section
+        %div
+          .d-flex
+            .text-capitalize.btn.btn-circle.border.mr-2
+              = ur.proposer.email[0]
+
+            .flex-grow-1
+              %h6.mb-0= ur.proposer.email
+              %small.text-muted= timeago(ur.updated_at).html_safe
+
+            - if policy(ur).review?
+              %a.text-primary{href: edit_scorecard_unlock_request_path(scorecard.uuid, ur)}
+                = t('shared.review')
+
+            - if policy(ur).update?
+              %a.btn.btn-link.p-1{href: edit_scorecard_unlock_request_path(scorecard.uuid, ur)}
+                %i.fas.fa-pen
+
+          / Reason
+          .mt-2
+            .mb-2
+              %strong= t('scorecard.reason')
+              %span= ": #{ur.reason}"
+
+        / Reviewer section
+        - if ur.reviewer_id.present?
+          %div.pt-3.border-top
+            .d-flex
+              .text-capitalize.btn.btn-circle.border.mr-2
+                = ur.reviewer.email[0]
+
+              %div.flex-grow-1
+                %h6.mb-0= ur.reviewer.email
+                %small.text-muted= timeago(ur.resolved_date).html_safe
+
+            .mt-2.text-muted
+              = t("scorecard.unlock_request_#{ur.status}")
+
+              - if ur.rejected_reason.present?
+                .mb-2
+                  %strong= t('scorecard.reason')
+                  %span= ": #{ur.rejected_reason}"

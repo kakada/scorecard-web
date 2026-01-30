@@ -677,6 +677,21 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "unlock_requests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "scorecard_id"
+    t.integer "proposer_id"
+    t.integer "reviewer_id"
+    t.text "reason"
+    t.text "rejected_reason"
+    t.integer "status"
+    t.datetime "resolved_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proposer_id"], name: "index_unlock_requests_on_proposer_id"
+    t.index ["scorecard_id"], name: "index_unlock_requests_on_scorecard_id"
+    t.index ["status"], name: "index_unlock_requests_on_status"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: ""

@@ -11,10 +11,14 @@
       %div.ml-1= status_html(@scorecard).html_safe
 
     / Short description
-    .my-2.card-subtitle.text-muted= scorecard_descriptions.html_safe
+    .my-2.card-subtitle.text-muted
+      = scorecard_descriptions.html_safe
+      %span.line-badge{ class: @scorecard.scorecard_type}
+        = @scorecard.t_scorecard_type
 
   .w-25.text-right
     = render 'button_request_change', scorecard: @scorecard
+    = render 'button_unlock_request', scorecard: @scorecard
 
     - if policy(@scorecard).in_review?
       %button.btn.btn-primary.btn-sm.shadow-sm.mr-2{type: 'button', "data-toggle" => "modal", "data-target" => "#confirmModal"}

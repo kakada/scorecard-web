@@ -127,6 +127,7 @@ class Scorecard < ApplicationRecord
   has_many   :suggested_actions, foreign_key: :scorecard_uuid, primary_key: :uuid
   has_many   :scorecard_references, foreign_key: :scorecard_uuid, primary_key: :uuid
   has_many   :request_changes, foreign_key: :scorecard_uuid, primary_key: :uuid
+  has_many   :unlock_requests, foreign_key: :scorecard_id
 
   has_many   :indicator_activities, foreign_key: :scorecard_uuid, primary_key: :uuid
   has_many   :strength_indicator_activities, foreign_key: :scorecard_uuid, primary_key: :uuid

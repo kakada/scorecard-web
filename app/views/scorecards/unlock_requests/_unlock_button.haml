@@ -1,0 +1,7 @@
+- popup_content ||= nil
+
+%a.d-inline-block.position-relative{ data: { toggle: 'popover', trigger: 'focus', html: 'true', content: popup_content}, role: 'button', tabindex: '0'}
+  %span{ class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: tooltip }}
+    %i.fas.fa-unlock
+
+  %span.full-stop{ class: full_stop_css }

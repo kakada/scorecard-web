@@ -42,6 +42,9 @@
       / Request change icon
       = render 'scorecards/button_request_change', scorecard: scorecard
 
+      / Unlock request icon
+      = render 'button_unlock_request', scorecard: scorecard
+
       / Pdf icon
       - if scorecard.access_locked? && scorecard.program.try(:pdf_templates).present?
         = link_to scorecard_path(scorecard.uuid, format: 'pdf'), class: "btn btn-circle btn-sm btn-outline-dark mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.view_as_pdf')}, target: '_blank' do

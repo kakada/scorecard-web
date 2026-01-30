@@ -1,0 +1,6 @@
+%p= @body_message.to_s.html_safe
+
+%p
+  Click
+  = link_to 'here', edit_scorecard_unlock_request_url(@scorecard.uuid, @unlock_request)
+  to review the unlock request!
