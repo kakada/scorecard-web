@@ -186,6 +186,7 @@ km:
     remove_scorecard_from_excel: លុបប័ណ្ណដាក់ពិន្ទុតាម Excel
     download_in_full: ទាញយកទម្រង់អនុវត្តរួចរាល់
     download_in_short: ទាញយកទម្រង់សម្រាប់អនុវត្ត
+    download_voting_indicators: ទាញយកទិន្នន័យ voting indicators
     reviewed: ត្រួតពិនិត្យរួចរាល់
     completed_by: "ត្រួតពិនិត្យដោយ៖"
     conducted_in_app: បានធ្វើឡើងនៅក្នុងកម្មវិធីទូរស័ព្ទ

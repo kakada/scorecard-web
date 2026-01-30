@@ -1,0 +1,3 @@
+en:
+  voting_indicator:
+    batch_limit_exceeded: "Cannot download more than %{max_record} scorecards at once. Please reduce the number of selected scorecards."

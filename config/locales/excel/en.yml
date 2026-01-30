@@ -46,7 +46,7 @@ en:
     # Scorecard Result
     weakness: Weaknesses / points to improve
     strength: Strength
-    suggested_action: Suggested action number %{number}
+    suggested_action: Suggested action
 
     # Scorecard Report
     number: "#"
@@ -72,3 +72,13 @@ en:
     raised_by_ethnic_minority: Raised by Ethnic Minority
     raised_by_id_poor: Raised by ID poor
     raised_by_id_people_with_disability: Raised by PwD
+
+    # Voting Indicator Raw Data
+    scorecard_batch_code: Scorecard Batch Code
+    median: Median Score
+    total_ratings: Total Participants Rated
+    very_bad_count: Very Bad Count
+    bad_count: Bad Count
+    acceptable_count: Acceptable Count
+    good_count: Good Count
+    very_good_count: Very Good Count

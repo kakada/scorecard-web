@@ -46,7 +46,7 @@ km:
     # Scorecard Result
     weakness: ចំណុចខ្សោយ/ចំណុចដែលត្រូវកែលម្អ
     strength: ចំនុចខ្លាំង
-    suggested_action: សកម្មភាពដែលស្នើឡើងទី %{number}
+    suggested_action: សកម្មភាពដែលស្នើឡើង
 
     # Scorecard Report
     number: ល.រ
@@ -72,3 +72,13 @@ km:
     raised_by_ethnic_minority: លើកឡើងដោយជនជាតិភាគតិច
     raised_by_id_poor: លើកឡើងដោយអ្នកមានប័ណ្ណក្រីក្រ
     raised_by_id_people_with_disability: លើកឡើងដោយជនមានពិការភាព
+
+    # Voting Indicator Raw Data
+    scorecard_batch_code: លេខកូដបាច់
+    median: ពិន្ទុមធ្យម(មេដ្យាន)
+    total_ratings: ចំនួនអ្នកចូលរួមដាក់ពិន្ទុ
+    very_bad_count: ចំនួនអ្នកមិនពេញចិត្តខ្លាំង
+    bad_count: ចំនួនអ្នកមិនពេញចិត្ត
+    acceptable_count: ចំនួនអ្នកអាចទទួលយកបាន
+    good_count: ចំនួនអ្នកពេញចិត្ត
+    very_good_count: ចំនួនអ្នកពេញចិត្តខ្លាំង
