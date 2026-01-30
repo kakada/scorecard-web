@@ -10,7 +10,7 @@
             = f.radio_button :sex, gender
             = label :sex, t("caf.#{gender}")
 
-    = render "shared/date_field", f: f, field: :date_of_birth, label: t('caf.date_of_birth')
+    = f.input :age, label: t('caf.age')
     = f.input :tel, label: t('caf.tel')
 
     .form-group

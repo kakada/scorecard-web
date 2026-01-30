@@ -10,7 +10,7 @@ wb.add_worksheet(name: "#{@local_ngo.code}_#{@local_ngo.name}'s Cafs") do |sheet
     t("caf.name"),
     t("caf.based_location"),
     t("caf.tel"),
-    t("caf.date_of_birth"),
+    t("caf.age"),
     t("caf.educational_background"),
     t("caf.scorecard_knowledge"),
     t("shared.created_at")
@@ -23,7 +23,7 @@ wb.add_worksheet(name: "#{@local_ngo.code}_#{@local_ngo.name}'s Cafs") do |sheet
       caf.name,
       caf.based_location_name,
       caf.tel,
-      caf.date_of_birth,
+      caf.age,
       caf.educational_background_name,
       caf.scorecard_knowledges.pluck(:"shortcut_name_#{I18n.locale}").join("; "),
       l(caf.created_at)

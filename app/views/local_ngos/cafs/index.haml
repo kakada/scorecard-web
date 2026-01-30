@@ -17,7 +17,7 @@
             %th= sortable "name", t("caf.name")
             %th= t('caf.gender')
             %th= t('caf.tel')
-            %th= t('caf.date_of_birth')
+            %th= t('caf.age')
             %th= t('caf.based_location')
             %th= t('caf.educational_background')
             %th= t('caf.scorecard_knowledge')
@@ -32,7 +32,7 @@
               %td
                 = t("caf.#{caf.sex}") if caf.sex.present?
               %td.text-nowrap= caf.tel
-              %td.text-nowrap= dob(caf.date_of_birth).html_safe
+              %td.text-nowrap= caf.age
               %td= caf.based_location_name
               %td= caf.educational_background_name
               %td

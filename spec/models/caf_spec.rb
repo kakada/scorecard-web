@@ -20,6 +20,7 @@
 #  province_id               :string
 #  district_id               :string
 #  commune_id                :string
+#  age                       :integer
 #
 require "rails_helper"
 

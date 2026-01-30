@@ -20,9 +20,10 @@
 #  province_id               :string
 #  district_id               :string
 #  commune_id                :string
+#  age                       :integer
 #
 class CafSerializer < ActiveModel::Serializer
-  attributes :id, :name, :sex, :date_of_birth, :tel, :address, :local_ngo_id,
+  attributes :id, :name, :sex, :age, :tel, :address, :local_ngo_id,
              :educational_background
 
   has_many :scorecard_knowledges
