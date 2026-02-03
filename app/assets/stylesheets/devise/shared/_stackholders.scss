@@ -1,10 +1,5 @@
-$font-size: 1em;
-$height: 80px;
 .stackholders {
-  .text-funded,
-  .text-implemented {
-    font-size: $font-size;
-  }
+  $height: 80px;
 
   .img-funded {
     height: $height;
@@ -16,19 +11,14 @@ $height: 80px;
 
   .img-implemented-wrapper {
     height: $height;
-    & > a:not(:last-child) {
+    & > a:not(:last-child), & > span:not(:last-child) {
       margin-right: 15px;
     }
   }
 }
 
-$font-size-lg: 1.2em;
-$height-lg: 65px;
 .stackholders-lg {
-  .text-funded,
-  .text-implemented {
-    font-size: $font-size-lg;
-  }
+  $height-lg: 56px;
 
   .img-funded {
     height: $height-lg *2;
@@ -40,8 +30,46 @@ $height-lg: 65px;
 
   .img-implemented-wrapper {
     height: $height-lg *2;
-    & > a:not(:last-child) {
-      margin-right: 15px;
-    }
+  }
+}
+
+// V2-----------
+.stackholders.v2 {
+  $height: 60px;
+
+  .img-funded {
+    height: $height;
+  }
+
+  .img-implemented {
+    height: 36px;
+  }
+
+  .ycc-logo {
+    height: 40px;
+  }
+
+  .img-implemented-wrapper {
+    height: $height;
+  }
+}
+
+.stackholders-lg.v2 {
+  $height-lg: 86px;
+
+  .img-funded {
+    height: $height-lg;
+  }
+
+  .img-implemented {
+    height: 50px;
+  }
+
+  .ycc-logo {
+    height: 56px;
+  }
+
+  .img-implemented-wrapper {
+    height: $height-lg;
   }
 }

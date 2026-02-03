@@ -1,0 +1,22 @@
+.stackholders.v2.d-md-flex.justify-content-between{ class: local_assigns[:wrapper_class] }
+  .funded-by.text-center.flex-shrink-0
+    %p.font-weight-normal.text-center.text-funded
+      គាំទ្រមូលនិធិដោយ / Funded by
+    = link_to 'https://eeas.europa.eu/delegations/cambodia_en', target: '_blank', class: 'd-flex align-items-center justify-content-center flex-wrap img-implemented-wrapper mr-4' do
+      = image_tag 'stakeholder_v2/eu.png', class: 'img-funded', alt: 'EU Cambodia'
+
+  .implemented-by.mt-5.mt-md-0
+    %p.font-weight-normal.text-center.text-implemented
+      អនុវត្តដោយ / Implemented by
+    .d-flex.align-items-center.justify-content-center.flex-wrap.img-implemented-wrapper
+      %span
+        = image_tag 'stakeholder_v2/ipa.png', class: 'img-implemented img-fluid', alt: 'Iternational Partners Austria'
+
+      = link_to 'https://www.care-cambodia.org/', target: '_blank' do
+        = image_tag 'stakeholder_v2/care.png', class: 'img-implemented img-fluid', alt: 'CARE Cambodia'
+
+      = link_to 'https://ycc.org.kh', class: "my-3 my-md-0", target: '_blank' do
+        = image_tag 'stakeholder_v2/ycc.png', class: 'img-implemented img-fluid ycc-logo', alt: 'Youth Council of Cambodia'
+
+      = link_to 'https://www.ideacambodia.org', target: '_blank' do
+        = image_tag 'stakeholder_v2/idea.jpg', class: 'img-implemented img-fluid', alt: 'IDEA Cambodia'

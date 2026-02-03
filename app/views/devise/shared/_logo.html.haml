@@ -14,9 +14,22 @@
     .app-description.rounded.my-4
       = render 'devise/shared/contact'
 
-    = render 'devise/shared/stackholders'
+    -# v2
+    .text-center.my-3
+      %div
+        %strong= "កំណែទី២ (ឆ្នាំ២០២៥)៖ សហការអនុវត្តដោយ"
+      %div
+        %strong= "Version 2 (2025), Co-implemented by"
+    = render 'devise/shared/stakeholders_v2'
 
-    .qr-code.text-center.mt-4
+    -# v1
+    .text-center.my-3
+      %div
+        %strong= "កំណែទី១៖ សហការផលិតដោយ"
+      %div
+        %strong= "Version 1, Co-produced by"
+
+    = render 'devise/shared/stakeholders'
+
+    .qr-code.text-center.mt-3
       = link_to "ទាញយកកម្មវិធី / Download App", ENV['APP_PLAY_STORE_URL'], target: "_blank"
-      %br
-      = image_tag 'qr-code.png', alt: 'CHC QR code', class: 'qr-code-img mt-3'
