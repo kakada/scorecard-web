@@ -20,6 +20,10 @@
             %a.btn.dropdown-item{href: scorecards_path(filter_params.merge(format: :xlsx, mode: option[1])), target: '_blank'}
               %i.fas.fa-download.drop-menu-icon
               %span= option[0]
+          
+          %a.btn.dropdown-item{href: voting_indicators_path(filter_params.merge(format: :xlsx)), target: '_blank'}
+            %i.fas.fa-download.drop-menu-icon
+            %span= t('scorecard.download_voting_indicators')
 
     / Add new button
     - if policy(Scorecard).create?

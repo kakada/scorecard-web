@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+require "builders/excel_builders/voting_indicator_raw_data_excel_builder"
+require "builders/excel_builders/scorecard_info_excel_builder"
+
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Voting Indicators") do |sheet|
+  ExcelBuilders::VotingIndicatorRawDataExcelBuilder.new(sheet, @scorecards).build
+end
+
+wb.add_worksheet(name: "Scorecard REF") do |sheet|
+  ExcelBuilders::ScorecardInfoExcelBuilder.new(sheet, @scorecards).build
+end

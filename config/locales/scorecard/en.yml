@@ -186,6 +186,7 @@ en:
     remove_scorecard_from_excel: Remove scoreard from excel
     download_in_full: Download result format
     download_in_short: Download implementation format
+    download_voting_indicators: Download voting indicators
     reviewed: Reviewed
     completed_by: "Completed by:"
     conducted_in_app: Conducted in mobile app
