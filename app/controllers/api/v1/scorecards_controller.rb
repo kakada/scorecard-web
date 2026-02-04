@@ -51,8 +51,7 @@ module Api
 
         def scorecard_params
           param = params.require(:scorecard).permit(
-            :conducted_date, :number_of_caf, :number_of_participant, :number_of_female,
-            :number_of_disability, :number_of_ethnic_minority, :number_of_youth, :number_of_id_poor,
+            :conducted_date, :number_of_caf,
             :finished_date, :language_conducted_code, :running_date, :device_type, :device_token,
             :proposed_indicator_method, :number_of_anonymous, :device_id, :app_version,
             facilitators_attributes: [ :id, :caf_id, :position ],

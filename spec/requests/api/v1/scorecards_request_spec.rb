@@ -83,7 +83,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let!(:user)       { create(:user, :lngo) }
     let!(:scorecard)  { create(:scorecard, running_mode: "offline", number_of_participant: 3, program_id: user.program_id, local_ngo_id: user.local_ngo_id) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
-    let(:params)      { { number_of_caf: 3, number_of_participant: 15, number_of_female: 5, app_version: 15013 } }
+    let(:params)      { { number_of_caf: 3, number_of_participant: 15, app_version: 15013 } }
 
     context "success" do
       before {
@@ -92,7 +92,6 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
       it { expect(response.content_type).to eq("application/json; charset=utf-8") }
       it { expect(response).to have_http_status(:ok) }
-      it { expect(scorecard.reload.number_of_participant).to eq(15) }
       it { expect(scorecard.reload.app_version).to eq(15013) }
     end
 
@@ -160,8 +159,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
       it "does not update attributes or lock submission" do
         sc = scorecard.reload
-        expect(sc.number_of_participant).to eq(3)   # unchanged
-        expect(sc.app_version).to be_nil            # unchanged
+        expect(sc.app_version).to be_nil    # unchanged
         expect(sc.submit_locked?).to be_falsey
       end
     end
@@ -446,7 +444,7 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(response).to have_http_status(:ok) }
       it { expect(scorecard.reload.submit_locked?).to be_falsey }
 
-      it "uses submitted number_of_participant value" do
+      it "uses participants callback demographics" do
         expect(scorecard.reload.number_of_participant).to eq(1) # it is counted from online voted participants
       end
     end
@@ -461,19 +459,9 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
 
     context "final submit uses submitted demographics" do
       before do
-        # Create participants (these should be ignored for offline scorecards)
-        scorecard.participants.create!(uuid: "p1", gender: "female", disability: true, minority: false, youth: true, poor_card: false, countable: true)
-        scorecard.participants.create!(uuid: "p2", gender: "male", disability: false, minority: true, youth: false, poor_card: true, countable: true)
-
         # Final submit with indicator activities and submitted demographics
         put "/api/v1/scorecards/#{scorecard.uuid}", params: {
           scorecard: {
-            number_of_participant: 50,
-            number_of_female: 30,
-            number_of_disability: 10,
-            number_of_ethnic_minority: 15,
-            number_of_youth: 20,
-            number_of_id_poor: 25,
             voting_indicators_attributes: [
               {
                 uuid: "vi-001",
@@ -484,6 +472,10 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
                   { voting_indicator_uuid: "vi-001", content: "activity 1", selected: true, type: "SuggestedIndicatorActivity" }
                 ]
               }
+            ],
+            participants_attributes: [
+              { uuid: "p1", gender: "female", disability: true, minority: false, youth: true, poor_card: false, countable: true },
+              { uuid: "p2", gender: "male", disability: false, minority: true, youth: false, poor_card: true, countable: true },
             ]
           }
         }, headers: headers
@@ -492,28 +484,13 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(response).to have_http_status(:ok) }
       it { expect(scorecard.reload.submit_locked?).to be_truthy }
 
-      it "uses submitted number_of_participant value" do
-        expect(scorecard.reload.number_of_participant).to eq(50)
-      end
-
-      it "uses submitted number_of_female value" do
-        expect(scorecard.reload.number_of_female).to eq(30)
-      end
-
-      it "uses submitted number_of_disability value" do
-        expect(scorecard.reload.number_of_disability).to eq(10)
-      end
-
-      it "uses submitted number_of_ethnic_minority value" do
-        expect(scorecard.reload.number_of_ethnic_minority).to eq(15)
-      end
-
-      it "uses submitted number_of_youth value" do
-        expect(scorecard.reload.number_of_youth).to eq(20)
-      end
-
-      it "uses submitted number_of_id_poor value" do
-        expect(scorecard.reload.number_of_id_poor).to eq(25)
+      it "uses participants callback demographics" do
+        expect(scorecard.reload.number_of_participant).to eq(2)
+        expect(scorecard.reload.number_of_female).to eq(1)
+        expect(scorecard.reload.number_of_disability).to eq(1)
+        expect(scorecard.reload.number_of_ethnic_minority).to eq(1)
+        expect(scorecard.reload.number_of_youth).to eq(1)
+        expect(scorecard.reload.number_of_id_poor).to eq(1)
       end
     end
   end
