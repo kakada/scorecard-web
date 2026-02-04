@@ -10,3 +10,15 @@ en:
     make_sure_you_save_it_before_preview: Make sure you save it before previewing
     are_you_sure_to_delete: Are you sure to delete the template <b>%{name}</b>?
     pdf_templates: PDF templates
+    tooltip:
+      province: Insert the province name of the scorecard
+      district: Insert the district name of the scorecard
+      commune: Insert the commune name of the scorecard
+      scorecard_type: Insert the scorecard type (e.g., Self Assessment, Community Scorecard)
+      result_table: Insert the SWOT analysis result table with indicators and actions
+      facility: Insert the service name where the scorecard was conducted
+      facilitators: Insert the list of facilitators who conducted the scorecard
+      local_ngo: Insert the name of the implementing local NGO
+      conducted_date: Insert the date when the scorecard was conducted
+      conducted_year_ce: Insert the year when the scorecard was conducted (Common Era/គ.ស format)
+      conducted_year_be: Insert the year when the scorecard was conducted (Buddhist Era/ព.ស format)

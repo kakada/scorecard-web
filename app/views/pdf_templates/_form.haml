@@ -24,7 +24,7 @@
 
     %div
       - Templates::PdfTemplateField.all.each do |field|
-        %a.btn.btn-link.template-field{"data-code" => field[:code]}= field[:name]
+        %a.btn.btn-link.template-field{"data-code" => field[:code], "data-toggle" => "tooltip", "data-placement" => "top", :title => t(field[:tooltip])}= field[:name]
 
     .actions
       = link_to t('shared.cancel'), pdf_templates_path, class: 'btn btn-secondary'

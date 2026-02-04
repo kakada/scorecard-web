@@ -16,6 +16,14 @@ module PdfTemplates
       "<ol>#{html}</ol>"
     end
 
+    def conducted_year_ce
+      fill_in_value
+    end
+
+    def conducted_year_be
+      fill_in_value
+    end
+
     private
       def fill_in_value
         "&lt;#{ I18n.t('shared.fill_in') }&gt;"

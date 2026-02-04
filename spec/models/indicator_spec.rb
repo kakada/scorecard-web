@@ -42,7 +42,7 @@ RSpec.describe Indicator, type: :model do
 
       it "has uniq name error" do
         indicator2.save
-        expect(indicator2.errors.full_messages).to eq ["Name ត្រូវបានគេយកទៅហើយ"]
+        expect(indicator2.errors.full_messages).to eq ["Name has already been taken"]
       end
     end
 
