@@ -8,9 +8,9 @@ module ScorecardsHelper
   end
 
   def participant_info(scorecard)
-    str = "#{t('scorecard.people', count: scorecard.number_of_participant)} "
+    str = "#{t('scorecard.people', count: scorecard.number_of_participant.to_i)} "
     str += "(+ #{scorecard.number_of_anonymous} #{t('scorecard.anonymous')})".downcase if scorecard.number_of_anonymous.to_i.positive?
-    return str unless scorecard.number_of_participant.positive?
+    return str unless scorecard.number_of_participant.to_i.positive?
 
     str += "<small class='text-muted'>("
     str += "#{t('scorecard.female')}: #{scorecard.number_of_female || 0}, "

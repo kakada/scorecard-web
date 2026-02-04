@@ -4,8 +4,8 @@ en:
     scorecard: Scorecard
     conducted_at: Conducted at
     location: Location
-    unit_type: Unit Type
-    facility: Facility
+    unit_type: Sector
+    facility: Service
     scorecard_type: Scorecard Type
     running_mode: Running Mode
     running_mode_offline: Offline
@@ -71,7 +71,7 @@ en:
     submitted_at: Submitted at
     any_province: Any province
     any_year: Any year
-    any_facility: Any facility
+    any_facility: Any service
     any_local_ngo: Any local NGO
     any_scorecard_type: Any scorecard type
     any_scorecard_batch: Any batch
@@ -163,7 +163,7 @@ en:
     use_this_code_to_download_scorecard: Use this code to download the scorecard.
     provinces_selected: provinces selected
     years_selected: years selected
-    facilities_selected: facilities selected
+    facilities_selected: services selected
     lngos_selected: local NGOs selected
     proposed_indicator_method: Proposed indicator method
     participant_based: Participant-based

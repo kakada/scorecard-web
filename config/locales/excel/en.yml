@@ -36,7 +36,7 @@ en:
     indicator_name: Indicator Name
     indicator_tag: Indicator Tag
     is_custom_indicator: Is Customed Indicator
-    facility_name: Facility
+    facility_name: Service
     # Proposed Indicator
     seleted_for_implementation: Selected for Implementation
     # Voting Summary

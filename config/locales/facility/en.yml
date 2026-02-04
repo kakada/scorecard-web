@@ -1,15 +1,15 @@
 en:
   facility:
-    facilities: Facilities
+    facilities: Services
     name: Name
-    parent: Unit
+    parent: Sector
     manage_indicator: Manage Indicator
-    add_new: Add new facility
-    new_facility: New Facility
-    edit_facility: Edit Facility
+    add_new: Add new service
+    new_facility: New Service
+    edit_facility: Edit Service
     name_en: Name in English
     name_km: Name in Khmer
     code: Code
     already_in_used: Can't delete, it's already in used.
     dataset: Dataset
-    are_you_sure_to_delete: Are you sure to delete the facility <b>%{name}</b>?
+    are_you_sure_to_delete: Are you sure to delete the service <b>%{name}</b>?
