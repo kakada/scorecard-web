@@ -50,7 +50,7 @@
   %label.col-sm-4.col-form-label= t("scorecard.total_participant")
   %label.col-sm-8.col-form-label
     = " : "
-    = participant_info(@scorecard).html_safe if @scorecard.submit_locked?
+    = participant_info(@scorecard).html_safe
 
 .row
   %label.col-sm-4.col-form-label= t("scorecard.number_of_caf")

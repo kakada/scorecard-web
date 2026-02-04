@@ -131,10 +131,10 @@ class Scorecard < ApplicationRecord
   has_many   :request_changes, foreign_key: :scorecard_uuid, primary_key: :uuid
   has_many   :unlock_requests, foreign_key: :scorecard_id
 
-  has_many   :indicator_activities, foreign_key: :scorecard_uuid, primary_key: :uuid
-  has_many   :strength_indicator_activities, foreign_key: :scorecard_uuid, primary_key: :uuid
-  has_many   :weakness_indicator_activities, foreign_key: :scorecard_uuid, primary_key: :uuid
-  has_many   :suggested_indicator_activities, foreign_key: :scorecard_uuid, primary_key: :uuid
+  has_many   :indicator_activities, through: :voting_indicators, source: :indicator_activities
+  has_many   :strength_indicator_activities, through: :voting_indicators, source: :strength_indicator_activities
+  has_many   :weakness_indicator_activities, through: :voting_indicators, source: :weakness_indicator_activities
+  has_many   :suggested_indicator_activities, through: :voting_indicators, source: :suggested_indicator_activities
 
   # Delegation
   delegate  :name, :code, to: :local_ngo, prefix: :local_ngo, allow_nil: true

@@ -8,11 +8,11 @@ module ScorecardsHelper
   end
 
   def participant_info(scorecard)
-    str = "#{scorecard.number_of_participant} "
-    str += "(#{t('scorecard.anonymous')} #{scorecard.number_of_anonymous})" if scorecard.number_of_anonymous.to_i.positive?
+    str = "#{t('scorecard.people', count: scorecard.number_of_participant)} "
+    str += "(+ #{scorecard.number_of_anonymous} #{t('scorecard.anonymous')})".downcase if scorecard.number_of_anonymous.to_i.positive?
     return str unless scorecard.number_of_participant.positive?
 
-    str += " - <small class='text-muted'>("
+    str += "<small class='text-muted'>("
     str += "#{t('scorecard.female')}: #{scorecard.number_of_female || 0}, "
     str += "#{t('scorecard.youth')}: #{scorecard.number_of_youth || 0}, "
     str += "#{t('scorecard.disability')}: #{scorecard.number_of_disability || 0}, "
@@ -24,6 +24,8 @@ module ScorecardsHelper
   def rating_participant_info(scorecard)
     participants = scorecard.rating_participants.to_a
     str = "#{t('scorecard.number_of_voted_participant')}: #{t('scorecard.people', count: participants.length)} "
+    return str unless participants.any?
+
     str += "<small class='text-muted'>("
     str += "#{t('scorecard.female')}: #{participants.count(&:female?)}, "
     str += "#{t('scorecard.youth')}: #{participants.count(&:youth?)}, "
@@ -34,11 +36,11 @@ module ScorecardsHelper
   end
 
   def indicator_development_sub_title(scorecard)
-    indicator_description(t("scorecard.number_of_proposed_indicator"), scorecard.raised_indicators.map(&:indicator).uniq)
+    indicator_description(t("scorecard.number_of_proposed_indicator"), scorecard.raised_indicators.includes(:indicator).map(&:indicator).uniq)
   end
 
   def voting_indicator_sub_title(scorecard)
-    str = indicator_description(t("scorecard.number_of_selected_indicator"), scorecard.voting_indicators.map(&:indicator))
+    str = indicator_description(t("scorecard.number_of_selected_indicator"), scorecard.voting_indicators.includes(:indicator).map(&:indicator))
     str += "<br>"
     str += "<small>#{t('scorecard.number_of_voted_participant')}: #{t('scorecard.people', count: scorecard.rating_participants.length)}</small>"
     str
@@ -92,7 +94,7 @@ module ScorecardsHelper
   def swot_sub_title(scorecard)
     str = "#{t('scorecard.indicator_count', count: scorecard.voting_indicators.length)}"
     str += ", #{t('scorecard.suggested_action_count', count: scorecard.suggested_indicator_activities.length)}"
-    str += " <span class='badge badge-info'>#{t('scorecard.selected_action_count', count: scorecard.suggested_indicator_activities.selecteds.count)}</span>"
+    str += " <span class='badge badge-info'>#{t('scorecard.selected_action_count', count: scorecard.suggested_indicator_activities.select(&:selected?).length)}</span>"
     str.html_safe
   end
 
@@ -123,10 +125,10 @@ module ScorecardsHelper
     end
 
     def indicator_description(label, indicators)
-      new_count = indicators.select { |indicator| indicator.custom? }.length
+      custom_indicator_count = indicators.select(&:custom?).length
 
       str = "#{label}: #{indicators.length} "
-      str += "<small class='text-muted'>(#{t('shared.new')}: #{new_count})</small>" if new_count.positive?
+      str += "<small class='text-muted'>(#{t('shared.new')}: #{custom_indicator_count})</small>" if custom_indicator_count.positive?
       str
     end
 end
