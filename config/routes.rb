@@ -128,6 +128,7 @@ Rails.application.routes.draw do
   resource :about, only: [:show]
   resource :privacy_policy, only: [:show]
   resource :terms_and_conditions, only: [:show]
+  resources :user_guides, only: [:index]
 
   resources :mobile_notifications, only: [:index, :new, :create]
 

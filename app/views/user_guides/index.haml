@@ -1,0 +1,26 @@
+.card
+  .card-header
+    %h4.card-title.mb-0
+      %i.fas.fa-book.mr-2
+      = t('user_guide.title')
+
+  .card-body
+    %p.text-muted.mb-4
+      = t('user_guide.description')
+
+    .row
+      - @user_guides.each do |guide|
+        .col-md-6.col-lg-4.mb-4
+          .card.h-100.shadow-sm
+            .card-body
+              .d-flex.align-items-center.mb-3
+                %i.fas.fa-file-pdf.text-danger.mr-3
+                %h6g.card-title.mb-0
+                  = t("user_guide.guides.#{guide[:key]}")
+
+              %p.card-text.text-muted.small
+                = t("user_guide.guide_descriptions.#{guide[:key]}")
+
+              = link_to "/guides/#{guide[:file]}", class: 'btn btn-outline-primary btn-block', target: '_blank', rel: 'noopener noreferrer' do
+                %i.fas.fa-download.mr-2
+                = t('user_guide.download')
