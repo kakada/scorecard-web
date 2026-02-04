@@ -37,7 +37,7 @@ module Scorecards
       end
 
       def raised_participants
-        @raised_participants ||= ::Participant.where(uuid: raised_indicators.map(&:participant_uuid).uniq)
+        @raised_participants ||= scorecard.raised_participants
       end
   end
 end

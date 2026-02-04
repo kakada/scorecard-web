@@ -31,7 +31,8 @@ km:
     strength: ចំនុចខ្លាំង
     weakness: ចំនុចខ្សោយ (បញ្ហា)
     desired_change: ការផ្លាស់ប្តូរដែលចង់បាន (តម្រូវការ)
-    suggested_action: សកម្មភាពដែលស្នើឡើង (ដំណោះស្រាយ)
+    suggested_action: សកម្មភាពស្នើឡើង (ដំណោះស្រាយ)
+    priority_action: សកម្មភាពអាទិភាព
     indicator: លក្ខណៈវិនិច្ឆ័យ
     implementer: អ្នកអនុវត្ត(Local NGO)
     scorecard_settings: ការកំណត់ប័ណ្ណដាក់ពិន្ទុ
@@ -56,7 +57,7 @@ km:
     number_of_selected_indicator: "ចំនួនលក្ខណៈវិនិច្ឆ័យដែលបានជ្រើសរើស"
     participant: អ្នកចូលរួម
     poor_card: មានប័ណ្ណក្រីក្រ
-    minority: ជនជាតិភាគតិច
+    minority: ជនជាតិដើមភាគតិច
     youth: យុវជន
     disability: ជនមានពិការភាព
     female: ស្រី
@@ -176,7 +177,7 @@ km:
     disability_shortcut: ជ.ព
     poor_card_shortcut:  ប.ក
     youth_shortcut: យ.វ
-    female_fullword: ស្ត្រី
+    female_fullword: ស្រី
     minority_fullword: ជនជាតិភាគតិច
     disability_fullword: ជនមានពិការភាព
     poor_card_fullword:  មានប័ណ្ណក្រីក្រ
@@ -204,3 +205,7 @@ km:
       other: "%{count} ចុងក្រោយ"
     search_by_code: ស្វែងរកតាមលេខកូដ
     go_voting: ទៅកាន់ការដាក់ពិន្ទុ
+    number_of_voted_participant: ចំនួនអ្នកចូលរួមដាក់ពិន្ទុ
+    people:
+      one: "%{count} នាក់"
+      other: "%{count} នាក់"

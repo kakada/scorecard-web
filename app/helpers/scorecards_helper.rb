@@ -8,14 +8,28 @@ module ScorecardsHelper
   end
 
   def participant_info(scorecard)
-    str = "#{@scorecard.number_of_participant} "
-    str += "(#{t('scorecard.anonymous')} #{scorecard.number_of_anonymous}) - " if scorecard.number_of_anonymous.to_i.positive?
-    str += "<small class='text-muted'>("
+    str = "#{scorecard.number_of_participant} "
+    str += "(#{t('scorecard.anonymous')} #{scorecard.number_of_anonymous})" if scorecard.number_of_anonymous.to_i.positive?
+    return str unless scorecard.number_of_participant.positive?
+
+    str += " - <small class='text-muted'>("
     str += "#{t('scorecard.female')}: #{scorecard.number_of_female || 0}, "
+    str += "#{t('scorecard.youth')}: #{scorecard.number_of_youth || 0}, "
     str += "#{t('scorecard.disability')}: #{scorecard.number_of_disability || 0}, "
     str += "#{t('scorecard.minority')}: #{scorecard.number_of_ethnic_minority || 0}, "
-    str += "#{t('scorecard.youth')}: #{scorecard.number_of_youth || 0}, "
     str += "#{t('scorecard.poor_card')}: #{scorecard.number_of_id_poor || 0}"
+    str + ")</small>"
+  end
+
+  def rating_participant_info(scorecard)
+    participants = scorecard.rating_participants.to_a
+    str = "#{t('scorecard.number_of_voted_participant')}: #{t('scorecard.people', count: participants.length)} "
+    str += "<small class='text-muted'>("
+    str += "#{t('scorecard.female')}: #{participants.count(&:female?)}, "
+    str += "#{t('scorecard.youth')}: #{participants.count(&:youth?)}, "
+    str += "#{t('scorecard.disability')}: #{participants.count(&:disability?)}, "
+    str += "#{t('scorecard.minority')}: #{participants.count(&:minority?)}, "
+    str += "#{t('scorecard.poor_card')}: #{participants.count(&:poor_card?)}"
     str + ")</small>"
   end
 
@@ -24,7 +38,10 @@ module ScorecardsHelper
   end
 
   def voting_indicator_sub_title(scorecard)
-    indicator_description(t("scorecard.number_of_selected_indicator"), scorecard.voting_indicators.map(&:indicator))
+    str = indicator_description(t("scorecard.number_of_selected_indicator"), scorecard.voting_indicators.map(&:indicator))
+    str += "<br>"
+    str += "<small>#{t('scorecard.number_of_voted_participant')}: #{t('scorecard.people', count: scorecard.rating_participants.length)}</small>"
+    str
   end
 
   def scorecard_descriptions
