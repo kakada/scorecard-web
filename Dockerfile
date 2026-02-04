@@ -20,6 +20,15 @@ RUN gem install bundler:2.1.4 && \
 # Install the application
 COPY . /app
 
+# Create system font folder
+RUN mkdir -p /usr/share/fonts/truetype/custom
+
+# Copy fonts from build context into system folder
+COPY vendor/assets/fonts/ /usr/share/fonts/truetype/custom/
+
+# Refresh font cache
+RUN fc-cache -f -v
+
 # Generate version file if available
 RUN if [ -d .git ]; then git describe --always > VERSION; fi
 
