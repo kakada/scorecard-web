@@ -1,12 +1,13 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th.align-middle.text-center #
-      %th.align-middle= t("scorecard.indicator")
-      %th.align-middle.text-center= t("scorecard.median")
-      %th.align-middle.text-center= t("scorecard.strength")
-      %th.align-middle.text-center= t("scorecard.weakness")
-      %th.align-middle.text-center= t("scorecard.suggested_action")
+      %th.align-top.text-center #
+      %th.align-top= t("scorecard.indicator")
+      %th.align-top.text-center
+        = "#{t('scorecard.average_score')}<br>(#{t('scorecard.median')})".html_safe
+      %th.align-top.text-center= t("scorecard.strength")
+      %th.align-top.text-center= t("scorecard.weakness")
+      %th.align-top.text-center= t("scorecard.suggested_action")
 
   %tbody
     - @voting_indicators.each_with_index do |vi, index|

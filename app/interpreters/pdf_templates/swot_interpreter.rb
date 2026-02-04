@@ -21,7 +21,7 @@ module PdfTemplates
 
     private
       def render_head
-        columns = %w(indicator average_score strength weakness suggested_action)
+        columns = %w(indicator average_score strength weakness suggested_action priority_action)
         headers = columns.map { |col| "<th class='text-center'>" + I18n.t("scorecard.#{col}") + "</th>" }.join("")
 
         "<tr>#{headers}</tr>"
@@ -36,7 +36,8 @@ module PdfTemplates
         build_column_median(voting_indicator.median) +
         build_column_activity(voting_indicator.strength_indicator_activities) +
         build_column_activity(voting_indicator.weakness_indicator_activities) +
-        build_column_activity(voting_indicator.suggested_indicator_activities)
+        build_column_activity(voting_indicator.suggested_indicator_activities) +
+        build_column_activity(voting_indicator.suggested_indicator_activities.select(&:selected?))
       end
 
       def build_column_indicator_name(voting_indicator)
@@ -76,8 +77,7 @@ module PdfTemplates
       def build_column_activity(indicator_activities)
         str = "<td><ul>"
         str += indicator_activities.map { |indicator_activity|
-          selected = indicator_activity.selected? ? "(#{I18n.t('indicator.selected')})" : ""
-          "<li>#{indicator_activity.content} #{selected}</li>"
+          "<li>#{indicator_activity.content}</li>"
         }.join("")
 
         str + "</ul></td>"

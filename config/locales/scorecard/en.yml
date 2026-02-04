@@ -32,6 +32,7 @@ en:
     weakness: Weakness (reflection)
     desired_change: Desired change (demand)
     suggested_action: Suggested actions (solution)
+    priority_action: Priority Actions
     indicator: Indicator
     implementer: Implementer(Local NGO)
     scorecard_settings: Scorecard Settings
@@ -203,3 +204,7 @@ en:
       other: "Last %{count}"
     search_by_code: Search by code
     go_voting: Go to voting
+    number_of_voted_participant: Number of voted participant
+    people:
+      one: "%{count} person"
+      other: "%{count} people"

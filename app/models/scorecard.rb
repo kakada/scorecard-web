@@ -121,8 +121,10 @@ class Scorecard < ApplicationRecord
   has_many   :participants, foreign_key: :scorecard_uuid
   has_many   :custom_indicators, foreign_key: :scorecard_uuid
   has_many   :raised_indicators, foreign_key: :scorecard_uuid
+  has_many   :raised_participants, -> { distinct }, through: :raised_indicators, source: :participant
   has_many   :voting_indicators, foreign_key: :scorecard_uuid
   has_many   :ratings, foreign_key: :scorecard_uuid
+  has_many   :rating_participants, -> { distinct }, through: :ratings, source: :participant
   has_many   :scorecard_progresses, foreign_key: :scorecard_uuid, primary_key: :uuid
   has_many   :suggested_actions, foreign_key: :scorecard_uuid, primary_key: :uuid
   has_many   :scorecard_references, foreign_key: :scorecard_uuid, primary_key: :uuid

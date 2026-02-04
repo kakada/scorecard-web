@@ -361,4 +361,32 @@ RSpec.describe Scorecard, type: :model do
       end
     end
   end
+
+  describe "raised_participants" do
+    it "returns distinct participants from raised_indicators" do
+      scorecard = create(:scorecard)
+      p1 = create(:participant, scorecard: scorecard)
+      p2 = create(:participant, scorecard: scorecard)
+
+      create(:raised_indicator, scorecard: scorecard, participant: p1)
+      create(:raised_indicator, scorecard: scorecard, participant: p1) # duplicate
+      create(:raised_indicator, scorecard: scorecard, participant: p2)
+
+      expect(scorecard.raised_participants).to match_array([p1, p2])
+    end
+  end
+
+  describe "rating_participants" do
+    it "returns distinct participants from ratings" do
+      scorecard = create(:scorecard)
+      p1 = create(:participant, scorecard: scorecard)
+      p2 = create(:participant, scorecard: scorecard)
+
+      create(:rating, scorecard: scorecard, participant: p1)
+      create(:rating, scorecard: scorecard, participant: p1) # duplicate
+      create(:rating, scorecard: scorecard, participant: p2)
+
+      expect(scorecard.rating_participants).to match_array([p1, p2])
+    end
+  end
 end

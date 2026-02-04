@@ -28,11 +28,8 @@ module Scorecards
       end
 
       def assign_participant_info(criteria = {}, indicator)
-        ratings = indicator.ratings.select { |rating| !!rating.participant && rating.participant.gender == "female" }
-        criteria["female_median_score"] = ratings.collect(&:score).mean.to_f.round_up_half
-
-        %w(minority disability poor_card youth).each do |field|
-          ratings = indicator.ratings.select { |rating| !!rating.participant && rating.participant[field] }
+        %w(female minority disability poor_card youth).each do |field|
+          ratings = indicator.ratings.select { |rating| rating&.participant.send("#{field}?") }
           criteria["#{field}_average_score"] = ratings.collect(&:score).mean.to_f.round_up_half
         end
 
