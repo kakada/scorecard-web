@@ -1,15 +1,15 @@
 km:
   facility:
-    facilities: វិស័យ
+    facilities: សេវា
     name: ឈ្មោះ
-    parent: យូនីត
+    parent: វិស័យ
     manage_indicator: គ្រប់គ្រងលក្ខណៈវិនិច្ឆ័យ
-    add_new: បន្ថែម Facility ថ្មី
-    new_facility: Facility ថ្មី
-    edit_facility: កែប្រែ Facility
+    add_new: បន្ថែមសេវាថ្មី
+    new_facility: សេវាថ្មី
+    edit_facility: កែប្រែសេវា
     name_en: ឈ្មោះជាភាសាអង់គ្លេស
     name_km: ឈ្មោះជាភាសាខ្មែរ
     code: លេខកូដ
     already_in_used: មិនអាចលុបបានទេ ព្រោះកំពុងប្រើប្រាស់
     dataset: សំណុំទិន្នន័យ
-    are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបវិស័យ <b>%{name}</b> នេះមែនទេ?
+    are_you_sure_to_delete: តើអ្នកប្រាកដជាលុបសេវា <b>%{name}</b> នេះមែនទេ?

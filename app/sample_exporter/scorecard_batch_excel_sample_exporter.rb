@@ -9,7 +9,7 @@ class ScorecardBatchExcelSampleExporter
   def build
     sheets = [
       { name: "Scorecard", klass_name: "ScorecardInfo" },
-      { name: "REF - Facility", klass_name: "FacilityInfo" },
+      { name: "REF - Service", klass_name: "FacilityInfo" },
       { name: "REF - Scorecard type", klass_name: "ScorecardTypeInfo" },
       { name: "REF - Running mode", klass_name: "RunningModeInfo" },
       { name: "REF - Local NGOs", klass_name: "LocalNgoInfo" }

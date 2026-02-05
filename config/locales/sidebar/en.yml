@@ -9,7 +9,7 @@ en:
     version: Version
     program: Program
     language: Language
-    scorecard_facility: Facility / Indicators
+    scorecard_facility: Service / Indicators
     indicator_template: Template / Indicators
     local_ngo: Local Ngo / CAFs
     scorecard_type: Scorecard Type

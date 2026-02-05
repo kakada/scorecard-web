@@ -4,8 +4,8 @@ km:
     scorecard: ប័ណ្ណដាក់ពិន្ទុ
     conducted_at: កាលបរិច្ឆេទអនុវត្ត
     location: ទីតាំង
-    unit_type: ប្រភេទវិស័យ
-    facility: ប្រភេទសេវា
+    unit_type: វិស័យ
+    facility: សេវា
     scorecard_type: ប្រភេទប័ណ្ណដាក់ពិន្ទុ
     running_mode: របៀបអនុវត្ត
     running_mode_offline: Offline
@@ -71,7 +71,7 @@ km:
     submitted_at: កាលបរិច្ឆេទទទួលបានសំណើរ
     any_province: គ្រប់ខេត្ត
     any_year: គ្រប់ឆ្នាំ
-    any_facility: គ្រប់វិស័យ
+    any_facility: គ្រប់សេវា
     any_local_ngo: គ្រប់អ្នកអនុវត្ត
     any_scorecard_type: គ្រប់ប្រភេទប័ណ្ណដាក់ពិន្ទុ
     any_scorecard_batch: គ្រប់ Batch
@@ -163,7 +163,7 @@ km:
     use_this_code_to_download_scorecard: ប្រើលេខកូដនេះសម្រាប់ទាញយកប័ណ្ណដាក់ពិន្ទុ
     provinces_selected: ខេត្តត្រូវបានជ្រើសរើស
     years_selected: ឆ្នាំត្រូវបានជ្រើសរើស
-    facilities_selected: ប្រភេទសេវាត្រូវបានជ្រើសរើស
+    facilities_selected: សេវាត្រូវបានជ្រើសរើស
     lngos_selected: អ្នកអនុវត្តត្រូវបានជ្រើសរើស
     proposed_indicator_method: វិធីសាស្រ្តស្នើលក្ខណៈវិនិច្ឆ័យ
     participant_based: ផ្អែកលើអ្នកចូលរួមជាគោល
