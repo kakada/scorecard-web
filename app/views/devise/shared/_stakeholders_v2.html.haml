@@ -9,8 +9,8 @@
     %p.font-weight-normal.text-center.text-implemented
       អនុវត្តដោយ / Implemented by
     .d-flex.align-items-center.justify-content-center.flex-wrap.img-implemented-wrapper
-      %span
-        = image_tag 'stakeholder_v2/ipa.png', class: 'img-implemented img-fluid', alt: 'Iternational Partners Austria'
+      = link_to 'https://www.entwicklung.at/en/ada', target: '_blank', rel: 'noopener noreferrer' do
+        = image_tag 'stakeholder_v2/ipa.png', class: 'img-implemented img-fluid', alt: 'International Partnerships Austria'
 
       = link_to 'https://www.care-cambodia.org/', target: '_blank' do
         = image_tag 'stakeholder_v2/care.png', class: 'img-implemented img-fluid', alt: 'CARE Cambodia'
