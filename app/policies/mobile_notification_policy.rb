@@ -2,6 +2,8 @@
 
 class MobileNotificationPolicy < ApplicationPolicy
   def index?
+    return false unless Settings.program["push_notification"] == "true"
+
     user.system_admin? || user.program_admin? || user.staff?
   end
 

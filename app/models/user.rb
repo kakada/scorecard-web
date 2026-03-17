@@ -150,6 +150,10 @@ class User < ApplicationRecord
     super and self.actived?
   end
 
+  def program_admin_for?(record)
+    program_admin? && program_id == record.id
+  end
+
   private
     def generate_authentication_token
       self.encrypted_password ||= ""

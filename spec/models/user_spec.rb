@@ -109,4 +109,33 @@ RSpec.describe User, type: :model do
       expect(new_user.errors.first.options[:message]).to eq(I18n.t("user.is_being_archived"))
     end
   end
+
+  describe "#program_admin_for?" do
+    let(:program) { create(:program) }
+    let(:other_program) { create(:program) }
+
+    context "when user is program_admin and belongs to the given program" do
+      let(:user) { User.new(role: :program_admin, program_id: program.id) }
+
+      it "returns true" do
+        expect(user.program_admin_for?(program)).to be(true)
+      end
+    end
+
+    context "when user is program_admin but belongs to a different program" do
+      let(:user) { User.new(role: :program_admin, program_id: other_program.id) }
+
+      it "returns false" do
+        expect(user.program_admin_for?(program)).to be(false)
+      end
+    end
+
+    context "when user is not program_admin" do
+      let(:user) { User.new(role: :staff, program_id: program.id) }
+
+      it "returns false" do
+        expect(user.program_admin_for?(program)).to be(false)
+      end
+    end
+  end
 end
