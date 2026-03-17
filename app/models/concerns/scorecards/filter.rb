@@ -4,23 +4,52 @@ module Scorecards::Filter
   extend ActiveSupport::Concern
 
   included do
-    def self.filter(params = {})
-      scope = all
-      scope = scope.where("uuid LIKE ?", "%#{params[:uuid].downcase}%") if params[:uuid].present?
-      scope = scope.where("planned_start_date BETWEEN ? AND ?", params[:start_date], params[:end_date]) if params[:start_date].present? && params[:end_date].present?
-      scope = scope.where(facility_id: params[:facility_ids]) if params[:facility_ids].present?
-      scope = scope.where(local_ngo_id: params[:local_ngo_ids]) if params[:local_ngo_ids].present?
-      scope = scope.where(province_id: params[:province_ids]) if params[:province_ids].present?
-      scope = scope.where(year: params[:years]) if params[:years].present?
-      scope = scope.where(scorecard_type: params[:scorecard_type]) if params[:scorecard_type].present?
-      scope = scope.where(progress: planned_statuses) if params[:filter] == "planned"
-      scope = scope.where(progress: params[:filter]) if params[:filter].present? && params[:filter] != "planned"
-      scope = scope.where(scorecard_batch_code: params[:batch_code]) if params[:batch_code].present?
-      scope
-    end
+    PLANNED_STATUSES = %w[planned renewed downloaded].freeze
+    RUNNING_STATUSES = %w[running open_voting close_voting].freeze
 
-    def self.planned_statuses
-      [nil, "renewed", "downloaded"]
+    class << self
+      def filter(params = {})
+        scope = all
+        scope = filter_by_uuid(scope, params[:uuid])
+        scope = filter_by_date_range(scope, params[:start_date], params[:end_date])
+        scope = filter_by_progress(scope, params[:filter])
+        scope = apply_filter(scope, :facility_id, params[:facility_ids])
+        scope = apply_filter(scope, :local_ngo_id, params[:local_ngo_ids])
+        scope = apply_filter(scope, :province_id, params[:province_ids])
+        scope = apply_filter(scope, :year, params[:years])
+        scope = apply_filter(scope, :scorecard_type, params[:scorecard_type])
+        scope = apply_filter(scope, :scorecard_batch_code, params[:batch_code])
+        scope
+      end
+
+      def filter_by_uuid(scope, uuid)
+        return scope unless uuid.present?
+
+        scope.where("uuid ILIKE ?", "%#{uuid}%")
+      end
+
+      def filter_by_progress(scope, status)
+        return scope unless status.present?
+
+        case status
+        when "planned"
+          scope.where(progress: PLANNED_STATUSES)
+        when "running"
+          scope.where(progress: RUNNING_STATUSES)
+        else
+          scope.where(progress: status)
+        end
+      end
+
+      def filter_by_date_range(scope, start_date, end_date)
+        return scope unless start_date.present? && end_date.present?
+
+        scope.where(planned_start_date: start_date..end_date)
+      end
+
+      def apply_filter(scope, column, value)
+        value.present? ? scope.where(column => value) : scope
+      end
     end
   end
 end

@@ -10,11 +10,11 @@ module Scorecards
 
     def group_count
       OpenStruct.new(
-        all: scorecards.length,
-        planned: scorecards.select { |s| Scorecard.planned_statuses.include?(s.progress) }.length,
-        running: scorecards.select(&:running?).length,
-        in_review: scorecards.select(&:in_review?).length,
-        completed: scorecards.select(&:completed?).length
+        all: scorecards.count,
+        planned: scorecards.count { |s| Scorecard::PLANNED_STATUSES.include?(s.progress) },
+        running: scorecards.count { |s| Scorecard::RUNNING_STATUSES.include?(s.progress) },
+        in_review: scorecards.count(&:in_review?),
+        completed: scorecards.count(&:completed?)
       )
     end
   end
