@@ -19,12 +19,12 @@ module ScorecardJson
 
     private
       def build_indicators
-        scorecard.voting_indicators.order(:display_order).map do |vi|
+        scorecard.voting_indicators.includes(:suggested_indicator_activities).order(:display_order).map do |vi|
           {
             name: vi.indicator.name,
             tag: vi.indicator.tag_name,
-            count: vi.suggested_action.length,
-            selected_actions: vi.suggested_action.map { |action| return { description: action } }
+            count: vi.suggested_indicator_activities.length,
+            selected_actions: vi.suggested_indicator_activities.map { |action| { description: action.content } }
           }
         end
       end

@@ -112,8 +112,8 @@ module ExcelBuilders
         return [] unless voting_indicator.present?
 
         [
-          (voting_indicator.indicatorable.custom? ? I18n.t("excel.other") : voting_indicator.indicatorable.name),
-          (voting_indicator.indicatorable.name if voting_indicator.indicatorable.custom?),
+          (voting_indicator.indicator.custom? ? I18n.t("excel.other") : voting_indicator.indicator.name),
+          (voting_indicator.indicator.name if voting_indicator.indicator.custom?),
         ]
         .concat(raisers(voting_indicator))
         .concat(rating(voting_indicator))

@@ -26,33 +26,6 @@ RSpec.describe VotingIndicator, type: :model do
   it { is_expected.to have_many(:raised_indicators) }
 
   describe "#after_validation, set_indicator_activities" do
-    context "no indicator_activities is passed" do
-      let!(:user)       { create(:user) }
-      let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
-      let!(:indicator)  { facility.indicators.first }
-      let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
-      let(:params)      { { voting_indicators_attributes: [ {
-                            uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
-                            strength: ["strength1"],
-                            weakness: ["weakness1"],
-                            suggested_actions_attributes: [
-                              { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action1", selected: true },
-                              { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action2", selected: false },
-                            ]
-                          }] }
-                        }
-      let(:voting_indicators) { scorecard.reload.voting_indicators }
-
-      before {
-        scorecard.update(params)
-      }
-
-      it { expect(voting_indicators.length).to eq(1) }
-      it { expect(voting_indicators.first.strength_indicator_activities.length).to eq(1) }
-      it { expect(voting_indicators.first.weakness_indicator_activities.length).to eq(1) }
-      it { expect(voting_indicators.first.suggested_indicator_activities.length).to eq(2) }
-    end
-
     context "indicator_activities is passed" do
       let!(:user)       { create(:user) }
       let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
@@ -60,8 +33,6 @@ RSpec.describe VotingIndicator, type: :model do
       let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, facility: facility) }
       let(:params)      { { voting_indicators_attributes: [ {
                             uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, scorecard_uuid: scorecard.uuid, display_order: 1,
-                            strength: ["strength1"],
-                            weakness: ["weakness1"],
                             suggested_actions_attributes: [
                               { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action1", selected: true },
                               { voting_indicator_uuid: "123", scorecard_uuid: scorecard.uuid, content: "action2", selected: false },

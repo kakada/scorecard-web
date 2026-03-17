@@ -9,9 +9,10 @@ module ScorecardJson
     end
 
     def build
+      indicators = build_indicators
       {
-        total: group_indicators.length,
-        indicators: build_indicators
+        total: indicators.length,
+        indicators: indicators
       }
     end
 
