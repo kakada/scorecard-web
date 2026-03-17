@@ -24,4 +24,14 @@ module Settings
       CONFIG[method_name.to_s]
     end
   end
+
+  def respond_to_missing?(method_name, include_private = false)
+    key = method_name.to_s
+
+    if key.end_with?("?")
+      CONFIG.key?(key.delete_suffix("?")) || super
+    else
+      CONFIG.key?(key) || super
+    end
+  end
 end

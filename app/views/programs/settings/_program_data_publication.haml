@@ -1,3 +1,5 @@
+- return unless ProgramDataPublicationPolicy.new(current_user, current_program).update?
+
 - data_publication = current_program.data_publication
 .dotted-line.d-flex.align-items-center
   %label.flex-grow-1

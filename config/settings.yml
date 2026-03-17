@@ -11,3 +11,6 @@ smtp:
 
 max_download_scorecard_record: <%= ENV.fetch('MAX_DOWNLOAD_SCORECARD_RECORD') { 1000 }.to_i %>
 max_download_record: <%= ENV.fetch('MAX_DOWNLOAD_RECORD') { 1000 }.to_i %>
+program:
+  data_publishable: <%= ENV['SETTINGS__PROGRAM__DATA_PUBLISHABLE'] %>
+  push_notification: <%= ENV['SETTINGS__PROGRAM__FIREBASE_PUSH_NOTIFICATION'] %>

@@ -3,7 +3,7 @@
 module Programs
   class DataPublicationsController < ::ApplicationController
     def show
-      @program = authorize current_program, :update?
+      @program = authorize current_program, :update?, policy_class: ProgramDataPublicationPolicy
       @data_publication = current_program.data_publication || current_program.build_data_publication
 
       respond_to do |format|
@@ -12,7 +12,7 @@ module Programs
     end
 
     def upsert
-      @program = authorize current_program, :update?
+      @program = authorize current_program, :update?, policy_class: ProgramDataPublicationPolicy
 
       if @program.update(program_params)
         redirect_to setting_path
