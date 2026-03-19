@@ -22,3 +22,4 @@ en:
       conducted_date: Insert the date when the scorecard was conducted
       conducted_year_ce: Insert the year when the scorecard was conducted (Common Era/គ.ស format)
       conducted_year_be: Insert the year when the scorecard was conducted (Buddhist Era/ព.ស format)
+      conducted_location: Insert the location where the scorecard was conducted (e.g., primary school name, health center name, factory name)

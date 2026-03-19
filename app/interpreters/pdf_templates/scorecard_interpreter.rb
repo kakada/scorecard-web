@@ -17,9 +17,14 @@ module PdfTemplates
     end
 
     def facility_name
-      str = scorecard.facility_name
-      str = "#{str} #{scorecard.primary_school_name}" if scorecard.primary_school_name.present?
-      str
+      scorecard.facility_name
+    end
+
+    def conducted_location
+      return "" unless scorecard.dataset.present?
+
+      str = scorecard.dataset.category_name
+      I18n.locale == :km ? "#{str}#{scorecard.dataset.name}" : "#{scorecard.dataset.name} #{str}"
     end
 
     def conducted_date

@@ -13,6 +13,7 @@ module Templates
         { name: "facilitators", code: "scorecard.facilitators", tooltip: "pdf_template.tooltip.facilitators" },
         { name: "local_ngo", code: "scorecard.local_ngo_name", tooltip: "pdf_template.tooltip.local_ngo" },
         { name: "conducted_date", code: "scorecard.conducted_date", tooltip: "pdf_template.tooltip.conducted_date" },
+        { name: "conducted_location", code: "scorecard.conducted_location", tooltip: "pdf_template.tooltip.conducted_location" },
         { name: "conducted_year_ce", code: "scorecard.conducted_year_ce", tooltip: "pdf_template.tooltip.conducted_year_ce" },
         { name: "conducted_year_be", code: "scorecard.conducted_year_be", tooltip: "pdf_template.tooltip.conducted_year_be" }
       ]
