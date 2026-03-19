@@ -2,7 +2,7 @@ km:
   dataset:
     datasets: សំណុំទិន្នន័យ
     dataset: សំណុំទិន្នន័យ
-    code: កូដ
+    code: លេខកូដ
     name_en: ឈ្មោះជាភាសាអង់គ្លេស
     name_km: ឈ្មោះជាភាសាខ្មែរ
     address: អាស័យដ្ឋាន
@@ -11,3 +11,5 @@ km:
     province: ខេត្ត
     district: ស្រុក
     commune: ឃុំ
+    name_en_hint: "បញ្ចូលតែឈ្មោះជាភាសាអង់គ្លេស (កុំដាក់ឈ្មោះ Category)។ ឧ៖ “Srae Thmey Primary School” → “Srae Thmey”"
+    name_km_hint: "បញ្ចូលតែឈ្មោះជាភាសាខ្មែរ (កុំដាក់ឈ្មោះ Category)។ ឧ៖ “បឋមសិក្សាស្រែថ្មី” → “ស្រែថ្មី”"
