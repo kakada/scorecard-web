@@ -11,3 +11,5 @@ en:
     province: Province
     district: District
     commune: Commune
+    name_en_hint: "Enter only the dataset name in English (don’t repeat the category). Ex: “Srae Thmey Primary School” → “Srae Thmey”."
+    name_km_hint: "Enter only the dataset name in Khmer (don’t repeat the category). Ex: “បឋមសិក្សាស្រែថ្មី” → “ស្រែថ្មី”"
