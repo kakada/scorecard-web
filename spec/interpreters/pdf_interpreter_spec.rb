@@ -26,7 +26,7 @@ RSpec.describe PdfTemplateInterpreter do
 
   describe "#message" do
     let!(:program) { create(:program) }
-    let!(:scorecard) { create(:scorecard, program: program) }
+    let!(:scorecard) { create(:scorecard, program: program, running_mode: "offline") }
     let(:interpretor) { PdfTemplateInterpreter.new(scorecard.uuid) }
 
     context "no program pdf_template" do

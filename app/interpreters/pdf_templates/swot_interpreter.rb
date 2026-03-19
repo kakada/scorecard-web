@@ -63,6 +63,9 @@ module PdfTemplates
       end
 
       def render_shortcut_note
+        # If the scorecard is online, participant profiles are not collected, so the note is not shown.
+        return "" if @scorecard.online?
+
         "<div>" +
           "#{I18n.t('scorecard.note')}: " +
           participant_profiles.map { |profile| I18n.t("scorecard.#{profile}_shortcut") + ": " + I18n.t("scorecard.#{profile}_fullword") }.join(", ") +
