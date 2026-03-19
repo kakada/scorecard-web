@@ -25,6 +25,8 @@ class Dataset < ApplicationRecord
   validates :district_id, presence: true, if: -> { category&.hierarchy&.include?("district") }
   validates :province_id, presence: true
 
+  delegate :name, to: :category, prefix: true
+
   def name
     self["name_#{I18n.locale}"]
   end
