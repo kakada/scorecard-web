@@ -22,7 +22,7 @@ module PdfTemplates
     private
       def render_head
         columns = %w(indicator average_score strength weakness suggested_action priority_action)
-        headers = columns.map { |col| "<th class='text-center'>" + I18n.t("scorecard.#{col}") + "</th>" }.join("")
+        headers = columns.map { |col| "<th class='bg'>" + I18n.t("scorecard.#{col}") + "</th>" }.join("")
 
         "<tr>#{headers}</tr>"
       end
