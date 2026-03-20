@@ -18,7 +18,7 @@
 }
 
 .stackholders-lg {
-  $height-lg: 56px;
+  $height-lg: 50px;
 
   .img-funded {
     height: $height-lg *2;
@@ -41,6 +41,10 @@
     height: $height;
   }
 
+  .austrian-logo {
+    height: $height - 8px;
+  }
+
   .img-implemented {
     height: 36px;
   }
@@ -55,10 +59,13 @@
 }
 
 .stackholders-lg.v2 {
-  $height-lg: 86px;
+  $height-lg: 70px;
 
   .img-funded {
     height: $height-lg;
+  }
+  .austrian-logo {
+    height: $height-lg - 8px;
   }
 
   .img-implemented {
