@@ -42,7 +42,7 @@ RSpec.describe PdfTemplateInterpreter do
       let!(:suggested_indicator_activity) { create(:suggested_indicator_activity, voting_indicator: voting_indicator, scorecard: voting_indicator.scorecard, selected: true) }
       let(:t_head) {
         str = %w(indicator average_score strength weakness suggested_action priority_action).map { |col|
-          "<th class='text-center'>" + I18n.t("scorecard.#{col}") + "</th>"
+          "<th class='bg'>" + I18n.t("scorecard.#{col}") + "</th>"
         }.join("")
 
         "<tr>#{str}</tr>"
