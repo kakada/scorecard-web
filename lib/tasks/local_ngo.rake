@@ -15,4 +15,13 @@ namespace :local_ngo do
       ngo.save
     end
   end
+
+  desc "migrate short_name from name (first 10 characters)"
+  task migrate_short_name: :environment do
+    LocalNgo.where(short_name: nil).find_each do |ngo|
+      next if ngo.name.blank?
+
+      ngo.update_column(:short_name, ngo.name.first(10))
+    end
+  end
 end

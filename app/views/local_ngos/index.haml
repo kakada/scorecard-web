@@ -19,6 +19,7 @@
               %th #
               %th= t("local_ngo.code")
               %th= sortable "name", t("shared.name")
+              %th= sortable "short_name", t("shared.short_name")
               %th= t('local_ngo.address')
               %th= sortable "target_provinces", t('local_ngo.target_provinces')
               %th= sortable "created_at", t("shared.created_at")
@@ -31,6 +32,7 @@
                 %td= local_ngo.code
                 %td
                   = link_to_if local_ngo.website_url.present?, local_ngo.name, local_ngo.website_url, target: "_blank"
+                %td= local_ngo.short_name
                 %td= local_ngo.address
                 %td= local_ngo.target_provinces
                 %td= timeago(local_ngo.created_at).html_safe

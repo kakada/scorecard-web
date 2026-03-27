@@ -19,6 +19,7 @@
 #  website_url         :string
 #  deleted_at          :datetime
 #  local_ngo_batch_id  :uuid
+#  short_name          :string
 #
 class LocalNgo < ApplicationRecord
   include LocalNgos::Filter
@@ -35,6 +36,7 @@ class LocalNgo < ApplicationRecord
 
   # Validation
   validates :name, presence: true, uniqueness: { scope: :program_id }
+  validates :short_name, presence: true, length: { maximum: 10 }
   validates :target_province_ids, presence: true
   validates :website_url, url: {  allow_blank: true,
                                   no_local: true,

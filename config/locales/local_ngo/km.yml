@@ -4,6 +4,7 @@ km:
     edit_local_ngo: កែតម្រូវអង្គការក្នុងស្រុក
     new_local_ngo: អង្គការក្នុងស្រុកថ្មី
     name: ឈ្មោះ
+    short_name: ឈ្មោះសង្ខេប
     province: ខេត្ត
     district: ស្រុក
     commune: ឃុំ
@@ -18,3 +19,4 @@ km:
     already_in_used: មិនអាចលុបបានទេ មានប័ណ្ណដាក់ពិន្ទុដែលត្រូវ ឬបានអនុវត្ត
     website_url: Url គេហទំព័រ
     code: លេខកូដ
+    short_name_hint: អតិបរមា ១០ តួអក្សរ

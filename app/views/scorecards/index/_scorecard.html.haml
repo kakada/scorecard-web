@@ -19,10 +19,14 @@
       = render 'shared/copy', value: scorecard_url(scorecard.uuid), label: '', tooltip_title: (t('shared.copied_testing_code') if test_mode?)
 
   %td= scorecard.year
-  %td= scorecard.local_ngo_name
+  %td
+    %span{ data: { toggle: 'tooltip', title: "#{scorecard.local_ngo_name}(#{scorecard.local_ngo_code})" } }
+      = scorecard.local_ngo_short_name || scorecard.local_ngo_name
+
   %td{data: { toggle: 'tooltip', title: scorecard_location(scorecard) } }
     .scorecard-location.ellipsis
       = scorecard_location(scorecard)
+
   %td= status_html(scorecard).html_safe
   %td.text-center
     - if scorecard.downloaded_count.positive?

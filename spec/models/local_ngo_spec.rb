@@ -19,6 +19,7 @@
 #  website_url         :string
 #  deleted_at          :datetime
 #  local_ngo_batch_id  :uuid
+#  short_name          :string
 #
 require "rails_helper"
 
@@ -28,6 +29,8 @@ RSpec.describe LocalNgo, type: :model do
   it { is_expected.to have_many(:scorecards) }
   it { is_expected.to have_many(:users) }
   it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:short_name) }
+  it { is_expected.to validate_length_of(:short_name).is_at_most(10) }
   it { is_expected.to validate_presence_of(:target_province_ids) }
   it { is_expected.to validate_uniqueness_of(:name).scoped_to(:program_id) }
 

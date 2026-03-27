@@ -4,6 +4,7 @@
       %tr
         %th #
         %th= t("shared.name")
+        %th= t("local_ngo.short_name")
         %th= t('local_ngo.address')
         %th= t('local_ngo.target_provinces')
         %th= t('local_ngo.website_url')
@@ -19,6 +20,7 @@
                 = render 'field_for_local_ngo', f: ff
 
           %td= local_ngo.name
+          %td= local_ngo.short_name
           %td= local_ngo.address
           %td= local_ngo.target_provinces
           %td= local_ngo.website_url
