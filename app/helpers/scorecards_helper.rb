@@ -1,6 +1,17 @@
 # frozen_string_literal: true
 
 module ScorecardsHelper
+  def scorecard_code_hint(scorecard)
+    <<~HTML
+      <ul class='text-left mb-0'>
+        <li>#{t('scorecard.scorecard_type')}: #{h(scorecard.t_scorecard_type)}</li>
+        <li>#{t('scorecard.facility')}: #{h(scorecard.facility_name)}</li>
+        <li>#{t('scorecard.code')}: #{h(scorecard.uuid)}</li>
+        <li>#{t('scorecard.running_mode')}: #{t("scorecard.running_mode_#{scorecard.running_mode}")}</li>
+      </ul>
+    HTML
+  end
+
   def scorecard_setup_sub_title
     return "" unless @scorecard.number_of_participant.present?
 

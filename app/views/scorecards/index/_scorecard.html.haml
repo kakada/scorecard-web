@@ -1,23 +1,28 @@
 %tr
-  %td
-    .line-badge{ class: scorecard.scorecard_type, 'data-toggle' => 'tooltip', title: scorecard.t_scorecard_type }
+  %td{'data-toggle' => 'tooltip', title: scorecard_code_hint(scorecard), 'data-html' => 'true'}
+    .line-badge{ class: scorecard.scorecard_type }
       = @pagy.from + index
 
-  %td
+  %td{'data-toggle' => 'tooltip', title: scorecard_code_hint(scorecard), 'data-html' => 'true'}
     .d-flex.align-items-center
-      %small.text-muted.mr-1{style: 'margin-top: 1px;', 'data-toggle' => 'tooltip', title: scorecard.facility_name}
+      %small.text-muted.mr-1
         = "#{scorecard.facility.code}"
 
       = link_to scorecard.uuid, scorecard_path(scorecard.uuid), class: 'text-primary'
 
-      %small{class: scorecard.running_mode, 'data-toggle' => 'tooltip', title: "#{t("scorecard.running_mode")}: #{t("scorecard.running_mode_#{scorecard.running_mode}")}"}
-        = "(#{t("scorecard.running_mode_#{scorecard.running_mode}")})"
+      %small.ml-1{class: scorecard.running_mode}
+        - if scorecard.online?
+          %i.fas.fa-wifi
+        - else
+          %i.fas.fa-signal
 
       = render 'shared/copy', value: scorecard_url(scorecard.uuid), label: '', tooltip_title: (t('shared.copied_testing_code') if test_mode?)
 
   %td= scorecard.year
-  %td= "#{scorecard.local_ngo_name}(#{scorecard.local_ngo_code})"
-  %td= scorecard_location(scorecard)
+  %td= scorecard.local_ngo_name
+  %td{data: { toggle: 'tooltip', title: scorecard_location(scorecard) } }
+    .scorecard-location.ellipsis
+      = scorecard_location(scorecard)
   %td= status_html(scorecard).html_safe
   %td.text-center
     - if scorecard.downloaded_count.positive?
@@ -26,7 +31,7 @@
       %span{'data-toggle': 'tooltip', title: "#{tooltip_title}", 'data-html': 'true', 'data-placement': 'right' }
         = scorecard.downloaded_count
 
-  %td= timeago(scorecard.created_at).html_safe
+  %td= timeago(scorecard.planned_start_date).html_safe
   %td
     - if scorecard.conducted_date.present?
       = timeago(scorecard.conducted_date).html_safe

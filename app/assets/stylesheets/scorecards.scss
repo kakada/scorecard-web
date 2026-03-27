@@ -260,3 +260,13 @@
 .online {
   color: #16A34A;
 }
+
+.scorecard-location {
+  width: 250px;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

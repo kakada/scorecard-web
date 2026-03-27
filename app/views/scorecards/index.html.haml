@@ -20,7 +20,7 @@
               %th= t('scorecard.location')
               %th= t('scorecard.status')
               %th= t('scorecard.number_of_downloaded')
-              %th= sortable "created_at", t('shared.created_at')
+              %th= sortable "planned_start_date", t('scorecard.planned_start_date')
               %th
                 %span{data: { toggle: 'tooltip', title: t('scorecard.conducted_in_app')}}
                   = sortable "conducted_date", t('scorecard.conducted_at')
