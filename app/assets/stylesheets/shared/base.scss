@@ -129,3 +129,31 @@ body {
 [data-link] {
   cursor: pointer;
 }
+
+// Responsive: nav tabs scroll horizontally on small screens
+.nav.nav-tabs {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  .nav-item {
+    white-space: nowrap;
+  }
+}
+
+// Responsive: scale down table font size on medium and small screens
+@media (max-width: 1199.98px) {
+  .table.pretty {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .table.pretty {
+    font-size: 0.75rem;
+
+    td, th {
+      padding: 0.3rem 0.4rem;
+    }
+  }
+}
