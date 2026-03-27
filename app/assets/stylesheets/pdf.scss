@@ -23,3 +23,12 @@ body, html, * {
   font-size: 0.75em;
   border-radius: 3px;
 }
+
+// Bootstrap's `.table` styles can override cell backgrounds.
+// Use a more specific selector + `!important` so header backgrounds render in PDFs.
+table.table thead th.bg {
+  background-color: #e6e6e6 !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  text-align: center;
+}
