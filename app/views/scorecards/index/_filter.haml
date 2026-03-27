@@ -1,6 +1,6 @@
 %form{ action: '/scorecards', method: 'get' }
   .d-flex.flex-wrap
-    .d-flex.flex-grow-1
+    .d-flex.flex-grow-1.flex-wrap
       = hidden_field_tag :filter, params[:filter]
 
       .mb-2= render "shared/filters/filter_name", field_name: "uuid", placeholder: t('scorecard.search_by_code')
