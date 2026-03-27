@@ -149,6 +149,34 @@ body {
 }
 
 @media (max-width: 767.98px) {
+  // Page titles
+  h1.h3 {
+    font-size: 1.1rem;
+  }
+
+  // Cards: reduce padding
+  .card .card-body {
+    padding: 0.75rem;
+  }
+
+  // Filter / search text inputs: full width
+  // !important required to override the fixed widths set with !important above
+  .filter-input,
+  .search-input,
+  .w-search {
+    width: 100% !important;
+    margin-right: 0;
+  }
+
+  // Buttons: search, advance-search (check), and "Create New"
+  .btn-primary.btn-sm,
+  .btn-outline-primary:not(.btn-circle),
+  .btn.advance-search {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  // Tables
   .table.pretty {
     font-size: 0.75rem;
 
