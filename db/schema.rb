@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
+ActiveRecord::Schema[7.0].define(version: 2026_03_27_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -296,6 +296,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_01_27_033953) do
     t.string "website_url"
     t.datetime "deleted_at", precision: nil
     t.uuid "local_ngo_batch_id"
+    t.string "short_name"
     t.index ["deleted_at"], name: "index_local_ngos_on_deleted_at"
   end
 

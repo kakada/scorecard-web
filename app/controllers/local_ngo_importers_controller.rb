@@ -46,7 +46,7 @@ class LocalNgoImportersController < ApplicationController
       params.require(:local_ngo_batch).permit(
         :total_count, :valid_count, :reference_cache,
         local_ngos_attributes: [
-          :name, :province_id, :district_id, :commune_id, :village_id, :program_id, :target_province_ids
+          :name, :short_name, :province_id, :district_id, :commune_id, :village_id, :program_id, :target_province_ids
         ]
       ).merge({
         user_id: current_user.id,

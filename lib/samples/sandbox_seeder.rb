@@ -55,6 +55,7 @@ module Samples
       def create_local_ngo(program)
         lngo = ::LocalNgo.find_or_initialize_by(
           name: SANDBOX_NAME,
+          short_name: SANDBOX_NAME.first(10),
           program_id: program.id
         ) do |ngo|
           ngo.target_province_ids = "01"

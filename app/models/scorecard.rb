@@ -137,7 +137,7 @@ class Scorecard < ApplicationRecord
   has_many   :suggested_indicator_activities, through: :voting_indicators, source: :suggested_indicator_activities
 
   # Delegation
-  delegate  :name, :code, to: :local_ngo, prefix: :local_ngo, allow_nil: true
+  delegate  :name, :code, :short_name, to: :local_ngo, prefix: :local_ngo, allow_nil: true
   delegate  :name_en, :name_km, to: :primary_school, prefix: :primary_school, allow_nil: true
   delegate  :name, to: :facility, prefix: :facility, allow_nil: true
   delegate  :name, to: :primary_school, prefix: :primary_school, allow_nil: true

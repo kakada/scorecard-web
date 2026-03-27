@@ -67,7 +67,7 @@ class LocalNgosController < ApplicationController
 
   private
     def local_ngo_params
-      params.require(:local_ngo).permit(:name, :province_id, :district_id, :commune_id, :village_id, :target_province_ids, :website_url)
+      params.require(:local_ngo).permit(:name, :short_name, :province_id, :district_id, :commune_id, :village_id, :target_province_ids, :website_url)
     end
 
     def filter_params

@@ -13,6 +13,7 @@ module Spreadsheets
       def process
         LocalNgo.new(
           name: row["name"],
+          short_name: row["short_name"],
           commune_id: commune.try(:id),
           district_id: commune.try(:district_id),
           province_id: commune.try(:province_id),

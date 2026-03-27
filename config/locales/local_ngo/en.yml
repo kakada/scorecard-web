@@ -4,6 +4,7 @@ en:
     edit_local_ngo: Edit Local Ngo
     new_local_ngo: New Local Ngo
     name: Name
+    short_name: Short Name
     province: Province
     district: District
     commune: Commune
@@ -18,3 +19,4 @@ en:
     already_in_used: Can't delete, there are scorecards belonging to
     website_url: Website Url
     code: Code
+    short_name_hint: Maximum 10 characters

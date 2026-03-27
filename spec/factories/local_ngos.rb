@@ -19,11 +19,13 @@
 #  website_url         :string
 #  deleted_at          :datetime
 #  local_ngo_batch_id  :uuid
+#  short_name          :string
 #
 FactoryBot.define do
   factory :local_ngo do
     program
     name        { FFaker::Name.name }
+    short_name  { FFaker::Name.name.first(10) }
     target_province_ids { "01" }
   end
 end

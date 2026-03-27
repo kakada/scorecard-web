@@ -1,6 +1,7 @@
 .w-50.view-center
   = simple_form_for @local_ngo do |f|
     = f.input :name, label: t('local_ngo.name')
+    = f.input :short_name, label: t('local_ngo.short_name'), input_html: { maxlength: 10}, hint: t('local_ngo.short_name_hint', default: "Maximum 10 characters")
 
     #province.form-group
       = f.label(:province_id) do
