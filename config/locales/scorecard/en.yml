@@ -209,3 +209,4 @@ en:
     people:
       one: "%{count} person"
       other: "%{count} people"
+    planned_date: Planned date
