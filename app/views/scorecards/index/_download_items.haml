@@ -1,0 +1,9 @@
+- options = [[t('scorecard.download_in_short'), 'short'], [t('scorecard.download_in_full'), 'full']]
+- options.each do |option|
+  %a.btn.dropdown-item{class: item_class, href: scorecards_path(filter_params.merge(format: :xlsx, mode: option[1])), target: '_blank'}
+    %i.fas.fa-download.drop-menu-icon
+    %span= option[0]
+
+%a.btn.dropdown-item{class: item_class, href: voting_indicators_path(filter_params.merge(format: :xlsx)), target: '_blank'}
+  %i.fas.fa-download.drop-menu-icon
+  %span= t('scorecard.download_voting_indicators')
