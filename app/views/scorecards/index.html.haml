@@ -22,13 +22,13 @@
               %th= t('scorecard.number_of_downloaded')
               %th
                 %span{data: { toggle: 'tooltip', title: t('scorecard.planned_start_date')}}
-                  = sortable "planned_start_date", t('scorecard.planned_date')
+                  = sortable "planned_start_date", t('scorecard.table_title.planned_date')
               %th
-                %span{data: { toggle: 'tooltip', title: t('scorecard.conducted_in_app')}}
-                  = sortable "conducted_date", t('scorecard.conducted_at')
+                %span{data: { toggle: 'tooltip', title: "#{t('scorecard.conducted_at')} (#{t('scorecard.conducted_in_app')})"}}
+                  = sortable "conducted_date", t('scorecard.table_title.conducted_date')
               %th
-                %span{data: { toggle: 'tooltip', title: t('scorecard.submitted_from_app')}}
-                  = sortable "submitted_at", t('scorecard.submitted_at')
+                %span{data: { toggle: 'tooltip', title: "#{t('scorecard.submitted_at')} (#{t('scorecard.submitted_from_app')})"}}
+                  = sortable "submitted_at", t('scorecard.table_title.submitted_date')
               %th
 
           %tbody

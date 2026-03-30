@@ -59,3 +59,15 @@
 .row
   %label.col-sm-4.col-form-label= t("scorecard.description")
   %label.col-sm-8.col-form-label= " : #{@scorecard.description}"
+
+.row
+  %label.col-sm-4.col-form-label= t("shared.created_at")
+  %label.col-sm-8.col-form-label
+    = " : "
+    != date_time_html(@scorecard.created_at)
+
+.row
+  %label.col-sm-4.col-form-label= t("shared.updated_at")
+  %label.col-sm-8.col-form-label
+    = " : "
+    != date_time_html(@scorecard.updated_at)

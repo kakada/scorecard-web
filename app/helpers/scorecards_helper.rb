@@ -96,6 +96,11 @@ module ScorecardsHelper
     "<span><i class='fas fa-calendar-alt mr-1'></i>#{display_date(date)}</span>"
   end
 
+  def date_time_html(date)
+    return "" unless date.present?
+    "<span><i class='fas fa-calendar-alt mr-1'></i>#{display_datetime(date)}</span>"
+  end
+
   def setting_url
     return local_ngos_path if current_user.lngo?
 

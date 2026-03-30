@@ -209,4 +209,7 @@ en:
     people:
       one: "%{count} person"
       other: "%{count} people"
-    planned_date: Planned date
+    table_title:
+      planned_date: Planned date
+      conducted_date: Conducted date
+      submitted_date: Submitted date
