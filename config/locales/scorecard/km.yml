@@ -209,4 +209,7 @@ km:
     people:
       one: "%{count} នាក់"
       other: "%{count} នាក់"
-    planned_date: ថ្ងៃគ្រោងទុក
+    table_title:
+      planned_date: ថ្ងៃគ្រោងទុក
+      conducted_date: ថ្ងៃអនុវត្ត
+      submitted_date: ថ្ងៃទទួលសំណើរ
