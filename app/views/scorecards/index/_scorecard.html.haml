@@ -35,17 +35,21 @@
       %span{'data-toggle': 'tooltip', title: "#{tooltip_title}", 'data-html': 'true', 'data-placement': 'right' }
         = scorecard.downloaded_count
 
-  %td= timeago(scorecard.planned_start_date).html_safe
   %td
-    - if scorecard.conducted_date.present?
-      = timeago(scorecard.conducted_date).html_safe
-    - else
-      = "_"
+    .ellipsis
+      = timeago(scorecard.planned_start_date).html_safe
   %td
-    - if scorecard.submitted_at.present?
-      = timeago(scorecard.submitted_at).html_safe
-    - else
-      = "_"
+    .ellipsis
+      - if scorecard.conducted_date.present?
+        = timeago(scorecard.conducted_date).html_safe
+      - else
+        = "_"
+  %td
+    .ellipsis
+      - if scorecard.submitted_at.present?
+        = timeago(scorecard.submitted_at).html_safe
+      - else
+        = "_"
   %td
     .d-flex.justify-content-end
       / Request change icon
