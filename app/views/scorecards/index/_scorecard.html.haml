@@ -1,9 +1,9 @@
 %tr
-  %td{'data-toggle' => 'tooltip', title: scorecard_code_hint(scorecard), 'data-html' => 'true'}
+  %td
     .line-badge{ class: scorecard.scorecard_type }
       = @pagy.from + index
 
-  %td{'data-toggle' => 'tooltip', title: scorecard_code_hint(scorecard), 'data-html' => 'true'}
+  %td{'data-toggle' => 'popover', 'data-trigger' => 'hover', 'data-content' => scorecard_code_hint(scorecard), 'data-html' => 'true'}
     .d-flex.align-items-center
       %small.text-muted.mr-1
         = "#{scorecard.facility.code}"
@@ -20,11 +20,11 @@
 
   %td= scorecard.year
   %td
-    %span{ data: { toggle: 'tooltip', title: "#{scorecard.local_ngo_name}(#{scorecard.local_ngo_code})" } }
+    %span{ data: { toggle: 'popover', trigger: 'hover', content: "#{scorecard.local_ngo_name}(#{scorecard.local_ngo_code})" } }
       = scorecard.local_ngo_short_name || scorecard.local_ngo_name
 
-  %td{data: { toggle: 'tooltip', title: scorecard_location(scorecard) } }
-    .scorecard-location.ellipsis
+  %td
+    .scorecard-location.ellipsis{data: { toggle: 'popover', trigger: 'hover', content: scorecard_location(scorecard) } }
       = scorecard_location(scorecard)
 
   %td= status_html(scorecard).html_safe
@@ -32,7 +32,7 @@
     - if scorecard.downloaded_count.positive?
       - tooltip_title = sanitize(render('scorecards/index/scorecard_progress_tooltip_title', scorecard: scorecard))
 
-      %span{'data-toggle': 'tooltip', title: "#{tooltip_title}", 'data-html': 'true', 'data-placement': 'right' }
+      %span{'data-toggle': 'popover', 'data-trigger': 'hover', 'data-content': "#{tooltip_title}", 'data-html': 'true', 'data-placement': 'right' }
         = scorecard.downloaded_count
 
   %td
@@ -69,16 +69,16 @@
           = link_to edit_scorecard_path(scorecard.uuid), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: 'tooltip', placement: 'top', title: t('shared.edit')} do
             %i.fas.fa-pen
         - else
-          %span.mr-1{data: {toggle: 'tooltip', placement: 'top', title: t('scorecard.cannot_update_running_scorecard')}}
+          %span.mr-1{data: {toggle: 'popover', trigger: 'hover', placement: 'top', content: t('scorecard.cannot_update_running_scorecard')}}
             %a.disabled{class: "btn btn-circle btn-sm btn-outline-warning"}
               %i.fas.fa-pen
 
         / Delete icon
         - if policy(scorecard).destroy?
-          %span{data: {toggle: 'tooltip', placement: 'top', title: t('shared.delete')}}
+          %span{data: {toggle: 'popover', trigger: 'hover', placement: 'top', content: t('shared.delete') }}
             = link_to scorecard_path(scorecard.uuid, associate_info: true), class: "btn btn-circle btn-sm btn-outline-danger", remote: true do
               %i.fas.fa-trash-alt
         - else
-          %span{data: {toggle: 'tooltip', placement: 'top', title: t('scorecard.cannot_delete_running_scorecard')}}
+          %span{data: {toggle: 'popover', trigger: 'hover', placement: 'top', content: t('scorecard.cannot_delete_running_scorecard') }}
             %a.disabled{class: "btn btn-circle btn-sm btn-outline-danger"}
               %i.fas.fa-trash-alt
