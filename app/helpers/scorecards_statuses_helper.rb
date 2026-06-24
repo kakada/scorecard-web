@@ -66,8 +66,8 @@ module ScorecardsStatusesHelper
 
   private
     def wrap_in_tooltip(title, status, css_klass)
-      "<span data-toggle='tooltip' data-html='true' data-placement='top' title='#{sanitize(title)}'>" +
+      "<span data-toggle='popover' data-trigger='hover' data-html='true' data-placement='top' data-content='#{sanitize(title)}'>" +
       "<span class='badge #{css_klass}' > " + t("scorecard.#{status}") + "</span>" +
-      "<span>"
+      "</span>"
     end
 end
