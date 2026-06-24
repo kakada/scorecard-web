@@ -8,6 +8,11 @@ km:
     add_contact: + បន្ថែមលេខទំនាក់ទំនង
     telegram_notification: សេចក្តីជូនដំណឹងតាម Telegram
     email_notification: សេចក្តីជូនដំណឹងតាម Email
+    auto_complete_submitted_scorecard: ការបញ្ចប់ប័ណ្ណដាក់ពិន្ទុដែលបានដាក់ស្នើដោយស្វ័យប្រវត្តិ
+    enable_auto_complete_submitted_scorecard: បើកការបញ្ចប់ប័ណ្ណដាក់ពិន្ទុដែលបានដាក់ស្នើដោយស្វ័យប្រវត្តិ
+    auto_complete_submitted_scorecard_in_days: ចំនួនថ្ងៃសម្រាប់ការបញ្ចប់ដោយស្វ័យប្រវត្តិ
+    auto_complete_submitted_scorecard_within: បញ្ចប់ប័ណ្ណដាក់ពិន្ទុដែលបានដាក់ស្នើដោយស្វ័យប្រវត្តិក្នុងរយៈពេល %{days} ថ្ងៃ
+    auto_complete_submitted_scorecard_description: ចំណាំ៖ បើកមុខងារនេះ ដើម្បីឱ្យប្រព័ន្ធបញ្ចប់ប័ណ្ណដាក់ពិន្ទុដែលបានដាក់ស្នើដោយស្វ័យប្រវត្តិ បន្ទាប់ពីរយៈពេលដែលបានកំណត់ ប្រសិនបើមិនមានសកម្មភាពណាមួយពីអ្នកប្រើប្រាស់។ ប្រសិនបើបិទមុខងារនេះ ប័ណ្ណដាក់ពិន្ទុដែលបានដាក់ស្នើនឹងមិនត្រូវបានបញ្ចប់ដោយស្វ័យប្រវត្តិទេ។
     are_you_sure_to_reindex_elasticsearch_document: តើអ្នកប្រាកដចិត្តថាចង់ reindex elasticsearch document របស់ប្រូក្រាមនេះ?
     es_reindex: Reindex Document
     reindex_successfully: Reindex document ដោយជោគជ័យ

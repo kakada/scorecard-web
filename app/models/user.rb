@@ -125,6 +125,10 @@ class User < ApplicationRecord
     self.where(authentication_token: token).where("token_expired_date >= ?", Time.zone.now).first
   end
 
+  def self.system_user
+    find_by(role: :system_admin)
+  end
+
   # Instant methods
   def regenerate_authentication_token!
     return if token_expired_date > Time.zone.now

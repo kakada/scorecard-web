@@ -10,6 +10,8 @@
 #  updated_at                :datetime         not null
 #  datetime_format           :string           default("DD-MM-YYYY")
 #  enable_email_notification :boolean          default(FALSE)
+#  enable_auto_complete_submitted_scorecard :boolean          default(FALSE)
+#  auto_complete_submitted_scorecard_in_days :integer          default(15), not null
 #  shortcut_name             :string
 #  dashboard_user_emails     :text             default([]), is an Array
 #  dashboard_user_roles      :string           default([]), is an Array
@@ -47,6 +49,7 @@ class Program < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :shortcut_name, presence: true, uniqueness: true
+  validates :auto_complete_submitted_scorecard_in_days, numericality: { only_integer: true, greater_than: 0 }
 
   before_create :secure_uuid
   after_create :create_default_language

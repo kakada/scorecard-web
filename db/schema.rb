@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_07_17_090000) do
+ActiveRecord::Schema[7.0].define(version: 2026_07_24_033500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -468,6 +468,8 @@ ActiveRecord::Schema[7.0].define(version: 2026_07_17_090000) do
     t.string "dashboard_user_roles", default: [], array: true
     t.string "uuid"
     t.boolean "sandbox", default: false, null: false
+    t.boolean "enable_auto_complete_submitted_scorecard", default: false
+    t.integer "auto_complete_submitted_scorecard_in_days", default: 15, null: false
   end
 
   create_table "raised_indicators", force: :cascade do |t|

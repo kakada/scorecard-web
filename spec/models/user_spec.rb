@@ -138,4 +138,12 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe ".system_user" do
+    let!(:system_admin) { create(:user, :system_admin) }
+
+    it "returns a system admin user" do
+      expect(described_class.system_user).to eq(system_admin)
+    end
+  end
 end

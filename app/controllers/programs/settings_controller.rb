@@ -19,7 +19,8 @@ module Programs
     private
       def program_params
         params.require(:program).permit(
-          :datetime_format, :enable_email_notification
+          :datetime_format, :enable_email_notification, :enable_auto_complete_submitted_scorecard,
+          :auto_complete_submitted_scorecard_in_days
         )
       end
   end

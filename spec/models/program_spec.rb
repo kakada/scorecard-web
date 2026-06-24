@@ -10,6 +10,8 @@
 #  updated_at                :datetime         not null
 #  datetime_format           :string           default("DD-MM-YYYY")
 #  enable_email_notification :boolean          default(FALSE)
+#  enable_auto_complete_submitted_scorecard :boolean          default(FALSE)
+#  auto_complete_submitted_scorecard_in_days :integer          default(15), not null
 #  shortcut_name             :string
 #  dashboard_user_emails     :text             default([]), is an Array
 #  dashboard_user_roles      :string           default([]), is an Array
@@ -27,6 +29,7 @@ RSpec.describe Program, type: :model do
   it { is_expected.to have_one(:data_publication).dependent(:destroy) }
   it { is_expected.to have_many(:data_publication_logs).dependent(:destroy) }
   it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_numericality_of(:auto_complete_submitted_scorecard_in_days).only_integer.is_greater_than(0) }
 
   describe "#after_create" do
     let!(:program) { create(:program) }

@@ -258,6 +258,41 @@ RSpec.describe Scorecard, type: :model do
     end
   end
 
+  describe "#after_commit on update, #schedule_auto_complete_submitted_scorecard" do
+    let(:program) do
+      create(
+        :program,
+        enable_auto_complete_submitted_scorecard: feature_enabled,
+        auto_complete_submitted_scorecard_in_days: auto_complete_days
+      )
+    end
+    let!(:scorecard) { create(:scorecard, program: program) }
+    let(:feature_enabled) { true }
+    let(:auto_complete_days) { 7 }
+
+    before do
+      AutoCompleteSubmittedScorecardJob.clear
+    end
+
+    context "when feature is enabled" do
+      it "schedules auto-complete job when scorecard is submitted" do
+        expected_run_at = auto_complete_days.days.from_now.to_f
+
+        expect { scorecard.lock_submit! }.to change(AutoCompleteSubmittedScorecardJob.jobs, :size).by(1)
+        expect(AutoCompleteSubmittedScorecardJob.jobs.last["args"]).to eq([scorecard.id])
+        expect(AutoCompleteSubmittedScorecardJob.jobs.last["at"]).to be_within(5).of(expected_run_at)
+      end
+    end
+
+    context "when feature is disabled" do
+      let(:feature_enabled) { false }
+
+      it "does not schedule auto-complete job" do
+        expect { scorecard.lock_submit! }.not_to change(AutoCompleteSubmittedScorecardJob.jobs, :size)
+      end
+    end
+  end
+
   describe "#after_commit on update, #create_completed_progress" do
     let!(:scorecard) { create(:scorecard, :submitted) }
     let!(:completor) { scorecard.creator }

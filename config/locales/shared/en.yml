@@ -18,6 +18,7 @@ en:
     status_on: On
     status_off: Off
     setup: Setup
+    configure: Configure
     change: Change
     learn_more: Learn more
     need_help: Need help?

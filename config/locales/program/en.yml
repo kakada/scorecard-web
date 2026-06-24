@@ -8,6 +8,11 @@ en:
     add_contact: + Add Contact
     telegram_notification: Telegram notification
     email_notification: Email notification
+    auto_complete_submitted_scorecard: Auto-complete submitted scorecards
+    enable_auto_complete_submitted_scorecard: Enable auto-complete submitted scorecards
+    auto_complete_submitted_scorecard_in_days: Auto-complete days
+    auto_complete_submitted_scorecard_within: "Auto-complete submitted scorecards within %{days} days"
+    auto_complete_submitted_scorecard_description: "Note: Enable this feature to allow the system to auto-complete submitted scorecards after the specified period if there is no user activity. If this feature is disabled, submitted scorecards will not be auto-completed."
     are_you_sure_to_reindex_elasticsearch_document: Are you sure to reindex elasticsearch document for this program?
     es_reindex: Reindex Document
     reindex_successfully: Reindex document successfully

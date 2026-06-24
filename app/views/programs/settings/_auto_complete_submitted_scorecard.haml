@@ -1,0 +1,10 @@
+.dotted-line.d-flex
+  %label.flex-1= t("program.auto_complete_submitted_scorecard")
+  .control
+    - if current_program.enable_auto_complete_submitted_scorecard
+      %small.text-muted
+        = t("program.auto_complete_submitted_scorecard_within", days: current_program.auto_complete_submitted_scorecard_in_days)
+
+    %a.pointer.badge.badge-info.text-white{'data-target' => '#auto-complete-submitted-scorecard', 'data-toggle' => 'modal'}= t('shared.configure')
+
+    = render 'modal_auto_complete_submitted_scorecard', f: f
