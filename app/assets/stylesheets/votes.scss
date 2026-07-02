@@ -2,17 +2,22 @@
 .public-vote-container {
   min-height: 100vh;
   overflow: auto;
+  background-color: #f0ebf8;
+
+  .indicator-required-note, abbr[title="required"]{
+    color: #c0392b;
+  }
 
   .card {
     border: none;
-    border-radius: 0;
     box-shadow: none;
+    border-radius: 8px;
 
     .card-header {
-      background: #c65e28;
       border-bottom: none;
       padding: 20px;
-      color: white;
+      border-top: 10px solid #ff8533;
+      border-radius: 8px;
 
       h3 {
         font-size: 1.2rem;
@@ -23,6 +28,7 @@
     .card-body {
       padding: 25px 20px;
       background: white;
+      border-radius: 8px;
     }
   }
 
@@ -33,7 +39,7 @@
     color: #333;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px dashed #ddd;
+    border-bottom: 1px dashed #bbb;
   }
 
   // Gender options
@@ -59,6 +65,7 @@
         text-align: center;
         transition: all 0.3s ease;
         background: white;
+        height: 100%;
 
         .gender-icon {
           font-size: 2rem;
@@ -117,6 +124,7 @@
         text-align: center;
         transition: all 0.3s ease;
         background: white;
+        height: 100%;
 
         .type-icon {
           font-size: 1.8rem;
@@ -150,9 +158,6 @@
   // Indicator items
   .indicator-item {
     background: white;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 20px;
 
     .indicator-header {
       .indicator-number {
@@ -294,14 +299,15 @@
 
     .gender-options {
       .gender-option {
-        flex: 0 0 calc(33.333% - 10px);
-        min-width: 90px;
+        flex: 1;
+        min-width: 0;
       }
     }
 
     .participant-type-options {
       .type-option {
-        flex: 0 0 calc(50% - 7.5px);
+        flex: 1;
+        min-width: 0px;
       }
     }
 

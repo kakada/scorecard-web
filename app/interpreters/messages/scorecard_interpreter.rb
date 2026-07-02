@@ -24,7 +24,7 @@ module Messages
     end
 
     def url
-      link = "#{ENV['HOST_URL']}/scorecards/#{scorecard.id}"
+      link = "#{ENV['HOST_URL']}/scorecards/#{scorecard.uuid}"
       "<a href='#{link}'>#{link}</a>"
     end
 
