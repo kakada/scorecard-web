@@ -22,6 +22,9 @@ en:
     error_title: "Submission Error"
     thank_you_title: "Thank You!"
     thank_you_message: "Thank you for your participation. Your vote has been recorded."
+    required_indicator_note: "* Indicates required question"
+    digital_community_scorecard: "Digital Community Scorecard"
+    form_created_by: "This form was created by"
 
     errors:
       score_required: "Please select a score for `%{indicator}`."

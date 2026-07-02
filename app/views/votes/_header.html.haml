@@ -1,6 +1,6 @@
 - show_language ||= false
 
-.card-header.bg-primary.text-white
+.card-header.bg-white.text-dark
   %h3.mb-0
     = t('public_votes.title')
   .mb-0.small
@@ -20,3 +20,7 @@
           = link_to new_scorecard_vote_path(@scorecard.token, locale: lang[:code]), class: 'dropdown-item d-flex align-items-center' do
             = image_tag lang[:image], alt: 'locale', size: '20x20', class: 'mr-2'
             %span= lang[:label]
+
+    .indicator-required-note.mt-2
+      %small
+        = t('public_votes.required_indicator_note')
