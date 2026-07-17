@@ -69,6 +69,7 @@ RSpec.describe "VotesController", type: :request do
             disability: false,
             minority: false,
             poor_card: false,
+            device_submission_token: "device-token-1",
             scores: {
               vi1.uuid => 4,
               vi2.uuid => 3
@@ -85,8 +86,49 @@ RSpec.describe "VotesController", type: :request do
 
         expect(vi1.reload.ratings.count).to eq(1)
         expect(vi2.reload.ratings.count).to eq(1)
+        expect(scorecard.participants.first.device_submission_token).to eq("device-token-1")
 
         expect(response).to redirect_to(scorecard_vote_url(scorecard.token, "thank-you", locale: I18n.locale))
+      end
+    end
+
+    context "when a duplicate submission is detected" do
+      let!(:participant) do
+        create(:participant,
+          scorecard: scorecard,
+          age: 25,
+          gender: "male",
+          disability: false,
+          minority: false,
+          poor_card: false,
+          device_submission_token: "device-token-1"
+        )
+      end
+
+      let(:params) do
+        {
+          public_vote_form: {
+            age: 25,
+            gender: "male",
+            disability: false,
+            minority: false,
+            poor_card: false,
+            device_submission_token: "device-token-1",
+            scores: {
+              vi1.uuid => 4,
+              vi2.uuid => 3
+            }
+          }
+        }
+      end
+
+      it "renders the form again with duplicate warning metadata" do
+        post scorecard_votes_path(scorecard.token), params: params
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.body).to include("data-duplicate-warning-required=\"true\"")
+        expect(response.body).to include("data-duplicate-device-submission-count=\"1\"")
+        expect(scorecard.reload.participants.count).to eq(1)
       end
     end
 

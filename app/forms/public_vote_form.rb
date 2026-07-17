@@ -12,6 +12,8 @@ class PublicVoteForm
   attribute :disability, :boolean
   attribute :minority, :boolean
   attribute :poor_card, :boolean
+  attribute :device_submission_token, :string
+  attribute :confirm_duplicate_submission, :boolean, default: false
   attribute :scores, default: {}
 
   attr_reader :scorecard
@@ -47,6 +49,9 @@ class PublicVoteForm
   def save
     return false unless valid?
 
+    @duplicate_confirmation_required = duplicate_submission_warning? && !confirm_duplicate_submission?
+    return false if duplicate_confirmation_required?
+
     ActiveRecord::Base.transaction do
       participant = create_participant
       create_votes(participant)
@@ -65,6 +70,34 @@ class PublicVoteForm
     errors.key?("scores_#{voting_indicator.uuid}")
   end
 
+  def duplicate_confirmation_required?
+    @duplicate_confirmation_required == true
+  end
+
+  def duplicate_device_submission_count
+    return 0 if device_submission_token.blank?
+
+    @duplicate_device_submission_count ||= scorecard.participants.where(device_submission_token: device_submission_token).count
+  end
+
+  def duplicate_profile_submission_count
+    @duplicate_profile_submission_count ||= scorecard.participants.where(
+      age: age,
+      gender: gender,
+      disability: disability,
+      minority: minority,
+      poor_card: poor_card
+    ).count
+  end
+
+  def duplicate_submission_warning?
+    duplicate_device_submission_count.positive? || duplicate_profile_submission_count.positive?
+  end
+
+  def duplicate_device_submission_number
+    duplicate_device_submission_count + 1
+  end
+
   private
     def create_participant
       scorecard.participants.create!(
@@ -73,7 +106,8 @@ class PublicVoteForm
         disability: disability,
         minority: minority,
         poor_card: poor_card,
-        youth: age&.between?(15, 30)
+        youth: age&.between?(15, 30),
+        device_submission_token: device_submission_token
       )
     end
 
@@ -99,5 +133,9 @@ class PublicVoteForm
           errors.add("scores_#{voting_indicator.uuid}", I18n.t("public_votes.errors.score_required", indicator: voting_indicator.indicator.name))
         end
       end
+    end
+
+    def confirm_duplicate_submission?
+      ActiveModel::Type::Boolean.new.cast(confirm_duplicate_submission)
     end
 end

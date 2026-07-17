@@ -12,6 +12,7 @@
 #  minority       :boolean          default(FALSE)
 #  poor_card      :boolean          default(FALSE)
 #  youth          :boolean          default(FALSE)
+#  device_submission_token :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  countable      :boolean          default(TRUE)
@@ -19,6 +20,7 @@
 class Participant < ApplicationRecord
   # Associations
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
+  has_many :ratings, foreign_key: :participant_uuid, dependent: :destroy
 
   # Callback
   before_create :secure_uuid

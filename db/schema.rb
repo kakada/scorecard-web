@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_03_27_000001) do
+ActiveRecord::Schema[7.0].define(version: 2026_07_17_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -406,6 +406,8 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_27_000001) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "countable", default: true
+    t.string "device_submission_token"
+    t.index ["scorecard_uuid", "device_submission_token"], name: "index_participants_on_scorecard_uuid_and_device_token"
   end
 
   create_table "pdf_templates", force: :cascade do |t|
