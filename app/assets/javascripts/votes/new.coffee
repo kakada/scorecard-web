@@ -23,7 +23,7 @@ CW.VotesNew = do ->
     token = submissionTokenFor(form)
     return unless token
 
-    tokenField.value = token if token
+    tokenField.value = token
 
   showDuplicateSubmissionWarning = ->
     form = document.getElementById('voting-form')
@@ -63,13 +63,11 @@ CW.VotesNew = do ->
     token
 
   generateToken = ->
-    cryptoApi = window.crypto ? window.msCrypto
-
     if window.crypto?.randomUUID
       window.crypto.randomUUID()
-    else if cryptoApi?.getRandomValues
+    else if window.crypto?.getRandomValues
       bytes = new Uint8Array(16)
-      cryptoApi.getRandomValues(bytes)
+      window.crypto.getRandomValues(bytes)
       Array.from(bytes, (byte) -> byte.toString(16).padStart(2, '0')).join('')
     else
       null
