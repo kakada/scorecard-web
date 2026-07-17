@@ -26,10 +26,10 @@ CW.VotesNew = do ->
   showDuplicateSubmissionWarning = ->
     form = document.getElementById('voting-form')
     return unless form
-    return unless form.dataset.duplicateWarningRequired == 'true'
 
     confirmField = form.querySelector('[name="public_vote_form[confirm_duplicate_submission]"]')
-    return if confirmField?.value == 'true'
+    confirmField.value = 'false' if confirmField
+    return unless form.dataset.duplicateWarningRequired == 'true'
 
     messages = [form.dataset.duplicateWarningTitle]
 
