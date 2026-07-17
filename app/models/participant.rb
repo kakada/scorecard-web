@@ -18,6 +18,8 @@
 #  countable      :boolean          default(TRUE)
 #
 class Participant < ApplicationRecord
+  PROFILE_FIELDS = %i[age gender disability minority poor_card].freeze
+
   # Associations
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
   has_many :ratings, foreign_key: :participant_uuid, dependent: :destroy
@@ -45,6 +47,14 @@ class Participant < ApplicationRecord
 
   def male?
     gender == GENDER_MALE
+  end
+
+  def profile_attributes
+    attributes.symbolize_keys.slice(*PROFILE_FIELDS)
+  end
+
+  def profile_signature
+    PROFILE_FIELDS.map { |field| public_send(field) }
   end
 
   private

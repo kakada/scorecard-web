@@ -81,13 +81,7 @@ class PublicVoteForm
   end
 
   def duplicate_profile_submission_count
-    @duplicate_profile_submission_count ||= scorecard.participants.where(
-      age: age,
-      gender: gender,
-      disability: disability,
-      minority: minority,
-      poor_card: poor_card
-    ).count
+    @duplicate_profile_submission_count ||= scorecard.participants.where(participant_profile_attributes).count
   end
 
   def duplicate_submission_warning?
@@ -137,5 +131,9 @@ class PublicVoteForm
 
     def confirm_duplicate_submission?
       ActiveModel::Type::Boolean.new.cast(confirm_duplicate_submission)
+    end
+
+    def participant_profile_attributes
+      Participant::PROFILE_FIELDS.index_with { |field| public_send(field) }
     end
 end
