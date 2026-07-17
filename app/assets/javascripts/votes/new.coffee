@@ -59,8 +59,12 @@ CW.VotesNew = do ->
   generateToken = ->
     if window.crypto?.randomUUID
       window.crypto.randomUUID()
+    else if window.crypto?.getRandomValues
+      bytes = new Uint8Array(16)
+      window.crypto.getRandomValues(bytes)
+      Array.from(bytes, (byte) -> byte.toString(16).padStart(2, '0')).join('')
     else
-      "#{Date.now()}-#{Math.random().toString(36).slice(2, 12)}"
+      null
 
   { init }
 
