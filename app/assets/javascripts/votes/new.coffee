@@ -21,6 +21,8 @@ CW.VotesNew = do ->
     return unless tokenField
 
     token = submissionTokenFor(form)
+    return unless token
+
     tokenField.value = token if token
 
   showDuplicateSubmissionWarning = ->
@@ -52,16 +54,22 @@ CW.VotesNew = do ->
 
     unless token
       token = generateToken()
+      unless token
+        console.warn('Secure device submission token generation is unavailable in this browser.')
+        return null
+
       window.localStorage.setItem(storageKey, token)
 
     token
 
   generateToken = ->
+    cryptoApi = window.crypto ? window.msCrypto
+
     if window.crypto?.randomUUID
       window.crypto.randomUUID()
-    else if window.crypto?.getRandomValues
+    else if cryptoApi?.getRandomValues
       bytes = new Uint8Array(16)
-      window.crypto.getRandomValues(bytes)
+      cryptoApi.getRandomValues(bytes)
       Array.from(bytes, (byte) -> byte.toString(16).padStart(2, '0')).join('')
     else
       null

@@ -32,7 +32,7 @@ en:
     duplicate_submission:
       title: "Duplicate Submission Detected"
       device_message: "A vote has already been submitted from this device for this scorecard."
-      device_repeat_message: "This appears to be the %{ordinal} submission from this device."
+      device_repeat_message: "This appears to be the %{number} submission from this device."
       profile_message: "Another submission with the same participant profile has already been recorded (%{count} existing)."
       confirm_message: "Are you sure you want to continue?"
 
