@@ -81,7 +81,7 @@ class PublicVoteForm
   end
 
   def duplicate_profile_submission_count
-    @duplicate_profile_submission_count ||= scorecard.participants.where(participant_profile_attributes).count
+    @duplicate_profile_submission_count ||= scorecard.participants.where(participant_profile_attributes).where(device_submission_token: device_submission_token).count
   end
 
   def duplicate_submission_warning?

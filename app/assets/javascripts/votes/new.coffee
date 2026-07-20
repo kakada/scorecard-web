@@ -36,7 +36,6 @@ CW.VotesNew = do ->
     messages = [form.dataset.duplicateWarningTitle]
 
     if parseInt(form.dataset.duplicateDeviceSubmissionCount || 0, 10) > 0
-      messages.push(form.dataset.duplicateDeviceMessage)
       messages.push(form.dataset.duplicateDeviceRepeatMessage)
 
     if parseInt(form.dataset.duplicateProfileSubmissionCount || 0, 10) > 0
