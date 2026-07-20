@@ -44,7 +44,7 @@ class VotesController < ApplicationController
 
     def public_vote_params
       params.require(:public_vote_form)
-            .permit(:age, :gender, :disability, :minority, :poor_card, scores: {})
+            .permit(:age, :gender, :disability, :minority, :poor_card, :device_submission_token, :confirm_duplicate_submission, scores: {})
     end
 
     def set_locale

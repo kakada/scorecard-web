@@ -164,6 +164,7 @@ Rails.application.routes.draw do
       resources :scorecards, only: [:show, :update] do
         resources :custom_indicators, only: [:create]
         resources :scorecard_references, only: [:create]
+        resources :vote_submissions, only: [:index, :destroy], module: :scorecards
         resource :qr_code, only: [:show], controller: "scorecards/qr_codes"
         resources :voting_results, only: [:index], module: :scorecards
         resource :poll, only: [:show], module: :scorecards

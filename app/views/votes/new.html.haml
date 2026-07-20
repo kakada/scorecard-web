@@ -1,6 +1,8 @@
-= simple_form_for @form, url: scorecard_votes_path(@scorecard.token, locale: I18n.locale), id: "voting-form" do |f|
+= simple_form_for @form, url: scorecard_votes_path(@scorecard.token, locale: I18n.locale), html: { id: "voting-form", data: public_vote_form_data(@form, @scorecard) } do |f|
   .public-vote-container
     .container.my-5
+      = f.hidden_field :device_submission_token
+      = f.hidden_field :confirm_duplicate_submission, value: @form.confirm_duplicate_submission
       .row.justify-content-center.mb-3
         .col-md-10
           .card.shadow-sm

@@ -68,6 +68,7 @@ RSpec.describe PublicVoteForm, type: :model do
           disability: false,
           minority: true,
           poor_card: false,
+          device_submission_token: "device-token-1",
           scores: { vi1.uuid => 4, vi2.uuid => 2 }
         }
       )
@@ -78,6 +79,7 @@ RSpec.describe PublicVoteForm, type: :model do
       expect(participant.age).to eq(18)
       expect(participant.gender).to eq("female")
       expect(participant.youth).to be(true) # age between 15 and 30
+      expect(participant.device_submission_token).to eq("device-token-1")
 
       ratings = scorecard.ratings.where(participant_uuid: participant.uuid)
       expect(ratings.count).to eq(2)
@@ -94,6 +96,44 @@ RSpec.describe PublicVoteForm, type: :model do
       expect(form.save).to be(false)
       expect(scorecard.participants.count).to eq(0)
       expect(scorecard.ratings.count).to eq(0)
+    end
+
+    it "requires confirmation before saving a duplicate device submission" do
+      create(:participant, scorecard: scorecard, device_submission_token: "device-token-1")
+
+      form = described_class.new(
+        scorecard: scorecard,
+        params: {
+          age: 25,
+          gender: "male",
+          device_submission_token: "device-token-1",
+          scores: { vi1.uuid => 5, vi2.uuid => 4 }
+        }
+      )
+
+      expect(form.save).to be(false)
+      expect(form.duplicate_confirmation_required?).to be(true)
+      expect(form.duplicate_device_submission_count).to eq(1)
+      expect(scorecard.ratings.count).to eq(0)
+    end
+
+    it "saves a duplicate submission after confirmation" do
+      create(:participant, scorecard: scorecard, age: 25, gender: "male", device_submission_token: "device-token-1")
+
+      form = described_class.new(
+        scorecard: scorecard,
+        params: {
+          age: 25,
+          gender: "male",
+          device_submission_token: "device-token-1",
+          confirm_duplicate_submission: true,
+          scores: { vi1.uuid => 5, vi2.uuid => 4 }
+        }
+      )
+
+      expect(form.save).to be(true)
+      expect(scorecard.participants.count).to eq(2)
+      expect(scorecard.ratings.count).to eq(2)
     end
   end
 end

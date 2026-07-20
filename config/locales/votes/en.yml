@@ -29,6 +29,12 @@ en:
     errors:
       score_required: "Please select a score for `%{indicator}`."
 
+    duplicate_submission:
+      title: "Submission %{number}"
+      device_repeat_message: "This is the %{number} submission from this device."
+      profile_message: "Another submission with the same participant profile has already been recorded (%{count} existing)."
+      confirm_message: "Are you sure you want to continue?"
+
   activemodel:
     attributes:
       public_vote_form:
