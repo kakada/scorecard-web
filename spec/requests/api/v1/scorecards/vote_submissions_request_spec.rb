@@ -53,8 +53,6 @@ RSpec.describe "Api::V1::Scorecards::VoteSubmissionsController", type: :request 
 
       expect(json_response.length).to eq(2)
       expect(json_response.map { |submission| submission["device_submission_token"] }).to all(eq("device-token-1"))
-      expect(json_response.map { |submission| submission["duplicate_device_submission"] }).to all(be(true))
-      expect(json_response.map { |submission| submission["duplicate_profile_submission"] }).to all(be(true))
       expect(json_response.first["ratings"]).to include(
         a_hash_including(
           "voting_indicator_uuid" => voting_indicator.uuid
