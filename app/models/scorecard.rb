@@ -178,6 +178,7 @@ class Scorecard < ApplicationRecord
 
   after_commit  :create_submitted_progress, on: [:update], if: -> { saved_change_to_progress? && in_review? }
   after_commit  :create_completed_progress, on: [:update], if: -> { saved_change_to_progress? && completed? }
+  after_commit  :schedule_auto_complete_submitted_scorecard, on: [:update], if: -> { saved_change_to_submitted_at? && in_review? }
   after_commit  :index_document_async, on: [:create, :update], if: -> { ENV["ELASTICSEARCH_ENABLED"] == "true" }
   after_destroy :delete_document_async, if: -> { ENV["ELASTICSEARCH_ENABLED"] == "true" }
 
@@ -263,6 +264,15 @@ class Scorecard < ApplicationRecord
 
     def create_completed_progress
       scorecard_progresses.create(status: STATUS_COMPLETED, user_id: completor_id)
+    end
+
+    def schedule_auto_complete_submitted_scorecard
+      return unless program&.enable_auto_complete_submitted_scorecard?
+
+      AutoCompleteSubmittedScorecardJob.perform_in(
+        program.auto_complete_submitted_scorecard_in_days.days,
+        id
+      )
     end
 
     def set_primary_school_code

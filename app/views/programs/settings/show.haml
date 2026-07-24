@@ -7,6 +7,7 @@
       = simple_form_for current_program, url: '/setting', method: :put, class: 'setting' do |f|
         = render "datetime_format", f: f
         = render 'email_notification', f: f
+        = render "auto_complete_submitted_scorecard", f: f
 
       = render "telegram_bot"
       = render "contacts"

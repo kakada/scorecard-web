@@ -1,0 +1,25 @@
+#auto-complete-submitted-scorecard.modal.fade{'aria-hidden' => 'true', 'aria-labelledby' => 'auto complete submitted scorecard', :role => 'dialog', :tabindex => '-1'}
+  .modal-dialog{:role => 'document'}
+    .modal-content
+      .modal-header
+        .flex-row-vertical-center
+          %h5#autoCompleteSubmittedScorecardModalLabel.modal-title
+            = t('program.auto_complete_submitted_scorecard')
+
+        %button.close{'aria-label' => 'Close', 'data-dismiss' => 'modal', type: 'button'}
+          %span{'aria-hidden' => 'true'} ×
+
+      .modal-body
+        .d-flex.align-items-center.justify-content-between.mb-3
+          %label.mb-0= t('program.enable_auto_complete_submitted_scorecard')
+          = form_check_toggle({name: "program[enable_auto_complete_submitted_scorecard]", checked: f.object.enable_auto_complete_submitted_scorecard}).html_safe
+
+        .d-flex.align-items-center.mb-3
+          %label.mb-0.mr-3{for: 'program_auto_complete_submitted_scorecard_in_days'}= t('program.auto_complete_submitted_scorecard_in_days')
+          = f.input_field :auto_complete_submitted_scorecard_in_days, class: "form-control", min: 1
+
+        .mb-3
+          %small= t('program.auto_complete_submitted_scorecard_description')
+      .modal-footer
+        %button.btn.btn-secondary{type: 'button', 'data-dismiss' => "modal"}= t('shared.cancel')
+        = f.submit t('shared.save'), class: 'btn btn-primary'
