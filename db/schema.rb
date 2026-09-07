@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_07_24_033500) do
+ActiveRecord::Schema[7.0].define(version: 2026_09_07_040719) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -680,6 +680,15 @@ ActiveRecord::Schema[7.0].define(version: 2026_07_24_033500) do
     t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "translations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.string "locale", null: false
+    t.string "label", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key", "locale"], name: "index_translations_on_key_and_locale", unique: true
   end
 
   create_table "unlock_requests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

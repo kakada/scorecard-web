@@ -1,0 +1,78 @@
+km:
+  # Panel title and description
+  map_panel_title: ផែនទីអនុវត្តប័ណ្ណដាក់ពិន្ទុឌីជីថល
+  summary_panel_title: សង្ខេបប័ណ្ណដាក់ពិន្ទុ
+  scorecard_total_panel_title: ប័ណ្ណដាក់ពិន្ទុសរុប (គ្រោងទុកសរុប/កំពុងត្រួតពិនិត្យ/អនុវត្តរួចរាល់)
+  scorecard_total_panel_description: ប័ណ្ណដាក់ពិន្ទុសរុប (គ្រោងទុកសរុប/កំពុងត្រួតពិនិត្យ/អនុវត្តរួចរាល់)
+  scorecard_entered_after_actual_implementation_date_panel_title: ចំនួនប័ណ្ណដាក់ពិន្ទុដែលបានបញ្ចូលទិន្នន័យក្រោយថ្ងៃអនុវត្តជាក់ស្តែង
+  scorecard_entered_after_actual_implementation_date_panel_description: "ចំនួនប័ណ្ណដាក់ពិន្ទុដែលបានបញ្ចូលទិន្នន័យក្រោយថ្ងៃអនុវត្តជាក់ស្តែង <br>Formula: (Entry date - Conducted date >= 1 Day) <br>ឧទាហរណ៍៖ ថ្ងៃអនុវត្តប័ណ្ណដាក់ពិន្ទុជាក់ស្តែង 01-មករា-2022 តែ ថ្ងៃបញ្ចូលទិន្នន័យ 03-មករា-2022។"
+  scorecard_implementation_duration_panel_title: រយៈពេលអនុវត្តប័ណ្ណដាក់ពិន្ទុ (កាលបរិច្ឆេទចាប់ផ្ដើមដល់អនុវត្តរួចរាល់)
+  scorecard_implementation_duration_panel_description: "រយៈពេលអនុវត្តប័ណ្ណដាក់ពិន្ទុ (កាលបរិច្ឆេទចាប់ផ្ដើមដល់អនុវត្តរួចរាល់)"
+  scorecard_participants_panel_title: "ចំនួន (LNGOs សរុប / CAFs សរុប / អ្នកចូលរួមសរុប / អ្នកចូលរួមជាមធ្យម)"
+  scorecard_participants_panel_description: "LNGOs: រាប់តាម Planned Scorecard <br>CAFs: រាប់តាម LNGO <br>អ្នកចូលរួម: រាប់តាម Completed Scorecard"
+  scorecard_total_indicators_panel_title: "ចំនួនសរុប Indicator (ស្នើឡើង / ស្នើឡើងថ្មី / អាទិភាព)"
+  scorecard_total_indicators_panel_description: "Indicator ស្នើឡើង សរុប: រាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់ <br>Indicator អាទិភាព សរុប: រាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់ <br>"
+  scorecard_average_indicators_panel_title: "ចំនួនមធ្យម Indicator (ស្នើឡើង / ស្នើឡើងថ្មី / អាទិភាព)"
+  scorecard_average_indicators_panel_description: "Indicator ស្នើឡើង ជាមធ្យម: ក្នុង 1 ប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់<br> Indicator ស្នើឡើងថ្មី ជាមធ្យម: ក្នុង 1 ប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់ <br> Indicator អាទិភាព ជាមធ្យម: ក្នុង 1 ប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់ <br/> - សម្គាល់៖ លទ្ធផលបង្គត់ឡើង(Ex: 0.3 -> 1)"
+  scorecard_total_by_service_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុសរុប (អនុវត្តរួចរាល់ vs គ្រោងទុក) តាមប្រភេទសេវា"
+  scorecard_total_by_service_type_panel_description: "ប័ណ្ណដាក់ពិន្ទុសរុប (អនុវត្តរួចរាល់ vs គ្រោងទុក) តាមប្រភេទសេវា"
+  scorecard_implemented_by_scorecard_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់ (វាយតម្លៃខ្លួនឯង vs ប័ណ្ណដាក់ពិន្ទុសហគមន៍) តាមប្រភេទសេវា"
+  scorecard_implemented_by_scorecard_type_panel_description: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់ (វាយតម្លៃខ្លួនឯង vs ប័ណ្ណដាក់ពិន្ទុសហគមន៍) តាមប្រភេទសេវា"
+  scorecard_implemented_by_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់តាម Type"
+  scorecard_implemented_by_type_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_implemented_by_facility_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់តាមប្រភេទសេវា"
+  scorecard_implemented_by_facility_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_implementation_by_device_type_panel_title: "ការអនុវត្តប័ណ្ណដាក់ពិន្ទុបែងចែកតាមប្រភេទឧបករណ៍"
+  scorecard_implementation_by_device_type_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍ដោយ អ្នកសម្របសម្រួលគណនេយ្យភាពសហគមន៍(CAF)"
+  scorecard_participants_by_gender_panel_title: "អ្នកចូលរួមបែងចែកតាមភេទ"
+  scorecard_participants_by_gender_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_participants_by_age_panel_title: "អ្នកចូលរួមបែងចែកតាមអាយុ"
+  scorecard_participants_by_age_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_participants_by_profile_panel_title: "អ្នកចូលរួមបែងចែកតាមលក្ខណៈសម្បតិ្ត"
+  scorecard_participants_by_profile_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_top_5_proposed_criteria_panel_title: "លក្ខណៈវិនិច្ឆ័យដែលស្នើឡើងច្រើនជាងគេទាំង៥"
+  scorecard_top_5_proposed_criteria_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_top_5_prioritized_criteria_panel_title: "លក្ខណៈវិនិច្ឆ័យអាទិភាព(ដែលបានអនុវត្ត)ច្រើនជាងគេទាំង៥"
+  scorecard_top_5_prioritized_criteria_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_top_5_prioritized_criteria_happy_face_panel_title: "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (😁 ពេញចិត្ត)"
+  scorecard_top_5_prioritized_criteria_happy_face_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_top_5_prioritized_criteria_neutral_face_panel_title: "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (🙂 ទទួលយកបាន)"
+  scorecard_top_5_prioritized_criteria_neutral_face_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_top_5_prioritized_criteria_angry_face_panel_title: "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (😡 មិនពេញចិត្ត)"
+  scorecard_top_5_prioritized_criteria_angry_face_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+
+  # label in graph
+  min_day: អប្បបរមា (ថ្ងៃ)
+  average_day: មធ្យម (ថ្ងៃ)
+  max_day: អតិបរមា (ថ្ងៃ)
+  scorecard_planned_count: ចំនួនគ្រោងទុក
+  scorecard_implemented_count: ចំនួនអនុវត្តរួចរាល់
+  scorecard_type_self_assessment: វាយតម្លៃដោយខ្លួនឯង
+  scorecard_type_community_scorecard: ប័ណ្ណដាក់ពិន្ទុសហគមន៍
+  scorecard_device_tablet: ថេប្លេត
+  scorecard_device_mobile: ទូរស័ព្ទចល័ត
+  participant_female: ស្រី
+  participant_male: ប្រុស
+  participant_other: ផ្សេងៗ
+  participant_age: អាយុ
+  participant_id_poor: ប័ណ្ណក្រីក្រ
+  participant_disability: ពិការភាព
+  participant_minority: ជនជាតិដើម
+  participant_youth: យុវជន
+  proposed_criteria_count: ចំនួនស្នើឡើង
+  selected_criteria_count: ចំនួនបានអនុវត្ត
+  vote_count: ចំនួនបោះឆ្នោត
+  scorecard_local_ngo: អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ
+  scorecard_implementation_status: "ការអនុវត្តប័ណ្ណដាក់ពិន្ទុ៖"
+  scorecard_implementation_status_planned: "គ្រោងទុក"
+  scorecard_implementation_status_review: "កំពុងត្រួតពិនិត្យ"
+  scorecard_implementation_status_implemented: "អនុវត្តរួចរាល់"
+
+  # Variable labels
+  province_title: ខេត្ត
+  year_title: ឆ្នាំ
+  facility_title: សេវា
+  program_title: កម្មវិធី
+  local_ngo_title: អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ
+  institution_title: ស្ថាប័ន
+  language_title: ភាសា

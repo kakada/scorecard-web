@@ -1,0 +1,78 @@
+en:
+  # Panel title and description
+  map_panel_title: "Digital Scorecard Practice Map"
+  summary_panel_title: "Scorecard Summary"
+  scorecard_total_panel_title: "Total Scorecards (Planned / In Review / Completed)"
+  scorecard_total_panel_description: "Total Scorecards (Planned / In Review / Completed)"
+  scorecard_entered_after_actual_implementation_date_panel_title: "Number of Scorecards Entered After Actual Implementation Date"
+  scorecard_entered_after_actual_implementation_date_panel_description: "Number of scorecards entered after the actual implementation date <br>Formula: (Entry date - Conducted date >= 1 Day) <br>Example: scorecard conducted 01-Jan-2022 but entered on 03-Jan-2022."
+  scorecard_implementation_duration_panel_title: "Scorecard Implementation Duration (Start Date to Completion)"
+  scorecard_implementation_duration_panel_description: "Scorecard Implementation Duration (Start Date to Completion)"
+  scorecard_participants_panel_title: "Number of (Total LNGOs / Total CAFs or Peers / Total Participants / Avg Participants)"
+  scorecard_participants_panel_description: "LNGOs: counted by Planned Scorecard <br>CAFs: counted by LNGO <br>Participants: counted by Completed Scorecard"
+  scorecard_total_indicators_panel_title: "Total Indicators (Proposed / New Custom / Prioritized)"
+  scorecard_total_indicators_panel_description: "Total Proposed Indicators: includes only completed scorecards <br>Total Prioritized Indicators: includes only completed scorecards <br>"
+  scorecard_average_indicators_panel_title: "Average Indicators (Proposed / New Custom / Prioritized)"
+  scorecard_average_indicators_panel_description: "Average Proposed Indicators: per 1 completed scorecard<br> Average New Indicators: per 1 completed scorecard <br> Average Prioritized Indicators: per 1 completed scorecard <br/> - Note: result is rounded up (Ex: 0.3 -> 1)"
+  scorecard_total_by_service_type_panel_title: "Total Scorecards (Completed vs Planned) by Service Type"
+  scorecard_total_by_service_type_panel_description: "Total Scorecards (Completed vs Planned) by Service Type"
+  scorecard_implemented_by_scorecard_type_panel_title: "Completed Scorecards (Self-Assessment vs Community Scorecard) by Scorecard Type"
+  scorecard_implemented_by_scorecard_type_panel_description: "Completed Scorecards (Self-Assessment vs Community Scorecard) by Scorecard Type"
+  scorecard_implemented_by_type_panel_title: "Completed Scorecards by Type"
+  scorecard_implemented_by_type_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_implemented_by_facility_panel_title: "Completed Scorecards by Service Type"
+  scorecard_implemented_by_facility_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_implementation_by_device_type_panel_title: "Scorecard Implementation by Device Type"
+  scorecard_implementation_by_device_type_panel_description: "This report includes only scorecards completed in the community by Community Accountability Facilitators (CAF)"
+  scorecard_participants_by_gender_panel_title: "Participants by Gender"
+  scorecard_participants_by_gender_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_participants_by_age_panel_title: "Participants by Age"
+  scorecard_participants_by_age_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_participants_by_profile_panel_title: "Participants by Profile"
+  scorecard_participants_by_profile_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_top_5_proposed_criteria_panel_title: "Top 5 Most Proposed Indicators"
+  scorecard_top_5_proposed_criteria_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_top_5_prioritized_criteria_panel_title: "Top 5 Most Prioritized Indicators (Implemented)"
+  scorecard_top_5_prioritized_criteria_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_top_5_prioritized_criteria_happy_face_panel_title: "Top 5 Prioritized Indicators (😁 Satisfied)"
+  scorecard_top_5_prioritized_criteria_happy_face_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_top_5_prioritized_criteria_neutral_face_panel_title: "Top 5 Prioritized Indicators (🙂 Acceptable)"
+  scorecard_top_5_prioritized_criteria_neutral_face_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_top_5_prioritized_criteria_angry_face_panel_title: "Top 5 Prioritized Indicators (😡 Not Satisfied)"
+  scorecard_top_5_prioritized_criteria_angry_face_panel_description: "This report includes only scorecards completed in the community"
+
+  # label in graph
+  min_day: Minimum (days)
+  average_day: Average (days)
+  max_day: Maximum (days)
+  scorecard_planned_count: Planned Count
+  scorecard_implemented_count: Implemented Count
+  scorecard_type_self_assessment: Self-Assessment
+  scorecard_type_community_scorecard: Community Scorecard
+  scorecard_device_tablet: Tablet
+  scorecard_device_mobile: Mobile Phone
+  participant_female: Female
+  participant_male: Male
+  participant_other: Other
+  participant_age: Age
+  participant_id_poor: ID Poor
+  participant_disability: Disability
+  participant_minority: Minority
+  participant_youth: Youth
+  proposed_criteria_count: Proposed Count
+  selected_criteria_count: Selected Count
+  vote_count: Vote Count
+  scorecard_local_ngo: Local Implementing NGO
+  scorecard_implementation_status: "Implementation Status:"
+  scorecard_implementation_status_planned: Planned
+  scorecard_implementation_status_review: Under Review
+  scorecard_implementation_status_implemented: Implemented
+
+  # Variable labels
+  province_title: Province
+  year_title: Year
+  facility_title: Facility
+  program_title: Program
+  local_ngo_title: Local Implementing NGO
+  institution_title: Institution
+  language_title: Language
