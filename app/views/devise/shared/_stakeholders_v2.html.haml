@@ -1,7 +1,7 @@
-.stackholders.v2.d-md-flex.justify-content-between{ class: local_assigns[:wrapper_class] }
-  .funded-by.text-center.flex-shrink-0
-    %p.font-weight-normal.text-center.text-funded
-      គាំទ្រមូលនិធិដោយ / Funded by
+.stackholders.v2.justify-content-between{ class: local_assigns[:wrapper_class] }
+  .funded-by.text-center
+    .font-weight-normal.text-center.text-funded.mb-2
+      សហការគាំទ្រមូលនិធិដោយ / Co-funded by:
     .d-flex.align-items-center.justify-content-center.mr-lg-5
       = link_to 'https://eeas.europa.eu/delegations/cambodia_en', target: '_blank', rel: 'noopener noreferrer', class: 'mr-2' do
         = image_tag 'stakeholder_v2/eu.png', class: 'img-funded', alt: 'EU Cambodia'
@@ -9,9 +9,9 @@
       = link_to 'https://www.entwicklung.at/en/ada', target: '_blank', rel: 'noopener noreferrer' do
         = image_tag 'stakeholder_v2/ipa.png', class: 'img-funded austrian-logo', alt: 'International Partnerships Austria'
 
-  .implemented-by.mt-5.mt-md-0
-    %p.font-weight-normal.text-center.text-implemented
-      អនុវត្តដោយ / Implemented by
+  .implemented-by.pt-3.mt-md-0
+    .font-weight-normal.text-center.text-implemented
+      សហការអនុវត្តដោយ / Co-implemented by:
     .d-flex.align-items-center.justify-content-center.flex-wrap.img-implemented-wrapper
       = link_to 'https://www.care-cambodia.org/', target: '_blank', rel: 'noopener noreferrer' do
         = image_tag 'stakeholder_v2/care.png', class: 'img-implemented img-fluid', alt: 'CARE Cambodia'
