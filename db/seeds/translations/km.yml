@@ -16,8 +16,8 @@ km:
   scorecard_average_indicators_panel_description: "Indicator ស្នើឡើង ជាមធ្យម: ក្នុង 1 ប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់<br> Indicator ស្នើឡើងថ្មី ជាមធ្យម: ក្នុង 1 ប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់ <br> Indicator អាទិភាព ជាមធ្យម: ក្នុង 1 ប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់ <br/> - សម្គាល់៖ លទ្ធផលបង្គត់ឡើង(Ex: 0.3 -> 1)"
   scorecard_total_by_service_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុសរុប (អនុវត្តរួចរាល់ vs គ្រោងទុក) តាមប្រភេទសេវា"
   scorecard_total_by_service_type_panel_description: "ប័ណ្ណដាក់ពិន្ទុសរុប (អនុវត្តរួចរាល់ vs គ្រោងទុក) តាមប្រភេទសេវា"
-  scorecard_implemented_by_scorecard_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់ (វាយតម្លៃខ្លួនឯង vs ប័ណ្ណដាក់ពិន្ទុសហគមន៍) តាមប្រភេទសេវា"
-  scorecard_implemented_by_scorecard_type_panel_description: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់ (វាយតម្លៃខ្លួនឯង vs ប័ណ្ណដាក់ពិន្ទុសហគមន៍) តាមប្រភេទសេវា"
+  scorecard_implemented_by_scorecard_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់ (វាយតម្លៃខ្លួនឯង vs ប័ណ្ណដាក់ពិន្ទុសហគមន៍ vs ប័ណ្ណដាក់ពិន្ទុរួម(វាយតម្លៃខ្លួនឯង + សហគមន៍)) តាមប្រភេទសេវា"
+  scorecard_implemented_by_scorecard_type_panel_description: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់ (វាយតម្លៃខ្លួនឯង vs ប័ណ្ណដាក់ពិន្ទុសហគមន៍ vs ប័ណ្ណដាក់ពិន្ទុរួម(វាយតម្លៃខ្លួនឯង + សហគមន៍)) តាមប្រភេទសេវា"
   scorecard_implemented_by_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់តាម Type"
   scorecard_implemented_by_type_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
   scorecard_implemented_by_facility_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់តាមប្រភេទសេវា"
@@ -49,6 +49,7 @@ km:
   scorecard_implemented_count: ចំនួនអនុវត្តរួចរាល់
   scorecard_type_self_assessment: វាយតម្លៃដោយខ្លួនឯង
   scorecard_type_community_scorecard: ប័ណ្ណដាក់ពិន្ទុសហគមន៍
+  scorecard_type_combined_scorecard: ប័ណ្ណដាក់ពិន្ទុរួម(វាយតម្លៃខ្លួនឯង + សហគមន៍)
   scorecard_device_tablet: ថេប្លេត
   scorecard_device_mobile: ទូរស័ព្ទចល័ត
   participant_female: ស្រី

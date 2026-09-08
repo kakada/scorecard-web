@@ -88,6 +88,11 @@ RSpec.describe Scorecard, type: :model do
   it { is_expected.to validate_presence_of(:planned_start_date) }
   it { is_expected.to validate_presence_of(:planned_end_date) }
 
+  describe "scorecard type" do
+    it { is_expected.to define_enum_for(:scorecard_type).with_values(Scorecard.scorecard_types) }
+    it { is_expected.to define_enum_for(:scorecard_type).with_values(self_assessment: 1, community_scorecard: 2, combined_scorecard: 3) }
+  end
+
   describe "#validate submitter" do
     context "no submitted_at" do
       let(:scorecard) { build(:scorecard, submitted_at: nil, submitter_id: nil) }

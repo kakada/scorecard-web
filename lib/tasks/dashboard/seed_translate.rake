@@ -12,6 +12,7 @@ namespace :dashboard do
 
     Dir.glob(translations_dir.join("*.yml")).each do |file|
       data = YAML.safe_load(File.read(file), permitted_classes: [], permitted_symbols: [], aliases: false)
+      next unless data.is_a?(Hash)
 
       puts "\n#{File.basename(file)}"
 

@@ -64,6 +64,7 @@ km:
     meeting_date: កំណត់សំគាល់ (ខែ/ឆ្នាំកិច្ចប្រជុំ)
     self_assessment: "2=អង្ភភាពផ្តល់សេវា"
     community_scorecard: "1=ប្រជាពលរដ្ឋ"
+    combined_scorecard: "3=ប័ណ្ណដាក់ពិន្ទុរួម(ការវាយតម្លៃខ្លួនឯង + សហគមន៍)"
     other: ផ្សេងៗ
     lngo: អ្នកអនុវត្ត(Local Ngo)
     number_of_caf: ចំនួនអ្នកសម្របសម្រួល

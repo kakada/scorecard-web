@@ -75,7 +75,8 @@ class Scorecard < ApplicationRecord
   # Enum field
   enum scorecard_type: {
     self_assessment: 1,
-    community_scorecard: 2
+    community_scorecard: 2,
+    combined_scorecard: 3
   }
 
   enum progress: ScorecardProgress.statuses
