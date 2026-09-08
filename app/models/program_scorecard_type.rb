@@ -19,7 +19,8 @@ class ProgramScorecardType < ApplicationRecord
 
   TYPES = [
     { code: "self_assessment", name_en: "Self assessment", name_km: "វាយតម្លៃខ្លួនឯង" },
-    { code: "community_scorecard", name_en: "Community scorecard", name_km: "ប័ណ្ណដាក់ពិន្ទុសហគមន៍" }
+    { code: "community_scorecard", name_en: "Community scorecard", name_km: "ប័ណ្ណដាក់ពិន្ទុសហគមន៍" },
+    { code: "combined_scorecard", name_en: "combined_scorecard", name_km: "ប័ណ្ណដាក់ពិន្ទុ(វាយតម្លៃខ្លួនឯង + សហគមន៍)" }
   ]
 
   validates :code, presence: true
