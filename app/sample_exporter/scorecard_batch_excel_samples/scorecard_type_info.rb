@@ -10,7 +10,7 @@ module ScorecardBatchExcelSamples
       def build_rows
         sheet.add_row %w(អង្គភាពផ្តល់សេវា self_assessment)
         sheet.add_row %w(ប្រជាពលរដ្ឋ community_scorecard)
-        sheet.add_row [ "ប័ណ្ណដាក់ពិន្ទុ(វាយតម្លៃខ្លួនឯង + សហគមន៍)", "combined_scorecard" ]
+        sheet.add_row [ "ប័ណ្ណដាក់ពិន្ទុរួម(វាយតម្លៃខ្លួនឯង + សហគមន៍)", "combined_scorecard" ]
       end
   end
 end

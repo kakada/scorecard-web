@@ -64,7 +64,7 @@ en:
     meeting_date: Notes (Meeting Month / Year)
     self_assessment: "2=Self Assessment"
     community_scorecard: "1=Community Scorecard"
-    combined_scorecard: "3=Combined Scorecard"
+    combined_scorecard: "3=Scorecard(Self assessment + Community Scorecard)"
     other: Other
     lngo: Local NGO
     number_of_caf: Number of caf
