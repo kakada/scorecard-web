@@ -1,52 +1,296 @@
 en:
   # Panel title and description
-  map_panel_title: "Digital Scorecard Practice Map"
+  map_panel_title: "Digital Community Scorecard Implementation Map"
   summary_panel_title: "Scorecard Summary"
-  scorecard_total_panel_title: "Total Scorecards (Planned / In Review / Completed)"
-  scorecard_total_panel_description: "Total Scorecards (Planned / In Review / Completed)"
+  scorecard_total_panel_title: "Total Scorecards (Planned / In Review / Approved)"
+  scorecard_total_panel_description: |
+    <h5>Total Scorecards: 10 Planned / 5 In Review / 3 Approved</h5>
+    <p>
+      This shows how scorecards are progressing through the review pipeline:
+      <strong>10 are planned, 5 are currently in review, and 3 have been approved</strong>,
+      for a total of <strong>18 scorecards</strong>.
+    </p>
+    <p>
+      <strong>Example:</strong> A manager creates a Q3 performance scorecard, which starts as
+      <em>Planned</em>. Once they begin completing it and submit it for evaluation, it moves to
+      <em>In Review</em>. After the reviewer signs off, it becomes <em>Approved</em>.
+    </p>
   scorecard_entered_after_actual_implementation_date_panel_title: "Number of Scorecards Entered After Actual Implementation Date"
-  scorecard_entered_after_actual_implementation_date_panel_description: "Number of scorecards entered after the actual implementation date <br>Formula: (Entry date - Conducted date >= 1 Day) <br>Example: scorecard conducted 01-Jan-2022 but entered on 03-Jan-2022."
-  scorecard_implementation_duration_panel_title: "Scorecard Implementation Duration (Start Date to Completion)"
-  scorecard_implementation_duration_panel_description: "Scorecard Implementation Duration (Start Date to Completion)"
+  scorecard_entered_after_actual_implementation_date_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Number of Scorecards Entered After the Actual Implementation Date</strong></p>
+    <p>This indicator shows the number of scorecards where the <strong>Entry Date</strong> is at least 1 day later than the <strong>Conducted Date</strong> (the date the assessment was actually carried out).</p>
+    <p><strong>Formula:</strong><br>
+    Entry Date − Conducted Date ≥ 1 Day</p>
+    <p><strong>Example:</strong><br>
+    Assessment conducted on: 01-Jan-2022<br>
+    Data entered on: 03-Jan-2022<br>
+    → This case is counted, since the gap is 2 days (≥ 1 day).</p>
+    </div>
+  scorecard_implementation_duration_panel_title: "Scorecard Implementation Duration (Start Date to Approval)"
+  scorecard_implementation_duration_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Scorecard Implementation Duration (Minimum / Average / Maximum)</strong></p>
+    <p>This indicator measures the number of days between the <strong>start date</strong> and the <strong>approval date</strong> of a scorecard, showing the minimum, average, and maximum duration across all approved scorecards.</p>
+    <p><strong>Formula:</strong><br>
+    Duration (days) = Approval Date − Start Date</p>
+    <p><strong>Current values:</strong><br>
+    Minimum: 1 day<br>
+    Average: 17 days<br>
+    Maximum: 36 days</p>
+    <p><strong>Example:</strong><br>
+    If a scorecard started on 01-Jan-2022 and was approved on 18-Jan-2022, its duration is 17 days — this falls close to the average.</p>
+    </div>
   scorecard_participants_panel_title: "Number of (Total LNGOs / Total CAFs or Peers / Total Participants / Avg Participants)"
-  scorecard_participants_panel_description: "LNGOs: counted by Planned Scorecard <br>CAFs: counted by LNGO <br>Participants: counted by Completed Scorecard"
-  scorecard_total_indicators_panel_title: "Total Indicators (Proposed / New Custom / Prioritized)"
-  scorecard_total_indicators_panel_description: "Total Proposed Indicators: includes only completed scorecards <br>Total Prioritized Indicators: includes only completed scorecards <br>"
-  scorecard_average_indicators_panel_title: "Average Indicators (Proposed / New Custom / Prioritized)"
-  scorecard_average_indicators_panel_description: "Average Proposed Indicators: per 1 completed scorecard<br> Average New Indicators: per 1 completed scorecard <br> Average Prioritized Indicators: per 1 completed scorecard <br/> - Note: result is rounded up (Ex: 0.3 -> 1)"
-  scorecard_total_by_service_type_panel_title: "Total Scorecards (Completed vs Planned) by Service Type"
-  scorecard_total_by_service_type_panel_description: "Total Scorecards (Completed vs Planned) by Service Type"
-  scorecard_implemented_by_scorecard_type_panel_title: "Completed Scorecards (Self-Assessment vs Community Scorecard vs Combined Scorecard) by Scorecard Type"
-  scorecard_implemented_by_scorecard_type_panel_description: "Completed Scorecards (Self-Assessment vs Community Scorecard vs Combined Scorecard(Self assessment + Community scorecard)) by Scorecard Type"
-  scorecard_implemented_by_type_panel_title: "Completed Scorecards by Type"
-  scorecard_implemented_by_type_panel_description: "This report includes only scorecards completed in the community"
-  scorecard_implemented_by_facility_panel_title: "Completed Scorecards by Service Type"
-  scorecard_implemented_by_facility_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_participants_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Count (Total LNGOs / Total CAFs / Total Participants / Average Participants)</strong></p>
+    <p>This indicator shows four related counts side by side:</p>
+    <ul>
+      <li><strong>LNGOs</strong> — counted based on <em>Planned Scorecards</em></li>
+      <li><strong>CAFs</strong> — counted based on <em>LNGO</em></li>
+      <li><strong>Participants</strong> — counted based on <em>Approved Scorecards</em></li>
+      <li><strong>Average Participants</strong> — the average number of participants per approved scorecard</li>
+    </ul>
+    <p><strong>Example:</strong><br>
+    If there are 4 LNGOs, each linked to multiple CAFs, and the approved scorecards recorded a total of 141 participants, the average participants figure is calculated by dividing total participants by the number of approved scorecards.</p>
+    </div>
+  scorecard_total_indicators_panel_title: "Total Indicators (Proposed / New Indicators / Prioritized)"
+  scorecard_total_indicators_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Total Indicators (Proposed / New Indicators / Prioritized(selected indicators))</strong></p>
+    <p>Counts raised indicators from completed scorecards:</p>
+    <ul>
+      <li><strong>Proposed Indicators (Total)</strong> — all raised indicators</li>
+      <li><strong>New Indicators (Total)</strong> — raised indicators that are custom (user-added)</li>
+      <li><strong>Priority Indicators (Total)</strong> — raised indicators marked as selected</li>
+    </ul>
+    <p><strong>Example:</strong> A scorecard raises 5 indicators — 2 new, 1 priority. This adds 5 to Proposed, 2 to New, and 1 to Priority.</p>
+    </div>
+  scorecard_average_indicators_panel_title: "Average Indicators (Proposed / New Indicators / Prioritized)"
+  scorecard_average_indicators_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Average Indicators (Proposed / New Indicators / Prioritized)</strong></p>
+    <p>Shows the average number of raised indicators per approved scorecard:</p>
+    <ul>
+      <li><strong>Proposed Indicators (Average)</strong> — average of all raised indicators per approved scorecard</li>
+      <li><strong>New Indicators (Average)</strong> — average of custom (user-added) raised indicators per approved scorecard</li>
+      <li><strong>Priority Indicators (Average)</strong> — average of raised indicators marked as selected per approved scorecard</li>
+    </ul>
+    <p><strong>Note:</strong> Results are rounded up (e.g., 0.3 → 1).</p>
+    <p><strong>Example:</strong> If approved scorecards average 0.3 proposed indicators each, the displayed value is rounded up to 1.</p>
+    </div>
+  scorecard_total_by_service_type_panel_title: "Total Scorecards (Planned vs Approved) by Service Type"
+  scorecard_total_by_service_type_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Total Scorecards (Planned vs Approved) by Service Type</strong></p>
+    <p>This chart compares the number of <strong>Planned</strong> and <strong>Approved</strong> scorecards across different service types, allowing quick identification of gaps between planning and completion.</p>
+    <p><strong>Current values:</strong></p>
+    <ul>
+      <li>Commune Administrative — Planned: 6 / Approved: 5</li>
+      <li>Garment Factory — Planned: 9 / Approved: 3</li>
+    </ul>
+    <p><strong>Example:</strong> For Garment Factory, 9 scorecards were planned but only 3 were approved — indicating a gap of 6 scorecards not yet completed.</p>
+    </div>
+  scorecard_implemented_by_scorecard_type_panel_title: "Approved Scorecards by Scorecard Type"
+  scorecard_implemented_by_scorecard_type_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Approved Scorecards by Scorecard Type</strong></p>
+    <p>This chart compares approved scorecards across scorecard types, broken down into three categories:</p>
+    <ul>
+      <li><strong>Self-Assessment</strong> — scorecard meeting that conducted with managements or authorizers(supply side)</li>
+      <li><strong>Community Scorecard</strong> — scorecard meeting that conducted with community members or factory workers (demand side)</li>
+      <li><strong>Combined Scorecard</strong> — scorecard meeting that joins both managements/authorizers and community members/factory workers</li>
+    </ul>
+    <p><strong>Current values:</strong></p>
+    <ul>
+      <li>Health Center — Self-Assessment: 11 / Community Scorecard: 0 / Combined Scorecard: 0</li>
+      <li>Garment Factory — Self-Assessment: 0 / Community Scorecard: 0 / Combined Scorecard: 3</li>
+    </ul>
+    <p><strong>Example:</strong> For Garment Factory, all 3 approved scorecards fall under the Combined Scorecard category, with no Self-Assessment or Community Scorecard recorded separately.</p>
+    </div>
+  scorecard_implemented_by_type_panel_title: "Approved Scorecards by Scorecard Type"
+  scorecard_implemented_by_type_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Approved Scorecards by Scorecard Type</strong></p>
+    <p>This donut chart shows the proportion of approved scorecards split by type:</p>
+    <ul>
+      <li><strong>Self-Assessment</strong> — 51 scorecards (94%)</li>
+      <li><strong>Combined Scorecard</strong> — 3 scorecards (6%)</li>
+    </ul>
+    <p><strong>Example:</strong> Out of 54 total approved scorecards, the vast majority (51) are Self-Assessment, while only 3 are Combined Scorecards (jointly conducted with both management and community/workers).</p>
+    </div>
+  scorecard_implemented_by_facility_panel_title: "Approved Scorecards by Service Type"
+  scorecard_implemented_by_facility_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Approved Scorecards by Service Type</strong></p>
+    <p>This donut chart shows the distribution of approved scorecards across service types. <em>This report includes only approved scorecards.</em></p>
+    <ul>
+      <li><strong>Commune Administrative</strong> — 20 scorecards (37%)</li>
+      <li><strong>Primary School</strong> — 20 scorecards (37%)</li>
+      <li><strong>Health Center</strong> — 11 scorecards (20%)</li>
+      <li><strong>Garment Factory</strong> — 3 scorecards (6%)</li>
+    </ul>
+    <p><strong>Example:</strong> Out of 54 total approved scorecards, Commune Administrative and Primary School each account for the largest share (37% each), while Garment Factory makes up the smallest share (6%).</p>
+    </div>
   scorecard_implementation_by_device_type_panel_title: "Scorecard Implementation by Device Type"
-  scorecard_implementation_by_device_type_panel_description: "This report includes only scorecards completed in the community by Community Accountability Facilitators (CAF)"
+  scorecard_implementation_by_device_type_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Scorecard Entries by Device Type</strong></p>
+    <p>This donut chart shows the breakdown of approved scorecards by the device used to enter data. <em>This report includes only approved scorecards.</em></p>
+    <ul>
+      <li><strong>Mobile</strong> — 64 scorecards (69%)</li>
+      <li><strong>Tablet</strong> — 29 scorecards (31%)</li>
+    </ul>
+    <p><strong>Example:</strong> Out of 93 total approved scorecards, most (64) were entered using a mobile phone, while 29 were entered using a tablet.</p>
+    </div>
   scorecard_participants_by_gender_panel_title: "Participants by Gender"
-  scorecard_participants_by_gender_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_participants_by_gender_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Participants by Gender</strong></p>
+    <p>This donut chart shows the breakdown of participants by gender. <em>This report includes only approved scorecards.</em></p>
+    <ul>
+      <li><strong>Male</strong> — 176 participants (57%)</li>
+      <li><strong>Female</strong> — 134 participants (43%)</li>
+    </ul>
+    <p><strong>Example:</strong> Out of 310 total participants, the majority (176) are male, while 134 are female.</p>
+    </div>
   scorecard_participants_by_age_panel_title: "Participants by Age"
-  scorecard_participants_by_age_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_participants_by_age_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Participants by Age Group</strong></p>
+    <p>This donut chart shows the breakdown of participants by age group. <em>This report includes only approved scorecards.</em></p>
+    <ul>
+      <li><strong>Age 31–45</strong> — 171 participants (55%)</li>
+      <li><strong>Age 15–30</strong> — 89 participants (29%)</li>
+      <li><strong>Age &gt;45</strong> — 50 participants (16%)</li>
+    </ul>
+    <p><strong>Example:</strong> Out of 310 total participants, more than half (171) fall in the 31–45 age group, the largest share among all age groups.</p>
+    </div>
   scorecard_participants_by_profile_panel_title: "Participants by Profile"
-  scorecard_participants_by_profile_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_participants_by_profile_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Participants by Ethnicity/Group</strong></p>
+    <p>This stacked bar chart shows the breakdown of participants by gender within each group. <em>This report includes only approved scorecards.</em></p>
+    <ul>
+      <li><strong>Indigenous</strong> — Female: 38 / Total: 73</li>
+      <li><strong>Youth</strong> — Female: 34 / Total: 55</li>
+    </ul>
+    <p><strong>Example:</strong> For the Indigenous group, 38 participants are female out of a total of 73 participants in that group, with the remainder being male.</p>
+    </div>
   scorecard_top_5_proposed_criteria_panel_title: "Top 5 Most Proposed Indicators"
-  scorecard_top_5_proposed_criteria_panel_description: "This report includes only scorecards completed in the community"
-  scorecard_top_5_prioritized_criteria_panel_title: "Top 5 Most Prioritized Indicators (Implemented)"
-  scorecard_top_5_prioritized_criteria_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_top_5_proposed_criteria_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Top 5 Most Frequently Raised Criteria</strong></p>
+    <p>This chart shows the five criteria/indicators most frequently raised across approved scorecards. <em>This report includes only approved scorecards.</em></p>
+    <ul>
+      <li><strong>Time</strong> — 16</li>
+      <li><strong>Teaching</strong> — 10</li>
+      <li><strong>Library</strong> — 9</li>
+      <li><strong>Monthly Meeting</strong> — 8</li>
+      <li><strong>Materials/Equipment</strong> — 7</li>
+    </ul>
+    <p><strong>Example:</strong> "Time" was raised 16 times, making it the most frequently cited criterion among approved scorecards — well ahead of "Teaching" at 10.</p>
+    </div>
+  scorecard_top_5_prioritized_criteria_panel_title: "Top 5 Most Prioritized Indicators"
+  scorecard_top_5_prioritized_criteria_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Top 5 Most Frequently Priority Criteria</strong></p>
+    <p>This chart shows the five priority criteria/indicators most frequently approved across scorecards. <em>This report includes only approved scorecards.</em></p>
+    <ul>
+      <li><strong>Teaching</strong> — 5</li>
+      <li><strong>Time</strong> — 5</li>
+      <li><strong>Water Storage Tank</strong> — 4</li>
+      <li><strong>Library</strong> — 4</li>
+      <li><strong>Waste Disposal Area</strong> — 3</li>
+    </ul>
+    <p><strong>Example:</strong> "Teaching" and "Time" are tied as the most frequently approved priority criteria, each appearing 5 times across approved scorecards.</p>
+    </div>
   scorecard_top_5_prioritized_criteria_happy_face_panel_title: "Top 5 Prioritized Indicators (😁 Satisfied)"
-  scorecard_top_5_prioritized_criteria_happy_face_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_top_5_prioritized_criteria_happy_face_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Top 5 Priority Criteria (😄 Satisfied)</strong></p>
+    <p>This chart shows the five priority criteria/indicators most frequently marked as "Satisfied(Score 4 and 5)" (😄) across approved scorecards.</p>
+    <ul>
+      <li><strong>Time</strong> — 24</li>
+      <li><strong>Monthly Meeting</strong> — 17</li>
+      <li><strong>Service Delivery</strong> — 11</li>
+      <li><strong>Teaching</strong> — 10</li>
+      <li><strong>Duty Shift</strong> — 10</li>
+    </ul>
+    <p><strong>Example:</strong> "Time" received the most satisfaction votes (24), more than double the next highest, "Monthly Meeting" (17).</p>
+    </div>
   scorecard_top_5_prioritized_criteria_neutral_face_panel_title: "Top 5 Prioritized Indicators (🙂 Acceptable)"
-  scorecard_top_5_prioritized_criteria_neutral_face_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_top_5_prioritized_criteria_neutral_face_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Top 5 Prioritized Indicators (🙂 Acceptable)</strong></p>
+    <p>This chart shows the five prioritized indicators most frequently marked as "Acceptable(Score 3)" (🙂) across scorecards.</p>
+    <ul>
+      <li><strong>Toilet/Sanitation</strong> — 14</li>
+      <li><strong>Teaching</strong> — 13</li>
+      <li><strong>Fence</strong> — 12</li>
+      <li><strong>Weather/Climate</strong> — 11</li>
+      <li><strong>Water Tank</strong> — 10</li>
+    </ul>
+    <p><strong>Example:</strong> "Toilet/Sanitation" received the most "Acceptable" votes (14), slightly ahead of "Teaching" (13).</p>
+    </div>
   scorecard_top_5_prioritized_criteria_angry_face_panel_title: "Top 5 Prioritized Indicators (😡 Not Satisfied)"
-  scorecard_top_5_prioritized_criteria_angry_face_panel_description: "This report includes only scorecards completed in the community"
+  scorecard_top_5_prioritized_criteria_angry_face_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Top 5 Prioritized Indicators (😡 Not Satisfied)</strong></p>
+    <p>This chart shows the five prioritized indicators most frequently marked as "Not Satisfied(Score 1 and 2)" (😡) across scorecards.</p>
+    <ul>
+      <li><strong>Parent Involvement in Children's Education</strong> — 17</li>
+      <li><strong>Library</strong> — 14</li>
+      <li><strong>Students Have Many Books</strong> — 14</li>
+      <li><strong>Students Drop Out of School</strong> — 11</li>
+      <li><strong>Number of Students Compared to the Number of Classrooms</strong> — 9</li>
+    </ul>
+    <p><strong>Example:</strong> "Parent Involvement in Children's Education" received the highest number of "Not Satisfied" votes (17), signaling this as the top concern among evaluated indicators.</p>
+    </div>
+  scorecard_completion_rate_panel_title: "Scorecard Completion Rate (%)"
+  scorecard_completion_rate_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Scorecard Completion Rate (%)</strong></p>
+    <p>This indicator shows the percentage of planned scorecards that have been completed (approved).</p>
+    <p><strong>Formula:</strong><br>
+    Completion Rate (%) = (Completed/Approved Scorecards ÷ Planned Scorecards) × 100</p>
+    <p><strong>Example:</strong><br>
+    If 55 scorecards were planned and 45 were approved, the completion rate is:<br>
+    (45 ÷ 55) × 100 = 82%</p>
+    </div>
+  scorecard_geo_coverage_rate_panel_title: "Geographic Coverage Rate (%)"
+  scorecard_geo_coverage_rate_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Geographic Coverage Rate (%)</strong></p>
+    <p>This indicator shows the percentage of the planned geographic coverage that has been achieved.</p>
+    <p><strong>Formula:</strong><br>
+    Geographic Coverage Rate (%) = (Achieved Geographic Coverage ÷ Planned Geographic Coverage) × 100</p>
+    <p><strong>Example:</strong><br>
+    If the planned geographic coverage is 10 regions and 8 regions have been achieved, the geographic coverage rate is:<br>
+    (8 ÷ 10) × 100 = 80%</p>
+    </div>
+  scorecard_beneficiary_reach_title: "Beneficiary Reach"
+  scorecard_beneficiary_reach_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Beneficiary Reach</strong></p>
+    <p>This table shows the demographic breakdown of total participants — each column displays the count followed by its percentage of the total.</p>
+    <ul>
+      <li><strong>Total Participants</strong> — 7</li>
+      <li><strong>Female %</strong> — 6 (86%)</li>
+      <li><strong>Youth %</strong> — 4 (57%)</li>
+      <li><strong>Disability %</strong> — 0 (0%)</li>
+      <li><strong>Minority %</strong> — 3 (43%)</li>
+    </ul>
+    <p><strong>Example:</strong> Out of 7 total participants, 6 are female (86%), 4 are youth (57%), and 3 belong to a minority group (43%). None of the participants reported a disability.</p>
+    </div>
 
   # label in graph
-  min_day: Minimum (days)
-  average_day: Average (days)
-  max_day: Maximum (days)
+  min_day: Min (days)
+  average_day: Avg (days)
+  max_day: Max (days)
   scorecard_planned_count: Planned Count
-  scorecard_implemented_count: Implemented Count
+  scorecard_implemented_count: Approved Count
   scorecard_type_self_assessment: Self-Assessment
   scorecard_type_community_scorecard: Community Scorecard
   scorecard_type_combined_scorecard: Scorecard (Self assessment + Community scorecard)
@@ -68,12 +312,17 @@ en:
   scorecard_implementation_status_planned: Planned
   scorecard_implementation_status_review: Under Review
   scorecard_implementation_status_implemented: Implemented
-
-  # Variable labels
-  province_title: Province
-  year_title: Year
-  facility_title: Facility
-  program_title: Program
-  local_ngo_title: Local Implementing NGO
-  institution_title: Institution
-  language_title: Language
+  # Geographic coverage labels
+  location: Covered Location
+  covered_vs_target: "# of Covered / # of Target"
+  coverage_rate: Coverage Rate (%)
+  province_covered: Province
+  district_covered: District
+  commune_covered: Commune
+  # Beneficiary Reach
+  beneficiary_reach: "Beneficiary Reach"
+  total_participants: "Total participants"
+  female_percentage: "Female %"
+  youth_percentage: "Youth %"
+  disabilities_percentage: "Disabilities %"
+  minority_percentage: "Minority %"
