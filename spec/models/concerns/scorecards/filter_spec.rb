@@ -74,14 +74,8 @@ RSpec.describe Scorecards::Filter do
         expect(result).to match_array([rejected])
       end
 
-      it "excludes rejected scorecards when filter is blank" do
-        result = Scorecard.filter(filter: nil)
-        expect(result).to include(nil_progress, planned, renewed, downloaded, running, open_voting, close_voting, completed)
-        expect(result).not_to include(rejected)
-      end
-
-      it "returns all scorecards including rejected when filter is all" do
-        result = Scorecard.filter(filter: "all")
+      it "returns all scorecards including rejected when filter is empty" do
+        result = Scorecard.filter(filter: "")
         expect(result).to include(nil_progress, planned, renewed, downloaded, running, open_voting, close_voting, completed, rejected)
       end
     end

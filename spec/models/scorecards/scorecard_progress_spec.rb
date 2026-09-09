@@ -29,7 +29,7 @@ RSpec.describe Scorecards::ScorecardProgress do
 
       counts = described_class.new(scorecards).group_count
 
-      expect(counts.all).to eq(4)
+      expect(counts.all).to eq(5)
       expect(counts.planned).to eq(1)
       expect(counts.running).to eq(1)
       expect(counts.in_review).to eq(1)

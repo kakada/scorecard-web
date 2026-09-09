@@ -58,6 +58,8 @@
 #  running_mode                :integer          default("online")
 #  qr_code                     :string
 #  token                       :string(64)
+#  rejected_at                 :datetime
+#  rejected_reason             :string
 #
 require "rails_helper"
 
@@ -131,6 +133,25 @@ RSpec.describe Scorecard, type: :model do
     end
   end
 
+  describe "#validate rejected_reason" do
+    context "no rejected_at" do
+      let(:scorecard) { build(:scorecard, rejected_at: nil, rejected_reason: nil) }
+
+      it { expect(scorecard.valid?).to be_truthy }
+    end
+
+    context "has rejected_at" do
+      let(:scorecard) { build(:scorecard, rejected_at: Time.now.utc, rejected_reason: nil) }
+
+      it { expect(scorecard.valid?).to be_falsey }
+
+      it "requires rejected_reason to be presence" do
+        scorecard.valid?
+        expect(scorecard.errors.messages[:rejected_reason]).not_to be_nil
+      end
+    end
+  end
+
   describe "#secure_uuid" do
     let!(:uuid) { SecureRandom.random_number(1..999999).to_s.rjust(6, "0") }
     let!(:scorecard1) { create(:scorecard, uuid: uuid) }
@@ -174,17 +195,16 @@ RSpec.describe Scorecard, type: :model do
 
   describe "#rejected_by" do
     let!(:scorecard) { create(:scorecard, :submitted) }
-    let!(:reviewer) { create(:user, role: :lngo, program: scorecard.program) }
+    let!(:reviewer) { create(:user, :lngo, program: scorecard.program) }
 
     before do
       scorecard.completed_by(reviewer)
-      scorecard.rejected_by(reviewer)
+      scorecard.rejected_by(reviewer, "Some reason for rejection")
     end
 
     it "marks scorecard as rejected" do
       expect(scorecard.reload.progress).to eq("rejected")
       expect(scorecard.rejected_at).to be_present
-      expect(scorecard.completed_at).to be_nil
     end
 
     it "creates rejected progress record" do

@@ -10,7 +10,7 @@ module Scorecards
 
     def group_count
       OpenStruct.new(
-        all: scorecards.count { |s| !s.rejected? },
+        all: scorecards.count,
         planned: scorecards.count { |s| Scorecard::PLANNED_STATUSES.include?(s.progress) },
         running: scorecards.count { |s| Scorecard::RUNNING_STATUSES.include?(s.progress) },
         in_review: scorecards.count(&:in_review?),

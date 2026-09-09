@@ -48,6 +48,7 @@ module ScorecardsStatusesHelper
   def status_rejected_html(scorecard)
     title = "<div class='text-left'>" +
               "<div>#{t('scorecard.rejected_at')} #{display_datetime(scorecard.rejected_at)}</div>" +
+              "<div>#{t('scorecard.rejected_reason')}: #{scorecard.rejected_reason}</div>" +
             "</div>"
 
     wrap_in_tooltip(title, scorecard.status, "badge-danger")

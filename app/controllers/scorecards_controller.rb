@@ -7,7 +7,7 @@ class ScorecardsController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @progress_count = Scorecards::ScorecardProgress.new(policy_scope(Scorecard.filter(group_count_filter_params.merge(filter: "all")))).group_count
+        @progress_count = Scorecards::ScorecardProgress.new(policy_scope(Scorecard.filter(group_count_filter_params))).group_count
 
         @pagy, @scorecards = pagy(
           policy_scope(Scorecard.filter(filter_params)
@@ -94,8 +94,8 @@ class ScorecardsController < ApplicationController
   end
 
   def reject
-    authorize @scorecard, :completed?
-    @scorecard.rejected_by(current_user)
+    authorize @scorecard, :reject?
+    @scorecard.rejected_by(current_user, params[:rejected_reason])
     flash[:notice] = t("scorecard.reject_successfully")
 
     redirect_to scorecard_url(@scorecard.uuid)

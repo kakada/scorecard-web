@@ -30,11 +30,9 @@ module Scorecards::Filter
       end
 
       def filter_by_progress(scope, status)
-        return scope.where.not(progress: REJECTED_STATUS) unless status.present?
+        return scope unless status.present?
 
         case status
-        when "all"
-          scope
         when "planned"
           scope.where(progress: PLANNED_STATUSES)
         when "running"
@@ -42,7 +40,7 @@ module Scorecards::Filter
         when REJECTED_STATUS
           scope.where(progress: REJECTED_STATUS)
         else
-          scope.where(progress: status).where.not(progress: REJECTED_STATUS)
+          scope.where(progress: status)
         end
       end
 
