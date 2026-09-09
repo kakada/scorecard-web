@@ -172,6 +172,28 @@ RSpec.describe Scorecard, type: :model do
     it { expect(scorecard.update(name: "test")).to be_truthy }
   end
 
+  describe "#rejected_by" do
+    let!(:scorecard) { create(:scorecard, :submitted) }
+    let!(:reviewer) { create(:user, role: :lngo, program: scorecard.program) }
+
+    before do
+      scorecard.completed_by(reviewer)
+      scorecard.rejected_by(reviewer)
+    end
+
+    it "marks scorecard as rejected" do
+      expect(scorecard.reload.progress).to eq("rejected")
+      expect(scorecard.rejected_at).to be_present
+      expect(scorecard.completed_at).to be_nil
+    end
+
+    it "creates rejected progress record" do
+      progress = scorecard.scorecard_progresses.last
+      expect(progress.status).to eq("rejected")
+      expect(progress.user_id).to eq(reviewer.id)
+    end
+  end
+
   describe "#access_locked?" do
     context "true" do
       let!(:scorecard) { create(:scorecard, :completed) }

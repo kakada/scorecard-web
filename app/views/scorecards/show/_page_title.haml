@@ -26,6 +26,10 @@
 
       = render "scorecards/show/modal_mark_as_completed"
 
+    - if policy(@scorecard).completed?
+      = link_to reject_scorecard_path(@scorecard.uuid), class: 'btn btn-danger btn-sm shadow-sm mr-2', method: :put, data: { confirm: t("scorecard.are_you_sure_to_reject", code: @scorecard.uuid) } do
+        = t("shared.reject")
+
     - if @scorecard.open_voting?
       %a.btn.btn-info.btn-sm.shadow-sm{ href: new_scorecard_vote_path(@scorecard.token), target: "_blank" }
         %i.fas.fa-vote-yea.fa-sm.text-white-50

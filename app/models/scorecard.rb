@@ -93,6 +93,7 @@ class Scorecard < ApplicationRecord
 
   # Constant
   STATUS_PLANNED = "planned"
+  STATUS_REJECTED = "rejected"
   STATUS_COMPLETED = "completed"
   STATUS_IN_REVIEW = "in_review"
   STATUS_RUNNING = "running"
