@@ -183,4 +183,24 @@ RSpec.describe ScorecardPolicy do
       end
     end
   end
+
+  permissions :completed? do
+    context "user is local ngo and scorecard is completed" do
+      let(:scorecard) { create(:scorecard, progress: :completed, local_ngo_id: lngo.id) }
+      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+
+      it "accept access" do
+        expect(subject).to permit(user, scorecard)
+      end
+    end
+
+    context "scorecard is not completed" do
+      let(:scorecard) { create(:scorecard, local_ngo_id: lngo.id, progress: :in_review) }
+      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+
+      it "denies access" do
+        expect(subject).not_to permit(user, scorecard)
+      end
+    end
+  end
 end

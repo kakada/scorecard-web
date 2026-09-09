@@ -6,6 +6,7 @@ module Scorecards::Filter
   included do
     PLANNED_STATUSES = %w[planned renewed downloaded].freeze
     RUNNING_STATUSES = %w[running open_voting close_voting].freeze
+    REJECTED_STATUS = "rejected"
 
     class << self
       def filter(params = {})
@@ -29,15 +30,19 @@ module Scorecards::Filter
       end
 
       def filter_by_progress(scope, status)
-        return scope unless status.present?
+        return scope.where.not(progress: REJECTED_STATUS) unless status.present?
 
         case status
+        when "all"
+          scope
         when "planned"
           scope.where(progress: PLANNED_STATUSES)
         when "running"
           scope.where(progress: RUNNING_STATUSES)
+        when REJECTED_STATUS
+          scope.where(progress: REJECTED_STATUS)
         else
-          scope.where(progress: status)
+          scope.where(progress: status).where.not(progress: REJECTED_STATUS)
         end
       end
 

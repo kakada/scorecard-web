@@ -45,6 +45,14 @@ module ScorecardsStatusesHelper
     wrap_in_tooltip(title, scorecard.status, "badge-success")
   end
 
+  def status_rejected_html(scorecard)
+    title = "<div class='text-left'>" +
+              "<div>#{t('scorecard.rejected_at')} #{display_datetime(scorecard.rejected_at)}</div>" +
+            "</div>"
+
+    wrap_in_tooltip(title, scorecard.status, "badge-danger")
+  end
+
   def status_open_voting_html(scorecard)
     wrap_in_tooltip(title, scorecard.status, "badge-primary")
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_09_07_040719) do
+ActiveRecord::Schema[7.0].define(version: 2026_09_09_043000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -623,6 +623,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_09_07_040719) do
     t.string "device_type"
     t.datetime "submitted_at", precision: nil
     t.datetime "completed_at", precision: nil
+    t.datetime "rejected_at", precision: nil
     t.string "device_token"
     t.integer "completor_id"
     t.integer "proposed_indicator_method", default: 1

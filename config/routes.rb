@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   resources :scorecards, param: :uuid do
     put :complete, on: :member
+    put :reject, on: :member
 
     scope module: "scorecards" do
       resources :medians

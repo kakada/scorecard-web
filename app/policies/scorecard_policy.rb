@@ -52,6 +52,10 @@ class ScorecardPolicy < ApplicationPolicy
     user.lngo? && record.in_review?
   end
 
+  def completed?
+    user.lngo? && record.completed?
+  end
+
   class Scope < Scope
     def resolve
       return scope.all if user.system_admin?
