@@ -2,51 +2,299 @@ km:
   # Panel title and description
   map_panel_title: ផែនទីអនុវត្តប័ណ្ណដាក់ពិន្ទុឌីជីថល
   summary_panel_title: សង្ខេបប័ណ្ណដាក់ពិន្ទុ
-  scorecard_total_panel_title: ប័ណ្ណដាក់ពិន្ទុសរុប (គ្រោងទុកសរុប/កំពុងត្រួតពិនិត្យ/អនុវត្តរួចរាល់)
-  scorecard_total_panel_description: ប័ណ្ណដាក់ពិន្ទុសរុប (គ្រោងទុកសរុប/កំពុងត្រួតពិនិត្យ/អនុវត្តរួចរាល់)
+  scorecard_total_panel_title: ប័ណ្ណដាក់ពិន្ទុសរុប (គ្រោងទុកសរុប/កំពុងត្រួតពិនិត្យ/អនុម័ត)
+  scorecard_total_panel_description: |
+    <h5>ប័ណ្ណដាក់ពិន្ទុសរុប៖ គ្រោងទុក ១០ / កំពុងត្រួតពិនិត្យ ៥ / បានអនុម័ត ៣</h5>
+    <p>
+      នេះបង្ហាញពីដំណើរការរបស់ Scorecard តាមដំណាក់កាល៖
+      <strong>១០ កំពុងស្ថិតក្នុងគម្រោង ៥ កំពុងពិនិត្យ និង ៣ បានអនុម័ត</strong>
+      សរុបមាន <strong>១៨ Scorecards</strong>។
+    </p>
+    <p>
+      <strong>ឧទាហរណ៍៖</strong> អ្នកគ្រប់គ្រងបង្កើត Scorecard សម្រាប់ការវាយតម្លៃការងារត្រីមាសទី ៣
+      ហើយវាចាប់ផ្តើមដោយ Status <em>គ្រោងទុក</em>។ នៅពេលប័ណ្ណដាក់ពិន្ទុត្រូវបានបំពេញ
+      និងដាក់ស្នើសម្រាប់ការវាយតម្លៃ វានឹងប្តូរ Status ទៅជា <em>កំពុងត្រួតពិនិត្យ</em>។
+      បន្ទាប់ពីអ្នកពិនិត្យបានអនុម័ត វានឹងប្តូរ Status ទៅជា <em>បានអនុម័ត</em>។
+    </p>
   scorecard_entered_after_actual_implementation_date_panel_title: ចំនួនប័ណ្ណដាក់ពិន្ទុដែលបានបញ្ចូលទិន្នន័យក្រោយថ្ងៃអនុវត្តជាក់ស្តែង
-  scorecard_entered_after_actual_implementation_date_panel_description: "ចំនួនប័ណ្ណដាក់ពិន្ទុដែលបានបញ្ចូលទិន្នន័យក្រោយថ្ងៃអនុវត្តជាក់ស្តែង <br>Formula: (Entry date - Conducted date >= 1 Day) <br>ឧទាហរណ៍៖ ថ្ងៃអនុវត្តប័ណ្ណដាក់ពិន្ទុជាក់ស្តែង 01-មករា-2022 តែ ថ្ងៃបញ្ចូលទិន្នន័យ 03-មករា-2022។"
-  scorecard_implementation_duration_panel_title: រយៈពេលអនុវត្តប័ណ្ណដាក់ពិន្ទុ (កាលបរិច្ឆេទចាប់ផ្ដើមដល់អនុវត្តរួចរាល់)
-  scorecard_implementation_duration_panel_description: "រយៈពេលអនុវត្តប័ណ្ណដាក់ពិន្ទុ (កាលបរិច្ឆេទចាប់ផ្ដើមដល់អនុវត្តរួចរាល់)"
+  scorecard_entered_after_actual_implementation_date_panel_description: |
+    <div lang="km-KH">
+    <p><strong>ចំនួនប័ណ្ណដាក់ពិន្ទុដែលបានបញ្ចូលទិន្នន័យក្រោយថ្ងៃអនុវត្តជាក់ស្តែង</strong></p>
+    <p>សូចនាករនេះបង្ហាញពីចំនួនប័ណ្ណដាក់ពិន្ទុ ដែលថ្ងៃបញ្ចូលទិន្នន័យ (Entry Date) មានរយៈពេលយ៉ាងតិច ១ ថ្ងៃ ក្រោយពីថ្ងៃដែលបានអនុវត្តជាក់ស្តែង (Conducted Date)។</p>
+    <p><strong>រូបមន្ត (Formula):</strong><br>
+    Entry Date − Conducted Date ≥ 1 Day</p>
+    <p><strong>ឧទាហរណ៍៖</strong><br>
+    ថ្ងៃអនុវត្តប័ណ្ណដាក់ពិន្ទុជាក់ស្តែង៖ 01-មករា-2022<br>
+    ថ្ងៃបញ្ចូលទិន្នន័យ៖ 03-មករា-2022<br>
+    → ករណីនេះត្រូវបានរាប់បញ្ចូល ព្រោះមានចន្លោះពេល ២ ថ្ងៃ (≥ 1 Day)។</p>
+    </div>
+
+  scorecard_implementation_duration_panel_title: រយៈពេលអនុវត្តប័ណ្ណដាក់ពិន្ទុ (កាលបរិច្ឆេទចាប់ផ្ដើមដល់អនុម័ត)
+  scorecard_implementation_duration_panel_description: |
+    <div lang="km-KH">
+    <p><strong>រយៈពេលអនុវត្តប័ណ្ណដាក់ពិន្ទុ (កាលបរិច្ឆេទចាប់ផ្តើមដល់អនុម័ត)</strong></p>
+    <p>សូចនាករនេះវាស់ស្ទង់ចំនួនថ្ងៃ រវាង <strong>ថ្ងៃចាប់ផ្តើម</strong> និង <strong>ថ្ងៃអនុម័ត</strong> របស់ប័ណ្ណដាក់ពិន្ទុនីមួយៗ ដោយបង្ហាញរយៈពេលអប្បបរមា មធ្យម និងអតិបរមា ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តទាំងអស់។</p>
+    <p><strong>រូបមន្ត (Formula):</strong><br>
+    រយៈពេល (ថ្ងៃ) = ថ្ងៃអនុម័ត − ថ្ងៃចាប់ផ្តើម</p>
+    <p><strong>តម្លៃបច្ចុប្បន្ន៖</strong><br>
+    អប្បបរមា៖ ១ ថ្ងៃ<br>
+    មធ្យម៖ ១៧ ថ្ងៃ<br>
+    អតិបរមា៖ ៣៦ ថ្ងៃ</p>
+    <p><strong>ឧទាហរណ៍៖</strong><br>
+    ប្រសិនបើប័ណ្ណដាក់ពិន្ទុមួយចាប់ផ្តើមនៅថ្ងៃ 01-មករា-2022 និងត្រូវបានអនុម័តនៅថ្ងៃ 18-មករា-2022 នោះរយៈពេលគឺ ១៧ ថ្ងៃ ដែលនៅជិតនឹងតម្លៃមធ្យម។</p>
+    </div>
   scorecard_participants_panel_title: "ចំនួន (LNGOs សរុប / CAFs សរុប / អ្នកចូលរួមសរុប / អ្នកចូលរួមជាមធ្យម)"
-  scorecard_participants_panel_description: "LNGOs: រាប់តាម Planned Scorecard <br>CAFs: រាប់តាម LNGO <br>អ្នកចូលរួម: រាប់តាម Completed Scorecard"
+  scorecard_participants_panel_description: |
+    <div lang="km-KH">
+    <p><strong>ចំនួន (LNGOs សរុប / CAFs សរុប / អ្នកចូលរួមសរុប / អ្នកចូលរួមជាមធ្យម)</strong></p>
+    <p>សូចនាករនេះបង្ហាញលេខចំនួន ៤ ប្រភេទរួមគ្នា៖</p>
+    <ul>
+      <li><strong>LNGOs</strong> — រាប់តាម <em>Planned Scorecard</em></li>
+      <li><strong>CAFs</strong> — រាប់តាម <em>LNGO</em></li>
+      <li><strong>អ្នកចូលរួម</strong> — រាប់តាម <em>Approved Scorecard</em></li>
+      <li><strong>អ្នកចូលរួមជាមធ្យម</strong> — ចំនួនអ្នកចូលរួមជាមធ្យមក្នុងមួយប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong><br>
+    ប្រសិនបើមាន LNGOs ចំនួន ៤ ដែលភ្ជាប់ជាមួយ CAFs ជាច្រើន ហើយប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តកត់ត្រាអ្នកចូលរួមសរុប ១៤១នាក់ នោះចំនួនអ្នកចូលរួមជាមធ្យមត្រូវបានគណនាដោយចែកអ្នកចូលរួមសរុប នឹងចំនួនប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត។</p>
+    </div>
   scorecard_total_indicators_panel_title: "ចំនួនសរុប Indicator (ស្នើឡើង / ស្នើឡើងថ្មី / អាទិភាព)"
-  scorecard_total_indicators_panel_description: "Indicator ស្នើឡើង សរុប: រាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់ <br>Indicator អាទិភាព សរុប: រាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់ <br>"
+  scorecard_total_indicators_panel_description: |
+    <div lang="km-KH">
+    <p><strong>ចំនួនសរុប Indicator (ស្នើឡើង / ស្នើឡើងថ្មី / អាទិភាព)</strong></p>
+    <p>រាប់ indicator ដែលបានលើកឡើងពីប័ណ្ណដាក់ពិន្ទុដែលបានបំពេញ៖</p>
+    <ul>
+      <li><strong>ស្នើឡើង (សរុប)</strong> — indicator ដែលបានលើកឡើងទាំងអស់</li>
+      <li><strong>ស្នើឡើងថ្មី (សរុប)</strong> — indicator ប្រភេទ custom (បន្ថែមដោយអ្នកប្រើប្រាស់)</li>
+      <li><strong>អាទិភាព (សរុប)</strong> — indicator ដែលជ្រើសយកទៅដាក់ពិន្ទុ</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> ប័ណ្ណដាក់ពិន្ទុមួយលើកឡើង indicator ៥ — ថ្មី ២ អាទិភាព ១។ វានឹងបូកបញ្ចូល ៥ ទៅ ស្នើឡើង, ២ ទៅ ស្នើឡើងថ្មី, និង ១ ទៅ អាទិភាព។</p>
+    </div>
   scorecard_average_indicators_panel_title: "ចំនួនមធ្យម Indicator (ស្នើឡើង / ស្នើឡើងថ្មី / អាទិភាព)"
-  scorecard_average_indicators_panel_description: "Indicator ស្នើឡើង ជាមធ្យម: ក្នុង 1 ប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់<br> Indicator ស្នើឡើងថ្មី ជាមធ្យម: ក្នុង 1 ប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់ <br> Indicator អាទិភាព ជាមធ្យម: ក្នុង 1 ប័ណ្ណដាក់ពិន្ទុដែលបានអនុវត្តរួចរាល់ <br/> - សម្គាល់៖ លទ្ធផលបង្គត់ឡើង(Ex: 0.3 -> 1)"
-  scorecard_total_by_service_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុសរុប (អនុវត្តរួចរាល់ vs គ្រោងទុក) តាមប្រភេទសេវា"
-  scorecard_total_by_service_type_panel_description: "ប័ណ្ណដាក់ពិន្ទុសរុប (អនុវត្តរួចរាល់ vs គ្រោងទុក) តាមប្រភេទសេវា"
-  scorecard_implemented_by_scorecard_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់ (វាយតម្លៃខ្លួនឯង vs ប័ណ្ណដាក់ពិន្ទុសហគមន៍ vs ប័ណ្ណដាក់ពិន្ទុរួម(វាយតម្លៃខ្លួនឯង + សហគមន៍)) តាមប្រភេទសេវា"
-  scorecard_implemented_by_scorecard_type_panel_description: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់ (វាយតម្លៃខ្លួនឯង vs ប័ណ្ណដាក់ពិន្ទុសហគមន៍ vs ប័ណ្ណដាក់ពិន្ទុរួម(វាយតម្លៃខ្លួនឯង + សហគមន៍)) តាមប្រភេទសេវា"
-  scorecard_implemented_by_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់តាម Type"
-  scorecard_implemented_by_type_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
-  scorecard_implemented_by_facility_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលអនុវត្តរួចរាល់តាមប្រភេទសេវា"
-  scorecard_implemented_by_facility_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_average_indicators_panel_description: |
+    <div lang="km-KH">
+    <p><strong>ចំនួនមធ្យម Indicator (ស្នើឡើង / ស្នើឡើងថ្មី / អាទិភាព)</strong></p>
+    <p>បង្ហាញចំនួនមធ្យម indicator ដែលបានលើកឡើង ក្នុងមួយប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត៖</p>
+    <ul>
+      <li><strong>ស្នើឡើង (មធ្យម)</strong> — មធ្យមនៃ indicator ដែលបានលើកឡើងទាំងអស់ ក្នុងមួយប័ណ្ណដែលបានអនុម័ត</li>
+      <li><strong>ស្នើឡើងថ្មី (មធ្យម)</strong> — មធ្យមនៃ indicator ប្រភេទ custom ក្នុងមួយប័ណ្ណដែលបានអនុម័ត</li>
+      <li><strong>អាទិភាព (មធ្យម)</strong> — មធ្យមនៃ indicator ដែលបានសម្គាល់ជា selected ក្នុងមួយប័ណ្ណដែលបានអនុម័ត</li>
+    </ul>
+    <p><strong>សម្គាល់៖</strong> លទ្ធផលបង្គត់ឡើង (ឧ. 0.3 → 1)។</p>
+    <p><strong>ឧទាហរណ៍៖</strong> ប្រសិនបើប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត មាន Proposed Indicators មធ្យម 0.3 នោះលេខបង្ហាញនឹងបង្គត់ឡើងទៅ 1។</p>
+    </div>
+  scorecard_total_by_service_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុសរុប (គ្រោងទុក vs អនុម័ត) តាមប្រភេទសេវា"
+  scorecard_total_by_service_type_panel_description: |
+    <div lang="km-KH">
+    <p><strong>ចំនួនប័ណ្ណដាក់ពិន្ទុសរុប (គ្រោងទុក vs អនុម័ត) តាមប្រភេទសេវា</strong></p>
+    <p>តារាងនេះប្រៀបធៀបចំនួនប័ណ្ណដាក់ពិន្ទុ <strong>ដែលបានគ្រោងទុក (Planned)</strong> និង <strong>ដែលបានអនុម័ត (Approved)</strong> តាមប្រភេទសេវានីមួយៗ ដើម្បីមើលឃើញភាពខុសគ្នារវាងផែនការ និងលទ្ធផលពិតប្រាកដ។</p>
+    <p><strong>តម្លៃបច្ចុប្បន្ន៖</strong></p>
+    <ul>
+      <li>រដ្ឋបាលឃុំ — គ្រោងទុក 6 / បានអនុម័ត 5</li>
+      <li>រោងចក្រកាត់ដេរ — គ្រោងទុក 9 / បានអនុម័ត 3</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> សម្រាប់រោងចក្រកាត់ដេរ មានប័ណ្ណដាក់ពិន្ទុត្រូវបានគម្រោង 9 ប៉ុន្តែមានតែ 3 ប៉ុណ្ណោះដែលបានអនុម័ត — បង្ហាញពីគម្លាតចំនួន 6 ប័ណ្ណដែលមិនទាន់បញ្ចប់។</p>
+    </div>
+  scorecard_implemented_by_scorecard_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តតាមប្រភេទប័ណ្ណដាក់ពិន្ទុ"
+  scorecard_implemented_by_scorecard_type_panel_description: |
+    <div lang="km-KH" style="margin-bottom: 16px;">
+    <p><strong>ប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តតាមប្រភេទប័ណ្ណដាក់ពិន្ទុ</strong></p>
+    <p>តារាងនេះប្រៀបធៀបប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត តាមប្រភេទប័ណ្ណដាក់ពិន្ទុនីមួយៗ ដោយបែងចែកជា ៣ ប្រភេទ៖</p>
+    <ul>
+      <li><strong>វាយតម្លៃដោយខ្លួនឯង (Self-Assessment)</strong> — កិច្ចប្រជុំប័ណ្ណដាក់ពិន្ទុដែលធ្វើឡើងជាមួយថ្នាក់គ្រប់គ្រង ឬអ្នកមានសិទ្ធិសម្រេច (ភាគីផ្គត់ផ្គង់)</li>
+      <li><strong>ប័ណ្ណដាក់ពិន្ទុសហគមន៍ (Community Scorecard)</strong> — កិច្ចប្រជុំប័ណ្ណដាក់ពិន្ទុដែលធ្វើឡើងជាមួយសមាជិកសហគមន៍ ឬកម្មកររោងចក្រ (ភាគីទាមទារ)</li>
+      <li><strong>ប័ណ្ណដាក់ពិន្ទុរួម (Self-Assessment + Community Scorecard)</strong> — កិច្ចប្រជុំប័ណ្ណដាក់ពិន្ទុដែលបញ្ចូលគ្នារវាងថ្នាក់គ្រប់គ្រង/អ្នកមានសិទ្ធិសម្រេច និងសមាជិកសហគមន៍/កម្មកររោងចក្រ</li>
+    </ul>
+    <p><strong>តម្លៃបច្ចុប្បន្ន៖</strong></p>
+    <ul>
+      <li>មណ្ឌលសុខភាព — ការវាយតម្លៃដោយខ្លួនឯង៖ 11 / ប័ណ្ណដាក់ពិន្ទុសហគមន៍៖ 0 / ប័ណ្ណដាក់ពិន្ទុរួម៖ 0</li>
+      <li>រោងចក្រកាត់ដេរ — ការវាយតម្លៃដោយខ្លួនឯង៖ 0 / ប័ណ្ណដាក់ពិន្ទុសហគមន៍៖ 0 / ប័ណ្ណដាក់ពិន្ទុរួម៖ 3</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> សម្រាប់រោងចក្រកាត់ដេរ ប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តទាំង ៣ ស្ថិតនៅក្នុងប្រភេទ "ប័ណ្ណដាក់ពិន្ទុរួម" ដោយគ្មានប័ណ្ណវាយតម្លៃដោយខ្លួនឯង ឬប័ណ្ណដាក់ពិន្ទុសហគមន៍ដាច់ដោយឡែកកត់ត្រាទេ។</p>
+    </div>
+  scorecard_implemented_by_type_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តតាម Scorecard Type"
+  scorecard_implemented_by_type_panel_description: |
+    <div lang="km-KH">
+    <p><strong>ប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តតាម Scorecard Type</strong></p>
+    <p>ក្រាបនេះបង្ហាញសមាមាត្រនៃប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត បែងចែកតាមប្រភេទ៖</p>
+    <ul>
+      <li><strong>វាយតម្លៃដោយខ្លួនឯង (Self-Assessment)</strong> — 51 ប័ណ្ណ (94%)</li>
+      <li><strong>ប័ណ្ណដាក់ពិន្ទុរួម (Self-Assessment + Community Scorecard)</strong> — 3 ប័ណ្ណ (6%)</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តសរុប 54 ភាគច្រើន (51) ជាការវាយតម្លៃដោយខ្លួនឯង ខណៈមានតែ 3 ប៉ុណ្ណោះជាប័ណ្ណដាក់ពិន្ទុរួម (ធ្វើឡើងរួមគ្នារវាងថ្នាក់គ្រប់គ្រង និងសហគមន៍/កម្មករ)។</p>
+    </div>
+  scorecard_implemented_by_facility_panel_title: "ប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តតាមប្រភេទសេវា"
+  scorecard_implemented_by_facility_panel_description: |
+    <div lang="km-KH">
+    <p><strong>ប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តតាមប្រភេទសេវា</strong></p>
+    <p>ក្រាបនេះបង្ហាញការចែកចាយនៃប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត តាមប្រភេទសេវានីមួយៗ។ <em>របាយការណ៍នេះរួមបញ្ចូលតែប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តប៉ុណ្ណោះ។</em></p>
+    <ul>
+      <li><strong>រដ្ឋបាលឃុំ</strong> — 20 ប័ណ្ណ (37%)</li>
+      <li><strong>សាលាបឋមសិក្សា</strong> — 20 ប័ណ្ណ (37%)</li>
+      <li><strong>មណ្ឌលសុខភាព</strong> — 11 ប័ណ្ណ (20%)</li>
+      <li><strong>រោងចក្រកាត់ដេរ</strong> — 3 ប័ណ្ណ (6%)</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តសរុប 54 រដ្ឋបាលឃុំ និងសាលាបឋមសិក្សា មានចំណែកធំបំផុតស្មើគ្នា (37% និមួយៗ) ខណៈរោងចក្រកាត់ដេរមានចំណែកតូចបំផុត (6%)។</p>
+    </div>
   scorecard_implementation_by_device_type_panel_title: "ការអនុវត្តប័ណ្ណដាក់ពិន្ទុបែងចែកតាមប្រភេទឧបករណ៍"
-  scorecard_implementation_by_device_type_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍ដោយ អ្នកសម្របសម្រួលគណនេយ្យភាពសហគមន៍(CAF)"
+  scorecard_implementation_by_device_type_panel_description: |
+    <div lang="km-KH">
+    <p><strong>ការអនុវត្តប័ណ្ណដាក់ពិន្ទុបែងចែកតាមប្រភេទឧបករណ៍</strong></p>
+    <p>ក្រាបនេះបង្ហាញការបែងចែកនៃប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត តាមប្រភេទឧបករណ៍ដែលបានប្រើសម្រាប់បញ្ចូលទិន្នន័យ។ <em>របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុម័ត។</em></p>
+    <ul>
+      <li><strong>ទូរស័ព្ទចល័ត</strong> — 64 ប័ណ្ណ (69%)</li>
+      <li><strong>ថេប្លេត</strong> — 29 ប័ណ្ណ (31%)</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តសរុប 93 ភាគច្រើន (64) ត្រូវបានបញ្ចូលទិន្នន័យតាមទូរស័ព្ទចល័ត ខណៈ 29 ត្រូវបានបញ្ចូលតាមថេប្លេត។</p>
+    </div>
   scorecard_participants_by_gender_panel_title: "អ្នកចូលរួមបែងចែកតាមភេទ"
-  scorecard_participants_by_gender_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_participants_by_gender_panel_description: |
+    <div lang="km-KH">
+    <p><strong>អ្នកចូលរួមបែងចែកតាមភេទ</strong></p>
+    <p>ក្រាបនេះបង្ហាញការបែងចែកនៃអ្នកចូលរួម តាមភេទ។ <em>របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុម័ត។</em></p>
+    <ul>
+      <li><strong>ប្រុស</strong> — 176 នាក់ (57%)</li>
+      <li><strong>ស្រី</strong> — 134 នាក់ (43%)</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> ក្នុងចំណោមអ្នកចូលរួមសរុប 310 នាក់ ភាគច្រើន (176 នាក់) ជាប្រុស ខណៈ 134 នាក់ជាស្រី។</p>
+    </div>
   scorecard_participants_by_age_panel_title: "អ្នកចូលរួមបែងចែកតាមអាយុ"
-  scorecard_participants_by_age_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_participants_by_age_panel_description: |
+    <div lang="km-KH">
+    <p><strong>អ្នកចូលរួមបែងចែកតាមអាយុ</strong></p>
+    <p>ក្រាបនេះបង្ហាញការបែងចែកនៃអ្នកចូលរួម តាមក្រុមអាយុ។ <em>របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុម័ត។</em></p>
+    <ul>
+      <li><strong>អាយុ 31–45</strong> — 171 នាក់ (55%)</li>
+      <li><strong>អាយុ 15–30</strong> — 89 នាក់ (29%)</li>
+      <li><strong>អាយុ &gt;45</strong> — 50 នាក់ (16%)</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> ក្នុងចំណោមអ្នកចូលរួមសរុប 310 នាក់ ជាងពាក់កណ្តាល (171 នាក់) ស្ថិតនៅក្នុងក្រុមអាយុ 31–45 ដែលជាចំណែកធំបំផុតក្នុងចំណោមក្រុមអាយុទាំងអស់។</p>
+    </div>
   scorecard_participants_by_profile_panel_title: "អ្នកចូលរួមបែងចែកតាមលក្ខណៈសម្បតិ្ត"
-  scorecard_participants_by_profile_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_participants_by_profile_panel_description: |
+    <div lang="km-KH">
+    <p><strong>អ្នកចូលរួមបែងចែកតាមក្រុមណៈសម្បត្តិ</strong></p>
+    <p>ក្រាបនេះបង្ហាញការបែងចែកនៃអ្នកចូលរួម តាមភេទ ក្នុងក្រុមនីមួយៗ។ <em>របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុម័ត។</em></p>
+    <ul>
+      <li><strong>ជនជាតិដើម</strong> — ស្រី៖ 38 / សរុប៖ 73</li>
+      <li><strong>យុវជន</strong> — ស្រី៖ 34 / សរុប៖ 55</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> ចំពោះក្រុមជនជាតិដើម មានអ្នកចូលរួម 38 នាក់ជាស្រី ក្នុងចំណោមអ្នកចូលរួមសរុប 73 នាក់ក្នុងក្រុមនោះ ដោយសល់ជាប្រុស។</p>
+    </div>
   scorecard_top_5_proposed_criteria_panel_title: "លក្ខណៈវិនិច្ឆ័យដែលស្នើឡើងច្រើនជាងគេទាំង៥"
-  scorecard_top_5_proposed_criteria_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
-  scorecard_top_5_prioritized_criteria_panel_title: "លក្ខណៈវិនិច្ឆ័យអាទិភាព(ដែលបានអនុវត្ត)ច្រើនជាងគេទាំង៥"
-  scorecard_top_5_prioritized_criteria_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_top_5_proposed_criteria_panel_description: |
+    <div lang="km-KH">
+    <p><strong>លក្ខណៈវិនិច្ឆ័យដែលស្នើឡើងច្រើនជាងគេទាំង៥</strong></p>
+    <p>តារាងនេះបង្ហាញលក្ខណៈវិនិច្ឆ័យ/សូចនាករចំនួន ៥ ដែលត្រូវបានស្នើឡើងញឹកញាប់បំផុត ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត។ <em>របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុម័ត។</em></p>
+    <ul>
+      <li><strong>ពេលវេលា</strong> — 16</li>
+      <li><strong>ការបង្រៀន</strong> — 10</li>
+      <li><strong>បណ្ណាល័យ</strong> — 9</li>
+      <li><strong>ប្រជុំប្រចាំខែ</strong> — 8</li>
+      <li><strong>សម្ភារៈកិច្ចា</strong> — 7</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> "ពេលវេលា" ត្រូវបានស្នើឡើង 16 ដង ធ្វើឱ្យវាក្លាយជាលក្ខណៈវិនិច្ឆ័យដែលត្រូវបានលើកឡើងញឹកញាប់បំផុត ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត — លើសពី "ការបង្រៀន" ដែលមាន 10 ដងគួរឲ្យកត់សម្គាល់។</p>
+    </div>
+  scorecard_top_5_prioritized_criteria_panel_title: "លក្ខណៈវិនិច្ឆ័យអាទិភាពច្រើនជាងគេទាំង៥"
+  scorecard_top_5_prioritized_criteria_panel_description: |
+    <div lang="km-KH">
+    <p><strong>លក្ខណៈវិនិច្ឆ័យអាទិភាព ច្រើនជាងគេទាំង៥</strong></p>
+    <p>តារាងនេះបង្ហាញលក្ខណៈវិនិច្ឆ័យ/សូចនាករអាទិភាពចំនួន ៥ ដែលត្រូវបានអនុម័តញឹកញាប់បំផុត ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត។ <em>របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុម័ត។</em></p>
+    <ul>
+      <li><strong>ការបង្រៀន</strong> — 5</li>
+      <li><strong>ពេលវេលា</strong> — 5</li>
+      <li><strong>ធុងទឹកអនាម័យ</strong> — 4</li>
+      <li><strong>បណ្ណាល័យ</strong> — 4</li>
+      <li><strong>កន្លែងចាក់សំរាម</strong> — 3</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> "ការបង្រៀន" និង "ពេលវេលា" មានចំនួនស្មើគ្នាជាលក្ខណៈវិនិច្ឆ័យអាទិភាពដែលបានអនុម័តញឹកញាប់បំផុត ដោយលេចឡើងម្តងៗ ៥ ដងក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត។</p>
+    </div>
   scorecard_top_5_prioritized_criteria_happy_face_panel_title: "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (😁 ពេញចិត្ត)"
-  scorecard_top_5_prioritized_criteria_happy_face_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_top_5_prioritized_criteria_happy_face_panel_description: |
+    <div lang="km-KH">
+    <p><strong>លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (😄 ពេញចិត្ត)</strong></p>
+    <p>តារាងនេះបង្ហាញលក្ខណៈវិនិច្ឆ័យ/សូចនាករអាទិភាពចំនួន ៥ ដែលត្រូវបានគូសសម្គាល់ជាការ "ពេញចិត្ត(ពិន្ទុ 4 និង 5)" (😄) ញឹកញាប់បំផុត ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុ។</p>
+    <ul>
+      <li><strong>ពេលវេលា</strong> — 24</li>
+      <li><strong>ប្រជុំប្រចាំខែ</strong> — 17</li>
+      <li><strong>ការផ្តល់សេវា</strong> — 11</li>
+      <li><strong>ការបង្រៀន</strong> — 10</li>
+      <li><strong>វេនប្រចាំការ</strong> — 10</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> "ពេលវេលា" ទទួលបានពិន្ទុពេញចិត្តច្រើនជាងគេ (24) ជាងទ្វេដងនៃចំណុចបន្ទាប់គឺ "ប្រជុំប្រចាំខែ" (17)។</p>
+    </div>
   scorecard_top_5_prioritized_criteria_neutral_face_panel_title: "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (🙂 ទទួលយកបាន)"
-  scorecard_top_5_prioritized_criteria_neutral_face_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_top_5_prioritized_criteria_neutral_face_panel_description: |
+    <div lang="km-KH">
+    <p><strong>សូចនាករអាទិភាពទាំង៥ (🙂 អាចទទួលយកបាន)</strong></p>
+    <p>តារាងនេះបង្ហាញសូចនាករអាទិភាពចំនួន ៥ ដែលត្រូវបានគូសសម្គាល់ជា "អាចទទួលយកបាន(ពិន្ទុ 3)" (🙂) ញឹកញាប់បំផុត ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុ។</p>
+    <ul>
+      <li><strong>បង្គន់អនាម័យ</strong> — 14</li>
+      <li><strong>ការបង្រៀន</strong> — 13</li>
+      <li><strong>របិដ្ឋាន</strong> — 12</li>
+      <li><strong>អាកាសធាតុ</strong> — 11</li>
+      <li><strong>ថ្នាំបង្គារ</strong> — 10</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> "បង្គន់អនាម័យ" ទទួលបានពិន្ទុ "អាចទទួលយកបាន" ច្រើនជាងគេ (14) លើសពី "ការបង្រៀន" (13) បន្តិច។</p>
+    </div>
   scorecard_top_5_prioritized_criteria_angry_face_panel_title: "លក្ខណៈវិនិច្ឆ័យអាទិភាពទាំង៥ (😡 មិនពេញចិត្ត)"
-  scorecard_top_5_prioritized_criteria_angry_face_panel_description: "របាយការណ៍នេះរាប់បញ្ចូលតែប័ណ្ណដាក់ពិន្ទុទាំងឡាយណាដែលបានអនុវត្តរួចរាល់នៅសហគមន៍"
+  scorecard_top_5_prioritized_criteria_angry_face_panel_description: |
+    <div lang="km-KH">
+    <p><strong>សូចនាករអាទិភាពទាំង៥ (😡 មិនពេញចិត្ត)</strong></p>
+    <p>តារាងនេះបង្ហាញសូចនាករអាទិភាពចំនួន ៥ ដែលត្រូវបានគូសសម្គាល់ជា "មិនពេញចិត្ត(ពិន្ទុ 1 និង 2)" (😡) ញឹកញាប់បំផុត ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុ។</p>
+    <ul>
+      <li><strong>ការចូលរួមរបស់មាតាបិតាសិស្សរំលឹកកូន</strong> — 17</li>
+      <li><strong>បណ្ណាល័យ</strong> — 14</li>
+      <li><strong>សិស្សអវត្តមានច្រើន</strong> — 14</li>
+      <li><strong>សិស្សបោះបង់ការសិក្សា</strong> — 11</li>
+      <li><strong>ទំនាក់ទំនងលម្អៀងគ្រូនិងសហគមន៍</strong> — 9</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> "ការចូលរួមរបស់មាតាបិតាសិស្សរំលឹកកូន" ទទួលបានពិន្ទុ "មិនពេញចិត្ត" ច្រើនជាងគេ (17) ដែលបង្ហាញថានេះជាបញ្ហាចម្បងបំផុតក្នុងចំណោមសូចនាករដែលបានវាយតម្លៃ។</p>
+    </div>
+  scorecard_completion_rate_panel_title: "អត្រាបញ្ចប់ប័ណ្ណដាក់ពិន្ទុ(%)"
+  scorecard_completion_rate_panel_description: |
+    <div lang="km-KH">
+    <p><strong>អត្រាបញ្ចប់ប័ណ្ណដាក់ពិន្ទុ (%)</strong></p>
+    <p>សូចនាករនេះបង្ហាញភាគរយនៃប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័ត ធៀបនឹងប័ណ្ណដាក់ពិន្ទុដែលបានគ្រោងទុក។</p>
+    <p><strong>រូបមន្ត (Formula):</strong><br>
+    អត្រាបញ្ចប់ (%) = (ប័ណ្ណដាក់ពិន្ទុដែលបានបញ្ចប់/អនុម័ត ÷ ប័ណ្ណដាក់ពិន្ទុដែលបានគម្រោង) × 100</p>
+    <p><strong>ឧទាហរណ៍៖</strong><br>
+    ប្រសិនបើមានប័ណ្ណដាក់ពិន្ទុគម្រោង ៥៥ និងបានអនុម័ត ៤៥ នោះអត្រាបញ្ចប់គឺ៖<br>
+    (៤៥ ÷ ៥៥) × 100 = 82%</p>
+    </div>
+  scorecard_geo_coverage_rate_panel_title: "អត្រាគ្របដណ្តប់ភូមិសាស្ត្រ (%)"
+  scorecard_geo_coverage_rate_panel_description: |
+    <div lang="km-KH">
+    <p><strong>អត្រាគ្របដណ្តប់ភូមិសាស្ត្រ (%)</strong></p>
+    <p>សូចនាករនេះបង្ហាញពីភាគរយនៃចំនួនភូមិសាស្ត្រដែលបានសម្រេច ប្រៀបធៀបនឹងចំនួនភូមិសាស្ត្រដែលបានគ្រោងទុក។</p>
+
+    <p><strong>រូបមន្ត (Formula):</strong><br>
+    អត្រាគ្របដណ្តប់ភូមិសាស្ត្រ (%) = (ចំនួនភូមិសាស្ត្រដែលបានសម្រេច ÷ ចំនួនភូមិសាស្ត្រដែលបានគ្រោងទុក) × 100</p>
+
+    <p><strong>ឧទាហរណ៍៖</strong><br>
+    ប្រសិនបើចំនួនភូមិសាស្ត្រដែលបានគ្រោងទុកមាន ១០ តំបន់ ហើយបានសម្រេច ៨ តំបន់ នោះអត្រាគ្របដណ្តប់ភូមិសាស្ត្រគឺ៖<br>
+    (៨ ÷ ១០) × 100 = 80%</p>
+    </div>
+  scorecard_beneficiary_reach_title: "វិសាលភាពអ្នកទទួលផល"
+  scorecard_beneficiary_reach_description: |
+    <div lang="km-KH">
+    <p><strong>វិសាលភាពអ្នកទទួលផល</strong></p>
+    <p>តារាងនេះបង្ហាញការបែងចែកនៃអ្នកចូលរួមសរុប — ជួរឈរនីមួយៗបង្ហាញចំនួន និងភាគរយប្រៀបធៀបនឹងចំនួនសរុប។</p>
+    <ul>
+      <li><strong>ចំនួនអ្នកចូលរួមសរុប</strong> — 7</li>
+      <li><strong>ស្រី %</strong> — 6 (86%)</li>
+      <li><strong>យុវជន %</strong> — 4 (57%)</li>
+      <li><strong>ពិការភាព %</strong> — 0 (0%)</li>
+      <li><strong>ជនជាតិដើម %</strong> — 3 (43%)</li>
+    </ul>
+    <p><strong>ឧទាហរណ៍៖</strong> ក្នុងចំណោមអ្នកចូលរួមសរុប 7 នាក់ មាន 6 នាក់ជាស្រី (86%) 4 នាក់ជាយុវជន (57%) និង 3 នាក់ជាជនជាតិដើម (43%)។ គ្មានអ្នកចូលរួមណាមួយរាយការណ៍ថាមានពិការភាពទេ។</p>
+    </div>
 
   # label in graph
   min_day: អប្បបរមា (ថ្ងៃ)
   average_day: មធ្យម (ថ្ងៃ)
   max_day: អតិបរមា (ថ្ងៃ)
   scorecard_planned_count: ចំនួនគ្រោងទុក
-  scorecard_implemented_count: ចំនួនអនុវត្តរួចរាល់
+  scorecard_implemented_count: ចំនួនអនុម័ត
   scorecard_type_self_assessment: វាយតម្លៃដោយខ្លួនឯង
   scorecard_type_community_scorecard: ប័ណ្ណដាក់ពិន្ទុសហគមន៍
   scorecard_type_combined_scorecard: ប័ណ្ណដាក់ពិន្ទុរួម(វាយតម្លៃខ្លួនឯង + សហគមន៍)
@@ -67,13 +315,18 @@ km:
   scorecard_implementation_status: "ការអនុវត្តប័ណ្ណដាក់ពិន្ទុ៖"
   scorecard_implementation_status_planned: "គ្រោងទុក"
   scorecard_implementation_status_review: "កំពុងត្រួតពិនិត្យ"
-  scorecard_implementation_status_implemented: "អនុវត្តរួចរាល់"
-
-  # Variable labels
-  province_title: ខេត្ត
-  year_title: ឆ្នាំ
-  facility_title: សេវា
-  program_title: កម្មវិធី
-  local_ngo_title: អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ
-  institution_title: ស្ថាប័ន
-  language_title: ភាសា
+  scorecard_implementation_status_implemented: "អនុម័ត"
+  # Geographic coverage labels
+  location: គោលដៅភូមិសាស្ត្រ
+  covered_vs_target: "# គ្របដណ្តប់ / # គោលដៅ"
+  coverage_rate: អត្រាគ្របដណ្តប់ (%)
+  province_covered: ខេត្ត
+  district_covered: ស្រុក
+  commune_covered: ឃុំ
+  # Beneficiary Reach
+  beneficiary_reach: "វិសាលភាពអ្នកទទួលផល"
+  total_participants: "ចំនួនអ្នកចូលរួមសរុប"
+  female_percentage: "ស្រី %"
+  youth_percentage: "យុវជន %"
+  disabilities_percentage: "ពិការភាព %"
+  minority_percentage: "ជនជាតិដើម %"
