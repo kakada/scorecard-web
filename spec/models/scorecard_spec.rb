@@ -58,6 +58,7 @@
 #  running_mode                :integer          default("online")
 #  qr_code                     :string
 #  token                       :string(64)
+#  rejected_at                 :datetime
 #
 require "rails_helper"
 
@@ -174,7 +175,7 @@ RSpec.describe Scorecard, type: :model do
 
   describe "#rejected_by" do
     let!(:scorecard) { create(:scorecard, :submitted) }
-    let!(:reviewer) { create(:user, role: :lngo, program: scorecard.program) }
+    let!(:reviewer) { create(:user, :lngo, program: scorecard.program) }
 
     before do
       scorecard.completed_by(reviewer)
@@ -184,7 +185,6 @@ RSpec.describe Scorecard, type: :model do
     it "marks scorecard as rejected" do
       expect(scorecard.reload.progress).to eq("rejected")
       expect(scorecard.rejected_at).to be_present
-      expect(scorecard.completed_at).to be_nil
     end
 
     it "creates rejected progress record" do

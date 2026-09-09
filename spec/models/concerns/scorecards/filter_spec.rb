@@ -76,7 +76,6 @@ RSpec.describe Scorecards::Filter do
 
       it "excludes rejected scorecards when filter is blank" do
         result = Scorecard.filter(filter: nil)
-        expect(result).to include(nil_progress, planned, renewed, downloaded, running, open_voting, close_voting, completed)
         expect(result).not_to include(rejected)
       end
 

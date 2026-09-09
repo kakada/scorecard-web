@@ -58,6 +58,7 @@
 #  running_mode                :integer          default("online")
 #  qr_code                     :string
 #  token                       :string(64)
+#  rejected_at                 :datetime
 #
 
 class Scorecard < ApplicationRecord

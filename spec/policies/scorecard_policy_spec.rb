@@ -184,19 +184,46 @@ RSpec.describe ScorecardPolicy do
     end
   end
 
-  permissions :completed? do
-    context "user is local ngo and scorecard is completed" do
+  permissions :reject? do
+    context "user is program admin and scorecard is completed" do
       let(:scorecard) { create(:scorecard, progress: :completed, local_ngo_id: lngo.id) }
-      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+      let(:user) { create(:user, :program_admin, program_id: scorecard.program_id) }
 
-      it "accept access" do
+      it "permits access" do
         expect(subject).to permit(user, scorecard)
       end
     end
 
-    context "scorecard is not completed" do
-      let(:scorecard) { create(:scorecard, local_ngo_id: lngo.id, progress: :in_review) }
-      let(:user) { User.new(role: :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
+    context "user is staff and scorecard is in review" do
+      let(:scorecard) { create(:scorecard, progress: :in_review, local_ngo_id: lngo.id) }
+      let(:user) { create(:user, :staff, program_id: scorecard.program_id) }
+
+      it "permits access" do
+        expect(subject).to permit(user, scorecard)
+      end
+    end
+
+    context "scorecard is rejected" do
+      let(:scorecard) { create(:scorecard, :completed, :rejected, local_ngo_id: lngo.id) }
+      let(:user) { create(:user, :program_admin, program_id: scorecard.program_id) }
+
+      it "denies access" do
+        expect(subject).not_to permit(user, scorecard)
+      end
+    end
+
+    context "scorecard is neither in review nor completed" do
+      let(:scorecard) { create(:scorecard, progress: :planned, local_ngo_id: lngo.id) }
+      let(:user) { create(:user, :program_admin, program_id: scorecard.program_id) }
+
+      it "denies access" do
+        expect(subject).not_to permit(user, scorecard)
+      end
+    end
+
+    context "user is local ngo (not program admin or staff)" do
+      let(:scorecard) { create(:scorecard, progress: :completed, local_ngo_id: lngo.id) }
+      let(:user) { create(:user, :lngo, local_ngo_id: lngo.id, program_id: scorecard.program_id) }
 
       it "denies access" do
         expect(subject).not_to permit(user, scorecard)
