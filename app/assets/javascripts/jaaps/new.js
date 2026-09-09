@@ -298,7 +298,9 @@ CW.JaapsNew = (() => {
       },
 
       { title: tr.estimated_cost, field: "estimated_cost", width: 180, headerSort: false, editor: editable ? "number" : false },
-      { title: tr.implementer, field: "implementer", width: 260, headerSort: false, editor: editable ? "input" : false }
+      { title: tr.implementer, field: "implementer", width: 260, headerSort: false, editor: editable ? "input" : false },
+      { title: tr.status, field: "status", width: 180, headerSort: false, editor: editable ? "input" : false },
+      { title: tr.date, field: "date", width: 180, headerSort: false, editor: editable ? "input" : false }
     ];
   }
 
