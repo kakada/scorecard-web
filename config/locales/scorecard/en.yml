@@ -137,6 +137,7 @@ en:
     edit_selected_action: Edit (selected action)
     in_review_at: "In review at:"
     completed_at: "Completed at:"
+    rejected_at: "Rejected at:"
     completed_date: Completed date
     mark_as_completed: Mark as completed
     selected: Selected
@@ -161,6 +162,8 @@ en:
     no_request_change: No scorecard request change
     are_you_sure_to_mark_as_completed: Are you sure to mark the scorecard <b>%{code}</b> as completed?
     data_connot_be_rollback_after_approve: The data will no longer be editable after you've approved!
+    are_you_sure_to_reject: Are you sure to reject the scorecard <b>%{code}</b>?
+    reject_successfully: Reject successfully
     use_this_code_to_download_scorecard: Use this code to download the scorecard.
     provinces_selected: provinces selected
     years_selected: years selected

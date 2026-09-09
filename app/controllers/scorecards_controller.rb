@@ -2,12 +2,12 @@
 
 class ScorecardsController < ApplicationController
   helper_method :filter_params
-  before_action :set_scorecard, only: [:show, :edit, :update, :destroy, :complete]
+  before_action :set_scorecard, only: [:show, :edit, :update, :destroy, :complete, :reject]
 
   def index
     respond_to do |format|
       format.html {
-        @progress_count = Scorecards::ScorecardProgress.new(policy_scope(Scorecard.filter(group_count_filter_params))).group_count
+        @progress_count = Scorecards::ScorecardProgress.new(policy_scope(Scorecard.filter(group_count_filter_params.merge(filter: "all")))).group_count
 
         @pagy, @scorecards = pagy(
           policy_scope(Scorecard.filter(filter_params)
@@ -89,6 +89,14 @@ class ScorecardsController < ApplicationController
   def complete
     authorize @scorecard, :in_review?
     @scorecard.completed_by(current_user)
+
+    redirect_to scorecard_url(@scorecard.uuid)
+  end
+
+  def reject
+    authorize @scorecard, :reject?
+    @scorecard.rejected_by(current_user)
+    flash[:notice] = t("scorecard.reject_successfully")
 
     redirect_to scorecard_url(@scorecard.uuid)
   end

@@ -12,6 +12,7 @@ RSpec.describe Scorecards::ScorecardProgress do
       expect(counts.running).to eq(0)
       expect(counts.in_review).to eq(0)
       expect(counts.completed).to eq(0)
+      expect(counts.rejected).to eq(0)
     end
 
     it "counts scorecards by progress groups" do
@@ -19,10 +20,11 @@ RSpec.describe Scorecards::ScorecardProgress do
       running_progress = Scorecard::RUNNING_STATUSES.first
 
       scorecards = [
-        instance_double(Scorecard, progress: planned_progress, in_review?: false, completed?: false),
-        instance_double(Scorecard, progress: running_progress, in_review?: false, completed?: false),
-        instance_double(Scorecard, progress: "in_review", in_review?: true, completed?: false),
-        instance_double(Scorecard, progress: "completed", in_review?: false, completed?: true),
+        instance_double(Scorecard, progress: planned_progress, in_review?: false, completed?: false, rejected?: false),
+        instance_double(Scorecard, progress: running_progress, in_review?: false, completed?: false, rejected?: false),
+        instance_double(Scorecard, progress: "in_review", in_review?: true, completed?: false, rejected?: false),
+        instance_double(Scorecard, progress: "completed", in_review?: false, completed?: true, rejected?: false),
+        instance_double(Scorecard, progress: "rejected", in_review?: false, completed?: false, rejected?: true),
       ]
 
       counts = described_class.new(scorecards).group_count
@@ -32,6 +34,7 @@ RSpec.describe Scorecards::ScorecardProgress do
       expect(counts.running).to eq(1)
       expect(counts.in_review).to eq(1)
       expect(counts.completed).to eq(1)
+      expect(counts.rejected).to eq(1)
     end
   end
 end

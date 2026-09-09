@@ -19,3 +19,7 @@
     %a.nav-link{href: scorecards_path(filter: 'completed')}
       = t('scorecard.completed').titleize
       = "(#{@progress_count.completed})"
+  %li.nav-item{class: css_active_tab(params[:filter]=='rejected')}
+    %a.nav-link{href: scorecards_path(filter: 'rejected')}
+      = t('scorecard.rejected').titleize
+      = "(#{@progress_count.rejected})"

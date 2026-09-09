@@ -19,11 +19,11 @@ en:
   scorecard_entered_after_actual_implementation_date_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
     <p><strong>Number of Scorecards Entered After the Actual Implementation Date</strong></p>
-    <p>This indicator shows the number of scorecards where the <strong>Entry Date</strong> is at least 1 day later than the <strong>Conducted Date</strong> (the date the assessment was actually carried out).</p>
+    <p>This indicator shows the number of scorecards where the <strong>Entry Date</strong> is at least 1 day later than the <strong>Conducted Date</strong> (the date the implementation was actually carried out).</p>
     <p><strong>Formula:</strong><br>
     Entry Date − Conducted Date ≥ 1 Day</p>
     <p><strong>Example:</strong><br>
-    Assessment conducted on: 01-Jan-2022<br>
+    Implementation conducted on: 01-Jan-2022<br>
     Data entered on: 03-Jan-2022<br>
     → This case is counted, since the gap is 2 days (≥ 1 day).</p>
     </div>
@@ -284,6 +284,20 @@ en:
     </ul>
     <p><strong>Example:</strong> Out of 7 total participants, 6 are female (86%), 4 are youth (57%), and 3 belong to a minority group (43%). None of the participants reported a disability.</p>
     </div>
+  data_quality_kpi_panel_title: "Data Quality KPI"
+  data_quality_kpi_panel_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>Data Quality KPI</strong></p>
+    <p>This table tracks key indicators of scorecard data quality across the review pipeline:</p>
+    <ul>
+      <li><strong># Submitted Scorecard</strong> — scorecards that have been submitted from CAFs/Peers</li>
+      <li><strong># Approved Scorecard</strong> — scorecards that have been approved by Local NGO (excluding rejected ones)</li>
+      <li><strong># Rejected Scorecard</strong> — scorecards that have been rejected by Program team</li>
+      <li><strong># Custom Indi Correction</strong> — custom indicators that were edited by Local NGO (i.e., updated after their initial creation)</li>
+    </ul>
+    <p><strong>Current values:</strong> 5 Submitted / 3 Approved / 1 Rejected / 0 Custom Indicator Corrections.</p>
+    <p><strong>Example:</strong> Out of 5 submitted scorecards, 3 have been approved and 1 rejected, with 1 still pending review. No custom indicators have needed correction by Local NGO.</p>
+    </div>
 
   # label in graph
   min_day: Min (days)
@@ -309,9 +323,10 @@ en:
   vote_count: Vote Count
   scorecard_local_ngo: Local Implementing NGO
   scorecard_implementation_status: "Implementation Status:"
-  scorecard_implementation_status_planned: Planned
-  scorecard_implementation_status_review: Under Review
-  scorecard_implementation_status_implemented: Implemented
+  scorecard_implementation_status_planned: Total Planned
+  scorecard_implementation_status_review: "# Under Review"
+  scorecard_implementation_status_implemented: "# Approved"
+  scorecard_implementation_status_rejected: "# Rejected"
   # Geographic coverage labels
   location: Covered Location
   covered_vs_target: "# of Covered / # of Target"
@@ -326,3 +341,8 @@ en:
   youth_percentage: "Youth %"
   disabilities_percentage: "Disabilities %"
   minority_percentage: "Minority %"
+  # Data Quality KPI
+  total_submitted_scorecard: "# Submitted Scorecard"
+  total_approved_scorecard: "# Approved Scorecard"
+  total_rejected_scorecard: "# Rejected Scorecard"
+  total_custom_indicator_correction: "# Custom Indi Correction"

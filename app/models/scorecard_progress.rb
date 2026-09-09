@@ -36,7 +36,8 @@ class ScorecardProgress < ApplicationRecord
     close_voting: 5,
 
     in_review: 6,
-    completed: 7
+    completed: 7,
+    rejected: -1
   }
 
   delegate :email, to: :user, prefix: :user, allow_nil: true

@@ -58,6 +58,7 @@
 #  running_mode                :integer          default("online")
 #  qr_code                     :string
 #  token                       :string(64)
+#  rejected_at                 :datetime
 #
 
 class Scorecard < ApplicationRecord
@@ -93,6 +94,7 @@ class Scorecard < ApplicationRecord
 
   # Constant
   STATUS_PLANNED = "planned"
+  STATUS_REJECTED = "rejected"
   STATUS_COMPLETED = "completed"
   STATUS_IN_REVIEW = "in_review"
   STATUS_RUNNING = "running"
