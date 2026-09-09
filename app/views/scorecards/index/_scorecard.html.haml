@@ -52,6 +52,11 @@
         = "_"
   %td
     .d-flex.justify-content-end
+      / Reject icon
+      - if policy(scorecard).reject?
+        = link_to scorecard_path(scorecard.uuid, reject_info: true), class: 'btn btn-circle btn-sm btn-outline-danger mr-1', remote: true, data: { toggle: 'tooltip', placement: 'top', title: t('shared.reject') } do
+          %i.fas.fa-minus
+
       / Request change icon
       = render 'scorecards/button_request_change', scorecard: scorecard
 

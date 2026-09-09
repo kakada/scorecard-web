@@ -35,9 +35,7 @@ module Scorecards::Lockable
       transaction do
         update_columns(
           progress: Scorecard::STATUS_REJECTED,
-          completed_at: nil,
           rejected_at: Time.now.utc,
-          updated_at: Time.now.utc
         )
         scorecard_progresses.create!(status: Scorecard::STATUS_REJECTED, user_id: user.id)
       end

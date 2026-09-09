@@ -52,8 +52,8 @@ class ScorecardPolicy < ApplicationPolicy
     user.lngo? && record.in_review?
   end
 
-  def completed?
-    user.lngo? && record.completed?
+  def reject?
+    (user.program_admin? || user.staff?) && (record.in_review? || record.completed?) && !record.rejected?
   end
 
   class Scope < Scope

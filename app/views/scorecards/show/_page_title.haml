@@ -26,7 +26,7 @@
 
       = render "scorecards/show/modal_mark_as_completed"
 
-    - if policy(@scorecard).completed?
+    - if policy(@scorecard).reject?
       = link_to reject_scorecard_path(@scorecard.uuid), class: 'btn btn-danger btn-sm shadow-sm mr-2', method: :put, data: { confirm: t("scorecard.are_you_sure_to_reject", code: @scorecard.uuid) } do
         = t("shared.reject")
 

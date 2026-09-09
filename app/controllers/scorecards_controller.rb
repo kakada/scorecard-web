@@ -94,7 +94,7 @@ class ScorecardsController < ApplicationController
   end
 
   def reject
-    authorize @scorecard, :completed?
+    authorize @scorecard, :reject?
     @scorecard.rejected_by(current_user)
     flash[:notice] = t("scorecard.reject_successfully")
 

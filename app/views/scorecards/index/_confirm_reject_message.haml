@@ -1,0 +1,6 @@
+.modal-body.text-left
+  = t("scorecard.are_you_sure_to_reject", code: @scorecard.uuid).html_safe
+
+.modal-footer
+  %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
+  = link_to t("shared._yes"), reject_scorecard_path(@scorecard.uuid), method: :put, class: "btn btn-danger"
