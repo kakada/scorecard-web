@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FamReportingStatPolicy < ApplicationPolicy
+class Ahoy::EventPolicy < ApplicationPolicy
   def index?
     user.system_admin? || user.program_admin? || user.staff?
   end

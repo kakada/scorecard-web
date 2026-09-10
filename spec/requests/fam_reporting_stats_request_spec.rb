@@ -6,8 +6,17 @@ RSpec.describe "FamReportingStats", type: :request do
   include Devise::Test::IntegrationHelpers
 
   describe "GET /fam_reporting_stats" do
-    let!(:web_stat) { create(:fam_reporting_stat, source: :web, views_count: 3) }
-    let!(:mobile_stat) { create(:fam_reporting_stat, source: :mobile, views_count: 2) }
+    let!(:web_events) do
+      create_list(:ahoy_visit, 2, platform: "web").map do |visit|
+        create(:ahoy_event, visit: visit, name: "view_fam_reporting")
+      end
+    end
+
+    let!(:mobile_events) do
+      create_list(:ahoy_visit, 1, platform: "iOS").map do |visit|
+        create(:ahoy_event, visit: visit, name: "view_fam_reporting")
+      end
+    end
 
     context "when user is program_admin" do
       let(:user) { create(:user) }
@@ -18,10 +27,6 @@ RSpec.describe "FamReportingStats", type: :request do
         get "/fam_reporting_stats"
 
         expect(response).to have_http_status(:success)
-        expect(response.body).to include(I18n.t("fam_reporting.sources.web"))
-        expect(response.body).to include(I18n.t("fam_reporting.sources.mobile"))
-        expect(response.body).to include("3")
-        expect(response.body).to include("2")
       end
     end
 

@@ -5,7 +5,7 @@ class FamReportingController < ApplicationController
   layout :set_layout
 
   def show
-    FamReportingStat.record_view!(:web)
+    ahoy.track "view_fam_reporting"
   end
 
   private

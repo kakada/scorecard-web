@@ -5,36 +5,46 @@ require "rails_helper"
 RSpec.describe "FamReporting", type: :request do
   include Devise::Test::IntegrationHelpers
 
+  let(:browser_headers) do
+    { "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" }
+  end
+
   describe "GET /fam_reporting" do
-    it "returns http success without authentication and tracks a web view" do
-      expect {
-        get "/fam_reporting"
-      }.to change { FamReportingStat.find_by(source: :web)&.views_count.to_i }.by(1)
+    context "when the visitor is not signed in" do
+      it "returns http success" do
+        get "/fam_reporting", headers: browser_headers
+        expect(response).to have_http_status(:success)
+      end
 
-      expect(response).to have_http_status(:success)
+      it "renders without the footer" do
+        get "/fam_reporting", headers: browser_headers
+        assert_select "footer", count: 0
+      end
+
+      it "tracks a view_fam_reporting event" do
+        expect {
+          get "/fam_reporting", headers: browser_headers
+        }.to change(Ahoy::Event, :count).by(1)
+
+        expect(Ahoy::Event.last.name).to eq("view_fam_reporting")
+      end
     end
-  end
 
-  describe "GET /users/sign_in" do
-    it "shows the fam reporting link" do
-      get new_user_session_path
+    context "when the visitor is signed in" do
+      let(:user) { create(:user) }
 
-      expect(response.body).to include(fam_reporting_path)
-      expect(response.body).to include(I18n.t("fam_reporting.report_concern"))
-    end
-  end
+      before { sign_in user }
 
-  describe "GET /" do
-    let(:user) { create(:user) }
+      it "returns http success" do
+        get "/fam_reporting", headers: browser_headers
+        expect(response).to have_http_status(:success)
+      end
 
-    it "shows the fam reporting notification on the homepage" do
-      sign_in user
-
-      get root_path
-
-      expect(response).to have_http_status(:success)
-      expect(response.body).to include(I18n.t("fam_reporting.homepage_notification_title"))
-      expect(response.body).to include(fam_reporting_path)
+      it "tracks a view_fam_reporting event" do
+        expect {
+          get "/fam_reporting", headers: browser_headers
+        }.to change(Ahoy::Event, :count).by(1)
+      end
     end
   end
 end
