@@ -1,6 +1,11 @@
 = content_for :title do
   = t('scorecard.scorecards')
 
+.alert.alert-info.shadow-sm
+  %strong= t("fam_reporting.homepage_notification_title")
+  %span.ml-1= t("fam_reporting.homepage_notification_body")
+  = link_to t("fam_reporting.report_concern"), fam_reporting_path, class: "alert-link ml-1"
+
 = render 'scorecards/index/nav_tabs'
 = render 'scorecards/index/filter'
 

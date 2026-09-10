@@ -1,0 +1,12 @@
+en:
+  fam_reporting:
+    page_title: FAM Reporting
+    report_concern: Report to FAM
+    homepage_notification_title: Need to share feedback or report a concern?
+    homepage_notification_body: You can contact CARE Cambodia through the Feedback and Accountability Mechanism.
+    statistics_title: FAM Reporting Statistics
+    source: Source
+    views_count: Views
+    sources:
+      web: Web
+      mobile: Mobile application
