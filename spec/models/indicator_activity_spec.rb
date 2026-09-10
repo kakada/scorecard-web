@@ -4,20 +4,22 @@
 #
 # Table name: indicator_activities
 #
-#  id                    :uuid             not null, primary key
-#  voting_indicator_uuid :string
-#  scorecard_uuid        :string
-#  content               :text
-#  selected              :boolean
-#  type                  :string
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
+#  id                             :uuid             not null, primary key
+#  voting_indicator_uuid          :string
+#  scorecard_uuid                 :string
+#  content                        :text
+#  selected                       :boolean
+#  type                           :string
+#  created_at                     :datetime         not null
+#  updated_at                     :datetime         not null
+#  indicator_activity_category_id :uuid
 #
 require "rails_helper"
 
 RSpec.describe IndicatorActivity, type: :model do
   it { is_expected.to belong_to(:voting_indicator).with_foreign_key(:voting_indicator_uuid).optional }
   it { is_expected.to belong_to(:scorecard).with_foreign_key(:scorecard_uuid).optional }
+  it { is_expected.to belong_to(:indicator_activity_category).optional }
 
   describe "default_scope" do
     it "orders by created_at ascending" do

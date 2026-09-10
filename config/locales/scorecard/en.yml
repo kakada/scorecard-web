@@ -32,6 +32,7 @@ en:
     weakness: Weakness (reflection)
     desired_change: Desired change (demand)
     suggested_action: Suggested actions (solution)
+    standard_waste_management: Standard Waste Management
     priority_action: Priority Actions
     indicator: Indicator
     implementer: Implementer(Local NGO)
@@ -214,3 +215,5 @@ en:
       planned_date: Planned date
       conducted_date: Conducted date
       submitted_date: Submitted date
+    category_name:  Standard Waste Management Category
+    category_description: Description

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_09_07_040719) do
+ActiveRecord::Schema[7.0].define(version: 2026_09_09_103100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -204,6 +204,19 @@ ActiveRecord::Schema[7.0].define(version: 2026_09_07_040719) do
     t.text "content"
     t.boolean "selected"
     t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "indicator_activity_category_id"
+    t.index ["indicator_activity_category_id"], name: "index_indicator_activities_on_indicator_activity_category_id"
+  end
+
+  create_table "indicator_activity_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name_en"
+    t.string "name_km"
+    t.text "description_en"
+    t.text "description_km"
+    t.integer "display_order", default: 0
+    t.integer "program_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -757,6 +770,8 @@ ActiveRecord::Schema[7.0].define(version: 2026_09_07_040719) do
     t.index ["scorecard_uuid", "indicator_uuid"], name: "index_voting_indicators_on_scorecard_uuid_and_indicator_uuid", unique: true
   end
 
+  add_foreign_key "indicator_activities", "indicator_activity_categories"
+  add_foreign_key "indicator_activity_categories", "programs"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

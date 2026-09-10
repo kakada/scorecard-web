@@ -16,7 +16,7 @@
         %td.text-break= vi.indicator.name
         %td.text-center= VotingIndicator.medians[vi.median]
 
-        - ['strength', 'weakness', 'suggested'].each do |action|
+        - ['strength', 'weakness'].each do |action|
           %td.w-25
             .text-break
               - vi.send("#{action}_indicator_activities").each do |activity|
@@ -35,6 +35,44 @@
 
                     %span{data_attr}= activity.content
 
+        -# Suggested action + standard waste management category are rendered together
+        %td.w-50
+          %table.table.table-sm.table-borderless.mb-0
+            - if vi.suggested_indicator_activities.any?
+              %thead
+                %tr
+                  %th.w-50.text-muted.small
+                  %th.w-50.text-muted.small
+                    = t("scorecard.standard_waste_management")
+                    %span.ml-1{type: 'button',  data: { toggle: 'modal', target: '#indicatorActivityCategoriesModal' }}
+                      %i.fas.fa-info-circle
+            %tbody
+              - vi.suggested_indicator_activities.each do |activity|
+                %tr
+                  %td.w-50.text-break
+                    .d-flex
+                      .d-flex.align-items-start
+                        .dice{style: 'width: 5px;height: 5px; background-color: black;margin-top: 10px; margin-right: 10px; border-radius: 50%'}
+                      - if policy(@scorecard).in_review?
+                        .d-flex.flex-grow-1
+                          - tooltip_title = activity.selected? ? t("scorecard.edit_selected_action") : t("shared.edit")
+                          .d-flex.align-items-start.tip{data: { toggle: 'tooltip', placement: 'top', title: tooltip_title }}
+                            = best_in_place activity, :content, url: scorecards_indicator_activity_path(activity), as: :textarea, class: ['add-space', ('text-info' if activity.selected?)], param: 'indicator_activity', inner_class: 'best-in-place-textarea', ok_button: t('shared.save'), cancel_button: t('shared.cancel'), ok_button_class: 'btn btn-primary btn-save', cancel_button_class: 'btn btn-secondary btn-cancel', skip_blur: true
+                            %span
+                              %i.fas.fa-pen.btn-sm.text-warning.edit-icon
+                      - else
+                        - data_attr = !activity.selected? ? {} : { class: 'text-info', data: { toggle: 'tooltip', placement: 'top', title: t('scorecard.selected_action') } }
+                        %span{data_attr}= activity.content
+                  %td.w-50.text-break
+                    - if policy(@scorecard).in_review?
+                      .d-flex.align-items-start.tip{data: { toggle: 'tooltip', placement: 'top', title: t("shared.edit") }}
+                        = best_in_place activity, :indicator_activity_category_id, url: scorecards_indicator_activity_path(activity), as: :select, collection: [["", t("shared.please_select")]] + @indicator_activity_categories_for_select, class: ['add-space', ('text-info' if activity.selected?)], param: 'indicator_activity', inner_class: 'best-in-place-select custom-select custom-select-sm'
+                        %span
+                          %i.fas.fa-pen.btn-sm.text-warning.edit-icon
+                    - else
+                      %span= activity.indicator_activity_category&.name || "-"
+
+
 - if references = @scorecard.scorecard_references.presence
   .mb-2
     %label= t('scorecard.references')
@@ -43,3 +81,6 @@
         %a.btn.btn-link{href: ref.attachment_url, download: true, target: '_blank'}
           %i.fas.fa-cloud-download-alt
           %span= ref.attachment_identifier
+
+-# Modal listing every indicator activity category with its name + description.
+= render 'scorecards/swots/indicatory_category_modal'
