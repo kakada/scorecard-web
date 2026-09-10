@@ -92,7 +92,7 @@ Rails.application.routes.draw do
 
   resources :languages
 
-  resources :indicator_activity_categories do
+  resources :indicator_activity_categories, except: [:show] do
     patch :move, on: :member
   end
 

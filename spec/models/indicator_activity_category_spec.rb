@@ -19,6 +19,7 @@ require "rails_helper"
 RSpec.describe IndicatorActivityCategory, type: :model do
   it { is_expected.to belong_to(:program) }
   it { is_expected.to have_many(:indicator_activities).dependent(:nullify) }
+  it { is_expected.to have_many(:suggested_indicator_activities).dependent(:nullify) }
   it { is_expected.to validate_presence_of(:name_en) }
   it { is_expected.to validate_presence_of(:name_km) }
   it { is_expected.to validate_uniqueness_of(:name_en).scoped_to(:program_id) }
@@ -92,53 +93,67 @@ RSpec.describe IndicatorActivityCategory, type: :model do
 
       expect(category.reload.display_order).to eq(1)
     end
+  end
 
-    describe "#locked?" do
-      it "returns true when the category is referenced by indicator activities" do
-        category = create(:indicator_activity_category)
-        create(:suggested_indicator_activity, indicator_activity_category: category)
+  describe "#locked?" do
+    it "returns true when the category is referenced by suggested indicator activities" do
+      category = create(:indicator_activity_category)
+      create(:suggested_indicator_activity, indicator_activity_category: category)
 
-        expect(category.locked?).to be(true)
-      end
+      expect(category.locked?).to be(true)
     end
 
-    describe "#remove!" do
-      it "removes category when not locked" do
-        category = create(:indicator_activity_category)
+    it "returns true when the category is referenced by indicator activities" do
+      category = create(:indicator_activity_category)
+      create(:indicator_activity, indicator_activity_category: category)
 
-        expect { category.remove! }.to change(IndicatorActivityCategory, :count).by(-1)
-      end
+      expect(category.locked?).to be(true)
+    end
+  end
 
-      it "does not remove category when it is locked" do
-        category = create(:indicator_activity_category)
-        create(:suggested_indicator_activity, indicator_activity_category: category)
+  describe "#remove!" do
+    it "removes category when not locked" do
+      category = create(:indicator_activity_category)
 
-        expect { category.remove! }.not_to change(IndicatorActivityCategory, :count)
-      end
+      expect { category.remove! }.to change(IndicatorActivityCategory, :count).by(-1)
     end
 
-    describe "re-ordering" do
-      it "moves category up by swapping display_order with previous category in the same program" do
-        program = create(:program)
-        first = create(:indicator_activity_category, program: program, display_order: 1)
-        second = create(:indicator_activity_category, program: program, display_order: 2)
+    it "does not remove category when it is locked by a suggested activity" do
+      category = create(:indicator_activity_category)
+      create(:suggested_indicator_activity, indicator_activity_category: category)
 
-        second.move_up!
+      expect { category.remove! }.not_to change(IndicatorActivityCategory, :count)
+    end
 
-        expect(first.reload.display_order).to eq(2)
-        expect(second.reload.display_order).to eq(1)
-      end
+    it "does not remove category when it is locked by an indicator activity" do
+      category = create(:indicator_activity_category)
+      create(:indicator_activity, indicator_activity_category: category)
 
-      it "moves category down by swapping display_order with next category in the same program" do
-        program = create(:program)
-        first = create(:indicator_activity_category, program: program, display_order: 1)
-        second = create(:indicator_activity_category, program: program, display_order: 2)
+      expect { category.remove! }.not_to change(IndicatorActivityCategory, :count)
+    end
+  end
 
-        first.move_down!
+  describe "re-ordering" do
+    it "moves category up by swapping display_order with previous category in the same program" do
+      program = create(:program)
+      first = create(:indicator_activity_category, program: program, display_order: 1)
+      second = create(:indicator_activity_category, program: program, display_order: 2)
 
-        expect(first.reload.display_order).to eq(2)
-        expect(second.reload.display_order).to eq(1)
-      end
+      second.move_up!
+
+      expect(first.reload.display_order).to eq(2)
+      expect(second.reload.display_order).to eq(1)
+    end
+
+    it "moves category down by swapping display_order with next category in the same program" do
+      program = create(:program)
+      first = create(:indicator_activity_category, program: program, display_order: 1)
+      second = create(:indicator_activity_category, program: program, display_order: 2)
+
+      first.move_down!
+
+      expect(first.reload.display_order).to eq(2)
+      expect(second.reload.display_order).to eq(1)
     end
   end
 end

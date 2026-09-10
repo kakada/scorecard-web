@@ -30,25 +30,28 @@
                 %td= timeago(category.created_at).html_safe
                 %td
                   .d-flex.justify-content-end
-                    %span.mr-1{data: {toggle: "tooltip", placement: "top", title: t("shared.move_up")}}
-                      = link_to move_indicator_activity_category_path(category, direction: "up"), method: :patch, class: "btn btn-circle btn-sm btn-outline-secondary" do
-                        %i.fas.fa-arrow-up
+                    - if policy(category).update?
+                      %span.mr-1{data: {toggle: "tooltip", placement: "top", title: t("shared.move_up")}}
+                        = link_to move_indicator_activity_category_path(category, direction: "up"), method: :patch, class: "btn btn-circle btn-sm btn-outline-secondary", "aria-label": t("shared.move_up") do
+                          %i.fas.fa-arrow-up
 
-                    %span.mr-1{data: {toggle: "tooltip", placement: "top", title: t("shared.move_down")}}
-                      = link_to move_indicator_activity_category_path(category, direction: "down"), method: :patch, class: "btn btn-circle btn-sm btn-outline-secondary" do
-                        %i.fas.fa-arrow-down
+                      %span.mr-1{data: {toggle: "tooltip", placement: "top", title: t("shared.move_down")}}
+                        = link_to move_indicator_activity_category_path(category, direction: "down"), method: :patch, class: "btn btn-circle btn-sm btn-outline-secondary", "aria-label": t("shared.move_down") do
+                          %i.fas.fa-arrow-down
 
                     - if policy(category).update?
                       = link_to edit_indicator_activity_category_path(category), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: "tooltip", placement: "top", title: t("shared.edit") } do
                         %i.fas.fa-pen
 
                     - if policy(category).destroy?
-                      - title = category.locked? ? t("indicator_activity_category.already_in_used") : t("shared.delete")
+                      - title = category.locked? ? t("indicator_activity_category.already_in_use") : t("shared.delete")
                       %span{ data: { toggle: "tooltip", placement: "top", title: title } }
-                        = link_to indicator_activity_category_path(category), remote: true, class: ["btn btn-circle btn-sm btn-outline-danger", ("disabled" if category.locked?)] do
-                          %i.fas.fa-trash-alt
+                        - if category.locked?
+                          %button.btn.btn-circle.btn-sm.btn-outline-danger.disabled{ type: "button", disabled: true, "aria-disabled": "true", "aria-label": title }
+                            %i.fas.fa-trash-alt
+                        - else
+                          = link_to indicator_activity_category_path(category), method: :delete, data: { confirm: t("indicator_activity_category.are_you_sure_to_delete", name: category.name) }, class: "btn btn-circle btn-sm btn-outline-danger", "aria-label": title do
+                            %i.fas.fa-trash-alt
 
     = render "shared/no_data", items: @indicator_activity_categories
     = render "shared/footers/pagination"
-
-= render "shared/modal_confirm"

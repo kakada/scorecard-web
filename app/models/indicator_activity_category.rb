@@ -18,6 +18,8 @@ class IndicatorActivityCategory < ApplicationRecord
   # Associations
   belongs_to :program
   has_many :indicator_activities, dependent: :nullify
+  has_many :suggested_indicator_activities, -> { where(type: SuggestedIndicatorActivity.name) }, class_name: "IndicatorActivity",
+                                              foreign_key: :indicator_activity_category_id, dependent: :nullify
 
   # Validations
   validates :name_en, :name_km, presence: true
@@ -38,7 +40,7 @@ class IndicatorActivityCategory < ApplicationRecord
   end
 
   def locked?
-    indicator_activities.exists?
+    indicator_activities.exists? || suggested_indicator_activities.exists?
   end
 
   def remove!
@@ -66,9 +68,16 @@ class IndicatorActivityCategory < ApplicationRecord
       return unless category.present?
 
       self.class.transaction do
-        current_order = display_order
-        update!(display_order: category.display_order)
-        category.update!(display_order: current_order)
+        records = [self, category].sort_by(&:id)
+        records[0].with_lock do
+          records[1].with_lock do
+            current_order = reload.display_order
+            adjacent_order = category.reload.display_order
+
+            update!(display_order: adjacent_order)
+            category.update!(display_order: current_order)
+          end
+        end
       end
     end
 end

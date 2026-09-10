@@ -19,9 +19,9 @@ class IndicatorActivityCategoryPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope.all if user.system_admin?
+      return scope.where(program_id: user.program_id) if user.program_admin? || user.staff?
 
-      scope.where(program_id: user.program_id)
+      scope.none
     end
   end
 end

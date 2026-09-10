@@ -1,19 +1,11 @@
 # frozen_string_literal: true
 
 class IndicatorActivityCategoriesController < ApplicationController
-  before_action :set_indicator_activity_category, only: [:show, :edit, :update, :destroy, :move]
+  before_action :set_indicator_activity_category, only: [:edit, :update, :destroy, :move]
 
   def index
     authorize IndicatorActivityCategory
     @pagy, @indicator_activity_categories = pagy(policy_scope(current_program.indicator_activity_categories).ordered)
-  end
-
-  def show
-    authorize @indicator_activity_category
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   def new
@@ -46,7 +38,11 @@ class IndicatorActivityCategoriesController < ApplicationController
 
   def destroy
     authorize @indicator_activity_category
-    @indicator_activity_category.remove!
+    if @indicator_activity_category.remove!
+      flash[:notice] = t("indicator_activity_category.deleted")
+    else
+      flash[:alert] = t("indicator_activity_category.already_in_use")
+    end
 
     redirect_to indicator_activity_categories_url
   end
@@ -58,6 +54,8 @@ class IndicatorActivityCategoriesController < ApplicationController
       @indicator_activity_category.move_up!
     elsif params[:direction] == "down"
       @indicator_activity_category.move_down!
+    else
+      flash[:alert] = t("indicator_activity_category.invalid_direction")
     end
 
     redirect_to indicator_activity_categories_url
@@ -65,7 +63,9 @@ class IndicatorActivityCategoriesController < ApplicationController
 
   private
     def set_indicator_activity_category
-      @indicator_activity_category = policy_scope(IndicatorActivityCategory).find(params[:id])
+      raise ActiveRecord::RecordNotFound unless current_program.present?
+
+      @indicator_activity_category = current_program.indicator_activity_categories.find(params[:id])
     end
 
     def indicator_activity_category_params

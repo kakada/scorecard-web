@@ -44,5 +44,10 @@ RSpec.describe IndicatorActivityCategoryPolicy, type: :policy do
       user = User.new(role: :program_admin, program_id: program2.id)
       expect(resolve_for(user)).to match_array([category2])
     end
+
+    it "returns no records for system_admin" do
+      user = User.new(role: :system_admin)
+      expect(resolve_for(user)).to be_empty
+    end
   end
 end

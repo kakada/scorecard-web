@@ -18,6 +18,19 @@ RSpec.describe "IndicatorActivityCategories", type: :request do
       expect do
         delete indicator_activity_category_path(category)
       end.not_to change(IndicatorActivityCategory, :count)
+
+      expect(response).to redirect_to(indicator_activity_categories_path)
+      expect(flash[:alert]).to eq(I18n.t("indicator_activity_category.already_in_use"))
+    end
+
+    it "returns not found for category from another program" do
+      another_program_category = create(:indicator_activity_category, program: create(:program))
+
+      expect do
+        delete indicator_activity_category_path(another_program_category)
+      end.not_to change(IndicatorActivityCategory, :count)
+
+      expect(response).to have_http_status(:not_found)
     end
   end
 
@@ -33,6 +46,54 @@ RSpec.describe "IndicatorActivityCategories", type: :request do
       expect(response).to redirect_to(indicator_activity_categories_path)
       expect(first.reload.display_order).to eq(2)
       expect(second.reload.display_order).to eq(1)
+    end
+
+    it "moves a category down" do
+      first = create(:indicator_activity_category, program: program, display_order: 1)
+      second = create(:indicator_activity_category, program: program, display_order: 2)
+
+      patch move_indicator_activity_category_path(first, direction: "down")
+
+      expect(response).to redirect_to(indicator_activity_categories_path)
+      expect(first.reload.display_order).to eq(2)
+      expect(second.reload.display_order).to eq(1)
+    end
+
+    it "shows error when direction is invalid" do
+      category = create(:indicator_activity_category, program: program, display_order: 1)
+
+      patch move_indicator_activity_category_path(category, direction: "left")
+
+      expect(response).to redirect_to(indicator_activity_categories_path)
+      expect(flash[:alert]).to eq(I18n.t("indicator_activity_category.invalid_direction"))
+    end
+
+    it "keeps ordering when moving the first category up" do
+      first = create(:indicator_activity_category, program: program, display_order: 1)
+      second = create(:indicator_activity_category, program: program, display_order: 2)
+
+      patch move_indicator_activity_category_path(first, direction: "up")
+
+      expect(first.reload.display_order).to eq(1)
+      expect(second.reload.display_order).to eq(2)
+    end
+
+    it "keeps ordering when moving the last category down" do
+      first = create(:indicator_activity_category, program: program, display_order: 1)
+      second = create(:indicator_activity_category, program: program, display_order: 2)
+
+      patch move_indicator_activity_category_path(second, direction: "down")
+
+      expect(first.reload.display_order).to eq(1)
+      expect(second.reload.display_order).to eq(2)
+    end
+
+    it "returns not found when moving a category from another program" do
+      another_program_category = create(:indicator_activity_category, program: create(:program), display_order: 1)
+
+      patch move_indicator_activity_category_path(another_program_category, direction: "up")
+
+      expect(response).to have_http_status(:not_found)
     end
   end
 end

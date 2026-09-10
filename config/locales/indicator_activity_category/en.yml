@@ -9,5 +9,7 @@ en:
     name_km: Name in Khmer
     description_en: Description in English
     description_km: Description in Khmer
-    are_you_sure_to_delete: Are you sure to delete the indicator activity category <b>%{name}</b>?
-    already_in_used: This category has been used and cannot be deleted
+    are_you_sure_to_delete: Are you sure you want to delete the indicator activity category %{name}?
+    already_in_use: This category is already in use and cannot be deleted
+    deleted: Indicator activity category was deleted successfully
+    invalid_direction: Invalid move direction
