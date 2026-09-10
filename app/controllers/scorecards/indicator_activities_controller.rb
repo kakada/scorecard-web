@@ -11,7 +11,7 @@ module Scorecards
 
     private
       def indicator_activity_param
-      params.require(:indicator_activity).permit(:content, :indicator_activity_category_id)
+        params.require(:indicator_activity).permit(:content, :indicator_activity_category_id)
       end
   end
 end

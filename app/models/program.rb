@@ -46,6 +46,7 @@ class Program < ApplicationRecord
   has_many :removing_scorecard_batches
   has_many :local_ngo_batches
   has_many :program_clones, foreign_key: :target_program_id, dependent: :destroy
+  has_many :indicator_activity_categories
 
   validates :name, presence: true, uniqueness: true
   validates :shortcut_name, presence: true, uniqueness: true

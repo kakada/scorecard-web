@@ -198,25 +198,27 @@ ActiveRecord::Schema[7.0].define(version: 2026_09_09_103100) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "indicator_activity_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name_en"
-    t.string "name_km"
-    t.text "description_en"
-    t.text "description_km"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "indicator_activities", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "voting_indicator_uuid"
     t.string "scorecard_uuid"
     t.text "content"
     t.boolean "selected"
     t.string "type"
-    t.uuid "indicator_activity_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "indicator_activity_category_id"
     t.index ["indicator_activity_category_id"], name: "index_indicator_activities_on_indicator_activity_category_id"
+  end
+
+  create_table "indicator_activity_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name_en"
+    t.string "name_km"
+    t.text "description_en"
+    t.text "description_km"
+    t.integer "display_order", default: 0
+    t.integer "program_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "indicators", force: :cascade do |t|
@@ -768,11 +770,12 @@ ActiveRecord::Schema[7.0].define(version: 2026_09_09_103100) do
     t.index ["scorecard_uuid", "indicator_uuid"], name: "index_voting_indicators_on_scorecard_uuid_and_indicator_uuid", unique: true
   end
 
+  add_foreign_key "indicator_activities", "indicator_activity_categories"
+  add_foreign_key "indicator_activity_categories", "programs"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
-  add_foreign_key "indicator_activities", "indicator_activity_categories"
   add_foreign_key "program_clones", "programs", column: "source_program_id"
   add_foreign_key "program_clones", "programs", column: "target_program_id"
   add_foreign_key "program_clones", "users"

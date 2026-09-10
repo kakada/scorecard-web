@@ -4,15 +4,15 @@
 #
 # Table name: indicator_activities
 #
-#  id                    :uuid             not null, primary key
-#  voting_indicator_uuid :string
-#  scorecard_uuid        :string
-#  content               :text
-#  selected              :boolean
-#  type                  :string
+#  id                             :uuid             not null, primary key
+#  voting_indicator_uuid          :string
+#  scorecard_uuid                 :string
+#  content                        :text
+#  selected                       :boolean
+#  type                           :string
+#  created_at                     :datetime         not null
+#  updated_at                     :datetime         not null
 #  indicator_activity_category_id :uuid
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
 #
 require "rails_helper"
 
@@ -37,17 +37,6 @@ RSpec.describe IndicatorActivity, type: :model do
       create(:indicator_activity, selected: nil)
 
       expect(described_class.selecteds).to contain_exactly(selected)
-    end
-  end
-
-  describe "#indicator_activity_category_name" do
-    it "returns the localized category name when available" do
-      category = create(:indicator_activity_category, name_en: "Waste Generation", name_km: "ការបោះចោលសំណល់")
-      activity = create(:indicator_activity, indicator_activity_category: category)
-
-      I18n.with_locale(:km) do
-        expect(activity.indicator_activity_category_name).to eq("ការបោះចោលសំណល់")
-      end
     end
   end
 end

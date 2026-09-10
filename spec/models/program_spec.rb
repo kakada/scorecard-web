@@ -28,6 +28,7 @@ RSpec.describe Program, type: :model do
   it { is_expected.to have_many(:rating_scales) }
   it { is_expected.to have_one(:data_publication).dependent(:destroy) }
   it { is_expected.to have_many(:data_publication_logs).dependent(:destroy) }
+  it { is_expected.to have_many(:indicator_activity_categories) }
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_numericality_of(:auto_complete_submitted_scorecard_in_days).only_integer.is_greater_than(0) }
 

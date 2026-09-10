@@ -1,0 +1,26 @@
+-# Rendered once for the whole page since the list doesn't vary by row.
+.modal.fade#indicatorActivityCategoriesModal{tabindex: '-1', role: 'dialog', 'aria-labelledby' => 'indicatorActivityCategoriesModalLabel', 'aria-hidden' => 'true'}
+  .modal-dialog.modal-dialog-scrollable{role: 'document', style: 'max-width: 70vw;'}
+    .modal-content
+      .modal-header
+        %h5.modal-title#indicatorActivityCategoriesModalLabel= t("scorecard.standard_waste_management")
+        %button.close{type: 'button', data: { dismiss: 'modal' }, 'aria-label' => t('shared.close')}
+          %span{'aria-hidden' => 'true'} &times;
+      .modal-body
+        - if @indicator_activity_categories.present?
+          %table.table.table-sm.table-hover.mb-0
+            %thead
+              %tr
+                %th.text-center{style: 'width: 60px;'} #
+                %th= t("scorecard.category_name")
+                %th= t("scorecard.category_description")
+            %tbody
+              - @indicator_activity_categories.each_with_index do |category, index|
+                %tr
+                  %td.text-center= index + 1
+                  %td= category.name
+                  %td.text-break= category.description
+        - else
+          %p.text-muted.mb-0= t("shared.no_records_found")
+      .modal-footer
+        %button.btn.btn-secondary{type: 'button', data: { dismiss: 'modal' }}= t("shared.close")

@@ -169,13 +169,12 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
     let!(:user)       { create(:user, :lngo) }
     let!(:facility)   { create(:facility, :with_parent, :with_indicators) }
     let!(:indicator)   { facility.indicators.first }
-    let!(:indicator_activity_category) { create(:indicator_activity_category) }
     let!(:scorecard)  { create(:scorecard, number_of_participant: 3, program: user.program, local_ngo_id: user.local_ngo_id, facility: facility) }
     let(:headers)     { { "ACCEPT" => "application/json", "Authorization" => "Token #{user.authentication_token}" } }
     let(:params)      { { voting_indicators_attributes: [ {
                           uuid: "123", indicatorable_id: indicator.id, indicatorable_type: indicator.class, display_order: 1,
                           indicator_activities_attributes: [
-                            { voting_indicator_uuid: "123", content: "action1", selected: true, type: "SuggestedIndicatorActivity", indicator_activity_category_id: indicator_activity_category.id },
+                            { voting_indicator_uuid: "123", content: "action1", selected: true, type: "SuggestedIndicatorActivity" },
                             { voting_indicator_uuid: "123", content: "action2", selected: false, type: "SuggestedIndicatorActivity" },
                           ]
                         }] }
@@ -193,7 +192,6 @@ RSpec.describe "Api::V1::ScorecardsController", type: :request do
       it { expect(voting_indicators.first.suggested_indicator_activities.length).to eq(2) }
       it { expect(voting_indicators.first.suggested_indicator_activities.select { |act| act.selected? }.length).to eq(1) }
       it { expect(voting_indicators.first.display_order).to eq(1) }
-      it { expect(voting_indicators.first.suggested_indicator_activities.first.indicator_activity_category_id).to eq(indicator_activity_category.id) }
     end
   end
 

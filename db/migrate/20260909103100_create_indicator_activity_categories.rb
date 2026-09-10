@@ -7,6 +7,9 @@ class CreateIndicatorActivityCategories < ActiveRecord::Migration[7.0]
       t.string :name_km
       t.text :description_en
       t.text :description_km
+      t.integer :display_order, default: 0
+      t.integer :program_id, null: false
+      t.foreign_key :programs, column: :program_id
 
       t.timestamps
     end

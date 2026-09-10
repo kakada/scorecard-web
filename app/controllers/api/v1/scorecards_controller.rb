@@ -62,7 +62,7 @@ module Api
             voting_indicators_attributes: [
               :id, :uuid, :indicator_uuid, :indicatorable_id, :indicatorable_type,
               :median, :display_order,
-              indicator_activities_attributes: [ :id, :voting_indicator_uuid, :content, :selected, :type, :indicator_activity_category_id ]
+              indicator_activities_attributes: [ :id, :voting_indicator_uuid, :content, :selected, :type ]
             ],
             ratings_attributes: [ :uuid, :voting_indicator_uuid, :participant_uuid, :score ]
           ).merge(submitter_id: current_user.id, runner_id: current_user.id)
