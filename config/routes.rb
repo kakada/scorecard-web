@@ -92,6 +92,10 @@ Rails.application.routes.draw do
 
   resources :languages
 
+  resources :indicator_activity_categories do
+    patch :move, on: :member
+  end
+
   resources :facilities do
     get :children, on: :member
     resources :indicators, module: "facilities" do

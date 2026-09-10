@@ -1,0 +1,4 @@
+$('#confirmModal .title').html("<%= t('indicator_activity_category.indicator_activity_categories') %>");
+$('#confirmModal .modal-body').html("<%= t('indicator_activity_category.are_you_sure_to_delete', name: @indicator_activity_category.name).html_safe %>");
+$("#confirmModal .btn-yes").attr('href', "<%= indicator_activity_category_path(@indicator_activity_category) %>");
+$("#confirmModal").modal("show");

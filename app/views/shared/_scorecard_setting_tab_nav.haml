@@ -43,6 +43,12 @@
         %i.fas.fa-fw.fa-star
         %span.d-none.d-md-inline= t("sidebar.rating")
 
+  - if policy(IndicatorActivityCategory).index?
+    %li.nav-item{ class: css_nested_active_class('indicator_activity_categories') }
+      %a.nav-link{:href => indicator_activity_categories_path}
+        %i.fas.fa-fw.fa-list
+        %span.d-none.d-md-inline= t("sidebar.activity_category")
+
   - if policy(PdfTemplate).create?
     %li.nav-item{ class: css_nested_active_class('pdf_templates') }
       %a.nav-link{:href => pdf_templates_path}

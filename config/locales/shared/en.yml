@@ -92,3 +92,5 @@ en:
     next: Next
     confirm: Confirm
     update_failed: Update failed!
+    move_up: Move up
+    move_down: Move down

@@ -56,6 +56,12 @@
           %i.fas.fa-fw.fa-wrench
           %span= t('sidebar.settings')
 
+    - if policy(IndicatorActivityCategory).index?
+      %li.nav-item{ class: css_active_class('indicator_activity_categories') }
+        %a.nav-link{:href => indicator_activity_categories_path}
+          %i.fas.fa-fw.fa-list
+          %span= t('sidebar.activity_category')
+
     - if policy(Category).index?
       %li.nav-item{ class: css_active_class('categories') }
         %a.nav-link{:href => categories_path}

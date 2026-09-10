@@ -1,0 +1,54 @@
+= render "shared/scorecard_setting_tab_nav"
+
+.card.shadow.mb-4
+  .card-body
+    %h6.m-0.font-weight-bold.text-primary.mb-3= t("indicator_activity_category.indicator_activity_categories")
+    = render "shared/pagination_title", hide_pagy: true do
+      - if policy(IndicatorActivityCategory).create?
+        = render "shared/buttons/add_new_button", title: t("indicator_activity_category.add_new"), url: new_indicator_activity_category_path
+
+    - if @indicator_activity_categories.present?
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
+            %tr
+              %th #
+              %th= t("indicator_activity_category.name_en")
+              %th= t("indicator_activity_category.name_km")
+              %th= t("indicator_activity_category.description_en")
+              %th= t("indicator_activity_category.description_km")
+              %th= t("shared.created_at")
+              %th
+          %tbody
+            - @indicator_activity_categories.each_with_index do |category, index|
+              %tr
+                %td= @pagy.from + index
+                %td= category.name_en
+                %td= category.name_km
+                %td.text-break= category.description_en
+                %td.text-break= category.description_km
+                %td= timeago(category.created_at).html_safe
+                %td
+                  .d-flex.justify-content-end
+                    %span.mr-1{data: {toggle: "tooltip", placement: "top", title: t("shared.move_up")}}
+                      = link_to move_indicator_activity_category_path(category, direction: "up"), method: :patch, class: "btn btn-circle btn-sm btn-outline-secondary" do
+                        %i.fas.fa-arrow-up
+
+                    %span.mr-1{data: {toggle: "tooltip", placement: "top", title: t("shared.move_down")}}
+                      = link_to move_indicator_activity_category_path(category, direction: "down"), method: :patch, class: "btn btn-circle btn-sm btn-outline-secondary" do
+                        %i.fas.fa-arrow-down
+
+                    - if policy(category).update?
+                      = link_to edit_indicator_activity_category_path(category), class: "btn btn-circle btn-sm btn-outline-warning mr-1", data: { toggle: "tooltip", placement: "top", title: t("shared.edit") } do
+                        %i.fas.fa-pen
+
+                    - if policy(category).destroy?
+                      - title = category.locked? ? t("indicator_activity_category.already_in_used") : t("shared.delete")
+                      %span{ data: { toggle: "tooltip", placement: "top", title: title } }
+                        = link_to indicator_activity_category_path(category), remote: true, class: ["btn btn-circle btn-sm btn-outline-danger", ("disabled" if category.locked?)] do
+                          %i.fas.fa-trash-alt
+
+    = render "shared/no_data", items: @indicator_activity_categories
+    = render "shared/footers/pagination"
+
+= render "shared/modal_confirm"

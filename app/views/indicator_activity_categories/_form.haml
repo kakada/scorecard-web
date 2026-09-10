@@ -1,0 +1,10 @@
+.w-50.view-center
+  = simple_form_for @indicator_activity_category do |f|
+    = f.input :name_en, label: t("indicator_activity_category.name_en")
+    = f.input :name_km, label: t("indicator_activity_category.name_km")
+    = f.input :description_en, as: :text, label: t("indicator_activity_category.description_en")
+    = f.input :description_km, as: :text, label: t("indicator_activity_category.description_km")
+
+    .actions
+      = link_to t("shared.cancel"), indicator_activity_categories_path, class: "btn btn-secondary"
+      = f.submit t("shared.save"), class: "btn btn-primary"
