@@ -1,0 +1,15 @@
+km:
+  indicator_activity_category:
+    indicator_activity_categories: ប្រភេទសកម្មភាពសូចនាករ
+    indicator_activity_category: ប្រភេទសកម្មភាពសូចនាករ
+    new_indicator_activity_category: បង្កើតប្រភេទសកម្មភាពសូចនាករថ្មី
+    edit_indicator_activity_category: កែតម្រូវប្រភេទសកម្មភាពសូចនាករ
+    add_new: បន្ថែមប្រភេទសកម្មភាពសូចនាករថ្មី
+    name_en: ឈ្មោះជាភាសាអង់គ្លេស
+    name_km: ឈ្មោះជាភាសាខ្មែរ
+    description_en: បរិយាយជាភាសាអង់គ្លេស
+    description_km: បរិយាយជាភាសាខ្មែរ
+    are_you_sure_to_delete: តើអ្នកប្រាកដថាចង់លុបប្រភេទសកម្មភាពសូចនាករ %{name} មែនទេ?
+    already_in_use: ប្រភេទនេះកំពុងត្រូវបានប្រើប្រាស់ មិនអាចលុបបានទេ
+    deleted: បានលុបប្រភេទសកម្មភាពសូចនាករដោយជោគជ័យ
+    invalid_direction: ទិសដៅផ្លាស់ទីមិនត្រឹមត្រូវ

@@ -1,5 +1,6 @@
 $('#mainModal .modal-title').html('<%= j render("scorecards/show/scorecard_setup_header", name: t("scorecard.swot_table")) %>');
 $('#mainModal .card-subtitle').html("<%= scorecard_descriptions.html_safe %>");
+$('#mainModal .modal-dialog').css('max-width', '70vw');
 $('#mainModal .modal-body').html('<%= j render("detail") %>');
 $("#mainModal").modal("show");
 

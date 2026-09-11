@@ -18,12 +18,18 @@ class IndicatorActivityCategory < ApplicationRecord
   # Associations
   belongs_to :program
   has_many :indicator_activities, dependent: :nullify
+  has_many :suggested_indicator_activities, -> { where(type: SuggestedIndicatorActivity.name) }, class_name: "IndicatorActivity",
+                                              foreign_key: :indicator_activity_category_id, dependent: :nullify
 
   # Validations
   validates :name_en, :name_km, presence: true
+  validates :name_en, uniqueness: { scope: :program_id }
+  validates :name_km, uniqueness: { scope: :program_id }
 
   # Callback
   before_create :set_display_order
+
+  scope :ordered, -> { order(display_order: :asc, created_at: :asc) }
 
   def name
     self["name_#{I18n.locale}"] || name_en
@@ -33,8 +39,45 @@ class IndicatorActivityCategory < ApplicationRecord
     self["description_#{I18n.locale}"] || description_en
   end
 
+  def locked?
+    indicator_activities.exists? || suggested_indicator_activities.exists?
+  end
+
+  def remove!
+    return if locked?
+
+    destroy
+  end
+
+  def move_up!
+    adjacent = program.indicator_activity_categories.where("display_order < ?", display_order).order(display_order: :desc).first
+    swap_order_with(adjacent)
+  end
+
+  def move_down!
+    adjacent = program.indicator_activity_categories.where("display_order > ?", display_order).order(display_order: :asc).first
+    swap_order_with(adjacent)
+  end
+
   private
     def set_display_order
       self.display_order ||= program.indicator_activity_categories.maximum(:display_order).to_i + 1
+    end
+
+    def swap_order_with(category)
+      return unless category.present?
+
+      self.class.transaction do
+        records = [self, category].sort_by(&:id)
+        records[0].with_lock do
+          records[1].with_lock do
+            current_order = reload.display_order
+            adjacent_order = category.reload.display_order
+
+            update!(display_order: adjacent_order)
+            category.update!(display_order: current_order)
+          end
+        end
+      end
     end
 end

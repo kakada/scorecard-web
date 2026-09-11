@@ -48,3 +48,9 @@
       %a.nav-link{:href => pdf_templates_path}
         %i.far.fa-fw.fa-file-pdf
         %span.d-none.d-md-inline= t("sidebar.pdf_template")
+
+  - if policy(IndicatorActivityCategory).index?
+    %li.nav-item{ class: css_nested_active_class('indicator_activity_categories') }
+      %a.nav-link{:href => indicator_activity_categories_path}
+        %i.fas.fa-recycle
+        %span.d-none.d-md-inline= t("sidebar.activity_category")

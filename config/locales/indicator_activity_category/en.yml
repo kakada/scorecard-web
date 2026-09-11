@@ -1,0 +1,15 @@
+en:
+  indicator_activity_category:
+    indicator_activity_categories: Indicator Activity Categories
+    indicator_activity_category: Indicator Activity Category
+    new_indicator_activity_category: New Indicator Activity Category
+    edit_indicator_activity_category: Edit Indicator Activity Category
+    add_new: Add new indicator activity category
+    name_en: Name in English
+    name_km: Name in Khmer
+    description_en: Description in English
+    description_km: Description in Khmer
+    are_you_sure_to_delete: Are you sure you want to delete the indicator activity category %{name}?
+    already_in_use: This category is already in use and cannot be deleted
+    deleted: Indicator activity category was deleted successfully
+    invalid_direction: Invalid move direction
