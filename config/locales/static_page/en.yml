@@ -1,0 +1,16 @@
+en:
+  static_page:
+    static_page: Static Page
+    static_pages: Static Pages
+    new_static_page: New Static Page
+    edit_static_page: Edit Static Page
+    slug: Slug
+    content: Content
+    content_en: Content in English
+    content_km: Content in Khmer
+    content_placeholder: Enter HTML content
+    preview: Preview
+    are_you_sure_to_delete: Are you sure you want to delete %{name}?
+    en_locale: English
+    km_locale: ខ្មែរ
+    static_page_information: Informational content, such as the FAM Reporting page, that can be updated without a code deployment.

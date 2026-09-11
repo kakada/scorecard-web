@@ -137,6 +137,7 @@ Rails.application.routes.draw do
   resources :user_guides, only: [:index]
 
   resources :mobile_notifications, only: [:index, :new, :create]
+  resources :static_pages
 
   resources :scorecard_batches, except: [:update, :edit], param: :code do
     get :sample, on: :collection

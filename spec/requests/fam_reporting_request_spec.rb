@@ -32,6 +32,7 @@ RSpec.describe "FamReporting", type: :request do
 
     context "when the visitor is signed in" do
       let(:user) { create(:user) }
+      let!(:static_page) { create(:static_page, slug: "/fam_reporting", content_km: "<h1>KM Content</h1>", content_en: "<h1>EN Content</h1>") }
 
       before { sign_in user }
 
@@ -44,6 +45,12 @@ RSpec.describe "FamReporting", type: :request do
         expect {
           get "/fam_reporting", headers: browser_headers
         }.to change(Ahoy::Event, :count).by(1)
+      end
+
+      it "loads copy from static page slug" do
+        get "/fam_reporting", headers: browser_headers
+
+        expect(response.body).to include("KM Content")
       end
     end
   end

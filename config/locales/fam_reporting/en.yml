@@ -8,3 +8,4 @@ en:
     event: Event
     device_type: Device Type
     os: Operating System
+    content_not_available: FAM report content is not configured yet.

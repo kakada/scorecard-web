@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_09_10_092106) do
+ActiveRecord::Schema[7.0].define(version: 2026_09_11_032000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -703,6 +703,15 @@ ActiveRecord::Schema[7.0].define(version: 2026_09_10_092106) do
     t.integer "scorecard_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "static_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug", null: false
+    t.text "content_en"
+    t.text "content_km"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_static_pages_on_slug", unique: true
   end
 
   create_table "suggested_actions", force: :cascade do |t|
