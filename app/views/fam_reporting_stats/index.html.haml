@@ -1,0 +1,27 @@
+- content_for :title do
+  = t("fam_reporting.statistics_title")
+
+.alert.alert-info.shadow-sm
+  %strong= t("fam_reporting.homepage_notification_title")
+  %span.ml-1= t("fam_reporting.homepage_notification_body")
+  = link_to t("fam_reporting.report_concern"), fam_reporting_path, class: "alert-link ml-1"
+
+.card.shadow.mb-4
+  .card-body
+    %table.table.table-hover.pretty
+      %thead
+        %tr
+          %th #
+          %th= t("fam_reporting.event")
+          %th= t("fam_reporting.device_type")
+          %th= t("fam_reporting.os")
+          %th= t("shared.created_at")
+
+      %tbody
+        - @events.each_with_index do |event, index|
+          %tr
+            %td= @pagy.from + index
+            %td= event.name
+            %td= event.visit.device_type
+            %td= event.visit.os
+            %td= timeago(event.time, "datetime").html_safe

@@ -74,6 +74,12 @@
           %i.fas.fa-fw.fa-book
           %span= t('sidebar.user_guides')
 
+    - if policy(Ahoy::Event).index?
+      %li.nav-item{ class: css_active_class('fam_reporting_stats') }
+        %a.nav-link{:href => fam_reporting_stats_path}
+          %i.fas.fa-fw.fa-chart-bar
+          %span= t('sidebar.fam_reporting_statistics')
+
     %li.nav-item{ class: css_active_class('about') }
       %a.nav-link{:href => about_path}
         %i.fas.fa-fw.fa-exclamation-circle

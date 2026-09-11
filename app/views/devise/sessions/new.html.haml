@@ -35,9 +35,11 @@
     .form-group
       = render "devise/shared/links"
     .form-group
-      = link_to t('about.about_us'), about_path
-    .form-group
+      = link_to t('fam_reporting.report_concern'), fam_reporting_path
+      = " | "
       = mail_to ENV['CSC_SUPPORT_EMAIL'], t('about.contact_us')
+      = " | "
+      = link_to t('about.about_us'), about_path
 
     .form-group
       %span.fs-xs

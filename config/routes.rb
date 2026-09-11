@@ -126,6 +126,8 @@ Rails.application.routes.draw do
   end
 
   resource :about, only: [:show]
+  resource :fam_reporting, only: [:show], controller: :fam_reporting
+  resources :fam_reporting_stats, only: [:index]
   resource :privacy_policy, only: [:show]
   resource :terms_and_conditions, only: [:show]
   resources :user_guides, only: [:index]
@@ -171,6 +173,7 @@ Rails.application.routes.draw do
       end
 
       resources :scorecard_progresses, only: [:create]
+      resources :fam_reporting_views, only: [:create]
 
       resources :local_ngos, only: [] do
         resources :cafs, only: [:index]
