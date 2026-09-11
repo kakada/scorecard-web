@@ -44,8 +44,13 @@
                   %th.w-50.text-muted.small
                   %th.w-50.text-muted.small
                     = t("scorecard.standard_waste_management")
-                    %span.ml-1{type: 'button',  data: { toggle: 'modal', target: '#indicatorActivityCategoriesModal' }}
-                      %i.fas.fa-info-circle
+                    - if policy(@scorecard).in_review?
+                      %span.ml-1{type: 'button',  data: { toggle: 'modal', target: '#indicatorActivityCategoriesModal' }}
+                        %i.fas.fa-info-circle.text-muted
+                    - elsif policy(IndicatorActivityCategory).index?
+                      = link_to indicator_activity_categories_path do
+                        %i.fas.fa-info-circle.text-muted
+
             %tbody
               - vi.suggested_indicator_activities.each do |activity|
                 %tr

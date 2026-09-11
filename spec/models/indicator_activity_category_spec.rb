@@ -17,13 +17,15 @@
 require "rails_helper"
 
 RSpec.describe IndicatorActivityCategory, type: :model do
+  subject { create(:indicator_activity_category) }
+
   it { is_expected.to belong_to(:program) }
   it { is_expected.to have_many(:indicator_activities).dependent(:nullify) }
   it { is_expected.to have_many(:suggested_indicator_activities).dependent(:nullify) }
   it { is_expected.to validate_presence_of(:name_en) }
   it { is_expected.to validate_presence_of(:name_km) }
   it { is_expected.to validate_uniqueness_of(:name_en).scoped_to(:program_id) }
-  it { is_expected.to validate_uniqueness_of(:name_km).scoped_to(:program_id) }
+  it { is_expected.to validate_uniqueness_of(:name_km).scoped_to(:program_id).case_insensitive }
 
   describe "#name" do
     it "returns localized name by locale" do

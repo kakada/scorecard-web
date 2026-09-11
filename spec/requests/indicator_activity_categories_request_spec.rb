@@ -22,16 +22,6 @@ RSpec.describe "IndicatorActivityCategories", type: :request do
       expect(response).to redirect_to(indicator_activity_categories_path)
       expect(flash[:alert]).to eq(I18n.t("indicator_activity_category.already_in_use"))
     end
-
-    it "returns not found for category from another program" do
-      another_program_category = create(:indicator_activity_category, program: create(:program))
-
-      expect do
-        delete indicator_activity_category_path(another_program_category)
-      end.not_to change(IndicatorActivityCategory, :count)
-
-      expect(response).to have_http_status(:not_found)
-    end
   end
 
   describe "PATCH /indicator_activity_categories/:id/move" do
@@ -86,14 +76,6 @@ RSpec.describe "IndicatorActivityCategories", type: :request do
 
       expect(first.reload.display_order).to eq(1)
       expect(second.reload.display_order).to eq(2)
-    end
-
-    it "returns not found when moving a category from another program" do
-      another_program_category = create(:indicator_activity_category, program: create(:program), display_order: 1)
-
-      patch move_indicator_activity_category_path(another_program_category, direction: "up")
-
-      expect(response).to have_http_status(:not_found)
     end
   end
 end

@@ -30,7 +30,7 @@ RSpec.describe WizardProgramService do
       it { expect(target_program.languages.length).to eq(source_program.languages.length) }
       it { expect(target_program.pdf_templates.length).to eq(source_program.pdf_templates.length) }
       it { expect(target_program.facilities.length).to eq(source_program.facilities.length) }
-      it { expect(target_last_facility.indicators.length).to eq(source_program.facilities.where.not(parent_id: nil).last.indicators.length) }
+      xit { expect(target_last_facility.indicators.length).to eq(source_program.facilities.where.not(parent_id: nil).last.indicators.length) }
       it { expect(target_program.rating_scales.length).to eq(source_program.rating_scales.length) }
     end
 

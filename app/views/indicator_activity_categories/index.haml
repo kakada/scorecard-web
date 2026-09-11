@@ -13,20 +13,24 @@
           %thead
             %tr
               %th #
-              %th= t("indicator_activity_category.name_en")
               %th= t("indicator_activity_category.name_km")
-              %th= t("indicator_activity_category.description_en")
+              %th= t("indicator_activity_category.name_en")
               %th= t("indicator_activity_category.description_km")
+              %th= t("indicator_activity_category.description_en")
               %th= t("shared.created_at")
               %th
           %tbody
             - @indicator_activity_categories.each_with_index do |category, index|
               %tr
                 %td= @pagy.from + index
-                %td= category.name_en
                 %td= category.name_km
-                %td.text-break= category.description_en
-                %td.text-break= category.description_km
+                %td= category.name_en
+                %td
+                  .ellipsis-2{style: "width: 250px;"}
+                    = category.description_km
+                %td
+                  .ellipsis-2{style: "width: 250px;"}
+                    = category.description_en
                 %td= timeago(category.created_at).html_safe
                 %td
                   .d-flex.justify-content-end
