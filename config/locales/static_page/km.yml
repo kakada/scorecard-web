@@ -1,12 +1,16 @@
 km:
   static_page:
-    static_page: ទំព័រស្ថិតិ
-    static_pages: ទំព័រស្ថិតិ
-    new_static_page: បង្កើតទំព័រស្ថិតិថ្មី
-    edit_static_page: កែប្រែទំព័រស្ថិតិ
+    static_page: ទំព័រមាតិកា
+    static_pages: ទំព័រមាតិកា
+    new_static_page: បង្កើតទំព័រមាតិកាថ្មី
+    edit_static_page: កែប្រែទំព័រមាតិកា
     slug: Slug
     content: មាតិកា
     content_en: មាតិកាជាភាសាអង់គ្លេស
     content_km: មាតិកាជាភាសាខ្មែរ
     content_placeholder: បញ្ចូលមាតិកា HTML
-    preview: ការមើលជាមុន
+    preview: ការបង្ហាញ
+    are_you_sure_to_delete: តើអ្នកប្រាកដថាចង់លុបទំព័រមាតិកា %{name}​នេះមែនឬទេ?
+    en_locale: English
+    km_locale: ខ្មែរ
+    static_page_information: ទំព័រមាតិកាដូចជា ទំព័រ FAM Reporting ដែលអាចធ្វើបច្ចុប្បន្នភាពបានដោយងាយ។

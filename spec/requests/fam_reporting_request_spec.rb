@@ -32,7 +32,7 @@ RSpec.describe "FamReporting", type: :request do
 
     context "when the visitor is signed in" do
       let(:user) { create(:user) }
-      let!(:static_page) { create(:static_page, slug: "fam_reporting", content_km: "<h1>KM Content</h1>", content_en: "<h1>EN Content</h1>") }
+      let!(:static_page) { create(:static_page, slug: "/fam_reporting", content_km: "<h1>KM Content</h1>", content_en: "<h1>EN Content</h1>") }
 
       before { sign_in user }
 

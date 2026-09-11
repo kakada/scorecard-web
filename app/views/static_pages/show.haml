@@ -2,7 +2,13 @@
   = @static_page.slug
 
 .d-flex.justify-content-end.mb-2
-  = link_to t("shared.edit"), edit_static_page_path(@static_page), class: "btn btn-warning"
+  = link_to edit_static_page_path(@static_page), class: "btn btn-warning btn-sm mr-2" do
+    %i.fas.fa-edit
+    = t("shared.edit")
+
+  = link_to static_pages_path, class: "btn btn-secondary btn-sm" do
+    %i.fas.fa-arrow-left
+    = t("shared.back")
 
 .card.shadow.mb-4
   .card-body
@@ -14,8 +20,8 @@
       .col-lg-6
         %h6.text-gray-800.font-weight-bold= t("static_page.content_km")
         .border.rounded.p-3.static-page-rendered-html
-          = sanitize(@static_page.content_km, attributes: %w[href src style class alt title target rel], tags: %w[a p div span h1 h2 h3 h4 h5 h6 ul ol li strong em b i u table thead tbody tr th td img hr br blockquote pre code])
+          = @static_page.content_km.html_safe
       .col-lg-6
         %h6.text-gray-800.font-weight-bold= t("static_page.content_en")
         .border.rounded.p-3.static-page-rendered-html
-          = sanitize(@static_page.content_en, attributes: %w[href src style class alt title target rel], tags: %w[a p div span h1 h2 h3 h4 h5 h6 ul ol li strong em b i u table thead tbody tr th td img hr br blockquote pre code])
+          = @static_page.content_en.html_safe

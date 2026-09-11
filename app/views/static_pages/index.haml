@@ -1,6 +1,9 @@
 - content_for :title do
   = t("static_page.static_pages")
 
+.alert.alert-info.shadow-sm
+  %span= t("static_page.static_page_information")
+
 - if policy(StaticPage.new).new?
   .d-flex.justify-content-end.mb-2
     = render "shared/buttons/add_new_button", title: t("shared.add_new", name: t("static_page.static_page")), url: new_static_page_path

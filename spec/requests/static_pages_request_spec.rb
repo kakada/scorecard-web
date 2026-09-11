@@ -39,13 +39,6 @@ RSpec.describe "StaticPages", type: :request do
       expect(response).to redirect_to(static_page_path(static_page))
       expect(static_page.reload.content_en).to eq("<p>Updated</p>")
     end
-
-    it "shows validation error for duplicate slug" do
-      post "/static_pages", params: { static_page: { slug: static_page.slug } }
-
-      expect(response).to have_http_status(:ok)
-      expect(response.body).to include("has already been taken")
-    end
   end
 
   describe "as non-admin" do

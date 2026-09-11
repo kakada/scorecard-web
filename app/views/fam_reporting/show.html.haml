@@ -9,6 +9,7 @@
   .card.shadow.mb-4
     .card-body
       - if @content.present?
-        = sanitize(@content, attributes: %w[href src style class alt title target rel], tags: %w[a p div span h1 h2 h3 h4 h5 h6 ul ol li strong em b i u table thead tbody tr th td img hr br blockquote pre code])
+        = @content.html_safe
+
       - else
         %p.text-muted.mb-0= t("fam_reporting.content_not_available")

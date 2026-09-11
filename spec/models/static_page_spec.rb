@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: static_pages
+#
+#  id         :uuid             not null, primary key
+#  slug       :string           not null
+#  content_en :text
+#  content_km :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 require "rails_helper"
 
 RSpec.describe StaticPage, type: :model do
