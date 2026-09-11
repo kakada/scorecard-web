@@ -80,6 +80,12 @@
           %i.fas.fa-fw.fa-chart-bar
           %span= t('sidebar.fam_reporting_statistics')
 
+    - if policy(StaticPage.new).new?
+      %li.nav-item{ class: css_active_class('static_pages') }
+        %a.nav-link{:href => static_pages_path}
+          %i.fas.fa-fw.fa-file-alt
+          %span= t("sidebar.static_pages")
+
     %li.nav-item{ class: css_active_class('about') }
       %a.nav-link{:href => about_path}
         %i.fas.fa-fw.fa-exclamation-circle

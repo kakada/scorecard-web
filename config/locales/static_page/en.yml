@@ -1,0 +1,12 @@
+en:
+  static_page:
+    static_page: Static Page
+    static_pages: Static Pages
+    new_static_page: New Static Page
+    edit_static_page: Edit Static Page
+    slug: Slug
+    content: Content
+    content_en: Content in English
+    content_km: Content in Khmer
+    content_placeholder: Enter HTML content
+    preview: Preview

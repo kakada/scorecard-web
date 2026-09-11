@@ -1,0 +1,28 @@
+.d-flex.flex-lg-row.flex-column
+  .flex-1.mr-lg-4
+    = simple_form_for @static_page do |f|
+      = f.input :slug, label: t("static_page.slug"), input_html: { autocomplete: "off" }
+
+      .form-group
+        %label.d-block= t("static_page.content")
+        %ul.nav.nav-pills.mb-3{ role: "tablist" }
+          %li.nav-item
+            %a#content-km-tab.nav-link.active{ "data-toggle" => "pill", href: "#content-km-pane", role: "tab", "aria-controls" => "content-km-pane", "aria-selected" => "true", "data-preview-source" => "km" }= t("static_page.content_km")
+          %li.nav-item
+            %a#content-en-tab.nav-link{ "data-toggle" => "pill", href: "#content-en-pane", role: "tab", "aria-controls" => "content-en-pane", "aria-selected" => "false", "data-preview-source" => "en" }= t("static_page.content_en")
+
+        .tab-content
+          #content-km-pane.tab-pane.fade.show.active{ role: "tabpanel", "aria-labelledby" => "content-km-tab" }
+            = f.input :content_km, as: :text, label: false, input_html: { rows: 20, class: "static-page-editor", "data-preview-input" => "km" }, placeholder: t("static_page.content_placeholder")
+          #content-en-pane.tab-pane.fade{ role: "tabpanel", "aria-labelledby" => "content-en-tab" }
+            = f.input :content_en, as: :text, label: false, input_html: { rows: 20, class: "static-page-editor", "data-preview-input" => "en" }, placeholder: t("static_page.content_placeholder")
+
+      .actions
+        = link_to t("shared.cancel"), static_pages_path, class: "btn btn-secondary"
+        = f.submit t("shared.save"), class: "btn btn-primary"
+
+  .flex-1
+    .card
+      .card-header.font-weight-bold= t("static_page.preview")
+      .card-body
+        .border.rounded.p-3.static-page-preview-area{"data-static-page-preview" => true}

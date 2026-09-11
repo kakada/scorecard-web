@@ -1,0 +1,34 @@
+- content_for :title do
+  = t("static_page.static_pages")
+
+- if policy(StaticPage.new).new?
+  .d-flex.justify-content-end.mb-2
+    = render "shared/buttons/add_new_button", title: t("shared.add_new", name: t("static_page.static_page")), url: new_static_page_path
+
+.card.shadow.mb-4
+  .card-body
+    - if @static_pages.present?
+      = render "shared/pagination_title"
+
+      .table-responsive
+        %table.table.table-hover
+          %thead
+            %tr
+              %th= t("static_page.slug")
+              %th= sortable "created_at", t("shared.created_at")
+              %th= sortable "updated_at", t("shared.updated_at")
+              %th
+          %tbody
+            - @static_pages.each do |static_page|
+              %tr
+                %td= link_to static_page.slug, static_page_path(static_page), class: "text-primary"
+                %td= timeago(static_page.created_at).html_safe
+                %td= timeago(static_page.updated_at).html_safe
+                %td
+                  .d-flex.justify-content-end
+                    = render "shared/action_buttons", edit_url: edit_static_page_path(static_page), delete_url: static_page_path(static_page), object: static_page
+
+    = render "shared/no_data", items: @static_pages
+    = render "shared/footers/pagination"
+
+= render "shared/modal_confirm"

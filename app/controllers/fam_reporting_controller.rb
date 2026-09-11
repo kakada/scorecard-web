@@ -5,6 +5,7 @@ class FamReportingController < ApplicationController
   layout :set_layout
 
   def show
+    @content = StaticPage.find_by(slug: "fam_reporting")&.content_by_locale(I18n.locale)
     ahoy.track "view_fam_reporting"
   end
 

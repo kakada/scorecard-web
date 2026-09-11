@@ -1,0 +1,12 @@
+km:
+  static_page:
+    static_page: ទំព័រស្ថិតិ
+    static_pages: ទំព័រស្ថិតិ
+    new_static_page: បង្កើតទំព័រស្ថិតិថ្មី
+    edit_static_page: កែប្រែទំព័រស្ថិតិ
+    slug: Slug
+    content: មាតិកា
+    content_en: មាតិកាជាភាសាអង់គ្លេស
+    content_km: មាតិកាជាភាសាខ្មែរ
+    content_placeholder: បញ្ចូលមាតិកា HTML
+    preview: ការមើលជាមុន
