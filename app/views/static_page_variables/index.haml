@@ -25,7 +25,7 @@
                 %td
                   %code= static_page_variable.key
                 %td= static_page_variable.variable_type.humanize
-                %td= static_page_variable.rendered_value.html_safe
+                %td= sanitize(static_page_variable.rendered_value)
                 %td= static_page_variable.description
                 %td
                   .d-flex.justify-content-end

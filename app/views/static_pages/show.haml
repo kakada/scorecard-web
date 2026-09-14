@@ -20,8 +20,8 @@
       .col-lg-6
         %h6.text-gray-800.font-weight-bold= t("static_page.content_km")
         .border.rounded.p-3.static-page-rendered-html
-          = @static_page.rendered_content_by_locale(:km).html_safe
+          = sanitize(@static_page.rendered_content_by_locale(:km))
       .col-lg-6
         %h6.text-gray-800.font-weight-bold= t("static_page.content_en")
         .border.rounded.p-3.static-page-rendered-html
-          = @static_page.rendered_content_by_locale(:en).html_safe
+          = sanitize(@static_page.rendered_content_by_locale(:en))

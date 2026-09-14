@@ -9,7 +9,7 @@
   .card.shadow.mb-4
     .card-body
       - if @content.present?
-        = @content.html_safe
+        = sanitize(@content)
 
       - else
         %p.text-muted.mb-0= t("fam_reporting.content_not_available")

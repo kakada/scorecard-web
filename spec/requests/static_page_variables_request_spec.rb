@@ -43,6 +43,11 @@ RSpec.describe "StaticPageVariables", type: :request do
       }
       expect(response).to redirect_to(static_page_variables_path)
       expect(static_page_variable.reload.value).to eq("Updated value")
+
+      expect {
+        delete "/static_page_variables/#{static_page_variable.id}"
+      }.to change(StaticPageVariable, :count).by(-1)
+      expect(response).to redirect_to(static_page_variables_path)
     end
   end
 
@@ -68,6 +73,9 @@ RSpec.describe "StaticPageVariables", type: :request do
       expect(response).to redirect_to(root_path)
 
       patch "/static_page_variables/#{static_page_variable.id}", params: { static_page_variable: { value: "Nope" } }
+      expect(response).to redirect_to(root_path)
+
+      delete "/static_page_variables/#{static_page_variable.id}"
       expect(response).to redirect_to(root_path)
     end
   end
