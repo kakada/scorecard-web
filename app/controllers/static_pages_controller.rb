@@ -40,7 +40,7 @@ class StaticPagesController < ApplicationController
   def preview
     authorize StaticPage, :edit?
 
-    render html: StaticPage.interpolate_content(params[:content]).html_safe, layout: false
+    render html: helpers.sanitize(StaticPage.interpolate_content(params[:content])), layout: false
   end
 
   def destroy

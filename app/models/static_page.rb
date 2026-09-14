@@ -27,9 +27,13 @@ class StaticPage < ApplicationRecord
   end
 
   def self.interpolate_content(content)
-    variables_by_key = StaticPageVariable.all.index_by(&:key)
+    content = content.to_s
+    keys = content.scan(/\{\{([A-Za-z0-9_]+)\}\}/).flatten.map(&:upcase).uniq
+    return content if keys.blank?
 
-    content.to_s.gsub(/\{\{([A-Za-z0-9_]+)\}\}/) do |match|
+    variables_by_key = StaticPageVariable.where(key: keys).index_by(&:key)
+
+    content.gsub(/\{\{([A-Za-z0-9_]+)\}\}/) do |match|
       variable = variables_by_key[Regexp.last_match(1).upcase]
       variable.present? ? variable.rendered_value : match
     end
