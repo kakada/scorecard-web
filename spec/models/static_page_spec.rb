@@ -32,4 +32,20 @@ RSpec.describe StaticPage, type: :model do
       expect(static_page.content_by_locale(:km)).to eq("<p>en</p>")
     end
   end
+
+  describe "#rendered_content_by_locale" do
+    let!(:static_page_variable) { create(:static_page_variable, key: "QR_CODE", value: "Rendered QR code") }
+
+    it "interpolates stored variables into localized content" do
+      static_page = build(:static_page, content_km: "<p>{{QR_CODE}}</p>", content_en: "<p>en</p>")
+
+      expect(static_page.rendered_content_by_locale(:km)).to eq("<p>Rendered QR code</p>")
+    end
+
+    it "leaves unknown variables untouched" do
+      static_page = build(:static_page, content_en: "<p>{{UNKNOWN_CODE}}</p>")
+
+      expect(static_page.rendered_content_by_locale(:en)).to eq("<p>{{UNKNOWN_CODE}}</p>")
+    end
+  end
 end

@@ -14,3 +14,19 @@ en:
     en_locale: English
     km_locale: ខ្មែរ
     static_page_information: Informational content, such as the FAM Reporting page, that can be updated without a code deployment.
+    available_variables: Available Variables
+    insert_variable_hint: Click a variable below to insert it at the cursor
+    manage_variables: Manage variables
+    no_variables: No static page variables yet.
+  static_page_variable:
+    static_page_variable: Static Page Variable
+    static_page_variables: Static Page Variables
+    new_static_page_variable: New Static Page Variable
+    edit_static_page_variable: Edit Static Page Variable
+    key: Key
+    token: Variable
+    variable_type: Type
+    value: Value
+    text_value: Text / URL Value
+    image: Image
+    description: Description
