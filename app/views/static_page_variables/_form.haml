@@ -2,8 +2,10 @@
   = simple_form_for @static_page_variable do |f|
     = f.input :key, label: t("static_page_variable.key"), input_html: { autocomplete: "off" }
     = f.input :variable_type, label: t("static_page_variable.variable_type"), collection: StaticPageVariable.variable_types.keys.map { |type| [type.humanize, type] }, include_blank: false
-    = f.input :value, label: t("static_page_variable.text_value")
-    = f.input :image, as: :file, label: t("static_page_variable.image"), input_html: { accept: "image/*" }
+    .js-static-page-variable-text-field
+      = f.input :value, label: t("static_page_variable.text_value")
+    .js-static-page-variable-image-field
+      = f.input :image, as: :file, label: t("static_page_variable.image"), input_html: { accept: "image/*" }
 
     - if @static_page_variable.image.present?
       .mb-3

@@ -43,4 +43,5 @@
         %i.fas.fa-eye
         = t("static_page.preview")
       .card-body
-        .static-page-preview-area{"data-static-page-preview" => true, "data-preview-url" => preview_static_pages_path}= sanitize(@static_page.rendered_content_by_locale(:km))
+        .static-page-preview-area{"data-static-page-preview" => true, "data-preview-url" => preview_static_pages_path}
+          = render "preview", content: @static_page.rendered_content_by_locale(:km)
