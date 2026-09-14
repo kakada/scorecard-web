@@ -47,5 +47,12 @@ RSpec.describe StaticPage, type: :model do
 
       expect(static_page.rendered_content_by_locale(:en)).to eq("<p>{{UNKNOWN_CODE}}</p>")
     end
+
+    it "keeps text variable HTML escaped after interpolation" do
+      static_page_variable.update!(value: "<strong>unsafe</strong>")
+      static_page = build(:static_page, content_en: "<p>{{QR_CODE}}</p>")
+
+      expect(static_page.rendered_content_by_locale(:en)).to eq("<p>&lt;strong&gt;unsafe&lt;/strong&gt;</p>")
+    end
   end
 end

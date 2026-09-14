@@ -43,6 +43,8 @@ RSpec.describe StaticPageVariable, type: :model do
       variable = build(:static_page_variable, :url)
 
       expect(variable.rendered_value).to include(%(href="https://example.com"))
+      expect(variable.rendered_value).to include(%(target="_blank"))
+      expect(variable.rendered_value).to include(%(rel="noopener noreferrer"))
     end
 
     it "renders an image tag for image values" do

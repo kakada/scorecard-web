@@ -45,6 +45,10 @@ RSpec.describe "StaticPages", type: :request do
       post "/static_pages/preview", params: { content: "<p>{{QR_CODE}}</p>" }
       expect(response).to have_http_status(:success)
       expect(response.body).to include("Rendered QR code")
+
+      post "/static_pages/preview", params: { content: "<h1>Heading</h1><script>alert(1)</script>" }
+      expect(response.body).to include("<h1>Heading</h1>")
+      expect(response.body).not_to include("<script>")
     end
   end
 

@@ -21,7 +21,7 @@ class StaticPageVariable < ApplicationRecord
 
   def rendered_value
     return helpers.image_tag(image.url, alt: key) if image? && image.present?
-    return helpers.link_to(value, value, target: "_blank", rel: "noopener") if url?
+    return helpers.link_to(value, value, target: "_blank", rel: "noopener noreferrer") if url?
 
     ERB::Util.html_escape(value)
   end
