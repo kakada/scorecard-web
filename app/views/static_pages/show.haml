@@ -1,0 +1,27 @@
+- content_for :title do
+  = @static_page.slug
+
+.d-flex.justify-content-end.mb-2
+  = link_to edit_static_page_path(@static_page), class: "btn btn-warning btn-sm mr-2" do
+    %i.fas.fa-edit
+    = t("shared.edit")
+
+  = link_to static_pages_path, class: "btn btn-secondary btn-sm" do
+    %i.fas.fa-arrow-left
+    = t("shared.back")
+
+.card.shadow.mb-4
+  .card-body
+    .mb-4
+      %h6.text-gray-800.font-weight-bold= t("static_page.slug")
+      %code= @static_page.slug
+
+    .row
+      .col-lg-6
+        %h6.text-gray-800.font-weight-bold= t("static_page.content_km")
+        .border.rounded.p-3.static-page-rendered-html
+          = @static_page.content_km.html_safe
+      .col-lg-6
+        %h6.text-gray-800.font-weight-bold= t("static_page.content_en")
+        .border.rounded.p-3.static-page-rendered-html
+          = @static_page.content_en.html_safe
