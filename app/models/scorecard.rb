@@ -58,6 +58,8 @@
 #  running_mode                :integer          default("online")
 #  qr_code                     :string
 #  token                       :string(64)
+#  rejected_at                 :datetime
+#  rejected_reason             :string
 #
 
 class Scorecard < ApplicationRecord
@@ -93,6 +95,7 @@ class Scorecard < ApplicationRecord
 
   # Constant
   STATUS_PLANNED = "planned"
+  STATUS_REJECTED = "rejected"
   STATUS_COMPLETED = "completed"
   STATUS_IN_REVIEW = "in_review"
   STATUS_RUNNING = "running"
@@ -167,6 +170,8 @@ class Scorecard < ApplicationRecord
 
   validates :running_mode, presence: true, inclusion: { in: running_modes.keys }
   validates :token, uniqueness: true, allow_nil: true
+
+  validates :rejected_reason, presence: true, if: -> { rejected_at.present? }
 
   # Callback
   before_create :secure_uuid

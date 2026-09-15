@@ -1,0 +1,11 @@
+= form_tag reject_scorecard_path(@scorecard.uuid), method: :put do
+  .modal-body.text-left
+    = t("scorecard.are_you_sure_to_reject", code: @scorecard.uuid).html_safe
+
+    .form-group.mt-2
+      = label_tag :rejected_reason, t("scorecard.rejected_reason")
+      = text_area_tag :rejected_reason, nil, class: "form-control", required: true
+
+  .modal-footer
+    %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"}= t("shared.cancel")
+    = submit_tag t("shared._yes"), class: "btn btn-danger"

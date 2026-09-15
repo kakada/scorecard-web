@@ -52,6 +52,7 @@ RSpec.describe Scorecards::Filter do
       let!(:open_voting) { create(:scorecard, progress: "open_voting") }
       let!(:close_voting) { create(:scorecard, progress: "close_voting") }
       let!(:completed) { create(:scorecard, progress: "completed") }
+      let!(:rejected) { create(:scorecard, progress: "rejected") }
 
       it "treats 'planned' filter as planned_statuses" do
         result = Scorecard.filter(filter: "planned")
@@ -68,9 +69,14 @@ RSpec.describe Scorecards::Filter do
         expect(result).to match_array([completed])
       end
 
-      it "returns all when filter is blank" do
-        result = Scorecard.filter(filter: nil)
-        expect(result).to include(nil_progress, planned, renewed, downloaded, running, open_voting, close_voting, completed)
+      it "filters rejected scorecards" do
+        result = Scorecard.filter(filter: "rejected")
+        expect(result).to match_array([rejected])
+      end
+
+      it "returns all scorecards including rejected when filter is empty" do
+        result = Scorecard.filter(filter: "")
+        expect(result).to include(nil_progress, planned, renewed, downloaded, running, open_voting, close_voting, completed, rejected)
       end
     end
 

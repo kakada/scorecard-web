@@ -58,6 +58,8 @@
 #  running_mode                :integer          default("online")
 #  qr_code                     :string
 #  token                       :string(64)
+#  rejected_at                 :datetime
+#  rejected_reason             :string
 #
 FactoryBot.define do
   factory :scorecard do
@@ -95,6 +97,12 @@ FactoryBot.define do
     trait :completed do
       completor     { create(:completor, program: program) }
       completed_at  { Time.now.utc }
+    end
+
+    trait :rejected do
+      progress     { "rejected" }
+      rejected_at  { Time.now.utc }
+      rejected_reason { "Some reason for rejection" }
     end
   end
 end

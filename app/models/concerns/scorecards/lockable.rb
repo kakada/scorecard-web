@@ -31,6 +31,17 @@ module Scorecards::Lockable
       update_columns(completed_at: nil, progress: Scorecard::STATUS_IN_REVIEW)
     end
 
+    def rejected_by(user, reason)
+      transaction do
+        update_columns(
+          progress: Scorecard::STATUS_REJECTED,
+          rejected_at: Time.now.utc,
+          rejected_reason: reason
+        )
+        scorecard_progresses.create!(status: Scorecard::STATUS_REJECTED, user_id: user.id)
+      end
+    end
+
     def access_locked?
       completed_at.present?
     end

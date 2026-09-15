@@ -4,7 +4,7 @@ km:
   summary_panel_title: សង្ខេបប័ណ្ណដាក់ពិន្ទុ
   scorecard_total_panel_title: ប័ណ្ណដាក់ពិន្ទុសរុប (គ្រោងទុកសរុប/កំពុងត្រួតពិនិត្យ/អនុម័ត)
   scorecard_total_panel_description: |
-    <h5>ប័ណ្ណដាក់ពិន្ទុសរុប៖ គ្រោងទុក ១០ / កំពុងត្រួតពិនិត្យ ៥ / បានអនុម័ត ៣</h5>
+    <h5>ប័ណ្ណដាក់ពិន្ទុសរុប៖ គ្រោងទុកសរុប ១០ / កំពុងត្រួតពិនិត្យ ៥ / បានអនុម័ត ៣</h5>
     <p>
       នេះបង្ហាញពីដំណើរការរបស់ Scorecard តាមដំណាក់កាល៖
       <strong>១០ កំពុងស្ថិតក្នុងគម្រោង ៥ កំពុងពិនិត្យ និង ៣ បានអនុម័ត</strong>
@@ -288,6 +288,20 @@ km:
     </ul>
     <p><strong>ឧទាហរណ៍៖</strong> ក្នុងចំណោមអ្នកចូលរួមសរុប 7 នាក់ មាន 6 នាក់ជាស្រី (86%) 4 នាក់ជាយុវជន (57%) និង 3 នាក់ជាជនជាតិដើម (43%)។ គ្មានអ្នកចូលរួមណាមួយរាយការណ៍ថាមានពិការភាពទេ។</p>
     </div>
+  data_quality_kpi_panel_title: "គុណភាពទិន្នន័យ KPI"
+  data_quality_kpi_panel_description: |
+    <div lang="km-KH">
+    <p><strong>KPI គុណភាពទិន្នន័យ</strong></p>
+    <p>តារាងនេះតាមដានសូចនាករសំខាន់ៗនៃគុណភាពទិន្នន័យប័ណ្ណដាក់ពិន្ទុ</p>
+    <ul>
+      <li><strong>ចំនួនប័ណ្ណបានដាក់ស្នើ</strong> — ប័ណ្ណដាក់ពិន្ទុដែលបានដាក់ស្នើដោយ CAFs/Peers</li>
+      <li><strong>ចំនួនប័ណ្ណបានអនុម័ត</strong> — ប័ណ្ណដាក់ពិន្ទុដែលបានអនុម័តដោយ Local NGO (មិនរាប់បញ្ចូលប័ណ្ណដែលបានបដិសេធ)</li>
+      <li><strong>ចំនួនប័ណ្ណបានបដិសេធ</strong> — ប័ណ្ណដាក់ពិន្ទុដែលបានបដិសេធដោយ Program team</li>
+      <li><strong># កែសម្រួលសូចនាករថ្មី</strong> — indicator ប្រភេទ custom ដែលត្រូវបានកែប្រែដោយ Local NGO (ពោលគឺបានធ្វើបច្ចុប្បន្នភាពក្រោយពេលបានបង្កើតដំបូង)</li>
+    </ul>
+    <p><strong>តម្លៃបច្ចុប្បន្ន៖</strong> ដាក់ស្នើ 5 / អនុម័ត 3 / បដិសេធ 1 / ការកែតម្រូវ Indicator ថ្មី 0។</p>
+    <p><strong>ឧទាហរណ៍៖</strong> ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុដែលបានដាក់ស្នើ 5 មាន 3 ត្រូវបានអនុម័ត និង 1 ត្រូវបានបដិសេធ ខណៈមាន 1 នៅសល់កំពុងរង់ចាំការត្រួតពិនិត្យ។ គ្មាន indicator ថ្មីណាមួយត្រូវការកែតម្រូវដោយ Local NGO ទេ។</p>
+    </div>
 
   # label in graph
   min_day: អប្បបរមា (ថ្ងៃ)
@@ -313,9 +327,10 @@ km:
   vote_count: ចំនួនបោះឆ្នោត
   scorecard_local_ngo: អង្គការអនុវត្តប័ណ្ណដាក់ពិន្ទុ
   scorecard_implementation_status: "ការអនុវត្តប័ណ្ណដាក់ពិន្ទុ៖"
-  scorecard_implementation_status_planned: "គ្រោងទុក"
+  scorecard_implementation_status_planned: "គ្រោងទុកសរុប"
   scorecard_implementation_status_review: "កំពុងត្រួតពិនិត្យ"
   scorecard_implementation_status_implemented: "អនុម័ត"
+  scorecard_implementation_status_rejected: "បដិសេធ"
   # Geographic coverage labels
   location: គោលដៅភូមិសាស្ត្រ
   covered_vs_target: "# គ្របដណ្តប់ / # គោលដៅ"
@@ -330,3 +345,8 @@ km:
   youth_percentage: "យុវជន %"
   disabilities_percentage: "ពិការភាព %"
   minority_percentage: "ជនជាតិដើម %"
+  # Data Quality KPI
+  total_submitted_scorecard: "ចំនួនប័ណ្ណបានដាក់ស្នើ"
+  total_approved_scorecard: "ចំនួនប័ណ្ណបានអនុម័ត"
+  total_rejected_scorecard: "ចំនួនប័ណ្ណបានបដិសេធ"
+  total_custom_indicator_correction: "# កែសម្រួលសូចនាករថ្មី"

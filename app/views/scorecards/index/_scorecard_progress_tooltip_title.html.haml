@@ -5,10 +5,10 @@
     - num = status == ScorecardProgress::DOWNLOADED ? 3 : 1
     - selecteds = progresses.select { |pr| pr.status == status }
 
-    %div= scorecard_progress_title(selecteds.length, num, status)
+    %small= scorecard_progress_title(selecteds.length, num, status)
     %div
-      %ul
+      %ul.mb-0
         - selecteds.take(num).each do |progress|
           %li
-            %span= "#{t('scorecard.device_id')}: "
-            %span= "#{progress.device_id} (#{display_datetime(progress.created_at)})"
+            %small= "#{t('scorecard.device_id')}: "
+            %small= "#{progress.device_id} (#{display_datetime(progress.created_at)})"
