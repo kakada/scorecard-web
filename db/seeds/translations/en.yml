@@ -284,6 +284,18 @@ en:
     </ul>
     <p><strong>Example:</strong> Out of 7 total participants, 6 are female (86%), 4 are youth (57%), and 3 belong to a minority group (43%). None of the participants reported a disability.</p>
     </div>
+  fam_reporting_view_by_device_title: "FAM Reporting View by Device"
+  fam_reporting_view_by_device_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>FAM Reporting View by Device</strong></p>
+    <p>This section shows the distribution of FAM reports viewed via different devices.</p>
+    </div>
+  fam_reporting_view_by_detail_title: "FAM Reporting View Detail"
+  fam_reporting_view_by_detail_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>FAM Reporting View Detail</strong></p>
+    <p>This section provides a detailed view of FAM reports.</p>
+    </div>
 
   # label in graph
   min_day: Min (days)
@@ -326,3 +338,8 @@ en:
   youth_percentage: "Youth %"
   disabilities_percentage: "Disabilities %"
   minority_percentage: "Minority %"
+  # FAM reporting
+  device_type: Device Type
+  os: OS
+  browser: Browser
+  views: Views
