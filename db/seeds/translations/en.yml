@@ -297,6 +297,17 @@ en:
     </ul>
     <p><strong>Current values:</strong> 5 Submitted / 3 Approved / 1 Rejected / 0 Custom Indicator Corrections.</p>
     <p><strong>Example:</strong> Out of 5 submitted scorecards, 3 have been approved and 1 rejected, with 1 still pending review. No custom indicators have needed correction by Local NGO.</p>
+  fam_reporting_view_by_device_title: "FAM Reporting View by Device"
+  fam_reporting_view_by_device_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>FAM Reporting View by Device</strong></p>
+    <p>This section shows the distribution of FAM reports viewed via different devices.</p>
+    </div>
+  fam_reporting_view_by_detail_title: "FAM Reporting View Detail"
+  fam_reporting_view_by_detail_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <p><strong>FAM Reporting View Detail</strong></p>
+    <p>This section provides a detailed view of FAM reports.</p>
     </div>
 
   # label in graph
@@ -346,3 +357,8 @@ en:
   total_approved_scorecard: "# Approved Scorecard"
   total_rejected_scorecard: "# Rejected Scorecard"
   total_custom_indicator_correction: "# Custom Indi Correction"
+  # FAM reporting
+  device_type: Device Type
+  os: OS
+  browser: Browser
+  views: Views

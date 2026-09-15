@@ -302,6 +302,18 @@ km:
     <p><strong>តម្លៃបច្ចុប្បន្ន៖</strong> ដាក់ស្នើ 5 / អនុម័ត 3 / បដិសេធ 1 / ការកែតម្រូវ Indicator ថ្មី 0។</p>
     <p><strong>ឧទាហរណ៍៖</strong> ក្នុងចំណោមប័ណ្ណដាក់ពិន្ទុដែលបានដាក់ស្នើ 5 មាន 3 ត្រូវបានអនុម័ត និង 1 ត្រូវបានបដិសេធ ខណៈមាន 1 នៅសល់កំពុងរង់ចាំការត្រួតពិនិត្យ។ គ្មាន indicator ថ្មីណាមួយត្រូវការកែតម្រូវដោយ Local NGO ទេ។</p>
     </div>
+  fam_reporting_view_by_device_title: "ការចូលមើល FAM តាមឧបករណ៍"
+  fam_reporting_view_by_device_description: |
+    <div lang="km-KH" style="margin-bottom: 16px;">
+    <p><strong>ការចូលមើល FAM តាមឧបករណ៍</strong></p>
+    <p>ក្រាបនេះបង្ហាញពីការចូលមើល FAM ដែលបានមើលតាមឧបករណ៍ផ្សេងៗ។</p>
+    </div>
+  fam_reporting_view_by_detail_title: "ការចូលមើល FAM លម្អិត"
+  fam_reporting_view_by_detail_description: |
+    <div lang="km-KH" style="margin-bottom: 16px;">
+    <p><strong>ការចូលមើល FAM លម្អិត</strong></p>
+    <p>តារាងនេះផ្តល់បង្ហាញការចូលមើលលម្អិតនៃការចូលមើល FAM។</p>
+    </div>
 
   # label in graph
   min_day: អប្បបរមា (ថ្ងៃ)
@@ -350,3 +362,8 @@ km:
   total_approved_scorecard: "ចំនួនប័ណ្ណបានអនុម័ត"
   total_rejected_scorecard: "ចំនួនប័ណ្ណបានបដិសេធ"
   total_custom_indicator_correction: "# កែសម្រួលសូចនាករថ្មី"
+  # FAM reporting
+  device_type: ប្រភេទឧបករណ៍
+  os: ប្រព័ន្ធប្រតិបត្តិការ
+  browser: Browser
+  views: ចំនួនការមើល
