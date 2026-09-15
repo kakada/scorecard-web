@@ -288,6 +288,19 @@ km:
     </ul>
     <p><strong>ឧទាហរណ៍៖</strong> ក្នុងចំណោមអ្នកចូលរួមសរុប 7 នាក់ មាន 6 នាក់ជាស្រី (86%) 4 នាក់ជាយុវជន (57%) និង 3 នាក់ជាជនជាតិដើម (43%)។ គ្មានអ្នកចូលរួមណាមួយរាយការណ៍ថាមានពិការភាពទេ។</p>
     </div>
+  fam_reporting_view_by_device_title: "ការចូលមើល FAM តាមឧបករណ៍"
+  fam_reporting_view_by_device_description: |
+    <div lang="km-KH" style="margin-bottom: 16px;">
+    <p><strong>ការចូលមើល FAM តាមឧបករណ៍</strong></p>
+    <p>ក្រាបនេះបង្ហាញពីការចូលមើល FAM ដែលបានមើលតាមឧបករណ៍ផ្សេងៗ។</p>
+    </div>
+  fam_reporting_view_by_detail_title: "ការចូលមើល FAM លម្អិត"
+  fam_reporting_view_by_detail_description: |
+    <div lang="km-KH" style="margin-bottom: 16px;">
+    <p><strong>ការចូលមើល FAM លម្អិត</strong></p>
+    <p>តារាងនេះផ្តល់បង្ហាញការចូលមើលលម្អិតនៃការចូលមើល FAM។</p>
+    </div>
+    </div>
 
   # label in graph
   min_day: អប្បបរមា (ថ្ងៃ)
@@ -330,3 +343,8 @@ km:
   youth_percentage: "យុវជន %"
   disabilities_percentage: "ពិការភាព %"
   minority_percentage: "ជនជាតិដើម %"
+  # FAM reporting
+  device_type: ប្រភេទឧបករណ៍
+  os: ប្រព័ន្ធប្រតិបត្តិការ
+  browser: Browser
+  views: ចំនួនការមើល
