@@ -21,7 +21,7 @@ CW.StaticPageVariablesForm = do ->
 
   { init: init }
 
-CW.StaticPageVariablesNew = CW.StaticPageVariablesForm
-CW.StaticPageVariablesCreate = CW.StaticPageVariablesForm
-CW.StaticPageVariablesEdit = CW.StaticPageVariablesForm
-CW.StaticPageVariablesUpdate = CW.StaticPageVariablesForm
+CW.Static_page_variablesNew = CW.StaticPageVariablesForm
+CW.Static_page_variablesCreate = CW.StaticPageVariablesForm
+CW.Static_page_variablesEdit = CW.StaticPageVariablesForm
+CW.Static_page_variablesUpdate = CW.StaticPageVariablesForm

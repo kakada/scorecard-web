@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: static_page_variables
+#
+#  id            :uuid             not null, primary key
+#  key           :string           not null
+#  variable_type :integer          default("text"), not null
+#  value         :text
+#  image         :string
+#  description   :text
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
 class StaticPageVariable < ApplicationRecord
   mount_uploader :image, ImageUploader
 

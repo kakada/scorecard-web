@@ -2,14 +2,17 @@
   = t("fam_reporting.page_title")
 
 #content.mx-auto{style: "width: fit-content;"}
-  .d-flex.my-4
-    - back_url = user_signed_in? ? fam_reporting_stats_path : new_user_session_path
-    = link_to t("shared.back"), back_url
+  - unless params[:hide_back_button]
+    .d-flex.my-4
+      - back_url = user_signed_in? ? fam_reporting_stats_path : new_user_session_path
+      = link_to t("shared.back"), back_url
 
   .card.shadow.mb-4
     .card-body
       - if @content.present?
-        = @content.html_safe
+        = sanitize(@content.to_s,
+          tags: %w[h1 h2 h3 h4 h5 h6 div p span strong em br img style a ul li],
+          attributes: %w[class style src href alt])
 
       - else
         %p.text-muted.mb-0= t("fam_reporting.content_not_available")

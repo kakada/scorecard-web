@@ -1,9 +1,15 @@
 - content_for :title do
   = t("static_page_variable.static_page_variables")
 
-- if policy(StaticPageVariable.new).new?
-  .d-flex.justify-content-end.mb-2
-    = render "shared/buttons/add_new_button", title: t("shared.add_new", name: t("static_page_variable.static_page_variable")), url: new_static_page_variable_path
+.alert.alert-info.shadow-sm
+  %span= t("static_page_variable.static_page_variable_information")
+
+.d-flex
+  = render 'static_pages/nav_tabs'
+
+  - if policy(StaticPageVariable.new).new?
+    .d-flex.flex-grow-1.justify-content-end.mb-2
+      = render "shared/buttons/add_new_button", title: t("shared.add_new", name: t("static_page_variable.static_page_variable")), url: new_static_page_variable_path
 
 .card.shadow.mb-4
   .card-body
@@ -25,7 +31,8 @@
                 %td
                   %code= static_page_variable.key
                 %td= static_page_variable.variable_type.humanize
-                %td= sanitize(static_page_variable.rendered_value)
+                %td.static_page_variable_value
+                  = sanitize(static_page_variable.rendered_value)
                 %td= static_page_variable.description
                 %td
                   .d-flex.justify-content-end

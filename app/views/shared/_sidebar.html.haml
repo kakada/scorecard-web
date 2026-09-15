@@ -81,16 +81,10 @@
           %span= t('sidebar.fam_reporting_statistics')
 
     - if policy(StaticPage.new).new?
-      %li.nav-item{ class: css_active_class('static_pages') }
+      %li.nav-item{ class: css_active_class('static_pages') || css_active_class('static_page_variables') }
         %a.nav-link{:href => static_pages_path}
           %i.fas.fa-fw.fa-file-alt
           %span= t("sidebar.static_pages")
-
-    - if policy(StaticPageVariable.new).new?
-      %li.nav-item{ class: css_active_class('static_page_variables') }
-        %a.nav-link{:href => static_page_variables_path}
-          %i.fas.fa-fw.fa-code
-          %span= t("sidebar.static_page_variables")
 
     %li.nav-item{ class: css_active_class('about') }
       %a.nav-link{:href => about_path}

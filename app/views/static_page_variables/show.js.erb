@@ -1,4 +1,4 @@
 $('#confirmModal .title').text("<%= j t('static_page_variable.static_page_variable') %>");
-$('#confirmModal .modal-body').text("<%= j t('shared.are_you_sure_to_delete', name: @static_page_variable.key) %>");
+$('#confirmModal .modal-body').text("<%= j t('static_page_variable.are_you_sure_to_delete', name: @static_page_variable.key) %>");
 $("#confirmModal .btn-yes").attr('href', "<%= static_page_variable_path(@static_page_variable) %>");
 $("#confirmModal").modal("show");

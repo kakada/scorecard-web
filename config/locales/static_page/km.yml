@@ -30,3 +30,5 @@ km:
     text_value: អត្ថបទ / តំណភ្ជាប់
     image: រូបភាព
     description: ការពិពណ៌នា
+    are_you_sure_to_delete: តើអ្នកប្រាកដថាចង់លុបអថេរ %{name} នេះមែនឬទេ?
+    static_page_variable_information: អថេរទំព័រមាតិកាដែលអាចប្រើបានក្នុងទំព័រមាតិកា។
