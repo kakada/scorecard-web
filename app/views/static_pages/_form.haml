@@ -16,6 +16,23 @@
             = f.input :content_km, as: :text, label: false, input_html: { rows: 20, class: "static-page-editor", "data-preview-input" => "km" }, placeholder: t("static_page.content_placeholder")
           #content-en-pane.tab-pane.fade{ role: "tabpanel", "aria-labelledby" => "content-en-tab" }
             = f.input :content_en, as: :text, label: false, input_html: { rows: 20, class: "static-page-editor", "data-preview-input" => "en" }, placeholder: t("static_page.content_placeholder")
+
+      .card.shadow-sm.border-0.mb-3
+        .card-body.py-3
+          .d-flex.justify-content-between.align-items-center.flex-wrap
+            %div
+              .font-weight-bold= t("static_page.available_variables")
+              %small.text-muted= t("static_page.insert_variable_hint")
+            = link_to t("static_page.manage_variables"), static_page_variables_path, class: "btn btn-outline-secondary btn-sm"
+
+          - if @static_page_variables.present?
+            .static-page-variables.mt-3
+              - @static_page_variables.each do |static_page_variable|
+                %button.btn.btn-light.btn-sm.static-page-variable-token.mr-2.mb-2{ type: "button", "data-token" => static_page_variable.token }
+                  %code= static_page_variable.token
+          - else
+            %p.text-muted.mb-0.mt-3= t("static_page.no_variables")
+
       .actions
         = link_to t("shared.cancel"), static_pages_path, class: "btn btn-secondary"
         = f.submit t("shared.save"), class: "btn btn-primary"
@@ -26,4 +43,5 @@
         %i.fas.fa-eye
         = t("static_page.preview")
       .card-body
-        .static-page-preview-area{"data-static-page-preview" => true}
+        .static-page-preview-area{"data-static-page-preview" => true, "data-preview-url" => preview_static_pages_path}
+          = render "preview", content: @static_page.rendered_content_by_locale(:km)

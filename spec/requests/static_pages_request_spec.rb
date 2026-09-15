@@ -6,6 +6,7 @@ RSpec.describe "StaticPages", type: :request do
   include Devise::Test::IntegrationHelpers
 
   let!(:static_page) { create(:static_page, slug: "fam_reporting") }
+  let!(:static_page_variable) { create(:static_page_variable, key: "QR_CODE", value: "Rendered QR code") }
 
   describe "as system_admin" do
     let(:user) { create(:user, :system_admin) }
@@ -21,6 +22,8 @@ RSpec.describe "StaticPages", type: :request do
 
       get "/static_pages/new"
       expect(response).to have_http_status(:success)
+      expect(response.body).to include("{{QR_CODE}}")
+      expect(response.body).to include("/static_page_variables")
 
       get "/static_pages/#{static_page.id}/edit"
       expect(response).to have_http_status(:success)
@@ -38,6 +41,14 @@ RSpec.describe "StaticPages", type: :request do
       patch "/static_pages/#{static_page.id}", params: { static_page: { content_en: "<p>Updated</p>" } }
       expect(response).to redirect_to(static_page_path(static_page))
       expect(static_page.reload.content_en).to eq("<p>Updated</p>")
+
+      post "/static_pages/preview", params: { content: "<p>{{QR_CODE}}</p>" }
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include("Rendered QR code")
+
+      post "/static_pages/preview", params: { content: "<h1>Heading</h1><script>alert(1)</script>" }
+      expect(response.body).to include("<h1>Heading</h1>")
+      expect(response.body).not_to include("<script>")
     end
   end
 
@@ -63,6 +74,9 @@ RSpec.describe "StaticPages", type: :request do
       expect(response).to redirect_to(root_path)
 
       patch "/static_pages/#{static_page.id}", params: { static_page: { content_en: "Nope" } }
+      expect(response).to redirect_to(root_path)
+
+      post "/static_pages/preview", params: { content: "<p>{{QR_CODE}}</p>" }
       expect(response).to redirect_to(root_path)
     end
   end

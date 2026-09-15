@@ -2,6 +2,7 @@
 
 class StaticPagesController < ApplicationController
   before_action :set_static_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_static_page_variables, only: [:new, :create, :edit, :update]
 
   def index
     authorize StaticPage
@@ -36,6 +37,12 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def preview
+    authorize StaticPage, :edit?
+
+    render partial: "preview", locals: { content: StaticPage.interpolate_content(params[:content]) }
+  end
+
   def destroy
     @static_page.destroy
 
@@ -49,5 +56,9 @@ class StaticPagesController < ApplicationController
 
     def static_page_params
       params.require(:static_page).permit(:slug, :content_en, :content_km)
+    end
+
+    def set_static_page_variables
+      @static_page_variables = policy_scope(StaticPageVariable.ordered)
     end
 end

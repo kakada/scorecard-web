@@ -33,6 +33,7 @@ RSpec.describe "FamReporting", type: :request do
     context "when the visitor is signed in" do
       let(:user) { create(:user) }
       let!(:static_page) { create(:static_page, slug: "/fam_reporting", content_km: "<h1>KM Content</h1>", content_en: "<h1>EN Content</h1>") }
+      let!(:static_page_variable) { create(:static_page_variable, key: "QR_CODE", value: "QR code image") }
 
       before { sign_in user }
 
@@ -51,6 +52,14 @@ RSpec.describe "FamReporting", type: :request do
         get "/fam_reporting", headers: browser_headers
 
         expect(response.body).to include("KM Content")
+      end
+
+      it "interpolates static page variables" do
+        static_page.update!(content_km: "<p>{{QR_CODE}}</p>")
+
+        get "/fam_reporting", headers: browser_headers
+
+        expect(response.body).to include("QR code image")
       end
     end
   end

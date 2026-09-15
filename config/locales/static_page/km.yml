@@ -14,3 +14,21 @@ km:
     en_locale: English
     km_locale: ខ្មែរ
     static_page_information: ទំព័រមាតិកាដូចជា ទំព័រ FAM Reporting ដែលអាចធ្វើបច្ចុប្បន្នភាពបានដោយងាយ។
+    available_variables: អថេរដែលអាចប្រើបាន
+    insert_variable_hint: ចុចលើអថេរខាងក្រោម ដើម្បីបញ្ចូលនៅត្រង់ទីតាំង cursor
+    manage_variables: គ្រប់គ្រងអថេរ
+    no_variables: មិនទាន់មានអថេរសម្រាប់ទំព័រមាតិកានៅឡើយទេ។
+  static_page_variable:
+    static_page_variable: អថេរទំព័រមាតិកា
+    static_page_variables: អថេរទំព័រមាតិកា
+    new_static_page_variable: បង្កើតអថេរទំព័រមាតិកាថ្មី
+    edit_static_page_variable: កែប្រែអថេរទំព័រមាតិកា
+    key: Key
+    token: អថេរ
+    variable_type: ប្រភេទ
+    value: តម្លៃ
+    text_value: អត្ថបទ / តំណភ្ជាប់
+    image: រូបភាព
+    description: ការពិពណ៌នា
+    are_you_sure_to_delete: តើអ្នកប្រាកដថាចង់លុបអថេរ %{name} នេះមែនឬទេ?
+    static_page_variable_information: អថេរទំព័រមាតិកាដែលអាចប្រើបានក្នុងទំព័រមាតិកា។

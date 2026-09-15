@@ -64,6 +64,7 @@
 //= require programs/new
 //= require mobile_notifications
 //= require static_pages
+//= require static_page_variables
 //= require activity_logs
 //= require request_changes/new
 //= require scorecard_batches/new

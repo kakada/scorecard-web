@@ -1,0 +1,44 @@
+- content_for :title do
+  = t("static_page_variable.static_page_variables")
+
+.alert.alert-info.shadow-sm
+  %span= t("static_page_variable.static_page_variable_information")
+
+.d-flex
+  = render 'static_pages/nav_tabs'
+
+  - if policy(StaticPageVariable.new).new?
+    .d-flex.flex-grow-1.justify-content-end.mb-2
+      = render "shared/buttons/add_new_button", title: t("shared.add_new", name: t("static_page_variable.static_page_variable")), url: new_static_page_variable_path
+
+.card.shadow.mb-4
+  .card-body
+    - if @static_page_variables.present?
+      = render "shared/pagination_title"
+
+      .table-responsive
+        %table.table.table-hover
+          %thead
+            %tr
+              %th= t("static_page_variable.key")
+              %th= t("static_page_variable.variable_type")
+              %th= t("static_page_variable.value")
+              %th= t("static_page_variable.description")
+              %th
+          %tbody
+            - @static_page_variables.each do |static_page_variable|
+              %tr
+                %td
+                  %code= static_page_variable.key
+                %td= static_page_variable.variable_type.humanize
+                %td.static_page_variable_value
+                  = sanitize(static_page_variable.rendered_value)
+                %td= static_page_variable.description
+                %td
+                  .d-flex.justify-content-end
+                    = render "shared/action_buttons", edit_url: edit_static_page_variable_path(static_page_variable), delete_url: static_page_variable_path(static_page_variable), object: static_page_variable
+
+    = render "shared/no_data", items: @static_page_variables
+    = render "shared/footers/pagination"
+
+= render "shared/modal_confirm"

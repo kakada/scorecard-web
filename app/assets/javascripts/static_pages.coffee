@@ -2,22 +2,56 @@ CW.Static_pagesNew = do ->
   init = ->
     bindPreview()
     bindLanguageTabs()
-    renderPreview(activeEditorValue())
+    bindVariableTokens()
+    requestPreview(activeEditorValue())
 
   bindPreview = ->
     $(document).off "input", ".static-page-editor"
     $(document).on "input", ".static-page-editor", ->
       return unless $(this).is(":visible")
 
-      renderPreview($(this).val())
+      queuePreview($(this).val())
 
   bindLanguageTabs = ->
     $(document).off "shown.bs.tab", "[data-preview-source]"
     $(document).on "shown.bs.tab", "[data-preview-source]", ->
-      renderPreview(activeEditorValue())
+      requestPreview(activeEditorValue())
+
+  bindVariableTokens = ->
+    $(document).off "click", ".static-page-variable-token"
+    $(document).on "click", ".static-page-variable-token", (e) ->
+      editor = activeEditor()
+      token = $(this).data("token")
+      return unless editor? && token?
+
+      CW.Util.insertToTextArea(editor.id, token)
+      requestPreview($(editor).val())
+      e.preventDefault()
 
   activeEditorValue = ->
-    $(".tab-pane.active .static-page-editor").val() || ""
+    $(activeEditor()).val() || ""
+
+  activeEditor = ->
+    $(".tab-pane.active .static-page-editor")[0]
+
+  queuePreview = (content) ->
+    clearTimeout(window.staticPagePreviewTimer)
+    window.staticPagePreviewTimer = setTimeout((-> requestPreview(content)), 250)
+
+  requestPreview = (content) ->
+    previewArea = $("[data-static-page-preview]")
+    previewUrl = previewArea.data("preview-url")
+    return renderPreview(content) unless previewUrl?
+
+    $.ajax
+      url: previewUrl
+      type: "POST"
+      data:
+        content: content || ""
+      headers:
+        "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content")
+      success: (html) ->
+        renderPreview(html)
 
   renderPreview = (content) ->
     $("[data-static-page-preview]").html(content || "")

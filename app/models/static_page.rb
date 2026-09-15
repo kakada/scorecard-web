@@ -21,4 +21,21 @@ class StaticPage < ApplicationRecord
       content_en.presence || content_km
     end
   end
+
+  def rendered_content_by_locale(locale = I18n.locale)
+    self.class.interpolate_content(content_by_locale(locale))
+  end
+
+  def self.interpolate_content(content)
+    content = content.to_s
+    keys = content.scan(/\{\{([A-Za-z0-9_]+)\}\}/).flatten.map(&:upcase).uniq
+    return content if keys.blank?
+
+    variables_by_key = StaticPageVariable.where(key: keys).index_by(&:key)
+
+    content.gsub(/\{\{([A-Za-z0-9_]+)\}\}/) do |match|
+      variable = variables_by_key[Regexp.last_match(1).upcase]
+      variable.present? ? variable.rendered_value : match
+    end
+  end
 end
