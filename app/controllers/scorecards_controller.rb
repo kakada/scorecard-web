@@ -2,7 +2,7 @@
 
 class ScorecardsController < ApplicationController
   helper_method :filter_params
-  before_action :set_scorecard, only: [:show, :edit, :update, :destroy, :complete]
+  before_action :set_scorecard, only: [:show, :edit, :update, :destroy, :complete, :reject]
 
   def index
     respond_to do |format|
@@ -89,6 +89,14 @@ class ScorecardsController < ApplicationController
   def complete
     authorize @scorecard, :in_review?
     @scorecard.completed_by(current_user)
+
+    redirect_to scorecard_url(@scorecard.uuid)
+  end
+
+  def reject
+    authorize @scorecard, :reject?
+    @scorecard.rejected_by(current_user, params[:rejected_reason])
+    flash[:notice] = t("scorecard.reject_successfully")
 
     redirect_to scorecard_url(@scorecard.uuid)
   end

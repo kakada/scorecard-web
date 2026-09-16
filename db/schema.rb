@@ -693,6 +693,8 @@ ActiveRecord::Schema[7.0].define(version: 2026_09_14_020500) do
     t.integer "running_mode", default: 1
     t.string "qr_code"
     t.string "token", limit: 64
+    t.datetime "rejected_at", precision: nil
+    t.string "rejected_reason"
     t.index ["deleted_at"], name: "index_scorecards_on_deleted_at"
     t.index ["token"], name: "index_scorecards_on_token", unique: true
     t.index ["uuid"], name: "index_scorecards_on_uuid"
