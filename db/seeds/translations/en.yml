@@ -4,22 +4,28 @@ en:
   summary_panel_title: "Scorecard Summary"
   scorecard_total_panel_title: "Total Scorecards (Planned / In Review / Approved)"
   scorecard_total_panel_description: |
-    <h5>Total Scorecards: 10 Planned / 5 In Review / 3 Approved</h5>
+    <h5>Total Scorecards: Planned 10 / In Review 5 / Approved 3</h5>
     <p>
-      This shows how scorecards are progressing through the review pipeline:
-      <strong>10 are planned, 5 are currently in review, and 3 have been approved</strong>,
-      for a total of <strong>18 scorecards</strong>.
+      This shows the number of scorecards at each stage:
+      <strong>Planned 10 / In Review 5 / Approved 3</strong>
+      (including scorecards with <em>Completed</em> and <em>Rejected</em> statuses).
     </p>
     <p>
-      <strong>Example:</strong> A manager creates a Q3 performance scorecard, which starts as
-      <em>Planned</em>. Once they begin completing it and submit it for evaluation, it moves to
-      <em>In Review</em>. After the reviewer signs off, it becomes <em>Approved</em>.
+      <strong>Example:</strong>
+      An administrator creates scorecards for the Q3 work implementation,
+      with a total of <em>10</em> scorecards planned.
+      Once a scorecard is completed and submitted for review,
+      its status changes to <em>In Review</em>.
+      After the reviewer makes a decision, the status changes to
+      <em>Completed</em> or <em>Rejected</em>.
+      For this KPI, both statuses are counted as <strong>Approved</strong>.
     </p>
   scorecard_entered_after_actual_implementation_date_panel_title: "Number of Scorecards Entered After Actual Implementation Date"
   scorecard_entered_after_actual_implementation_date_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Number of Scorecards Entered After the Actual Implementation Date</strong></p>
+    <h5>Number of Scorecards Entered After the Actual Implementation Date</h5>
     <p>This indicator shows the number of scorecards where the <strong>Entry Date</strong> is at least 1 day later than the <strong>Conducted Date</strong> (the date the implementation was actually carried out).</p>
+    <p><strong>Note:</strong> Only approved(accepted) scorecards are counted.</p>
     <p><strong>Formula:</strong><br>
     Entry Date − Conducted Date ≥ 1 Day</p>
     <p><strong>Example:</strong><br>
@@ -30,8 +36,9 @@ en:
   scorecard_implementation_duration_panel_title: "Scorecard Implementation Duration (Start Date to Approval)"
   scorecard_implementation_duration_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Scorecard Implementation Duration (Minimum / Average / Maximum)</strong></p>
+    <h5>Scorecard Implementation Duration (Start Date to Approval[Accepted + Rejected])</h5>
     <p>This indicator measures the number of days between the <strong>start date</strong> and the <strong>approval date</strong> of a scorecard, showing the minimum, average, and maximum duration across all approved scorecards.</p>
+    <p><strong>Note:</strong> Only approved(accepted) scorecards are counted.</p>
     <p><strong>Formula:</strong><br>
     Duration (days) = Approval Date − Start Date</p>
     <p><strong>Current values:</strong><br>
@@ -44,22 +51,22 @@ en:
   scorecard_participants_panel_title: "Number of (Total LNGOs / Total CAFs or Peers / Total Participants / Avg Participants)"
   scorecard_participants_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Count (Total LNGOs / Total CAFs / Total Participants / Average Participants)</strong></p>
+    <h5>Count (Total LNGOs / Total CAFs / Total Participants / Average Participants)</h5>
     <p>This indicator shows four related counts side by side:</p>
     <ul>
-      <li><strong>LNGOs</strong> — counted based on <em>Planned Scorecards</em></li>
+      <li><strong>LNGOs</strong> — counted based on <em>Planned Scorecards(excluding rejected)</em></li>
       <li><strong>CAFs</strong> — counted based on <em>LNGO</em></li>
-      <li><strong>Participants</strong> — counted based on <em>Approved Scorecards</em></li>
-      <li><strong>Average Participants</strong> — the average number of participants per approved scorecard</li>
+      <li><strong>Participants</strong> — counted based on <em>Approved Scorecards(excluding rejected)</em></li>
+      <li><strong>Average Participants</strong> — the average number of participants per approved scorecard (excluding rejected)</li>
     </ul>
     <p><strong>Example:</strong><br>
-    If there are 4 LNGOs, each linked to multiple CAFs, and the approved scorecards recorded a total of 141 participants, the average participants figure is calculated by dividing total participants by the number of approved scorecards.</p>
+    If there are 4 LNGOs, each linked to multiple CAFs, and the approved scorecards recorded a total of 141 participants, the average participants figure is calculated by dividing total participants by the number of approved scorecards(excluding rejected).</p>
     </div>
   scorecard_total_indicators_panel_title: "Total Indicators (Proposed / New Indicators / Prioritized)"
   scorecard_total_indicators_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Total Indicators (Proposed / New Indicators / Prioritized(selected indicators))</strong></p>
-    <p>Counts raised indicators from completed scorecards:</p>
+    <h5>Total Indicators (Proposed / New Indicators / Prioritized(selected indicators))</h5>
+    <p>Counts raised indicators from approved scorecards (excluding rejected):</p>
     <ul>
       <li><strong>Proposed Indicators (Total)</strong> — all raised indicators</li>
       <li><strong>New Indicators (Total)</strong> — raised indicators that are custom (user-added)</li>
@@ -70,8 +77,8 @@ en:
   scorecard_average_indicators_panel_title: "Average Indicators (Proposed / New Indicators / Prioritized)"
   scorecard_average_indicators_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Average Indicators (Proposed / New Indicators / Prioritized)</strong></p>
-    <p>Shows the average number of raised indicators per approved scorecard:</p>
+    <h5>Average Indicators (Proposed / New Indicators / Prioritized)</h5>
+    <p>Shows the average number of raised indicators per approved scorecard (excluding rejected):</p>
     <ul>
       <li><strong>Proposed Indicators (Average)</strong> — average of all raised indicators per approved scorecard</li>
       <li><strong>New Indicators (Average)</strong> — average of custom (user-added) raised indicators per approved scorecard</li>
@@ -83,8 +90,8 @@ en:
   scorecard_total_by_service_type_panel_title: "Total Scorecards (Planned vs Approved) by Service Type"
   scorecard_total_by_service_type_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Total Scorecards (Planned vs Approved) by Service Type</strong></p>
-    <p>This chart compares the number of <strong>Planned</strong> and <strong>Approved</strong> scorecards across different service types, allowing quick identification of gaps between planning and completion.</p>
+    <h5>Total Scorecards (Planned vs Approved) by Service Type</h5>
+    <p>This chart compares the number of <strong>Planned(excluding rejected)</strong> and <strong>Approved(excluding rejected)</strong> scorecards across different service types, allowing quick identification of gaps between planning and completion.</p>
     <p><strong>Current values:</strong></p>
     <ul>
       <li>Commune Administrative — Planned: 6 / Approved: 5</li>
@@ -95,8 +102,8 @@ en:
   scorecard_implemented_by_scorecard_type_panel_title: "Approved Scorecards by Scorecard Type"
   scorecard_implemented_by_scorecard_type_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Approved Scorecards by Scorecard Type</strong></p>
-    <p>This chart compares approved scorecards across scorecard types, broken down into three categories:</p>
+    <h5>Approved Scorecards by Scorecard Type</h5>
+    <p>This chart compares approved scorecards across scorecard types (excluding rejected), broken down into three categories:</p>
     <ul>
       <li><strong>Self-Assessment</strong> — scorecard meeting that conducted with managements or authorizers(supply side)</li>
       <li><strong>Community Scorecard</strong> — scorecard meeting that conducted with community members or factory workers (demand side)</li>
@@ -112,8 +119,8 @@ en:
   scorecard_implemented_by_type_panel_title: "Approved Scorecards by Scorecard Type"
   scorecard_implemented_by_type_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Approved Scorecards by Scorecard Type</strong></p>
-    <p>This donut chart shows the proportion of approved scorecards split by type:</p>
+    <h5>Approved Scorecards by Scorecard Type</h5>
+    <p>This donut chart shows the proportion of approved scorecards(excluding rejected) split by type:</p>
     <ul>
       <li><strong>Self-Assessment</strong> — 51 scorecards (94%)</li>
       <li><strong>Combined Scorecard</strong> — 3 scorecards (6%)</li>
@@ -123,8 +130,8 @@ en:
   scorecard_implemented_by_facility_panel_title: "Approved Scorecards by Service Type"
   scorecard_implemented_by_facility_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Approved Scorecards by Service Type</strong></p>
-    <p>This donut chart shows the distribution of approved scorecards across service types. <em>This report includes only approved scorecards.</em></p>
+    <h5>Approved Scorecards by Service Type</h5>
+    <p>This donut chart shows the distribution of approved scorecards(excluding rejected) across service types. <em>This report includes only approved scorecards.</em></p>
     <ul>
       <li><strong>Commune Administrative</strong> — 20 scorecards (37%)</li>
       <li><strong>Primary School</strong> — 20 scorecards (37%)</li>
@@ -136,8 +143,8 @@ en:
   scorecard_implementation_by_device_type_panel_title: "Scorecard Implementation by Device Type"
   scorecard_implementation_by_device_type_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Scorecard Entries by Device Type</strong></p>
-    <p>This donut chart shows the breakdown of approved scorecards by the device used to enter data. <em>This report includes only approved scorecards.</em></p>
+    <h5>Scorecard Entries by Device Type</h5>
+    <p>This donut chart shows the breakdown of approved scorecards(excluding rejected) by the device used to enter data. <em>This report includes only approved scorecards.</em></p>
     <ul>
       <li><strong>Mobile</strong> — 64 scorecards (69%)</li>
       <li><strong>Tablet</strong> — 29 scorecards (31%)</li>
@@ -147,8 +154,8 @@ en:
   scorecard_participants_by_gender_panel_title: "Participants by Gender"
   scorecard_participants_by_gender_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Participants by Gender</strong></p>
-    <p>This donut chart shows the breakdown of participants by gender. <em>This report includes only approved scorecards.</em></p>
+    <h5>Participants by Gender</h5>
+    <p>This donut chart shows the breakdown of participants by gender. <em>This report includes only approved scorecards(excluding rejected).</em></p>
     <ul>
       <li><strong>Male</strong> — 176 participants (57%)</li>
       <li><strong>Female</strong> — 134 participants (43%)</li>
@@ -158,8 +165,8 @@ en:
   scorecard_participants_by_age_panel_title: "Participants by Age"
   scorecard_participants_by_age_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Participants by Age Group</strong></p>
-    <p>This donut chart shows the breakdown of participants by age group. <em>This report includes only approved scorecards.</em></p>
+    <h5>Participants by Age Group</h5>
+    <p>This donut chart shows the breakdown of participants by age group. <em>This report includes only approved scorecards(excluding rejected).</em></p>
     <ul>
       <li><strong>Age 31–45</strong> — 171 participants (55%)</li>
       <li><strong>Age 15–30</strong> — 89 participants (29%)</li>
@@ -170,8 +177,8 @@ en:
   scorecard_participants_by_profile_panel_title: "Participants by Profile"
   scorecard_participants_by_profile_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Participants by Ethnicity/Group</strong></p>
-    <p>This stacked bar chart shows the breakdown of participants by gender within each group. <em>This report includes only approved scorecards.</em></p>
+    <h5>Participants by Ethnicity/Group</h5>
+    <p>This stacked bar chart shows the breakdown of participants by gender within each group. <em>This report includes only approved scorecards(excluding rejected).</em></p>
     <ul>
       <li><strong>Indigenous</strong> — Female: 38 / Total: 73</li>
       <li><strong>Youth</strong> — Female: 34 / Total: 55</li>
@@ -181,8 +188,8 @@ en:
   scorecard_top_5_proposed_criteria_panel_title: "Top 5 Most Proposed Indicators"
   scorecard_top_5_proposed_criteria_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Top 5 Most Frequently Raised Criteria</strong></p>
-    <p>This chart shows the five criteria/indicators most frequently raised across approved scorecards. <em>This report includes only approved scorecards.</em></p>
+    <h5>Top 5 Most Frequently Raised Criteria</h5>
+    <p>This chart shows the five criteria/indicators most frequently raised across approved scorecards. <em>This report includes only approved scorecards(excluding rejected).</em></p>
     <ul>
       <li><strong>Time</strong> — 16</li>
       <li><strong>Teaching</strong> — 10</li>
@@ -195,8 +202,8 @@ en:
   scorecard_top_5_prioritized_criteria_panel_title: "Top 5 Most Prioritized Indicators"
   scorecard_top_5_prioritized_criteria_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Top 5 Most Frequently Priority Criteria</strong></p>
-    <p>This chart shows the five priority criteria/indicators most frequently approved across scorecards. <em>This report includes only approved scorecards.</em></p>
+    <h5>Top 5 Most Frequently Priority Criteria</h5>
+    <p>This chart shows the five priority criteria/indicators most frequently approved across scorecards. <em>This report includes only approved scorecards(excluding rejected).</em></p>
     <ul>
       <li><strong>Teaching</strong> — 5</li>
       <li><strong>Time</strong> — 5</li>
@@ -209,8 +216,8 @@ en:
   scorecard_top_5_prioritized_criteria_happy_face_panel_title: "Top 5 Prioritized Indicators (😁 Satisfied)"
   scorecard_top_5_prioritized_criteria_happy_face_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Top 5 Priority Criteria (😄 Satisfied)</strong></p>
-    <p>This chart shows the five priority criteria/indicators most frequently marked as "Satisfied(Score 4 and 5)" (😄) across approved scorecards.</p>
+    <h5>Top 5 Priority Criteria (😄 Satisfied)</h5>
+    <p>This chart shows the five priority criteria/indicators most frequently marked as "Satisfied(Score 4 and 5)" (😄) across approved scorecards(excluding rejected).</p>
     <ul>
       <li><strong>Time</strong> — 24</li>
       <li><strong>Monthly Meeting</strong> — 17</li>
@@ -223,8 +230,8 @@ en:
   scorecard_top_5_prioritized_criteria_neutral_face_panel_title: "Top 5 Prioritized Indicators (🙂 Acceptable)"
   scorecard_top_5_prioritized_criteria_neutral_face_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Top 5 Prioritized Indicators (🙂 Acceptable)</strong></p>
-    <p>This chart shows the five prioritized indicators most frequently marked as "Acceptable(Score 3)" (🙂) across scorecards.</p>
+    <h5>Top 5 Prioritized Indicators (🙂 Acceptable)</h5>
+    <p>This chart shows the five prioritized indicators most frequently marked as "Acceptable(Score 3)" (🙂) across approved scorecards(excluding rejected).</p>
     <ul>
       <li><strong>Toilet/Sanitation</strong> — 14</li>
       <li><strong>Teaching</strong> — 13</li>
@@ -237,8 +244,8 @@ en:
   scorecard_top_5_prioritized_criteria_angry_face_panel_title: "Top 5 Prioritized Indicators (😡 Not Satisfied)"
   scorecard_top_5_prioritized_criteria_angry_face_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Top 5 Prioritized Indicators (😡 Not Satisfied)</strong></p>
-    <p>This chart shows the five prioritized indicators most frequently marked as "Not Satisfied(Score 1 and 2)" (😡) across scorecards.</p>
+    <h5>Top 5 Prioritized Indicators (😡 Not Satisfied)</h5>
+    <p>This chart shows the five prioritized indicators most frequently marked as "Not Satisfied(Score 1 and 2)" (😡) across approved scorecards(excluding rejected).</p>
     <ul>
       <li><strong>Parent Involvement in Children's Education</strong> — 17</li>
       <li><strong>Library</strong> — 14</li>
@@ -251,19 +258,19 @@ en:
   scorecard_completion_rate_panel_title: "Scorecard Completion Rate (%)"
   scorecard_completion_rate_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Scorecard Completion Rate (%)</strong></p>
-    <p>This indicator shows the percentage of planned scorecards that have been completed (approved).</p>
+    <h5>Scorecard Completion Rate (%)</h5>
+    <p>This indicator shows the percentage of planned scorecards that have been completed(accepted + rejected).</p>
     <p><strong>Formula:</strong><br>
-    Completion Rate (%) = (Completed/Approved Scorecards ÷ Planned Scorecards) × 100</p>
+    Completion Rate (%) = (Completed[Accepted + Rejected] Scorecards ÷ Planned Scorecards) × 100</p>
     <p><strong>Example:</strong><br>
-    If 55 scorecards were planned and 45 were approved, the completion rate is:<br>
+    If 55 scorecards were planned and 45 were approved(accepted 44 + rejected 1), the completion rate is:<br>
     (45 ÷ 55) × 100 = 82%</p>
     </div>
   scorecard_geo_coverage_rate_panel_title: "Geographic Coverage Rate (%)"
   scorecard_geo_coverage_rate_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Geographic Coverage Rate (%)</strong></p>
-    <p>This indicator shows the percentage of the planned geographic coverage that has been achieved.</p>
+    <h5>Geographic Coverage Rate (%)</h5>
+    <p>This indicator shows the percentage of the planned geographic coverage that has been achieved, excluding any rejected scorecards.</p>
     <p><strong>Formula:</strong><br>
     Geographic Coverage Rate (%) = (Achieved Geographic Coverage ÷ Planned Geographic Coverage) × 100</p>
     <p><strong>Example:</strong><br>
@@ -273,7 +280,7 @@ en:
   scorecard_beneficiary_reach_title: "Beneficiary Reach"
   scorecard_beneficiary_reach_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Beneficiary Reach</strong></p>
+    <h5>Beneficiary Reach</h5>
     <p>This table shows the demographic breakdown of total participants — each column displays the count followed by its percentage of the total.</p>
     <ul>
       <li><strong>Total Participants</strong> — 7</li>
@@ -282,32 +289,46 @@ en:
       <li><strong>Disability %</strong> — 0 (0%)</li>
       <li><strong>Minority %</strong> — 3 (43%)</li>
     </ul>
+    <p><strong>Note:</strong> Only approved (accepted) scorecards are included.</p>
     <p><strong>Example:</strong> Out of 7 total participants, 6 are female (86%), 4 are youth (57%), and 3 belong to a minority group (43%). None of the participants reported a disability.</p>
     </div>
   data_quality_kpi_panel_title: "Data Quality KPI"
   data_quality_kpi_panel_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>Data Quality KPI</strong></p>
+    <h5>Data Quality KPI</h5>
     <p>This table tracks key indicators of scorecard data quality across the review pipeline:</p>
     <ul>
       <li><strong># Submitted Scorecard</strong> — scorecards that have been submitted from CAFs/Peers</li>
-      <li><strong># Approved Scorecard</strong> — scorecards that have been approved by Local NGO (excluding rejected ones)</li>
+      <li><strong># Approved (Accepted) Scorecard</strong> — scorecards that have been approved by Local NGO (excluding rejected ones)</li>
       <li><strong># Rejected Scorecard</strong> — scorecards that have been rejected by Program team</li>
-      <li><strong># Custom Indi Correction</strong> — custom indicators that were edited by Local NGO (i.e., updated after their initial creation)</li>
+      <li><strong># Custom Indicator Correction</strong> — custom indicators that were edited by Local NGO (i.e., updated after their initial creation)</li>
     </ul>
     <p><strong>Current values:</strong> 5 Submitted / 3 Approved / 1 Rejected / 0 Custom Indicator Corrections.</p>
     <p><strong>Example:</strong> Out of 5 submitted scorecards, 3 have been approved and 1 rejected, with 1 still pending review. No custom indicators have needed correction by Local NGO.</p>
+    </div>
   fam_reporting_view_by_device_title: "FAM Reporting View by Device"
   fam_reporting_view_by_device_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>FAM Reporting View by Device</strong></p>
+    <h5>FAM Reporting View by Device</h5>
     <p>This section shows the distribution of FAM reports viewed via different devices.</p>
+    <p>You can filter by time period to view FAM reporting trends.</p>
+    <p><strong>Note:</strong> The FAM page is for general viewing and is not under any specific Program.</p>
     </div>
   fam_reporting_view_by_detail_title: "FAM Reporting View Detail"
   fam_reporting_view_by_detail_description: |
     <div lang="en-US" style="margin-bottom: 16px;">
-    <p><strong>FAM Reporting View Detail</strong></p>
+    <h5>FAM Reporting View Detail</h5>
     <p>This section provides a detailed view of FAM reports.</p>
+    <p>You can filter by time period to view FAM reporting trends.</p>
+    <p><strong>Note:</strong> The FAM page is for general viewing and is not under any specific Program.</p>
+    </div>
+  num_activities_by_waste_category_title: "# of Activities by Standard Waste Management Category"
+  num_activities_by_waste_category_description: |
+    <div lang="en-US" style="margin-bottom: 16px;">
+    <h5># of Activities by Standard Waste Management Category</h5>
+    <p>This section shows the number of activities categorized by standard waste management categories.</p>
+    <p><strong>Example:</strong> If there are 10 activities, this section will show how many fall under each standard waste management category.</p>
+    <p><strong>Note:</strong> It includes only activities from approved (accepted) scorecards.</p>
     </div>
 
   # label in graph
@@ -336,7 +357,7 @@ en:
   scorecard_implementation_status: "Implementation Status:"
   scorecard_implementation_status_planned: Total Planned
   scorecard_implementation_status_review: "# Under Review"
-  scorecard_implementation_status_implemented: "# Approved"
+  scorecard_implementation_status_implemented: "# Approved(accepted)"
   scorecard_implementation_status_rejected: "# Rejected"
   # Geographic coverage labels
   location: Covered Location
@@ -362,3 +383,6 @@ en:
   os: OS
   browser: Browser
   views: Views
+  # activity by waste category
+  category_name: Category Name
+  activity_count: Activity Count
