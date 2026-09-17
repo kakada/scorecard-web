@@ -39,6 +39,7 @@ module Dashboards
         template["label"] = translation[@locale] if translation
       end
 
+      # Hide locale variable and set the current selection based on the interpreter's locale
       def interpret_variable_locale(template)
         return unless template["name"] == "locale"
 
