@@ -13,9 +13,18 @@
 #  program_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  locale        :string           default("km"), not null
 #
 require "rails_helper"
 
 RSpec.describe GfDashboard, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to belong_to(:program) }
+  it { is_expected.to validate_presence_of(:locale) }
+  it { is_expected.to validate_inclusion_of(:locale).in_array(GfDashboard::LOCALES) }
+
+  describe "locale uniqueness" do
+    subject { build(:gf_dashboard, program: create(:program)) }
+
+    it { is_expected.to validate_uniqueness_of(:locale).scoped_to(:program_id) }
+  end
 end

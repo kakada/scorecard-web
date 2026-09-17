@@ -10,29 +10,43 @@ class Dashboard
   include HTTParty
   base_uri ENV["GF_DASHBOARD_BASE_URL"]
 
-  attr_reader :program, :gf_dashboard
+  attr_reader :program, :gf_dashboard, :locale
 
-  def initialize(program)
+  def initialize(program, locale = GfDashboard::LOCALES.first)
     @program = program
-    @gf_dashboard = program.gf_dashboard || program.build_gf_dashboard
+    @locale = locale
+    @gf_dashboard = program.gf_dashboards.find_or_initialize_by(locale: locale)
   end
 
+  # Grafana org/datasource are shared across a program's dashboards, so they
+  # are only bootstrapped once (on whichever locale creates them first) and
+  # then reused by every other locale.
   def create
-    create_org
-    switch_to_current_org
-    create_org_token
-    create_datasource
+    ensure_org!
     create_dashboard
     set_default_dashboard
   end
 
   def update
-    return unless gf_dashboard.present?
+    return unless gf_dashboard.persisted?
 
-    params = { dashboard: DashboardInterpreter.new(program).interpreted_message, overwrite: true }
+    params = { dashboard: DashboardInterpreter.new(program, locale).interpreted_message, overwrite: true }
     params[:dashboard][:id] = gf_dashboard.dashboard_id
 
     upsert_with_token("/api/dashboards/db", JSON.dump(params))
+  end
+
+  def ensure_org!
+    org_dashboard = program.gf_dashboards.where.not(org_id: nil).first
+
+    if org_dashboard.blank?
+      create_org
+      switch_to_current_org
+      create_org_token
+      create_datasource
+    elsif gf_dashboard.org_id.blank?
+      gf_dashboard.update(org_id: org_dashboard.org_id, org_token: org_dashboard.org_token)
+    end
   end
 
   def create_org
@@ -61,7 +75,7 @@ class Dashboard
   end
 
   def create_dashboard
-    params = JSON.dump({ dashboard: DashboardInterpreter.new(program).interpreted_message, overwrite: false })
+    params = JSON.dump({ dashboard: DashboardInterpreter.new(program, locale).interpreted_message, overwrite: false })
     res = upsert_with_token("/api/dashboards/db", params)
 
     if res.is_a?(Net::HTTPSuccess)

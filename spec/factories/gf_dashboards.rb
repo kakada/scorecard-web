@@ -13,8 +13,11 @@
 #  program_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  locale        :string           default("km"), not null
 #
 FactoryBot.define do
   factory :gf_dashboard do
+    program
+    locale { "km" }
   end
 end

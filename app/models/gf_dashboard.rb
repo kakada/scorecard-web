@@ -13,7 +13,13 @@
 #  program_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  locale        :string           default("km"), not null
 #
 class GfDashboard < ApplicationRecord
   belongs_to :program
+
+  LOCALES = %w(km en)
+  LOCALE_NAMES = { "km" => "ខ្មែរ", "en" => "English" }.freeze
+
+  validates :locale, presence: true, inclusion: { in: LOCALES }, uniqueness: { scope: :program_id }
 end

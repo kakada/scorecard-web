@@ -22,9 +22,9 @@
 #
 FactoryBot.define do
   factory :facility do
-    name_en        { FFaker::Name.name }
+    name_en        { "#{FFaker::Name.name}_#{SecureRandom.hex(4)}" }
     name_km        { name_en }
-    code           { name.upcase.split(" ").map { |n| n[0] }.join("") }
+    code           { name_en.upcase.split(" ").map { |n| n[0] }.join("") }
     program
 
     trait :with_indicators do

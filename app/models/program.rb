@@ -40,7 +40,7 @@ class Program < ApplicationRecord
   has_one  :data_publication, dependent: :destroy
   has_many :data_publication_logs, dependent: :destroy
   has_one  :telegram_bot, dependent: :destroy
-  has_one  :gf_dashboard
+  has_many :gf_dashboards, dependent: :destroy
   has_many :scorecard_batches
   has_many :program_scorecard_types
   has_many :removing_scorecard_batches
@@ -70,12 +70,17 @@ class Program < ApplicationRecord
 
   delegate :enabled, to: :telegram_bot, prefix: :telegram_bot, allow_nil: true
 
+  def gf_dashboard(locale = GfDashboard::LOCALES.first)
+    gf_dashboards.find_by(locale: locale)
+  end
+
   def create_dashboard
-    ::Dashboard.new(self).create
+    GfDashboard::LOCALES.each { |locale| ::Dashboard.new(self, locale).create }
+    update_dashboard
   end
 
   def update_dashboard
-    ::Dashboard.new(self).update
+    GfDashboard::LOCALES.each { |locale| ::Dashboard.new(self, locale).update }
   end
 
   def secure_uuid
