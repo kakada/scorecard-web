@@ -13,10 +13,14 @@ module Users::CallbackDashboard
     after_destroy :remove_from_dashboard_async, unless: :skip_callback
 
     def add_to_dashboard
+      return if program.nil?
+
       Dashboard.new(program).add_user(self)
     end
 
     def remove_from_dashboard
+      return if program.nil?
+
       Dashboard.new(program).remove_user(self)
 
       update_column(:gf_user_id, nil)

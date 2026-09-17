@@ -42,8 +42,10 @@ RSpec.describe Dashboards::PanelInterpreter do
       let(:panels) do
         [{
           "id" => 1,
-          "viewType" => "geospatial",
-          "options" => { "geospatial" => { "geoJsonUrl" => "http://stale.example/provinces.json" } },
+          "options" => {
+            "viewType" => "geospatial",
+            "geospatial" => { "geoJsonUrl" => "http://stale.example/provinces.json" }
+          },
           "targets" => []
         }]
       end
@@ -59,8 +61,10 @@ RSpec.describe Dashboards::PanelInterpreter do
       let(:panels) do
         [{
           "id" => 2,
-          "viewType" => "timeseries",
-          "options" => { "geospatial" => { "geoJsonUrl" => "http://stale.example/provinces.json" } },
+          "options" => {
+            "viewType" => "timeseries",
+            "geospatial" => { "geoJsonUrl" => "http://stale.example/provinces.json" }
+          },
           "targets" => []
         }]
       end
