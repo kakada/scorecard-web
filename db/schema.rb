@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_09_14_020500) do
+ActiveRecord::Schema[7.0].define(version: 2026_09_17_050000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -232,6 +232,8 @@ ActiveRecord::Schema[7.0].define(version: 2026_09_14_020500) do
     t.integer "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "locale", default: "km", null: false
+    t.index ["program_id", "locale"], name: "index_gf_dashboards_on_program_id_and_locale", unique: true
   end
 
   create_table "importing_cafs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
