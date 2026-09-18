@@ -18,4 +18,13 @@ class Ahoy::Event < ApplicationRecord
 
   belongs_to :visit
   belongs_to :user, optional: true
+
+  # Class method
+  def self.filter(params)
+    events = all
+    events = events.where(name: params[:name]) if params[:name].present?
+    events = events.where("time >= ?", params[:start_time]) if params[:start_time].present?
+    events = events.where("time <= ?", params[:end_time]) if params[:end_time].present?
+    events
+  end
 end

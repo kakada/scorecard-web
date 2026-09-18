@@ -21,13 +21,17 @@
           %thead
             %tr
               %th= t("static_page.slug")
+              %th= t("static_page.url")
               %th= sortable "created_at", t("shared.created_at")
               %th= sortable "updated_at", t("shared.updated_at")
               %th
           %tbody
             - @static_pages.each do |static_page|
               %tr
-                %td= link_to static_page.slug, static_page_path(static_page), class: "text-primary"
+                %td
+                  = link_to static_page_path(static_page), class: "text-primary" do
+                    %code= static_page.slug
+                %td= link_to static_page.url, static_page.url, target: "_blank"
                 %td= timeago(static_page.created_at).html_safe
                 %td= timeago(static_page.updated_at).html_safe
                 %td

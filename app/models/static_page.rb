@@ -12,7 +12,19 @@
 #  updated_at :datetime         not null
 #
 class StaticPage < ApplicationRecord
+  ALLOWED_CONTENT_TAGS = %w[h1 h2 h3 h4 h5 h6 div p span strong em br img style a ul li].freeze
+  ALLOWED_CONTENT_ATTRIBUTES = %w[class style src href alt].freeze
+
   validates :slug, presence: true, uniqueness: true
+
+  # This method generates the event name for the static page, used for tracking views.
+  def event_name
+    "view_#{slug}"
+  end
+
+  def url
+    "/#{slug}"
+  end
 
   def content_by_locale(locale = I18n.locale)
     if locale.to_s == "km"

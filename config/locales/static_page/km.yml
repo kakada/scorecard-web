@@ -5,10 +5,13 @@ km:
     new_static_page: បង្កើតទំព័រមាតិកាថ្មី
     edit_static_page: កែប្រែទំព័រមាតិកា
     slug: Slug
+    url: URL
+    url_preview: "ទំព័រនេះនឹងអាចចូលមើលបានតាមរយៈ៖"
     content: មាតិកា
     content_en: មាតិកាជាភាសាអង់គ្លេស
     content_km: មាតិកាជាភាសាខ្មែរ
     content_placeholder: បញ្ចូលមាតិកា HTML
+    allowed_tags_hint: "ស្លាក HTML ដែលអនុញ្ញាត៖"
     preview: ការបង្ហាញ
     are_you_sure_to_delete: តើអ្នកប្រាកដថាចង់លុបទំព័រមាតិកា %{name}​នេះមែនឬទេ?
     en_locale: English
@@ -32,3 +35,13 @@ km:
     description: ការពិពណ៌នា
     are_you_sure_to_delete: តើអ្នកប្រាកដថាចង់លុបអថេរ %{name} នេះមែនឬទេ?
     static_page_variable_information: អថេរទំព័រមាតិកាដែលអាចប្រើបានក្នុងទំព័រមាតិកា។
+  static_page_stat:
+    statistics_title: ស្ថិតិទំព័រមាតិកា
+    all_events: ព្រឹត្តិការណ៍ទាំងអស់
+    events_selected: ព្រឹត្តិការណ៍ត្រូវបានជ្រើសរើស
+    event: ព្រឹត្តិការណ៍
+    device_type: ប្រភេទឧបករណ៍
+    os: ប្រព័ន្ធប្រតិបត្តិការ
+    homepage_notification_title: មានមតិយោបល់ ឬចង់រាយការណ៍បញ្ហាមែនទេ?
+    homepage_notification_body: អ្នកអាចទាក់ទង CARE Cambodia តាមរយៈយន្តការផ្តល់ព័ត៌មាន និងគណនេយ្យភាព។
+    report_concern: រាយការណ៍ទៅ FAM

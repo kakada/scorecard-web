@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-class FamReportingController < ApplicationController
+class PagesController < ApplicationController
   skip_before_action :authenticate_user!
   layout :set_layout
 
   def show
-    @content = StaticPage.find_by(slug: "/fam_reporting")&.rendered_content_by_locale(I18n.locale)
-    ahoy.track "view_fam_reporting"
+    @static_page = StaticPage.find_by!(slug: params[:slug])
+
+    ahoy.track @static_page.event_name
   end
 
   private

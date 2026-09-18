@@ -1,0 +1,18 @@
+- content_for :title do
+  = @static_page.slug
+
+#content.mx-auto{style: "width: fit-content;"}
+  - unless params[:hide_back_button]
+    .d-flex.my-4
+      - back_url = user_signed_in? ? static_page_stats_path : new_user_session_path
+      = link_to t("shared.back"), back_url
+
+  .card.shadow.mb-4
+    .card-body
+      - if @static_page.rendered_content_by_locale.present?
+        = sanitize(@static_page.rendered_content_by_locale.to_s,
+          tags: StaticPage::ALLOWED_CONTENT_TAGS,
+          attributes: StaticPage::ALLOWED_CONTENT_ATTRIBUTES)
+
+      - else
+        %p.text-muted.mb-0= t("fam_reporting.content_not_available")
