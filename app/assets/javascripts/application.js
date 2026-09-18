@@ -66,6 +66,7 @@
 //= require static_pages
 //= require static_page_variables
 //= require activity_logs
+//= require static_page_stats
 //= require request_changes/new
 //= require scorecard_batches/new
 //= require removing_scorecards/create

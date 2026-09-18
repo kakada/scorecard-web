@@ -19,6 +19,22 @@ RSpec.describe StaticPage, type: :model do
   it { is_expected.to validate_presence_of(:slug) }
   it { is_expected.to validate_uniqueness_of(:slug) }
 
+  describe "#event_name" do
+    it "prefixes the slug with view_" do
+      static_page = build(:static_page, slug: "privacy_policy")
+
+      expect(static_page.event_name).to eq("view_privacy_policy")
+    end
+  end
+
+  describe "#url" do
+    it "prefixes the slug with a leading slash" do
+      static_page = build(:static_page, slug: "privacy_policy")
+
+      expect(static_page.url).to eq("/privacy_policy")
+    end
+  end
+
   describe "#content_by_locale" do
     it "returns khmer content for km locale" do
       static_page = build(:static_page, content_km: "<p>km</p>", content_en: "<p>en</p>")

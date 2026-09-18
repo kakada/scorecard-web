@@ -1,0 +1,50 @@
+- content_for :title do
+  = t("static_page_stat.statistics_title")
+
+.alert.alert-info.shadow-sm
+  %strong= t("static_page_stat.homepage_notification_title")
+  %span.ml-1= t("static_page_stat.homepage_notification_body")
+  = link_to t("static_page_stat.report_concern"), '/fam_reporting', class: "alert-link ml-1"
+
+= form_tag static_page_stats_path, method: :get, class: "d-flex align-items-center mb-3" do
+  .mr-2
+    .filter-input.tooltips.mr-2{ 'data-toggle' => 'tooltip' }
+      = select_tag 'name[]', options_for_select(@event_names, params[:name]), multiple: true, "data-live-search" => "true", "data-count-selected-text" => "{0} #{t('static_page_stat.events_selected')}", "data-selected-text-format" => "count > 1", "data-none-selected-text" => t("static_page_stat.all_events"), class: 'selectpicker form-control'
+  .mr-2
+    .filter-input
+      #daterange.form-control.pointer.d-flex.align-items-center
+        %span{'data-placeholder' => t('static_page_stat.filter_by_date')}= t('static_page_stat.filter_by_date')
+        .flex-grow-1
+        %i.fa.fa-calendar.ml-2
+
+      %input.start-date{ type: 'hidden', name: 'start_time', value: params[:start_time] }
+      %input.end-date{ type: 'hidden', name: 'end_time', value: params[:end_time] }
+
+  = render "shared/buttons/search_button"
+
+.card.shadow.mb-4
+  .card-body
+    - if @events.present?
+      = render "shared/pagination_title"
+
+      .table-responsive
+        %table.table.table-hover.pretty
+          %thead
+            %tr
+              %th #
+              %th= t("static_page_stat.event")
+              %th= t("static_page_stat.device_type")
+              %th= t("static_page_stat.os")
+              %th= t("shared.created_at")
+
+          %tbody
+            - @events.each_with_index do |event, index|
+              %tr
+                %td= @pagy.from + index
+                %td= event.name
+                %td= event.visit.device_type
+                %td= event.visit.os
+                %td= timeago(event.time, "datetime").html_safe
+
+    = render "shared/no_data", items: @events
+    = render "shared/footers/pagination"

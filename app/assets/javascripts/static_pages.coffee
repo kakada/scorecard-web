@@ -3,7 +3,19 @@ CW.Static_pagesNew = do ->
     bindPreview()
     bindLanguageTabs()
     bindVariableTokens()
+    bindSlugPreview()
     requestPreview(activeEditorValue())
+
+  bindSlugPreview = ->
+    updateSlugPreview($("#static_page_slug").val())
+
+    $(document).off "input", "#static_page_slug"
+    $(document).on "input", "#static_page_slug", ->
+      updateSlugPreview($(this).val())
+
+  updateSlugPreview = (value) ->
+    slug = (value || "").replace(/^\/+/, "")
+    $("#static-page-url-preview").text("/" + slug)
 
   bindPreview = ->
     $(document).off "input", ".static-page-editor"

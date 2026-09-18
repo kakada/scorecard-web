@@ -2,9 +2,11 @@
   .flex-1.mr-lg-4
     = simple_form_for @static_page do |f|
       = f.input :slug, label: t("static_page.slug"), input_html: { autocomplete: "off" }
+      %small.form-text.text-muted.mb-3
+        = t("static_page.url_preview")
+        %code#static-page-url-preview /
 
       .form-group
-        %label.d-block= t("static_page.content")
         %ul.nav.nav-pills.lang-switch.mb-3{ role: "tablist" }
           %li.nav-item
             %a#content-km-tab.nav-link.active{ "data-toggle" => "pill", href: "#content-km-pane", role: "tab", "aria-controls" => "content-km-pane", "aria-selected" => "true", "data-preview-source" => "km" }= t("static_page.km_locale")
@@ -17,6 +19,10 @@
           #content-en-pane.tab-pane.fade{ role: "tabpanel", "aria-labelledby" => "content-en-tab" }
             = f.input :content_en, as: :text, label: false, input_html: { rows: 20, class: "static-page-editor", "data-preview-input" => "en" }, placeholder: t("static_page.content_placeholder")
 
+        %small.form-text.text-muted.mb-2
+          = t("static_page.allowed_tags_hint")
+          - StaticPage::ALLOWED_CONTENT_TAGS.each do |tag|
+            %code.mr-1= "<#{tag}>"
       .card.shadow-sm.border-0.mb-3
         .card-body.py-3
           .d-flex.justify-content-between.align-items-center.flex-wrap

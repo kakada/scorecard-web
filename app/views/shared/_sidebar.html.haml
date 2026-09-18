@@ -75,10 +75,10 @@
           %span= t('sidebar.user_guides')
 
     - if policy(Ahoy::Event).index?
-      %li.nav-item{ class: css_active_class('fam_reporting_stats') }
-        %a.nav-link{:href => fam_reporting_stats_path}
+      %li.nav-item{ class: css_active_class('static_page_stats') }
+        %a.nav-link{:href => static_page_stats_path}
           %i.fas.fa-fw.fa-chart-bar
-          %span= t('sidebar.fam_reporting_statistics')
+          %span= t('sidebar.static_page_statistics')
 
     - if policy(StaticPage.new).new?
       %li.nav-item{ class: css_active_class('static_pages') || css_active_class('static_page_variables') }
