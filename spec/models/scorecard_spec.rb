@@ -340,6 +340,23 @@ RSpec.describe Scorecard, type: :model do
     end
   end
 
+  describe "#after_commit on update, #schedule_pending_review_reminder" do
+    let!(:scorecard) { create(:scorecard) }
+
+    before do
+      PendingReviewReminderJob.clear
+    end
+
+    it "schedules the first reminder three days after submission" do
+      submitted_at = 3.days.ago
+
+      scorecard.update!(submitted_at: submitted_at, progress: :in_review, submitter: scorecard.creator)
+
+      expect(PendingReviewReminderJob.jobs.last["args"]).to eq([scorecard.id])
+      expect(PendingReviewReminderJob.jobs.last["at"]).to be_within(5).of((submitted_at + 3.days).to_f)
+    end
+  end
+
   describe "#after_commit on update, #create_completed_progress" do
     let!(:scorecard) { create(:scorecard, :submitted) }
     let!(:completor) { scorecard.creator }
