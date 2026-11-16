@@ -1,1 +1,33 @@
-%p= @body_message
+%div{style: "font-family: Arial, Helvetica, sans-serif; color: #333333; max-width: 560px; margin: 0 auto; padding: 24px;"}
+  %h2{style: "color: #1a5276; font-size: 18px; margin: 0 0 16px;"}
+    = I18n.t("scorecard.pending_review_reminder_subject")
+
+  %p{style: "font-size: 15px; line-height: 1.6; margin: 0 0 16px;"}
+    Dear Reviewer,
+
+  %p{style: "font-size: 15px; line-height: 1.6; margin: 0 0 16px;"}
+    = @body_message
+
+  %table{style: "width: 100%; border-collapse: collapse; margin: 0 0 24px; font-size: 14px;"}
+    %tr
+      %td{style: "padding: 4px 0; color: #777777; width: 140px;"} Code
+      %td{style: "padding: 4px 0; font-weight: bold;"}= @scorecard.uuid
+    %tr
+      %td{style: "padding: 4px 0; color: #777777;"} Type
+      %td{style: "padding: 4px 0;"}= @scorecard.t_scorecard_type
+    %tr
+      %td{style: "padding: 4px 0; color: #777777;"} Location
+      %td{style: "padding: 4px 0;"}= @scorecard.location_name
+
+  %table{cellpadding: "0", cellspacing: "0", border: "0", style: "margin: 0 0 24px;"}
+    %tr
+      %td{style: "background-color: #1a5276; border-radius: 4px;"}
+        = link_to "Review Scorecard", scorecard_url(@scorecard.uuid), style: "display: inline-block; padding: 10px 22px; color: #ffffff; text-decoration: none; font-weight: bold; font-size: 14px; border-radius: 4px;"
+
+  %p{style: "font-size: 13px; color: #999999; line-height: 1.5; margin: 0 0 8px;"}
+    This is an automated reminder. If this scorecard has already been reviewed, no further action is required.
+
+  %p{style: "font-size: 13px; color: #777777; margin: 24px 0 0;"}
+    Best regards,
+    %br/
+    The Scorecard Team

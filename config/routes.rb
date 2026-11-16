@@ -214,5 +214,8 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => "/sidekiq"
   end
 
+  # Letter Opener Web for viewing emails in development environment
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   get "/:slug", to: "pages#show", as: :page
 end

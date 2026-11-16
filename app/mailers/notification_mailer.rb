@@ -7,7 +7,8 @@ class NotificationMailer < ApplicationMailer
   end
 
   def pending_review_reminder(emails, scorecard)
-    @body_message = I18n.t("scorecard.pending_review_reminder", name: scorecard.name)
+    @scorecard = scorecard
+    @body_message = I18n.t("scorecard.pending_review_reminder", name: scorecard.uuid)
     mail(to: emails, subject: I18n.t("scorecard.pending_review_reminder_subject"))
   end
 

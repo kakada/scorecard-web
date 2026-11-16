@@ -48,24 +48,27 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: Settings.host }
 
-  if Settings.smtp.present?
-    smtp_settings = {}.tap do |settings|
-      settings[:address]              = Settings.smtp["address"] if Settings.smtp["address"].present?
-      settings[:port]                 = Settings.smtp["port"] if Settings.smtp["port"].present?
-      settings[:domain]               = Settings.smtp["domain"] if Settings.smtp["domain"].present?
-      settings[:user_name]            = Settings.smtp["user_name"] if Settings.smtp["user_name"].present?
-      settings[:password]             = Settings.smtp["password"] if Settings.smtp["password"].present?
-      settings[:authentication]       = Settings.smtp["authentication"] if Settings.smtp["authentication"].present?
-      if Settings.smtp["enable_starttls_auto"].present?
-        settings[:enable_starttls_auto] = Settings.smtp["enable_starttls_auto"]
-      end
-    end
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 
-    if smtp_settings.present?
-      config.action_mailer.delivery_method = :smtp
-      config.action_mailer.smtp_settings = smtp_settings
-    end
-  end
+  # if Settings.smtp.present?
+  #   smtp_settings = {}.tap do |settings|
+  #     settings[:address]              = Settings.smtp["address"] if Settings.smtp["address"].present?
+  #     settings[:port]                 = Settings.smtp["port"] if Settings.smtp["port"].present?
+  #     settings[:domain]               = Settings.smtp["domain"] if Settings.smtp["domain"].present?
+  #     settings[:user_name]            = Settings.smtp["user_name"] if Settings.smtp["user_name"].present?
+  #     settings[:password]             = Settings.smtp["password"] if Settings.smtp["password"].present?
+  #     settings[:authentication]       = Settings.smtp["authentication"] if Settings.smtp["authentication"].present?
+  #     if Settings.smtp["enable_starttls_auto"].present?
+  #       settings[:enable_starttls_auto] = Settings.smtp["enable_starttls_auto"]
+  #     end
+  #   end
+
+  #   if smtp_settings.present?
+  #     config.action_mailer.delivery_method = :smtp
+  #     config.action_mailer.smtp_settings = smtp_settings
+  #   end
+  # end
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
