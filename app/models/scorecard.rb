@@ -71,6 +71,7 @@ class Scorecard < ApplicationRecord
   include Scorecards::FacilityMigrationConcern
   include Scorecards::QrCodeGeneratorConcern
   include Scorecards::VotableResultConcern
+  include Scorecards::PendingReviewReminderConcern
 
   acts_as_paranoid if column_names.include? "deleted_at"
 
@@ -185,6 +186,7 @@ class Scorecard < ApplicationRecord
   after_commit  :create_submitted_progress, on: [:update], if: -> { saved_change_to_progress? && in_review? }
   after_commit  :create_completed_progress, on: [:update], if: -> { saved_change_to_progress? && completed? }
   after_commit  :schedule_auto_complete_submitted_scorecard, on: [:update], if: -> { saved_change_to_submitted_at? && in_review? }
+  after_commit  :schedule_pending_review_reminder, on: [:update], if: -> { saved_change_to_submitted_at? && in_review? }
   after_commit  :index_document_async, on: [:create, :update], if: -> { ENV["ELASTICSEARCH_ENABLED"] == "true" }
   after_destroy :delete_document_async, if: -> { ENV["ELASTICSEARCH_ENABLED"] == "true" }
 

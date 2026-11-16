@@ -187,10 +187,20 @@ RSpec.describe Scorecard, type: :model do
   describe "#unlock_access!" do
     let!(:scorecard) { create(:scorecard, :submitted, :completed) }
 
-    before { scorecard.unlock_access! }
+    before do
+      PendingReviewReminderJob.clear
+      scorecard.unlock_access!
+    end
 
     it { expect(scorecard.completed_at).to be_nil }
     it { expect(scorecard.update(name: "test")).to be_truthy }
+
+    it "reschedules the pending review reminder anchored to the original submitted_at" do
+      job = PendingReviewReminderJob.jobs.last
+
+      expect(job["args"]).to eq([scorecard.id])
+      expect(job["at"]).to be_within(5).of((scorecard.submitted_at + Scorecards::PendingReviewReminderConcern::REMINDER_INTERVAL).to_f)
+    end
   end
 
   describe "#rejected_by" do
@@ -337,6 +347,23 @@ RSpec.describe Scorecard, type: :model do
       it "does not schedule auto-complete job" do
         expect { scorecard.lock_submit! }.not_to change(AutoCompleteSubmittedScorecardJob.jobs, :size)
       end
+    end
+  end
+
+  describe "#after_commit on update, #schedule_pending_review_reminder" do
+    let!(:scorecard) { create(:scorecard) }
+
+    before do
+      PendingReviewReminderJob.clear
+    end
+
+    it "schedules the first reminder three days after submission" do
+      submitted_at = Time.current
+
+      scorecard.update!(submitted_at: submitted_at, progress: :in_review, submitter: scorecard.creator)
+
+      expect(PendingReviewReminderJob.jobs.last["args"]).to eq([scorecard.id])
+      expect(PendingReviewReminderJob.jobs.last["at"]).to be_within(5).of((submitted_at + 3.days).to_f)
     end
   end
 

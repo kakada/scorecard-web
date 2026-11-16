@@ -160,6 +160,16 @@ km:
     age: អាយុ
     scorecard_is_checked: "ប័ណ្ណដាក់ពិន្ទុ %{uuid} នេះត្រួវបានត្រួតពិនិត្យរួចរាល់ហើយ ដូចនេះអ្នកអាចទាញយកនិងចែករំលែកបាន!"
     completed_scorecard: ប័ណ្ណពិន្ទុត្រូវបានត្រួតពិនិត្យរួចរាល់
+    pending_review_reminder_subject: "ការរំលឹក៖ ប័ណ្ណដាក់ពិន្ទុកំពុងរង់ចាំការត្រួតពិនិត្យ"
+    pending_review_reminder: "ប័ណ្ណដាក់ពិន្ទុ %{name} នៅតែរង់ចាំការត្រួតពិនិត្យ។ សូមត្រួតពិនិត្យ និងបញ្ចប់វា។"
+    pending_review_reminder_greeting: "ជូនចំពោះអ្នកត្រួតពិនិត្យ,"
+    pending_review_reminder_code_label: លេខកូដ
+    pending_review_reminder_type_label: ប្រភេទ
+    pending_review_reminder_location_label: ទីតាំង
+    pending_review_reminder_button: ត្រួតពិនិត្យប័ណ្ណដាក់ពិន្ទុ
+    pending_review_reminder_note: "នេះគឺជាសារម្រាលដែលផ្ញើដោយស្វ័យប្រវត្តិ។ ប្រសិនបើប័ណ្ណដាក់ពិន្ទុនេះត្រូវបានត្រួតពិនិត្យរួចរាល់ហើយ អ្នកមិនចាំបាច់ធ្វើសកម្មភាពបន្ថែមទៀតទេ។"
+    pending_review_reminder_signoff: "សូមគោរព,"
+    pending_review_reminder_team: ក្រុមការងារប័ណ្ណដាក់ពិន្ទុ
     no_request_change: មិនមានការស្នើរធ្វើការផ្លាស់ប្តូរព័ត៌មានប័ណ្ណដាក់ពិន្ទុទេ
     are_you_sure_to_mark_as_completed: តើអ្នកយល់ព្រមសម្គាល់ប័ណ្ណដាក់ពិន្ទុ <b>%{code}</b> នេះថាបានបញ្ចប់មែនទេ?
     data_connot_be_rollback_after_approve: ទិន្នន័យនឹងមិនអាចកែបានទៀតទេ បន្ទាប់ពីអ្នកយល់ព្រមរួច!
