@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Scorecards::PendingReviewReminder
+module Scorecards::PendingReviewReminderConcern
   extend ActiveSupport::Concern
 
   REMINDER_INTERVAL = 3.days

@@ -71,7 +71,7 @@ class Scorecard < ApplicationRecord
   include Scorecards::FacilityMigrationConcern
   include Scorecards::QrCodeGeneratorConcern
   include Scorecards::VotableResultConcern
-  include Scorecards::PendingReviewReminder
+  include Scorecards::PendingReviewReminderConcern
 
   acts_as_paranoid if column_names.include? "deleted_at"
 
