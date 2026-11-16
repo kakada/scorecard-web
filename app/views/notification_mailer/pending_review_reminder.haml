@@ -3,31 +3,31 @@
     = I18n.t("scorecard.pending_review_reminder_subject")
 
   %p{style: "font-size: 15px; line-height: 1.6; margin: 0 0 16px;"}
-    Dear Reviewer,
+    = I18n.t("scorecard.pending_review_reminder_greeting")
 
   %p{style: "font-size: 15px; line-height: 1.6; margin: 0 0 16px;"}
     = @body_message
 
   %table{style: "width: 100%; border-collapse: collapse; margin: 0 0 24px; font-size: 14px;"}
     %tr
-      %td{style: "padding: 4px 0; color: #777777; width: 140px;"} Code
+      %td{style: "padding: 4px 0; color: #777777; width: 140px;"}= I18n.t("scorecard.pending_review_reminder_code_label")
       %td{style: "padding: 4px 0; font-weight: bold;"}= @scorecard.uuid
     %tr
-      %td{style: "padding: 4px 0; color: #777777;"} Type
+      %td{style: "padding: 4px 0; color: #777777;"}= I18n.t("scorecard.pending_review_reminder_type_label")
       %td{style: "padding: 4px 0;"}= @scorecard.t_scorecard_type
     %tr
-      %td{style: "padding: 4px 0; color: #777777;"} Location
+      %td{style: "padding: 4px 0; color: #777777;"}= I18n.t("scorecard.pending_review_reminder_location_label")
       %td{style: "padding: 4px 0;"}= @scorecard.location_name
 
   %table{cellpadding: "0", cellspacing: "0", border: "0", style: "margin: 0 0 24px;"}
     %tr
       %td{style: "background-color: #1a5276; border-radius: 4px;"}
-        = link_to "Review Scorecard", scorecard_url(@scorecard.uuid), style: "display: inline-block; padding: 10px 22px; color: #ffffff; text-decoration: none; font-weight: bold; font-size: 14px; border-radius: 4px;"
+        = link_to I18n.t("scorecard.pending_review_reminder_button"), scorecard_url(@scorecard.uuid), style: "display: inline-block; padding: 10px 22px; color: #ffffff; text-decoration: none; font-weight: bold; font-size: 14px; border-radius: 4px;"
 
   %p{style: "font-size: 13px; color: #999999; line-height: 1.5; margin: 0 0 8px;"}
-    This is an automated reminder. If this scorecard has already been reviewed, no further action is required.
+    = I18n.t("scorecard.pending_review_reminder_note")
 
   %p{style: "font-size: 13px; color: #777777; margin: 24px 0 0;"}
-    Best regards,
+    = I18n.t("scorecard.pending_review_reminder_signoff")
     %br/
-    The Scorecard Team
+    = I18n.t("scorecard.pending_review_reminder_team")

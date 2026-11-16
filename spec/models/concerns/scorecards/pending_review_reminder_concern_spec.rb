@@ -70,12 +70,26 @@ RSpec.describe Scorecards::PendingReviewReminderConcern do
 
     context "after an interval has elapsed" do
       it "emails the creator and submitter and schedules the next reminder" do
-        scorecard = create(:scorecard, :submitted, submitted_at: 3.days.ago)
+        program = create(:program, enable_email_notification: true)
+        scorecard = create(:scorecard, :submitted, program: program, submitted_at: 3.days.ago)
         delivery = double(deliver_now: true)
 
         expect(NotificationMailer).to receive(:pending_review_reminder)
           .with([scorecard.creator.email, scorecard.submitter.email], scorecard)
           .and_return(delivery)
+
+        scorecard.send_pending_review_reminder!
+
+        job = PendingReviewReminderJob.jobs.last
+        expect(job["args"]).to eq([scorecard.id])
+        expect(job["at"]).to be_within(5).of((scorecard.submitted_at + 2 * described_class::REMINDER_INTERVAL).to_f)
+      end
+
+      it "still reschedules but does not email when the program disables email notifications" do
+        program = create(:program, enable_email_notification: false)
+        scorecard = create(:scorecard, :submitted, program: program, submitted_at: 3.days.ago)
+
+        expect(NotificationMailer).not_to receive(:pending_review_reminder)
 
         scorecard.send_pending_review_reminder!
 

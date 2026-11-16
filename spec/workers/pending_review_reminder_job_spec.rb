@@ -4,7 +4,8 @@ require "rails_helper"
 
 RSpec.describe PendingReviewReminderJob do
   describe "#perform" do
-    let(:scorecard) { create(:scorecard, :submitted, submitted_at: 3.days.ago) }
+    let(:program) { create(:program, enable_email_notification: true) }
+    let(:scorecard) { create(:scorecard, :submitted, program: program, submitted_at: 3.days.ago) }
 
     before do
       described_class.clear

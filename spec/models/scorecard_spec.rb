@@ -187,10 +187,20 @@ RSpec.describe Scorecard, type: :model do
   describe "#unlock_access!" do
     let!(:scorecard) { create(:scorecard, :submitted, :completed) }
 
-    before { scorecard.unlock_access! }
+    before do
+      PendingReviewReminderJob.clear
+      scorecard.unlock_access!
+    end
 
     it { expect(scorecard.completed_at).to be_nil }
     it { expect(scorecard.update(name: "test")).to be_truthy }
+
+    it "reschedules the pending review reminder anchored to the original submitted_at" do
+      job = PendingReviewReminderJob.jobs.last
+
+      expect(job["args"]).to eq([scorecard.id])
+      expect(job["at"]).to be_within(5).of((scorecard.submitted_at + Scorecards::PendingReviewReminderConcern::REMINDER_INTERVAL).to_f)
+    end
   end
 
   describe "#rejected_by" do

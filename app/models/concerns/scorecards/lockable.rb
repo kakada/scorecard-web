@@ -29,6 +29,7 @@ module Scorecards::Lockable
 
     def unlock_access!
       update_columns(completed_at: nil, progress: Scorecard::STATUS_IN_REVIEW)
+      reschedule_pending_review_reminder
     end
 
     def rejected_by(user, reason)
