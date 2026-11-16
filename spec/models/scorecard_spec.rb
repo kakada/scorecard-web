@@ -348,7 +348,7 @@ RSpec.describe Scorecard, type: :model do
     end
 
     it "schedules the first reminder three days after submission" do
-      submitted_at = 3.days.ago
+      submitted_at = Time.current
 
       scorecard.update!(submitted_at: submitted_at, progress: :in_review, submitter: scorecard.creator)
 

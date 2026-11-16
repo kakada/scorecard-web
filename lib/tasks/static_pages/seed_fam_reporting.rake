@@ -5,7 +5,7 @@
 namespace :static_pages do
   desc "Seed FAM reporting static pages"
   task seed_fam_reporting: :environment do
-    slug = "/fam_reporting"
+    slug = "fam_reporting"
     base_path = Rails.root.join("db", "seeds", "static_pages", "fam_reporting")
 
     content_en = File.read(base_path.join("content_en.html"))

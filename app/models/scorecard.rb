@@ -71,6 +71,7 @@ class Scorecard < ApplicationRecord
   include Scorecards::FacilityMigrationConcern
   include Scorecards::QrCodeGeneratorConcern
   include Scorecards::VotableResultConcern
+  include Scorecards::PendingReviewReminder
 
   acts_as_paranoid if column_names.include? "deleted_at"
 
@@ -280,10 +281,6 @@ class Scorecard < ApplicationRecord
         program.auto_complete_submitted_scorecard_in_days.days,
         id
       )
-    end
-
-    def schedule_pending_review_reminder
-      PendingReviewReminderJob.perform_at(submitted_at + PendingReviewReminderJob::REMINDER_INTERVAL, id)
     end
 
     def set_primary_school_code
